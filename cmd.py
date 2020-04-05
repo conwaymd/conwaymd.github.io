@@ -9,8 +9,6 @@ A converter from Conway's markdown (CMD) to HTML,
 written for the sole purpose of building his site
 <https://yawnoc.github.io/>.
 
-To be kept in the root directory.
-
 Conversion is done entirely using regular expression replacements
 and placeholder dictionaries.
 Unlike John Gruber's markdown, I use fence-style constructs
@@ -21,7 +19,7 @@ Conway: It works, really!
 You   : You're crazy.
 Conway: Oh shut up, I already know that.
 
-Documentation: <https://yawnoc.github.io/code/cmd.html>
+Documentation: <https://conway-markdown.github.io/conway-markdown/>
 
 Released into the public domain (CC0):
   <https://creativecommons.org/publicdomain/zero/1.0/>
