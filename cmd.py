@@ -678,6 +678,8 @@ def process_literal_match(placeholder_storage, match_object):
 def process_display_code(placeholder_storage, markup):
   """
   Process display code ``[id] [class]↵ {content} ``.
+  The opening backtick must be the first
+  non-whitespace character on its line.
   
   ``[id] [class]↵ {content} `` becomes
   <pre id="[id]" class="[class]"><code>{content}</code></pre>,
@@ -690,6 +692,7 @@ def process_display_code(placeholder_storage, markup):
   
   markup = re.sub(
     rf'''
+      ^  {HORIZONTAL_WHITESPACE_REGEX} *
       (?P<backticks>  ` {{2,}}  )
         (?P<id_>  [\S] *  )
         (?P<class_>  [^\n] *  )
@@ -699,7 +702,7 @@ def process_display_code(placeholder_storage, markup):
     ''',
     functools.partial(process_display_code_match, placeholder_storage),
     markup,
-    flags=re.VERBOSE
+    flags=re.MULTILINE|re.VERBOSE
   )
   
   return markup
@@ -816,6 +819,8 @@ def process_comments(markup):
 def process_display_maths(placeholder_storage, markup):
   r"""
   Process display maths $$[id] [class]↵ {content} $$.
+  The opening dollar sign must be the first
+  non-whitespace character on its line.
   
   $$[id] [class]↵ {content} $$ becomes
   <div id="[id]" class="maths [class]">{content}</div>,
@@ -834,6 +839,7 @@ def process_display_maths(placeholder_storage, markup):
   
   markup = re.sub(
     rf'''
+      ^  {HORIZONTAL_WHITESPACE_REGEX} *
       (?P<dollar_signs>  [$] {{2,}}  )
         (?P<id_>  [\S] *  )
         (?P<class_>  [^\n] *  )
@@ -843,7 +849,7 @@ def process_display_maths(placeholder_storage, markup):
     ''',
     functools.partial(process_display_maths_match, placeholder_storage),
     markup,
-    flags=re.VERBOSE
+    flags=re.MULTILINE|re.VERBOSE
   )
   
   return markup
@@ -1132,6 +1138,8 @@ def process_ordinary_replacement_match(
 def process_preamble(placeholder_storage, property_storage, markup):
   """
   Process the preamble %%↵ {content} %%.
+  The opening percent sign must be the first
+  non-whitespace character on its line.
   
   %%↵ {content} %% becomes the HTML preamble,
   i.e. everything from <!DOCTYPE html> through to <body>.
@@ -1196,6 +1204,7 @@ def process_preamble(placeholder_storage, property_storage, markup):
   
   markup, preamble_count = re.subn(
     rf'''
+      ^  {HORIZONTAL_WHITESPACE_REGEX} *
       (?P<percent_signs>  % {{2,}}  )
       \n
         (?P<content>  {ANY_STRING_MINIMAL_REGEX}  )
@@ -1206,7 +1215,7 @@ def process_preamble(placeholder_storage, property_storage, markup):
     ),
     markup,
     count=1,
-    flags=re.VERBOSE
+    flags=re.MULTILINE|re.VERBOSE
   )
   
   if preamble_count > 0:
@@ -1398,6 +1407,8 @@ def process_preamble_match(
 def process_headings(placeholder_storage, markup):
   """
   Process headings #[id] {content} #.
+  The opening hash must be
+  the first non-whitespace character of its line.
   
   #[id] {content} # becomes <h1 id="[id]">{content}</h1>.
   Whitespace around {content} is stripped.
@@ -1463,6 +1474,8 @@ LIST_TAG_NAMES = ['ul', 'ol']
 def process_blocks(placeholder_storage, markup):
   """
   Process blocks XX[id] [class]↵ {content} XX.
+  The opening delimiter X must be the first
+  non-whitespace character on its line.
   
   The following delimiters (X) are used:
     Non-lists
@@ -1488,6 +1501,7 @@ def process_blocks(placeholder_storage, markup):
   
   markup = re.sub(
     rf'''
+      ^  {HORIZONTAL_WHITESPACE_REGEX} *
       (?P<delimiters>
         (?P<delimiter>  {BLOCK_DELIMITER_REGEX}  )
         (?P=delimiter) +
@@ -1500,7 +1514,7 @@ def process_blocks(placeholder_storage, markup):
     ''',
     functools.partial(process_block_match, placeholder_storage),
     markup,
-    flags=re.VERBOSE
+    flags=re.MULTILINE|re.VERBOSE
   )
   
   return markup
@@ -1586,6 +1600,8 @@ def process_images(placeholder_storage, image_definition_storage, markup):
   Reference-style:
     DEFINITION: @@![{label}] [class]↵ {src} [title] @@[width]
     LINK: ![{alt}][[label]]
+  The opening at sign must be the first
+  non-whitespace character on its line.
   A single space may be included between [{alt}] and [[label]].
   The referencing string {label} is case insensitive
   (this is handled by the image definition storage class).
@@ -1626,6 +1642,7 @@ def process_images(placeholder_storage, image_definition_storage, markup):
   # Reference-style image definitions
   markup = re.sub(
     rf'''
+      ^  {HORIZONTAL_WHITESPACE_REGEX} *
       (?P<at_signs>  @  {{2,}})
         !
         \[
@@ -1644,7 +1661,7 @@ def process_images(placeholder_storage, image_definition_storage, markup):
       image_definition_storage
     ),
     markup,
-    flags=re.VERBOSE
+    flags=re.MULTILINE|re.VERBOSE
   )
   
   # Reference-style images
@@ -1764,6 +1781,8 @@ def process_links(placeholder_storage, link_definition_storage, markup):
   Reference-style:
     DEFINITION: @@[{label}] [class]↵ {href} [title] @@
     LINK: [{content}][[label]]
+  The opening at sign must be the first
+  non-whitespace character on its line.
   A single space may be included between [{content}] and [[label]].
   The referencing string {label} is case insensitive
   (this is handled by the link definition storage class).
@@ -1807,6 +1826,7 @@ def process_links(placeholder_storage, link_definition_storage, markup):
   # Reference-style link definitions
   markup = re.sub(
     rf'''
+      ^  {HORIZONTAL_WHITESPACE_REGEX} *
       (?P<at_signs>  @  {{2,}})
         \[
           (?P<label>  {ANY_STRING_MINIMAL_REGEX}  )
@@ -1823,7 +1843,7 @@ def process_links(placeholder_storage, link_definition_storage, markup):
       link_definition_storage
     ),
     markup,
-    flags=re.VERBOSE
+    flags=re.MULTILINE|re.VERBOSE
   )
   
   # Reference-style links
