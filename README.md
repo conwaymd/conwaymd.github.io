@@ -1,6 +1,6 @@
 # [conway-markdown.github.io][cmd-docs]
 
-GitHub pages documentation for Conway's markdown.
+GitHub pages documentation for Conway's markdown (CMD).
 
 See also: [Python repository][cmd-repo]
 
