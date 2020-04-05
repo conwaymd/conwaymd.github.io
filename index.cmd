@@ -4,6 +4,8 @@
 %title Conway's markdown
 %date-created 2020-04-05
 %date-modified 2020-04-05
+%resources
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 %%%%
 
