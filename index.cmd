@@ -17,7 +17,8 @@
 |||| page-properties
   First created: %date-created \\
   Last modified: %date-modified \\
-  Page source: [index.cmd][cmd-source]
+  This page's CMD source: [`index.cmd`][cmd-source] \\
+  GitHub repository: [`conway-markdown`][cmd-github]
 ||||
 
 
@@ -44,8 +45,15 @@ to avoid needing to escape that symbol.
 %footer-element
 
 
+@@[cmd-github]
+  https://github.com/conway-markdown/conway-markdown/
+  GitHub: Conway's markdown
+@@
+
 @@[cmd-source]
-  https://github.com/conway-markdown/conway-markdown/blob/master/index.cmd
+  https://github.com/conway-markdown/conway-markdown.github.io/\
+    blob/master/index.cmd
+  GitHub: index.cmd
 @@
 
 @@[markdown]
