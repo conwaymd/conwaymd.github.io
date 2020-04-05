@@ -12,7 +12,19 @@ body {
   padding: 0 0.25em;
 }
 
-.page-properties {
+div.cmd-syntax {
+  border: 2px solid #111;
+  font-family: monospace;
+  font-size: larger;
+  margin: 0.25em;
+  padding: 0.5em;
+}
+
+div.page-properties {
   font-size: smaller;
 }
 
+span.mandatory-argument{
+  color: #7000ff;
+  font-weight: bold;
+}

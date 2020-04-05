@@ -11,7 +11,7 @@
 <h1>Conway's markdown</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-05<br>
+Last modified: 2020-04-06<br>
 This page's CMD source: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a><br>
 GitHub repository: <a href="https://github.com/conway-markdown/conway-markdown/" title="GitHub: Conway's markdown"><code>conway-markdown</code></a>
 </div>
@@ -20,13 +20,47 @@ Conway's fence-style markdown,
 implemented in Python using regex replacements.
 </p>
 <p>
-Conway markdown (CMD) is the result of someone joking that
+Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's <a href="https://daringfireball.net/projects/markdown/" title="Daring Fireball: Markdown">markdown</a>,
-Conway markdown uses fence-style constructs,
+Conway's markdown uses fence-style constructs,
 for which arbitrarily long runs of a delimiter symbol can be used
-to avoid needing to escape that symbol.
+to wrap shorter runs of that symbol.
 </p>
+<h2 id="literals">CMD literals</h2>
+<div class="cmd-syntax">
+<code>(! <span class="mandatory-argument">{content}</span> !)</code>
+</div>
+<p>
+Literal <code><span class="mandatory-argument">{content}</span></code>,
+with HTML syntax-character escaping and de-indentation.
+Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
+For <code><span class="mandatory-argument">{content}</span></code> containing one or more consecutive exclamation marks
+followed by a closing round bracket,
+use a greater number of exclamation marks in the delimiters.
+</p>
+<ul>
+
+<li>CMD
+<pre><code>Escaping: (! &amp; &lt; &gt; !).
+Whitespace stripping: {(!      yes      !)}.
+Enough exclamation marks: (!!! (!! (! never !) !!) !!!).
+</code></pre>
+</li>
+<li>HTML
+<pre><code>Escaping: &amp;amp; &amp;lt; &amp;gt;.
+Whitespace stripping: {yes}.
+Enough exclamation marks: (!! (! never !) !!).
+</code></pre>
+</li>
+<li>Rendered
+<p>
+Escaping: &amp; &lt; &gt;.
+Whitespace stripping: {yes}.
+Enough exclamation marks: (!! (! never !) !!).
+</p>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
