@@ -6,6 +6,7 @@
 %date-modified 2020-04-05
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="cmd.css">
 
 %%%%
 
@@ -13,7 +14,7 @@
 # %title #
 
 
-||||
+|||| page-properties
   First created: %date-created \\
   Last modified: %date-modified \\
   Page source: [index.cmd][cmd-source]
