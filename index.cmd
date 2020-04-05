@@ -70,7 +70,7 @@ use a greater number of exclamation marks in the delimiters.
 
 ====
 * CMD
-  ````
+  ```` cmd
   (!!!!
     Escaping: (! & < > !).
     Whitespace stripping: {(!      yes      !)}.
@@ -79,7 +79,7 @@ use a greater number of exclamation marks in the delimiters.
   ````
 
 * HTML
-  ````
+  ```` html
   (!!!!
     Escaping: &amp; &lt; &gt;.
     Whitespace stripping: {yes}.

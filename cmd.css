@@ -28,3 +28,18 @@ span.mandatory-argument{
   color: #7000ff;
   font-weight: bold;
 }
+
+pre {
+  background: white;
+  border: 1px solid;
+  overflow-x: auto;
+  padding: 0.5em;
+}
+
+pre.cmd {
+  color: #008;
+}
+
+pre.html {
+  color: #800
+}
