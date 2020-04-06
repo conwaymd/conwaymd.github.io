@@ -83,9 +83,24 @@ except those listed in `.cmdignore`.
 ////
 
 
-##literals
-  CMD literals
+##syntax
+  Syntax
 ##
+
+////
+
+Since CMD-to-HTML conversion is merely a bunch of regex replacements
+(with some dictionaries for temporary storage of strings),
+the syntax for earlier replacements will have higher precedence
+than that for later replacements.
+The syntax of CMD, in the order of processing, is thus:
+
+////
+
+
+###literals
+  CMD literals
+###
 
 {^^
   ({{!}} {.content.} {{!}})
@@ -131,9 +146,9 @@ use a greater number of {{exclamation marks}} in the delimiters.
 ====
 
 
-##display-code
+###display-code
   Display code
-##
+###
 
 {^^
   {{ (!``!) }}[.id.] [.class.]\newline {.content.} {{ (!``!) }}

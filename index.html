@@ -44,7 +44,15 @@ Omit <code>[cmd_name[.[cmd]]]</code> to convert all CMD files
 in the current directory (at all levels),
 except those listed in <code>.cmdignore</code>.
 </p>
-<h2 id="literals">CMD literals</h2>
+<h2 id="syntax">Syntax</h2>
+<p>
+Since CMD-to-HTML conversion is merely a bunch of regex replacements
+(with some dictionaries for temporary storage of strings),
+the syntax for earlier replacements will have higher precedence
+than that for later replacements.
+The syntax of CMD, in the order of processing, is thus:
+</p>
+<h3 id="literals">CMD literals</h3>
 <pre class="cmd syntax"><code>(<span class="repeatable-delimiter">!</span> <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">!</span>)</code></pre>
 <p>
 Literal <code><span class="mandatory-argument">{content}</span></code>,
@@ -75,7 +83,7 @@ Enough exclamation marks: (!! (! never !) !!).
 </p>
 </li>
 </ul>
-<h2 id="display-code">Display code</h2>
+<h3 id="display-code">Display code</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">[id]</span> <span class="optional-argument">[class]</span>↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">``</span></code></pre>
 <p>
 Display code
