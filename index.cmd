@@ -17,6 +17,9 @@
 {% \{ \^ [\s]* % <code> %}
 {% [\s]* \^ \} % </code> %}
 
+{% {{ [\s]* % <span class="repeatable-delimiter"> %}
+{% [\s]* }} % </span> %}
+
 {: {. : <span class="mandatory-argument">{ :}
 {: .} : }</span> :}
 
@@ -49,9 +52,9 @@ implemented in Python using regex replacements.
 Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's [markdown][],
-Conway's markdown uses fence-style constructs,
-for which arbitrarily long runs of a delimiter symbol can be used
-to wrap shorter runs of that symbol.
+Conway's markdown uses fence-style constructs
+for which a delimiter symbol may be {{arbitrarily repeated}}
+in order to wrap shorter runs of that symbol.
 
 ////
 
@@ -79,7 +82,9 @@ except those listed in `.cmdignore`.
   CMD literals
 ##
 
-{^^ (!! (! !!) {.content.} (!! !) !!) ^^}
+{^^
+  ({{!}} {.content.} {{!}})
+^^}
 
 ////
 

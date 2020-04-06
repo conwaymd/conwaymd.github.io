@@ -29,9 +29,9 @@ implemented in Python using regex replacements.
 Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's <a href="https://daringfireball.net/projects/markdown/" title="Daring Fireball: Markdown">markdown</a>,
-Conway's markdown uses fence-style constructs,
-for which arbitrarily long runs of a delimiter symbol can be used
-to wrap shorter runs of that symbol.
+Conway's markdown uses fence-style constructs
+for which a delimiter symbol may be <span class="repeatable-delimiter">arbitrarily repeated</span>
+in order to wrap shorter runs of that symbol.
 </p>
 <h2 id="usage">Usage</h2>
 <p>
@@ -45,7 +45,7 @@ in the current directory (at all levels),
 except those listed in <code>.cmdignore</code>.
 </p>
 <h2 id="literals">CMD literals</h2>
-<pre class="cmd syntax"><code>(! <span class="mandatory-argument">{content}</span> !)</code></pre>
+<pre class="cmd syntax"><code>(<span class="repeatable-delimiter">!</span> <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">!</span>)</code></pre>
 <p>
 Literal <code><span class="mandatory-argument">{content}</span></code>,
 with HTML syntax-character escaping and de-indentation.
