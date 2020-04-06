@@ -48,6 +48,9 @@ pre.syntax {
 span.repeatable-delimiter {
   color: black;
   background: yellow;
+}
+
+pre span.repeatable-delimiter {
   font-weight: bold;
 }
 
