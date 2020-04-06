@@ -26,10 +26,14 @@
 
 |||| page-properties
   First created: %date-created \\
-  Last modified: %date-modified \\
-  This page's CMD source: [`index.cmd`][cmd-source] \\
-  GitHub repository: [`conway-markdown`][cmd-github]
+  Last modified: %date-modified
 ||||
+
+====
+* This page's source CMD: [`index.cmd`][source-cmd]
+* This page's output HTML: [`index.html`][output-html]
+* GitHub repository: [`conway-markdown`][cmd-github]
+====
 
 
 ////
@@ -107,10 +111,16 @@ use a greater number of exclamation marks in the delimiters.
   GitHub: Conway's markdown
 @@
 
-@@[cmd-source]
+@@[source-cmd]
   https://github.com/conway-markdown/conway-markdown.github.io/\
     blob/master/index.cmd
   GitHub: index.cmd
+@@
+
+@@[output-html]
+  https://github.com/conway-markdown/conway-markdown.github.io/\
+    blob/master/index.html
+  GitHub: index.html
 @@
 
 @@[markdown]
