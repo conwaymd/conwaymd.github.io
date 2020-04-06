@@ -33,6 +33,17 @@ Conway's markdown uses fence-style constructs,
 for which arbitrarily long runs of a delimiter symbol can be used
 to wrap shorter runs of that symbol.
 </p>
+<h2 id="usage">Usage</h2>
+<p>
+Convert a CMD file to HTML, outputting to <code>cmd_name.html</code>:
+</p>
+<pre><code>$ python cmd.py [cmd_name[.[cmd]]]
+</code></pre>
+<p>
+Omit <code>[cmd_name[.[cmd]]]</code> to convert all CMD files
+in the current directory (at all levels),
+except those listed in <code>.cmdignore</code>.
+</p>
 <h2 id="literals">CMD literals</h2>
 <pre class="cmd syntax"><code>(! <span class="mandatory-argument">{content}</span> !)</code></pre>
 <p>

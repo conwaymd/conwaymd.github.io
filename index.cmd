@@ -56,6 +56,25 @@ to wrap shorter runs of that symbol.
 ////
 
 
+##usage
+  Usage
+##
+
+////
+Convert a CMD file to HTML, outputting to `cmd_name.html`:
+////
+
+````
+$ python cmd.py [cmd_name[.[cmd]]]
+````
+
+////
+Omit `[cmd_name[.[cmd]]]` to convert all CMD files
+in the current directory (at all levels),
+except those listed in `.cmdignore`.
+////
+
+
 ##literals
   CMD literals
 ##
