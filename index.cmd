@@ -11,6 +11,9 @@
 %%%%
 
 
+{% \{ \^\^ [\s]* % <pre class="cmd syntax"><code> %}
+{% [\s]* \^\^ \} % </code></pre> %}
+
 {% \{ \^ [\s]* % <code> %}
 {% [\s]* \^ \} % </code> %}
 
@@ -53,9 +56,7 @@ to wrap shorter runs of that symbol.
   CMD literals
 ##
 
-|| cmd-syntax
-  {^ (!! (! !!) {.content.} (!! !) !!) ^}
-||
+{^^ (!! (! !!) {.content.} (!! !) !!) ^^}
 
 ////
 

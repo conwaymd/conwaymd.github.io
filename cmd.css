@@ -12,14 +12,6 @@ body {
   padding: 0 0.25em;
 }
 
-div.cmd-syntax {
-  border: 2px solid #111;
-  font-family: monospace;
-  font-size: larger;
-  margin: 0.25em;
-  padding: 0.5em;
-}
-
 div.page-properties {
   font-size: smaller;
 }
@@ -42,4 +34,10 @@ pre.cmd {
 
 pre.html {
   color: #800
+}
+
+pre.syntax {
+  border: 2px solid #111;
+  font-size: larger;
+  margin: 0.25em;
 }
