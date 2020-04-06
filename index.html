@@ -30,8 +30,8 @@ Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's <a href="https://daringfireball.net/projects/markdown/" title="Daring Fireball: Markdown">markdown</a>,
 Conway's markdown uses fence-style constructs
-for which a delimiter symbol may be <span class="repeatable-delimiter">arbitrarily repeated</span>
-in order to wrap shorter runs of that symbol.
+where an <span class="repeatable-delimiter">arbitrarily repeatable delimiter symbol</span>
+is used to wrap shorter runs of that symbol.
 </p>
 <h2 id="usage">Usage</h2>
 <p>
@@ -52,7 +52,7 @@ with HTML syntax-character escaping and de-indentation.
 Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
 For <code><span class="mandatory-argument">{content}</span></code> containing one or more consecutive exclamation marks
 followed by a closing round bracket,
-use a greater number of exclamation marks in the delimiters.
+use a greater number of <span class="repeatable-delimiter">exclamation marks</span> in the delimiters.
 </p>
 <ul>
 <li>CMD
@@ -73,6 +73,61 @@ Escaping: &amp; &lt; &gt;.
 Whitespace stripping: {yes}.
 Enough exclamation marks: (!! (! never !) !!).
 </p>
+</li>
+</ul>
+<h2 id="display-code">Display code</h2>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">[id]</span> <span class="optional-argument">[class]</span>↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">``</span></code></pre>
+<p>
+Display code
+<code>&lt;pre id="<span class="optional-argument">[id]</span>" class="<span class="optional-argument">[class]</span>"&gt;&lt;code&gt;<span class="mandatory-argument">{content}</span>&lt;/code&gt;&lt;/pre&gt;</code>,
+with HTML syntax-character escaping
+and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
+For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive backticks,
+use a greater number of <span class="repeatable-delimiter">backticks</span> in the delimiters.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>``id-0 class-1 class-2
+    Escaping: &amp; &lt; &gt;.
+    Uniform
+        de-indentation:
+        yes.
+``
+````
+  ``
+  Use more backticks as required.
+  If [id] and [class] are omitted,
+  no corresponding attributes are generated.
+  ``
+````
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;pre id="id-0" class="class-1 class-2"&gt;&lt;code&gt;Escaping: &amp;amp; &amp;lt; &amp;gt;.
+Uniform
+    de-indentation:
+    yes.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;``
+Use more backticks as required.
+If [id] and [class] are omitted,
+no corresponding attributes are generated.
+``
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+</li>
+<li>Rendered
+<pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
+Uniform
+    de-indentation:
+    yes.
+</code></pre>
+<pre><code>``
+Use more backticks as required.
+If [id] and [class] are omitted,
+no corresponding attributes are generated.
+``
+</code></pre>
 </li>
 </ul>
 <footer>

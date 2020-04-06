@@ -23,6 +23,11 @@
 {: {. : <span class="mandatory-argument">{ :}
 {: .} : }</span> :}
 
+{: [. : <span class="optional-argument">[ :}
+{: .] : ]</span> :}
+
+{: \newline : ↵ :}
+
 
 # %title #
 
@@ -53,8 +58,8 @@ Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's [markdown][],
 Conway's markdown uses fence-style constructs
-for which a delimiter symbol may be {{arbitrarily repeated}}
-in order to wrap shorter runs of that symbol.
+where an {{arbitrarily repeatable delimiter symbol}}
+is used to wrap shorter runs of that symbol.
 
 ////
 
@@ -93,7 +98,7 @@ with HTML syntax-character escaping and de-indentation.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive exclamation marks
 followed by a closing round bracket,
-use a greater number of exclamation marks in the delimiters.
+use a greater number of {{exclamation marks}} in the delimiters.
 
 ////
 
@@ -123,9 +128,84 @@ use a greater number of exclamation marks in the delimiters.
     Enough exclamation marks: (!!! (!! (! never !) !!) !!!).
   ////
 
-
 ====
 
+
+##display-code
+  Display code
+##
+
+{^^
+  {{ (!``!) }}[.id.] [.class.]\newline {.content.} {{ (!``!) }}
+^^}
+
+////
+
+Display code
+{^
+  (! <pre !)
+    id="[.id.]" class="[.class.]"(! > !)\
+      (! <code> !)\
+        {.content.}\
+      (! </code> !)\
+  (! </pre> !)
+^},
+with HTML syntax-character escaping
+and de-indentation for {^ {.content.} ^}.
+For {^ {.content.} ^} containing two or more consecutive backticks,
+use a greater number of {{backticks}} in the delimiters.
+
+////
+
+====
+* CMD
+  `````` cmd
+    ``id-0 class-1 class-2
+        Escaping: & < >.
+        Uniform
+            de-indentation:
+            yes.
+    ``
+    ````
+      ``
+      Use more backticks as required.
+      If [id] and [class] are omitted,
+      no corresponding attributes are generated.
+      ``
+    ````
+  ``````
+
+* HTML
+  `````` html
+    <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
+    Uniform
+        de-indentation:
+        yes.
+    </code></pre>
+    <pre><code>``
+    Use more backticks as required.
+    If [id] and [class] are omitted,
+    no corresponding attributes are generated.
+    ``
+    </code></pre>
+  ``````
+
+* Rendered
+    ``id-0 class-1 class-2
+        Escaping: & < >.
+        Uniform
+            de-indentation:
+            yes.
+    ``
+    ````
+      ``
+      Use more backticks as required.
+      If [id] and [class] are omitted,
+      no corresponding attributes are generated.
+      ``
+    ````
+
+====
 
 %footer-element
 
