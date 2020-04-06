@@ -160,9 +160,12 @@ use a greater number of {{backticks}} in the delimiters.
 ====
 * CMD
   `````` cmd
+  (!!!!
     ``id-0 class-1 class-2
         Escaping: & < >.
-        Uniform
+        Note that CMD literals have higher precedence,
+        since they are processed first: (!! (! literally !) !!).
+            Uniform
             de-indentation:
             yes.
     ``
@@ -173,12 +176,16 @@ use a greater number of {{backticks}} in the delimiters.
       no corresponding attributes are generated.
       ``
     ````
+  !!!!)
   ``````
 
 * HTML
   `````` html
+  (!!!!
     <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
-    Uniform
+    Note that CMD literals have higher precedence,
+    since they are processed first: (! literally !).
+        Uniform
         de-indentation:
         yes.
     </code></pre>
@@ -188,12 +195,15 @@ use a greater number of {{backticks}} in the delimiters.
     no corresponding attributes are generated.
     ``
     </code></pre>
+  !!!!)
   ``````
 
 * Rendered
     ``id-0 class-1 class-2
         Escaping: & < >.
-        Uniform
+        Note that CMD literals have higher precedence,
+        since they are processed first: (!! (! literally !) !!).
+            Uniform
             de-indentation:
             yes.
     ``

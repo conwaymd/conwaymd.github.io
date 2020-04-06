@@ -89,7 +89,9 @@ use a greater number of <span class="repeatable-delimiter">backticks</span> in t
 <li>CMD
 <pre class="cmd"><code>``id-0 class-1 class-2
     Escaping: &amp; &lt; &gt;.
-    Uniform
+    Note that CMD literals have higher precedence,
+    since they are processed first: (!! (! literally !) !!).
+        Uniform
         de-indentation:
         yes.
 ``
@@ -104,7 +106,9 @@ use a greater number of <span class="repeatable-delimiter">backticks</span> in t
 </li>
 <li>HTML
 <pre class="html"><code>&lt;pre id="id-0" class="class-1 class-2"&gt;&lt;code&gt;Escaping: &amp;amp; &amp;lt; &amp;gt;.
-Uniform
+Note that CMD literals have higher precedence,
+since they are processed first: (! literally !).
+    Uniform
     de-indentation:
     yes.
 &lt;/code&gt;&lt;/pre&gt;
@@ -118,7 +122,9 @@ no corresponding attributes are generated.
 </li>
 <li>Rendered
 <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
-Uniform
+Note that CMD literals have higher precedence,
+since they are processed first: (! literally !).
+    Uniform
     de-indentation:
     yes.
 </code></pre>
