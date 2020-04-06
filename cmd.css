@@ -45,7 +45,13 @@ pre.syntax {
   margin: 0.25em;
 }
 
-span.mandatory-argument{
+span.repeatable-delimiter {
+  color: black;
+  background: yellow;
+  font-weight: bold;
+}
+
+span.mandatory-argument {
   color: #7000ff;
   font-weight: bold;
 }
