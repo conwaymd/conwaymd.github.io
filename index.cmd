@@ -1,7 +1,7 @@
 %%%%
 
 %author Conway
-%title Conway's markdown
+%title Conway's markdown (CMD)
 %date-created 2020-04-05
 %date-modified 2020-04-06
 %resources
