@@ -91,7 +91,7 @@ The syntax of CMD, in the order of processing, is thus:
 ----
 
 
-###literals
+###cmd-literals
   CMD literals
 ###
 
@@ -241,7 +241,7 @@ with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive backticks
-which are not already protected by [CMD literals](#literals),
+which are not already protected by [CMD literals](#cmd-literals),
 use a greater number of {{backticks}} in the delimiters.
 ----
 
