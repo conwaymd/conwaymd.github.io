@@ -31,6 +31,21 @@
 {: [. : <span class="optional-argument">[ :}
 {: .] : ]</span> :}
 
+<!-- Heading self-link anchors (<h2> to <h6>) -->
+{%
+  (?P<leading_whitespace> ^ [\S\n]* )
+  (?P<hashes> [#]{2,6} )
+  (?P<id_> [^\s]* )
+  (?P<removable_whitespace> [\s]* )
+    (?P<content> [\s\S]*? )
+  (?P=hashes)
+%
+  \g<leading_whitespace>\g<hashes>\g<id_>
+    <a class="self-link" href="#\g<id_>"></a>
+    \g<content>
+  \g<hashes>
+%}
+
 <!-- U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS -->
 {: \newline : ↵ :}
 
