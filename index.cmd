@@ -44,58 +44,51 @@
 ====
 
 
-////
-
+----
 Conway's fence-style markdown,
 implemented in Python using regex replacements.
+----
 
-////
-
-
-////
-
+----
 Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's [markdown][],
 Conway's markdown uses fence-style constructs
 where an {{arbitrarily repeatable delimiter symbol}}
 is used to wrap shorter runs of that symbol.
-
-////
+----
 
 
 ##usage
   Usage
 ##
 
-////
+----
 Convert a CMD file to HTML, outputting to `cmd_name.html`:
-////
+----
 
 ````
 $ python cmd.py [cmd_name[.[cmd]]]
 ````
 
-////
+----
 Omit `[cmd_name[.[cmd]]]` to convert all CMD files
 in the current directory (at all levels),
 except those listed in `.cmdignore`.
-////
+----
 
 
 ##syntax
   Syntax
 ##
 
-////
-
+----
 Since CMD-to-HTML conversion is merely a bunch of regex replacements
 (with some dictionaries for temporary storage of strings),
 the syntax for earlier replacements will have higher precedence
 than that for later replacements.
 The syntax of CMD, in the order of processing, is thus:
-
-////
+----
 
 
 ###literals
@@ -106,16 +99,14 @@ The syntax of CMD, in the order of processing, is thus:
   ({{!}} {.content.} {{!}})
 ^^}
 
-////
-
+----
 Literal {^ {.content.} ^},
 with HTML syntax-character escaping and de-indentation.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive exclamation marks
 followed by a closing round bracket,
 use a greater number of {{exclamation marks}} in the delimiters.
-
-////
+----
 
 ====
 * CMD
@@ -137,11 +128,11 @@ use a greater number of {{exclamation marks}} in the delimiters.
   ````
 
 * Rendered
-  ////
+  ----
     Escaping: (! & < > !).
     Whitespace stripping: {(!      yes      !)}.
     Enough exclamation marks: (!!! (!! (! never !) !!) !!!).
-  ////
+  ----
 
 ====
 
@@ -154,8 +145,7 @@ use a greater number of {{exclamation marks}} in the delimiters.
   {{ (!``!) }}[.id.] [.class.]\newline {.content.} {{ (!``!) }}
 ^^}
 
-////
-
+----
 Display code
 {^
   (! <pre !)
@@ -169,8 +159,7 @@ with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 For {^ {.content.} ^} containing two or more consecutive backticks,
 use a greater number of {{backticks}} in the delimiters.
-
-////
+----
 
 ====
 * CMD
