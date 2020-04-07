@@ -11,21 +11,27 @@
 %%%%
 
 
+<!-- {^^ Syntax (display) ^^} -->
 {% \{ \^\^ [\s]* % <pre class="cmd syntax"><code> %}
 {% [\s]* \^\^ \} % </code></pre> %}
 
+<!-- {^ Inline syntax ^} -->
 {% \{ \^ [\s]* % <code> %}
 {% [\s]* \^ \} % </code> %}
 
+<!-- {{ Repeatable delimiter }} -->
 {% {{ [\s]* % <span class="repeatable-delimiter"> %}
 {% [\s]* }} % </span> %}
 
+<!-- {.Mandatory.} -->
 {: {. : <span class="mandatory-argument">{ :}
 {: .} : }</span> :}
 
+<!-- {.Optional.} -->
 {: [. : <span class="optional-argument">[ :}
 {: .] : ]</span> :}
 
+<!-- U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS -->
 {: \newline : ↵ :}
 
 
