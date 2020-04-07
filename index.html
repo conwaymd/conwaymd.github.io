@@ -33,8 +33,7 @@ Conway's markdown uses fence-style constructs
 where an <span class="repeatable-delimiter">arbitrarily repeatable delimiter symbol</span>
 is used to wrap shorter runs of that symbol.
 </p>
-<h2 id="usage"><a class="self-link" href="#usage"></a>
-Usage</h2>
+<h2 id="usage"><a class="self-link" href="#usage"></a>Usage</h2>
 <p>
 Convert a CMD file to HTML, outputting to <code>cmd_name.html</code>:
 </p>
@@ -45,8 +44,7 @@ Omit <code>[cmd_name[.[cmd]]]</code> to convert all CMD files
 in the current directory (at all levels),
 except those listed in <code>.cmdignore</code>.
 </p>
-<h2 id="syntax"><a class="self-link" href="#syntax"></a>
-Syntax</h2>
+<h2 id="syntax"><a class="self-link" href="#syntax"></a>Syntax</h2>
 <p>
 Since CMD-to-HTML conversion is merely a bunch of regex replacements
 (with some dictionaries for temporary storage of strings),
@@ -54,8 +52,7 @@ the syntax for earlier replacements will have higher precedence
 than that for later replacements.
 The syntax of CMD, in the order of processing, is thus:
 </p>
-<h3 id="cmd-literals"><a class="self-link" href="#cmd-literals"></a>
-CMD literals</h3>
+<h3 id="cmd-literals"><a class="self-link" href="#cmd-literals"></a>CMD literals</h3>
 <pre class="cmd syntax"><code>(<span class="repeatable-delimiter">!</span> <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">!</span>)</code></pre>
 <p>
 Literal <code><span class="mandatory-argument">{content}</span></code>,
@@ -86,8 +83,7 @@ Enough exclamation marks: (!! (! never !) !!).
 </p>
 </li>
 </ul>
-<h3 id="display-code"><a class="self-link" href="#display-code"></a>
-Display code</h3>
+<h3 id="display-code"><a class="self-link" href="#display-code"></a>Display code</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">[id]</span> <span class="optional-argument">[class]</span>↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">``</span></code></pre>
 <p>
 Display code
@@ -148,8 +144,7 @@ no corresponding attributes are generated.
 </code></pre>
 </li>
 </ul>
-<h3 id="inline-code"><a class="self-link" href="#inline-code"></a>
-Inline code</h3>
+<h3 id="inline-code"><a class="self-link" href="#inline-code"></a>Inline code</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">`</span> <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">`</span></code></pre>
 <p>
 Inline code

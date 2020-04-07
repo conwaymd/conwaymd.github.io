@@ -41,7 +41,7 @@
   (?P=hashes)
 %
   \g<leading_whitespace>\g<hashes>\g<id_>
-    <a class="self-link" href="#\g<id_>"></a>
+    <a class="self-link" href="#\g<id_>"></a>\\
     \g<content>
   \g<hashes>
 %}
