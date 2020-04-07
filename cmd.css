@@ -28,6 +28,13 @@ h6 a.self-link {
   padding-left: 32px;
 }
 
+:target::before {
+  content: "";
+  display: block;
+  height: 10px;
+  margin: -10px 0 0;
+}
+
 li {
   padding-bottom: 0.2em;
 }
