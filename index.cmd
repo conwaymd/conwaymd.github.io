@@ -6,7 +6,7 @@
 %date-modified 2020-04-07
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="cmd.css">
+  <link rel="stylesheet" href="/cmd.css">
 
 %%%%
 
