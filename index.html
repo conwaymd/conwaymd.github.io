@@ -144,6 +144,33 @@ no corresponding attributes are generated.
 </code></pre>
 </li>
 </ul>
+<h3 id="inline-code">Inline code</h3>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">`</span> <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">`</span></code></pre>
+<p>
+Inline code
+<code>&lt;code&gt;<span class="mandatory-argument">{content}</span>&lt;/code&gt;</code>,
+with HTML syntax-character escaping
+and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
+Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
+For <code><span class="mandatory-argument">{content}</span></code> containing one or more consecutive backticks
+which are not already protected by <a href="#literals">CMD literals</a>,
+use a greater number of <span class="repeatable-delimiter">backticks</span> in the delimiters.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>`` The escaped form of &amp; is &amp;amp;. ``
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;code&gt;The escaped form of &amp;amp; is &amp;amp;amp;.&lt;/code&gt;
+</code></pre>
+</li>
+<li>Rendered
+<p>
+<code>The escaped form of &amp; is &amp;amp;.</code>
+</p>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.

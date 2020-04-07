@@ -221,6 +221,48 @@ use a greater number of {{backticks}} in the delimiters.
 
 ====
 
+
+###inline-code
+  Inline code
+###
+
+{^^
+  {{ (!`!) }} {.content.} {{ (!`!) }}
+^^}
+
+----
+Inline code
+{^
+  (! <code> !)\
+    {.content.}\
+  (! </code> !)
+^},
+with HTML syntax-character escaping
+and de-indentation for {^ {.content.} ^}.
+Whitespace around {^ {.content.} ^} is stripped.
+For {^ {.content.} ^} containing one or more consecutive backticks
+which are not already protected by [CMD literals](#literals),
+use a greater number of {{backticks}} in the delimiters.
+----
+
+====
+* CMD
+  ```` cmd
+    `` The escaped form of & is &amp;. ``
+  ````
+
+* HTML
+  ```` html
+    <code>The escaped form of &amp; is &amp;amp;.</code>
+  ````
+
+* Rendered
+  ----
+    `` The escaped form of & is &amp;. ``
+  ----
+
+====
+
 %footer-element
 
 
