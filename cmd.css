@@ -16,6 +16,18 @@ div.page-properties {
   font-size: smaller;
 }
 
+h2 a.self-link,
+h3 a.self-link,
+h4 a.self-link,
+h5 a.self-link,
+h6 a.self-link {
+  background-image: url(/self-link.svg);
+  background-position: center left;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  padding-left: 32px;
+}
+
 li {
   padding-bottom: 0.2em;
 }
