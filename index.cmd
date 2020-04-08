@@ -7,6 +7,21 @@
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js">
+    </script>
+%onload-js
+  let elements = document.getElementsByClassName("js-maths");
+  for (let i = 0; i < elements.length; i++) {
+    let element = elements[i]
+    katex.render(
+      element.textContent,
+      element,
+      {displayMode: element.tagName == "DIV"}
+    );
+  }
 
 %%%%
 
@@ -339,7 +354,72 @@ Although comments are weaker than literals and code
 they may still be used to remove them.
 For instance ` (!! (! A <!-- B --> !) !!) ` becomes ` A <!-- B --> `,
 whereas ` (!! <!-- A (! B !) --> !!) ` is removed entirely.
+In this sense they are stronger than literals and code.
 ----
+
+
+
+###display-maths
+  Display maths
+###
+
+{^^
+  {{ (!$$!) }}[.id.][[.class.]]\newline {.content.} {{ (!$$!) }}
+^^}
+
+----
+The delimiting dollar signs must be the first non-whitespace characters
+on lines of equal indentation.
+If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+----
+
+----
+Produces
+{^
+  (! <div !)
+    id="[.id.]" class="js-maths [.class.]"(! > !)\
+      {.content.}\
+  (! </div> !)
+^},
+with HTML syntax-character escaping
+and de-indentation for {^ {.content.} ^}.
+For {^ {.content.} ^} containing two or more consecutive dollar signs
+which are not already protected by CMD literals,
+use a greater number of {{dollar signs}} in the delimiters.
+----
+
+----
+This is to be used with some sort of JavaScript code
+which renders equations based on the class `js-maths`.
+Here I am using [KaTeX][].
+----
+
+====
+* CMD
+  ````[cmd]
+    $$
+      1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
+      = \frac{\pi^2}{6}
+      < 2
+    $$
+  ````
+
+* HTML
+  ````[html]
+    <div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
+    = \frac{\pi^2}{6}
+    &lt; 2
+    </div>
+  ````
+
+* Rendered
+    $$
+      1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
+      = \frac{\pi^2}{6}
+      < 2
+    $$
+
+====
 
 %footer-element
 
@@ -359,6 +439,11 @@ whereas ` (!! <!-- A (! B !) --> !!) ` is removed entirely.
   https://github.com/conway-markdown/conway-markdown.github.io/\
     blob/master/index.html
   GitHub: index.html
+@@
+
+@@[katex]
+  https://katex.org/
+  KaTeX --- The fastest math typesetting library for the web
 @@
 
 @@[markdown]

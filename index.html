@@ -5,9 +5,20 @@
 <meta name="author" content="Conway">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/cmd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js">
+</script>
 <title>Conway's markdown (CMD)</title>
 </head>
-<body>
+<body onload="let elements = document.getElementsByClassName(&quot;js-maths&quot;);
+  for (let i = 0; i &lt; elements.length; i++) {
+    let element = elements[i]
+    katex.render(
+      element.textContent,
+      element,
+      {displayMode: element.tagName == &quot;DIV&quot;}
+    );
+  }">
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
@@ -211,7 +222,52 @@ Although comments are weaker than literals and code
 they may still be used to remove them.
 For instance <code>(! A &lt;!-- B --&gt; !)</code> becomes <code>A &lt;!-- B --&gt;</code>,
 whereas <code>&lt;!-- A (! B !) --&gt;</code> is removed entirely.
+In this sense they are stronger than literals and code.
 </p>
+<h3 id="display-maths"><a class="self-link" href="#display-maths"></a>Display maths</h3>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">$$</span><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">$$</span></code></pre>
+<p>
+The delimiting dollar signs must be the first non-whitespace characters
+on lines of equal indentation.
+If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+</p>
+<p>
+Produces
+<code>&lt;div id="<span class="optional-argument">[id]</span>" class="js-maths <span class="optional-argument">[class]</span>"&gt;<span class="mandatory-argument">{content}</span>&lt;/div&gt;</code>,
+with HTML syntax-character escaping
+and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
+For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive dollar signs
+which are not already protected by CMD literals,
+use a greater number of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
+</p>
+<p>
+This is to be used with some sort of JavaScript code
+which renders equations based on the class <code>js-maths</code>.
+Here I am using <a href="https://katex.org/" title="KaTeX — The fastest math typesetting library for the web">KaTeX</a>.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>$$
+  1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
+  = \frac{\pi^2}{6}
+  &lt; 2
+$$
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;div class="js-maths"&gt;1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
+= \frac{\pi^2}{6}
+&amp;lt; 2
+&lt;/div&gt;
+</code></pre>
+</li>
+<li>Rendered
+<div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
+= \frac{\pi^2}{6}
+&lt; 2
+</div>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
