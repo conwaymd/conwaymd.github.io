@@ -157,6 +157,40 @@ use a greater number of {{exclamation marks}} in the delimiters.
 
 ====
 
+----
+CMD literals are very powerful.
+For example, `id` and `class` in CMD block syntax
+are specified in the form {^ [.id.][[.class.]] ^}.
+Now, if for whatever reason you want an `id`
+with square brackets, e.g.~`[dumb-id]`,
+then wrapping it inside a CMD literal will prevent it
+from being interpreted as the class `dumb-id`:
+----
+
+====
+* CMD
+  ````[cmd]
+  (!!
+    ``[dumb-id]
+      Whoops!
+    ``
+    ``(![dumb-id]!)
+      That's better.
+    ``
+  !!)
+  ````
+
+* HTML
+  ````[html]
+    <pre class="dumb-id"><code>Whoops!
+    </code></pre>
+    <pre id="[dumb-id]"><code>That's better.
+    </code></pre>
+  ````
+
+====
+
+
 
 ###display-code
   Display code

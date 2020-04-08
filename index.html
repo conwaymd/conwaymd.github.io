@@ -83,6 +83,33 @@ Enough exclamation marks: (!! (! never !) !!).
 </p>
 </li>
 </ul>
+<p>
+CMD literals are very powerful.
+For example, <code>id</code> and <code>class</code> in CMD block syntax
+are specified in the form <code><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]</code>.
+Now, if for whatever reason you want an <code>id</code>
+with square brackets, e.g.&nbsp;<code>[dumb-id]</code>,
+then wrapping it inside a CMD literal will prevent it
+from being interpreted as the class <code>dumb-id</code>:
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>``[dumb-id]
+  Whoops!
+``
+``(![dumb-id]!)
+  That's better.
+``
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;pre class="dumb-id"&gt;&lt;code&gt;Whoops!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="[dumb-id]"&gt;&lt;code&gt;That's better.
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+</li>
+</ul>
 <h3 id="display-code"><a class="self-link" href="#display-code"></a>Display code</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">``</span></code></pre>
 <p>
