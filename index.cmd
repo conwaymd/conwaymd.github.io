@@ -384,7 +384,7 @@ Produces
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 For {^ {.content.} ^} containing two or more consecutive dollar signs
-which are not already protected by CMD literals,
+which are not already protected by [CMD literals](#cmd-literals),
 use a greater number of {{dollar signs}} in the delimiters.
 ----
 
@@ -418,6 +418,56 @@ Here I am using [KaTeX][].
       = \frac{\pi^2}{6}
       < 2
     $$
+
+====
+
+
+###inline-maths
+  Inline maths
+###
+
+{^^
+  {{ (!$!) }} {.content.} {{ (!$!) }}
+^^}
+
+----
+Produces
+{^
+  (! <span class="js-maths"> !)\
+    {.content.}\
+  (! </span> !)
+^},
+with HTML syntax-character escaping for {^ {.content.} ^}.
+Whitespace around {^ {.content.} ^} is stripped.
+For {^ {.content.} ^} containing one or more consecutive dollar signs
+which are not already protected by [CMD literals](#cmd-literals),
+use a greater number of {{dollar signs}} in the delimiters.
+----
+
+----
+This is to be used with some sort of JavaScript code
+which renders equations based on the class `js-maths`.
+Here I am using [KaTeX][].
+----
+
+====
+* CMD
+  ````[cmd]
+    A contrived instance of multiple dollar signs in inline maths:
+    $$$ \text{Yea, \$$d$ means $d$~dollars.} $$$
+  ````
+
+* HTML
+  ````[html]
+    A contrived instance of multiple dollar signs in inline maths:
+    <span class="js-maths">\text{Yea, \$$d$ means $d$~dollars.}</span>
+  ````
+
+* Rendered
+  ----
+    A contrived instance of multiple dollar signs in inline maths:
+    $$$ \text{Yea, \$$d$ means $d$~dollars.} $$$
+  ----
 
 ====
 
