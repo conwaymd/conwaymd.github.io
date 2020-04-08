@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-07
+%date-modified 2020-04-09
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
@@ -121,7 +121,7 @@ The syntax of CMD, in the order of processing, is thus:
 ^^}
 
 ----
-Literal {^ {.content.} ^},
+Produces {^ {.content.} ^} literally,
 with HTML syntax-character escaping and de-indentation.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive exclamation marks
@@ -163,11 +163,17 @@ use a greater number of {{exclamation marks}} in the delimiters.
 ###
 
 {^^
-  {{ (!``!) }}[.id.] [.class.]\newline {.content.} {{ (!``!) }}
+  {{ (!``!) }}[.id.][[.class.]]\newline {.content.} {{ (!``!) }}
 ^^}
 
 ----
-Display code
+The delimiting backticks must be the first non-whitespace characters
+on lines of equal indentation.
+If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+----
+
+----
+Produces the display code
 {^
   (! <pre !)
     id="[.id.]" class="[.class.]"(! > !)\
@@ -186,7 +192,7 @@ use a greater number of {{backticks}} in the delimiters.
 * CMD
   ``````[cmd]
   (!!!!
-    ``id-0 class-1 class-2
+    ``id-0[class-1 class-2]
         Escaping: & < >.
         Note that CMD literals have higher precedence,
         since they are processed first: (!! (! literally !) !!).
@@ -252,7 +258,7 @@ use a greater number of {{backticks}} in the delimiters.
 ^^}
 
 ----
-Inline code
+Produces the inline code
 {^
   (! <code> !)\
     {.content.}\
@@ -269,17 +275,17 @@ use a greater number of {{backticks}} in the delimiters.
 ====
 * CMD
   ````[cmd]
-    `` The escaped form of & is &amp;. ``
+    `` The escaped form of & is &amp;. Here is a tilde: `. ``
   ````
 
 * HTML
   ````[html]
-    <code>The escaped form of &amp; is &amp;amp;.</code>
+    <code>The escaped form of &amp; is &amp;amp;. Here is a tilde: `.</code>
   ````
 
 * Rendered
   ----
-    `` The escaped form of & is &amp;. ``
+    `` The escaped form of & is &amp;. Here is a tilde: `. ``
   ----
 
 ====
