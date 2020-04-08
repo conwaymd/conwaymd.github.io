@@ -53,7 +53,7 @@
 # %title #
 
 
-|||| page-properties
+||||[page-properties]
   First created: %date-created \\
   Last modified: %date-modified
 ||||
@@ -131,7 +131,7 @@ use a greater number of {{exclamation marks}} in the delimiters.
 
 ====
 * CMD
-  ```` cmd
+  ````[cmd]
   (!!!!
     Escaping: (! & < > !).
     Whitespace stripping: {(!      yes      !)}.
@@ -140,7 +140,7 @@ use a greater number of {{exclamation marks}} in the delimiters.
   ````
 
 * HTML
-  ```` html
+  ````[html]
   (!!!!
     Escaping: &amp; &lt; &gt;.
     Whitespace stripping: {yes}.
@@ -184,7 +184,7 @@ use a greater number of {{backticks}} in the delimiters.
 
 ====
 * CMD
-  `````` cmd
+  ``````[cmd]
   (!!!!
     ``id-0 class-1 class-2
         Escaping: & < >.
@@ -205,7 +205,7 @@ use a greater number of {{backticks}} in the delimiters.
   ``````
 
 * HTML
-  `````` html
+  ``````[html]
   (!!!!
     <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
     Note that CMD literals have higher precedence,
@@ -224,7 +224,7 @@ use a greater number of {{backticks}} in the delimiters.
   ``````
 
 * Rendered
-    ``id-0 class-1 class-2
+    ``id-0[class-1 class-2]
         Escaping: & < >.
         Note that CMD literals have higher precedence,
         since they are processed first: (!! (! literally !) !!).
@@ -268,12 +268,12 @@ use a greater number of {{backticks}} in the delimiters.
 
 ====
 * CMD
-  ```` cmd
+  ````[cmd]
     `` The escaped form of & is &amp;. ``
   ````
 
 * HTML
-  ```` html
+  ````[html]
     <code>The escaped form of &amp; is &amp;amp;.</code>
   ````
 
