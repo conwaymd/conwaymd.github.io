@@ -171,6 +171,15 @@ use a greater number of <span class="repeatable-delimiter">backticks</span> in t
 </p>
 </li>
 </ul>
+<h3 id="comments"><a class="self-link" href="#comments"></a>Comments</h3>
+<pre class="cmd syntax"><code>&lt;!-- <span class="mandatory-argument">{comment}</span> --&gt;</code></pre>
+<p>
+Removed, along with any preceding horizontal whitespace.
+Although comments are weaker than literals and code
+they may still be used to remove them.
+For instance <code>(! A &lt;!-- B --&gt; !)</code> becomes <code>A &lt;!-- B --&gt;</code>,
+whereas <code>&lt;!-- A (! B !) --&gt;</code> is removed entirely.
+</p>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.

@@ -284,6 +284,23 @@ use a greater number of {{backticks}} in the delimiters.
 
 ====
 
+
+###comments
+  Comments
+###
+
+{^^
+  (! <!-- !) {.comment.} (! --> !)
+^^}
+
+----
+Removed, along with any preceding horizontal whitespace.
+Although comments are weaker than literals and code
+they may still be used to remove them.
+For instance ` (!! (! A <!-- B --> !) !!) ` becomes ` A <!-- B --> `,
+whereas ` (!! <!-- A (! B !) --> !!) ` is removed entirely.
+----
+
 %footer-element
 
 
