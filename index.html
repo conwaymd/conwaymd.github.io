@@ -196,63 +196,48 @@ with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
 Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
 For <code><span class="mandatory-argument">{content}</span></code> containing one or more consecutive backticks
-which are not already protected by <a href="#cmd-literals)," title="use a greater number of &lt;span class=&quot;repeatable-delimiter&quot;&gt;backticks&lt;/span&gt; in the delimiters.
-&lt;/p&gt;
-
-&lt;ul&gt;
-
-&lt;li&gt;CMD
-<pre class=&quot;cmd&quot;><code>`` The escaped form of &amp; is &amp;amp;. Here is a tilde: `. ``
+which are not already protected by <a href="#cmd-literals">CMD literals</a>,
+use a greater number of <span class="repeatable-delimiter">backticks</span> in the delimiters.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>`` The escaped form of &amp; is &amp;amp;. Here is a tilde: `. ``
 </code></pre>
-
-&lt;/li&gt;
-&lt;li&gt;HTML
-<pre class=&quot;html&quot;><code>&lt;code&gt;The escaped form of &amp;amp; is &amp;amp;amp;. Here is a tilde: `.&lt;/code&gt;
+</li>
+<li>HTML
+<pre class="html"><code>&lt;code&gt;The escaped form of &amp;amp; is &amp;amp;amp;. Here is a tilde: `.&lt;/code&gt;
 </code></pre>
-
-&lt;/li&gt;
-&lt;li&gt;Rendered
-&lt;p&gt;
-    <code>The escaped form of &amp; is &amp;amp;. Here is a tilde: `.</code>
-&lt;/p&gt;
-
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;h3 id=&quot;comments&quot;&gt;&lt;a class=&quot;self-link&quot; href=&quot;#comments&quot;&gt;&lt;/a&gt;Comments&lt;/h3&gt;
-
-&lt;pre class=&quot;cmd syntax&quot;&gt;&lt;code&gt;&lt;!-- &lt;span class=&quot;mandatory-argument&quot;&gt;{comment}&lt;/span&gt; --&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
+</li>
+<li>Rendered
+<p>
+<code>The escaped form of &amp; is &amp;amp;. Here is a tilde: `.</code>
+</p>
+</li>
+</ul>
+<h3 id="comments"><a class="self-link" href="#comments"></a>Comments</h3>
+<pre class="cmd syntax"><code>&lt;!-- <span class="mandatory-argument">{comment}</span> --&gt;</code></pre>
+<p>
 Removed, along with any preceding horizontal whitespace.
 Although comments are weaker than literals and code
 they may still be used to remove them.
 For instance <code>(! A &lt;!-- B --&gt; !)</code> becomes <code>A &lt;!-- B --&gt;</code>,
 whereas <code>&lt;!-- A (! B !) --&gt;</code> is removed entirely.
 In this sense they are stronger than literals and code.
-&lt;/p&gt;
-
-
-
-&lt;h3 id=&quot;display-maths&quot;&gt;&lt;a class=&quot;self-link&quot; href=&quot;#display-maths&quot;&gt;&lt;/a&gt;Display maths&lt;/h3&gt;
-
-&lt;pre class=&quot;cmd syntax&quot;&gt;&lt;code&gt;&lt;span class=&quot;repeatable-delimiter&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;optional-argument&quot;&gt;[id]&lt;/span&gt;[&lt;span class=&quot;optional-argument&quot;&gt;[class]&lt;/span&gt;]↵ &lt;span class=&quot;mandatory-argument&quot;&gt;{content}&lt;/span&gt; &lt;span class=&quot;repeatable-delimiter&quot;&gt;$$&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
+</p>
+<h3 id="display-maths"><a class="self-link" href="#display-maths"></a>Display maths</h3>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">$$</span><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">$$</span></code></pre>
+<p>
 The delimiting dollar signs must be the first non-whitespace characters
 on lines of equal indentation.
-If &lt;code&gt;&lt;span class=&quot;optional-argument&quot;&gt;[class]&lt;/span&gt;&lt;/code&gt; is empty, the square brackets surrounding it may be omitted.
-&lt;/p&gt;
-
-&lt;p&gt;
+If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+</p>
+<p>
 Produces
-&lt;code&gt;&lt;div
-    id=&quot;&lt;span class=&quot;optional-argument&quot;&gt;[id]&lt;/span&gt;&quot; class=&quot;js-maths &lt;span class=&quot;optional-argument&quot;&gt;[class]&lt;/span&gt;&quot;&gt;&lt;span class=&quot;mandatory-argument&quot;&gt;{content}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;,
+<code>&lt;div id="<span class="optional-argument">[id]</span>" class="js-maths <span class="optional-argument">[class]</span>"&gt;<span class="mandatory-argument">{content}</span>&lt;/div&gt;</code>,
 with HTML syntax-character escaping
-and de-indentation for &lt;code&gt;&lt;span class=&quot;mandatory-argument&quot;&gt;{content}&lt;/span&gt;&lt;/code&gt;.
-For &lt;code&gt;&lt;span class=&quot;mandatory-argument&quot;&gt;{content}&lt;/span&gt;&lt;/code&gt; containing two or more consecutive dollar signs
-which are not already protected by [CMD literals](#cmd-literals">CMD literals</a>,
+and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
+For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive dollar signs
+which are not already protected by <a href="#cmd-literals">CMD literals</a>,
 use a greater number of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
 </p>
 <p>
