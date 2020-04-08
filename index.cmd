@@ -42,7 +42,7 @@
 {: {. : <span class="mandatory-argument">{ :}
 {: .} : }</span> :}
 
-<!-- {.Optional.} -->
+<!-- [.Optional.] -->
 {: [. : <span class="optional-argument">[ :}
 {: .] : ]</span> :}
 
