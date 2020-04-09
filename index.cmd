@@ -324,7 +324,7 @@ with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive backticks
-which are not already protected by [CMD literals](#cmd-literals),
+which are not already protected by [CMD literals][],
 use a greater number of {{backticks}} in the delimiters.
 ----
 
@@ -391,7 +391,7 @@ Produces
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 For {^ {.content.} ^} containing two or more consecutive dollar signs
-which are not already protected by [CMD literals](#cmd-literals),
+which are not already protected by [CMD literals][],
 use a greater number of {{dollar signs}} in the delimiters.
 ----
 
@@ -447,7 +447,7 @@ Produces
 with HTML syntax-character escaping for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive dollar signs
-which are not already protected by [CMD literals](#cmd-literals),
+which are not already protected by [CMD literals][],
 use a greater number of {{dollar signs}} in the delimiters.
 ----
 
@@ -520,6 +520,10 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ====
 
 %footer-element
+
+@@[CMD literals]
+  #cmd-literals
+@@
 
 
 @@[cmd-github]
