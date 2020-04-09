@@ -55,7 +55,7 @@
 
 <!-- Heading self-link anchors (<h2> to <h6>) -->
 {%
-  (?P<leading_whitespace> ^ [\S\n]* )
+  (?P<leading_whitespace> ^ [^\S\n]* )
   (?P<hashes> [#]{2,6} )
   (?P<id_> [^\s]* )
   (?P<removable_whitespace> [\s]+ )
@@ -546,7 +546,7 @@ before the section headings (`<h2>` to `<h6>`) in this page:
 ----
 ````[cmd]
   {%
-    (?P<leading_whitespace> ^ [\S\n]* )
+    (?P<leading_whitespace> ^ [^\S\n]* )
     (?P<hashes> [#]{2,6} )
     (?P<id_> [^\s]* )
     (?P<removable_whitespace> [\s]+ )
