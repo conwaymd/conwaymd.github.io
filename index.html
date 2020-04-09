@@ -302,6 +302,37 @@ A contrived instance of multiple dollar signs in inline maths:
 </p>
 </li>
 </ul>
+<h3 id="inclusions"><a class="self-link" href="#inclusions"></a>Inclusions</h3>
+<pre class="cmd syntax"><code>(<span class="repeatable-delimiter">+</span> <span class="mandatory-argument">{file_name}</span> <span class="repeatable-delimiter">+</span>)</code></pre>
+<p>
+Includes the content of the file <code><span class="mandatory-argument">{file_name}</span></code>.
+For <code><span class="mandatory-argument">{file_name}</span></code> containing one or more consecutive plus signs
+followed by a closing round bracket,
+use a greater number of <span class="repeatable-delimiter">plus signs</span> in the delimiters.
+</p>
+<p>
+All of the syntax above (CMD literals through to inline maths) is processed.
+Unlike nested <code>\input</code> in LaTeX, nested inclusions are not processed.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>(+ inclusion.txt +)
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>This is content from &lt;a href="/inclusion.txt"&gt;&lt;code&gt;inclusion.txt&lt;/code&gt;&lt;/a&gt;.
+Nested inclusions are not processed,
+so there is no need to worry about recursion errors: (+ inclusion.txt +)
+</code></pre>
+</li>
+<li>Rendered
+<p>
+This is content from <a href="/inclusion.txt"><code>inclusion.txt</code></a>.
+Nested inclusions are not processed,
+so there is no need to worry about recursion errors: (+ inclusion.txt +)
+</p>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.

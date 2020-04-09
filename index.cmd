@@ -471,6 +471,47 @@ Here I am using [KaTeX][].
 
 ====
 
+
+###inclusions
+  Inclusions
+###
+
+{^^
+  ({{ (!+!) }} {.(! file_name !).} {{ (!+!) }})
+^^}
+
+----
+Includes the content of the file {^ {.(! file_name !).} ^}.
+For {^ {.(! file_name !).} ^} containing one or more consecutive plus signs
+followed by a closing round bracket,
+use a greater number of {{plus signs}} in the delimiters.
+----
+
+----
+All of the syntax above (CMD literals through to inline maths) is processed.
+Unlike nested `\input` in LaTeX, nested inclusions are not processed.
+----
+
+====
+* CMD
+  ````[cmd]
+    (+ inclusion.txt +)
+  ````
+
+* HTML
+  ````[html]
+  This is content from <a href="/inclusion.txt"><code>inclusion.txt</code></a>.
+  Nested inclusions are not processed,
+  so there is no need to worry about recursion errors: (+ inclusion.txt +)
+  ````
+
+* Rendered
+  ----
+    (+ inclusion.txt +)
+  ----
+
+====
+
 %footer-element
 
 
