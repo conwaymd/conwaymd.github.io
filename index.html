@@ -358,14 +358,14 @@ to automatically insert the self-link anchors
 before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>) in this page:
 </p>
 <pre class="cmd"><code>{%
-  (?P&lt;leading_whitespace&gt; ^ [^\S\n]* )
+  ^ [^\S\n]*
   (?P&lt;hashes&gt; [#]{2,6} )
-  (?P&lt;id_&gt; [^\s]* )
-  (?P&lt;removable_whitespace&gt; [\s]+ )
+    (?P&lt;id_&gt; [\S]*? )
+  [\s]+
     (?P&lt;content&gt; [\s\S]*? )
   (?P=hashes)
 %
-  \g&lt;leading_whitespace&gt;\g&lt;hashes&gt;\g&lt;id_&gt;
+  \g&lt;hashes&gt;\g&lt;id_&gt;
     &lt;a class="self-link" href="#\g&lt;id_&gt;"&gt;&lt;/a&gt;\\
     \g&lt;content&gt;
   \g&lt;hashes&gt;

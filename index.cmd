@@ -55,14 +55,14 @@
 
 <!-- Heading self-link anchors (<h2> to <h6>) -->
 {%
-  (?P<leading_whitespace> ^ [^\S\n]* )
+  ^ [^\S\n]*
   (?P<hashes> [#]{2,6} )
-  (?P<id_> [^\s]* )
-  (?P<removable_whitespace> [\s]+ )
+    (?P<id_> [\S]*? )
+  [\s]+
     (?P<content> [\s\S]*? )
   (?P=hashes)
 %
-  \g<leading_whitespace>\g<hashes>\g<id_>
+  \g<hashes>\g<id_>
     <a class="self-link" href="#\g<id_>"></a>\\
     \g<content>
   \g<hashes>
@@ -546,14 +546,14 @@ before the section headings (`<h2>` to `<h6>`) in this page:
 ----
 ````[cmd]
   {%
-    (?P<leading_whitespace> ^ [^\S\n]* )
+    ^ [^\S\n]*
     (?P<hashes> [#]{2,6} )
-    (?P<id_> [^\s]* )
-    (?P<removable_whitespace> [\s]+ )
+      (?P<id_> [\S]*? )
+    [\s]+
       (?P<content> [\s\S]*? )
     (?P=hashes)
   %
-    \g<leading_whitespace>\g<hashes>\g<id_>
+    \g<hashes>\g<id_>
       <a class="self-link" href="#\g<id_>"></a>\\
       \g<content>
     \g<hashes>
