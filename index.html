@@ -340,6 +340,37 @@ so there is no need to worry about recursion errors: (+ inclusion.txt +)
 </p>
 </li>
 </ul>
+<h3 id="regex-replacements"><a class="self-link" href="#regex-replacements"></a>Regex replacements</h3>
+<pre class="cmd syntax"><code>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">{pattern}</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">{replacement}</span> <span class="repeatable-delimiter">%</span>}</code></pre>
+<p>
+Processes regex replacements of <code><span class="mandatory-argument">{pattern}</span></code> by <code><span class="mandatory-argument">{replacement}</span></code>
+in Python syntax with the flags <code>re.MULTILINE</code> and <code>re.VERBOSE</code> enabled.
+Whitespace around <code><span class="mandatory-argument">{pattern}</span></code> and <code><span class="mandatory-argument">{replacement}</span></code> is stripped.
+For <code><span class="mandatory-argument">{pattern}</span></code> or <code><span class="mandatory-argument">{replacement}</span></code> containing
+one or more consecutive percent signs,
+use a greater number of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
+For <code><span class="mandatory-argument">{pattern}</span></code> matching any of the syntax above,
+which should not be processed using that syntax, use CMD literals.
+</p>
+<p>
+For example, the following regex replacement is used
+to automatically insert the self-link anchors
+before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>) in this page:
+</p>
+<pre class="cmd"><code>{%
+  (?P&lt;leading_whitespace&gt; ^ [\S\n]* )
+  (?P&lt;hashes&gt; [#]{2,6} )
+  (?P&lt;id_&gt; [^\s]* )
+  (?P&lt;removable_whitespace&gt; [\s]+ )
+    (?P&lt;content&gt; [\s\S]*? )
+  (?P=hashes)
+%
+  \g&lt;leading_whitespace&gt;\g&lt;hashes&gt;\g&lt;id_&gt;
+    &lt;a class="self-link" href="#\g&lt;id_&gt;"&gt;&lt;/a&gt;\\
+    \g&lt;content&gt;
+  \g&lt;hashes&gt;
+%}
+</code></pre>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.

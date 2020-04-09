@@ -58,7 +58,7 @@
   (?P<leading_whitespace> ^ [\S\n]* )
   (?P<hashes> [#]{2,6} )
   (?P<id_> [^\s]* )
-  (?P<removable_whitespace> [\s]* )
+  (?P<removable_whitespace> [\s]+ )
     (?P<content> [\s\S]*? )
   (?P=hashes)
 %
@@ -518,6 +518,47 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
   ----
 
 ====
+
+
+###regex-replacements
+  Regex replacements
+###
+
+{^^
+  (!{!){{ (!%!) }} {.pattern.} {{ (!%!) }} {.replacement.} {{ (!%!) }}(!}!)
+^^}
+
+----
+Processes regex replacements of {^ {.pattern.} ^} by {^ {.replacement.} ^}
+in Python syntax with the flags `re.MULTILINE` and `re.VERBOSE` enabled.
+Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
+For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
+one or more consecutive percent signs,
+use a greater number of {{percent signs}} in the delimiters.
+For {^ {.pattern.} ^} matching any of the syntax above,
+which should not be processed using that syntax, use CMD literals.
+----
+
+----
+For example, the following regex replacement is used
+to automatically insert the self-link anchors
+before the section headings (`<h2>` to `<h6>`) in this page:
+----
+````[cmd]
+  {%
+    (?P<leading_whitespace> ^ [\S\n]* )
+    (?P<hashes> [#]{2,6} )
+    (?P<id_> [^\s]* )
+    (?P<removable_whitespace> [\s]+ )
+      (?P<content> [\s\S]*? )
+    (?P=hashes)
+  %
+    \g<leading_whitespace>\g<hashes>\g<id_>
+      <a class="self-link" href="#\g<id_>"></a>\\
+      \g<content>
+    \g<hashes>
+  %}
+````
 
 %footer-element
 
