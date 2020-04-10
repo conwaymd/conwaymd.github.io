@@ -98,7 +98,7 @@ implemented in Python using regex replacements.
 ----
 Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
-Inspired by the backticks of John Gruber's [markdown][],
+Inspired by the backticks of John Gruber's [markdown],
 Conway's markdown uses fence-style constructs
 where an {{arbitrarily repeatable delimiter symbol}}
 is used to wrap shorter runs of that symbol.
@@ -327,7 +327,7 @@ with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive backticks
-which are not already protected by [CMD literals][],
+which are not already protected by [CMD literals],
 use a greater number of {{backticks}} in the delimiters.
 ----
 
@@ -394,14 +394,14 @@ Produces
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 For {^ {.content.} ^} containing two or more consecutive dollar signs
-which are not already protected by [CMD literals][],
+which are not already protected by [CMD literals],
 use a greater number of {{dollar signs}} in the delimiters.
 ----
 
 ----
 This is to be used with some sort of JavaScript code
 which renders equations based on the class `js-maths`.
-Here I am using [KaTeX][].
+Here I am using [KaTeX].
 ----
 
 ====
@@ -450,14 +450,14 @@ Produces
 with HTML syntax-character escaping for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive dollar signs
-which are not already protected by [CMD literals][],
+which are not already protected by [CMD literals],
 use a greater number of {{dollar signs}} in the delimiters.
 ----
 
 ----
 This is to be used with some sort of JavaScript code
 which renders equations based on the class `js-maths`.
-Here I am using [KaTeX][].
+Here I am using [KaTeX].
 ----
 
 ====
