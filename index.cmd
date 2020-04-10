@@ -86,7 +86,9 @@
 ====
 * This page's source CMD: [`index.cmd`][source-cmd]
 * This page's output HTML: [`index.html`][output-html]
-* GitHub repository: [`conway-markdown`][cmd-github]
+* GitHub repositories:
+    [`conway-markdown`][cmd-repo],
+    [`conway-markdown.github.io`][cmd-docs-repo]
 ====
 
 
@@ -573,9 +575,14 @@ before the section headings (`<h2>` to `<h6>`) in this page:
 @@
 
 
-@@[cmd-github]
+@@[cmd-repo]
   https://github.com/conway-markdown/conway-markdown/
   GitHub: Conway's markdown
+@@
+
+@@[cmd-docs-repo]
+  https://github.com/conway-markdown/conway-markdown.github.io/
+  GitHub: Documentation for Conway's markdown (GitHub pages)
 @@
 
 @@[source-cmd]
