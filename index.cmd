@@ -545,7 +545,14 @@ which should not be processed using that syntax, use CMD literals.
 ----
 
 ----
-For example, the following regex replacement is used
+All regex replacement specifications are read and stored
+before being applied in order.
+If the same pattern is specified more than once,
+the latest specification shall prevail.
+----
+
+----
+As an example, the following regex replacement is used
 to automatically insert the self-link anchors
 before the section headings (`<h2>` to `<h6>`) in this page:
 ----
