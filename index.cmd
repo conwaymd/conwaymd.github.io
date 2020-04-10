@@ -226,8 +226,8 @@ from being interpreted as the class `dumb-id`:
 ^^}
 
 ----
-The delimiting backticks must be the first non-whitespace characters
-on lines of equal indentation.
+The delimiting backticks must be
+the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
 ----
 
@@ -378,8 +378,8 @@ In this sense they are stronger than literals and code.
 ^^}
 
 ----
-The delimiting dollar signs must be the first non-whitespace characters
-on lines of equal indentation.
+The delimiting dollar signs must be
+the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
 ----
 
