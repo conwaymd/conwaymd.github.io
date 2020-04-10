@@ -29,7 +29,7 @@
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-09
+Last modified: 2020-04-10
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a>
@@ -366,9 +366,12 @@ before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>)
   (?P=hashes)
 %
   \g&lt;hashes&gt;\g&lt;id_&gt;
-    &lt;a class="self-link" href="#\g&lt;id_&gt;"&gt;&lt;/a&gt;\\
+    [][self-link:\g&lt;id_&gt;]\\
     \g&lt;content&gt;
   \g&lt;hashes&gt;
+  @@[self-link:\g&lt;id_&gt;][self-link]
+    \\#\g&lt;id_&gt;
+  @@
 %}
 </code></pre>
 <footer>

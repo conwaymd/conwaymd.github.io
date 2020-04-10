@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-09
+%date-modified 2020-04-10
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
@@ -557,9 +557,12 @@ before the section headings (`<h2>` to `<h6>`) in this page:
     (?P=hashes)
   %
     \g<hashes>\g<id_>
-      <a class="self-link" href="#\g<id_>"></a>\\
+      [][self-link:\g<id_>]\\
       \g<content>
     \g<hashes>
+    @@[self-link:\g<id_>][self-link]
+      \\#\g<id_>
+    @@
   %}
 ````
 
