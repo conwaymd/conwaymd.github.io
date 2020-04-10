@@ -201,7 +201,7 @@ from being interpreted as the class `dumb-id`:
     ``[dumb-id]
       Whoops!
     ``
-    ``(![dumb-id]!)
+    ``(! [dumb-id] !)
       That's better.
     ``
   !!)
