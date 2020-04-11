@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-10
+%date-modified 2020-04-11
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
@@ -74,6 +74,8 @@
 <!-- U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS -->
 {: \newline : ↵ :}
 
+<!-- U+E000 PRIVATE USE AREA -->
+{: \e000 :  :}
 
 # %title #
 
@@ -132,7 +134,7 @@ except those listed in `.cmdignore`.
 
 ----
 Since CMD-to-HTML conversion is merely a bunch of regex replacements
-(with some dictionaries for temporary storage of strings),
+with some dictionaries for temporary storage of strings,
 the syntax for earlier replacements will have higher precedence
 than that for later replacements.
 The syntax of CMD, in the order of processing, is thus:
@@ -574,6 +576,20 @@ before the section headings (`<h2>` to `<h6>`) in this page:
     @@
   %}
 ````
+
+----
+**Warning:** malicious or careless user-defined regex replacements
+will break the normal CMD syntax.
+To avoid breaking placeholder storage
+(used to protect portions of the markup from further processing),
+do not use replacements to alter placeholder strings,
+which are of the form {^ \e000{.n.}\e000 ^},
+where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
+and {^ {.n.} ^} is an integer.
+To avoid breaking properties,
+do not use replacements to alter property strings,
+which are of the form {^ %{.property name.} ^}.
+----
 
 %footer-element
 

@@ -29,7 +29,7 @@
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-10
+Last modified: 2020-04-11
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a>
@@ -67,7 +67,7 @@ except those listed in <code>.cmdignore</code>.
 <h2 id="syntax"><a class="self-link" href="#syntax"></a>Syntax</h2>
 <p>
 Since CMD-to-HTML conversion is merely a bunch of regex replacements
-(with some dictionaries for temporary storage of strings),
+with some dictionaries for temporary storage of strings,
 the syntax for earlier replacements will have higher precedence
 than that for later replacements.
 The syntax of CMD, in the order of processing, is thus:
@@ -382,6 +382,19 @@ before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>)
   @@
 %}
 </code></pre>
+<p>
+<strong>Warning:</strong> malicious or careless user-defined regex replacements
+will break the normal CMD syntax.
+To avoid breaking placeholder storage
+(used to protect portions of the markup from further processing),
+do not use replacements to alter placeholder strings,
+which are of the form <code><span class="mandatory-argument">{n}</span></code>,
+where <code></code> is the placeholder marker <code>U+E000</code> (Private Use Area)
+and <code><span class="mandatory-argument">{n}</span></code> is an integer.
+To avoid breaking properties,
+do not use replacements to alter property strings,
+which are of the form <code>%<span class="mandatory-argument">{property name}</span></code>.
+</p>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
