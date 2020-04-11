@@ -792,9 +792,9 @@ are computed based on the supplied original properties:
       %onload-js
         special.textContent += ' This is a special paragraph!'
     %%
-
+    
     # %title #
-
+    
     ----special
       The title of this page is "%title", and the author is %author.
       At the time of writing, next year will be %year-modified-next.
