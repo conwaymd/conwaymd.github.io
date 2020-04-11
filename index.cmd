@@ -871,6 +871,119 @@ or more consecutive hashes, use [CMD literals].
 ====
 
 
+###blocks
+  Blocks
+###
+
+{^^
+  {{ XXXX }}[.id.][[.class.]]\newline {.content.} {{ XXXX }}
+^^}
+
+----
+The delimiting characters (`X`) must be
+the first non-whitespace characters on their lines.
+If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+----
+
+----
+Produces the block
+{^
+  \<{.tag name.}
+    id="[.id.]" class="[.class.]"\>\newline
+        {.content.}\
+  \</{.tag name.}\>
+^}.
+For {^ {.content.} ^} containing four or more
+consecutive delimiting characters
+which are not already protected by [CMD literals],
+use a greater number of {{delimiting characters}} in the delimiters.
+----
+
+----
+The following delimiting characters (`X`) are used:
+----
+======
+* Non-lists:
+  ====
+  * `-` for `<p>`
+  * `|` for `<div>`
+  * `"` for `<blockquote>`
+  ====
+* Lists:
+  ====
+  * `=` for `<ul>`
+  * `+` for `<ol>`
+  ====
+======
+
+----
+In the implementation, a recursive call is used to process nested blocks.
+----
+
+----
+For list blocks, {^ {.content.} ^} is split into list items `<li>`
+according to leading occurrences of the following delimiters
+(i.e.~occurrences preceded only by whitespace on their lines):
+----
+====
+  * `*`
+  * `1.` (or any run of digits followed by a full stop)
+====
+
+================
+* CMD
+  ````[cmd]
+    ----
+    A paragraph.
+    ----
+    ======
+      * A nested unordered list:
+        ====
+        1. Unlike John Gruber's markdown, indentation doesn't matter.
+            * This is on the same level as the item above.
+        ====
+      * A nested ordered list:
+        ++++
+        * Asterisk `<li>` markers can be used for `<ol>`.
+        2.  An easy way to remember the list delimiters is that
+            unordered list items stay constant (`=`) while
+            ordered list items increment (`+`).
+        ++++
+      0. Numbered `<li>` markers can be used for `<ul>`
+      99999999. Any non-negative integer will do.
+    ======
+    """"some-id[some-class]
+      Someone might quote this later.
+    """"
+  ````
+
+* Rendered
+    ----
+    A paragraph.
+    ----
+    ======
+      * A nested unordered list:
+        ====
+        1. Unlike John Gruber's markdown, indentation doesn't matter.
+            * This is on the same level as the item above.
+        ====
+      * A nested ordered list:
+        ++++
+        * Asterisk `<li>` markers can be used for `<ol>`.
+        2.  An easy way to remember the list delimiters is that
+            unordered list items stay constant (`=`) while
+            ordered list items increment (`+`).
+        ++++
+      0. Numbered `<li>` markers can be used for `<ul>`
+      99999999. Any non-negative integer will do.
+    ======
+    """"some-id[some-class]
+      Someone might quote this later.
+    """"
+
+================
+
+
 %footer-element
 
 @@[CMD literals]

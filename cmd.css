@@ -6,6 +6,12 @@ a:hover {
   text-decoration: underline;
 }
 
+blockquote {
+  background: lightyellow;
+  border-left: 3px solid black;
+  padding: 0.7em;
+}
+
 body {
   background-color: #feecec;
   font-family: sans-serif;
