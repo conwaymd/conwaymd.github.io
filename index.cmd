@@ -591,6 +591,82 @@ do not use replacements to alter property strings,
 which are of the form {^ %{.property name.} ^}.
 ----
 
+
+###ordinary-replacements
+  Ordinary replacements
+###
+
+{^^
+  (!{!){{ (!:!) }} {.pattern.} {{ (!:!) }} {.replacement.} {{ (!:!) }}(!}!)
+^^}
+
+----
+Processes ordinary replacements of {^ {.pattern.} ^} by {^ {.replacement.} ^}.
+Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
+For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
+one or more consecutive colons,
+use a greater number of {{colons}} in the delimiters.
+----
+
+----
+All ordinary replacement specifications are read and stored
+before being applied in order.
+If the same pattern is specified more than once,
+the latest specification shall prevail.
+----
+
+====
+* CMD
+  ````[cmd]
+    {: |hup-hup| : Huzzah! :}
+    |hup-hup| \\
+    
+    {: \def1 : Earlier specifications lose. :}
+    {: \def1 : Later specifications win. :}
+    \def1 \\
+    
+    \def2 \\
+    {: \def2 : Specifications can be given anywhere. :}
+    
+    {: <out> : Nesting will work provided the <in> is given later. :}
+    {: <in> : inner specification :}
+    <out>
+  ````
+
+* Rendered
+  ----
+    {: |hup-hup| : Huzzah! :}
+    |hup-hup| \\
+    
+    {: \def1 : Earlier specifications lose. :}
+    {: \def1 : Later specifications win. :}
+    \def1 \\
+    
+    \def2 \\
+    {: \def2 : Specifications can be given anywhere. :}
+    
+    {: <out> : Nesting will work provided the <in> is given later. :}
+    {: <in> : inner specification :}
+    <out>
+  ----
+
+====
+
+----
+**Warning:** malicious or careless user-defined ordinary replacements
+will break the normal CMD syntax.
+To avoid breaking placeholder storage
+(used to protect portions of the markup from further processing),
+do not use replacements to alter placeholder strings,
+which are of the form {^ \e000{.n.}\e000 ^},
+where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
+and {^ {.n.} ^} is an integer.
+To avoid breaking properties,
+do not use replacements to alter property strings,
+which are of the form {^ %{.property name.} ^}.
+----
+
+
 %footer-element
 
 @@[CMD literals]
