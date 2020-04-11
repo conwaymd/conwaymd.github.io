@@ -18,14 +18,14 @@
 <title>Conway's markdown (CMD)</title>
 </head>
 <body onload="let elements = document.getElementsByClassName(&quot;js-maths&quot;);
-  for (let i = 0; i &lt; elements.length; i++) {
-    let element = elements[i]
-    katex.render(
-      element.textContent,
-      element,
-      {displayMode: element.tagName == &quot;DIV&quot;}
-    );
-  }">
+for (let i = 0; i &lt; elements.length; i++) {
+  let element = elements[i]
+  katex.render(
+    element.textContent,
+    element,
+    {displayMode: element.tagName == &quot;DIV&quot;}
+  );
+}">
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
@@ -363,11 +363,11 @@ the latest specification shall prevail.
 <p>
 As an example, the following regex replacement is used
 to automatically insert the self-link anchors
-before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>) in this page:
+before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h3&gt;</code>) in this page:
 </p>
 <pre class="cmd"><code>{%
   ^ [^\S\n]*
-  (?P&lt;hashes&gt; [#]{2,6} )
+  (?P&lt;hashes&gt; [#]{2,3} (?![#]) )
     (?P&lt;id_&gt; [\S]*? )
   [\s]+
     (?P&lt;content&gt; [\s\S]*? )
@@ -449,6 +449,148 @@ To avoid breaking properties,
 do not use replacements to alter property strings,
 which are of the form <code>%<span class="mandatory-argument">{property name}</span></code>.
 </p>
+<h3 id="preamble"><a class="self-link" href="#preamble"></a>Preamble</h3>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">%%</span>↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">%%</span></code></pre>
+<p>
+The delimiting percent signs must be
+the first non-whitespace characters on their lines.
+</p>
+<p>
+Processes the preamble, whose <code><span class="mandatory-argument">{content}</span></code> is to consist of
+property specifications of the form
+<code>%<span class="mandatory-argument">{property name}</span> <span class="mandatory-argument">{property markup}</span></code>,
+which are stored and may be referenced by writing <code>%<span class="mandatory-argument">{property name}</span></code>,
+called a property string, anywhere else in the document.
+<code><span class="mandatory-argument">{property name}</span></code> may only contain letters, digits, and hyphens.
+If the same property is specified more than once,
+the latest specification shall prevail.
+</p>
+<p>
+This produces the HTML preamble,
+i.e.&nbsp;everything from <code>&lt;!DOCTYPE html&gt;</code> through to <code>&lt;body&gt;</code>.
+</p>
+<p>
+For <code><span class="mandatory-argument">{property markup}</span></code> matching a <code><span class="mandatory-argument">{property name}</span></code> pattern,
+use a CMD literal, e.g. <code>(! a literal %propety-name !)</code>.
+For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive percent signs
+which are not already protected by CMD literals,
+use a greater number of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
+</p>
+<p>
+Only the first occurrence of a preamble in the markup is processed.
+</p>
+<p>
+The following properties, called original properties,
+are accorded special treatment.
+If omitted from a preamble,
+they take the default values shown beside them:
+</p>
+<pre class="cmd"><code>%lang en
+%title Title
+%title-suffix
+%author
+%date-created yyyy-mm-dd
+%date-modified yyyy-mm-dd
+%resources
+%description
+%css
+%onload-js
+%footer-copyright-remark
+%footer-remark
+</code></pre>
+<p>
+The following properties, called derived properties,
+are computed based on the supplied original properties:
+</p>
+<pre class="cmd"><code>%html-lang-attribute
+%meta-element-author
+%meta-element-description
+%title-element
+%style-element
+%body-onload-attribute
+%year-created
+%year-modified
+%year-modified-next
+%footer-element
+%url
+</code></pre>
+<h4 id="preamble-1">Example 1: a minimal HTML file</h4>
+<ul>
+<li>CMD
+<pre class="cmd"><code>%%
+%%
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+</ul>
+<h4 id="preamble-2">Example 2: a not-so-minimal HTML file</h4>
+<ul>
+<li>CMD
+<pre class="cmd"><code>%%
+  %lang en-AU
+  %title My title
+  %title-suffix \ | My site
+  %author Me
+  %date-created 2020-04-11
+  %date-modified 2020-04-11
+  %description
+    This is the description. Hooray for automatic escaping (&amp;, &lt;, &gt;, ")!
+  %css
+    #special {
+      color: purple;
+    }
+  %onload-js
+    special.textContent += ' This is a special paragraph!'
+%%
+
+# %title #
+
+----special
+  The title of this page is "%title", and the author is %author.
+  At the time of writing, next year will be %year-modified-next.
+----
+
+%footer-element
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en-AU"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="author" content="Me"&gt;
+&lt;meta name="description" content="This is the description. Hooray for automatic escaping (&amp;amp;, &amp;lt;, &amp;gt;, &amp;quot;)!"&gt;
+&lt;title&gt;My title | My site&lt;/title&gt;
+&lt;style&gt;#special {
+  color: purple;
+}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body onload="special.textContent += ' This is a special paragraph!'"&gt;
+&lt;h1&gt;My title&lt;/h1&gt;
+&lt;p id="special"&gt;
+The title of this page is "My title", and the author is Me.
+At the time of writing, next year will be 2021.
+&lt;/p&gt;
+&lt;footer&gt;
+&lt;hr&gt;
+©&amp;nbsp;2020&amp;nbsp;Me.
+&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.

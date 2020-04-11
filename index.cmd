@@ -53,10 +53,10 @@
 {: [. : <span class="optional-argument">[ :}
 {: .] : ]</span> :}
 
-<!-- Heading self-link anchors (<h2> to <h6>) -->
+<!-- Heading self-link anchors (<h2> to <h3>) -->
 {%
   ^ [^\S\n]*
-  (?P<hashes> [#]{2,6} )
+  (?P<hashes> [#]{2,3} (?![#]) )
     (?P<id_> [\S]*? )
   [\s]+
     (?P<content> [\s\S]*? )
@@ -556,12 +556,12 @@ the latest specification shall prevail.
 ----
 As an example, the following regex replacement is used
 to automatically insert the self-link anchors
-before the section headings (`<h2>` to `<h6>`) in this page:
+before the section headings (`<h2>` to `<h3>`) in this page:
 ----
 ````[cmd]
   {%
     ^ [^\S\n]*
-    (?P<hashes> [#]{2,6} )
+    (?P<hashes> [#]{2,3} (?![#]) )
       (?P<id_> [\S]*? )
     [\s]+
       (?P<content> [\s\S]*? )
@@ -665,6 +665,172 @@ To avoid breaking properties,
 do not use replacements to alter property strings,
 which are of the form {^ %{.property name.} ^}.
 ----
+
+
+###preamble
+  Preamble
+###
+
+{^^
+  {{ (!%%!) }}\newline {.content.} {{ (!%%!) }}
+^^}
+
+----
+The delimiting percent signs must be
+the first non-whitespace characters on their lines.
+----
+
+----
+Processes the preamble, whose {^ {.content.} ^} is to consist of
+property specifications of the form
+{^ %{.property name.} {.property markup.} ^},
+which are stored and may be referenced by writing {^ %{.property name.} ^},
+called a property string, anywhere else in the document.
+{^ {.property name.} ^} may only contain letters, digits, and hyphens.
+If the same property is specified more than once,
+the latest specification shall prevail.
+----
+
+----
+This produces the HTML preamble,
+i.e.~everything from `<!DOCTYPE html>` through to `<body>`.
+----
+
+----
+For {^ {.property markup.} ^} matching a {^ {.property name.} ^} pattern,
+use a CMD literal, e.g. `(!! (! a literal %propety-name !) !!)`.
+For {^ {.content.} ^} containing two or more consecutive percent signs
+which are not already protected by CMD literals,
+use a greater number of {{percent signs}} in the delimiters.
+----
+
+----
+Only the first occurrence of a preamble in the markup is processed.
+----
+
+----
+The following properties, called original properties,
+are accorded special treatment.
+If omitted from a preamble,
+they take the default values shown beside them:
+----
+````[cmd]
+  %lang en
+  %title Title
+  %title-suffix
+  %author
+  %date-created yyyy-mm-dd
+  %date-modified yyyy-mm-dd
+  %resources
+  %description
+  %css
+  %onload-js
+  %footer-copyright-remark
+  %footer-remark
+````
+
+----
+The following properties, called derived properties,
+are computed based on the supplied original properties:
+----
+````[cmd]
+  %html-lang-attribute
+  %meta-element-author
+  %meta-element-description
+  %title-element
+  %style-element
+  %body-onload-attribute
+  %year-created
+  %year-modified
+  %year-modified-next
+  %footer-element
+  %url
+````
+
+####preamble-1 Example 1: a minimal HTML file ####
+
+====
+* CMD
+  ````[cmd]
+    %%
+    %%
+  ````
+
+* HTML
+  ````[html]
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    </head>
+    <body>
+    </body>
+    </html>
+  ````
+
+====
+
+####preamble-2 Example 2: a not-so-minimal HTML file ####
+
+====
+* CMD
+  ````[cmd]
+    %%
+      %lang en-AU
+      %title My title
+      %title-suffix \ | My site
+      %author Me
+      %date-created 2020-04-11
+      %date-modified 2020-04-11
+      %description
+        This is the description. Hooray for automatic escaping (&, <, >, ")!
+      %css
+        #special {
+          color: purple;
+        }
+      %onload-js
+        special.textContent += ' This is a special paragraph!'
+    %%
+
+    # %title #
+
+    ----special
+      The title of this page is "%title", and the author is %author.
+      At the time of writing, next year will be %year-modified-next.
+    ----
+
+    %footer-element
+  ````
+
+* HTML
+  ````[html]
+    <!DOCTYPE html>
+    <html lang="en-AU">
+    <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Me">
+    <meta name="description" content="This is the description. Hooray for automatic escaping (&amp;, &lt;, &gt;, &quot;)!">
+    <title>My title | My site</title>
+    <style>#special {
+      color: purple;
+    }</style>
+    </head>
+    <body onload="special.textContent += ' This is a special paragraph!'">
+    <h1>My title</h1>
+    <p id="special">
+    The title of this page is "My title", and the author is Me.
+    At the time of writing, next year will be 2021.
+    </p>
+    <footer>
+    <hr>
+    ©&nbsp;2020&nbsp;Me.
+    </footer>
+    </body>
+    </html>
+  ````
+
+====
 
 
 %footer-element
