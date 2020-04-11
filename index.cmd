@@ -833,6 +833,44 @@ are computed based on the supplied original properties:
 ====
 
 
+###headings
+  Headings
+###
+
+{^^
+  \#[.id.] {.content.} \#
+^^}
+
+----
+Produces the heading
+{^
+  (! <h1 !)
+    id="[.id.]"(! > !)\
+      {.content.}\
+  (! </h1> !)
+^}.
+Whitespace around {^ {.content.} ^} is stripped.
+For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
+For {^ {.content.} ^} containing the delimiting number of
+or more consecutive hashes, use [CMD literals].
+----
+
+====
+* CMD
+  ````[cmd]
+    ###some-id Heading with id ###
+    #### Heading without id ####
+  ````
+
+* HTML
+  ````[html]
+    <h3 id="some-id">Heading with id</h3>
+    <h4>Heading without id</h4>
+  ````
+
+====
+
+
 %footer-element
 
 @@[CMD literals]

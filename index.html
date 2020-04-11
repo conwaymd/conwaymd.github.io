@@ -591,6 +591,28 @@ At the time of writing, next year will be 2021.
 </code></pre>
 </li>
 </ul>
+<h3 id="headings"><a class="self-link" href="#headings"></a>Headings</h3>
+<pre class="cmd syntax"><code>#<span class="optional-argument">[id]</span> <span class="mandatory-argument">{content}</span> #</code></pre>
+<p>
+Produces the heading
+<code>&lt;h1 id="<span class="optional-argument">[id]</span>"&gt;<span class="mandatory-argument">{content}</span>&lt;/h1&gt;</code>.
+Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
+For <code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>, use 2 to 6 delimiting hashes respectively.
+For <code><span class="mandatory-argument">{content}</span></code> containing the delimiting number of
+or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>###some-id Heading with id ###
+#### Heading without id ####
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;h3 id="some-id"&gt;Heading with id&lt;/h3&gt;
+&lt;h4&gt;Heading without id&lt;/h4&gt;
+</code></pre>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
