@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-11
+%date-modified 2020-04-12
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
@@ -876,11 +876,11 @@ or more consecutive hashes, use [CMD literals].
 ###
 
 {^^
-  {{ XXXX }}[.id.][[.class.]]\newline {.content.} {{ XXXX }}
+  {{ cccc }}[.id.][[.class.]]\newline {.content.} {{ cccc }}
 ^^}
 
 ----
-The delimiting characters (`X`) must be
+The delimiting characters (`c`) must be
 the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
 ----
@@ -900,7 +900,7 @@ use a greater number of {{delimiting characters}} in the delimiters.
 ----
 
 ----
-The following delimiting characters (`X`) are used:
+The following delimiting characters (`c`) are used:
 ----
 ======
 * Non-lists:
