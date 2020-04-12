@@ -1491,7 +1491,7 @@ The delimiting at signs must be the first
 non-whitespace characters on their lines.
 A single space may be included
 between {^ [{.alt.}] ^} and {^ [[.label.]] ^}.
-The referencing strings {^ {.label.} ^} and {^ [[.label.]] ^}
+The referencing strings {^ {.label.} ^} and {^ [.label.] ^}
 are case insensitive.
 Non-empty {^ [.width.] ^} must consist of digits only.
 If {^ [.class.] ^} is empty,
@@ -1508,11 +1508,15 @@ Produces the image
     title="[.title.]"
     width="[.width.]"
   (! > !)
-^},
-with HTML syntax-character escaping
-and de-indentation for {^ {.content.} ^}.
-For {^ {.content.} ^} containing two or more consecutive backticks,
-use a greater number of {{backticks}} in the delimiters.
+^}.
+Whitespace around {^ [.label.] ^} is stripped.
+For definitions whose {^ {.label.} ^}, {^ [.class.] ^},
+{^ {.src.} ^}, or {^ [.title.] ^} contains
+two or more consecutive at signs
+which are not protected by CMD literals,
+use a longer run of {{at signs}} in the delimiters.
+For images whose {^ {.alt.} ^} or {^ [.label.] ^} contains
+one or more closing square brackets, use [CMD literals].
 ----
 
 ====
