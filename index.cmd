@@ -1174,7 +1174,7 @@ the square brackets surrounding it may be omitted.
 ----
 
 ####tables-1
-  Example 1: table without `<thead>`, `<tbody>`, `<tfoot>` parts
+  Example 1: table *without* `<thead>`, `<tbody>`, `<tfoot>` parts
 ####
 
 ====
@@ -1202,6 +1202,35 @@ the square brackets surrounding it may be omitted.
     ''''
   ````
 
+* HTML
+  ````[html]
+    <table>
+    <tr>
+    <th>A</th>
+    <th>B</th>
+    <th>C</th>
+    <th>D</th>
+    </tr>
+    <tr>
+    <td>1</td>
+    <td rowspan="2">2</td>
+    <td>3</td>
+    <td>4</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td rowspan="3" colspan="2">6</td>
+    </tr>
+    <tr>
+    <td colspan="2">7</td>
+    </tr>
+    <tr>
+    <td>8</td>
+    <th>?</th>
+    </tr>
+    </table>
+  ````
+
 * Rendered
     ''''
       //
@@ -1222,6 +1251,85 @@ the square brackets surrounding it may be omitted.
       //
         , 8
         ; ?
+    ''''
+
+====
+
+####tables-2
+  Example 2: table *with* `<thead>`, `<tbody>`, `<tfoot>` parts
+####
+
+====
+* CMD
+  ````[cmd]
+  (!!
+    ''''
+    ^^^
+      //
+        ; Meals
+        ; Cost / (! $ !)
+    ~~~
+      //
+        ; Lunch
+        , 7
+      //
+        ; Dinner
+        , 10
+    ___
+      //
+        ; Total
+        ,total-cost[some-class]
+          17
+    ''''
+  !!)
+  ````
+
+* HTML
+  ````[html]
+    <table>
+    <thead>
+    <tr>
+    <th>Meals</th>
+    <th>Cost / $</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <th>Lunch</th>
+    <td>7</td>
+    </tr>
+    <tr>
+    <th>Dinner</th>
+    <td>10</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+    <th>Total</th>
+    <td id="total-cost" class="some-class">17</td>
+    </tr>
+    </tfoot>
+    </table>
+  ````
+
+* Rendered
+    ''''
+    ^^^
+      //
+        ; Meals
+        ; Cost / (! $ !)
+    ~~~
+      //
+        ; Lunch
+        , 7
+      //
+        ; Dinner
+        , 10
+    ___
+      //
+        ; Total
+        ,total-cost[some-class]
+          17
     ''''
 
 ====
