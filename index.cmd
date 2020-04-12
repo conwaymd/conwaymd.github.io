@@ -494,12 +494,12 @@ Here I am using [KaTeX].
 ###
 
 {^^
-  ({{ (!+!) }} {.(! file_name !).} {{ (!+!) }})
+  ({{ (!+!) }} {.(! file name !).} {{ (!+!) }})
 ^^}
 
 ----
-Includes the content of the file {^ {.(! file_name !).} ^}.
-For {^ {.(! file_name !).} ^} containing one or more consecutive plus signs
+Includes the content of the file {^ {.(! file name !).} ^}.
+For {^ {.(! file name !).} ^} containing one or more consecutive plus signs
 followed by a closing round bracket,
 use a greater number of {{plus signs}} in the delimiters.
 ----
