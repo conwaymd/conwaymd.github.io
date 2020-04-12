@@ -889,8 +889,8 @@ If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
 Produces the block
 {^
   \<{.tag name.}
-    id="[.id.]" class="[.class.]"\>\newline
-        {.content.}\
+    id="[.id.]" class="[.class.]"\>\newline\
+      {.content.}\newline\
   \</{.tag name.}\>
 ^}.
 For {^ {.content.} ^} containing four or more
@@ -920,15 +920,30 @@ The following delimiting characters (`c`) are used:
 In the implementation, a recursive call is used to process nested blocks.
 ----
 
+####list-items
+  List items
+####
+
 ----
 For list blocks, {^ {.content.} ^} is split into list items `<li>`
-according to leading occurrences of the following delimiters
-(i.e.~occurrences preceded only by whitespace on their lines):
+according to leading occurrences
+(i.e. occurrences preceded only by whitespace on their lines)
+of the following:
+----
+
+{^^ Y[.id.][[.class.]] ^^}
+
+----
+The following delimiters (`Y`) for list items are used:
 ----
 ====
-  * `*`
-  * `1.` (or any run of digits followed by a full stop)
+* `*`
+* `1.` (or any run of digits followed by a full stop)
 ====
+----
+If {^ [.class.] ^} is empty,
+the square brackets surrounding it may be omitted.
+----
 
 ####blocks-1 Example 1: nesting ####
 
