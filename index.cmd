@@ -993,6 +993,39 @@ according to leading occurrences of the following delimiters
 
 ================
 
+####blocks-2 Example 2: `id` and `class` ####
+
+================
+* CMD
+  ````[cmd]
+    ----p-id[p-class]
+    Paragraph with `id` and `class`.
+    ----
+    ======
+    *li-id List item with `id` and no `class`.
+    0.[li-class] List item with `class` and no `id`.
+    1.[li-class]
+      Put arbitrary whitespace after the class for more clarity.
+    ======
+  ````
+
+* HTML
+  ````[html]
+    <p id="p-id" class="p-class">
+    Paragraph with <code>id</code> and <code>class</code>.
+    </p>
+    <ul>
+    <li id="li-id">List item with <code>id</code> and no <code>class</code>.
+    </li>
+    <li class="li-class">List item with <code>class</code> and no <code>id</code>.
+    </li>
+    <li class="li-class">Put arbitrary whitespace after the class for more clarity.
+    </li>
+    </ul>
+  ````
+
+================
+
 
 %footer-element
 

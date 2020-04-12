@@ -736,6 +736,35 @@ Someone might quote this later.
 </ul>
 </li>
 </ul>
+<h4 id="blocks-2">Example 2: <code>id</code> and <code>class</code></h4>
+<ul>
+<li>CMD
+<pre class="cmd"><code>----p-id[p-class]
+Paragraph with `id` and `class`.
+----
+======
+*li-id List item with `id` and no `class`.
+0.[li-class] List item with `class` and no `id`.
+1.[li-class]
+  Put arbitrary whitespace after the class for more clarity.
+======
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;p id="p-id" class="p-class"&gt;
+Paragraph with &lt;code&gt;id&lt;/code&gt; and &lt;code&gt;class&lt;/code&gt;.
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li id="li-id"&gt;List item with &lt;code&gt;id&lt;/code&gt; and no &lt;code&gt;class&lt;/code&gt;.
+&lt;/li&gt;
+&lt;li class="li-class"&gt;List item with &lt;code&gt;class&lt;/code&gt; and no &lt;code&gt;id&lt;/code&gt;.
+&lt;/li&gt;
+&lt;li class="li-class"&gt;Put arbitrary whitespace after the class for more clarity.
+&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
