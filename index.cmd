@@ -890,7 +890,7 @@ Produces the block
 {^
   \<{.tag name.}
     id="[.id.]" class="[.class.]"\>\newline\
-      {.content.}\newline\
+      {.content.}\
   \</{.tag name.}\>
 ^}.
 For {^ {.content.} ^} containing four or more
