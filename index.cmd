@@ -1436,6 +1436,33 @@ the square brackets surrounding it may be omitted.
 ||||
 
 
+###line-continuations
+  Line continuations
+###
+
+----
+Use backslashes for line continuation.
+All leading whitespace on the next line is stripped.
+----
+
+====
+* CMD
+  ````[cmd]
+    (Line 1)\
+      (Line 2)
+    (Line 3) \
+           (Line 4)
+  ````
+
+* HTML
+  ````[html]
+    (Line 1)(Line 2)
+    (Line 3) (Line 4)
+  ````
+
+====
+
+
 %footer-element
 
 @@[CMD literals]

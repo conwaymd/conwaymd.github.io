@@ -1148,6 +1148,25 @@ ___
 </tr>
 </table>
 </div>
+<h3 id="line-continuations"><a class="self-link" href="#line-continuations"></a>Line continuations</h3>
+<p>
+Use backslashes for line continuation.
+All leading whitespace on the next line is stripped.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>(Line 1)\
+  (Line 2)
+(Line 3) \
+       (Line 4)
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>(Line 1)(Line 2)
+(Line 3) (Line 4)
+</code></pre>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
