@@ -1167,6 +1167,56 @@ All leading whitespace on the next line is stripped.
 </code></pre>
 </li>
 </ul>
+<h3 id="images"><a class="self-link" href="#images"></a>Images</h3>
+<h4 id="reference-style-images"><a class="self-link" href="#reference-style-images"></a>Reference-style images</h4>
+<ul>
+<li>Definition
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>![<span class="mandatory-argument">{label}</span>][<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{src}</span> <span class="optional-argument">[title]</span> <span class="repeatable-delimiter">@@</span><span class="optional-argument">[width]</span></code></pre>
+</li>
+<li>Link
+<pre class="cmd syntax"><code>![<span class="mandatory-argument">{alt}</span>][<span class="optional-argument">[label]</span>]</code></pre>
+</li>
+</ul>
+<p>
+The delimiting at signs must be the first
+non-whitespace characters on their lines.
+A single space may be included
+between <code>[<span class="mandatory-argument">{alt}</span>]</code> and <code>[<span class="optional-argument">[label]</span>]</code>.
+The referencing strings <code><span class="mandatory-argument">{label}</span></code> and <code>[<span class="optional-argument">[label]</span>]</code>
+are case insensitive.
+Non-empty <code><span class="optional-argument">[width]</span></code> must consist of digits only.
+If <code><span class="optional-argument">[class]</span></code> is empty,
+the square brackets surrounding it may be omitted.
+</p>
+<p>
+Produces the image
+<code>&lt;img alt="<span class="mandatory-argument">{alt}</span>" class="<span class="optional-argument">[class]</span>" src="<span class="mandatory-argument">{src}</span>" title="<span class="optional-argument">[title]</span>" width="<span class="optional-argument">[width]</span>"
+&gt;</code>,
+with HTML syntax-character escaping
+and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
+For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive backticks,
+use a greater number of <span class="repeatable-delimiter">backticks</span> in the delimiters.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>@@![moses-breaking-tablets]
+  /rembrandt-moses.jpg
+  Moses Breaking the Tablets of the Law (Rembrandt)
+@@200
+
+![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200"&gt;
+</code></pre>
+</li>
+<li>Rendered
+<p>
+<img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200">
+</p>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.

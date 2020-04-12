@@ -1463,6 +1463,87 @@ All leading whitespace on the next line is stripped.
 ====
 
 
+###images
+  Images
+###
+
+
+####reference-style-images
+  Reference-style images
+####
+
+====
+* Definition
+  {^^
+    {{ (! @@ !) }}![{.label.}][[.class.]]↵ \
+      {.src.} [.title.] \
+    {{ (! @@ !) }}[.width.]
+  ^^}
+
+* Link
+  {^^
+    ![{.alt.}][[.label.]]
+  ^^}
+
+====
+----
+The delimiting at signs must be the first
+non-whitespace characters on their lines.
+A single space may be included
+between {^ [{.alt.}] ^} and {^ [[.label.]] ^}.
+The referencing strings {^ {.label.} ^} and {^ [[.label.]] ^}
+are case insensitive.
+Non-empty {^ [.width.] ^} must consist of digits only.
+If {^ [.class.] ^} is empty,
+the square brackets surrounding it may be omitted.
+----
+
+----
+Produces the image
+{^
+  (! <img !)
+    alt="{.alt.}"
+    class="[.class.]"
+    src="{.src.}"
+    title="[.title.]"
+    width="[.width.]"
+  (! > !)
+^},
+with HTML syntax-character escaping
+and de-indentation for {^ {.content.} ^}.
+For {^ {.content.} ^} containing two or more consecutive backticks,
+use a greater number of {{backticks}} in the delimiters.
+----
+
+====
+* CMD
+  ````[cmd]
+  @@![moses-breaking-tablets]
+    /rembrandt-moses.jpg
+    Moses Breaking the Tablets of the Law (Rembrandt)
+  @@200
+  
+  ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
+  ````
+
+* HTML
+  ````[html]
+  <img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200">
+  ````
+
+* Rendered
+  ----
+  @@![moses-breaking-tablets]
+    /rembrandt-moses.jpg
+    Moses Breaking the Tablets of the Law (Rembrandt)
+  @@200
+  
+  ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
+  ----
+
+====
+
+
 %footer-element
 
 @@[CMD literals]
