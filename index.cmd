@@ -77,7 +77,10 @@
 <!-- U+E000 PRIVATE USE AREA -->
 {: \e000 :  :}
 
+
+
 # %title #
+
 
 
 ||||[page-properties]
@@ -331,7 +334,7 @@ with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive backticks
-which are not already protected by [CMD literals],
+which are not protected by [CMD literals],
 use a greater number of {{backticks}} in the delimiters.
 ----
 
@@ -398,7 +401,7 @@ Produces
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 For {^ {.content.} ^} containing two or more consecutive dollar signs
-which are not already protected by [CMD literals],
+which are not protected by [CMD literals],
 use a greater number of {{dollar signs}} in the delimiters.
 ----
 
@@ -454,7 +457,7 @@ Produces
 with HTML syntax-character escaping for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive dollar signs
-which are not already protected by [CMD literals],
+which are not protected by [CMD literals],
 use a greater number of {{dollar signs}} in the delimiters.
 ----
 
@@ -700,7 +703,7 @@ i.e.~everything from `<!DOCTYPE html>` through to `<body>`.
 For {^ {.property markup.} ^} matching a {^ {.property name.} ^} pattern,
 use a CMD literal, e.g. `(!! (! a literal %propety-name !) !!)`.
 For {^ {.content.} ^} containing two or more consecutive percent signs
-which are not already protected by CMD literals,
+which are not protected by CMD literals,
 use a greater number of {{percent signs}} in the delimiters.
 ----
 
@@ -895,7 +898,7 @@ Produces the block
 ^}.
 For {^ {.content.} ^} containing four or more
 consecutive delimiting characters
-which are not already protected by [CMD literals],
+which are not protected by [CMD literals],
 use a greater number of {{delimiting characters}} in the delimiters.
 ----
 
