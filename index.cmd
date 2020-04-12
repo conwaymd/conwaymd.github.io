@@ -1519,6 +1519,13 @@ For images whose {^ {.alt.} ^} or {^ [.label.] ^} contains
 one or more closing square brackets, use [CMD literals].
 ----
 
+----
+All image definitions are read and stored
+before being applied in order.
+If the same label is specified more than once,
+the latest specification shall prevail.
+----
+
 ====
 * CMD
   ````[cmd]
@@ -1543,6 +1550,58 @@ one or more closing square brackets, use [CMD literals].
   @@200
   
   ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
+  ----
+
+====
+
+
+####inline-style-images
+  Inline-style images
+####
+
+{^^
+  (! ![ !){.alt.}]({.src.} [.title.])
+^^}
+
+----
+Unlike John Gruber's markdown, {^ [.title.] ^} is not surrounded by quotes.
+If quotes are supplied to {^ [.title.] ^},
+they are automatically escaped as `&quot;`.
+----
+
+----
+Produces the image
+{^
+  (! <img !)
+    alt="{.alt.}"
+    src="{.src.}"
+    title="[.title.]"
+  (! > !)
+^}.
+For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
+one or more closing square or round brackets, use [CMD literals].
+----
+
+====
+* CMD
+  ````[cmd]
+  (!!
+  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](/rembrandt-anatomy.jpg
+    The Anatomy Lesson of Dr~Nicolaes Tulp (! (Rembrandt) !)
+  )
+  !!)
+  ````
+
+* HTML
+  ````[html]
+  <img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
+  ````
+
+* Rendered
+  ----
+  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](/rembrandt-anatomy.jpg
+    The Anatomy Lesson of Dr~Nicolaes Tulp (! (Rembrandt) !)
+  )
   ----
 
 ====
