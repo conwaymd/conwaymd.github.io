@@ -88,3 +88,20 @@ span.optional-argument {
   color: #c60;
   font-weight: bold;
 }
+
+table {
+  background-color: white;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-top: 0.5em;
+  white-space: pre-wrap;
+}
+
+th {
+  background-color: lightgrey;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 0.3em;
+}

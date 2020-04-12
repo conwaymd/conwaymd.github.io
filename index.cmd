@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-12
+%date-modified 2020-04-13
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
@@ -1075,7 +1075,7 @@ use a greater number of {{apostrophes}} in the delimiters.
 ----
 
 ----
-In the implementation, a recursive call is used to process nested blocks.
+In the implementation, a recursive call is used to process nested tables.
 ----
 
 ----
@@ -1172,6 +1172,59 @@ or at the end of the content being split.
 If {^ [.class.] ^} is empty,
 the square brackets surrounding it may be omitted.
 ----
+
+####tables-1
+  Example 1: table without `<thead>`, `<tbody>`, `<tfoot>` parts
+####
+
+====
+* CMD
+  ````[cmd]
+    ''''
+      //
+        ; A
+        ; B
+        ; C
+        ; D
+      //
+        , 1
+        ,{2} 2
+        , 3
+        , 4
+      //
+        , 5
+        ,{3,2} 6
+      //
+        ,{,2} 7
+      //
+        , 8
+        ; ?
+    ''''
+  ````
+
+* Rendered
+    ''''
+      //
+        ; A
+        ; B
+        ; C
+        ; D
+      //
+        , 1
+        ,{2} 2
+        , 3
+        , 4
+      //
+        , 5
+        ,{3,2} 6
+      //
+        ,{,2} 7
+      //
+        , 8
+        ; ?
+    ''''
+
+====
 
 
 %footer-element

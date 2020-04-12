@@ -29,7 +29,7 @@ for (let i = 0; i &lt; elements.length; i++) {
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-12
+Last modified: 2020-04-13
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a>
@@ -792,7 +792,7 @@ which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a greater number of <span class="repeatable-delimiter">apostrophes</span> in the delimiters.
 </p>
 <p>
-In the implementation, a recursive call is used to process nested blocks.
+In the implementation, a recursive call is used to process nested tables.
 </p>
 <p>
 <code><span class="mandatory-argument">{content}</span></code> is
@@ -877,6 +877,59 @@ or at the end of the content being split.
 If <code><span class="optional-argument">[class]</span></code> is empty,
 the square brackets surrounding it may be omitted.
 </p>
+<h4 id="tables-1"><a class="self-link" href="#tables-1"></a>Example 1: table without <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
+<ul>
+<li>CMD
+<pre class="cmd"><code>''''
+  //
+    ; A
+    ; B
+    ; C
+    ; D
+  //
+    , 1
+    ,{2} 2
+    , 3
+    , 4
+  //
+    , 5
+    ,{3,2} 6
+  //
+    ,{,2} 7
+  //
+    , 8
+    ; ?
+''''
+</code></pre>
+</li>
+<li>Rendered
+<table>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+<tr>
+<td>1</td>
+<td rowspan="2">2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5</td>
+<td rowspan="3" colspan="2">6</td>
+</tr>
+<tr>
+<td colspan="2">7</td>
+</tr>
+<tr>
+<td>8</td>
+<th>?</th>
+</tr>
+</table>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
