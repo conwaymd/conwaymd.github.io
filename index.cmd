@@ -53,10 +53,10 @@
 {: [. : <span class="optional-argument">[ :}
 {: .] : ]</span> :}
 
-<!-- Heading self-link anchors (<h2> to <h3>) -->
+<!-- Heading self-link anchors (<h2> to <h6>) -->
 {%
   ^ [^\S\n]*
-  (?P<hashes> [#]{2,3} (?![#]) )
+  (?P<hashes> [#]{2,6} (?![#]) )
     (?P<id_> [\S]*? )
   [\s]+
     (?P<content> [\s\S]*? )
@@ -556,12 +556,12 @@ the latest specification shall prevail.
 ----
 As an example, the following regex replacement is used
 to automatically insert the self-link anchors
-before the section headings (`<h2>` to `<h3>`) in this page:
+before the section headings (`<h2>` to `<h6>`) in this page:
 ----
 ````[cmd]
   {%
     ^ [^\S\n]*
-    (?P<hashes> [#]{2,3} (?![#]) )
+    (?P<hashes> [#]{2,6} (?![#]) )
       (?P<id_> [\S]*? )
     [\s]+
       (?P<content> [\s\S]*? )
