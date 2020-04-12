@@ -930,6 +930,8 @@ according to leading occurrences of the following delimiters
   * `1.` (or any run of digits followed by a full stop)
 ====
 
+####blocks-1 Example 1: nesting ####
+
 ================
 * CMD
   ````[cmd]
@@ -937,24 +939,28 @@ according to leading occurrences of the following delimiters
     A paragraph.
     ----
     ======
-      * A nested unordered list:
-        ====
-        1. Unlike John Gruber's markdown, indentation doesn't matter.
-            * This is on the same level as the item above.
-        ====
-      * A nested ordered list:
-        ++++
-        * Asterisk `<li>` markers can be used for `<ol>`.
-        2.  An easy way to remember the list delimiters is that
-            unordered list items stay constant (`=`) while
-            ordered list items increment (`+`).
-        ++++
-      0. Numbered `<li>` markers can be used for `<ul>`
-      99999999. Any non-negative integer will do.
+    * A nested unordered list:
+      ====
+      1. Unlike John Gruber's markdown, indentation doesn't matter.
+          * This is on the same level as the item above.
+      ====
+    * A nested ordered list:
+      ++++
+      * Asterisk `<li>` markers can be used for `<ol>`.
+      2.  An easy way to remember the list delimiters is that
+          unordered list items stay constant (`=`) while
+          ordered list items increment (`+`).
+      ++++
+    0. Numbered `<li>` markers can be used for `<ul>`
+    99999999. Any non-negative integer will do.
+      """"""
+      Someone might quote this later. 
+      ====
+      * Yes, I know.
+      ====
+      """"""
+    1. They all get turned into `<li>` tags regardless.
     ======
-    """"some-id[some-class]
-      Someone might quote this later.
-    """"
   ````
 
 * Rendered
@@ -962,24 +968,28 @@ according to leading occurrences of the following delimiters
     A paragraph.
     ----
     ======
-      * A nested unordered list:
-        ====
-        1. Unlike John Gruber's markdown, indentation doesn't matter.
-            * This is on the same level as the item above.
-        ====
-      * A nested ordered list:
-        ++++
-        * Asterisk `<li>` markers can be used for `<ol>`.
-        2.  An easy way to remember the list delimiters is that
-            unordered list items stay constant (`=`) while
-            ordered list items increment (`+`).
-        ++++
-      0. Numbered `<li>` markers can be used for `<ul>`
-      99999999. Any non-negative integer will do.
+    * A nested unordered list:
+      ====
+      1. Unlike John Gruber's markdown, indentation doesn't matter.
+          * This is on the same level as the item above.
+      ====
+    * A nested ordered list:
+      ++++
+      * Asterisk `<li>` markers can be used for `<ol>`.
+      2.  An easy way to remember the list delimiters is that
+          unordered list items stay constant (`=`) while
+          ordered list items increment (`+`).
+      ++++
+    0. Numbered `<li>` markers can be used for `<ul>`
+    99999999. Any non-negative integer will do.
+      """"""
+      Someone might quote this later. 
+      ====
+      * Yes, I know.
+      ====
+      """"""
+    1. They all get turned into `<li>` tags regardless.
     ======
-    """"some-id[some-class]
-      Someone might quote this later.
-    """"
 
 ================
 

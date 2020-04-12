@@ -666,30 +666,35 @@ according to leading occurrences of the following delimiters
 <li><code>1.</code> (or any run of digits followed by a full stop)
 </li>
 </ul>
+<h4 id="blocks-1">Example 1: nesting</h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>----
 A paragraph.
 ----
 ======
-  * A nested unordered list:
-    ====
-    1. Unlike John Gruber's markdown, indentation doesn't matter.
-        * This is on the same level as the item above.
-    ====
-  * A nested ordered list:
-    ++++
-    * Asterisk `&lt;li&gt;` markers can be used for `&lt;ol&gt;`.
-    2.  An easy way to remember the list delimiters is that
-        unordered list items stay constant (`=`) while
-        ordered list items increment (`+`).
-    ++++
-  0. Numbered `&lt;li&gt;` markers can be used for `&lt;ul&gt;`
-  99999999. Any non-negative integer will do.
+* A nested unordered list:
+  ====
+  1. Unlike John Gruber's markdown, indentation doesn't matter.
+      * This is on the same level as the item above.
+  ====
+* A nested ordered list:
+  ++++
+  * Asterisk `&lt;li&gt;` markers can be used for `&lt;ol&gt;`.
+  2.  An easy way to remember the list delimiters is that
+      unordered list items stay constant (`=`) while
+      ordered list items increment (`+`).
+  ++++
+0. Numbered `&lt;li&gt;` markers can be used for `&lt;ul&gt;`
+99999999. Any non-negative integer will do.
+  """"""
+  Someone might quote this later. 
+  ====
+  * Yes, I know.
+  ====
+  """"""
+1. They all get turned into `&lt;li&gt;` tags regardless.
 ======
-""""some-id[some-class]
-  Someone might quote this later.
-""""
 </code></pre>
 </li>
 <li>Rendered
@@ -718,11 +723,17 @@ ordered list items increment (<code>+</code>).
 <li>Numbered <code>&lt;li&gt;</code> markers can be used for <code>&lt;ul&gt;</code>
 </li>
 <li>Any non-negative integer will do.
+<blockquote>
+Someone might quote this later.
+<ul>
+<li>Yes, I know.
 </li>
 </ul>
-<blockquote id="some-id" class="some-class">
-Someone might quote this later.
 </blockquote>
+</li>
+<li>They all get turned into <code>&lt;li&gt;</code> tags regardless.
+</li>
+</ul>
 </li>
 </ul>
 <footer>
