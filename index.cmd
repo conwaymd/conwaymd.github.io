@@ -1047,6 +1047,133 @@ the square brackets surrounding it may be omitted.
 ================
 
 
+###tables
+  Tables
+###
+
+{^^
+  {{ (! '''' !) }}[.id.][[.class.]]\newline {.content.} {{ (! '''' !) }}
+^^}
+
+----
+The delimiting apostrophes must be
+the first non-whitespace characters on their lines.
+If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+----
+
+----
+Produces the block
+{^
+  \<table
+    id="[.id.]" class="[.class.]"\>\newline\
+      {.content.}\
+  \</table\>
+^}.
+For {^ {.content.} ^} containing four or more apostrophes
+which are not protected by [CMD literals],
+use a greater number of {{apostrophes}} in the delimiters.
+----
+
+----
+In the implementation, a recursive call is used to process nested blocks.
+----
+
+----
+{^ {.content.} ^} is
+----
+++++
+1.  split into table cells `<th>`, `<td>`
+    according to [table cell processing](#table-cells),
+2.  split into table rows `<tr>`
+    according to [table row processing](#table-rows), and
+3.  split into table parts `<thead>`, `<tbody>`, `<tfoot>`
+    according to [table part processing](#table-parts).
+++++
+
+####table-cells
+  Table cells
+####
+
+----
+{^ {.content.} ^} is split into table cells `<th>`, `<td>`
+according to leading occurrences
+(i.e. occurrences preceded only by whitespace on their lines)
+of the following:
+----
+
+{^^ Z[.id.][[.class.]]{[.rowspan.],[.colspan.]} ^^}
+
+----
+The following delimiters (`Z`) for table cells are used:
+----
+====
+* `;` (or any run of semicolons) for `<th>`
+* `,` (or any run of commas) for `<td>`
+====
+----
+Table cells end at the next table cell, table row, or table part,
+or at the end of the content being split.
+Non-empty {^ [.rowspan.] ^} and {^ [.colspan.] ^} must consist of digits only.
+If {^ [.class.] ^} is empty,
+the square brackets surrounding it may be omitted.
+If {^ [.colspan.] ^} is empty, the comma before it may be omitted.
+If both {^ [.rowspan.] ^} and {^ [.colspan.] ^} are empty,
+the comma between them and the curly brackets surrounding them may be omitted.
+----
+
+####table-rows
+  Table rows
+####
+
+----
+{^ {.content.} ^} is split into table rows `<tr>`
+according to leading occurrences
+(i.e. occurrences preceded only by whitespace on their lines)
+of the following:
+----
+
+{^^ /[.id.][[.class.]] ^^}
+
+----
+The slash may instead be any run of slashes.
+----
+
+----
+Table rows end at the next table row or table part,
+or at the end of the content being split.
+If {^ [.class.] ^} is empty,
+the square brackets surrounding it may be omitted.
+----
+
+####table-parts
+  Table parts
+####
+
+----
+{^ {.content.} ^} is split into table parts `<thead>`, `<tbody>`, `<tfoot>`
+according to leading occurrences
+(i.e. occurrences preceded only by whitespace on their lines)
+of the following:
+----
+
+{^^ Y[.id.][[.class.]] ^^}
+
+----
+The following delimiters (`Y`) for table parts are used:
+----
+====
+* `^` (or any run of carets) for `<thead>`
+* `~` (or any run of tildes) for `<tbody>`
+* `_` (or any run of underscores) for `<tfoot>`
+====
+----
+Table parts end at the next table part,
+or at the end of the content being split.
+If {^ [.class.] ^} is empty,
+the square brackets surrounding it may be omitted.
+----
+
+
 %footer-element
 
 @@[CMD literals]
