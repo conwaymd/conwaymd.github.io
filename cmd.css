@@ -18,6 +18,11 @@ body {
   padding: 0 0.25em;
 }
 
+div.centred-flex{
+  display: flex;
+  justify-content: center;
+}
+
 div.page-properties {
   font-size: smaller;
 }

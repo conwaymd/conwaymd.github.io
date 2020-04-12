@@ -1335,6 +1335,107 @@ the square brackets surrounding it may be omitted.
 ====
 
 
+###punctuation
+  Punctuation (or, escapes)
+###
+
+
+||||[centred-flex]
+''''
+  //
+    ; CCH
+    ; HTML
+    ; Rendered
+    ; Description
+  //
+    , `\\`
+    , `<br>`
+    , \\
+    , Line break
+  //
+    , `\/`
+    ,
+    ,
+    , Empty string
+  //
+    , `\ /`
+    , `(! !) (! !)`
+    , \ /
+    , Space
+  //
+    , `\ (! !)`
+    , `(! !) (! !)`
+    , \ (! !)
+    , Space
+  //
+    , `\~`
+    , `~`
+    , \~
+    , Tilde
+  //
+    , `~`
+    , `&nbsp;`
+    , ~
+    , Non-breaking space
+  //
+    , `\0`
+    , `&numsp;`
+    , \0
+    , Figure space
+  //
+    , `\,`
+    , `&thinsp;`
+    , \,
+    , Thin space
+  //
+    , `\&`
+    , `&amp;`
+    , \&
+    , Ampersand
+  //
+    , `\<`
+    , `&lt;`
+    , \<
+    , Less than
+  //
+    , `\>`
+    , `&gt;`
+    , \>
+    , Greater than
+  //
+    , `---`
+    , `—`
+    , ---
+    , `U+2014 EM DASH`
+  //
+    , `--`
+    , `–`
+    , --
+    , `U+2013 EN DASH`
+  //
+    , `\P`
+    , `¶`
+    , \P
+    , `U+00B6 PILCROW SIGN`
+  //
+    , `\#`
+    , `#`
+    , \#
+    , Hash
+  //
+    , `\*`
+    , `*`
+    , \*
+    , Asterisk
+  //
+    , `\_`
+    , `_`
+    , \_
+    , Underscore
+''''
+||||
+
+
 %footer-element
 
 @@[CMD literals]
