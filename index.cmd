@@ -750,7 +750,7 @@ are computed based on the supplied original properties:
   %url
 ````
 
-####preamble-1 Example 1: a minimal HTML file ####
+####preamble-minimal Example 1: a minimal HTML file ####
 
 ====
 * CMD
@@ -774,7 +774,7 @@ are computed based on the supplied original properties:
 
 ====
 
-####preamble-2 Example 2: a not-so-minimal HTML file ####
+####preamble-not-minimal Example 2: a not-so-minimal HTML file ####
 
 ====
 * CMD
@@ -948,7 +948,7 @@ If {^ [.class.] ^} is empty,
 the square brackets surrounding it may be omitted.
 ----
 
-####blocks-1 Example 1: nesting ####
+####blocks-nesting Example 1: nesting ####
 
 ================
 * CMD
@@ -1013,7 +1013,7 @@ the square brackets surrounding it may be omitted.
 
 ================
 
-####blocks-2 Example 2: `id` and `class` ####
+####blocks-id-class Example 2: `id` and `class` ####
 
 ================
 * CMD
@@ -1173,7 +1173,7 @@ If {^ [.class.] ^} is empty,
 the square brackets surrounding it may be omitted.
 ----
 
-####tables-1
+####tables-without-parts
   Example 1: table *without* `<thead>`, `<tbody>`, `<tfoot>` parts
 ####
 
@@ -1255,7 +1255,7 @@ the square brackets surrounding it may be omitted.
 
 ====
 
-####tables-2
+####tables-with-parts
   Example 2: table *with* `<thead>`, `<tbody>`, `<tfoot>` parts
 ####
 
