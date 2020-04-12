@@ -158,7 +158,7 @@ with HTML syntax-character escaping and de-indentation.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive exclamation marks
 followed by a closing round bracket,
-use a greater number of {{exclamation marks}} in the delimiters.
+use a longer run of {{exclamation marks}} in the delimiters.
 ----
 
 ====
@@ -251,7 +251,7 @@ Produces the display code
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 For {^ {.content.} ^} containing two or more consecutive backticks,
-use a greater number of {{backticks}} in the delimiters.
+use a longer run of {{backticks}} in the delimiters.
 ----
 
 ====
@@ -335,7 +335,7 @@ and de-indentation for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive backticks
 which are not protected by [CMD literals],
-use a greater number of {{backticks}} in the delimiters.
+use a longer run of {{backticks}} in the delimiters.
 ----
 
 ====
@@ -402,7 +402,7 @@ with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 For {^ {.content.} ^} containing two or more consecutive dollar signs
 which are not protected by [CMD literals],
-use a greater number of {{dollar signs}} in the delimiters.
+use a longer run of {{dollar signs}} in the delimiters.
 ----
 
 ----
@@ -458,7 +458,7 @@ with HTML syntax-character escaping for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more consecutive dollar signs
 which are not protected by [CMD literals],
-use a greater number of {{dollar signs}} in the delimiters.
+use a longer run of {{dollar signs}} in the delimiters.
 ----
 
 ----
@@ -501,7 +501,7 @@ Here I am using [KaTeX].
 Includes the content of the file {^ {.(! file name !).} ^}.
 For {^ {.(! file name !).} ^} containing one or more consecutive plus signs
 followed by a closing round bracket,
-use a greater number of {{plus signs}} in the delimiters.
+use a longer run of {{plus signs}} in the delimiters.
 ----
 
 ----
@@ -544,7 +544,7 @@ in Python syntax with the flags `re.MULTILINE` and `re.VERBOSE` enabled.
 Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
 For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
 one or more consecutive percent signs,
-use a greater number of {{percent signs}} in the delimiters.
+use a longer run of {{percent signs}} in the delimiters.
 For {^ {.pattern.} ^} matching any of the syntax above,
 which should not be processed using that syntax, use CMD literals.
 ----
@@ -608,7 +608,7 @@ Processes ordinary replacements of {^ {.pattern.} ^} by {^ {.replacement.} ^}.
 Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
 For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
 one or more consecutive colons,
-use a greater number of {{colons}} in the delimiters.
+use a longer run of {{colons}} in the delimiters.
 ----
 
 ----
@@ -704,7 +704,7 @@ For {^ {.property markup.} ^} matching a {^ {.property name.} ^} pattern,
 use a CMD literal, e.g. `(!! (! a literal %propety-name !) !!)`.
 For {^ {.content.} ^} containing two or more consecutive percent signs
 which are not protected by CMD literals,
-use a greater number of {{percent signs}} in the delimiters.
+use a longer run of {{percent signs}} in the delimiters.
 ----
 
 ----
@@ -899,7 +899,7 @@ Produces the block
 For {^ {.content.} ^} containing four or more
 consecutive delimiting characters
 which are not protected by [CMD literals],
-use a greater number of {{delimiting characters}} in the delimiters.
+use a longer run of {{delimiting characters}} in the delimiters.
 ----
 
 ----
@@ -1071,7 +1071,7 @@ Produces the block
 ^}.
 For {^ {.content.} ^} containing four or more apostrophes
 which are not protected by [CMD literals],
-use a greater number of {{apostrophes}} in the delimiters.
+use a longer run of {{apostrophes}} in the delimiters.
 ----
 
 ----

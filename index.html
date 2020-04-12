@@ -80,7 +80,7 @@ with HTML syntax-character escaping and de-indentation.
 Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
 For <code><span class="mandatory-argument">{content}</span></code> containing one or more consecutive exclamation marks
 followed by a closing round bracket,
-use a greater number of <span class="repeatable-delimiter">exclamation marks</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">exclamation marks</span> in the delimiters.
 </p>
 <ul>
 <li>CMD
@@ -143,7 +143,7 @@ Produces the display code
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
 For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive backticks,
-use a greater number of <span class="repeatable-delimiter">backticks</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">backticks</span> in the delimiters.
 </p>
 <ul>
 <li>CMD
@@ -206,7 +206,7 @@ and de-indentation for <code><span class="mandatory-argument">{content}</span></
 Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
 For <code><span class="mandatory-argument">{content}</span></code> containing one or more consecutive backticks
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a greater number of <span class="repeatable-delimiter">backticks</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">backticks</span> in the delimiters.
 </p>
 <ul>
 <li>CMD
@@ -247,7 +247,7 @@ with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">{content}</span></code>.
 For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive dollar signs
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a greater number of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
 </p>
 <p>
 This is to be used with some sort of JavaScript code
@@ -286,7 +286,7 @@ with HTML syntax-character escaping for <code><span class="mandatory-argument">{
 Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
 For <code><span class="mandatory-argument">{content}</span></code> containing one or more consecutive dollar signs
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a greater number of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
 </p>
 <p>
 This is to be used with some sort of JavaScript code
@@ -317,7 +317,7 @@ A contrived instance of multiple dollar signs in inline maths:
 Includes the content of the file <code><span class="mandatory-argument">{file name}</span></code>.
 For <code><span class="mandatory-argument">{file name}</span></code> containing one or more consecutive plus signs
 followed by a closing round bracket,
-use a greater number of <span class="repeatable-delimiter">plus signs</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">plus signs</span> in the delimiters.
 </p>
 <p>
 All of the syntax above (CMD literals through to inline maths) is processed.
@@ -350,7 +350,7 @@ in Python syntax with the flags <code>re.MULTILINE</code> and <code>re.VERBOSE</
 Whitespace around <code><span class="mandatory-argument">{pattern}</span></code> and <code><span class="mandatory-argument">{replacement}</span></code> is stripped.
 For <code><span class="mandatory-argument">{pattern}</span></code> or <code><span class="mandatory-argument">{replacement}</span></code> containing
 one or more consecutive percent signs,
-use a greater number of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
 For <code><span class="mandatory-argument">{pattern}</span></code> matching any of the syntax above,
 which should not be processed using that syntax, use CMD literals.
 </p>
@@ -402,7 +402,7 @@ Processes ordinary replacements of <code><span class="mandatory-argument">{patte
 Whitespace around <code><span class="mandatory-argument">{pattern}</span></code> and <code><span class="mandatory-argument">{replacement}</span></code> is stripped.
 For <code><span class="mandatory-argument">{pattern}</span></code> or <code><span class="mandatory-argument">{replacement}</span></code> containing
 one or more consecutive colons,
-use a greater number of <span class="repeatable-delimiter">colons</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">colons</span> in the delimiters.
 </p>
 <p>
 All ordinary replacement specifications are read and stored
@@ -474,7 +474,7 @@ For <code><span class="mandatory-argument">{property markup}</span></code> match
 use a CMD literal, e.g. <code>(! a literal %propety-name !)</code>.
 For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive percent signs
 which are not protected by CMD literals,
-use a greater number of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
 </p>
 <p>
 Only the first occurrence of a preamble in the markup is processed.
@@ -626,7 +626,7 @@ Produces the block
 For <code><span class="mandatory-argument">{content}</span></code> containing four or more
 consecutive delimiting characters
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a greater number of <span class="repeatable-delimiter">delimiting characters</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">delimiting characters</span> in the delimiters.
 </p>
 <p>
 The following delimiting characters (<code>c</code>) are used:
@@ -789,7 +789,7 @@ Produces the block
 <code>&lt;table id="<span class="optional-argument">[id]</span>" class="<span class="optional-argument">[class]</span>"&gt;↵<span class="mandatory-argument">{content}</span>&lt;/table&gt;</code>.
 For <code><span class="mandatory-argument">{content}</span></code> containing four or more apostrophes
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a greater number of <span class="repeatable-delimiter">apostrophes</span> in the delimiters.
+use a longer run of <span class="repeatable-delimiter">apostrophes</span> in the delimiters.
 </p>
 <p>
 In the implementation, a recursive call is used to process nested tables.
