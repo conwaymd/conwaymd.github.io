@@ -1560,7 +1560,7 @@ the latest specification shall prevail.
 ####
 
 {^^
-  (! ![ !){.alt.}]({.src.} [.title.])
+  (! ![ !){.alt.}]( {.src.} [.title.] )
 ^^}
 
 ----
@@ -1586,7 +1586,8 @@ one or more closing square or round brackets, use [CMD literals].
 * CMD
   ````[cmd]
   (!!
-  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](/rembrandt-anatomy.jpg
+  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
+    /rembrandt-anatomy.jpg
     The Anatomy Lesson of Dr~Nicolaes Tulp (! (Rembrandt) !)
   )
   !!)
@@ -1599,7 +1600,8 @@ one or more closing square or round brackets, use [CMD literals].
 
 * Rendered
   ----
-  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](/rembrandt-anatomy.jpg
+  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
+    /rembrandt-anatomy.jpg
     The Anatomy Lesson of Dr~Nicolaes Tulp (! (Rembrandt) !)
   )
   ----
@@ -1712,7 +1714,7 @@ the latest specification shall prevail.
 ####
 
 {^^
-  (! [ !){.content.}]({.href.} [.title.])
+  (! [ !){.content.}]( {.href.} [.title.] )
 ^^}
 
 ----
