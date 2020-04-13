@@ -1480,21 +1480,21 @@ All leading whitespace on the next line is stripped.
     {{ (! @@ !) }}[.width.]
   ^^}
 
-* Link
+* Image
   {^^
     ![{.alt.}][[.label.]]
   ^^}
 
 ====
 ----
-The delimiting at signs must be the first
+The delimiting at signs in a definition must be the first
 non-whitespace characters on their lines.
 A single space may be included
-between {^ [{.alt.}] ^} and {^ [[.label.]] ^}.
+between {^ [{.alt.}] ^} and {^ [[.label.]] ^} in an image.
 The referencing strings {^ {.label.} ^} and {^ [.label.] ^}
 are case insensitive.
-Non-empty {^ [.width.] ^} must consist of digits only.
-If {^ [.class.] ^} is empty,
+Non-empty {^ [.width.] ^} in a definition must consist of digits only.
+If {^ [.class.] ^} in a definition is empty,
 the square brackets surrounding it may be omitted.
 ----
 
