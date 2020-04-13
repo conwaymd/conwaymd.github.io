@@ -1954,6 +1954,26 @@ Recursive calls are used to process nested inline semantics.
 ====
 
 
+###whitespace
+  Whitespace
+###
+
+----
+Whitespace is processed as follows:
+----
+++++
+1.  Leading and trailing horizontal whitespace is removed.
+2.  Empty lines are removed. (In the implementation,
+    consecutive newlines are replaced with a single newline.)
+3.  Whitespace before line break elements `<br>` is removed.
+4.  Whitespace for attributes is canonicalised:
+    ====
+    * a single space is used before the attribute name, and
+    * no whitespace is used around the equals sign.
+    ====
+++++
+
+
 %footer-element
 
 @@[CMD literals]

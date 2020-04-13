@@ -1550,6 +1550,27 @@ I <i class="translator-supplied">am</i> the LORD.
 </p>
 </li>
 </ul>
+<h3 id="whitespace"><a class="self-link" href="#whitespace"></a>Whitespace</h3>
+<p>
+Whitespace is processed as follows:
+</p>
+<ol>
+<li>Leading and trailing horizontal whitespace is removed.
+</li>
+<li>Empty lines are removed. (In the implementation,
+consecutive newlines are replaced with a single newline.)
+</li>
+<li>Whitespace before line break elements <code>&lt;br&gt;</code> is removed.
+</li>
+<li>Whitespace for attributes is canonicalised:
+<ul>
+<li>a single space is used before the attribute name, and
+</li>
+<li>no whitespace is used around the equals sign.
+</li>
+</ul>
+</li>
+</ol>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.
