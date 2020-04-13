@@ -119,7 +119,7 @@ which I can't without some sort of extension
 ----
 ++++
 1.  Set the width of [images](#images)
-2.  Add classes to elements
+2.  Add `id` and `class` to elements
 3.  Write [arbitrary text](#cmd-literals) outside of code elements
     without using backslash escapes or HTML (ampersand) entities
 4.  [Include](#inclusions) markdown from another file (e.g.~a template)
