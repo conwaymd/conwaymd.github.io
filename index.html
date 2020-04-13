@@ -49,9 +49,34 @@ implemented in Python using regex replacements.
 Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's <a href="https://daringfireball.net/projects/markdown/" title="Daring Fireball: Markdown">markdown</a>,
-Conway's markdown uses fence-style constructs
+CMD uses fence-style constructs
 where an <span class="repeatable-delimiter">arbitrarily repeatable delimiter symbol</span>
 is used to wrap shorter runs of that symbol.
+</p>
+<p>
+While markdown is really an excellent syntax,
+there are many things which I've always wanted to do in markdown,
+which I can't without some sort of extension
+(or falling back to writing plain HTML):
+</p>
+<ol>
+<li>Set the width of <a href="#images">images</a>
+</li>
+<li>Add classes to elements
+</li>
+<li>Write <a href="#cmd-literals">arbitrary text</a> outside of code elements
+without using backslash escapes or HTML (ampersand) entities
+</li>
+<li><a href="#inclusions">Include</a> markdown from another file (e.g.&nbsp;a template)
+</li>
+<li>Use <a href="#inline-semantics"><code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> elements</a>,
+not just <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>
+</li>
+<li><a href="#regex-replacements">Define my own syntax</a> as I go.
+</li>
+</ol>
+<p>
+CMD addresses each of these.
 </p>
 <h2 id="usage"><a class="self-link" href="#usage"></a>Usage</h2>
 <p>

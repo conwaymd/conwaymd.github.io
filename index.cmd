@@ -106,9 +106,29 @@ implemented in Python using regex replacements.
 Conway's markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's [markdown],
-Conway's markdown uses fence-style constructs
+CMD uses fence-style constructs
 where an {{arbitrarily repeatable delimiter symbol}}
 is used to wrap shorter runs of that symbol.
+----
+
+----
+While markdown is really an excellent syntax,
+there are many things which I've always wanted to do in markdown,
+which I can't without some sort of extension
+(or falling back to writing plain HTML):
+----
+++++
+1.  Set the width of [images](#images)
+2.  Add classes to elements
+3.  Write [arbitrary text](#cmd-literals) outside of code elements
+    without using backslash escapes or HTML (ampersand) entities
+4.  [Include](#inclusions) markdown from another file (e.g.~a template)
+5.  Use [`<b>` and `<i>` elements](#inline-semantics),
+    not just `<strong>` and `<em>`
+6.  [Define my own syntax](#regex-replacements) as I go.
+++++
+----
+CMD addresses each of these.
 ----
 
 
