@@ -1801,10 +1801,18 @@ equal to one or two delimiting characters (`c`),
 are used:
 ----
 ======
-* `*` for `<em>`
 * `**` for `<strong>`
-* `_` for `<i>`
+  (strong importance, seriousness, etc.)
+
+* `*` for `<em>`
+  (stress emphasis, sarcasm, etc.)
+
 * `__` for `<b>`
+  (bring to attention *without* greater importance,~e.g. keywords)
+
+* `_` for `<i>`
+  (offset text *without* stress emphasis, e.g.~book titles, Latin)
+
 ======
 
 ----
