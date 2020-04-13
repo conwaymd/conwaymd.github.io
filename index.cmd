@@ -141,7 +141,7 @@ Convert a CMD file to HTML, outputting to `cmd_name.html`:
 ----
 
 ````
-$ python cmd.py [cmd_name[.[cmd]]]
+$ cmd.py [cmd_name[.[cmd]]]
 ````
 
 ----
