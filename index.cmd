@@ -1001,6 +1001,8 @@ The following delimiters (`Y`) for list items are used:
 * `1.` (or any run of digits followed by a full stop)
 ====
 ----
+List items end at the next list item,
+or at the end of the content being split.
 If {^ [.class.] ^} is empty,
 the square brackets surrounding it may be omitted.
 ----
