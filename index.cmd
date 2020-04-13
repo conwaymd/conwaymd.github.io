@@ -162,6 +162,43 @@ the syntax for earlier replacements will have higher precedence
 than that for later replacements.
 The syntax of CMD, in the order of processing, is thus:
 ----
+======
+* [CMD literals]
+* [Display code](#display-code)
+* [Inline code](#inline-code)
+* [Comments](#comments)
+* [Display maths](#display-maths)
+* [Inline maths](#inline-maths)
+* [Inclusions](#inclusions)
+* [Regex replacements](#regex-replacements)
+* [Ordinary replacements](#ordinary-replacements)
+* [Preamble](#preamble)
+* [Headings](#headings)
+* [Blocks](#blocks)
+  ====
+  * [List items](#list-items)
+  ====
+* [Tables](#tables)
+  ====
+  * [Table cells](#table-cells)
+  * [Table rows](#table-rows)
+  * [Table parts](#table-parts)
+  ====
+* [Punctuation (or, escapes)](#punctuation)
+* [Line continuations](#line-continuations)
+* [Images](#images)
+  ====
+  * [Reference-style images](#reference-style-images)
+  * [Inline-style images](#inline-style-images)
+  ====
+* [Links](#links)
+  ====
+  * [Reference-style links](#reference-style-links)
+  * [Inline-style links](#inline-style-links)
+  ====
+* [Inline semantics](#inline-semantics)
+* [Whitespace](#whitespace)
+======
 
 
 ###cmd-literals
