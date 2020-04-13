@@ -1828,7 +1828,7 @@ are used:
   (stress emphasis, sarcasm, etc.)
 
 * `__` for `<b>`
-  (bring to attention *without* greater importance,~e.g. keywords)
+  (bring to attention *without* strong importance,~e.g. keywords)
 
 * `_` for `<i>`
   (offset text *without* stress emphasis, e.g.~book titles, Latin)
