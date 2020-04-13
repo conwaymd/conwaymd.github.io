@@ -1360,6 +1360,167 @@ one or more closing square or round brackets, use <a href="#cmd-literals">CMD li
 </p>
 </li>
 </ul>
+<h3 id="inline-semantics"><a class="self-link" href="#inline-semantics"></a>Inline semantics</h3>
+<pre class="cmd syntax"><code>X[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> X</code></pre>
+<p>
+<code><span class="mandatory-argument">{content}</span></code> must be non-empty.
+If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+</p>
+<p>
+Produces the inline semantic
+<code>&lt;<span class="mandatory-argument">{tag name}</span> class="<span class="optional-argument">[class]</span>"&gt;<span class="mandatory-argument">{content}</span>&lt;/<span class="mandatory-argument">{tag name}</span>&gt;</code>.
+Whitespace around <code><span class="mandatory-argument">{content}</span></code> is stripped.
+For <code><span class="mandatory-argument">{content}</span></code> containing one or more occurrences
+of the delimiting characters <code>c</code> (<code>*</code> or <code>_</code>),
+use <a href="#cmd-literals">CMD literals</a> or the <a href="#punctuation">escapes</a> <code>\*</code> and <code>\_</code>.
+</p>
+<p>
+The following delimiters (<code>X</code>),
+equal to one or two delimiting characters (<code>c</code>),
+are used:
+</p>
+<ul>
+<li><code>*</code> for <code>&lt;em&gt;</code>
+</li>
+<li><code>**</code> for <code>&lt;strong&gt;</code>
+</li>
+<li><code>_</code> for <code>&lt;i&gt;</code>
+</li>
+<li><code>__</code> for <code>&lt;b&gt;</code>
+</li>
+</ul>
+<p>
+In the implementation, matches are sought in the following order:
+</p>
+<div class="centred-flex">
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>33</td>
+<td><code>ccc[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> ccc</code></td>
+</tr>
+<tr>
+<td>312</td>
+<td><code>ccc[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> c <span class="mandatory-argument">{outer content}</span> cc</code></td>
+</tr>
+<tr>
+<td>321</td>
+<td><code>ccc[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> cc <span class="mandatory-argument">{outer content}</span> c</code></td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>cc[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> cc</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>c[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> c</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+33 is effectively 312 with empty <code><span class="mandatory-argument">{outer content}</span></code>.
+Once such a pattern has been matched,
+only three cases need to be handled for the resulting match object:
+</p>
+<ul>
+<li>2-layer special (for 33):<br>
+<pre class="cmd syntax"><code>XY[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> YX</code></pre>
+</li>
+<li>2-layer general (for 312, 321):<br>
+<pre class="cmd syntax"><code>XY[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> Y <span class="mandatory-argument">{outer content}</span> X</code></pre>
+</li>
+<li>1-layer case (for 22, 11):<br>
+<pre class="cmd syntax"><code>X[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> X</code></pre>
+</li>
+</ul>
+<p>
+Recursive calls are used to process nested inline semantics.
+</p>
+<div class="centred-flex">
+<table>
+<thead>
+<tr>
+<th>CCH</th>
+<th>Rendered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>***strong(em)***</code></td>
+<td><strong><em>strong(em)</em></strong></td>
+</tr>
+<tr>
+<td><code>***strong(em)* strong**</code></td>
+<td><strong><em>strong(em)</em> strong</strong></td>
+</tr>
+<tr>
+<td><code>***em(strong)** em*</code></td>
+<td><em><strong>em(strong)</strong> em</em></td>
+</tr>
+<tr>
+<td><code>**strong**</code></td>
+<td><strong>strong</strong></td>
+</tr>
+<tr>
+<td><code>*em*</code></td>
+<td><em>em</em></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td><code>___b(i)___</code></td>
+<td><b><i>b(i)</i></b></td>
+</tr>
+<tr>
+<td><code>___b(i)_ b__</code></td>
+<td><b><i>b(i)</i> b</b></td>
+</tr>
+<tr>
+<td><code>___i(b)__ i_</code></td>
+<td><i><b>i(b)</b> i</i></td>
+</tr>
+<tr>
+<td><code>__b__</code></td>
+<td><b>b</b></td>
+</tr>
+<tr>
+<td><code>_i_</code></td>
+<td><i>i</i></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>CMD
+<pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` / `&lt;em&gt;` with `&lt;b&gt;` / `&lt;i&gt;`.** \\
+They are *not* the same. \\
+Meals come with __rice__ or __pasta__. \\
+I _[translator-supplied]am_ the LORD.
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;strong&gt;Do not confuse &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt; with &lt;code&gt;&amp;lt;b&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;i&amp;gt;&lt;/code&gt;.&lt;/strong&gt;&lt;br&gt;
+They are &lt;em&gt;not&lt;/em&gt; the same.&lt;br&gt;
+Meals come with &lt;b&gt;rice&lt;/b&gt; or &lt;b&gt;pasta&lt;/b&gt;.&lt;br&gt;
+I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.
+</code></pre>
+</li>
+<li>Rendered
+<p>
+<strong>Do not confuse <code>&lt;strong&gt;</code> / <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> / <code>&lt;i&gt;</code>.</strong><br>
+They are <em>not</em> the same.<br>
+Meals come with <b>rice</b> or <b>pasta</b>.<br>
+I <i class="translator-supplied">am</i> the LORD.
+</p>
+</li>
+</ul>
 <footer>
 <hr>
 ©&nbsp;2020&nbsp;Conway.

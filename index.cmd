@@ -1768,6 +1768,164 @@ one or more closing square or round brackets, use [CMD literals].
 ====
 
 
+###inline-semantics
+  Inline semantics
+###
+
+{^^
+  X[[.class.]] {.content.} X
+^^}
+
+----
+{^ {.content.} ^} must be non-empty.
+If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+----
+
+----
+Produces the inline semantic
+{^
+  \<{.tag name.}
+    class="[.class.]"\>\
+      {.content.}\
+  \</{.tag name.}\>
+^}.
+Whitespace around {^ {.content.} ^} is stripped.
+For {^ {.content.} ^} containing one or more occurrences
+of the delimiting characters `c` (`*` or `_`),
+use [CMD literals] or the [escapes](#punctuation) `\*` and `\_`.
+----
+
+----
+The following delimiters (`X`),
+equal to one or two delimiting characters (`c`),
+are used:
+----
+======
+* `*` for `<em>`
+* `**` for `<strong>`
+* `_` for `<i>`
+* `__` for `<b>`
+======
+
+----
+In the implementation, matches are sought in the following order:
+----
+
+||||[centred-flex]
+''''
+^^^
+  //
+    ; Type
+    ; Form
+~~~
+  //
+    , 33
+    , {^ ccc[[.inner class.]] {.inner content.} ccc ^}
+  //
+    , 312
+    , {^ ccc[[.inner class.]] {.inner content.} c {.outer content.} cc ^}
+  //
+    , 321
+    , {^ ccc[[.inner class.]] {.inner content.} cc {.outer content.} c ^}
+  //
+    , 22
+    , {^ cc[[.class.]] {.content.} cc ^}
+  //
+    , 11
+    , {^ c[[.class.]] {.content.} c ^}
+''''
+||||
+
+----
+33 is effectively 312 with empty {^ {.outer content.} ^}.
+Once such a pattern has been matched,
+only three cases need to be handled for the resulting match object:
+----
+====
+* 2-layer special (for 33): \\
+  {^^ XY[[.inner class.]] {.inner content.} YX ^^}
+
+* 2-layer general (for 312, 321): \\
+  {^^ XY[[.inner class.]] {.inner content.} Y {.outer content.} X ^^}
+
+* 1-layer case (for 22, 11): \\
+  {^^ X[[.class.]] {.content.} X ^^}
+
+====
+
+----
+Recursive calls are used to process nested inline semantics.
+----
+
+||||[centred-flex]
+''''
+^^^
+  //
+    ; CCH
+    ; Rendered
+~~~
+  //
+    , `***strong(em)***`
+    ,  ***strong(em)***
+  //
+    , `***strong(em)* strong**`
+    ,  ***strong(em)* strong**
+  //
+    , `***em(strong)** em*`
+    ,  ***em(strong)** em*
+  //
+    , `**strong**`
+    ,  **strong**
+  //
+    , `*em*`
+    ,  *em*
+~~~
+  //
+    , `___b(i)___`
+    ,  ___b(i)___
+  //
+    , `___b(i)_ b__`
+    ,  ___b(i)_ b__
+  //
+    , `___i(b)__ i_`
+    ,  ___i(b)__ i_
+  //
+    , `__b__`
+    ,  __b__
+  //
+    , `_i_`
+    ,  _i_
+''''
+||||
+
+====
+* CMD
+  ````[cmd]
+  **Do not confuse `<strong>` / `<em>` with `<b>` / `<i>`.** \\
+  They are *not* the same. \\
+  Meals come with __rice__ or __pasta__. \\
+  I _[translator-supplied]am_ the LORD.
+  ````
+
+* HTML
+  ````[html]
+  <strong>Do not confuse <code>&lt;strong&gt;</code> / <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> / <code>&lt;i&gt;</code>.</strong><br>
+  They are <em>not</em> the same.<br>
+  Meals come with <b>rice</b> or <b>pasta</b>.<br>
+  I <i class="translator-supplied">am</i> the LORD.
+  ````
+
+* Rendered
+  ----
+  \/**Do not confuse `<strong>` / `<em>` with `<b>` / `<i>`.** \\
+  They are *not* the same. \\
+  Meals come with __rice__ or __pasta__. \\
+  I _[translator-supplied]am_ the LORD.
+  ----
+
+====
+
+
 %footer-element
 
 @@[CMD literals]
