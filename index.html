@@ -29,7 +29,7 @@ for (let i = 0; i &lt; elements.length; i++) {
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-13
+Last modified: 2020-04-14
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a>
@@ -545,12 +545,15 @@ The delimiting percent signs must be
 the first non-whitespace characters on their lines.
 </p>
 <p>
-Processes the preamble, whose <code><span class="mandatory-argument">{content}</span></code> is to consist of
-property specifications of the form
-<code>%<span class="mandatory-argument">{property name}</span> <span class="mandatory-argument">{property markup}</span></code>,
-which are stored and may be referenced by writing <code>%<span class="mandatory-argument">{property name}</span></code>,
+Processes the preamble.
+<code><span class="mandatory-argument">{content}</span></code> is split into property specifications
+according to leading occurrences of <code>%<span class="mandatory-argument">{property name}</span></code>,
+where <code><span class="mandatory-argument">{property name}</span></code> may only contain letters, digits, and hyphens.
+Property specifications end at the next property specification,
+or at the end of the (preamble) content being split.
+Each property is stored and may be referenced
+by writing <code>%<span class="mandatory-argument">{property name}</span></code>,
 called a property string, anywhere else in the document.
-<code><span class="mandatory-argument">{property name}</span></code> may only contain letters, digits, and hyphens.
 If the same property is specified more than once,
 the latest specification shall prevail.
 </p>
@@ -559,8 +562,6 @@ This produces the HTML preamble,
 i.e.&nbsp;everything from <code>&lt;!DOCTYPE html&gt;</code> through to <code>&lt;body&gt;</code>.
 </p>
 <p>
-For <code><span class="mandatory-argument">{property markup}</span></code> matching a <code><span class="mandatory-argument">{property name}</span></code> pattern,
-use a CMD literal, e.g. <code>(! a literal %propety-name !)</code>.
 For <code><span class="mandatory-argument">{content}</span></code> containing two or more consecutive percent signs
 which are not protected by CMD literals,
 use a longer run of <span class="repeatable-delimiter">percent signs</span> in the delimiters.

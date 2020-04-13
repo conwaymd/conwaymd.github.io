@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-13
+%date-modified 2020-04-14
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
@@ -741,12 +741,15 @@ the first non-whitespace characters on their lines.
 ----
 
 ----
-Processes the preamble, whose {^ {.content.} ^} is to consist of
-property specifications of the form
-{^ %{.property name.} {.property markup.} ^},
-which are stored and may be referenced by writing {^ %{.property name.} ^},
+Processes the preamble.
+{^ {.content.} ^} is split into property specifications
+according to leading occurrences of {^ %{.property name.} ^},
+where {^ {.property name.} ^} may only contain letters, digits, and hyphens.
+Property specifications end at the next property specification,
+or at the end of the (preamble) content being split.
+Each property is stored and may be referenced
+by writing {^ %{.property name.} ^},
 called a property string, anywhere else in the document.
-{^ {.property name.} ^} may only contain letters, digits, and hyphens.
 If the same property is specified more than once,
 the latest specification shall prevail.
 ----
@@ -757,8 +760,6 @@ i.e.~everything from `<!DOCTYPE html>` through to `<body>`.
 ----
 
 ----
-For {^ {.property markup.} ^} matching a {^ {.property name.} ^} pattern,
-use a CMD literal, e.g. `(!! (! a literal %propety-name !) !!)`.
 For {^ {.content.} ^} containing two or more consecutive percent signs
 which are not protected by CMD literals,
 use a longer run of {{percent signs}} in the delimiters.
