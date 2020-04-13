@@ -1506,7 +1506,7 @@ Produces the image
     class="[.class.]"
     src="{.src.}"
     title="[.title.]"
-    width="[.width.]"
+    width="[.width.]"\
   (! > !)
 ^}.
 Whitespace around {^ [.label.] ^} is stripped.
@@ -1575,7 +1575,7 @@ Produces the image
   (! <img !)
     alt="{.alt.}"
     src="{.src.}"
-    title="[.title.]"
+    title="[.title.]"\
   (! > !)
 ^}.
 For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
@@ -1602,6 +1602,165 @@ one or more closing square or round brackets, use [CMD literals].
   ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](/rembrandt-anatomy.jpg
     The Anatomy Lesson of Dr~Nicolaes Tulp (! (Rembrandt) !)
   )
+  ----
+
+====
+
+
+###links
+  Links
+###
+
+
+####reference-style-links
+  Reference-style links
+####
+
+====
+* Definition
+  {^^
+    {{ (! @@ !) }}[{.label.}][[.class.]]↵ \
+      {.href.} [.title.] \
+    {{ (! @@ !) }}
+  ^^}
+
+* Link
+  {^^
+    [{.content.}][[.label.]]
+  ^^}
+
+====
+----
+The delimiting at signs in a definition must be the first
+non-whitespace characters on their lines.
+A single space may be included
+between {^ [{.content.}] ^} and {^ [[.label.]] ^} in a link.
+The referencing strings {^ {.label.} ^} and {^ [.label.] ^}
+are case insensitive.
+If {^ [.class.] ^} in a definition is empty,
+the square brackets surrounding it may be omitted.
+If {^ [.label.] ^} in a link is empty,
+the square brackets surrounding it may be omitted,
+and {^ {.content.} ^} is used as the label for that link.
+----
+
+----
+Produces the link
+{^
+  (! <a !)
+    class="[.class.]"
+    href="{.href.}"
+    title="[.title.]"\
+  (! > !)\
+    {.content.}\
+  (! </a> !)
+^}.
+Whitespace around {^ {.content.} ^} and {^ [.label.] ^} is stripped.
+For definitions whose {^ {.label.} ^}, {^ [.class.] ^},
+{^ {.href.} ^}, or {^ [.title.] ^} contains
+two or more consecutive at signs
+which are not protected by CMD literals,
+use a longer run of {{at signs}} in the delimiters.
+For links whose {^ {.content.} ^} or {^ [.label.] ^} contains
+one or more closing square brackets, use [CMD literals].
+----
+
+----
+All link definitions are read and stored
+before being applied in order.
+If the same label is specified more than once,
+the latest specification shall prevail.
+----
+
+====
+* CMD
+  ````[cmd]
+  @@[wikipedia]
+    https://en.wikipedia.org/wiki/Main_Page
+    Wikipedia, the free encyclopedia
+  @@
+  
+  [Wikipedia's home page][wikipedia] \\
+  [Wikipedia][] \\
+  [Wikipedia]
+  ````
+
+* HTML
+  ````[html]
+  <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia's home page</a><br>
+  <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a><br>
+  <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a>
+  ````
+
+* Rendered
+  ----
+  @@[wikipedia]
+    https://en.wikipedia.org/wiki/Main_Page
+    Wikipedia, the free encyclopedia
+  @@
+  
+  [Wikipedia's home page][wikipedia] \\
+  [Wikipedia][] \\
+  [Wikipedia]
+  ----
+
+====
+
+
+####inline-style-links
+  Inline-style links
+####
+
+{^^
+  (! [ !){.content.}]({.href.} [.title.])
+^^}
+
+----
+Unlike John Gruber's markdown, {^ [.title.] ^} is not surrounded by quotes.
+If quotes are supplied to {^ [.title.] ^},
+they are automatically escaped as `&quot;`.
+----
+
+----
+Produces the link
+{^
+  (! <a !)
+    href="{.href.}"
+    title="[.title.]"\
+  (! > !)\
+    {.content.}\
+  (! </a> !)
+^}.
+Whitespace around {^ {.content.} ^} is stripped.
+For {^ {.content.} ^}, {^ {.href.} ^}, or {^ [.title.] ^} containing
+one or more closing square or round brackets, use [CMD literals].
+----
+
+====
+* CMD
+  ````[cmd]
+  [Wikimedia Commons](
+    https://commons.wikimedia.org/wiki/Main_Page
+    Wikimedia Commons
+  )
+    \\
+  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
+  ````
+
+* HTML
+  ````[html]
+  <a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
+  <a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
+  ````
+
+* Rendered
+  ----
+  [Wikimedia Commons](
+    https://commons.wikimedia.org/wiki/Main_Page
+    Wikimedia Commons
+  )
+    \\
+  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
   ----
 
 ====
