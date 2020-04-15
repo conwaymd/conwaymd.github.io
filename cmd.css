@@ -27,6 +27,11 @@ div.page-properties {
   font-size: smaller;
 }
 
+footer {
+  border-top: 2px solid black;
+  padding-top: 0.5em;
+}
+
 h2 a.self-link,
 h3 a.self-link,
 h4 a.self-link,
