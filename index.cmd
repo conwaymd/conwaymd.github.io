@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-14
+%date-modified 2020-04-15
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.css">
@@ -998,7 +998,7 @@ of the following:
 The following delimiters (`Y`) for list items are used:
 ----
 ====
-* `*` (or any run of asterisks)
+* `*`
 * `1.` (or any run of digits followed by a full stop)
 ====
 ----
@@ -1025,7 +1025,6 @@ the square brackets surrounding it may be omitted.
     * A nested ordered list:
       ++++
       * Asterisk `<li>` markers can be used for `<ol>`.
-      **** An arbitrarily long run of asterisks can be used.
       2.  An easy way to remember the list delimiters is that
           unordered list items stay constant (`=`) while
           ordered list items increment (`+`).
@@ -1055,7 +1054,6 @@ the square brackets surrounding it may be omitted.
     * A nested ordered list:
       ++++
       * Asterisk `<li>` markers can be used for `<ol>`.
-      **** An arbitrarily long run of asterisks can be used.
       2.  An easy way to remember the list delimiters is that
           unordered list items stay constant (`=`) while
           ordered list items increment (`+`).
