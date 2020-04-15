@@ -6,7 +6,7 @@
 %date-modified 2020-04-15
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/cmd.css">
+  <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
   <script defer
