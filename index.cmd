@@ -999,6 +999,8 @@ The following delimiters (`Y`) for list items are used:
 ----
 ====
 * `*`
+* `+`
+* `-`
 * `1.` (or any run of digits followed by a full stop)
 ====
 ----
@@ -1024,12 +1026,14 @@ the square brackets surrounding it may be omitted.
       ====
     * A nested ordered list:
       ++++
-      * Asterisk `<li>` markers can be used for `<ol>`.
+      * A leading asterisk `*` can be used for `<li>` in `<ol>`.
+      + Also a plus sign `+`.
+      - Also a hyphen `-`.
       2.  An easy way to remember the list delimiters is that
-          unordered list items stay constant (`=`) while
-          ordered list items increment (`+`).
+          unordered list items stay constant (`====`) while
+          ordered list items increment (`++++`).
       ++++
-    0. Numbered `<li>` markers can be used for `<ul>`
+    0. A leading number and full stop can be used for `<li>` in `<ul>`.
     99999999. Any non-negative integer will do.
       """"""
       Someone might quote this later. 
@@ -1053,12 +1057,14 @@ the square brackets surrounding it may be omitted.
       ====
     * A nested ordered list:
       ++++
-      * Asterisk `<li>` markers can be used for `<ol>`.
+      * A leading asterisk `*` can be used for `<li>` in `<ol>`.
+      + Also a plus sign `+`.
+      - Also a hyphen `-`.
       2.  An easy way to remember the list delimiters is that
-          unordered list items stay constant (`=`) while
-          ordered list items increment (`+`).
+          unordered list items stay constant (`====`) while
+          ordered list items increment (`++++`).
       ++++
-    0. Numbered `<li>` markers can be used for `<ul>`
+    0. A leading number and full stop can be used for `<li>` in `<ul>`.
     99999999. Any non-negative integer will do.
       """"""
       Someone might quote this later. 

@@ -758,6 +758,10 @@ The following delimiters (<code>Y</code>) for list items are used:
 <ul>
 <li><code>*</code>
 </li>
+<li><code>+</code>
+</li>
+<li><code>-</code>
+</li>
 <li><code>1.</code> (or any run of digits followed by a full stop)
 </li>
 </ul>
@@ -781,12 +785,14 @@ A paragraph.
   ====
 * A nested ordered list:
   ++++
-  * Asterisk `&lt;li&gt;` markers can be used for `&lt;ol&gt;`.
+  * A leading asterisk `*` can be used for `&lt;li&gt;` in `&lt;ol&gt;`.
+  + Also a plus sign `+`.
+  - Also a hyphen `-`.
   2.  An easy way to remember the list delimiters is that
-      unordered list items stay constant (`=`) while
-      ordered list items increment (`+`).
+      unordered list items stay constant (`====`) while
+      ordered list items increment (`++++`).
   ++++
-0. Numbered `&lt;li&gt;` markers can be used for `&lt;ul&gt;`
+0. A leading number and full stop can be used for `&lt;li&gt;` in `&lt;ul&gt;`.
 99999999. Any non-negative integer will do.
   """"""
   Someone might quote this later. 
@@ -813,15 +819,19 @@ A paragraph.
 </li>
 <li>A nested ordered list:
 <ol>
-<li>Asterisk <code>&lt;li&gt;</code> markers can be used for <code>&lt;ol&gt;</code>.
+<li>A leading asterisk <code>*</code> can be used for <code>&lt;li&gt;</code> in <code>&lt;ol&gt;</code>.
+</li>
+<li>Also a plus sign <code>+</code>.
+</li>
+<li>Also a hyphen <code>-</code>.
 </li>
 <li>An easy way to remember the list delimiters is that
-unordered list items stay constant (<code>=</code>) while
-ordered list items increment (<code>+</code>).
+unordered list items stay constant (<code>====</code>) while
+ordered list items increment (<code>++++</code>).
 </li>
 </ol>
 </li>
-<li>Numbered <code>&lt;li&gt;</code> markers can be used for <code>&lt;ul&gt;</code>
+<li>A leading number and full stop can be used for <code>&lt;li&gt;</code> in <code>&lt;ul&gt;</code>.
 </li>
 <li>Any non-negative integer will do.
 <blockquote>
