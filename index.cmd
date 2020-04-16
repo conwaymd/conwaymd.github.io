@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-15
+%date-modified 2020-04-17
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -1487,6 +1487,26 @@ the square brackets surrounding it may be omitted.
     , \#
     , Hash
   //
+    , `\[`
+    , `[`
+    , \[
+    , Opening square bracket
+  //
+    , `\]`
+    , `]`
+    , \]
+    , Closing square bracket
+  //
+    , `\(`
+    , `(`
+    , \(
+    , Opening round bracket
+  //
+    , `\)`
+    , `)`
+    , \)
+    , Closing round bracket
+  //
     , `\*`
     , `*`
     , \*
@@ -1580,7 +1600,8 @@ two or more consecutive at signs
 which are not protected by CMD literals,
 use a longer run of {{at signs}} in the delimiters.
 For images whose {^ {.alt.} ^} or {^ [.label.] ^} contains
-one or more closing square brackets, use [CMD literals].
+one or more closing square brackets,
+use [escapes](#punctuation) or [CMD literals].
 ----
 
 ----
@@ -1643,18 +1664,17 @@ Produces the image
   (! > !)
 ^}.
 For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
-one or more closing square or round brackets, use [CMD literals].
+one or more closing square or round brackets,
+use [escapes](#punctuation) or [CMD literals].
 ----
 
 ====
 * CMD
   ````[cmd]
-  (!!
   ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
     /rembrandt-anatomy.jpg
-    The Anatomy Lesson of Dr~Nicolaes Tulp (! (Rembrandt) !)
+    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
   )
-  !!)
   ````
 
 * HTML
@@ -1666,7 +1686,7 @@ one or more closing square or round brackets, use [CMD literals].
   ----
   ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
     /rembrandt-anatomy.jpg
-    The Anatomy Lesson of Dr~Nicolaes Tulp (! (Rembrandt) !)
+    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
   )
   ----
 
@@ -1728,7 +1748,8 @@ two or more consecutive at signs
 which are not protected by CMD literals,
 use a longer run of {{at signs}} in the delimiters.
 For links whose {^ {.content.} ^} or {^ [.label.] ^} contains
-one or more closing square brackets, use [CMD literals].
+one or more closing square brackets,
+use [escapes](#punctuation) or [CMD literals].
 ----
 
 ----
@@ -1799,7 +1820,8 @@ Produces the link
 ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^}, {^ {.href.} ^}, or {^ [.title.] ^} containing
-one or more closing square or round brackets, use [CMD literals].
+one or more closing square or round brackets,
+use [escapes](#punctuation) or [CMD literals].
 ----
 
 ====
