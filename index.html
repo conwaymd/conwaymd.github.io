@@ -29,7 +29,7 @@ for (let i = 0; i &lt; elements.length; i++) {
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-17
+Last modified: 2020-04-18
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a>
@@ -195,18 +195,18 @@ Enough exclamation marks: (!! (! never !) !!).
 <p>
 CMD literals are very powerful.
 For example, <code>id</code> and <code>class</code> in CMD block syntax
-are specified in the form <code><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]</code>.
+are specified in the form <code><span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}</code>.
 Now, if for whatever reason you want an <code>id</code>
-with square brackets, e.g.&nbsp;<code>[dumb-id]</code>,
+with curly brackets, e.g.&nbsp;<code>{dumb-id}</code>,
 then wrapping it inside a CMD literal will prevent it
 from being interpreted as the class <code>dumb-id</code>:
 </p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>``[dumb-id]
+<pre class="cmd"><code>``{dumb-id}
   Whoops!
 ``
-``(! [dumb-id] !)
+``(! {dumb-id} !)
   That's better.
 ``
 </code></pre>
@@ -214,17 +214,17 @@ from being interpreted as the class <code>dumb-id</code>:
 <li>HTML
 <pre class="html"><code>&lt;pre class="dumb-id"&gt;&lt;code&gt;Whoops!
 &lt;/code&gt;&lt;/pre&gt;
-&lt;pre id="[dumb-id]"&gt;&lt;code&gt;That's better.
+&lt;pre id="{dumb-id}"&gt;&lt;code&gt;That's better.
 &lt;/code&gt;&lt;/pre&gt;
 </code></pre>
 </li>
 </ul>
 <h3 id="display-code"><a class="self-link" href="#display-code"></a>Display code</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">``</span></code></pre>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">``</span></code></pre>
 <p>
 The delimiting backticks must be
 the first non-whitespace characters on their lines.
-If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+If <code><span class="optional-argument">[class]</span></code> is empty, the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the display code
@@ -236,7 +236,7 @@ use a longer run of <span class="repeatable-delimiter">backticks</span> in the d
 </p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>``id-0[class-1 class-2]
+<pre class="cmd"><code>``id-0{class-1 class-2}
     Escaping: &amp; &lt; &gt;.
     Note that CMD literals have higher precedence,
     since they are processed first: (!! (! literally !) !!).
@@ -323,11 +323,11 @@ whereas <code>&lt;!-- A (! B !) --&gt;</code> is removed entirely.
 In this sense they are stronger than literals and code.
 </p>
 <h3 id="display-maths"><a class="self-link" href="#display-maths"></a>Display maths</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">$$</span><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">$$</span></code></pre>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">$$</span><span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">$$</span></code></pre>
 <p>
 The delimiting dollar signs must be
 the first non-whitespace characters on their lines.
-If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+If <code><span class="optional-argument">[class]</span></code> is empty, the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces
@@ -704,11 +704,11 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h3 id="blocks"><a class="self-link" href="#blocks"></a>Blocks</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">cccc</span><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">cccc</span></code></pre>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">cccc</span><span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">cccc</span></code></pre>
 <p>
 The delimiting characters (<code>c</code>) must be
 the first non-whitespace characters on their lines.
-If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+If <code><span class="optional-argument">[class]</span></code> is empty, the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the block
@@ -751,7 +751,7 @@ according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 </p>
-<pre class="cmd syntax"><code>Y<span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]</code></pre>
+<pre class="cmd syntax"><code>Y<span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}</code></pre>
 <p>
 The following delimiters (<code>Y</code>) for list items are used:
 </p>
@@ -769,7 +769,7 @@ The following delimiters (<code>Y</code>) for list items are used:
 List items end at the next list item,
 or at the end of the content being split.
 If <code><span class="optional-argument">[class]</span></code> is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="blocks-nesting"><a class="self-link" href="#blocks-nesting"></a>Example 1: nesting</h4>
 <ul>
@@ -850,13 +850,13 @@ Someone might quote this later.
 <h4 id="blocks-id-class"><a class="self-link" href="#blocks-id-class"></a>Example 2: <code>id</code> and <code>class</code></h4>
 <ul>
 <li>CMD
-<pre class="cmd"><code>----p-id[p-class]
+<pre class="cmd"><code>----p-id{p-class}
 Paragraph with `id` and `class`.
 ----
 ======
 *li-id List item with `id` and no `class`.
-0.[li-class] List item with `class` and no `id`.
-1.[li-class]
+0.{li-class} List item with `class` and no `id`.
+1.{li-class}
   Put arbitrary whitespace after the class for more clarity.
 ======
 </code></pre>
@@ -877,11 +877,11 @@ Paragraph with &lt;code&gt;id&lt;/code&gt; and &lt;code&gt;class&lt;/code&gt;.
 </li>
 </ul>
 <h3 id="tables"><a class="self-link" href="#tables"></a>Tables</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span><span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">''''</span></code></pre>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span><span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}↵ <span class="mandatory-argument">{content}</span> <span class="repeatable-delimiter">''''</span></code></pre>
 <p>
 The delimiting apostrophes must be
 the first non-whitespace characters on their lines.
-If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+If <code><span class="optional-argument">[class]</span></code> is empty, the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the block
@@ -914,7 +914,7 @@ according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 </p>
-<pre class="cmd syntax"><code>Z<span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]{<span class="optional-argument">[rowspan]</span>,<span class="optional-argument">[colspan]</span>}</code></pre>
+<pre class="cmd syntax"><code>Z<span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}[<span class="optional-argument">[rowspan]</span>,<span class="optional-argument">[colspan]</span>]</code></pre>
 <p>
 The following delimiters (<code>Z</code>) for table cells are used:
 </p>
@@ -929,10 +929,10 @@ Table cells end at the next table cell, table row, or table part,
 or at the end of the content being split.
 Non-empty <code><span class="optional-argument">[rowspan]</span></code> and <code><span class="optional-argument">[colspan]</span></code> must consist of digits only.
 If <code><span class="optional-argument">[class]</span></code> is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 If <code><span class="optional-argument">[colspan]</span></code> is empty, the comma before it may be omitted.
 If both <code><span class="optional-argument">[rowspan]</span></code> and <code><span class="optional-argument">[colspan]</span></code> are empty,
-the comma between them and the curly brackets surrounding them may be omitted.
+the comma between them and the square brackets surrounding them may be omitted.
 </p>
 <h4 id="table-rows"><a class="self-link" href="#table-rows"></a>Table rows</h4>
 <p>
@@ -941,7 +941,7 @@ according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 </p>
-<pre class="cmd syntax"><code>/<span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]</code></pre>
+<pre class="cmd syntax"><code>/<span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}</code></pre>
 <p>
 The slash may instead be any run of slashes.
 </p>
@@ -949,7 +949,7 @@ The slash may instead be any run of slashes.
 Table rows end at the next table row or table part,
 or at the end of the content being split.
 If <code><span class="optional-argument">[class]</span></code> is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="table-parts"><a class="self-link" href="#table-parts"></a>Table parts</h4>
 <p>
@@ -958,7 +958,7 @@ according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 </p>
-<pre class="cmd syntax"><code>Y<span class="optional-argument">[id]</span>[<span class="optional-argument">[class]</span>]</code></pre>
+<pre class="cmd syntax"><code>Y<span class="optional-argument">[id]</span>{<span class="optional-argument">[class]</span>}</code></pre>
 <p>
 The following delimiters (<code>Y</code>) for table parts are used:
 </p>
@@ -974,7 +974,7 @@ The following delimiters (<code>Y</code>) for table parts are used:
 Table parts end at the next table part,
 or at the end of the content being split.
 If <code><span class="optional-argument">[class]</span></code> is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="tables-without-parts"><a class="self-link" href="#tables-without-parts"></a>Example 1: table <em>without</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
 <ul>
@@ -987,14 +987,14 @@ the square brackets surrounding it may be omitted.
     ; D
   //
     , 1
-    ,{2} 2
+    ,[2] 2
     , 3
     , 4
   //
     , 5
-    ,{3,2} 6
+    ,[3,2] 6
   //
-    ,{,2} 7
+    ,[,2] 7
   //
     , 8
     ; ?
@@ -1075,7 +1075,7 @@ the square brackets surrounding it may be omitted.
 ___
   //
     ; Total
-    ,total-cost[some-class]
+    ,total-cost{some-class}
       17
 ''''
 </code></pre>
@@ -1294,7 +1294,7 @@ All leading whitespace on the next line is stripped.
 <h4 id="reference-style-images"><a class="self-link" href="#reference-style-images"></a>Reference-style images</h4>
 <ul>
 <li>Definition
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>![<span class="mandatory-argument">{label}</span>][<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{src}</span> <span class="optional-argument">[title]</span> <span class="repeatable-delimiter">@@</span><span class="optional-argument">[width]</span></code></pre>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>![<span class="mandatory-argument">{label}</span>]{<span class="optional-argument">[class]</span>}↵ <span class="mandatory-argument">{src}</span> <span class="optional-argument">[title]</span> <span class="repeatable-delimiter">@@</span><span class="optional-argument">[width]</span></code></pre>
 </li>
 <li>Image
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">{alt}</span>][<span class="optional-argument">[label]</span>]</code></pre>
@@ -1309,7 +1309,7 @@ The referencing strings <code><span class="mandatory-argument">{label}</span></c
 are case insensitive.
 Non-empty <code><span class="optional-argument">[width]</span></code> in a definition must consist of digits only.
 If <code><span class="optional-argument">[class]</span></code> in a definition is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the image
@@ -1386,7 +1386,7 @@ use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</
 <h4 id="reference-style-links"><a class="self-link" href="#reference-style-links"></a>Reference-style links</h4>
 <ul>
 <li>Definition
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>[<span class="mandatory-argument">{label}</span>][<span class="optional-argument">[class]</span>]↵ <span class="mandatory-argument">{href}</span> <span class="optional-argument">[title]</span> <span class="repeatable-delimiter">@@</span></code></pre>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>[<span class="mandatory-argument">{label}</span>]{<span class="optional-argument">[class]</span>}↵ <span class="mandatory-argument">{href}</span> <span class="optional-argument">[title]</span> <span class="repeatable-delimiter">@@</span></code></pre>
 </li>
 <li>Link
 <pre class="cmd syntax"><code>[<span class="mandatory-argument">{content}</span>][<span class="optional-argument">[label]</span>]</code></pre>
@@ -1400,7 +1400,7 @@ between <code>[<span class="mandatory-argument">{content}</span>]</code> and <co
 The referencing strings <code><span class="mandatory-argument">{label}</span></code> and <code><span class="optional-argument">[label]</span></code>
 are case insensitive.
 If <code><span class="optional-argument">[class]</span></code> in a definition is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 If <code><span class="optional-argument">[label]</span></code> in a link is empty,
 the square brackets surrounding it may be omitted,
 and <code><span class="mandatory-argument">{content}</span></code> is used as the label for that link.
@@ -1488,10 +1488,10 @@ use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</
 </li>
 </ul>
 <h3 id="inline-semantics"><a class="self-link" href="#inline-semantics"></a>Inline semantics</h3>
-<pre class="cmd syntax"><code>X[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> X</code></pre>
+<pre class="cmd syntax"><code>X{<span class="optional-argument">[class]</span>} <span class="mandatory-argument">{content}</span> X</code></pre>
 <p>
 <code><span class="mandatory-argument">{content}</span></code> must be non-empty.
-If <code><span class="optional-argument">[class]</span></code> is empty, the square brackets surrounding it may be omitted.
+If <code><span class="optional-argument">[class]</span></code> is empty, the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the inline semantic
@@ -1521,6 +1521,10 @@ are used:
 </li>
 </ul>
 <p>
+<strong>In HTML5, <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> are <em>not</em> deprecated.</strong>
+See <a href="https://www.w3.org/International/questions/qa-b-and-i-tags.en">W3C on using <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> elements</a>.
+</p>
+<p>
 In the implementation, matches are sought in the following order:
 </p>
 <div class="centred-flex">
@@ -1534,23 +1538,23 @@ In the implementation, matches are sought in the following order:
 <tbody>
 <tr>
 <td>33</td>
-<td><code>ccc[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> ccc</code></td>
+<td><code>ccc{<span class="optional-argument">[inner class]</span>} <span class="mandatory-argument">{inner content}</span> ccc</code></td>
 </tr>
 <tr>
 <td>312</td>
-<td><code>ccc[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> c <span class="mandatory-argument">{outer content}</span> cc</code></td>
+<td><code>ccc{<span class="optional-argument">[inner class]</span>} <span class="mandatory-argument">{inner content}</span> c <span class="mandatory-argument">{outer content}</span> cc</code></td>
 </tr>
 <tr>
 <td>321</td>
-<td><code>ccc[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> cc <span class="mandatory-argument">{outer content}</span> c</code></td>
+<td><code>ccc{<span class="optional-argument">[inner class]</span>} <span class="mandatory-argument">{inner content}</span> cc <span class="mandatory-argument">{outer content}</span> c</code></td>
 </tr>
 <tr>
 <td>22</td>
-<td><code>cc[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> cc</code></td>
+<td><code>cc{<span class="optional-argument">[class]</span>} <span class="mandatory-argument">{content}</span> cc</code></td>
 </tr>
 <tr>
 <td>11</td>
-<td><code>c[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> c</code></td>
+<td><code>c{<span class="optional-argument">[class]</span>} <span class="mandatory-argument">{content}</span> c</code></td>
 </tr>
 </tbody>
 </table>
@@ -1562,13 +1566,13 @@ only three cases need to be handled for the resulting match object:
 </p>
 <ul>
 <li>2-layer special (for 33):<br>
-<pre class="cmd syntax"><code>XY[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> YX</code></pre>
+<pre class="cmd syntax"><code>XY{<span class="optional-argument">[inner class]</span>} <span class="mandatory-argument">{inner content}</span> YX</code></pre>
 </li>
 <li>2-layer general (for 312, 321):<br>
-<pre class="cmd syntax"><code>XY[<span class="optional-argument">[inner class]</span>] <span class="mandatory-argument">{inner content}</span> Y <span class="mandatory-argument">{outer content}</span> X</code></pre>
+<pre class="cmd syntax"><code>XY{<span class="optional-argument">[inner class]</span>} <span class="mandatory-argument">{inner content}</span> Y <span class="mandatory-argument">{outer content}</span> X</code></pre>
 </li>
 <li>1-layer case (for 22, 11):<br>
-<pre class="cmd syntax"><code>X[<span class="optional-argument">[class]</span>] <span class="mandatory-argument">{content}</span> X</code></pre>
+<pre class="cmd syntax"><code>X{<span class="optional-argument">[class]</span>} <span class="mandatory-argument">{content}</span> X</code></pre>
 </li>
 </ul>
 <p>
@@ -1630,14 +1634,14 @@ Recursive calls are used to process nested inline semantics.
 </div>
 <ul>
 <li>CMD
-<pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` / `&lt;em&gt;` with `&lt;b&gt;` / `&lt;i&gt;`.** \\
+<pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` and `&lt;em&gt;` with `&lt;b&gt;` and `&lt;i&gt;`.** \\
 They are *not* the same. \\
 Meals come with __rice__ or __pasta__. \\
-I _[translator-supplied]am_ the LORD.
+I _{translator-supplied} am_ the LORD.
 </code></pre>
 </li>
 <li>HTML
-<pre class="html"><code>&lt;strong&gt;Do not confuse &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt; with &lt;code&gt;&amp;lt;b&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;i&amp;gt;&lt;/code&gt;.&lt;/strong&gt;&lt;br&gt;
+<pre class="html"><code>&lt;strong&gt;Do not confuse &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt; with &lt;code&gt;&amp;lt;b&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;i&amp;gt;&lt;/code&gt;.&lt;/strong&gt;&lt;br&gt;
 They are &lt;em&gt;not&lt;/em&gt; the same.&lt;br&gt;
 Meals come with &lt;b&gt;rice&lt;/b&gt; or &lt;b&gt;pasta&lt;/b&gt;.&lt;br&gt;
 I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.
@@ -1645,7 +1649,7 @@ I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.
 </li>
 <li>Rendered
 <p>
-<strong>Do not confuse <code>&lt;strong&gt;</code> / <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> / <code>&lt;i&gt;</code>.</strong><br>
+<strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
 They are <em>not</em> the same.<br>
 Meals come with <b>rice</b> or <b>pasta</b>.<br>
 I <i class="translator-supplied">am</i> the LORD.

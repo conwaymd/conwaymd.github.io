@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-17
+%date-modified 2020-04-18
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -249,9 +249,9 @@ use a longer run of {{exclamation marks}} in the delimiters.
 ----
 CMD literals are very powerful.
 For example, `id` and `class` in CMD block syntax
-are specified in the form {^ [.id.][[.class.]] ^}.
+are specified in the form {^ [.id.]{[.class.]} ^}.
 Now, if for whatever reason you want an `id`
-with square brackets, e.g.~`[dumb-id]`,
+with curly brackets, e.g.~`{dumb-id}`,
 then wrapping it inside a CMD literal will prevent it
 from being interpreted as the class `dumb-id`:
 ----
@@ -260,10 +260,10 @@ from being interpreted as the class `dumb-id`:
 * CMD
   ````{cmd}
   (!!
-    ``[dumb-id]
+    ``{dumb-id}
       Whoops!
     ``
-    ``(! [dumb-id] !)
+    ``(! {dumb-id} !)
       That's better.
     ``
   !!)
@@ -273,7 +273,7 @@ from being interpreted as the class `dumb-id`:
   ````{html}
     <pre class="dumb-id"><code>Whoops!
     </code></pre>
-    <pre id="[dumb-id]"><code>That's better.
+    <pre id="{dumb-id}"><code>That's better.
     </code></pre>
   ````
 
@@ -286,13 +286,13 @@ from being interpreted as the class `dumb-id`:
 ###
 
 {^^
-  {{ (!``!) }}[.id.][[.class.]]\newline {.content.} {{ (!``!) }}
+  {{ (!``!) }}[.id.]{[.class.]}\newline {.content.} {{ (!``!) }}
 ^^}
 
 ----
 The delimiting backticks must be
 the first non-whitespace characters on their lines.
-If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
 ----
@@ -315,7 +315,7 @@ use a longer run of {{backticks}} in the delimiters.
 * CMD
   ``````{cmd}
   (!!!!
-    ``id-0[class-1 class-2]
+    ``id-0{class-1 class-2}
         Escaping: & < >.
         Note that CMD literals have higher precedence,
         since they are processed first: (!! (! literally !) !!).
@@ -438,13 +438,13 @@ In this sense they are stronger than literals and code.
 ###
 
 {^^
-  {{ (!$$!) }}[.id.][[.class.]]\newline {.content.} {{ (!$$!) }}
+  {{ (!$$!) }}[.id.]{[.class.]}\newline {.content.} {{ (!$$!) }}
 ^^}
 
 ----
 The delimiting dollar signs must be
 the first non-whitespace characters on their lines.
-If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
 ----
@@ -937,13 +937,13 @@ or more consecutive hashes, use [CMD literals].
 ###
 
 {^^
-  {{ cccc }}[.id.][[.class.]]\newline {.content.} {{ cccc }}
+  {{ cccc }}[.id.]{[.class.]}\newline {.content.} {{ cccc }}
 ^^}
 
 ----
 The delimiting characters (`c`) must be
 the first non-whitespace characters on their lines.
-If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
 ----
@@ -992,7 +992,7 @@ according to leading occurrences
 of the following:
 ----
 
-{^^ Y[.id.][[.class.]] ^^}
+{^^ Y[.id.]{[.class.]} ^^}
 
 ----
 The following delimiters (`Y`) for list items are used:
@@ -1007,7 +1007,7 @@ The following delimiters (`Y`) for list items are used:
 List items end at the next list item,
 or at the end of the content being split.
 If {^ [.class.] ^} is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 ----
 
 ####blocks-nesting Example 1: nesting ####
@@ -1082,13 +1082,13 @@ the square brackets surrounding it may be omitted.
 ================
 * CMD
   ````{cmd}
-    ----p-id[p-class]
+    ----p-id{p-class}
     Paragraph with `id` and `class`.
     ----
     ======
     *li-id List item with `id` and no `class`.
-    0.[li-class] List item with `class` and no `id`.
-    1.[li-class]
+    0.{li-class} List item with `class` and no `id`.
+    1.{li-class}
       Put arbitrary whitespace after the class for more clarity.
     ======
   ````
@@ -1116,13 +1116,13 @@ the square brackets surrounding it may be omitted.
 ###
 
 {^^
-  {{ (! '''' !) }}[.id.][[.class.]]\newline {.content.} {{ (! '''' !) }}
+  {{ (! '''' !) }}[.id.]{[.class.]}\newline {.content.} {{ (! '''' !) }}
 ^^}
 
 ----
 The delimiting apostrophes must be
 the first non-whitespace characters on their lines.
-If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
 ----
@@ -1165,7 +1165,7 @@ according to leading occurrences
 of the following:
 ----
 
-{^^ Z[.id.][[.class.]]{[.rowspan.],[.colspan.]} ^^}
+{^^ Z[.id.]{[.class.]}[[.rowspan.],[.colspan.]] ^^}
 
 ----
 The following delimiters (`Z`) for table cells are used:
@@ -1179,10 +1179,10 @@ Table cells end at the next table cell, table row, or table part,
 or at the end of the content being split.
 Non-empty {^ [.rowspan.] ^} and {^ [.colspan.] ^} must consist of digits only.
 If {^ [.class.] ^} is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 If {^ [.colspan.] ^} is empty, the comma before it may be omitted.
 If both {^ [.rowspan.] ^} and {^ [.colspan.] ^} are empty,
-the comma between them and the curly brackets surrounding them may be omitted.
+the comma between them and the square brackets surrounding them may be omitted.
 ----
 
 ####table-rows
@@ -1196,7 +1196,7 @@ according to leading occurrences
 of the following:
 ----
 
-{^^ /[.id.][[.class.]] ^^}
+{^^ /[.id.]{[.class.]} ^^}
 
 ----
 The slash may instead be any run of slashes.
@@ -1206,7 +1206,7 @@ The slash may instead be any run of slashes.
 Table rows end at the next table row or table part,
 or at the end of the content being split.
 If {^ [.class.] ^} is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 ----
 
 ####table-parts
@@ -1220,7 +1220,7 @@ according to leading occurrences
 of the following:
 ----
 
-{^^ Y[.id.][[.class.]] ^^}
+{^^ Y[.id.]{[.class.]} ^^}
 
 ----
 The following delimiters (`Y`) for table parts are used:
@@ -1234,7 +1234,7 @@ The following delimiters (`Y`) for table parts are used:
 Table parts end at the next table part,
 or at the end of the content being split.
 If {^ [.class.] ^} is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 ----
 
 ####tables-without-parts
@@ -1252,14 +1252,14 @@ the square brackets surrounding it may be omitted.
         ; D
       //
         , 1
-        ,{2} 2
+        ,[2] 2
         , 3
         , 4
       //
         , 5
-        ,{3,2} 6
+        ,[3,2] 6
       //
-        ,{,2} 7
+        ,[,2] 7
       //
         , 8
         ; ?
@@ -1342,7 +1342,7 @@ the square brackets surrounding it may be omitted.
     ___
       //
         ; Total
-        ,total-cost[some-class]
+        ,total-cost{some-class}
           17
     ''''
   !!)
@@ -1559,7 +1559,7 @@ All leading whitespace on the next line is stripped.
 ====
 * Definition
   {^^
-    {{ (! @@ !) }}![{.label.}][[.class.]]↵ \
+    {{ (! @@ !) }}![{.label.}]{[.class.]}↵ \
       {.src.} [.title.] \
     {{ (! @@ !) }}[.width.]
   ^^}
@@ -1579,7 +1579,7 @@ The referencing strings {^ {.label.} ^} and {^ [.label.] ^}
 are case insensitive.
 Non-empty {^ [.width.] ^} in a definition must consist of digits only.
 If {^ [.class.] ^} in a definition is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
@@ -1705,7 +1705,7 @@ use [escapes](#punctuation) or [CMD literals].
 ====
 * Definition
   {^^
-    {{ (! @@ !) }}[{.label.}][[.class.]]↵ \
+    {{ (! @@ !) }}[{.label.}]{[.class.]}↵ \
       {.href.} [.title.] \
     {{ (! @@ !) }}
   ^^}
@@ -1724,7 +1724,7 @@ between {^ [{.content.}] ^} and {^ [[.label.]] ^} in a link.
 The referencing strings {^ {.label.} ^} and {^ [.label.] ^}
 are case insensitive.
 If {^ [.class.] ^} in a definition is empty,
-the square brackets surrounding it may be omitted.
+the curly brackets surrounding it may be omitted.
 If {^ [.label.] ^} in a link is empty,
 the square brackets surrounding it may be omitted,
 and {^ {.content.} ^} is used as the label for that link.
@@ -1859,12 +1859,12 @@ use [escapes](#punctuation) or [CMD literals].
 ###
 
 {^^
-  X[[.class.]] {.content.} X
+  X{[.class.]} {.content.} X
 ^^}
 
 ----
 {^ {.content.} ^} must be non-empty.
-If {^ [.class.] ^} is empty, the square brackets surrounding it may be omitted.
+If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
 ----
@@ -1902,6 +1902,13 @@ are used:
 ======
 
 ----
+**In HTML5, `<b>` and `<i>` are *not* deprecated.**
+See [W3C on using `<b>` and `<i>` elements](
+  https://www.w3.org/International/questions/qa-b-and-i-tags.en
+).
+----
+
+----
 In the implementation, matches are sought in the following order:
 ----
 
@@ -1914,19 +1921,19 @@ In the implementation, matches are sought in the following order:
 ~~~
   //
     , 33
-    , {^ ccc[[.inner class.]] {.inner content.} ccc ^}
+    , {^ ccc{[.inner class.]} {.inner content.} ccc ^}
   //
     , 312
-    , {^ ccc[[.inner class.]] {.inner content.} c {.outer content.} cc ^}
+    , {^ ccc{[.inner class.]} {.inner content.} c {.outer content.} cc ^}
   //
     , 321
-    , {^ ccc[[.inner class.]] {.inner content.} cc {.outer content.} c ^}
+    , {^ ccc{[.inner class.]} {.inner content.} cc {.outer content.} c ^}
   //
     , 22
-    , {^ cc[[.class.]] {.content.} cc ^}
+    , {^ cc{[.class.]} {.content.} cc ^}
   //
     , 11
-    , {^ c[[.class.]] {.content.} c ^}
+    , {^ c{[.class.]} {.content.} c ^}
 ''''
 ||||
 
@@ -1937,13 +1944,13 @@ only three cases need to be handled for the resulting match object:
 ----
 ====
 * 2-layer special (for 33): \\
-  {^^ XY[[.inner class.]] {.inner content.} YX ^^}
+  {^^ XY{[.inner class.]} {.inner content.} YX ^^}
 
 * 2-layer general (for 312, 321): \\
-  {^^ XY[[.inner class.]] {.inner content.} Y {.outer content.} X ^^}
+  {^^ XY{[.inner class.]} {.inner content.} Y {.outer content.} X ^^}
 
 * 1-layer case (for 22, 11): \\
-  {^^ X[[.class.]] {.content.} X ^^}
+  {^^ X{[.class.]} {.content.} X ^^}
 
 ====
 
@@ -1995,15 +2002,15 @@ Recursive calls are used to process nested inline semantics.
 ====
 * CMD
   ````{cmd}
-  **Do not confuse `<strong>` / `<em>` with `<b>` / `<i>`.** \\
+  **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \\
   They are *not* the same. \\
   Meals come with __rice__ or __pasta__. \\
-  I _[translator-supplied]am_ the LORD.
+  I _{translator-supplied} am_ the LORD.
   ````
 
 * HTML
   ````{html}
-  <strong>Do not confuse <code>&lt;strong&gt;</code> / <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> / <code>&lt;i&gt;</code>.</strong><br>
+  <strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
   They are <em>not</em> the same.<br>
   Meals come with <b>rice</b> or <b>pasta</b>.<br>
   I <i class="translator-supplied">am</i> the LORD.
@@ -2011,10 +2018,10 @@ Recursive calls are used to process nested inline semantics.
 
 * Rendered
   ----
-  \/**Do not confuse `<strong>` / `<em>` with `<b>` / `<i>`.** \\
+  \/**Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \\
   They are *not* the same. \\
   Meals come with __rice__ or __pasta__. \\
-  I _{translator-supplied}am_ the LORD.
+  I _{translator-supplied} am_ the LORD.
   ----
 
 ====
