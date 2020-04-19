@@ -34,24 +34,49 @@
 
 
 <!-- {^^ Syntax (display) ^^} -->
-{% \{ \^\^ [\s]* % <pre class="cmd syntax"><code> %}
-{% [\s]* \^\^ \} % </code></pre> %}
+{%
+  \{ \^\^ [\s]*
+    (?P<content> [\s\S]*? )
+  [\s]* \^\^ \}
+%
+  <pre class="cmd syntax"><code>\g<content></code></pre>
+%}
 
 <!-- {^ Inline syntax ^} -->
-{% \{ \^ [\s]* % <code> %}
-{% [\s]* \^ \} % </code> %}
+{%
+  \{ \^ [\s]*
+    (?P<content> [\s\S]*? )
+  [\s]* \^ \}
+%
+  <code>\g<content></code>
+%}
 
 <!-- {{ Repeatable delimiter }} -->
-{% {{ [\s]* % <span class="repeatable-delimiter"> %}
-{% [\s]* }} % </span> %}
+{%
+  \{{2} [\s]*
+    (?P<content> [\s\S]*? )
+  [\s]* \}{2}
+%
+  <span class="repeatable-delimiter">\g<content></span>
+%}
 
 <!-- {.Mandatory.} -->
-{: {. : <span class="mandatory-argument">{ :}
-{: .} : }</span> :}
+{%
+  \{ [.]
+    (?P<content> [\s\S]*? )
+  [.] \}
+%
+  <span class="mandatory-argument">{\g<content>}</span>
+%}
 
 <!-- [.Optional.] -->
-{: [. : <span class="optional-argument">[ :}
-{: .] : ]</span> :}
+{%
+  \[ [.]
+    (?P<content> [\s\S]*? )
+  [.] \]
+%
+  <span class="optional-argument">[\g<content>]</span>
+%}
 
 <!-- Heading self-link anchors (<h2> to <h6>) -->
 {%
