@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-18
+%date-modified 2020-04-20
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -1605,6 +1605,9 @@ are case insensitive.
 Non-empty {^ [.width.] ^} in a definition must consist of digits only.
 If {^ [.class.] ^} in a definition is empty,
 the curly brackets surrounding it may be omitted.
+If {^ [.label.] ^} in an image is empty,
+the square brackets surrounding it may be omitted,
+and {^ {.alt.} ^} is used as the label for that image.
 ----
 
 ----
