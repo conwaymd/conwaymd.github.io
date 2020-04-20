@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-20
+%date-modified 2020-04-21
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -1491,6 +1491,11 @@ the curly brackets surrounding it may be omitted.
     , `&gt;`
     , \>
     , Greater than
+  //
+    , `...`
+    , `…`
+    , ...
+    , `U+2026 HORIZONTAL ELLIPSIS`
   //
     , `---`
     , `—`
