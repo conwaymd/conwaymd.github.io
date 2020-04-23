@@ -9,15 +9,15 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  let elements = document.getElementsByClassName("js-maths");
-  for (let i = 0; i < elements.length; i++) {
-    let element = elements[i]
-    katex.render(
-      element.textContent,
-      element,
-      {displayMode: element.tagName == "DIV"}
-    );
-  }
+let elements = document.getElementsByClassName("js-maths");
+for (let i = 0; i < elements.length; i++) {
+let element = elements[i]
+katex.render(
+element.textContent,
+element,
+{displayMode: element.tagName =="DIV"}
+);
+}
 })
 </script>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-21
+Last modified: 2020-04-24
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a>
@@ -506,13 +506,13 @@ the latest specification shall prevail.
 <ul>
 <li>CMD
 <pre class="cmd"><code>{: |hup-hup| : Huzzah! :}
-|hup-hup| \\
+|hup-hup| \+
 
 {: \def1 : Earlier specifications lose. :}
 {: \def1 : Later specifications win. :}
-\def1 \\
+\def1 \+
 
-\def2 \\
+\def2 \+
 {: \def2 : Specifications can be given anywhere. :}
 
 {: &lt;out&gt; : Nesting will work provided the &lt;in&gt; is given later. :}
@@ -1148,12 +1148,6 @@ ___
 <th>Description</th>
 </tr>
 <tr>
-<td><code>\\</code></td>
-<td><code>&lt;br&gt;</code></td>
-<td><br></td>
-<td>Line break</td>
-</tr>
-<tr>
 <td><code>\/</code></td>
 <td></td>
 <td></td>
@@ -1278,6 +1272,12 @@ ___
 <td><code>_</code></td>
 <td>_</td>
 <td>Underscore</td>
+</tr>
+<tr>
+<td><code>\+</code></td>
+<td><code>&lt;br&gt;</code></td>
+<td><br></td>
+<td>Line break</td>
 </tr>
 </table>
 </div>
@@ -1444,8 +1444,8 @@ the latest specification shall prevail.
   Wikipedia, the free encyclopedia
 @@
 
-[Wikipedia's home page][wikipedia] \\
-[Wikipedia][] \\
+[Wikipedia's home page][wikipedia] \+
+[Wikipedia][] \+
 [Wikipedia]
 </code></pre>
 </li>
@@ -1484,7 +1484,7 @@ use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</
   https://commons.wikimedia.org/wiki/Main_Page
   Wikimedia Commons
 )
-  \\
+  \+
 [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
 </code></pre>
 </li>
@@ -1647,9 +1647,9 @@ Recursive calls are used to process nested inline semantics.
 </div>
 <ul>
 <li>CMD
-<pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` and `&lt;em&gt;` with `&lt;b&gt;` and `&lt;i&gt;`.** \\
-They are *not* the same. \\
-Meals come with __rice__ or __pasta__. \\
+<pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` and `&lt;em&gt;` with `&lt;b&gt;` and `&lt;i&gt;`.** \+
+They are *not* the same. \+
+Meals come with __rice__ or __pasta__. \+
 I _{translator-supplied} am_ the LORD.
 </code></pre>
 </li>

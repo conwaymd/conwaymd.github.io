@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-21
+%date-modified 2020-04-24
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -119,7 +119,7 @@
 
 
 ||||{page-properties}
-  First created: %date-created \\
+  First created: %date-created \+
   Last modified: %date-modified
 ||||
 
@@ -714,13 +714,13 @@ the latest specification shall prevail.
 * CMD
   ````{cmd}
     {: |hup-hup| : Huzzah! :}
-    |hup-hup| \\
+    |hup-hup| \+
     
     {: \def1 : Earlier specifications lose. :}
     {: \def1 : Later specifications win. :}
-    \def1 \\
+    \def1 \+
     
-    \def2 \\
+    \def2 \+
     {: \def2 : Specifications can be given anywhere. :}
     
     {: <out> : Nesting will work provided the <in> is given later. :}
@@ -731,13 +731,13 @@ the latest specification shall prevail.
 * Rendered
   ----
     {: |hup-hup| : Huzzah! :}
-    |hup-hup| \\
+    |hup-hup| \+
     
     {: \def1 : Earlier specifications lose. :}
     {: \def1 : Later specifications win. :}
-    \def1 \\
+    \def1 \+
     
-    \def2 \\
+    \def2 \+
     {: \def2 : Specifications can be given anywhere. :}
     
     {: <out> : Nesting will work provided the <in> is given later. :}
@@ -1447,11 +1447,6 @@ the curly brackets surrounding it may be omitted.
     ; Rendered
     ; Description
   //
-    , `\\`
-    , `<br>`
-    , \\
-    , Line break
-  //
     , `\/`
     ,
     ,
@@ -1556,6 +1551,11 @@ the curly brackets surrounding it may be omitted.
     , `_`
     , \_
     , Underscore
+  //
+    , `\+`
+    , `<br>`
+    , \+
+    , Line break
 ''''
 ||||
 
@@ -1810,8 +1810,8 @@ the latest specification shall prevail.
     Wikipedia, the free encyclopedia
   @@
   
-  [Wikipedia's home page][wikipedia] \\
-  [Wikipedia][] \\
+  [Wikipedia's home page][wikipedia] \+
+  [Wikipedia][] \+
   [Wikipedia]
   ````
 
@@ -1829,8 +1829,8 @@ the latest specification shall prevail.
     Wikipedia, the free encyclopedia
   @@
   
-  [Wikipedia's home page][wikipedia] \\
-  [Wikipedia][] \\
+  [Wikipedia's home page][wikipedia] \+
+  [Wikipedia][] \+
   [Wikipedia]
   ----
 
@@ -1874,7 +1874,7 @@ use [escapes](#punctuation) or [CMD literals].
     https://commons.wikimedia.org/wiki/Main_Page
     Wikimedia Commons
   )
-    \\
+    \+
   [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
   ````
 
@@ -1890,7 +1890,7 @@ use [escapes](#punctuation) or [CMD literals].
     https://commons.wikimedia.org/wiki/Main_Page
     Wikimedia Commons
   )
-    \\
+    \+
   [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
   ----
 
@@ -1986,13 +1986,13 @@ Once such a pattern has been matched,
 only three cases need to be handled for the resulting match object:
 ----
 ====
-* 2-layer special (for 33): \\
+* 2-layer special (for 33): \+
   {^^ XY{[.inner class.]} {.inner content.} YX ^^}
 
-* 2-layer general (for 312, 321): \\
+* 2-layer general (for 312, 321): \+
   {^^ XY{[.inner class.]} {.inner content.} Y {.outer content.} X ^^}
 
-* 1-layer case (for 22, 11): \\
+* 1-layer case (for 22, 11): \+
   {^^ X{[.class.]} {.content.} X ^^}
 
 ====
@@ -2045,9 +2045,9 @@ Recursive calls are used to process nested inline semantics.
 ====
 * CMD
   ````{cmd}
-  **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \\
-  They are *not* the same. \\
-  Meals come with __rice__ or __pasta__. \\
+  **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
+  They are *not* the same. \+
+  Meals come with __rice__ or __pasta__. \+
   I _{translator-supplied} am_ the LORD.
   ````
 
@@ -2061,9 +2061,9 @@ Recursive calls are used to process nested inline semantics.
 
 * Rendered
   ----
-  \/**Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \\
-  They are *not* the same. \\
-  Meals come with __rice__ or __pasta__. \\
+  \/**Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
+  They are *not* the same. \+
+  Meals come with __rice__ or __pasta__. \+
   I _{translator-supplied} am_ the LORD.
   ----
 
