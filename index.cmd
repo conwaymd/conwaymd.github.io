@@ -1447,6 +1447,11 @@ the curly brackets surrounding it may be omitted.
     ; Rendered
     ; Description
   //
+    , `\\`
+    , `\`
+    , \\
+    , Backslash
+  //
     , `\/`
     ,
     ,
@@ -1485,17 +1490,22 @@ the curly brackets surrounding it may be omitted.
     , `\&`
     , `&amp;`
     , \&
-    , Ampersand
+    , Ampersand (entity)
   //
     , `\<`
     , `&lt;`
     , \<
-    , Less than
+    , Less than (entity)
   //
     , `\>`
     , `&gt;`
     , \>
-    , Greater than
+    , Greater than (entity)
+  //
+    , `\"`
+    , `&quot;`
+    , \"
+    , Double quote (entity)
   //
     , `...`
     , `…`
@@ -1551,6 +1561,11 @@ the curly brackets surrounding it may be omitted.
     , `_`
     , \_
     , Underscore
+  //
+    , `\=`
+    , `<hr>`
+    , \=
+    , Thematic break
   //
     , `\+`
     , `<br>`
