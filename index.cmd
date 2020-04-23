@@ -19,6 +19,19 @@
       y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz\
     "
     crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let elements = document.getElementsByClassName("js-maths");
+    for (let i = 0; i < elements.length; i++) {
+      let element = elements[i]
+      katex.render(
+        element.textContent,
+        element,
+        {displayMode: element.tagName == "DIV"}
+      );
+    }
+  })
+  </script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -26,16 +39,6 @@
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="theme-color" content="#ffffff">
-%onload-js
-  let elements = document.getElementsByClassName("js-maths");
-  for (let i = 0; i < elements.length; i++) {
-    let element = elements[i]
-    katex.render(
-      element.textContent,
-      element,
-      {displayMode: element.tagName == "DIV"}
-    );
-  }
 
 %%%%
 
