@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-24
+Last modified: 2020-04-25
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd"><code>index.cmd</code></a>
@@ -93,6 +93,13 @@ Omit <code>[cmd_name[.[cmd]]]</code> to convert all CMD files
 in the current directory (at all levels),
 except those listed in <code>.cmdignore</code>.
 </p>
+<h3 id="optional-arguments"><a class="self-link" href="#optional-arguments"></a>Optional arguments</h3>
+<ul>
+<li><code>-c</code>, <code>--clean-urls</code><br>
+Remove the <code>.html</code> extension from the property <code>%url</code>
+(defined whenever a <a href="#preamble">preamble</a> is supplied).
+</li>
+</ul>
 <h2 id="syntax"><a class="self-link" href="#syntax"></a>Syntax</h2>
 <p>
 Since CMD-to-HTML conversion is merely a bunch of regex replacements

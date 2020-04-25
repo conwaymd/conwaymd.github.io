@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-24
+%date-modified 2020-04-25
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -184,6 +184,16 @@ Omit `[cmd_name[.[cmd]]]` to convert all CMD files
 in the current directory (at all levels),
 except those listed in `.cmdignore`.
 ----
+
+###optional-arguments
+  Optional arguments
+###
+
+====
+* `-c`, `--clean-urls` \+
+  Remove the `.html` extension from the property `%url`
+  (defined whenever a [preamble](#preamble) is supplied).
+====
 
 
 ##syntax
