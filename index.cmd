@@ -528,7 +528,7 @@ use a longer run of {{dollar signs}} in the delimiters.
 ----
 This is to be used with some sort of JavaScript code
 which renders equations based on the class `js-maths`.
-Here I am using [KaTeX].
+On this page I am using [KaTeX].
 ----
 
 ====
@@ -584,7 +584,7 @@ use a longer run of {{dollar signs}} in the delimiters.
 ----
 This is to be used with some sort of JavaScript code
 which renders equations based on the class `js-maths`.
-Here I am using [KaTeX].
+On this page I am using [KaTeX].
 ----
 
 ====
