@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-28
+%date-modified 2020-04-29
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -162,6 +162,27 @@ which I can't without some sort of extension
 ----
 CMD addresses each of these.
 ----
+
+
+##installation
+  Installation
+##
+
+----
+Since this is just a crappy, single-file regex converter,
+there is no plan on turning it into a proper Python package any time soon.
+In the meantime:
+----
+````
+$ cd some-directory/
+$ git clone https://github.com/conway-markdown/conway-markdown.git
+````
+====
+* If you are using Linux or Mac,
+  make an alias for `some-directory/conway-markdown/cmd.py` and invoke that.
+* If you are using Windows,
+  add `some-directory` to the `%PATH%` variable and invoke `cmd.py`.
+====
 
 
 ##usage

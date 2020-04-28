@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-28
+Last modified: 2020-04-29
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -82,6 +82,23 @@ not just <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>
 <p>
 CMD addresses each of these.
 </p>
+<h2 id="installation"><a class="permalink" href="#installation" aria-label="Permalink"></a>Installation</h2>
+<p>
+Since this is just a crappy, single-file regex converter,
+there is no plan on turning it into a proper Python package any time soon.
+In the meantime:
+</p>
+<pre><code>$ cd some-directory/
+$ git clone https://github.com/conway-markdown/conway-markdown.git
+</code></pre>
+<ul>
+<li>If you are using Linux or Mac,
+make an alias for <code>some-directory/conway-markdown/cmd.py</code> and invoke that.
+</li>
+<li>If you are using Windows,
+add <code>some-directory</code> to the <code>%PATH%</code> variable and invoke <code>cmd.py</code>.
+</li>
+</ul>
 <h2 id="usage"><a class="permalink" href="#usage" aria-label="Permalink"></a>Usage</h2>
 <p>
 Convert a CMD file to HTML, outputting to <code>cmd_name.html</code>:
