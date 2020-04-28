@@ -15,7 +15,7 @@ blockquote {
 body {
   background-color: #feecec;
   font-family: sans-serif;
-  line-height: 1.4;
+  line-height: 1.6;
   padding: 0 0.25em;
 }
 
@@ -85,7 +85,7 @@ pre {
 :not(pre) > code {
   background: white;
   border: 1px solid grey;
-  padding: 2px;
+  padding: 0.2em;
 }
 
 code > .repeatable-delimiter {
