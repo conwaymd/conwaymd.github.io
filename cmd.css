@@ -33,8 +33,8 @@ footer {
   padding-top: 0.5em;
 }
 
-.self-link {
-  background-image: url(/self-link.svg);
+.permalink {
+  background-image: url(/permalink.svg);
   background-position: center left;
   background-repeat: no-repeat;
   background-size: 1em;

@@ -88,7 +88,7 @@
   <span class="optional-argument">\g<content></span>
 %}
 
-<!-- Heading self-link anchors (<h2> to <h6>) -->
+<!-- Heading permalinks (<h2> to <h6>) -->
 {%
   ^ [^\S\n]*
   (?P<hashes> [#]{2,6} (?![#]) )
@@ -98,7 +98,7 @@
   (?P=hashes)
 %
   \g<hashes>\g<id_>
-    <a class="self-link" href="#\g<id_>" aria-label="Permalink"></a>\\
+    <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
     \g<content>
   \g<hashes>
 %}
@@ -657,7 +657,7 @@ the latest specification shall prevail.
 
 ----
 As an example, the following regex replacement is used
-to automatically insert the self-link anchors
+to automatically insert the permalinks
 before the section headings (`<h2>` to `<h6>`) in this page:
 ----
 ````{cmd}
@@ -670,7 +670,7 @@ before the section headings (`<h2>` to `<h6>`) in this page:
     (?P=hashes)
   %
     \g<hashes>\g<id_>
-      <a class="self-link" href="#\g<id_>" aria-label="Permalink"></a>\\
+      <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
       \g<content>
     \g<hashes>
   %}
