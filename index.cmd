@@ -76,7 +76,7 @@
     (?P<content> [\s\S]*? )
   [.] \}
 %
-  <span class="mandatory-argument">{\g<content>}</span>
+  <span class="mandatory-argument">\g<content></span>
 %}
 
 <!-- [.Optional.] -->
@@ -85,7 +85,7 @@
     (?P<content> [\s\S]*? )
   [.] \]
 %
-  <span class="optional-argument">[\g<content>]</span>
+  <span class="optional-argument">\g<content></span>
 %}
 
 <!-- Heading self-link anchors (<h2> to <h6>) -->
