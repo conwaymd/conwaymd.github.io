@@ -124,11 +124,11 @@
 ||||
 
 ====
-* This page's source CMD: [`index.cmd`][source-cmd]
-* This page's output HTML: [`index.html`][output-html]
+* This page's source CMD: [index.cmd][source-cmd]
+* This page's output HTML: [index.html][output-html]
 * GitHub repositories:
-    [`conway-markdown`][cmd-repo],
-    [`conway-markdown.github.io`][cmd-docs-repo]
+    [conway-markdown][cmd-repo],
+    [conway-markdown.github.io][cmd-docs-repo]
 ====
 
 
