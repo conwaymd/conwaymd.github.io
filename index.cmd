@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-25
+%date-modified 2020-04-28
 %resources
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -134,7 +134,7 @@
 
 ----
 Conway's fence-style markdown,
-implemented in Python using regex replacements.
+implemented in Python~3.6+ using regex replacements.
 ----
 
 ----
