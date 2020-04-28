@@ -82,7 +82,7 @@ not just <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>
 <p>
 CMD addresses each of these.
 </p>
-<h2 id="usage"><a class="self-link" href="#usage"></a>Usage</h2>
+<h2 id="usage"><a class="self-link" href="#usage" aria-label="Permalink"></a>Usage</h2>
 <p>
 Convert a CMD file to HTML, outputting to <code>cmd_name.html</code>:
 </p>
@@ -93,14 +93,14 @@ Omit <code>[cmd_name[.[cmd]]]</code> to convert all CMD files
 in the current directory (at all levels),
 except those listed in <code>.cmdignore</code>.
 </p>
-<h3 id="optional-arguments"><a class="self-link" href="#optional-arguments"></a>Optional arguments</h3>
+<h3 id="optional-arguments"><a class="self-link" href="#optional-arguments" aria-label="Permalink"></a>Optional arguments</h3>
 <ul>
 <li><code>-c</code>, <code>--clean-urls</code><br>
 Remove the <code>.html</code> extension from the property <code>%url</code>
 (defined whenever a <a href="#preamble">preamble</a> is supplied).
 </li>
 </ul>
-<h2 id="syntax"><a class="self-link" href="#syntax"></a>Syntax</h2>
+<h2 id="syntax"><a class="self-link" href="#syntax" aria-label="Permalink"></a>Syntax</h2>
 <p>
 Since CMD-to-HTML conversion is merely a bunch of regex replacements
 with some dictionaries for temporary storage of strings,
@@ -172,7 +172,7 @@ The syntax of CMD, in the order of processing, is thus:
 <li><a href="#whitespace">Whitespace</a>
 </li>
 </ul>
-<h3 id="cmd-literals"><a class="self-link" href="#cmd-literals"></a>CMD literals</h3>
+<h3 id="cmd-literals"><a class="self-link" href="#cmd-literals" aria-label="Permalink"></a>CMD literals</h3>
 <pre class="cmd syntax"><code>(<span class="repeatable-delimiter">!</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">!</span>)</code></pre>
 <p>
 Produces <code><span class="mandatory-argument">content</span></code> literally,
@@ -230,7 +230,7 @@ from being interpreted as the class <code>dumb-id</code>:
 </code></pre>
 </li>
 </ul>
-<h3 id="display-code"><a class="self-link" href="#display-code"></a>Display code</h3>
+<h3 id="display-code"><a class="self-link" href="#display-code" aria-label="Permalink"></a>Display code</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">``</span></code></pre>
 <p>
 The delimiting backticks must be
@@ -296,7 +296,7 @@ no corresponding attributes are generated.
 </code></pre>
 </li>
 </ul>
-<h3 id="inline-code"><a class="self-link" href="#inline-code"></a>Inline code</h3>
+<h3 id="inline-code"><a class="self-link" href="#inline-code" aria-label="Permalink"></a>Inline code</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">`</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">`</span></code></pre>
 <p>
 Produces the inline code
@@ -323,7 +323,7 @@ use a longer run of <span class="repeatable-delimiter">backticks</span> in the d
 </p>
 </li>
 </ul>
-<h3 id="comments"><a class="self-link" href="#comments"></a>Comments</h3>
+<h3 id="comments"><a class="self-link" href="#comments" aria-label="Permalink"></a>Comments</h3>
 <pre class="cmd syntax"><code>&lt;!-- <span class="mandatory-argument">comment</span> --&gt;</code></pre>
 <p>
 Removed, along with any preceding horizontal whitespace.
@@ -333,7 +333,7 @@ For instance <code>(! A &lt;!-- B --&gt; !)</code> becomes <code>A &lt;!-- B --&
 whereas <code>&lt;!-- A (! B !) --&gt;</code> is removed entirely.
 In this sense they are stronger than literals and code.
 </p>
-<h3 id="display-maths"><a class="self-link" href="#display-maths"></a>Display maths</h3>
+<h3 id="display-maths"><a class="self-link" href="#display-maths" aria-label="Permalink"></a>Display maths</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">$$</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">$$</span></code></pre>
 <p>
 The delimiting dollar signs must be
@@ -377,7 +377,7 @@ $$
 </div>
 </li>
 </ul>
-<h3 id="inline-maths"><a class="self-link" href="#inline-maths"></a>Inline maths</h3>
+<h3 id="inline-maths"><a class="self-link" href="#inline-maths" aria-label="Permalink"></a>Inline maths</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">$</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">$</span></code></pre>
 <p>
 Produces
@@ -411,7 +411,7 @@ A contrived instance of multiple dollar signs in inline maths:
 </p>
 </li>
 </ul>
-<h3 id="inclusions"><a class="self-link" href="#inclusions"></a>Inclusions</h3>
+<h3 id="inclusions"><a class="self-link" href="#inclusions" aria-label="Permalink"></a>Inclusions</h3>
 <pre class="cmd syntax"><code>(<span class="repeatable-delimiter">+</span> <span class="mandatory-argument">file name</span> <span class="repeatable-delimiter">+</span>)</code></pre>
 <p>
 Includes the content of the file <code><span class="mandatory-argument">file name</span></code>.
@@ -442,7 +442,7 @@ so there is no need to worry about recursion errors: (+ inclusion.txt +)
 </p>
 </li>
 </ul>
-<h3 id="regex-replacements"><a class="self-link" href="#regex-replacements"></a>Regex replacements</h3>
+<h3 id="regex-replacements"><a class="self-link" href="#regex-replacements" aria-label="Permalink"></a>Regex replacements</h3>
 <pre class="cmd syntax"><code>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">pattern</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">replacement</span> <span class="repeatable-delimiter">%</span>}</code></pre>
 <p>
 Processes regex replacements of <code><span class="mandatory-argument">pattern</span></code> by <code><span class="mandatory-argument">replacement</span></code>
@@ -474,12 +474,9 @@ before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>)
   (?P=hashes)
 %
   \g&lt;hashes&gt;\g&lt;id_&gt;
-    [][self-link:\g&lt;id_&gt;]\\
+    &lt;a class="self-link" href="#\g&lt;id_&gt;" aria-label="Permalink"&gt;&lt;/a&gt;\\
     \g&lt;content&gt;
   \g&lt;hashes&gt;
-  @@[self-link:\g&lt;id_&gt;]{self-link}
-    \\#\g&lt;id_&gt;
-  @@
 %}
 </code></pre>
 <p>
@@ -495,7 +492,7 @@ To avoid breaking properties,
 do not use replacements to alter property strings,
 which are of the form <code>%<span class="mandatory-argument">property name</span></code>.
 </p>
-<h3 id="ordinary-replacements"><a class="self-link" href="#ordinary-replacements"></a>Ordinary replacements</h3>
+<h3 id="ordinary-replacements"><a class="self-link" href="#ordinary-replacements" aria-label="Permalink"></a>Ordinary replacements</h3>
 <pre class="cmd syntax"><code>{<span class="repeatable-delimiter">:</span> <span class="mandatory-argument">pattern</span> <span class="repeatable-delimiter">:</span> <span class="mandatory-argument">replacement</span> <span class="repeatable-delimiter">:</span>}</code></pre>
 <p>
 Processes ordinary replacements of <code><span class="mandatory-argument">pattern</span></code> by <code><span class="mandatory-argument">replacement</span></code>.
@@ -549,7 +546,7 @@ To avoid breaking properties,
 do not use replacements to alter property strings,
 which are of the form <code>%<span class="mandatory-argument">property name</span></code>.
 </p>
-<h3 id="preamble"><a class="self-link" href="#preamble"></a>Preamble</h3>
+<h3 id="preamble"><a class="self-link" href="#preamble" aria-label="Permalink"></a>Preamble</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">%%</span>↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">%%</span></code></pre>
 <p>
 The delimiting percent signs must be
@@ -615,7 +612,7 @@ are computed based on the supplied original properties:
 %footer-element
 %url
 </code></pre>
-<h4 id="preamble-minimal"><a class="self-link" href="#preamble-minimal"></a>Example 1: a minimal HTML file</h4>
+<h4 id="preamble-minimal"><a class="self-link" href="#preamble-minimal" aria-label="Permalink"></a>Example 1: a minimal HTML file</h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>%%
@@ -635,7 +632,7 @@ are computed based on the supplied original properties:
 </code></pre>
 </li>
 </ul>
-<h4 id="preamble-not-minimal"><a class="self-link" href="#preamble-not-minimal"></a>Example 2: a not-so-minimal HTML file</h4>
+<h4 id="preamble-not-minimal"><a class="self-link" href="#preamble-not-minimal" aria-label="Permalink"></a>Example 2: a not-so-minimal HTML file</h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>%%
@@ -692,7 +689,7 @@ At the time of writing, next year will be 2021.
 </code></pre>
 </li>
 </ul>
-<h3 id="headings"><a class="self-link" href="#headings"></a>Headings</h3>
+<h3 id="headings"><a class="self-link" href="#headings" aria-label="Permalink"></a>Headings</h3>
 <pre class="cmd syntax"><code>#<span class="optional-argument">id</span> <span class="mandatory-argument">content</span> #</code></pre>
 <p>
 Produces the heading
@@ -714,7 +711,7 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </code></pre>
 </li>
 </ul>
-<h3 id="blocks"><a class="self-link" href="#blocks"></a>Blocks</h3>
+<h3 id="blocks"><a class="self-link" href="#blocks" aria-label="Permalink"></a>Blocks</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">cccc</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">cccc</span></code></pre>
 <p>
 The delimiting characters (<code>c</code>) must be
@@ -755,7 +752,7 @@ The following delimiting characters (<code>c</code>) are used:
 <p>
 In the implementation, a recursive call is used to process nested blocks.
 </p>
-<h4 id="list-items"><a class="self-link" href="#list-items"></a>List items</h4>
+<h4 id="list-items"><a class="self-link" href="#list-items" aria-label="Permalink"></a>List items</h4>
 <p>
 For list blocks, <code><span class="mandatory-argument">content</span></code> is split into list items <code>&lt;li&gt;</code>
 according to leading occurrences
@@ -782,7 +779,7 @@ or at the end of the content being split.
 If <code><span class="optional-argument">class</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
-<h4 id="blocks-nesting"><a class="self-link" href="#blocks-nesting"></a>Example 1: nesting</h4>
+<h4 id="blocks-nesting"><a class="self-link" href="#blocks-nesting" aria-label="Permalink"></a>Example 1: nesting</h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>----
@@ -858,7 +855,7 @@ Someone might quote this later.
 </ul>
 </li>
 </ul>
-<h4 id="blocks-id-class"><a class="self-link" href="#blocks-id-class"></a>Example 2: <code>id</code> and <code>class</code></h4>
+<h4 id="blocks-id-class"><a class="self-link" href="#blocks-id-class" aria-label="Permalink"></a>Example 2: <code>id</code> and <code>class</code></h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>----p-id{p-class}
@@ -887,7 +884,7 @@ Paragraph with &lt;code&gt;id&lt;/code&gt; and &lt;code&gt;class&lt;/code&gt;.
 </code></pre>
 </li>
 </ul>
-<h3 id="tables"><a class="self-link" href="#tables"></a>Tables</h3>
+<h3 id="tables"><a class="self-link" href="#tables" aria-label="Permalink"></a>Tables</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">''''</span></code></pre>
 <p>
 The delimiting apostrophes must be
@@ -918,7 +915,7 @@ according to <a href="#table-rows">table row processing</a>, and
 according to <a href="#table-parts">table part processing</a>.
 </li>
 </ol>
-<h4 id="table-cells"><a class="self-link" href="#table-cells"></a>Table cells</h4>
+<h4 id="table-cells"><a class="self-link" href="#table-cells" aria-label="Permalink"></a>Table cells</h4>
 <p>
 <code><span class="mandatory-argument">content</span></code> is split into table cells <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>
 according to leading occurrences
@@ -945,7 +942,7 @@ If <code><span class="optional-argument">colspan</span></code> is empty, the com
 If both <code><span class="optional-argument">rowspan</span></code> and <code><span class="optional-argument">colspan</span></code> are empty,
 the comma between them and the square brackets surrounding them may be omitted.
 </p>
-<h4 id="table-rows"><a class="self-link" href="#table-rows"></a>Table rows</h4>
+<h4 id="table-rows"><a class="self-link" href="#table-rows" aria-label="Permalink"></a>Table rows</h4>
 <p>
 <code><span class="mandatory-argument">content</span></code> is split into table rows <code>&lt;tr&gt;</code>
 according to leading occurrences
@@ -962,7 +959,7 @@ or at the end of the content being split.
 If <code><span class="optional-argument">class</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
-<h4 id="table-parts"><a class="self-link" href="#table-parts"></a>Table parts</h4>
+<h4 id="table-parts"><a class="self-link" href="#table-parts" aria-label="Permalink"></a>Table parts</h4>
 <p>
 <code><span class="mandatory-argument">content</span></code> is split into table parts <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>
 according to leading occurrences
@@ -987,7 +984,7 @@ or at the end of the content being split.
 If <code><span class="optional-argument">class</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
-<h4 id="tables-without-parts"><a class="self-link" href="#tables-without-parts"></a>Example 1: table <em>without</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
+<h4 id="tables-without-parts"><a class="self-link" href="#tables-without-parts" aria-label="Permalink"></a>Example 1: table <em>without</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>''''
@@ -1068,7 +1065,7 @@ the curly brackets surrounding it may be omitted.
 </table>
 </li>
 </ul>
-<h4 id="tables-with-parts"><a class="self-link" href="#tables-with-parts"></a>Example 2: table <em>with</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
+<h4 id="tables-with-parts"><a class="self-link" href="#tables-with-parts" aria-label="Permalink"></a>Example 2: table <em>with</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>''''
@@ -1145,7 +1142,7 @@ ___
 </table>
 </li>
 </ul>
-<h3 id="punctuation"><a class="self-link" href="#punctuation"></a>Punctuation (or, escapes)</h3>
+<h3 id="punctuation"><a class="self-link" href="#punctuation" aria-label="Permalink"></a>Punctuation (or, escapes)</h3>
 <div class="centred-flex">
 <table>
 <tr>
@@ -1306,7 +1303,7 @@ ___
 </tr>
 </table>
 </div>
-<h3 id="line-continuations"><a class="self-link" href="#line-continuations"></a>Line continuations</h3>
+<h3 id="line-continuations"><a class="self-link" href="#line-continuations" aria-label="Permalink"></a>Line continuations</h3>
 <p>
 Use backslashes for line continuation.
 All leading whitespace on the next line is stripped.
@@ -1325,8 +1322,8 @@ All leading whitespace on the next line is stripped.
 </code></pre>
 </li>
 </ul>
-<h3 id="images"><a class="self-link" href="#images"></a>Images</h3>
-<h4 id="reference-style-images"><a class="self-link" href="#reference-style-images"></a>Reference-style images</h4>
+<h3 id="images"><a class="self-link" href="#images" aria-label="Permalink"></a>Images</h3>
+<h4 id="reference-style-images"><a class="self-link" href="#reference-style-images" aria-label="Permalink"></a>Reference-style images</h4>
 <ul>
 <li>Definition
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>![<span class="mandatory-argument">label</span>]{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">src</span> <span class="optional-argument">title</span> <span class="repeatable-delimiter">@@</span><span class="optional-argument">width</span></code></pre>
@@ -1388,7 +1385,7 @@ the latest specification shall prevail.
 </p>
 </li>
 </ul>
-<h4 id="inline-style-images"><a class="self-link" href="#inline-style-images"></a>Inline-style images</h4>
+<h4 id="inline-style-images"><a class="self-link" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">alt</span>]( <span class="mandatory-argument">src</span> <span class="optional-argument">title</span> )</code></pre>
 <p>
 Unlike John Gruber's markdown, <code><span class="optional-argument">title</span></code> is not surrounded by quotes.
@@ -1420,8 +1417,8 @@ use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</
 </p>
 </li>
 </ul>
-<h3 id="links"><a class="self-link" href="#links"></a>Links</h3>
-<h4 id="reference-style-links"><a class="self-link" href="#reference-style-links"></a>Reference-style links</h4>
+<h3 id="links"><a class="self-link" href="#links" aria-label="Permalink"></a>Links</h3>
+<h4 id="reference-style-links"><a class="self-link" href="#reference-style-links" aria-label="Permalink"></a>Reference-style links</h4>
 <ul>
 <li>Definition
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>[<span class="mandatory-argument">label</span>]{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">href</span> <span class="optional-argument">title</span> <span class="repeatable-delimiter">@@</span></code></pre>
@@ -1488,7 +1485,7 @@ the latest specification shall prevail.
 </p>
 </li>
 </ul>
-<h4 id="inline-style-links"><a class="self-link" href="#inline-style-links"></a>Inline-style links</h4>
+<h4 id="inline-style-links"><a class="self-link" href="#inline-style-links" aria-label="Permalink"></a>Inline-style links</h4>
 <pre class="cmd syntax"><code>[<span class="mandatory-argument">content</span>]( <span class="mandatory-argument">href</span> <span class="optional-argument">title</span> )</code></pre>
 <p>
 Unlike John Gruber's markdown, <code><span class="optional-argument">title</span></code> is not surrounded by quotes.
@@ -1525,7 +1522,7 @@ use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</
 </p>
 </li>
 </ul>
-<h3 id="inline-semantics"><a class="self-link" href="#inline-semantics"></a>Inline semantics</h3>
+<h3 id="inline-semantics"><a class="self-link" href="#inline-semantics" aria-label="Permalink"></a>Inline semantics</h3>
 <pre class="cmd syntax"><code>X{<span class="optional-argument">class</span>} <span class="mandatory-argument">content</span> X</code></pre>
 <p>
 <code><span class="mandatory-argument">content</span></code> must be non-empty.
@@ -1694,7 +1691,7 @@ I <i class="translator-supplied">am</i> the LORD.
 </p>
 </li>
 </ul>
-<h3 id="whitespace"><a class="self-link" href="#whitespace"></a>Whitespace</h3>
+<h3 id="whitespace"><a class="self-link" href="#whitespace" aria-label="Permalink"></a>Whitespace</h3>
 <p>
 Whitespace is processed as follows:
 </p>

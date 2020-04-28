@@ -98,12 +98,9 @@
   (?P=hashes)
 %
   \g<hashes>\g<id_>
-    [][self-link:\g<id_>]\\
+    <a class="self-link" href="#\g<id_>" aria-label="Permalink"></a>\\
     \g<content>
   \g<hashes>
-  @@[self-link:\g<id_>]{self-link}
-    \\#\g<id_>
-  @@
 %}
 
 <!-- U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS -->
@@ -673,12 +670,9 @@ before the section headings (`<h2>` to `<h6>`) in this page:
     (?P=hashes)
   %
     \g<hashes>\g<id_>
-      [][self-link:\g<id_>]\\
+      <a class="self-link" href="#\g<id_>" aria-label="Permalink"></a>\\
       \g<content>
     \g<hashes>
-    @@[self-link:\g<id_>]{self-link}
-      \\#\g<id_>
-    @@
   %}
 ````
 
