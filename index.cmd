@@ -208,40 +208,40 @@ than that for later replacements.
 The syntax of CMD, in the order of processing, is thus:
 ----
 ======
-* [CMD literals]
-* [Display code](#display-code)
-* [Inline code](#inline-code)
-* [Comments](#comments)
-* [Display maths](#display-maths)
-* [Inline maths](#inline-maths)
-* [Inclusions](#inclusions)
-* [Regex replacements](#regex-replacements)
-* [Ordinary replacements](#ordinary-replacements)
-* [Preamble](#preamble)
-* [Headings](#headings)
-* [Blocks](#blocks)
+* [CMD literals `(!! (! !) !!)`] [cmd literals]
+* [Display code ``` ``↵ `` ```](#display-code)
+* [Inline code `` ` ` ``](#inline-code)
+* [Comments `<!-- -->`](#comments)
+* [Display maths `$$↵ $$`](#display-maths)
+* [Inline maths `$ $`](#inline-maths)
+* [Inclusions `(+ +)`](#inclusions)
+* [Regex replacements `{% % %}`](#regex-replacements)
+* [Ordinary replacements `{: : :}`](#ordinary-replacements)
+* [Preamble `%%↵ %%`](#preamble)
+* [Headings `# #`](#headings)
+* [Blocks `----↵ ----` etc.](#blocks)
   ====
-  * [List items](#list-items)
+  * [List items `*`, `+`, `-`, `1.`](#list-items)
   ====
-* [Tables](#tables)
+* [Tables `''''↵ ''''`](#tables)
   ====
-  * [Table cells](#table-cells)
-  * [Table rows](#table-rows)
-  * [Table parts](#table-parts)
+  * [Table cells `;` `,`](#table-cells)
+  * [Table rows `/`](#table-rows)
+  * [Table parts `^`, `~`, `_`](#table-parts)
   ====
-* [Punctuation (or, escapes)](#punctuation)
-* [Line continuations](#line-continuations)
+* [Punctuation (or, escapes) `\\` etc.](#punctuation)
+* [Line continuations `\↵`](#line-continuations)
 * [Images](#images)
   ====
-  * [Reference-style images](#reference-style-images)
-  * [Inline-style images](#inline-style-images)
+  * [Reference-style images `@@![ ]↵ @@`, `![ ][ ]`](#reference-style-images)
+  * [Inline-style images `![ ]( )`](#inline-style-images)
   ====
 * [Links](#links)
   ====
-  * [Reference-style links](#reference-style-links)
-  * [Inline-style links](#inline-style-links)
+  * [Reference-style links `@@[ ]↵ @@`, `[ ][ ]`](#reference-style-links)
+  * [Inline-style links `[ ]( )`](#inline-style-links)
   ====
-* [Inline semantics](#inline-semantics)
+* [Inline semantics `* *`, `** **`, `_ _`, `__ __`](#inline-semantics)
 * [Whitespace](#whitespace)
 ======
 
