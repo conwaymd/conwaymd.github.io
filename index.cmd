@@ -208,7 +208,7 @@ except those listed in `.cmdignore`.
 ###
 
 ====
-* `-c`, `--clean-urls` \+
+* `-c`, `--clean-url` \+
   Remove the `.html` extension from the property `%url`
   (defined whenever a [preamble](#preamble) is supplied).
 ====
