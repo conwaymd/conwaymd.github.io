@@ -328,9 +328,12 @@ This makes it immune to all CMD processing
 
 ====
 
-####cmd-literals-flags
+####flags
   Example 2: flags
 ####
+@@[flags examples]
+  \#flags
+@@
 
 #####unescaped-flag
   2.1~Unescaped flag `u`
@@ -399,6 +402,9 @@ This makes it immune to all CMD processing
 #####whitespace-flag
   2.3~Whitespace flag `w`
 #####
+@@[whitespace flag example]
+  \#whitespace-flag
+@@
 
 ====
 * CMD
@@ -478,7 +484,7 @@ from being interpreted as the class `dumb-id`:
 ###
 
 {^^
-  {{ (!``!) }}[.id.]{[.class.]}\newline {.content.} {{ (!``!) }}
+  [.flags.]{{ (!``!) }}[.id.]{[.class.]}\newline {.content.} {{ (!``!) }}
 ^^}
 
 ----
@@ -499,6 +505,16 @@ Produces the display code
 ^},
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
+{^ [.flags.] ^} may consist of zero or more of the following characters
+(see [flags examples]):
+----
+====
+* `u` to leave HTML syntax characters unescaped
+* `c` to process [line continuations](#line-continuations)
+* `w` to process [whitespace](#whitespace) completely
+* `a` to enable all flags above
+====
+----
 For {^ {.content.} ^} containing two or more consecutive backticks,
 use a longer run of {{backticks}} in the delimiters.
 ----
@@ -569,7 +585,7 @@ use a longer run of {{backticks}} in the delimiters.
 ###
 
 {^^
-  {{ (!`!) }} {.content.} {{ (!`!) }}
+  [.flags.]{{ (!`!) }} {.content.} {{ (!`!) }}
 ^^}
 
 ----
@@ -582,6 +598,16 @@ Produces the inline code
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
+{^ [.flags.] ^} may consist of zero or more of the following characters
+(see [flags examples]):
+----
+====
+* `u` to leave HTML syntax characters unescaped
+* `c` to process [line continuations](#line-continuations)
+* `w` to process [whitespace](#whitespace) completely
+* `a` to enable all flags above
+====
+----
 For {^ {.content.} ^} containing one or more consecutive backticks
 which are not protected by [CMD literals],
 use a longer run of {{backticks}} in the delimiters.
@@ -630,7 +656,7 @@ In this sense they are stronger than literals and code.
 ###
 
 {^^
-  {{ (!$$!) }}[.id.]{[.class.]}\newline {.content.} {{ (!$$!) }}
+  [.flags.]{{ (!$$!) }}[.id.]{[.class.]}\newline {.content.} {{ (!$$!) }}
 ^^}
 
 ----
@@ -649,6 +675,13 @@ Produces
 ^},
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
+{^ [.flags.] ^} may consist of zero or more of the following characters
+(see [whitespace flag example]):
+----
+====
+* `w` to process [whitespace](#whitespace) completely
+====
+----
 For {^ {.content.} ^} containing two or more consecutive dollar signs
 which are not protected by [CMD literals],
 use a longer run of {{dollar signs}} in the delimiters.
@@ -665,24 +698,24 @@ On this page I am using [KaTeX].
   ````{cmd}
     $$
       1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-      = \frac{\pi^2}{6}
-      < 2
+        = \frac{\pi^2}{6}
+        < 2
     $$
   ````
 
 * HTML
   ````{html}
     <div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-    = \frac{\pi^2}{6}
-    &lt; 2
+      = \frac{\pi^2}{6}
+      &lt; 2
     </div>
   ````
 
 * Rendered
     $$
       1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-      = \frac{\pi^2}{6}
-      < 2
+        = \frac{\pi^2}{6}
+        < 2
     $$
 
 ====
@@ -693,7 +726,7 @@ On this page I am using [KaTeX].
 ###
 
 {^^
-  {{ (!$!) }} {.content.} {{ (!$!) }}
+  [.flags.]{{ (!$!) }} {.content.} {{ (!$!) }}
 ^^}
 
 ----
@@ -705,6 +738,13 @@ Produces
 ^},
 with HTML syntax-character escaping for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
+{^ [.flags.] ^} may consist of zero or more of the following characters
+(see [whitespace flag example]):
+----
+====
+* `w` to process [whitespace](#whitespace) completely
+====
+----
 For {^ {.content.} ^} containing one or more consecutive dollar signs
 which are not protected by [CMD literals],
 use a longer run of {{dollar signs}} in the delimiters.

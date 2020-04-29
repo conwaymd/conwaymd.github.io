@@ -239,7 +239,7 @@ Enough exclamation marks: (!! (! never !) !!).
 </p>
 </li>
 </ul>
-<h4 id="cmd-literals-flags"><a class="permalink" href="#cmd-literals-flags" aria-label="Permalink"></a>Example 2: flags</h4>
+<h4 id="flags"><a class="permalink" href="#flags" aria-label="Permalink"></a>Example 2: flags</h4>
 <h5 id="unescaped-flag"><a class="permalink" href="#unescaped-flag" aria-label="Permalink"></a>2.1&nbsp;Unescaped flag <code>u</code></h5>
 <ul>
 <li>CMD
@@ -342,7 +342,7 @@ from being interpreted as the class <code>dumb-id</code>:
 </li>
 </ul>
 <h3 id="display-code"><a class="permalink" href="#display-code" aria-label="Permalink"></a>Display code</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">``</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">``</span></code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">flags</span><span class="repeatable-delimiter">``</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">``</span></code></pre>
 <p>
 The delimiting backticks must be
 the first non-whitespace characters on their lines.
@@ -353,6 +353,20 @@ Produces the display code
 <code>&lt;pre id="<span class="optional-argument">id</span>" class="<span class="optional-argument">class</span>"&gt;&lt;code&gt;<span class="mandatory-argument">content</span>&lt;/code&gt;&lt;/pre&gt;</code>,
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">content</span></code>.
+<code><span class="optional-argument">flags</span></code> may consist of zero or more of the following characters
+(see <a href="#flags">flags examples</a>):
+</p>
+<ul>
+<li><code>u</code> to leave HTML syntax characters unescaped
+</li>
+<li><code>c</code> to process <a href="#line-continuations">line continuations</a>
+</li>
+<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
+</li>
+<li><code>a</code> to enable all flags above
+</li>
+</ul>
+<p>
 For <code><span class="mandatory-argument">content</span></code> containing two or more consecutive backticks,
 use a longer run of <span class="repeatable-delimiter">backticks</span> in the delimiters.
 </p>
@@ -408,13 +422,27 @@ no corresponding attributes are generated.
 </li>
 </ul>
 <h3 id="inline-code"><a class="permalink" href="#inline-code" aria-label="Permalink"></a>Inline code</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">`</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">`</span></code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">flags</span><span class="repeatable-delimiter">`</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">`</span></code></pre>
 <p>
 Produces the inline code
 <code>&lt;code&gt;<span class="mandatory-argument">content</span>&lt;/code&gt;</code>,
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">content</span></code>.
 Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
+<code><span class="optional-argument">flags</span></code> may consist of zero or more of the following characters
+(see <a href="#flags">flags examples</a>):
+</p>
+<ul>
+<li><code>u</code> to leave HTML syntax characters unescaped
+</li>
+<li><code>c</code> to process <a href="#line-continuations">line continuations</a>
+</li>
+<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
+</li>
+<li><code>a</code> to enable all flags above
+</li>
+</ul>
+<p>
 For <code><span class="mandatory-argument">content</span></code> containing one or more consecutive backticks
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a longer run of <span class="repeatable-delimiter">backticks</span> in the delimiters.
@@ -445,7 +473,7 @@ whereas <code>&lt;!-- A (! B !) --&gt;</code> is removed entirely.
 In this sense they are stronger than literals and code.
 </p>
 <h3 id="display-maths"><a class="permalink" href="#display-maths" aria-label="Permalink"></a>Display maths</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">$$</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">$$</span></code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">flags</span><span class="repeatable-delimiter">$$</span><span class="optional-argument">id</span>{<span class="optional-argument">class</span>}↵ <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">$$</span></code></pre>
 <p>
 The delimiting dollar signs must be
 the first non-whitespace characters on their lines.
@@ -456,6 +484,14 @@ Produces
 <code>&lt;div id="<span class="optional-argument">id</span>" class="js-maths <span class="optional-argument">class</span>"&gt;<span class="mandatory-argument">content</span>&lt;/div&gt;</code>,
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">content</span></code>.
+<code><span class="optional-argument">flags</span></code> may consist of zero or more of the following characters
+(see <a href="#whitespace-flag">whitespace flag example</a>):
+</p>
+<ul>
+<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
+</li>
+</ul>
+<p>
 For <code><span class="mandatory-argument">content</span></code> containing two or more consecutive dollar signs
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a longer run of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
@@ -469,32 +505,40 @@ On this page I am using <a href="https://katex.org/" title="KaTeX — The fastes
 <li>CMD
 <pre class="cmd"><code>$$
   1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-  = \frac{\pi^2}{6}
-  &lt; 2
+    = \frac{\pi^2}{6}
+    &lt; 2
 $$
 </code></pre>
 </li>
 <li>HTML
 <pre class="html"><code>&lt;div class="js-maths"&gt;1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-= \frac{\pi^2}{6}
-&amp;lt; 2
+  = \frac{\pi^2}{6}
+  &amp;lt; 2
 &lt;/div&gt;
 </code></pre>
 </li>
 <li>Rendered
 <div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-= \frac{\pi^2}{6}
-&lt; 2
+  = \frac{\pi^2}{6}
+  &lt; 2
 </div>
 </li>
 </ul>
 <h3 id="inline-maths"><a class="permalink" href="#inline-maths" aria-label="Permalink"></a>Inline maths</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">$</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">$</span></code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">flags</span><span class="repeatable-delimiter">$</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">$</span></code></pre>
 <p>
 Produces
 <code>&lt;span class="js-maths"&gt;<span class="mandatory-argument">content</span>&lt;/span&gt;</code>,
 with HTML syntax-character escaping for <code><span class="mandatory-argument">content</span></code>.
 Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
+<code><span class="optional-argument">flags</span></code> may consist of zero or more of the following characters
+(see <a href="#whitespace-flag">whitespace flag example</a>):
+</p>
+<ul>
+<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
+</li>
+</ul>
+<p>
 For <code><span class="mandatory-argument">content</span></code> containing one or more consecutive dollar signs
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a longer run of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
