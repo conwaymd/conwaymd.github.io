@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-29
+%date-modified 2020-04-30
 %resources a(!
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -269,17 +269,36 @@ The syntax of CMD, in the order of processing, is thus:
 ###
 
 {^^
-  ({{!}} {.content.} {{!}})
+  [.flags.]({{!}} {.content.} {{!}})
 ^^}
 
 ----
 Produces {^ {.content.} ^} literally,
 with HTML syntax-character escaping and de-indentation.
 Whitespace around {^ {.content.} ^} is stripped.
+{^ [.flags.] ^} may consist of zero or more of the following characters:
+----
+====
+* `u` to leave HTML syntax characters unescaped
+* `c` to process [line continuations](#line-continuations)
+* `w` to process [whitespace](#whitespace) completely
+* `a` to enable all flags above
+====
+----
 For {^ {.content.} ^} containing one or more consecutive exclamation marks
 followed by a closing round bracket,
 use a longer run of {{exclamation marks}} in the delimiters.
 ----
+
+----
+A good use case is to wrap `<script>` elements inside `(!! u(! !) !!)`.
+This makes it immune to all CMD processing
+(e.g.~conversion of `* *` to `<em> </em>`).
+----
+
+####cmd-literals-basic
+  Example 1: basic usage
+####
 
 ====
 * CMD
@@ -308,6 +327,116 @@ use a longer run of {{exclamation marks}} in the delimiters.
   ----
 
 ====
+
+####cmd-literals-flags
+  Example 2: flags
+####
+
+#####unescaped-flag
+  2.1~Unescaped flag `u`
+#####
+
+====
+* CMD
+  ````{cmd}
+  (!!!!
+    Escaping:     (! <b>blah</b> !).
+    No escaping: u(! <b>cough</b> !).
+  !!!!)
+  ````
+
+* HTML
+  ````{html}
+    Escaping:     &lt;b&gt;blah&lt;/b&gt;.
+    No escaping: <b>cough</b>.
+  ````
+
+* Rendered
+  ----
+    Escaping:     (! <b>blah</b> !).
+    No escaping: u(! <b>cough</b> !).
+  ----
+
+====
+
+#####continuations-flag
+  2.2~Continuations flag `c`
+#####
+
+====
+* CMD
+  ````{cmd}
+  (!!!!
+    uc(!
+      <pre>
+        Blah blah blah\
+          Cough cough cough
+            Yep yep yep
+      </pre>
+    !)
+  !!!!)
+  ````
+
+* HTML
+  ````{html}
+      <pre>
+        Blah blah blahCough cough cough
+            Yep yep yep
+      </pre>
+  ````
+
+* Rendered
+    uc(!
+      <pre>
+        Blah blah blah\
+          Cough cough cough
+            Yep yep yep
+      </pre>
+    !)
+
+====
+
+#####whitespace-flag
+  2.3~Whitespace flag `w`
+#####
+
+====
+* CMD
+  ````{cmd}
+  (!!!!
+    uw(!
+      <pre>
+        Blah blah blah
+          Cough cough cough
+            Yep yep yep
+      </pre>
+    !)
+  !!!!)
+  ````
+
+* HTML
+  ````{html}
+    <pre>
+    Blah blah blah
+    Cough cough cough
+    Yep yep yep
+    </pre>
+  ````
+
+* Rendered
+    uw(!
+      <pre>
+        Blah blah blah
+          Cough cough cough
+            Yep yep yep
+      </pre>
+    !)
+
+====
+
+####cmd-literals-contrived
+  Example 3: contrived usage
+####
 
 ----
 CMD literals are very powerful.

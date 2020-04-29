@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-29
+Last modified: 2020-04-30
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -190,15 +190,34 @@ The syntax of CMD, in the order of processing, is thus:
 </li>
 </ul>
 <h3 id="cmd-literals"><a class="permalink" href="#cmd-literals" aria-label="Permalink"></a>CMD literals</h3>
-<pre class="cmd syntax"><code>(<span class="repeatable-delimiter">!</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">!</span>)</code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">flags</span>(<span class="repeatable-delimiter">!</span> <span class="mandatory-argument">content</span> <span class="repeatable-delimiter">!</span>)</code></pre>
 <p>
 Produces <code><span class="mandatory-argument">content</span></code> literally,
 with HTML syntax-character escaping and de-indentation.
 Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
+<code><span class="optional-argument">flags</span></code> may consist of zero or more of the following characters:
+</p>
+<ul>
+<li><code>u</code> to leave HTML syntax characters unescaped
+</li>
+<li><code>c</code> to process <a href="#line-continuations">line continuations</a>
+</li>
+<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
+</li>
+<li><code>a</code> to enable all flags above
+</li>
+</ul>
+<p>
 For <code><span class="mandatory-argument">content</span></code> containing one or more consecutive exclamation marks
 followed by a closing round bracket,
 use a longer run of <span class="repeatable-delimiter">exclamation marks</span> in the delimiters.
 </p>
+<p>
+A good use case is to wrap <code>&lt;script&gt;</code> elements inside <code>u(! !)</code>.
+This makes it immune to all CMD processing
+(e.g.&nbsp;conversion of <code>* *</code> to <code>&lt;em&gt; &lt;/em&gt;</code>).
+</p>
+<h4 id="cmd-literals-basic"><a class="permalink" href="#cmd-literals-basic" aria-label="Permalink"></a>Example 1: basic usage</h4>
 <ul>
 <li>CMD
 <pre class="cmd"><code>Escaping: (! &amp; &lt; &gt; !).
@@ -220,6 +239,81 @@ Enough exclamation marks: (!! (! never !) !!).
 </p>
 </li>
 </ul>
+<h4 id="cmd-literals-flags"><a class="permalink" href="#cmd-literals-flags" aria-label="Permalink"></a>Example 2: flags</h4>
+<h5 id="unescaped-flag"><a class="permalink" href="#unescaped-flag" aria-label="Permalink"></a>2.1&nbsp;Unescaped flag <code>u</code></h5>
+<ul>
+<li>CMD
+<pre class="cmd"><code>Escaping:     (! &lt;b&gt;blah&lt;/b&gt; !).
+No escaping: u(! &lt;b&gt;cough&lt;/b&gt; !).
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>Escaping:     &amp;lt;b&amp;gt;blah&amp;lt;/b&amp;gt;.
+No escaping: &lt;b&gt;cough&lt;/b&gt;.
+</code></pre>
+</li>
+<li>Rendered
+<p>
+Escaping:     &lt;b&gt;blah&lt;/b&gt;.
+No escaping: <b>cough</b>.
+</p>
+</li>
+</ul>
+<h5 id="continuations-flag"><a class="permalink" href="#continuations-flag" aria-label="Permalink"></a>2.2&nbsp;Continuations flag <code>c</code></h5>
+<ul>
+<li>CMD
+<pre class="cmd"><code>uc(!
+  &lt;pre&gt;
+    Blah blah blah\
+      Cough cough cough
+        Yep yep yep
+  &lt;/pre&gt;
+!)
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;pre&gt;
+  Blah blah blahCough cough cough
+      Yep yep yep
+&lt;/pre&gt;
+</code></pre>
+</li>
+<li>Rendered
+<pre>
+  Blah blah blahCough cough cough
+      Yep yep yep
+</pre>
+</li>
+</ul>
+<h5 id="whitespace-flag"><a class="permalink" href="#whitespace-flag" aria-label="Permalink"></a>2.3&nbsp;Whitespace flag <code>w</code></h5>
+<ul>
+<li>CMD
+<pre class="cmd"><code>uw(!
+  &lt;pre&gt;
+    Blah blah blah
+      Cough cough cough
+        Yep yep yep
+  &lt;/pre&gt;
+!)
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;pre&gt;
+Blah blah blah
+Cough cough cough
+Yep yep yep
+&lt;/pre&gt;
+</code></pre>
+</li>
+<li>Rendered
+<pre>
+Blah blah blah
+Cough cough cough
+Yep yep yep
+</pre>
+</li>
+</ul>
+<h4 id="cmd-literals-contrived"><a class="permalink" href="#cmd-literals-contrived" aria-label="Permalink"></a>Example 3: contrived usage</h4>
 <p>
 CMD literals are very powerful.
 For example, <code>id</code> and <code>class</code> in CMD block syntax
