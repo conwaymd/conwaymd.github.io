@@ -1478,7 +1478,7 @@ the curly brackets surrounding it may be omitted.
     , Backslash
   //
     , `\/`
-    ,
+    , `(! !)`
     ,
     , Empty string
   //
