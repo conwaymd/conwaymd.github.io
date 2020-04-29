@@ -4,7 +4,7 @@
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
 %date-modified 2020-04-29
-%resources
+%resources a(!
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -39,7 +39,7 @@
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="theme-color" content="#ffffff">
-
+!)
 %%%%
 
 
