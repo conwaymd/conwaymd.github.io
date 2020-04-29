@@ -1075,16 +1075,17 @@ are computed based on the supplied original properties:
       %date-modified 2020-04-11
       %description
         This is the description. Hooray for automatic escaping (&, <, >, ")!
-      %css
+      %css a(!
         #special {
           color: purple;
         }
+      !)
       %onload-js
         special.textContent += ' This is a special paragraph!'
     %%
-    
+
     # %title #
-    
+
     ----special
       The title of this page is "%title", and the author is %author.
       At the time of writing, next year will be %year-modified-next.
@@ -1103,7 +1104,7 @@ are computed based on the supplied original properties:
     <meta name="description" content="This is the description. Hooray for automatic escaping (&amp;, &lt;, &gt;, &quot;)!">
     <title>My title | My site</title>
     <style>#special {
-      color: purple;
+    color: purple;
     }</style>
     </head>
     <body onload="special.textContent += ' This is a special paragraph!'">
@@ -1113,7 +1114,6 @@ are computed based on the supplied original properties:
     At the time of writing, next year will be 2021.
     </p>
     <footer>
-    <hr>
     ©&nbsp;2020&nbsp;Me.
     </footer>
     </body>
