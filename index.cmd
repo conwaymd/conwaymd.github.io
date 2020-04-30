@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-04-30
+%date-modified 2020-05-01
 %resources a(!
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -251,13 +251,13 @@ The syntax of CMD, in the order of processing, is thus:
 * [Line continuations `\↵`](#line-continuations)
 * [Images](#images)
   ====
-  * [Reference-style images `@@![ ]↵ @@`, `![ ][ ]`](#reference-style-images)
   * [Inline-style images `![ ]( )`](#inline-style-images)
+  * [Reference-style images `@@![ ]↵ @@`, `![ ][ ]`](#reference-style-images)
   ====
 * [Links](#links)
   ====
-  * [Reference-style links `@@[ ]↵ @@`, `[ ][ ]`](#reference-style-links)
   * [Inline-style links `[ ]( )`](#inline-style-links)
+  * [Reference-style links `@@[ ]↵ @@`, `[ ][ ]`](#reference-style-links)
   ====
 * [Inline semantics `* *`, `** **`, `_ _`, `__ __`](#inline-semantics)
 * [Whitespace](#whitespace)
@@ -1801,6 +1801,59 @@ All leading whitespace on the next line is stripped.
 ###
 
 
+####inline-style-images
+  Inline-style images
+####
+
+{^^
+  (! ![ !){.alt.}]( {.src.} [.title.] )
+^^}
+
+----
+Unlike John Gruber's markdown, {^ [.title.] ^} is not surrounded by quotes.
+If quotes are supplied to {^ [.title.] ^},
+they are automatically escaped as `&quot;`.
+----
+
+----
+Produces the image
+{^
+  (! <img !)
+    alt="{.alt.}"
+    src="{.src.}"
+    title="[.title.]"\
+  (! > !)
+^}.
+For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
+one or more closing square or round brackets,
+use [escapes](#punctuation) or [CMD literals].
+----
+
+====
+* CMD
+  ````{cmd}
+  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
+    /rembrandt-anatomy.jpg
+    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
+  )
+  ````
+
+* HTML
+  ````{html}
+  <img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
+  ````
+
+* Rendered
+  ----
+  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
+    /rembrandt-anatomy.jpg
+    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
+  )
+  ----
+
+====
+
+
 ####reference-style-images
   Reference-style images
 ####
@@ -1892,12 +1945,17 @@ the latest specification shall prevail.
 ====
 
 
-####inline-style-images
-  Inline-style images
+###links
+  Links
+###
+
+
+####inline-style-links
+  Inline-style links
 ####
 
 {^^
-  (! ![ !){.alt.}]( {.src.} [.title.] )
+  (! [ !){.content.}]( {.href.} [.title.] )
 ^^}
 
 ----
@@ -1907,15 +1965,17 @@ they are automatically escaped as `&quot;`.
 ----
 
 ----
-Produces the image
+Produces the link
 {^
-  (! <img !)
-    alt="{.alt.}"
-    src="{.src.}"
+  (! <a !)
+    href="{.href.}"
     title="[.title.]"\
-  (! > !)
+  (! > !)\
+    {.content.}\
+  (! </a> !)
 ^}.
-For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
+Whitespace around {^ {.content.} ^} is stripped.
+For {^ {.content.} ^}, {^ {.href.} ^}, or {^ [.title.] ^} containing
 one or more closing square or round brackets,
 use [escapes](#punctuation) or [CMD literals].
 ----
@@ -1923,31 +1983,31 @@ use [escapes](#punctuation) or [CMD literals].
 ====
 * CMD
   ````{cmd}
-  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
-    /rembrandt-anatomy.jpg
-    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
+  [Wikimedia Commons](
+    https://commons.wikimedia.org/wiki/Main_Page
+    Wikimedia Commons
   )
+    \+
+  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
   ````
 
 * HTML
   ````{html}
-  <img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
+  <a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
+  <a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
   ````
 
 * Rendered
   ----
-  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
-    /rembrandt-anatomy.jpg
-    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
+  [Wikimedia Commons](
+    https://commons.wikimedia.org/wiki/Main_Page
+    Wikimedia Commons
   )
+    \+
+  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
   ----
 
 ====
-
-
-###links
-  Links
-###
 
 
 ####reference-style-links
@@ -2041,66 +2101,6 @@ the latest specification shall prevail.
   [Wikipedia's home page][wikipedia] \+
   [Wikipedia][] \+
   [Wikipedia]
-  ----
-
-====
-
-
-####inline-style-links
-  Inline-style links
-####
-
-{^^
-  (! [ !){.content.}]( {.href.} [.title.] )
-^^}
-
-----
-Unlike John Gruber's markdown, {^ [.title.] ^} is not surrounded by quotes.
-If quotes are supplied to {^ [.title.] ^},
-they are automatically escaped as `&quot;`.
-----
-
-----
-Produces the link
-{^
-  (! <a !)
-    href="{.href.}"
-    title="[.title.]"\
-  (! > !)\
-    {.content.}\
-  (! </a> !)
-^}.
-Whitespace around {^ {.content.} ^} is stripped.
-For {^ {.content.} ^}, {^ {.href.} ^}, or {^ [.title.] ^} containing
-one or more closing square or round brackets,
-use [escapes](#punctuation) or [CMD literals].
-----
-
-====
-* CMD
-  ````{cmd}
-  [Wikimedia Commons](
-    https://commons.wikimedia.org/wiki/Main_Page
-    Wikimedia Commons
-  )
-    \+
-  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
-  ````
-
-* HTML
-  ````{html}
-  <a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
-  <a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
-  ````
-
-* Rendered
-  ----
-  [Wikimedia Commons](
-    https://commons.wikimedia.org/wiki/Main_Page
-    Wikimedia Commons
-  )
-    \+
-  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
   ----
 
 ====

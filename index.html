@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-04-30
+Last modified: 2020-05-01
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -170,17 +170,17 @@ The syntax of CMD, in the order of processing, is thus:
 </li>
 <li><a href="#images">Images</a>
 <ul>
-<li><a href="#reference-style-images">Reference-style images <code>@@![ ]↵ @@</code>, <code>![ ][ ]</code></a>
-</li>
 <li><a href="#inline-style-images">Inline-style images <code>![ ]( )</code></a>
+</li>
+<li><a href="#reference-style-images">Reference-style images <code>@@![ ]↵ @@</code>, <code>![ ][ ]</code></a>
 </li>
 </ul>
 </li>
 <li><a href="#links">Links</a>
 <ul>
-<li><a href="#reference-style-links">Reference-style links <code>@@[ ]↵ @@</code>, <code>[ ][ ]</code></a>
-</li>
 <li><a href="#inline-style-links">Inline-style links <code>[ ]( )</code></a>
+</li>
+<li><a href="#reference-style-links">Reference-style links <code>@@[ ]↵ @@</code>, <code>[ ][ ]</code></a>
 </li>
 </ul>
 </li>
@@ -1476,6 +1476,38 @@ All leading whitespace on the next line is stripped.
 </li>
 </ul>
 <h3 id="images"><a class="permalink" href="#images" aria-label="Permalink"></a>Images</h3>
+<h4 id="inline-style-images"><a class="permalink" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
+<pre class="cmd syntax"><code>![<span class="mandatory-argument">alt</span>]( <span class="mandatory-argument">src</span> <span class="optional-argument">title</span> )</code></pre>
+<p>
+Unlike John Gruber's markdown, <code><span class="optional-argument">title</span></code> is not surrounded by quotes.
+If quotes are supplied to <code><span class="optional-argument">title</span></code>,
+they are automatically escaped as <code>&amp;quot;</code>.
+</p>
+<p>
+Produces the image
+<code>&lt;img alt="<span class="mandatory-argument">alt</span>" src="<span class="mandatory-argument">src</span>" title="<span class="optional-argument">title</span>"&gt;</code>.
+For <code><span class="mandatory-argument">alt</span></code>, <code><span class="mandatory-argument">src</span></code>, or <code><span class="optional-argument">title</span></code> containing
+one or more closing square or round brackets,
+use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
+  /rembrandt-anatomy.jpg
+  The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
+)
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;img alt="Dr&amp;nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&amp;nbsp;Nicolaes Tulp (Rembrandt)"&gt;
+</code></pre>
+</li>
+<li>Rendered
+<p>
+<img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
+</p>
+</li>
+</ul>
 <h4 id="reference-style-images"><a class="permalink" href="#reference-style-images" aria-label="Permalink"></a>Reference-style images</h4>
 <ul>
 <li>Definition
@@ -1538,39 +1570,44 @@ the latest specification shall prevail.
 </p>
 </li>
 </ul>
-<h4 id="inline-style-images"><a class="permalink" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
-<pre class="cmd syntax"><code>![<span class="mandatory-argument">alt</span>]( <span class="mandatory-argument">src</span> <span class="optional-argument">title</span> )</code></pre>
+<h3 id="links"><a class="permalink" href="#links" aria-label="Permalink"></a>Links</h3>
+<h4 id="inline-style-links"><a class="permalink" href="#inline-style-links" aria-label="Permalink"></a>Inline-style links</h4>
+<pre class="cmd syntax"><code>[<span class="mandatory-argument">content</span>]( <span class="mandatory-argument">href</span> <span class="optional-argument">title</span> )</code></pre>
 <p>
 Unlike John Gruber's markdown, <code><span class="optional-argument">title</span></code> is not surrounded by quotes.
 If quotes are supplied to <code><span class="optional-argument">title</span></code>,
 they are automatically escaped as <code>&amp;quot;</code>.
 </p>
 <p>
-Produces the image
-<code>&lt;img alt="<span class="mandatory-argument">alt</span>" src="<span class="mandatory-argument">src</span>" title="<span class="optional-argument">title</span>"&gt;</code>.
-For <code><span class="mandatory-argument">alt</span></code>, <code><span class="mandatory-argument">src</span></code>, or <code><span class="optional-argument">title</span></code> containing
+Produces the link
+<code>&lt;a href="<span class="mandatory-argument">href</span>" title="<span class="optional-argument">title</span>"&gt;<span class="mandatory-argument">content</span>&lt;/a&gt;</code>.
+Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
+For <code><span class="mandatory-argument">content</span></code>, <code><span class="mandatory-argument">href</span></code>, or <code><span class="optional-argument">title</span></code> containing
 one or more closing square or round brackets,
 use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
-  /rembrandt-anatomy.jpg
-  The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
+<pre class="cmd"><code>[Wikimedia Commons](
+  https://commons.wikimedia.org/wiki/Main_Page
+  Wikimedia Commons
 )
+  \+
+[Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
 </code></pre>
 </li>
 <li>HTML
-<pre class="html"><code>&lt;img alt="Dr&amp;nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&amp;nbsp;Nicolaes Tulp (Rembrandt)"&gt;
+<pre class="html"><code>&lt;a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons"&gt;Wikimedia Commons&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://commons.wikimedia.org/wiki/Main_Page"&gt;Wikimedia Commons without title&lt;/a&gt;
 </code></pre>
 </li>
 <li>Rendered
 <p>
-<img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
+<a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
+<a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
 </p>
 </li>
 </ul>
-<h3 id="links"><a class="permalink" href="#links" aria-label="Permalink"></a>Links</h3>
 <h4 id="reference-style-links"><a class="permalink" href="#reference-style-links" aria-label="Permalink"></a>Reference-style links</h4>
 <ul>
 <li>Definition
@@ -1635,43 +1672,6 @@ the latest specification shall prevail.
 <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia's home page</a><br>
 <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a><br>
 <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a>
-</p>
-</li>
-</ul>
-<h4 id="inline-style-links"><a class="permalink" href="#inline-style-links" aria-label="Permalink"></a>Inline-style links</h4>
-<pre class="cmd syntax"><code>[<span class="mandatory-argument">content</span>]( <span class="mandatory-argument">href</span> <span class="optional-argument">title</span> )</code></pre>
-<p>
-Unlike John Gruber's markdown, <code><span class="optional-argument">title</span></code> is not surrounded by quotes.
-If quotes are supplied to <code><span class="optional-argument">title</span></code>,
-they are automatically escaped as <code>&amp;quot;</code>.
-</p>
-<p>
-Produces the link
-<code>&lt;a href="<span class="mandatory-argument">href</span>" title="<span class="optional-argument">title</span>"&gt;<span class="mandatory-argument">content</span>&lt;/a&gt;</code>.
-Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
-For <code><span class="mandatory-argument">content</span></code>, <code><span class="mandatory-argument">href</span></code>, or <code><span class="optional-argument">title</span></code> containing
-one or more closing square or round brackets,
-use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>[Wikimedia Commons](
-  https://commons.wikimedia.org/wiki/Main_Page
-  Wikimedia Commons
-)
-  \+
-[Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons"&gt;Wikimedia Commons&lt;/a&gt;&lt;br&gt;
-&lt;a href="https://commons.wikimedia.org/wiki/Main_Page"&gt;Wikimedia Commons without title&lt;/a&gt;
-</code></pre>
-</li>
-<li>Rendered
-<p>
-<a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
-<a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
 </p>
 </li>
 </ul>
