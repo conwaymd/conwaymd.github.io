@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-05-01
+%date-modified 2020-05-02
 %resources a(!
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -1720,6 +1720,11 @@ the curly brackets surrounding it may be omitted.
     , `¶`
     , \P
     , `U+00B6 PILCROW SIGN`
+  //
+    , `\d`
+    , `$`
+    , \d
+    , Dollar sign
   //
     , `\#`
     , `#`
