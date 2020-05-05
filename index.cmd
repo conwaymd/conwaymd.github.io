@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-05-02
+%date-modified 2020-05-05
 %resources a(!
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
@@ -244,8 +244,8 @@ The syntax of CMD, in the order of processing, is thus:
 * [Tables `''''↵ ''''`](#tables)
   ====
   * [Table cells `;` `,`](#table-cells)
-  * [Table rows `/`](#table-rows)
-  * [Table parts `^`, `~`, `_`](#table-parts)
+  * [Table rows `==`](#table-rows)
+  * [Table parts `|^`, `|:`, `|_`](#table-parts)
   ====
 * [Punctuation (or, escapes) `\\` etc.](#punctuation)
 * [Line continuations `\↵`](#line-continuations)
@@ -1400,8 +1400,8 @@ of the following:
 The following delimiters (`Z`) for table cells are used:
 ----
 ====
-* `;` (or any run of semicolons) for `<th>`
-* `,` (or any run of commas) for `<td>`
+* `;` for `<th>`
+* `,` for `<td>`
 ====
 ----
 Table cells end at the next table cell, table row, or table part,
@@ -1425,11 +1425,7 @@ according to leading occurrences
 of the following:
 ----
 
-{^^ /[.id.]{[.class.]} ^^}
-
-----
-The slash may instead be any run of slashes.
-----
+{^^ ==[.id.]{[.class.]} ^^}
 
 ----
 Table rows end at the next table row or table part,
@@ -1455,9 +1451,9 @@ of the following:
 The following delimiters (`Y`) for table parts are used:
 ----
 ====
-* `^` (or any run of carets) for `<thead>`
-* `~` (or any run of tildes) for `<tbody>`
-* `_` (or any run of underscores) for `<tfoot>`
+* `|^` for `<thead>`
+* `|~` for `<tbody>`
+* `|_` for `<tfoot>`
 ====
 ----
 Table parts end at the next table part,
@@ -1474,22 +1470,22 @@ the curly brackets surrounding it may be omitted.
 * CMD
   ````{cmd}
     ''''
-      //
+      ==
         ; A
         ; B
         ; C
         ; D
-      //
+      ==
         , 1
         ,[2] 2
         , 3
         , 4
-      //
+      ==
         , 5
         ,[3,2] 6
-      //
+      ==
         ,[,2] 7
-      //
+      ==
         , 8
         ; ?
     ''''
@@ -1526,22 +1522,22 @@ the curly brackets surrounding it may be omitted.
 
 * Rendered
     ''''
-      //
+      ==
         ; A
         ; B
         ; C
         ; D
-      //
+      ==
         , 1
         ,[2] 2
         , 3
         , 4
-      //
+      ==
         , 5
         ,[3,2] 6
-      //
+      ==
         ,[,2] 7
-      //
+      ==
         , 8
         ; ?
     ''''
@@ -1555,26 +1551,24 @@ the curly brackets surrounding it may be omitted.
 ====
 * CMD
   ````{cmd}
-  (!!
     ''''
-    ^^^
-      //
+    |^
+      ==
         ; Meals
-        ; Cost / (! $ !)
-    ~~~
-      //
+        ; Cost / \d
+    |:
+      ==
         ; Lunch
         , 7
-      //
+      ==
         ; Dinner
         , 10
-    ___
-      //
+    |_
+      ==
         ; Total
         ,total-cost{some-class}
           17
     ''''
-  !!)
   ````
 
 * HTML
@@ -1607,19 +1601,19 @@ the curly brackets surrounding it may be omitted.
 
 * Rendered
     ''''
-    ^^^
-      //
+    |^
+      ==
         ; Meals
-        ; Cost / (! $ !)
-    ~~~
-      //
+        ; Cost / \d
+    |:
+      ==
         ; Lunch
         , 7
-      //
+      ==
         ; Dinner
         , 10
-    ___
-      //
+    |_
+      ==
         ; Total
         ,total-cost{some-class}
           17
@@ -1635,137 +1629,137 @@ the curly brackets surrounding it may be omitted.
 
 ||||{centred-flex}
 ''''
-  //
+  ==
     ; CCH
     ; HTML
     ; Rendered
     ; Description
-  //
+  ==
     , `\\`
     , `\`
     , \\
     , Backslash
-  //
+  ==
     , `\/`
     , `(! !)`
     ,
     , Empty string
-  //
+  ==
     , `\ /`
     , `(! !) (! !)`
     , \ /
     , Space
-  //
+  ==
     , `\ (! !)`
     , `(! !) (! !)`
     , \ (! !)
     , Space
-  //
+  ==
     , `\~`
     , `~`
     , \~
     , Tilde
-  //
+  ==
     , `~`
     , `&nbsp;`
     , ~
     , Non-breaking space
-  //
+  ==
     , `\0`
     , `&numsp;`
     , \0
     , Figure space
-  //
+  ==
     , `\,`
     , `&thinsp;`
     , \,
     , Thin space
-  //
+  ==
     , `\&`
     , `&amp;`
     , \&
     , Ampersand (entity)
-  //
+  ==
     , `\<`
     , `&lt;`
     , \<
     , Less than (entity)
-  //
+  ==
     , `\>`
     , `&gt;`
     , \>
     , Greater than (entity)
-  //
+  ==
     , `\"`
     , `&quot;`
     , \"
     , Double quote (entity)
-  //
+  ==
     , `...`
     , `…`
     , ...
     , `U+2026 HORIZONTAL ELLIPSIS`
-  //
+  ==
     , `---`
     , `—`
     , ---
     , `U+2014 EM DASH`
-  //
+  ==
     , `--`
     , `–`
     , --
     , `U+2013 EN DASH`
-  //
+  ==
     , `\P`
     , `¶`
     , \P
     , `U+00B6 PILCROW SIGN`
-  //
+  ==
     , `\d`
     , `$`
     , \d
     , Dollar sign
-  //
+  ==
     , `\#`
     , `#`
     , \#
     , Hash
-  //
+  ==
     , `\[`
     , `[`
     , \[
     , Opening square bracket
-  //
+  ==
     , `\]`
     , `]`
     , \]
     , Closing square bracket
-  //
+  ==
     , `\(`
     , `(`
     , \(
     , Opening round bracket
-  //
+  ==
     , `\)`
     , `)`
     , \)
     , Closing round bracket
-  //
+  ==
     , `\*`
     , `*`
     , \*
     , Asterisk
-  //
+  ==
     , `\_`
     , `_`
     , \_
     , Underscore
-  //
+  ==
     , `\=`
     , `<hr>`
     , \=
     , Thematic break
-  //
+  ==
     , `\+`
     , `<br>`
     , \+
@@ -2171,24 +2165,24 @@ In the implementation, matches are sought in the following order:
 
 ||||{centred-flex}
 ''''
-^^^
-  //
+|^
+  ==
     ; Type
     ; Form
-~~~
-  //
+|:
+  ==
     , 33
     , {^ ccc{[.inner class.]} {.inner content.} ccc ^}
-  //
+  ==
     , 312
     , {^ ccc{[.inner class.]} {.inner content.} c {.outer content.} cc ^}
-  //
+  ==
     , 321
     , {^ ccc{[.inner class.]} {.inner content.} cc {.outer content.} c ^}
-  //
+  ==
     , 22
     , {^ cc{[.class.]} {.content.} cc ^}
-  //
+  ==
     , 11
     , {^ c{[.class.]} {.content.} c ^}
 ''''
@@ -2217,40 +2211,39 @@ Recursive calls are used to process nested inline semantics.
 
 ||||{centred-flex}
 ''''
-^^^
-  //
+|^
+  ==
     ; CCH
     ; Rendered
-~~~
-  //
-    , `***strong(em)***`
-    ,  ***strong(em)***
-  //
-    , `***strong(em)* strong**`
-    ,  ***strong(em)* strong**
-  //
-    , `***em(strong)** em*`
-    ,  ***em(strong)** em*
-  //
+|:
+  ==
+    , `***strong-em***`
+    ,  ***strong-em***
+  ==
+    , `***strong-em* strong**`
+    ,  ***strong-em* strong**
+  ==
+    , `***em-strong** em*`
+    ,  ***em-strong** em*
+  ==
     , `**strong**`
     ,  **strong**
-  //
+  ==
     , `*em*`
     ,  *em*
-~~~
-  //
-    , `___b(i)___`
-    ,  ___b(i)___
-  //
-    , `___b(i)_ b__`
-    ,  ___b(i)_ b__
-  //
-    , `___i(b)__ i_`
-    ,  ___i(b)__ i_
-  //
+  ==
+    , `___b-i___`
+    ,  ___b-i___
+  ==
+    , `___b-i_ b__`
+    ,  ___b-i_ b__
+  ==
+    , `___i-b__ i_`
+    ,  ___i-b__ i_
+  ==
     , `__b__`
     ,  __b__
-  //
+  ==
     , `_i_`
     ,  _i_
 ''''

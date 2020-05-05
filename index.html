@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-05-02
+Last modified: 2020-05-05
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -158,9 +158,9 @@ The syntax of CMD, in the order of processing, is thus:
 <ul>
 <li><a href="#table-cells">Table cells <code>;</code> <code>,</code></a>
 </li>
-<li><a href="#table-rows">Table rows <code>/</code></a>
+<li><a href="#table-rows">Table rows <code>==</code></a>
 </li>
-<li><a href="#table-parts">Table parts <code>^</code>, <code>~</code>, <code>_</code></a>
+<li><a href="#table-parts">Table parts <code>|^</code>, <code>|:</code>, <code>|_</code></a>
 </li>
 </ul>
 </li>
@@ -1080,9 +1080,9 @@ of the following:
 The following delimiters (<code>Z</code>) for table cells are used:
 </p>
 <ul>
-<li><code>;</code> (or any run of semicolons) for <code>&lt;th&gt;</code>
+<li><code>;</code> for <code>&lt;th&gt;</code>
 </li>
-<li><code>,</code> (or any run of commas) for <code>&lt;td&gt;</code>
+<li><code>,</code> for <code>&lt;td&gt;</code>
 </li>
 </ul>
 <p>
@@ -1102,10 +1102,7 @@ according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 </p>
-<pre class="cmd syntax"><code>/<span class="optional-argument">id</span>{<span class="optional-argument">class</span>}</code></pre>
-<p>
-The slash may instead be any run of slashes.
-</p>
+<pre class="cmd syntax"><code>==<span class="optional-argument">id</span>{<span class="optional-argument">class</span>}</code></pre>
 <p>
 Table rows end at the next table row or table part,
 or at the end of the content being split.
@@ -1124,11 +1121,11 @@ of the following:
 The following delimiters (<code>Y</code>) for table parts are used:
 </p>
 <ul>
-<li><code>^</code> (or any run of carets) for <code>&lt;thead&gt;</code>
+<li><code>|^</code> for <code>&lt;thead&gt;</code>
 </li>
-<li><code>~</code> (or any run of tildes) for <code>&lt;tbody&gt;</code>
+<li><code>|~</code> for <code>&lt;tbody&gt;</code>
 </li>
-<li><code>_</code> (or any run of underscores) for <code>&lt;tfoot&gt;</code>
+<li><code>|_</code> for <code>&lt;tfoot&gt;</code>
 </li>
 </ul>
 <p>
@@ -1141,22 +1138,22 @@ the curly brackets surrounding it may be omitted.
 <ul>
 <li>CMD
 <pre class="cmd"><code>''''
-  //
+  ==
     ; A
     ; B
     ; C
     ; D
-  //
+  ==
     , 1
     ,[2] 2
     , 3
     , 4
-  //
+  ==
     , 5
     ,[3,2] 6
-  //
+  ==
     ,[,2] 7
-  //
+  ==
     , 8
     ; ?
 ''''
@@ -1222,19 +1219,19 @@ the curly brackets surrounding it may be omitted.
 <ul>
 <li>CMD
 <pre class="cmd"><code>''''
-^^^
-  //
+|^
+  ==
     ; Meals
-    ; Cost / (! $ !)
-~~~
-  //
+    ; Cost / \d
+|:
+  ==
     ; Lunch
     , 7
-  //
+  ==
     ; Dinner
     , 10
-___
-  //
+|_
+  ==
     ; Total
     ,total-cost{some-class}
       17
@@ -1782,16 +1779,16 @@ Recursive calls are used to process nested inline semantics.
 </thead>
 <tbody>
 <tr>
-<td><code>***strong(em)***</code></td>
-<td><strong><em>strong(em)</em></strong></td>
+<td><code>***strong-em***</code></td>
+<td><strong><em>strong-em</em></strong></td>
 </tr>
 <tr>
-<td><code>***strong(em)* strong**</code></td>
-<td><strong><em>strong(em)</em> strong</strong></td>
+<td><code>***strong-em* strong**</code></td>
+<td><strong><em>strong-em</em> strong</strong></td>
 </tr>
 <tr>
-<td><code>***em(strong)** em*</code></td>
-<td><em><strong>em(strong)</strong> em</em></td>
+<td><code>***em-strong** em*</code></td>
+<td><em><strong>em-strong</strong> em</em></td>
 </tr>
 <tr>
 <td><code>**strong**</code></td>
@@ -1801,19 +1798,17 @@ Recursive calls are used to process nested inline semantics.
 <td><code>*em*</code></td>
 <td><em>em</em></td>
 </tr>
-</tbody>
-<tbody>
 <tr>
-<td><code>___b(i)___</code></td>
-<td><b><i>b(i)</i></b></td>
+<td><code>___b-i___</code></td>
+<td><b><i>b-i</i></b></td>
 </tr>
 <tr>
-<td><code>___b(i)_ b__</code></td>
-<td><b><i>b(i)</i> b</b></td>
+<td><code>___b-i_ b__</code></td>
+<td><b><i>b-i</i> b</b></td>
 </tr>
 <tr>
-<td><code>___i(b)__ i_</code></td>
-<td><i><b>i(b)</b> i</i></td>
+<td><code>___i-b__ i_</code></td>
+<td><i><b>i-b</b> i</i></td>
 </tr>
 <tr>
 <td><code>__b__</code></td>
