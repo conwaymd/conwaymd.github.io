@@ -4,7 +4,7 @@
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
 %date-modified 2020-05-05
-%resources a(!
+%resources a~~
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -39,7 +39,7 @@
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="theme-color" content="#ffffff">
-!)
+~~
 %%%%
 
 
@@ -226,7 +226,7 @@ than that for later replacements.
 The syntax of CMD, in the order of processing, is thus:
 ----
 ======
-* [CMD literals `(!! (! !) !!)`] [cmd literals]
+* [CMD literals `~~~ ~~ ~~ ~~~`] [cmd literals]
 * [Display code ``` ``↵ `` ```](#display-code)
 * [Inline code `` ` ` ``](#inline-code)
 * [Comments `<!-- -->`](#comments)
@@ -269,7 +269,7 @@ The syntax of CMD, in the order of processing, is thus:
 ###
 
 {^^
-  [.flags.]({{!}} {.content.} {{!}})
+  [.flags.]{{~~~ ~~ ~~~}} {.content.} {{~~~ ~~ ~~~}}
 ^^}
 
 ----
@@ -285,13 +285,12 @@ Whitespace around {^ {.content.} ^} is stripped.
 * `a` to enable all flags above
 ====
 ----
-For {^ {.content.} ^} containing one or more consecutive exclamation marks
-followed by a closing round bracket,
-use a longer run of {{exclamation marks}} in the delimiters.
+For {^ {.content.} ^} containing two or more consecutive tildes,
+use a longer run of {{tildes}} in the delimiters.
 ----
 
 ----
-A good use case is to wrap `<script>` elements inside `(!! u(! !) !!)`.
+A good use case is to wrap `<script>` elements inside `~~~ u~~ ~~ ~~~`.
 This makes it immune to all CMD processing
 (e.g.~conversion of `* *` to `<em> </em>`).
 ----
@@ -303,27 +302,27 @@ This makes it immune to all CMD processing
 ====
 * CMD
   ````{cmd}
-  (!!!!
-    Escaping: (! & < > !).
-    Whitespace stripping: {(!      yes      !)}.
-    Enough exclamation marks: (!!! (!! (! never !) !!) !!!).
-  !!!!)
+  ~~~~~
+    Escaping: ~~ & < > ~~.
+    Whitespace stripping: {~~      yes      ~~}.
+    Enough tildes: ~~~~ ~~~ ~~ never ~~ ~~~ ~~~~.
+  ~~~~~
   ````
 
 * HTML
   ````{html}
-  (!!!!
+  ~~~~~
     Escaping: &amp; &lt; &gt;.
     Whitespace stripping: {yes}.
-    Enough exclamation marks: (!! (! never !) !!).
-  !!!!)
+    Enough tildes: ~~~ ~~ never ~~ ~~~.
+  ~~~~~
   ````
 
 * Rendered
   ----
-    Escaping: (! & < > !).
-    Whitespace stripping: {(!      yes      !)}.
-    Enough exclamation marks: (!!! (!! (! never !) !!) !!!).
+    Escaping: ~~ & < > ~~.
+    Whitespace stripping: {~~      yes      ~~}.
+    Enough tildes: ~~~~ ~~~ ~~ never ~~ ~~~ ~~~~.
   ----
 
 ====
@@ -342,10 +341,10 @@ This makes it immune to all CMD processing
 ====
 * CMD
   ````{cmd}
-  (!!!!
-    Escaping:     (! <b>blah</b> !).
-    No escaping: u(! <b>cough</b> !).
-  !!!!)
+  ~~~~
+    Escaping:     ~~ <b>blah</b> ~~.
+    No escaping: u~~ <b>cough</b> ~~.
+  ~~~~
   ````
 
 * HTML
@@ -356,8 +355,8 @@ This makes it immune to all CMD processing
 
 * Rendered
   ----
-    Escaping:     (! <b>blah</b> !).
-    No escaping: u(! <b>cough</b> !).
+    Escaping:     ~~ <b>blah</b> ~~.
+    No escaping: u~~ <b>cough</b> ~~.
   ----
 
 ====
@@ -369,15 +368,15 @@ This makes it immune to all CMD processing
 ====
 * CMD
   ````{cmd}
-  (!!!!
-    uc(!
+  ~~~~
+    uc~~
       <pre>
         Blah blah blah\
           Cough cough cough
             Yep yep yep
       </pre>
-    !)
-  !!!!)
+    ~~
+  ~~~~
   ````
 
 * HTML
@@ -389,13 +388,13 @@ This makes it immune to all CMD processing
   ````
 
 * Rendered
-    uc(!
+    uc~~
       <pre>
         Blah blah blah\
           Cough cough cough
             Yep yep yep
       </pre>
-    !)
+    ~~
 
 ====
 
@@ -409,15 +408,15 @@ This makes it immune to all CMD processing
 ====
 * CMD
   ````{cmd}
-  (!!!!
-    uw(!
+  ~~~~
+    uw~~
       <pre>
         Blah blah blah
           Cough cough cough
             Yep yep yep
       </pre>
-    !)
-  !!!!)
+    ~~
+  ~~~~
   ````
 
 * HTML
@@ -430,13 +429,13 @@ This makes it immune to all CMD processing
   ````
 
 * Rendered
-    uw(!
+    uw~~
       <pre>
         Blah blah blah
           Cough cough cough
             Yep yep yep
       </pre>
-    !)
+    ~~
 
 ====
 
@@ -457,14 +456,14 @@ from being interpreted as the class `dumb-id`:
 ====
 * CMD
   ````{cmd}
-  (!!
+  ~~~~
     ``{dumb-id}
       Whoops!
     ``
-    ``(! {dumb-id} !)
+    ``~~ {dumb-id} ~~
       That's better.
     ``
-  !!)
+  ~~~~
   ````
 
 * HTML
@@ -484,7 +483,7 @@ from being interpreted as the class `dumb-id`:
 ###
 
 {^^
-  [.flags.]{{ (!``!) }}[.id.]{[.class.]}\newline {.content.} {{ (!``!) }}
+  [.flags.]{{ ~~``~~ }}[.id.]{[.class.]}\newline {.content.} {{ ~~``~~ }}
 ^^}
 
 ----
@@ -496,12 +495,12 @@ If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 Produces the display code
 {^
-  (! <pre !)
-    id="[.id.]" class="[.class.]"(! > !)\
-      (! <code> !)\
+  ~~ <pre ~~
+    id="[.id.]" class="[.class.]"~~ > ~~\
+      ~~ <code> ~~\
         {.content.}\
-      (! </code> !)\
-  (! </pre> !)
+      ~~ </code> ~~\
+  ~~ </pre> ~~
 ^},
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
@@ -522,11 +521,11 @@ use a longer run of {{backticks}} in the delimiters.
 ====
 * CMD
   ``````{cmd}
-  (!!!!
+  ~~~~
     ``id-0{class-1 class-2}
         Escaping: & < >.
         Note that CMD literals have higher precedence,
-        since they are processed first: (!! (! literally !) !!).
+        since they are processed first: ~~~ ~~ literally ~~ ~~~.
             Uniform
             de-indentation:
             yes.
@@ -538,15 +537,15 @@ use a longer run of {{backticks}} in the delimiters.
       no corresponding attributes are generated.
       ``
     ````
-  !!!!)
+  ~~~~
   ``````
 
 * HTML
   ``````{html}
-  (!!!!
+  ~~~~
     <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
     Note that CMD literals have higher precedence,
-    since they are processed first: (! literally !).
+    since they are processed first: ~~ literally ~~.
         Uniform
         de-indentation:
         yes.
@@ -557,14 +556,14 @@ use a longer run of {{backticks}} in the delimiters.
     no corresponding attributes are generated.
     ``
     </code></pre>
-  !!!!)
+  ~~~~
   ``````
 
 * Rendered
     ``id-0{class-1 class-2}
         Escaping: & < >.
         Note that CMD literals have higher precedence,
-        since they are processed first: (!! (! literally !) !!).
+        since they are processed first: ~~~ ~~ literally ~~ ~~~.
             Uniform
             de-indentation:
             yes.
@@ -585,15 +584,15 @@ use a longer run of {{backticks}} in the delimiters.
 ###
 
 {^^
-  [.flags.]{{ (!`!) }} {.content.} {{ (!`!) }}
+  [.flags.]{{ ~~`~~ }} {.content.} {{ ~~`~~ }}
 ^^}
 
 ----
 Produces the inline code
 {^
-  (! <code> !)\
+  ~~ <code> ~~\
     {.content.}\
-  (! </code> !)
+  ~~ </code> ~~
 ^},
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
@@ -637,15 +636,15 @@ use a longer run of {{backticks}} in the delimiters.
 ###
 
 {^^
-  (! <!-- !) {.comment.} (! --> !)
+  ~~ <!-- ~~ {.comment.} ~~ --> ~~
 ^^}
 
 ----
 Removed, along with any preceding horizontal whitespace.
 Although comments are weaker than literals and code
 they may still be used to remove them.
-For instance ` (!! (! A <!-- B --> !) !!) ` becomes ` A <!-- B --> `,
-whereas ` (!! <!-- A (! B !) --> !!) ` is removed entirely.
+For instance ` ~~~ ~~ A <!-- B --> ~~ ~~~ ` becomes ` A <!-- B --> `,
+whereas ` ~~~ <!-- A ~~ B ~~ --> ~~~ ` is removed entirely.
 In this sense they are stronger than literals and code.
 ----
 
@@ -656,7 +655,7 @@ In this sense they are stronger than literals and code.
 ###
 
 {^^
-  [.flags.]{{ (!$$!) }}[.id.]{[.class.]}\newline {.content.} {{ (!$$!) }}
+  [.flags.]{{ ~~$$~~ }}[.id.]{[.class.]}\newline {.content.} {{ ~~$$~~ }}
 ^^}
 
 ----
@@ -668,10 +667,10 @@ If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 Produces
 {^
-  (! <div !)
-    id="[.id.]" class="js-maths [.class.]"(! > !)\
+  ~~ <div ~~
+    id="[.id.]" class="js-maths [.class.]"~~ > ~~\
       {.content.}\
-  (! </div> !)
+  ~~ </div> ~~
 ^},
 with HTML syntax-character escaping
 and de-indentation for {^ {.content.} ^}.
@@ -726,15 +725,15 @@ On this page I am using [KaTeX].
 ###
 
 {^^
-  [.flags.]{{ (!$!) }} {.content.} {{ (!$!) }}
+  [.flags.]{{ ~~$~~ }} {.content.} {{ ~~$~~ }}
 ^^}
 
 ----
 Produces
 {^
-  (! <span class="js-maths"> !)\
+  ~~ <span class="js-maths"> ~~\
     {.content.}\
-  (! </span> !)
+  ~~ </span> ~~
 ^},
 with HTML syntax-character escaping for {^ {.content.} ^}.
 Whitespace around {^ {.content.} ^} is stripped.
@@ -783,12 +782,12 @@ On this page I am using [KaTeX].
 ###
 
 {^^
-  ({{ (!+!) }} {.(! file name !).} {{ (!+!) }})
+  ({{ + }} {.file name.} {{ + }})
 ^^}
 
 ----
-Includes the content of the file {^ {.(! file name !).} ^}.
-For {^ {.(! file name !).} ^} containing one or more consecutive plus signs
+Includes the content of the file {^ {.file name.} ^}.
+For {^ {.file name.} ^} containing one or more consecutive plus signs
 followed by a closing round bracket,
 use a longer run of {{plus signs}} in the delimiters.
 ----
@@ -824,7 +823,7 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ###
 
 {^^
-  (!{!){{ (!%!) }} {.pattern.} {{ (!%!) }} {.replacement.} {{ (!%!) }}(!}!)
+  ~~{~~{{ % }} {.pattern.} {{ % }} {.replacement.} {{ % }}~~}~~
 ^^}
 
 ----
@@ -886,7 +885,7 @@ which are of the form {^ %{.property name.} ^}.
 ###
 
 {^^
-  (!{!){{ (!:!) }} {.pattern.} {{ (!:!) }} {.replacement.} {{ (!:!) }}(!}!)
+  ~~{~~{{ : }} {.pattern.} {{ : }} {.replacement.} {{ : }}~~}~~
 ^^}
 
 ----
@@ -961,7 +960,7 @@ which are of the form {^ %{.property name.} ^}.
 ###
 
 {^^
-  {{ (!%%!) }}\newline {.content.} {{ (!%%!) }}
+  {{ %% }}\newline {.content.} {{ %% }}
 ^^}
 
 ----
@@ -1066,6 +1065,7 @@ are computed based on the supplied original properties:
 ====
 * CMD
   ````{cmd}
+  ~~~~
     %%
       %lang en-AU
       %title My title
@@ -1075,23 +1075,24 @@ are computed based on the supplied original properties:
       %date-modified 2020-04-11
       %description
         This is the description. Hooray for automatic escaping (&, <, >, ")!
-      %css a(!
+      %css a~~
         #special {
           color: purple;
         }
-      !)
+      ~~
       %onload-js
         special.textContent += ' This is a special paragraph!'
     %%
-
+    
     # %title #
-
+    
     ----special
       The title of this page is "%title", and the author is %author.
       At the time of writing, next year will be %year-modified-next.
     ----
-
+    
     %footer-element
+  ~~~~
   ````
 
 * HTML
@@ -1134,10 +1135,10 @@ are computed based on the supplied original properties:
 ----
 Produces the heading
 {^
-  (! <h1 !)
-    id="[.id.]"(! > !)\
+  ~~ <h1 ~~
+    id="[.id.]"~~ > ~~\
       {.content.}\
-  (! </h1> !)
+  ~~ </h1> ~~
 ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
@@ -1345,7 +1346,7 @@ the curly brackets surrounding it may be omitted.
 ###
 
 {^^
-  {{ (! '''' !) }}[.id.]{[.class.]}\newline {.content.} {{ (! '''' !) }}
+  {{ '''' }}[.id.]{[.class.]}\newline {.content.} {{ '''' }}
 ^^}
 
 ----
@@ -1641,18 +1642,18 @@ the curly brackets surrounding it may be omitted.
     , Backslash
   ==
     , `\/`
-    , `(! !)`
+    , `~~ ~~`
     ,
     , Empty string
   ==
     , `\ /`
-    , `(! !) (! !)`
+    , `~~ ~~ ~~ ~~`
     , \ /
     , Space
   ==
-    , `\ (! !)`
-    , `(! !) (! !)`
-    , \ (! !)
+    , `\ ~~ ~~`
+    , `~~ ~~ ~~ ~~`
+    , \ ~~ ~~
     , Space
   ==
     , `\~`
@@ -1805,7 +1806,7 @@ All leading whitespace on the next line is stripped.
 ####
 
 {^^
-  (! ![ !){.alt.}]( {.src.} [.title.] )
+  ~~ ![ ~~{.alt.}]( {.src.} [.title.] )
 ^^}
 
 ----
@@ -1817,11 +1818,11 @@ they are automatically escaped as `&quot;`.
 ----
 Produces the image
 {^
-  (! <img !)
+  ~~ <img ~~
     alt="{.alt.}"
     src="{.src.}"
     title="[.title.]"\
-  (! > !)
+  ~~ > ~~
 ^}.
 For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
 one or more closing square or round brackets,
@@ -1860,9 +1861,9 @@ use [escapes](#punctuation) or [CMD literals].
 ====
 * Definition
   {^^
-    {{ (! @@ !) }}![{.label.}]{[.class.]}↵ \
+    {{ @@ }}![{.label.}]{[.class.]}↵ \
       {.src.} [.title.] \
-    {{ (! @@ !) }}[.width.]
+    {{ @@ }}[.width.]
   ^^}
 
 * Image
@@ -1889,13 +1890,13 @@ and {^ {.alt.} ^} is used as the label for that image.
 ----
 Produces the image
 {^
-  (! <img !)
+  ~~ <img ~~
     alt="{.alt.}"
     class="[.class.]"
     src="{.src.}"
     title="[.title.]"
     width="[.width.]"\
-  (! > !)
+  ~~ > ~~
 ^}.
 Whitespace around {^ [.label.] ^} is stripped.
 For definitions whose {^ {.label.} ^}, {^ [.class.] ^},
@@ -1954,7 +1955,7 @@ the latest specification shall prevail.
 ####
 
 {^^
-  (! [ !){.content.}]( {.href.} [.title.] )
+  ~~ [ ~~{.content.}]( {.href.} [.title.] )
 ^^}
 
 ----
@@ -1966,12 +1967,12 @@ they are automatically escaped as `&quot;`.
 ----
 Produces the link
 {^
-  (! <a !)
+  ~~ <a ~~
     href="{.href.}"
     title="[.title.]"\
-  (! > !)\
+  ~~ > ~~\
     {.content.}\
-  (! </a> !)
+  ~~ </a> ~~
 ^}.
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^}, {^ {.href.} ^}, or {^ [.title.] ^} containing
@@ -2016,9 +2017,9 @@ use [escapes](#punctuation) or [CMD literals].
 ====
 * Definition
   {^^
-    {{ (! @@ !) }}[{.label.}]{[.class.]}↵ \
+    {{ @@ }}[{.label.}]{[.class.]}↵ \
       {.href.} [.title.] \
-    {{ (! @@ !) }}
+    {{ @@ }}
   ^^}
 
 * Link
@@ -2044,13 +2045,13 @@ and {^ {.content.} ^} is used as the label for that link.
 ----
 Produces the link
 {^
-  (! <a !)
+  ~~ <a ~~
     class="[.class.]"
     href="{.href.}"
     title="[.title.]"\
-  (! > !)\
+  ~~ > ~~\
     {.content.}\
-  (! </a> !)
+  ~~ </a> ~~
 ^}.
 Whitespace around {^ {.content.} ^} and {^ [.label.] ^} is stripped.
 For definitions whose {^ {.label.} ^}, {^ [.class.] ^},
