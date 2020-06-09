@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-05-05
+Last modified: 2020-06-09
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -738,6 +738,7 @@ If omitted from a preamble,
 they take the default values shown beside them:
 </p>
 <pre class="cmd"><code>%lang en
+%viewport width=device-width, initial-scale=1
 %title Title
 %title-suffix
 %author
@@ -757,6 +758,7 @@ are computed based on the supplied original properties:
 <pre class="cmd"><code>%html-lang-attribute
 %meta-element-author
 %meta-element-description
+%meta-element-viewport
 %title-element
 %style-element
 %body-onload-attribute
@@ -778,6 +780,7 @@ are computed based on the supplied original properties:
 &lt;html lang="en"&gt;
 &lt;head&gt;
 &lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 &lt;title&gt;Title&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -824,6 +827,7 @@ are computed based on the supplied original properties:
 &lt;meta charset="utf-8"&gt;
 &lt;meta name="author" content="Me"&gt;
 &lt;meta name="description" content="This is the description. Hooray for automatic escaping (&amp;amp;, &amp;lt;, &amp;gt;, &amp;quot;)!"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 &lt;title&gt;My title | My site&lt;/title&gt;
 &lt;style&gt;#special {
 color: purple;

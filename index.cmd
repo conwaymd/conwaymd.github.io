@@ -3,9 +3,8 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-05-05
+%date-modified 2020-06-09
 %resources a~~
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
@@ -1005,6 +1004,7 @@ they take the default values shown beside them:
 ----
 ````{cmd}
   %lang en
+  %viewport width=device-width, initial-scale=1
   %title Title
   %title-suffix
   %author
@@ -1026,6 +1026,7 @@ are computed based on the supplied original properties:
   %html-lang-attribute
   %meta-element-author
   %meta-element-description
+  %meta-element-viewport
   %title-element
   %style-element
   %body-onload-attribute
@@ -1051,6 +1052,7 @@ are computed based on the supplied original properties:
     <html lang="en">
     <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     </head>
     <body>
@@ -1103,6 +1105,7 @@ are computed based on the supplied original properties:
     <meta charset="utf-8">
     <meta name="author" content="Me">
     <meta name="description" content="This is the description. Hooray for automatic escaping (&amp;, &lt;, &gt;, &quot;)!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My title | My site</title>
     <style>#special {
     color: purple;
