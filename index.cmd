@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-06-09
+%date-modified 2020-06-21
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -201,16 +201,6 @@ Omit `[cmd_name[.[cmd]]]` to convert all CMD files
 in the current directory (at all levels),
 except those listed in `.cmdignore`.
 ----
-
-###optional-arguments
-  Optional arguments
-###
-
-====
-* `-c`, `--clean-url` \+
-  Remove the `.html` extension from the property `%url`
-  (defined whenever a [preamble](#preamble) is supplied).
-====
 
 
 ##syntax
@@ -1035,6 +1025,7 @@ are computed based on the supplied original properties:
   %year-modified-next
   %footer-element
   %url
+  %clean-url
 ````
 
 ####preamble-minimal Example 1: a minimal HTML file ####
