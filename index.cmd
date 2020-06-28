@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-06-21
+%date-modified 2020-06-28
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -1855,9 +1855,9 @@ use [escapes](#punctuation) or [CMD literals].
 ====
 * Definition
   {^^
-    {{ @@ }}![{.label.}]{[.class.]}↵ \
+    {{ @@ }}![{.label.}]{[.class.]}[[.width.]]↵ \
       {.src.} [.title.] \
-    {{ @@ }}[.width.]
+    {{ @@ }}
   ^^}
 
 * Image
@@ -1876,6 +1876,8 @@ are case insensitive.
 Non-empty {^ [.width.] ^} in a definition must consist of digits only.
 If {^ [.class.] ^} in a definition is empty,
 the curly brackets surrounding it may be omitted.
+If {^ [.width.] ^} in a definition is empty,
+the square brackets surrounding it may be omitted.
 If {^ [.label.] ^} in an image is empty,
 the square brackets surrounding it may be omitted,
 and {^ {.alt.} ^} is used as the label for that image.
@@ -1913,10 +1915,10 @@ the latest specification shall prevail.
 ====
 * CMD
   ````{cmd}
-  @@![moses-breaking-tablets]
+  @@![moses-breaking-tablets][200]
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
-  @@200
+  @@
   
   ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
   ````
@@ -1928,10 +1930,10 @@ the latest specification shall prevail.
 
 * Rendered
   ----
-  @@![moses-breaking-tablets]
+  @@![moses-breaking-tablets][200]
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
-  @@200
+  @@
   
   ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
   ----
