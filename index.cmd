@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-06-28
+%date-modified 2020-06-30
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -225,7 +225,6 @@ The syntax of CMD, in the order of processing, is thus:
 * [Regex replacements `{% % %}`](#regex-replacements)
 * [Ordinary replacements `{: : :}`](#ordinary-replacements)
 * [Preamble `%%↵ %%`](#preamble)
-* [Headings `# #`](#headings)
 * [Blocks `----↵ ----` etc.](#blocks)
   ====
   * [List items `*`, `+`, `-`, `1.`](#list-items)
@@ -248,6 +247,7 @@ The syntax of CMD, in the order of processing, is thus:
   * [Inline-style links `[ ]( )`](#inline-style-links)
   * [Reference-style links `@@[ ]↵ @@`, `[ ][ ]`](#reference-style-links)
   ====
+* [Headings `# #`](#headings)
 * [Inline semantics `* *`, `** **`, `_ _`, `__ __`](#inline-semantics)
 * [Whitespace](#whitespace)
 ======
@@ -1113,44 +1113,6 @@ are computed based on the supplied original properties:
     </footer>
     </body>
     </html>
-  ````
-
-====
-
-
-###headings
-  Headings
-###
-
-{^^
-  \#[.id.] {.content.} \#
-^^}
-
-----
-Produces the heading
-{^
-  ~~ <h1 ~~
-    id="[.id.]"~~ > ~~\
-      {.content.}\
-  ~~ </h1> ~~
-^}.
-Whitespace around {^ {.content.} ^} is stripped.
-For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
-For {^ {.content.} ^} containing the delimiting number of
-or more consecutive hashes, use [CMD literals].
-----
-
-====
-* CMD
-  ````{cmd}
-    ###some-id Heading with id ###
-    #### Heading without id ####
-  ````
-
-* HTML
-  ````{html}
-    <h3 id="some-id">Heading with id</h3>
-    <h4>Heading without id</h4>
   ````
 
 ====
@@ -2098,6 +2060,44 @@ the latest specification shall prevail.
   [Wikipedia][] \+
   [Wikipedia]
   ----
+
+====
+
+
+###headings
+  Headings
+###
+
+{^^
+  \#[.id.] {.content.} \#
+^^}
+
+----
+Produces the heading
+{^
+  ~~ <h1 ~~
+    id="[.id.]"~~ > ~~\
+      {.content.}\
+  ~~ </h1> ~~
+^}.
+Whitespace around {^ {.content.} ^} is stripped.
+For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
+For {^ {.content.} ^} containing the delimiting number of
+or more consecutive hashes, use [CMD literals].
+----
+
+====
+* CMD
+  ````{cmd}
+    ###some-id Heading with id ###
+    #### Heading without id ####
+  ````
+
+* HTML
+  ````{html}
+    <h3 id="some-id">Heading with id</h3>
+    <h4>Heading without id</h4>
+  ````
 
 ====
 

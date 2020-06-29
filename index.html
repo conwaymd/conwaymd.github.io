@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-06-28
+Last modified: 2020-06-30
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -139,8 +139,6 @@ The syntax of CMD, in the order of processing, is thus:
 </li>
 <li><a href="#preamble">Preamble <code>%%↵ %%</code></a>
 </li>
-<li><a href="#headings">Headings <code># #</code></a>
-</li>
 <li><a href="#blocks">Blocks <code>----↵ ----</code> etc.</a>
 <ul>
 <li><a href="#list-items">List items <code>*</code>, <code>+</code>, <code>-</code>, <code>1.</code></a>
@@ -176,6 +174,8 @@ The syntax of CMD, in the order of processing, is thus:
 <li><a href="#reference-style-links">Reference-style links <code>@@[ ]↵ @@</code>, <code>[ ][ ]</code></a>
 </li>
 </ul>
+</li>
+<li><a href="#headings">Headings <code># #</code></a>
 </li>
 <li><a href="#inline-semantics">Inline semantics <code>* *</code>, <code>** **</code>, <code>_ _</code>, <code>__ __</code></a>
 </li>
@@ -838,28 +838,6 @@ At the time of writing, next year will be 2021.
 &lt;/footer&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>
-</li>
-</ul>
-<h3 id="headings"><a class="permalink" href="#headings" aria-label="Permalink"></a>Headings</h3>
-<pre class="cmd syntax"><code>#<span class="optional-argument">id</span> <span class="mandatory-argument">content</span> #</code></pre>
-<p>
-Produces the heading
-<code>&lt;h1 id="<span class="optional-argument">id</span>"&gt;<span class="mandatory-argument">content</span>&lt;/h1&gt;</code>.
-Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
-For <code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>, use 2 to 6 delimiting hashes respectively.
-For <code><span class="mandatory-argument">content</span></code> containing the delimiting number of
-or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>###some-id Heading with id ###
-#### Heading without id ####
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;h3 id="some-id"&gt;Heading with id&lt;/h3&gt;
-&lt;h4&gt;Heading without id&lt;/h4&gt;
 </code></pre>
 </li>
 </ul>
@@ -1677,6 +1655,28 @@ the latest specification shall prevail.
 <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a><br>
 <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a>
 </p>
+</li>
+</ul>
+<h3 id="headings"><a class="permalink" href="#headings" aria-label="Permalink"></a>Headings</h3>
+<pre class="cmd syntax"><code>#<span class="optional-argument">id</span> <span class="mandatory-argument">content</span> #</code></pre>
+<p>
+Produces the heading
+<code>&lt;h1 id="<span class="optional-argument">id</span>"&gt;<span class="mandatory-argument">content</span>&lt;/h1&gt;</code>.
+Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
+For <code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>, use 2 to 6 delimiting hashes respectively.
+For <code><span class="mandatory-argument">content</span></code> containing the delimiting number of
+or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>###some-id Heading with id ###
+#### Heading without id ####
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;h3 id="some-id"&gt;Heading with id&lt;/h3&gt;
+&lt;h4&gt;Heading without id&lt;/h4&gt;
+</code></pre>
 </li>
 </ul>
 <h3 id="inline-semantics"><a class="permalink" href="#inline-semantics" aria-label="Permalink"></a>Inline semantics</h3>
