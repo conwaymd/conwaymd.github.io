@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-06-30
+Last modified: 2020-07-01
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -593,7 +593,8 @@ so there is no need to worry about recursion errors: (+ inclusion.txt +)
 <pre class="cmd syntax"><code><span class="optional-argument">flag</span>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">pattern</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">replacement</span> <span class="repeatable-delimiter">%</span>}</code></pre>
 <p>
 Processes regex replacements of <code><span class="mandatory-argument">pattern</span></code> by <code><span class="mandatory-argument">replacement</span></code>
-in Python syntax with the flags <code>re.MULTILINE</code> and <code>re.VERBOSE</code> enabled.
+according to Python regex syntax,
+with the flags <code>re.ASCII</code>, <code>re.MULTILINE</code>, and <code>re.VERBOSE</code> enabled.
 Whitespace around <code><span class="mandatory-argument">pattern</span></code> and <code><span class="mandatory-argument">replacement</span></code> is stripped.
 For <code><span class="mandatory-argument">pattern</span></code> or <code><span class="mandatory-argument">replacement</span></code> containing
 one or more consecutive percent signs,

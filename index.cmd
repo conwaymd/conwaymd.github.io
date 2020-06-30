@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-06-30
+%date-modified 2020-07-01
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -817,7 +817,8 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 
 ----
 Processes regex replacements of {^ {.pattern.} ^} by {^ {.replacement.} ^}
-in Python syntax with the flags `re.MULTILINE` and `re.VERBOSE` enabled.
+according to Python regex syntax,
+with the flags `re.ASCII`, `re.MULTILINE`, and `re.VERBOSE` enabled.
 Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
 For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
 one or more consecutive percent signs,
