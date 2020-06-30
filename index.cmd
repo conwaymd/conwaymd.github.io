@@ -2316,6 +2316,15 @@ Recursive calls are used to process nested inline semantics.
 ###
 
 ----
+Throughout this document, "whitespace" refers specifically to ASCII whitespace.
+See [`string.whitespace`][string.whitespace]:
+----
+""""
+~~[~~...~~]~~ all ASCII characters that are considered whitespace.
+~~[~~...~~]~~ space, tab, linefeed, return, formfeed, and vertical tab.
+""""
+
+----
 Whitespace is processed as follows:
 ----
 ++++
@@ -2371,4 +2380,8 @@ Whitespace is processed as follows:
 @@[markdown]
   https://daringfireball.net/projects/markdown/
   Daring Fireball: Markdown
+@@
+
+@@[string.whitespace]
+  https://docs.python.org/3/library/string.html#string.whitespace
 @@
