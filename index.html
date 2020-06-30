@@ -155,7 +155,7 @@ The syntax of CMD, in the order of processing, is thus:
 </li>
 </ul>
 </li>
-<li><a href="#punctuation">Punctuation (or, escapes) <code>\\</code> etc.</a>
+<li><a href="#escapes">Escapes <code>\\</code> etc.</a>
 </li>
 <li><a href="#line-continuations">Line continuations <code>\↵</code></a>
 </li>
@@ -612,7 +612,7 @@ and specifies when the regex replacement is to be applied:
 </li>
 <li><code>t</code> for just before processing <a href="#tables">tables</a>
 </li>
-<li><code>e</code> for just before processing <a href="#punctuation">punctuation/escapes</a>
+<li><code>e</code> for just before processing <a href="#escapes">escapes</a>
 </li>
 <li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
 </li>
@@ -689,7 +689,7 @@ and specifies when the ordinary replacement is to be applied:
 </li>
 <li><code>t</code> for just before processing <a href="#tables">tables</a>
 </li>
-<li><code>e</code> for just before processing <a href="#punctuation">punctuation/escapes</a>
+<li><code>e</code> for just before processing <a href="#escapes">escapes</a>
 </li>
 <li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
 </li>
@@ -1329,7 +1329,7 @@ the curly brackets surrounding it may be omitted.
 </table>
 </li>
 </ul>
-<h3 id="punctuation"><a class="permalink" href="#punctuation" aria-label="Permalink"></a>Punctuation (or, escapes)</h3>
+<h3 id="escapes"><a class="permalink" href="#escapes" aria-label="Permalink"></a>Escapes</h3>
 <div class="centred-flex">
 <table>
 <tr>
@@ -1528,7 +1528,7 @@ Produces the image
 <code>&lt;img alt="<span class="mandatory-argument">alt</span>" src="<span class="mandatory-argument">src</span>" title="<span class="optional-argument">title</span>"&gt;</code>.
 For <code><span class="mandatory-argument">alt</span></code>, <code><span class="mandatory-argument">src</span></code>, or <code><span class="optional-argument">title</span></code> containing
 one or more closing square or round brackets,
-use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
 <ul>
 <li>CMD
@@ -1584,7 +1584,7 @@ which are not protected by CMD literals,
 use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
 For images whose <code><span class="mandatory-argument">alt</span></code> or <code><span class="optional-argument">label</span></code> contains
 one or more closing square brackets,
-use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
 <p>
 All image definitions are read and stored
@@ -1626,7 +1626,7 @@ Produces the link
 Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
 For <code><span class="mandatory-argument">content</span></code>, <code><span class="mandatory-argument">href</span></code>, or <code><span class="optional-argument">title</span></code> containing
 one or more closing square or round brackets,
-use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
 <ul>
 <li>CMD
@@ -1683,7 +1683,7 @@ which are not protected by CMD literals,
 use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
 For links whose <code><span class="mandatory-argument">content</span></code> or <code><span class="optional-argument">label</span></code> contains
 one or more closing square brackets,
-use <a href="#punctuation">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
 <p>
 All link definitions are read and stored
@@ -1751,7 +1751,7 @@ Produces the inline semantic
 Whitespace around <code><span class="mandatory-argument">content</span></code> is stripped.
 For <code><span class="mandatory-argument">content</span></code> containing one or more occurrences
 of the delimiting characters <code>c</code> (<code>*</code> or <code>_</code>),
-use <a href="#cmd-literals">CMD literals</a> or the <a href="#punctuation">escapes</a> <code>\*</code> and <code>\_</code>.
+use <a href="#cmd-literals">CMD literals</a> or the <a href="#escapes">escapes</a> <code>\*</code> and <code>\_</code>.
 </p>
 <p>
 The following delimiters (<code>X</code>),

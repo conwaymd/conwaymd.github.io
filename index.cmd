@@ -235,7 +235,7 @@ The syntax of CMD, in the order of processing, is thus:
   * [Table rows `==`](#table-rows)
   * [Table parts `|^`, `|:`, `|_`](#table-parts)
   ====
-* [Punctuation (or, escapes) `\\` etc.](#punctuation)
+* [Escapes `\\` etc.](#escapes)
 * [Line continuations `\↵`](#line-continuations)
 * [Images](#images)
   ====
@@ -832,7 +832,7 @@ and specifies when the regex replacement is to be applied:
 * `p` for just before processing [preamble](#preamble)
 * `b` for just before processing [blocks](#blocks)
 * `t` for just before processing [tables](#tables)
-* `e` for just before processing [punctuation/escapes](#punctuation)
+* `e` for just before processing [escapes]
 * `c` for just before processing [line continuations](#line-continuations)
 * `i` for just before processing [images](#images)
 * `l` for just before processing [links](#links)
@@ -909,7 +909,7 @@ and specifies when the ordinary replacement is to be applied:
 * `p` for just before processing [preamble](#preamble)
 * `b` for just before processing [blocks](#blocks)
 * `t` for just before processing [tables](#tables)
-* `e` for just before processing [punctuation/escapes](#punctuation)
+* `e` for just before processing [escapes]
 * `c` for just before processing [line continuations](#line-continuations)
 * `i` for just before processing [images](#images)
 * `l` for just before processing [links](#links)
@@ -1615,8 +1615,8 @@ the curly brackets surrounding it may be omitted.
 ====
 
 
-###punctuation
-  Punctuation (or, escapes)
+###escapes
+  Escapes
 ###
 
 
@@ -1818,7 +1818,7 @@ Produces the image
 ^}.
 For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
 one or more closing square or round brackets,
-use [escapes](#punctuation) or [CMD literals].
+use [escapes] or [CMD literals].
 ----
 
 ====
@@ -1900,7 +1900,7 @@ which are not protected by CMD literals,
 use a longer run of {{at signs}} in the delimiters.
 For images whose {^ {.alt.} ^} or {^ [.label.] ^} contains
 one or more closing square brackets,
-use [escapes](#punctuation) or [CMD literals].
+use [escapes] or [CMD literals].
 ----
 
 ----
@@ -1971,7 +1971,7 @@ Produces the link
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^}, {^ {.href.} ^}, or {^ [.title.] ^} containing
 one or more closing square or round brackets,
-use [escapes](#punctuation) or [CMD literals].
+use [escapes] or [CMD literals].
 ----
 
 ====
@@ -2055,7 +2055,7 @@ which are not protected by CMD literals,
 use a longer run of {{at signs}} in the delimiters.
 For links whose {^ {.content.} ^} or {^ [.label.] ^} contains
 one or more closing square brackets,
-use [escapes](#punctuation) or [CMD literals].
+use [escapes] or [CMD literals].
 ----
 
 ----
@@ -2162,7 +2162,7 @@ Produces the inline semantic
 Whitespace around {^ {.content.} ^} is stripped.
 For {^ {.content.} ^} containing one or more occurrences
 of the delimiting characters `c` (`*` or `_`),
-use [CMD literals] or the [escapes](#punctuation) `\*` and `\_`.
+use [CMD literals] or the [escapes] `\*` and `\_`.
 ----
 
 ----
@@ -2336,6 +2336,9 @@ Whitespace is processed as follows:
   #cmd-literals
 @@
 
+@@[escapes]
+  #escapes
+@@
 
 @@[cmd-repo]
   https://github.com/conway-markdown/conway-markdown/
