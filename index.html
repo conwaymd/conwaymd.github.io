@@ -590,7 +590,7 @@ so there is no need to worry about recursion errors: (+ inclusion.txt +)
 </li>
 </ul>
 <h3 id="regex-replacements"><a class="permalink" href="#regex-replacements" aria-label="Permalink"></a>Regex replacements</h3>
-<pre class="cmd syntax"><code>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">pattern</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">replacement</span> <span class="repeatable-delimiter">%</span>}</code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">flag</span>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">pattern</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">replacement</span> <span class="repeatable-delimiter">%</span>}</code></pre>
 <p>
 Processes regex replacements of <code><span class="mandatory-argument">pattern</span></code> by <code><span class="mandatory-argument">replacement</span></code>
 in Python syntax with the flags <code>re.MULTILINE</code> and <code>re.VERBOSE</code> enabled.
@@ -600,11 +600,41 @@ one or more consecutive percent signs,
 use a longer run of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
 For <code><span class="mandatory-argument">pattern</span></code> matching any of the syntax above,
 which should not be processed using that syntax, use CMD literals.
+<code><span class="optional-argument">flag</span></code> may consist of zero or one of the following characters,
+and specifies when the regex replacement is to be applied:
+</p>
+<ul>
+<li><code>A</code> for immediately after processing regex replacements
+</li>
+<li><code>p</code> for just before processing <a href="#preamble">preamble</a>
+</li>
+<li><code>b</code> for just before processing <a href="#blocks">blocks</a>
+</li>
+<li><code>t</code> for just before processing <a href="#tables">tables</a>
+</li>
+<li><code>e</code> for just before processing <a href="#punctuation">punctuation/escapes</a>
+</li>
+<li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
+</li>
+<li><code>i</code> for just before processing <a href="#images">images</a>
+</li>
+<li><code>l</code> for just before processing <a href="#links">links</a>
+</li>
+<li><code>h</code> for just before processing <a href="#headings">headings</a>
+</li>
+<li><code>s</code> for just before processing <a href="#inline-semantics">inline semantics</a>
+</li>
+<li><code>w</code> for just before processing <a href="#whitespace">whitespace</a>
+</li>
+<li><code>Z</code> for just before replacing placeholder strings
+</li>
+</ul>
+<p>
+If <code><span class="optional-argument">flag</span></code> is empty, it defaults to <code>A</code>.
 </p>
 <p>
-All regex replacement specifications are read and stored
-before being applied in order.
-If the same pattern is specified more than once,
+All regex replacement specifications are read and stored.
+If the same pattern is specified more than once for a given flag,
 the latest specification shall prevail.
 </p>
 <p>
@@ -640,18 +670,48 @@ do not use replacements to alter property strings,
 which are of the form <code>%<span class="mandatory-argument">property name</span></code>.
 </p>
 <h3 id="ordinary-replacements"><a class="permalink" href="#ordinary-replacements" aria-label="Permalink"></a>Ordinary replacements</h3>
-<pre class="cmd syntax"><code>{<span class="repeatable-delimiter">:</span> <span class="mandatory-argument">pattern</span> <span class="repeatable-delimiter">:</span> <span class="mandatory-argument">replacement</span> <span class="repeatable-delimiter">:</span>}</code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">flag</span>{<span class="repeatable-delimiter">:</span> <span class="mandatory-argument">pattern</span> <span class="repeatable-delimiter">:</span> <span class="mandatory-argument">replacement</span> <span class="repeatable-delimiter">:</span>}</code></pre>
 <p>
 Processes ordinary replacements of <code><span class="mandatory-argument">pattern</span></code> by <code><span class="mandatory-argument">replacement</span></code>.
 Whitespace around <code><span class="mandatory-argument">pattern</span></code> and <code><span class="mandatory-argument">replacement</span></code> is stripped.
 For <code><span class="mandatory-argument">pattern</span></code> or <code><span class="mandatory-argument">replacement</span></code> containing
 one or more consecutive colons,
 use a longer run of <span class="repeatable-delimiter">colons</span> in the delimiters.
+<code><span class="optional-argument">flag</span></code> may consist of zero or one of the following characters,
+and specifies when the ordinary replacement is to be applied:
+</p>
+<ul>
+<li><code>A</code> for immediately after processing ordinary replacements
+</li>
+<li><code>p</code> for just before processing <a href="#preamble">preamble</a>
+</li>
+<li><code>b</code> for just before processing <a href="#blocks">blocks</a>
+</li>
+<li><code>t</code> for just before processing <a href="#tables">tables</a>
+</li>
+<li><code>e</code> for just before processing <a href="#punctuation">punctuation/escapes</a>
+</li>
+<li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
+</li>
+<li><code>i</code> for just before processing <a href="#images">images</a>
+</li>
+<li><code>l</code> for just before processing <a href="#links">links</a>
+</li>
+<li><code>h</code> for just before processing <a href="#headings">headings</a>
+</li>
+<li><code>s</code> for just before processing <a href="#inline-semantics">inline semantics</a>
+</li>
+<li><code>w</code> for just before processing <a href="#whitespace">whitespace</a>
+</li>
+<li><code>Z</code> for just before replacing placeholder strings
+</li>
+</ul>
+<p>
+If <code><span class="optional-argument">flag</span></code> is empty, it defaults to <code>A</code>.
 </p>
 <p>
-All ordinary replacement specifications are read and stored
-before being applied in order.
-If the same pattern is specified more than once,
+All ordinary replacement specifications are read and stored.
+If the same pattern is specified more than once for a given flag,
 the latest specification shall prevail.
 </p>
 <ul>

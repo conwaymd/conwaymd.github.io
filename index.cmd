@@ -812,7 +812,7 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ###
 
 {^^
-  ~~{~~{{ % }} {.pattern.} {{ % }} {.replacement.} {{ % }}~~}~~
+  [.flag.]~~{~~{{ % }} {.pattern.} {{ % }} {.replacement.} {{ % }}~~}~~
 ^^}
 
 ----
@@ -824,12 +824,30 @@ one or more consecutive percent signs,
 use a longer run of {{percent signs}} in the delimiters.
 For {^ {.pattern.} ^} matching any of the syntax above,
 which should not be processed using that syntax, use CMD literals.
+{^ [.flag.] ^} may consist of zero or one of the following characters,
+and specifies when the regex replacement is to be applied:
+----
+====
+* `A` for immediately after processing regex replacements
+* `p` for just before processing [preamble](#preamble)
+* `b` for just before processing [blocks](#blocks)
+* `t` for just before processing [tables](#tables)
+* `e` for just before processing [punctuation/escapes](#punctuation)
+* `c` for just before processing [line continuations](#line-continuations)
+* `i` for just before processing [images](#images)
+* `l` for just before processing [links](#links)
+* `h` for just before processing [headings](#headings)
+* `s` for just before processing [inline semantics](#inline-semantics)
+* `w` for just before processing [whitespace](#whitespace)
+* `Z` for just before replacing placeholder strings
+====
+----
+If {^ [.flag.] ^} is empty, it defaults to `A`.
 ----
 
 ----
-All regex replacement specifications are read and stored
-before being applied in order.
-If the same pattern is specified more than once,
+All regex replacement specifications are read and stored.
+If the same pattern is specified more than once for a given flag,
 the latest specification shall prevail.
 ----
 
@@ -874,7 +892,7 @@ which are of the form {^ %{.property name.} ^}.
 ###
 
 {^^
-  ~~{~~{{ : }} {.pattern.} {{ : }} {.replacement.} {{ : }}~~}~~
+  [.flag.]~~{~~{{ : }} {.pattern.} {{ : }} {.replacement.} {{ : }}~~}~~
 ^^}
 
 ----
@@ -883,12 +901,30 @@ Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
 For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
 one or more consecutive colons,
 use a longer run of {{colons}} in the delimiters.
+{^ [.flag.] ^} may consist of zero or one of the following characters,
+and specifies when the ordinary replacement is to be applied:
+----
+====
+* `A` for immediately after processing ordinary replacements
+* `p` for just before processing [preamble](#preamble)
+* `b` for just before processing [blocks](#blocks)
+* `t` for just before processing [tables](#tables)
+* `e` for just before processing [punctuation/escapes](#punctuation)
+* `c` for just before processing [line continuations](#line-continuations)
+* `i` for just before processing [images](#images)
+* `l` for just before processing [links](#links)
+* `h` for just before processing [headings](#headings)
+* `s` for just before processing [inline semantics](#inline-semantics)
+* `w` for just before processing [whitespace](#whitespace)
+* `Z` for just before replacing placeholder strings
+====
+----
+If {^ [.flag.] ^} is empty, it defaults to `A`.
 ----
 
 ----
-All ordinary replacement specifications are read and stored
-before being applied in order.
-If the same pattern is specified more than once,
+All ordinary replacement specifications are read and stored.
+If the same pattern is specified more than once for a given flag,
 the latest specification shall prevail.
 ----
 
