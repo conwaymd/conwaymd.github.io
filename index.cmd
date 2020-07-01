@@ -221,7 +221,7 @@ The syntax of CMD, in the order of processing, is thus:
 * [Comments `<!-- -->`](#comments)
 * [Display maths `$$↵ $$`](#display-maths)
 * [Inline maths `$ $`](#inline-maths)
-* [Inclusions `(+ +)`](#inclusions)
+* [Inclusions `{+ +}`](#inclusions)
 * [Regex replacements `{% % %}`](#regex-replacements)
 * [Ordinary replacements `{: : :}`](#ordinary-replacements)
 * [Preamble `%%↵ %%`](#preamble)
@@ -771,13 +771,13 @@ On this page I am using [KaTeX].
 ###
 
 {^^
-  ({{ + }} {.file name.} {{ + }})
+  ~~ { ~~{{ + }} {.file name.} {{ + }}~~ } ~~
 ^^}
 
 ----
 Includes the content of the file {^ {.file name.} ^}.
 For {^ {.file name.} ^} containing one or more consecutive plus signs
-followed by a closing round bracket,
+followed by a closing curly bracket,
 use a longer run of {{plus signs}} in the delimiters.
 ----
 
@@ -789,19 +789,19 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ====
 * CMD
   ````{cmd}
-    (+ inclusion.txt +)
+    {+ inclusion.txt +}
   ````
 
 * HTML
   ````{html}
   This is content from <a href="/inclusion.txt"><code>inclusion.txt</code></a>.
   Nested inclusions are not processed,
-  so there is no need to worry about recursion errors: (+ inclusion.txt +)
+  so there is no need to worry about recursion errors: {+ inclusion.txt +}
   ````
 
 * Rendered
   ----
-    (+ inclusion.txt +)
+    {+ inclusion.txt +}
   ----
 
 ====
