@@ -42,7 +42,7 @@
 %%%%
 
 
-<!-- {^^ Syntax (display) ^^} -->
+<## {^^ Syntax (display) ^^} ##>
 {%
   \{ \^\^ [\s]*
     (?P<content> [\s\S]*? )
@@ -51,7 +51,7 @@
   <pre class="cmd syntax"><code>\g<content></code></pre>
 %}
 
-<!-- {^ Inline syntax ^} -->
+<## {^ Inline syntax ^} ##>
 {%
   \{ \^ [\s]*
     (?P<content> [\s\S]*? )
@@ -60,7 +60,7 @@
   <code>\g<content></code>
 %}
 
-<!-- {{ Repeatable delimiter }} -->
+<## {{ Repeatable delimiter }} ##>
 {%
   \{{2} [\s]*
     (?P<content> [\s\S]*? )
@@ -69,7 +69,7 @@
   <span class="repeatable-delimiter">\g<content></span>
 %}
 
-<!-- {.Mandatory.} -->
+<## {.Mandatory.} ##>
 {%
   \{ [.]
     (?P<content> [\s\S]*? )
@@ -78,7 +78,7 @@
   <span class="mandatory-argument">\g<content></span>
 %}
 
-<!-- [.Optional.] -->
+<## [.Optional.] ##>
 {%
   \[ [.]
     (?P<content> [\s\S]*? )
@@ -87,7 +87,7 @@
   <span class="optional-argument">\g<content></span>
 %}
 
-<!-- Heading permalinks (<h2> to <h6>) -->
+<## Heading permalinks (<h2> to <h6>) ##>
 {%
   ^ [^\S\n]*
   (?P<hashes> [#]{2,6} (?![#]) )
@@ -102,10 +102,10 @@
   \g<hashes>
 %}
 
-<!-- U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS -->
+<## U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS ##>
 {: \newline : ↵ :}
 
-<!-- U+E000 PRIVATE USE AREA -->
+<## U+E000 PRIVATE USE AREA ##>
 {: \e000 :  :}
 
 
@@ -218,7 +218,7 @@ The syntax of CMD, in the order of processing, is thus:
 * [CMD literals `~~~ ~~ ~~ ~~~`] [cmd literals]
 * [Display code ``` ``↵ `` ```](#display-code)
 * [Inline code `` ` ` ``](#inline-code)
-* [Comments `<!-- -->`](#comments)
+* [Comments `<# #>`](#comments)
 * [Display maths `$$↵ $$`](#display-maths)
 * [Inline maths `$ $`](#inline-maths)
 * [Inclusions `{+ +}`](#inclusions)
@@ -625,15 +625,20 @@ use a longer run of {{backticks}} in the delimiters.
 ###
 
 {^^
-  ~~ <!-- ~~ {.comment.} ~~ --> ~~
+  \<{{\#}} {.comment.} {{\#}}\>
 ^^}
 
 ----
 Removed, along with any preceding horizontal whitespace.
+For {^ {.comment.} ^} containing one or more consecutive hashes
+followed by a closing angle bracket,
+use a longer run of {{hashes}} in the delimiters.
+----
+----
 Although comments are weaker than literals and code
 they may still be used to remove them.
-For instance ` ~~~ ~~ A <!-- B --> ~~ ~~~ ` becomes ` A <!-- B --> `,
-whereas ` ~~~ <!-- A ~~ B ~~ --> ~~~ ` is removed entirely.
+For instance ` ~~~ ~~ A <# B #> ~~ ~~~ ` becomes ` A <# B #> `,
+whereas ` ~~~ <# A ~~ B ~~ #> ~~~ ` is removed entirely.
 In this sense they are stronger than literals and code.
 ----
 

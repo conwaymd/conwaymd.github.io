@@ -125,7 +125,7 @@ The syntax of CMD, in the order of processing, is thus:
 </li>
 <li><a href="#inline-code">Inline code <code>` `</code></a>
 </li>
-<li><a href="#comments">Comments <code>&lt;!-- --&gt;</code></a>
+<li><a href="#comments">Comments <code>&lt;# #&gt;</code></a>
 </li>
 <li><a href="#display-maths">Display maths <code>$$↵ $$</code></a>
 </li>
@@ -455,13 +455,18 @@ use a longer run of <span class="repeatable-delimiter">backticks</span> in the d
 </li>
 </ul>
 <h3 id="comments"><a class="permalink" href="#comments" aria-label="Permalink"></a>Comments</h3>
-<pre class="cmd syntax"><code>&lt;!-- <span class="mandatory-argument">comment</span> --&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;<span class="repeatable-delimiter">#</span> <span class="mandatory-argument">comment</span> <span class="repeatable-delimiter">#</span>&gt;</code></pre>
 <p>
 Removed, along with any preceding horizontal whitespace.
+For <code><span class="mandatory-argument">comment</span></code> containing one or more consecutive hashes
+followed by a closing angle bracket,
+use a longer run of <span class="repeatable-delimiter">hashes</span> in the delimiters.
+</p>
+<p>
 Although comments are weaker than literals and code
 they may still be used to remove them.
-For instance <code>~~ A &lt;!-- B --&gt; ~~</code> becomes <code>A &lt;!-- B --&gt;</code>,
-whereas <code>&lt;!-- A ~~ B ~~ --&gt;</code> is removed entirely.
+For instance <code>~~ A &lt;# B #&gt; ~~</code> becomes <code>A &lt;# B #&gt;</code>,
+whereas <code>&lt;# A ~~ B ~~ #&gt;</code> is removed entirely.
 In this sense they are stronger than literals and code.
 </p>
 <h3 id="display-maths"><a class="permalink" href="#display-maths" aria-label="Permalink"></a>Display maths</h3>
