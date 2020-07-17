@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-07-01
+%date-modified 2020-07-18
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -60,6 +60,13 @@
   <code>\g<content></code>
 %}
 
+<## Delimiting character or run \C \X \Y \Z ##>
+{%
+  \\ (?P<character> [CXYZ])
+%
+  \\<\g<character>\\>
+%}
+
 <## {{ Repeatable delimiter }} ##>
 {%
   \{{2} [\s]*
@@ -75,7 +82,7 @@
     (?P<content> [\s\S]*? )
   [.] \}
 %
-  <span class="mandatory-argument">\g<content></span>
+  <span class="mandatory-argument">\\<\g<content>\\></span>
 %}
 
 <## [.Optional.] ##>
@@ -84,7 +91,7 @@
     (?P<content> [\s\S]*? )
   [.] \]
 %
-  <span class="optional-argument">\g<content></span>
+  <span class="optional-argument">\\<\g<content>\\></span>
 %}
 
 <## Heading permalinks (<h2> to <h6>) ##>
@@ -258,13 +265,13 @@ The syntax of CMD, in the order of processing, is thus:
 ###
 
 {^^
-  [.flags.]{{~~~ ~~ ~~~}} {.content.} {{~~~ ~~ ~~~}}
+  [.flags.]{{~~~ ~~ ~~~}} {.CONTENT.} {{~~~ ~~ ~~~}}
 ^^}
 
 ----
-Produces {^ {.content.} ^} literally,
+Produces {^ {.CONTENT.} ^} literally,
 with HTML syntax-character escaping and de-indentation.
-Whitespace around {^ {.content.} ^} is stripped.
+Whitespace around {^ {.CONTENT.} ^} is stripped.
 {^ [.flags.] ^} may consist of zero or more of the following characters:
 ----
 ====
@@ -274,7 +281,7 @@ Whitespace around {^ {.content.} ^} is stripped.
 * `a` to enable all flags above
 ====
 ----
-For {^ {.content.} ^} containing two or more consecutive tildes,
+For {^ {.CONTENT.} ^} containing two or more consecutive tildes,
 use a longer run of {{tildes}} in the delimiters.
 ----
 
@@ -472,7 +479,7 @@ from being interpreted as the class `dumb-id`:
 ###
 
 {^^
-  [.flags.]{{ ~~``~~ }}[.id.]{[.class.]}\newline {.content.} {{ ~~``~~ }}
+  [.flags.]{{ ~~``~~ }}[.id.]{[.class.]}\newline {.CONTENT.} {{ ~~``~~ }}
 ^^}
 
 ----
@@ -487,12 +494,12 @@ Produces the display code
   ~~ <pre ~~
     id="[.id.]" class="[.class.]"~~ > ~~\
       ~~ <code> ~~\
-        {.content.}\
+        {.CONTENT.}\
       ~~ </code> ~~\
   ~~ </pre> ~~
 ^},
 with HTML syntax-character escaping
-and de-indentation for {^ {.content.} ^}.
+and de-indentation for {^ {.CONTENT.} ^}.
 {^ [.flags.] ^} may consist of zero or more of the following characters
 (see [flags examples]):
 ----
@@ -503,7 +510,7 @@ and de-indentation for {^ {.content.} ^}.
 * `a` to enable all flags above
 ====
 ----
-For {^ {.content.} ^} containing two or more consecutive backticks,
+For {^ {.CONTENT.} ^} containing two or more consecutive backticks,
 use a longer run of {{backticks}} in the delimiters.
 ----
 
@@ -573,19 +580,19 @@ use a longer run of {{backticks}} in the delimiters.
 ###
 
 {^^
-  [.flags.]{{ ~~`~~ }} {.content.} {{ ~~`~~ }}
+  [.flags.]{{ ~~`~~ }} {.CONTENT.} {{ ~~`~~ }}
 ^^}
 
 ----
 Produces the inline code
 {^
   ~~ <code> ~~\
-    {.content.}\
+    {.CONTENT.}\
   ~~ </code> ~~
 ^},
 with HTML syntax-character escaping
-and de-indentation for {^ {.content.} ^}.
-Whitespace around {^ {.content.} ^} is stripped.
+and de-indentation for {^ {.CONTENT.} ^}.
+Whitespace around {^ {.CONTENT.} ^} is stripped.
 {^ [.flags.] ^} may consist of zero or more of the following characters
 (see [flags examples]):
 ----
@@ -596,7 +603,7 @@ Whitespace around {^ {.content.} ^} is stripped.
 * `a` to enable all flags above
 ====
 ----
-For {^ {.content.} ^} containing one or more consecutive backticks
+For {^ {.CONTENT.} ^} containing one or more consecutive backticks
 which are not protected by [CMD literals],
 use a longer run of {{backticks}} in the delimiters.
 ----
@@ -625,12 +632,12 @@ use a longer run of {{backticks}} in the delimiters.
 ###
 
 {^^
-  \<{{\#}} {.comment.} {{\#}}\>
+  \<{{\#}} {.COMMENT.} {{\#}}\>
 ^^}
 
 ----
 Removed, along with any preceding horizontal whitespace.
-For {^ {.comment.} ^} containing one or more consecutive hashes
+For {^ {.COMMENT.} ^} containing one or more consecutive hashes
 followed by a closing angle bracket,
 use a longer run of {{hashes}} in the delimiters.
 ----
@@ -649,7 +656,7 @@ In this sense they are stronger than literals and code.
 ###
 
 {^^
-  [.flags.]{{ ~~$$~~ }}[.id.]{[.class.]}\newline {.content.} {{ ~~$$~~ }}
+  [.flags.]{{ ~~$$~~ }}[.id.]{[.class.]}\newline {.CONTENT.} {{ ~~$$~~ }}
 ^^}
 
 ----
@@ -663,11 +670,11 @@ Produces
 {^
   ~~ <div ~~
     id="[.id.]" class="js-maths [.class.]"~~ > ~~\
-      {.content.}\
+      {.CONTENT.}\
   ~~ </div> ~~
 ^},
 with HTML syntax-character escaping
-and de-indentation for {^ {.content.} ^}.
+and de-indentation for {^ {.CONTENT.} ^}.
 {^ [.flags.] ^} may consist of zero or more of the following characters
 (see [whitespace flag example]):
 ----
@@ -675,7 +682,7 @@ and de-indentation for {^ {.content.} ^}.
 * `w` to process [whitespace](#whitespace) completely
 ====
 ----
-For {^ {.content.} ^} containing two or more consecutive dollar signs
+For {^ {.CONTENT.} ^} containing two or more consecutive dollar signs
 which are not protected by [CMD literals],
 use a longer run of {{dollar signs}} in the delimiters.
 ----
@@ -719,18 +726,18 @@ On this page I am using [KaTeX].
 ###
 
 {^^
-  [.flags.]{{ ~~$~~ }} {.content.} {{ ~~$~~ }}
+  [.flags.]{{ ~~$~~ }} {.CONTENT.} {{ ~~$~~ }}
 ^^}
 
 ----
 Produces
 {^
   ~~ <span class="js-maths"> ~~\
-    {.content.}\
+    {.CONTENT.}\
   ~~ </span> ~~
 ^},
-with HTML syntax-character escaping for {^ {.content.} ^}.
-Whitespace around {^ {.content.} ^} is stripped.
+with HTML syntax-character escaping for {^ {.CONTENT.} ^}.
+Whitespace around {^ {.CONTENT.} ^} is stripped.
 {^ [.flags.] ^} may consist of zero or more of the following characters
 (see [whitespace flag example]):
 ----
@@ -738,7 +745,7 @@ Whitespace around {^ {.content.} ^} is stripped.
 * `w` to process [whitespace](#whitespace) completely
 ====
 ----
-For {^ {.content.} ^} containing one or more consecutive dollar signs
+For {^ {.CONTENT.} ^} containing one or more consecutive dollar signs
 which are not protected by [CMD literals],
 use a longer run of {{dollar signs}} in the delimiters.
 ----
@@ -776,12 +783,12 @@ On this page I am using [KaTeX].
 ###
 
 {^^
-  ~~ { ~~{{ + }} {.file name.} {{ + }}~~ } ~~
+  ~~ { ~~{{ + }} {.FILE NAME.} {{ + }}~~ } ~~
 ^^}
 
 ----
-Includes the content of the file {^ {.file name.} ^}.
-For {^ {.file name.} ^} containing one or more consecutive plus signs
+Includes the content of the file {^ {.FILE NAME.} ^}.
+For {^ {.FILE NAME.} ^} containing one or more consecutive plus signs
 followed by a closing curly bracket,
 use a longer run of {{plus signs}} in the delimiters.
 ----
@@ -817,18 +824,18 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ###
 
 {^^
-  [.flag.]~~{~~{{ % }} {.pattern.} {{ % }} {.replacement.} {{ % }}~~}~~
+  [.flag.]~~{~~{{ % }} {.PATTERN.} {{ % }} {.REPLACEMENT.} {{ % }}~~}~~
 ^^}
 
 ----
-Processes regex replacements of {^ {.pattern.} ^} by {^ {.replacement.} ^}
+Processes regex replacements of {^ {.PATTERN.} ^} by {^ {.REPLACEMENT.} ^}
 according to Python regex syntax,
 with the flags `re.ASCII`, `re.MULTILINE`, and `re.VERBOSE` enabled.
-Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
-For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
+Whitespace around {^ {.PATTERN.} ^} and {^ {.REPLACEMENT.} ^} is stripped.
+For {^ {.PATTERN.} ^} or {^ {.REPLACEMENT.} ^} containing
 one or more consecutive percent signs,
 use a longer run of {{percent signs}} in the delimiters.
-For {^ {.pattern.} ^} matching any of the syntax above,
+For {^ {.PATTERN.} ^} matching any of the syntax above,
 which should not be processed using that syntax, use CMD literals.
 {^ [.flag.] ^} may consist of zero or one of the following characters,
 and specifies when the regex replacement is to be applied:
@@ -884,12 +891,12 @@ will break the normal CMD syntax.
 To avoid breaking placeholder storage
 (used to protect portions of the markup from further processing),
 do not use replacements to alter placeholder strings,
-which are of the form {^ \e000{.n.}\e000 ^},
+which are of the form {^ \e000{.N.}\e000 ^},
 where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
-and {^ {.n.} ^} is an integer.
+and {^ {.N.} ^} is an integer.
 To avoid breaking properties,
 do not use replacements to alter property strings,
-which are of the form {^ %{.property name.} ^}.
+which are of the form {^ %{.PROPERTY NAME.} ^}.
 ----
 
 
@@ -898,13 +905,13 @@ which are of the form {^ %{.property name.} ^}.
 ###
 
 {^^
-  [.flag.]~~{~~{{ : }} {.pattern.} {{ : }} {.replacement.} {{ : }}~~}~~
+  [.flag.]~~{~~{{ : }} {.PATTERN.} {{ : }} {.REPLACEMENT.} {{ : }}~~}~~
 ^^}
 
 ----
-Processes ordinary replacements of {^ {.pattern.} ^} by {^ {.replacement.} ^}.
-Whitespace around {^ {.pattern.} ^} and {^ {.replacement.} ^} is stripped.
-For {^ {.pattern.} ^} or {^ {.replacement.} ^} containing
+Processes ordinary replacements of {^ {.PATTERN.} ^} by {^ {.REPLACEMENT.} ^}.
+Whitespace around {^ {.PATTERN.} ^} and {^ {.REPLACEMENT.} ^} is stripped.
+For {^ {.PATTERN.} ^} or {^ {.REPLACEMENT.} ^} containing
 one or more consecutive colons,
 use a longer run of {{colons}} in the delimiters.
 {^ [.flag.] ^} may consist of zero or one of the following characters,
@@ -977,12 +984,12 @@ will break the normal CMD syntax.
 To avoid breaking placeholder storage
 (used to protect portions of the markup from further processing),
 do not use replacements to alter placeholder strings,
-which are of the form {^ \e000{.n.}\e000 ^},
+which are of the form {^ \e000{.N.}\e000 ^},
 where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
-and {^ {.n.} ^} is an integer.
+and {^ {.N.} ^} is an integer.
 To avoid breaking properties,
 do not use replacements to alter property strings,
-which are of the form {^ %{.property name.} ^}.
+which are of the form {^ %{.PROPERTY NAME.} ^}.
 ----
 
 
@@ -991,7 +998,7 @@ which are of the form {^ %{.property name.} ^}.
 ###
 
 {^^
-  {{ %% }}\newline {.content.} {{ %% }}
+  {{ %% }}\newline {.CONTENT.} {{ %% }}
 ^^}
 
 ----
@@ -1001,13 +1008,13 @@ the first non-whitespace characters on their lines.
 
 ----
 Processes the preamble.
-{^ {.content.} ^} is split into property specifications
-according to leading occurrences of {^ %{.property name.} ^},
-where {^ {.property name.} ^} may only contain letters, digits, and hyphens.
+{^ {.CONTENT.} ^} is split into property specifications
+according to leading occurrences of {^ %{.PROPERTY NAME.} ^},
+where {^ {.PROPERTY NAME.} ^} may only contain letters, digits, and hyphens.
 Property specifications end at the next property specification,
 or at the end of the (preamble) content being split.
 Each property is stored and may be referenced
-by writing {^ %{.property name.} ^},
+by writing {^ %{.PROPERTY NAME.} ^},
 called a property string, anywhere else in the document.
 If the same property is specified more than once,
 the latest specification shall prevail.
@@ -1019,7 +1026,7 @@ i.e.~everything from `<!DOCTYPE html>` through to `<body>`.
 ----
 
 ----
-For {^ {.content.} ^} containing two or more consecutive percent signs
+For {^ {.CONTENT.} ^} containing two or more consecutive percent signs
 which are not protected by CMD literals,
 use a longer run of {{percent signs}} in the delimiters.
 ----
@@ -1165,11 +1172,11 @@ are computed based on the supplied original properties:
 ###
 
 {^^
-  {{ cccc }}[.id.]{[.class.]}\newline {.content.} {{ cccc }}
+  {{ \C\C\C\C }}[.id.]{[.class.]}\newline {.CONTENT.} {{ \C\C\C\C }}
 ^^}
 
 ----
-The delimiting characters (`c`) must be
+The delimiting characters {^ \C ^} must be
 the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
@@ -1177,19 +1184,19 @@ If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 Produces the block
 {^
-  \<{.tag name.}
+  \<{.TAG NAME.}
     id="[.id.]" class="[.class.]"\>\newline\
-      {.content.}\
-  \</{.tag name.}\>
+      {.CONTENT.}\
+  \</{.TAG NAME.}\>
 ^}.
-For {^ {.content.} ^} containing four or more
+For {^ {.CONTENT.} ^} containing four or more
 consecutive delimiting characters
 which are not protected by [CMD literals],
 use a longer run of {{delimiting characters}} in the delimiters.
 ----
 
 ----
-The following delimiting characters (`c`) are used:
+The following delimiting characters {^ \C ^} are used:
 ----
 ======
 * Non-lists:
@@ -1214,16 +1221,16 @@ In the implementation, a recursive call is used to process nested blocks.
 ####
 
 ----
-For list blocks, {^ {.content.} ^} is split into list items `<li>`
+For list blocks, {^ {.CONTENT.} ^} is split into list items `<li>`
 according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 ----
 
-{^^ Y[.id.]{[.class.]} ^^}
+{^^ \Y[.id.]{[.class.]} ^^}
 
 ----
-The following delimiters (`Y`) for list items are used:
+The following delimiters {^ \Y ^} for list items are used:
 ----
 ====
 * `*`
@@ -1344,7 +1351,7 @@ the curly brackets surrounding it may be omitted.
 ###
 
 {^^
-  {{ '''' }}[.id.]{[.class.]}\newline {.content.} {{ '''' }}
+  {{ '''' }}[.id.]{[.class.]}\newline {.CONTENT.} {{ '''' }}
 ^^}
 
 ----
@@ -1358,10 +1365,10 @@ Produces the block
 {^
   \<table
     id="[.id.]" class="[.class.]"\>\newline\
-      {.content.}\
+      {.CONTENT.}\
   \</table\>
 ^}.
-For {^ {.content.} ^} containing four or more apostrophes
+For {^ {.CONTENT.} ^} containing four or more apostrophes
 which are not protected by [CMD literals],
 use a longer run of {{apostrophes}} in the delimiters.
 ----
@@ -1371,7 +1378,7 @@ In the implementation, a recursive call is used to process nested tables.
 ----
 
 ----
-{^ {.content.} ^} is
+{^ {.CONTENT.} ^} is
 ----
 ++++
 1.  split into table cells `<th>`, `<td>`
@@ -1387,16 +1394,16 @@ In the implementation, a recursive call is used to process nested tables.
 ####
 
 ----
-{^ {.content.} ^} is split into table cells `<th>`, `<td>`
+{^ {.CONTENT.} ^} is split into table cells `<th>`, `<td>`
 according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 ----
 
-{^^ Z[.id.]{[.class.]}[[.rowspan.],[.colspan.]] ^^}
+{^^ \Z[.id.]{[.class.]}[[.rowspan.],[.colspan.]] ^^}
 
 ----
-The following delimiters (`Z`) for table cells are used:
+The following delimiters {^ \Z ^} for table cells are used:
 ----
 ====
 * `;` for `<th>`
@@ -1418,7 +1425,7 @@ the comma between them and the square brackets surrounding them may be omitted.
 ####
 
 ----
-{^ {.content.} ^} is split into table rows `<tr>`
+{^ {.CONTENT.} ^} is split into table rows `<tr>`
 according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
@@ -1438,16 +1445,16 @@ the curly brackets surrounding it may be omitted.
 ####
 
 ----
-{^ {.content.} ^} is split into table parts `<thead>`, `<tbody>`, `<tfoot>`
+{^ {.CONTENT.} ^} is split into table parts `<thead>`, `<tbody>`, `<tfoot>`
 according to leading occurrences
 (i.e. occurrences preceded only by whitespace on their lines)
 of the following:
 ----
 
-{^^ Y[.id.]{[.class.]} ^^}
+{^^ \Y[.id.]{[.class.]} ^^}
 
 ----
-The following delimiters (`Y`) for table parts are used:
+The following delimiters {^ \Y ^} for table parts are used:
 ----
 ====
 * `|^` for `<thead>`
@@ -1804,7 +1811,7 @@ All leading whitespace on the next line is stripped.
 ####
 
 {^^
-  ~~ ![ ~~{.alt.}]( {.src.} [.title.] )
+  ~~ ![ ~~{.ALT.}]( [.src.] [.title.] )
 ^^}
 
 ----
@@ -1817,12 +1824,12 @@ they are automatically escaped as `&quot;`.
 Produces the image
 {^
   ~~ <img ~~
-    alt="{.alt.}"
-    src="{.src.}"
+    alt="{.ALT.}"
+    src="[.src.]"
     title="[.title.]"\
   ~~ > ~~
 ^}.
-For {^ {.alt.} ^}, {^ {.src.} ^}, or {^ [.title.] ^} containing
+For {^ {.ALT.} ^}, {^ [.src.] ^}, or {^ [.title.] ^} containing
 one or more closing square or round brackets,
 use [escapes] or [CMD literals].
 ----
@@ -1859,14 +1866,14 @@ use [escapes] or [CMD literals].
 ====
 * Definition
   {^^
-    {{ @@ }}![{.label.}]{[.class.]}[[.width.]]↵ \
-      {.src.} [.title.] \
+    {{ @@ }}![{.LABEL.}]{[.class.]}[[.width.]]↵ \
+      [.src.] [.title.] \
     {{ @@ }}
   ^^}
 
 * Image
   {^^
-    ![{.alt.}][[.label.]]
+    ![{.ALT.}][[.label.]]
   ^^}
 
 ====
@@ -1874,8 +1881,8 @@ use [escapes] or [CMD literals].
 The delimiting at signs in a definition must be the first
 non-whitespace characters on their lines.
 A single space may be included
-between {^ [{.alt.}] ^} and {^ [[.label.]] ^} in an image.
-The referencing strings {^ {.label.} ^} and {^ [.label.] ^}
+between {^ [{.ALT.}] ^} and {^ [[.label.]] ^} in an image.
+The referencing strings {^ {.LABEL.} ^} and {^ [.label.] ^}
 are case insensitive.
 Non-empty {^ [.width.] ^} in a definition must consist of digits only.
 If {^ [.class.] ^} in a definition is empty,
@@ -1884,27 +1891,27 @@ If {^ [.width.] ^} in a definition is empty,
 the square brackets surrounding it may be omitted.
 If {^ [.label.] ^} in an image is empty,
 the square brackets surrounding it may be omitted,
-and {^ {.alt.} ^} is used as the label for that image.
+and {^ {.ALT.} ^} is used as the label for that image.
 ----
 
 ----
 Produces the image
 {^
   ~~ <img ~~
-    alt="{.alt.}"
+    alt="{.ALT.}"
     class="[.class.]"
-    src="{.src.}"
+    src="[.src.]"
     title="[.title.]"
     width="[.width.]"\
   ~~ > ~~
 ^}.
 Whitespace around {^ [.label.] ^} is stripped.
-For definitions whose {^ {.label.} ^}, {^ [.class.] ^},
-{^ {.src.} ^}, or {^ [.title.] ^} contains
+For definitions whose {^ {.LABEL.} ^}, {^ [.class.] ^},
+{^ [.src.] ^}, or {^ [.title.] ^} contains
 two or more consecutive at signs
 which are not protected by CMD literals,
 use a longer run of {{at signs}} in the delimiters.
-For images whose {^ {.alt.} ^} or {^ [.label.] ^} contains
+For images whose {^ {.ALT.} ^} or {^ [.label.] ^} contains
 one or more closing square brackets,
 use [escapes] or [CMD literals].
 ----
@@ -1955,7 +1962,7 @@ the latest specification shall prevail.
 ####
 
 {^^
-  ~~ [ ~~{.content.}]( {.href.} [.title.] )
+  ~~ [ ~~{.CONTENT.}]( [.href.] [.title.] )
 ^^}
 
 ----
@@ -1968,14 +1975,14 @@ they are automatically escaped as `&quot;`.
 Produces the link
 {^
   ~~ <a ~~
-    href="{.href.}"
+    href="[.href.]"
     title="[.title.]"\
   ~~ > ~~\
-    {.content.}\
+    {.CONTENT.}\
   ~~ </a> ~~
 ^}.
-Whitespace around {^ {.content.} ^} is stripped.
-For {^ {.content.} ^}, {^ {.href.} ^}, or {^ [.title.] ^} containing
+Whitespace around {^ {.CONTENT.} ^} is stripped.
+For {^ {.CONTENT.} ^}, {^ [.href.] ^}, or {^ [.title.] ^} containing
 one or more closing square or round brackets,
 use [escapes] or [CMD literals].
 ----
@@ -2017,14 +2024,14 @@ use [escapes] or [CMD literals].
 ====
 * Definition
   {^^
-    {{ @@ }}[{.label.}]{[.class.]}↵ \
-      {.href.} [.title.] \
+    {{ @@ }}[{.LABEL.}]{[.class.]}↵ \
+      [.href.] [.title.] \
     {{ @@ }}
   ^^}
 
 * Link
   {^^
-    [{.content.}][[.label.]]
+    [{.CONTENT.}][[.label.]]
   ^^}
 
 ====
@@ -2032,14 +2039,14 @@ use [escapes] or [CMD literals].
 The delimiting at signs in a definition must be the first
 non-whitespace characters on their lines.
 A single space may be included
-between {^ [{.content.}] ^} and {^ [[.label.]] ^} in a link.
-The referencing strings {^ {.label.} ^} and {^ [.label.] ^}
+between {^ [{.CONTENT.}] ^} and {^ [[.label.]] ^} in a link.
+The referencing strings {^ {.LABEL.} ^} and {^ [.label.] ^}
 are case insensitive.
 If {^ [.class.] ^} in a definition is empty,
 the curly brackets surrounding it may be omitted.
 If {^ [.label.] ^} in a link is empty,
 the square brackets surrounding it may be omitted,
-and {^ {.content.} ^} is used as the label for that link.
+and {^ {.CONTENT.} ^} is used as the label for that link.
 ----
 
 ----
@@ -2047,19 +2054,19 @@ Produces the link
 {^
   ~~ <a ~~
     class="[.class.]"
-    href="{.href.}"
+    href="[.href.]"
     title="[.title.]"\
   ~~ > ~~\
-    {.content.}\
+    {.CONTENT.}\
   ~~ </a> ~~
 ^}.
-Whitespace around {^ {.content.} ^} and {^ [.label.] ^} is stripped.
-For definitions whose {^ {.label.} ^}, {^ [.class.] ^},
-{^ {.href.} ^}, or {^ [.title.] ^} contains
+Whitespace around {^ {.CONTENT.} ^} and {^ [.label.] ^} is stripped.
+For definitions whose {^ {.LABEL.} ^}, {^ [.class.] ^},
+{^ [.href.] ^}, or {^ [.title.] ^} contains
 two or more consecutive at signs
 which are not protected by CMD literals,
 use a longer run of {{at signs}} in the delimiters.
-For links whose {^ {.content.} ^} or {^ [.label.] ^} contains
+For links whose {^ {.CONTENT.} ^} or {^ [.label.] ^} contains
 one or more closing square brackets,
 use [escapes] or [CMD literals].
 ----
@@ -2111,7 +2118,7 @@ the latest specification shall prevail.
 ###
 
 {^^
-  \#[.id.] {.content.} \#
+  \#[.id.] {.CONTENT.} \#
 ^^}
 
 ----
@@ -2119,12 +2126,12 @@ Produces the heading
 {^
   ~~ <h1 ~~
     id="[.id.]"~~ > ~~\
-      {.content.}\
+      {.CONTENT.}\
   ~~ </h1> ~~
 ^}.
-Whitespace around {^ {.content.} ^} is stripped.
+Whitespace around {^ {.CONTENT.} ^} is stripped.
 For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
-For {^ {.content.} ^} containing the delimiting number of
+For {^ {.CONTENT.} ^} containing the delimiting number of
 or more consecutive hashes, use [CMD literals].
 ----
 
@@ -2149,31 +2156,30 @@ or more consecutive hashes, use [CMD literals].
 ###
 
 {^^
-  X{[.class.]} {.content.} X
+  \X{[.class.]} {.CONTENT.} \X
 ^^}
 
 ----
-{^ {.content.} ^} must be non-empty.
+{^ {.CONTENT.} ^} must be non-empty.
 If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the inline semantic
 {^
-  \<{.tag name.}
+  \<{.TAG NAME.}
     class="[.class.]"\>\
-      {.content.}\
-  \</{.tag name.}\>
+      {.CONTENT.}\
+  \</{.TAG NAME.}\>
 ^}.
-Whitespace around {^ {.content.} ^} is stripped.
-For {^ {.content.} ^} containing one or more occurrences
-of the delimiting characters `c` (`*` or `_`),
+Whitespace around {^ {.CONTENT.} ^} is stripped.
+For {^ {.CONTENT.} ^} containing one or more occurrences of `*` or `_`,
 use [CMD literals] or the [escapes] `\*` and `\_`.
 ----
 
 ----
-The following delimiters (`X`),
-equal to one or two delimiting characters (`c`),
+The following delimiters {^ \X ^},
+equal to one or two delimiting characters {^ \C ^},
 are used:
 ----
 ======
@@ -2199,7 +2205,8 @@ See [W3C on using `<b>` and `<i>` elements](
 ----
 
 ----
-In the implementation, matches are sought in the following order:
+In the implementation, matches are sought in the following order
+(for brevity, `C` is used in place of {^ \C ^} below):
 ----
 
 ||||{centred-flex}
@@ -2211,36 +2218,36 @@ In the implementation, matches are sought in the following order:
 |:
   ==
     , 33
-    , {^ ccc{[.inner class.]} {.inner content.} ccc ^}
+    , {^ CCC{[.inner class.]} {.INNER CONTENT.} CCC ^}
   ==
     , 312
-    , {^ ccc{[.inner class.]} {.inner content.} c {.outer content.} cc ^}
+    , {^ CCC{[.inner class.]} {.INNER CONTENT.} C {.OUTER CONTENT.} CC ^}
   ==
     , 321
-    , {^ ccc{[.inner class.]} {.inner content.} cc {.outer content.} c ^}
+    , {^ CCC{[.inner class.]} {.INNER CONTENT.} CC {.OUTER CONTENT.} C ^}
   ==
     , 22
-    , {^ cc{[.class.]} {.content.} cc ^}
+    , {^ CC{[.class.]} {.CONTENT.} CC ^}
   ==
     , 11
-    , {^ c{[.class.]} {.content.} c ^}
+    , {^ C{[.class.]} {.CONTENT.} C ^}
 ''''
 ||||
 
 ----
-33 is effectively 312 with empty {^ {.outer content.} ^}.
+33 is effectively 312 with empty {^ {.OUTER CONTENT.} ^}.
 Once such a pattern has been matched,
 only three cases need to be handled for the resulting match object:
 ----
 ====
 * 2-layer special (for 33): \+
-  {^^ XY{[.inner class.]} {.inner content.} YX ^^}
+  {^^ \X\Y{[.inner class.]} {.INNER CONTENT.} \Y\X ^^}
 
 * 2-layer general (for 312, 321): \+
-  {^^ XY{[.inner class.]} {.inner content.} Y {.outer content.} X ^^}
+  {^^ \X\Y{[.inner class.]} {.INNER CONTENT.} \Y {.OUTER CONTENT.} \X ^^}
 
 * 1-layer case (for 22, 11): \+
-  {^^ X{[.class.]} {.content.} X ^^}
+  {^^ \X{[.class.]} {.CONTENT.} \X ^^}
 
 ====
 
