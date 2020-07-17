@@ -109,9 +109,6 @@
   \g<hashes>
 %}
 
-<## U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS ##>
-{: \newline : ↵ :}
-
 <## U+E000 PRIVATE USE AREA ##>
 {: \e000 :  :}
 
@@ -479,12 +476,12 @@ from being interpreted as the class `dumb-id`:
 ###
 
 {^^
-  [.flags.]{{ ~~``~~ }}[.id.]{[.class.]}\newline {.CONTENT.} {{ ~~``~~ }}
+  \/[.flags.]{{ ~~``~~ }}[.id.]{[.class.]}
+  \/  {.CONTENT.}
+  \/{{ ~~``~~ }}
 ^^}
 
 ----
-The delimiting backticks must be
-the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
@@ -656,12 +653,12 @@ In this sense they are stronger than literals and code.
 ###
 
 {^^
-  [.flags.]{{ ~~$$~~ }}[.id.]{[.class.]}\newline {.CONTENT.} {{ ~~$$~~ }}
+  \/[.flags.]{{ ~~$$~~ }}[.id.]{[.class.]}
+  \/  {.CONTENT.}
+  \/{{ ~~$$~~ }}
 ^^}
 
 ----
-The delimiting dollar signs must be
-the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
@@ -998,13 +995,10 @@ which are of the form {^ %{.PROPERTY NAME.} ^}.
 ###
 
 {^^
-  {{ %% }}\newline {.CONTENT.} {{ %% }}
+  \/{{ %% }}
+  \/  {.CONTENT.}
+  \/{{ %% }}
 ^^}
-
-----
-The delimiting percent signs must be
-the first non-whitespace characters on their lines.
-----
 
 ----
 Processes the preamble.
@@ -1172,12 +1166,12 @@ are computed based on the supplied original properties:
 ###
 
 {^^
-  {{ \C\C\C\C }}[.id.]{[.class.]}\newline {.CONTENT.} {{ \C\C\C\C }}
+  \/{{ \C\C\C\C }}[.id.]{[.class.]}
+  \/  {.CONTENT.}
+  \/{{ \C\C\C\C }}
 ^^}
 
 ----
-The delimiting characters {^ \C ^} must be
-the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
@@ -1185,7 +1179,7 @@ If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 Produces the block
 {^
   \<{.TAG NAME.}
-    id="[.id.]" class="[.class.]"\>\newline\
+    id="[.id.]" class="[.class.]"\>↵\
       {.CONTENT.}\
   \</{.TAG NAME.}\>
 ^}.
@@ -1222,9 +1216,7 @@ In the implementation, a recursive call is used to process nested blocks.
 
 ----
 For list blocks, {^ {.CONTENT.} ^} is split into list items `<li>`
-according to leading occurrences
-(i.e. occurrences preceded only by whitespace on their lines)
-of the following:
+according to leading occurrences of the following:
 ----
 
 {^^ \Y[.id.]{[.class.]} ^^}
@@ -1351,20 +1343,20 @@ the curly brackets surrounding it may be omitted.
 ###
 
 {^^
-  {{ '''' }}[.id.]{[.class.]}\newline {.CONTENT.} {{ '''' }}
+  \/{{ '''' }}[.id.]{[.class.]}
+  \/  {.CONTENT.}
+  \/{{ '''' }}
 ^^}
 
 ----
-The delimiting apostrophes must be
-the first non-whitespace characters on their lines.
 If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
 ----
 
 ----
-Produces the block
+Produces the table
 {^
   \<table
-    id="[.id.]" class="[.class.]"\>\newline\
+    id="[.id.]" class="[.class.]"\>↵\
       {.CONTENT.}\
   \</table\>
 ^}.
@@ -1395,9 +1387,7 @@ In the implementation, a recursive call is used to process nested tables.
 
 ----
 {^ {.CONTENT.} ^} is split into table cells `<th>`, `<td>`
-according to leading occurrences
-(i.e. occurrences preceded only by whitespace on their lines)
-of the following:
+according to leading occurrences of the following:
 ----
 
 {^^ \Z[.id.]{[.class.]}[[.rowspan.],[.colspan.]] ^^}
@@ -1426,9 +1416,7 @@ the comma between them and the square brackets surrounding them may be omitted.
 
 ----
 {^ {.CONTENT.} ^} is split into table rows `<tr>`
-according to leading occurrences
-(i.e. occurrences preceded only by whitespace on their lines)
-of the following:
+according to leading occurrences of the following:
 ----
 
 {^^ ==[.id.]{[.class.]} ^^}
@@ -1446,9 +1434,7 @@ the curly brackets surrounding it may be omitted.
 
 ----
 {^ {.CONTENT.} ^} is split into table parts `<thead>`, `<tbody>`, `<tfoot>`
-according to leading occurrences
-(i.e. occurrences preceded only by whitespace on their lines)
-of the following:
+according to leading occurrences of the following:
 ----
 
 {^^ \Y[.id.]{[.class.]} ^^}
@@ -1811,7 +1797,7 @@ All leading whitespace on the next line is stripped.
 ####
 
 {^^
-  ~~ ![ ~~{.ALT.}]( [.src.] [.title.] )
+  ~~ ![ ~~{.ALT.}]([.src.] [.title.])
 ^^}
 
 ----
@@ -1866,9 +1852,9 @@ use [escapes] or [CMD literals].
 ====
 * Definition
   {^^
-    {{ @@ }}![{.LABEL.}]{[.class.]}[[.width.]]↵ \
-      [.src.] [.title.] \
-    {{ @@ }}
+    \/{{ @@ }}![{.LABEL.}]{[.class.]}[[.width.]]
+    \/  [.src.] [.title.]
+    \/{{ @@ }}
   ^^}
 
 * Image
@@ -1878,8 +1864,6 @@ use [escapes] or [CMD literals].
 
 ====
 ----
-The delimiting at signs in a definition must be the first
-non-whitespace characters on their lines.
 A single space may be included
 between {^ [{.ALT.}] ^} and {^ [[.label.]] ^} in an image.
 The referencing strings {^ {.LABEL.} ^} and {^ [.label.] ^}
@@ -1962,7 +1946,7 @@ the latest specification shall prevail.
 ####
 
 {^^
-  ~~ [ ~~{.CONTENT.}]( [.href.] [.title.] )
+  ~~ [ ~~{.CONTENT.}]([.href.] [.title.])
 ^^}
 
 ----
@@ -2024,9 +2008,9 @@ use [escapes] or [CMD literals].
 ====
 * Definition
   {^^
-    {{ @@ }}[{.LABEL.}]{[.class.]}↵ \
-      [.href.] [.title.] \
-    {{ @@ }}
+    \/{{ @@ }}[{.LABEL.}]{[.class.]}
+    \/  [.href.] [.title.]
+    \/{{ @@ }}
   ^^}
 
 * Link
@@ -2036,8 +2020,6 @@ use [escapes] or [CMD literals].
 
 ====
 ----
-The delimiting at signs in a definition must be the first
-non-whitespace characters on their lines.
 A single space may be included
 between {^ [{.CONTENT.}] ^} and {^ [[.label.]] ^} in a link.
 The referencing strings {^ {.LABEL.} ^} and {^ [.label.] ^}
