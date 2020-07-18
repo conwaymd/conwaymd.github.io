@@ -162,7 +162,8 @@ which I can't without some sort of extension
 4.  [Include](#inclusions) markdown from another file (e.g.~a template)
 5.  Use [`<b>` and `<i>` elements](#inline-semantics),
     not just `<strong>` and `<em>`
-6.  [Define my own syntax](#regex-replacements) as I go.
+6.  Use [`<div>` elements](#blocks) without falling back to HTML
+7.  [Define my own syntax](#regex-replacements) as I go.
 ++++
 ----
 CMD addresses each of these.
