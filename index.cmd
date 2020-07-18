@@ -868,6 +868,7 @@ and specifies when the regex replacement is to be applied:
 * `t` for just before processing [tables](#tables)
 * `e` for just before processing [escapes]
 * `c` for just before processing [line continuations](#line-continuations)
+* `r` for just before processing [reference-style definitions][ref-defs]
 * `i` for just before processing [images](#images)
 * `l` for just before processing [links](#links)
 * `h` for just before processing [headings](#headings)
@@ -950,6 +951,7 @@ and specifies when the ordinary replacement is to be applied:
 * `t` for just before processing [tables](#tables)
 * `e` for just before processing [escapes]
 * `c` for just before processing [line continuations](#line-continuations)
+* `r` for just before processing [reference-style definitions][ref-defs]
 * `i` for just before processing [images](#images)
 * `l` for just before processing [links](#links)
 * `h` for just before processing [headings](#headings)
@@ -1818,6 +1820,8 @@ All leading whitespace on the next line is stripped.
 ###{#reference-definitions}
   Reference-style definitions
 ###
+
+@[ref-defs] #reference-definitions @
 
 {^^
   {{@}}[<|LABEL|>]{<|attribute specification|>} <|address|> <|title|> {{@}}
