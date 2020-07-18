@@ -860,7 +860,7 @@ which should not be processed using that syntax, use CMD literals.
 and specifies when the regex replacement is to be applied:
 ----
 ====
-* `A` for immediately after processing regex replacements
+* `A` for immediately after processing regex replacement definitions
 * `p` for just before processing [preamble](#preamble)
 * `b` for just before processing [blocks](#blocks)
 * `t` for just before processing [tables](#tables)
@@ -930,7 +930,8 @@ which are of the form {^ %<|PROPERTY NAME|> ^}.
 ^^}
 
 ----
-Processes ordinary replacements of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}.
+Reads and stores all ordinary replacement definitions
+for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}.
 Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
 For {^ <|PATTERN|> ^} or {^ <|REPLACEMENT|> ^} containing
 one or more consecutive colons,
@@ -939,7 +940,7 @@ use a longer run of {{colons}} in the delimiters.
 and specifies when the ordinary replacement is to be applied:
 ----
 ====
-* `A` for immediately after processing ordinary replacements
+* `A` for immediately after processing ordinary replacement definitions
 * `p` for just before processing [preamble](#preamble)
 * `b` for just before processing [blocks](#blocks)
 * `t` for just before processing [tables](#tables)
@@ -957,9 +958,9 @@ If {^ <|flag|> ^} is empty, it defaults to `A`.
 ----
 
 ----
-All ordinary replacement specifications are read and stored.
+All ordinary replacement definitions are read and stored.
 If the same pattern is specified more than once for a given flag,
-the latest specification shall prevail.
+the latest definition shall prevail.
 ----
 
 ====
