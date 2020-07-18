@@ -672,23 +672,25 @@ In this sense they are stronger than literals and code.
 ###
 
 {^^
-  \/<|flags|>{{ ~~$$~~ }}<|id|>{<|class|>}
+  \/<|flags|>{{ ~~$$~~ }}{<|attribute specification|>}
   \/  <|CONTENT|>
   \/{{ ~~$$~~ }}
 ^^}
 
 ----
-If {^ <|class|> ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces
 {^
-  ~~ <div ~~
-    id="<|id|>" class="js-maths <|class|>"~~ > ~~\
-      <|CONTENT|>\
+  ~~ <div ~~<|ATTRIBUTES|>~~ > ~~\
+       <|CONTENT|>\
   ~~ </div> ~~
-^},
+^}
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <attribute specification> ^} with `.js-maths` prepended,
 with HTML syntax-character escaping
 and de-indentation for {^ <|CONTENT|> ^}.
 {^ <|flags|> ^} may consist of zero or more of the following characters

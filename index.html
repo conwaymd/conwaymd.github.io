@@ -483,15 +483,18 @@ whereas <code>&lt;# A ~~ B ~~ #&gt;</code> is removed entirely.
 In this sense they are stronger than literals and code.
 </p>
 <h3 id="display-maths"><a class="permalink" href="#display-maths" aria-label="Permalink"></a>Display maths</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">$$</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
+<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">$$</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
 <span class="repeatable-delimiter">$$</span></code></pre>
 <p>
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces
-<code>&lt;div id="<span class="optional-argument">&lt;id&gt;</span>" class="js-maths <span class="optional-argument">&lt;class&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/div&gt;</code>,
+<code>&lt;div<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/div&gt;</code>
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><attribute specification></code> with <code>.js-maths</code> prepended,
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
 <code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
