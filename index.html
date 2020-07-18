@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-07-18
+Last modified: 2020-07-19
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -66,7 +66,7 @@ which I can't without some sort of extension
 <ol>
 <li>Set the width of <a href="#images">images</a>
 </li>
-<li>Add <code>id</code> and <code>class</code> to elements
+<li>Add <a href="#attribute-specifications"><code>id</code> and <code>class</code></a> to elements
 </li>
 <li>Write <a href="#cmd-literals">arbitrary text</a> outside of code elements
 without using backslash escapes or HTML (ampersand) entities
@@ -182,6 +182,42 @@ The syntax of CMD, in the order of processing, is thus:
 <li><a href="#whitespace">Whitespace</a>
 </li>
 </ul>
+<h3 id="attribute-specifications"><a class="permalink" href="#attribute-specifications" aria-label="Permalink"></a>Attribute specifications</h3>
+<p>
+Most CMD syntaxes have an optional curly-bracketed part
+which allows for the specification of attributes.
+The following forms are recognised:
+</p>
+<pre class="cmd syntax"><code>#<span class="mandatory-argument">&lt;ID&gt;</span>
+.<span class="mandatory-argument">&lt;CLASS&gt;</span>
+r<span class="mandatory-argument">&lt;ROWSPAN&gt;</span>
+c<span class="mandatory-argument">&lt;COLSPAN&gt;</span>
+w<span class="mandatory-argument">&lt;WIDTH&gt;</span></code></pre>
+<p>
+Unrecognised forms are ignored.
+If the class attribute is specified more than once,
+the new value is appended to the existing values.
+If a non-class attribute is specified more than once,
+the latest specification shall prevail.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>||||{#first .hot #second .cold}
+  Blah
+||||
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;div id="second" class="hot cold"&gt;
+Blah
+&lt;/div&gt;
+</code></pre>
+</li>
+</ul>
+<p>
+CMD attribute specifications are inspired
+by <a href="https://kramdown.gettalong.org/syntax#inline-attribute-lists">kramdown's inline attribute lists</a>.
+</p>
 <h3 id="cmd-literals"><a class="permalink" href="#cmd-literals" aria-label="Permalink"></a>CMD literals</h3>
 <pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">~~</span> <span class="mandatory-argument">&lt;CONTENT&gt;</span> <span class="repeatable-delimiter">~~</span></code></pre>
 <p>

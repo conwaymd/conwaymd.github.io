@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-07-18
+%date-modified 2020-07-19
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -156,7 +156,7 @@ which I can't without some sort of extension
 ----
 ++++
 1.  Set the width of [images](#images)
-2.  Add `id` and `class` to elements
+2.  Add [`id` and `class`](#attribute-specifications) to elements
 3.  Write [arbitrary text](#cmd-literals) outside of code elements
     without using backslash escapes or HTML (ampersand) entities
 4.  [Include](#inclusions) markdown from another file (e.g.~a template)
@@ -257,6 +257,57 @@ The syntax of CMD, in the order of processing, is thus:
 * [Inline semantics `* *`, `** **`, `_ _`, `__ __`](#inline-semantics)
 * [Whitespace](#whitespace)
 ======
+
+
+###{#attribute-specifications}
+  Attribute specifications
+###
+
+----
+Most CMD syntaxes have an optional curly-bracketed part
+which allows for the specification of attributes.
+The following forms are recognised:
+----
+
+{^^
+  \#{.ID.}
+  .{.CLASS.}
+  r{.ROWSPAN.}
+  c{.COLSPAN.}
+  w{.WIDTH.}
+^^}
+
+----
+Unrecognised forms are ignored.
+If the class attribute is specified more than once,
+the new value is appended to the existing values.
+If a non-class attribute is specified more than once,
+the latest specification shall prevail.
+----
+
+====
+* CMD
+  ````{.cmd}
+  ||||{#first .hot #second .cold}
+    Blah
+  ||||
+  ````
+
+* HTML
+  ````{.html}
+  <div id="second" class="hot cold">
+  Blah
+  </div>
+  ````
+====
+
+----
+CMD attribute specifications are inspired
+by [kramdown's inline attribute lists][ial].
+----
+
+@[ial] https://kramdown.gettalong.org/syntax#inline-attribute-lists @
+
 
 
 ###{#cmd-literals}
