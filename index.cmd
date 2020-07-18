@@ -1920,7 +1920,7 @@ use [escapes] or [CMD literals].
 ^^}
 
 ----
-To be used with a [reference-style definition][ref-defs].
+To be used in conjunction with a [reference-style definition][ref-defs].
 ----
 ----
 A single space may be included
@@ -1998,13 +1998,12 @@ they are automatically escaped as `&quot;`.
 ----
 Produces the link
 {^
-  ~~ <a ~~
-    href="<|href|>"
-    title="<|title|>"\
-  ~~ > ~~\
-    <|CONTENT|>\
+  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
+       <|CONTENT|>\
   ~~ </a> ~~
-^}.
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|href|> ^} and {^ <|title|> ^}.
 Whitespace around {^ <|CONTENT|> ^} is stripped.
 For {^ <|CONTENT|> ^}, {^ <|href|> ^}, or {^ <|title|> ^} containing
 one or more closing square or round brackets,
@@ -2045,68 +2044,48 @@ use [escapes] or [CMD literals].
   Reference-style links
 ####
 
-====
-* Definition
-  {^^
-    \/{{ @@ }}[<|LABEL|>]{<|class|>}
-    \/  <|href|> <|title|>
-    \/{{ @@ }}
-  ^^}
+{^^
+  [<|CONTENT|>][<|label|>]
+^^}
 
-* Link
-  {^^
-    [<|CONTENT|>][<|label|>]
-  ^^}
+----
+To be used in conjunction with a [reference-style definition][ref-defs].
+----
 
-====
 ----
 A single space may be included
-between {^ [<|CONTENT|>] ^} and {^ [<|label|>] ^} in a link.
-The referencing strings {^ <|LABEL|> ^} and {^ <|label|> ^}
-are case insensitive.
-If {^ <|class|> ^} in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If {^ <|label|> ^} in a link is empty,
+between {^ [<|CONTENT|>] ^} and {^ [<|label|>] ^}.
+The referencing {^ <|label|> ^} is case insensitive.
+If {^ <|label|> ^} is empty,
 the square brackets surrounding it may be omitted,
-and {^ <|CONTENT|> ^} is used as the label for that link.
+and {^ <|CONTENT|> ^} is used as the label.
 ----
 
 ----
 Produces the link
 {^
-  ~~ <a ~~
-    class="<|class|>"
-    href="<|href|>"
-    title="<|title|>"\
-  ~~ > ~~\
-    <|CONTENT|>\
+  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
+       <|CONTENT|>\
   ~~ </a> ~~
-^}.
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from the attribute specifications
+for the corresponding [reference-style image definition][ref-defs].
+----
+----
 Whitespace around {^ <|CONTENT|> ^} and {^ <|label|> ^} is stripped.
-For definitions whose {^ <|LABEL|> ^}, {^ <|class|> ^},
-{^ <|href|> ^}, or {^ <|title|> ^} contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of {{at signs}} in the delimiters.
 For links whose {^ <|CONTENT|> ^} or {^ <|label|> ^} contains
 one or more closing square brackets,
 use [escapes] or [CMD literals].
 ----
 
-----
-All link definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-----
-
 ====
 * CMD
   ````{.cmd}
-  @@[wikipedia]
+  @[wikipedia]
     https://en.wikipedia.org/wiki/Main_Page
     Wikipedia, the free encyclopedia
-  @@
+  @
   
   [Wikipedia's home page][wikipedia] \+
   [Wikipedia][] \+
@@ -2122,10 +2101,10 @@ the latest specification shall prevail.
 
 * Rendered
   ----
-  @@[wikipedia]
+  @[wikipedia]
     https://en.wikipedia.org/wiki/Main_Page
     Wikipedia, the free encyclopedia
-  @@
+  @
   
   [Wikipedia's home page][wikipedia] \+
   [Wikipedia][] \+

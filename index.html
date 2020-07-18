@@ -1607,7 +1607,7 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 <h4 id="reference-style-images"><a class="permalink" href="#reference-style-images" aria-label="Permalink"></a>Reference-style images</h4>
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>][<span class="optional-argument">&lt;label&gt;</span>]</code></pre>
 <p>
-To be used with a <a href="#reference-definitions">reference-style definition</a>.
+To be used in conjunction with a <a href="#reference-definitions">reference-style definition</a>.
 </p>
 <p>
 A single space may be included
@@ -1660,7 +1660,9 @@ they are automatically escaped as <code>&amp;quot;</code>.
 </p>
 <p>
 Produces the link
-<code>&lt;a href="<span class="optional-argument">&lt;href&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>.
+<code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><span class="optional-argument">&lt;href&gt;</span></code> and <code><span class="optional-argument">&lt;title&gt;</span></code>.
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>, <code><span class="optional-argument">&lt;href&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
 one or more closing square or round brackets,
@@ -1689,52 +1691,37 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h4 id="reference-style-links"><a class="permalink" href="#reference-style-links" aria-label="Permalink"></a>Reference-style links</h4>
-<ul>
-<li>Definition
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>[<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;class&gt;</span>}
-  <span class="optional-argument">&lt;href&gt;</span> <span class="optional-argument">&lt;title&gt;</span>
-<span class="repeatable-delimiter">@@</span></code></pre>
-</li>
-<li>Link
 <pre class="cmd syntax"><code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>][<span class="optional-argument">&lt;label&gt;</span>]</code></pre>
-</li>
-</ul>
+<p>
+To be used in conjunction with a <a href="#reference-definitions">reference-style definition</a>.
+</p>
 <p>
 A single space may be included
-between <code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code> in a link.
-The referencing strings <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code> and <code><span class="optional-argument">&lt;label&gt;</span></code>
-are case insensitive.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;label&gt;</span></code> in a link is empty,
+between <code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code>.
+The referencing <code><span class="optional-argument">&lt;label&gt;</span></code> is case insensitive.
+If <code><span class="optional-argument">&lt;label&gt;</span></code> is empty,
 the square brackets surrounding it may be omitted,
-and <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is used as the label for that link.
+and <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is used as the label.
 </p>
 <p>
 Produces the link
-<code>&lt;a class="<span class="optional-argument">&lt;class&gt;</span>" href="<span class="optional-argument">&lt;href&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>.
+<code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from the attribute specifications
+for the corresponding <a href="#reference-definitions">reference-style image definition</a>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> and <code><span class="optional-argument">&lt;label&gt;</span></code> is stripped.
-For definitions whose <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code>, <code><span class="optional-argument">&lt;class&gt;</span></code>,
-<code><span class="optional-argument">&lt;href&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
 For links whose <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> or <code><span class="optional-argument">&lt;label&gt;</span></code> contains
 one or more closing square brackets,
 use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
-<p>
-All link definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-</p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>@@[wikipedia]
+<pre class="cmd"><code>@[wikipedia]
   https://en.wikipedia.org/wiki/Main_Page
   Wikipedia, the free encyclopedia
-@@
+@
 
 [Wikipedia's home page][wikipedia] \+
 [Wikipedia][] \+
