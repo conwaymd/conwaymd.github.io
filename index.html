@@ -343,34 +343,6 @@ Yep yep yep
 </pre>
 </li>
 </ul>
-<h4 id="cmd-literals-contrived"><a class="permalink" href="#cmd-literals-contrived" aria-label="Permalink"></a>Example 3: contrived usage</h4>
-<p>
-CMD literals are very powerful.
-For example, <code>id</code> and <code>class</code> in CMD block syntax
-are specified in the form <code><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code>.
-Now, if for whatever reason you want an <code>id</code>
-with curly brackets, e.g.&nbsp;<code>{dumb-id}</code>,
-then wrapping it inside a CMD literal will prevent it
-from being interpreted as the class <code>dumb-id</code>:
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>``{dumb-id}
-  Whoops!
-``
-``~~ {dumb-id} ~~
-  That's better.
-``
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;pre class="dumb-id"&gt;&lt;code&gt;Whoops!
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre id="{dumb-id}"&gt;&lt;code&gt;That's better.
-&lt;/code&gt;&lt;/pre&gt;
-</code></pre>
-</li>
-</ul>
 <h3 id="display-code"><a class="permalink" href="#display-code" aria-label="Permalink"></a>Display code</h3>
 <pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">``</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
