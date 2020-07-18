@@ -494,7 +494,7 @@ the curly brackets surrounding it may be omitted.
 Produces
 <code>&lt;div<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/div&gt;</code>
 where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><attribute specification></code> with <code>.js-maths</code> prepended,
+built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> with <code>.js-maths</code> prepended,
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
 <code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
@@ -613,10 +613,12 @@ so there is no need to worry about recursion errors: {+ inclusion.txt +}
 <h3 id="regex-replacements"><a class="permalink" href="#regex-replacements" aria-label="Permalink"></a>Regex replacement definitions</h3>
 <pre class="cmd syntax"><code><span class="optional-argument">&lt;flag&gt;</span>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">&lt;PATTERN&gt;</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">&lt;REPLACEMENT&gt;</span> <span class="repeatable-delimiter">%</span>}</code></pre>
 <p>
-Reads and stores all regex replacement definitions
+Regex replacement definition
 for the replacement of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>
 according to Python regex syntax,
 with the flags <code>re.ASCII</code>, <code>re.MULTILINE</code>, and <code>re.VERBOSE</code> enabled.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> and <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> or <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> containing
 one or more consecutive percent signs,
@@ -697,8 +699,10 @@ which are of the form <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&
 <h3 id="ordinary-replacements"><a class="permalink" href="#ordinary-replacements" aria-label="Permalink"></a>Ordinary replacements</h3>
 <pre class="cmd syntax"><code><span class="optional-argument">&lt;flag&gt;</span>{<span class="repeatable-delimiter">:</span> <span class="mandatory-argument">&lt;PATTERN&gt;</span> <span class="repeatable-delimiter">:</span> <span class="mandatory-argument">&lt;REPLACEMENT&gt;</span> <span class="repeatable-delimiter">:</span>}</code></pre>
 <p>
-Reads and stores all ordinary replacement definitions
+Ordinary replacement definition
 for the replacement of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> and <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> or <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> containing
 one or more consecutive colons,
@@ -1533,6 +1537,33 @@ All leading whitespace on the next line is stripped.
 </code></pre>
 </li>
 </ul>
+<h3 id="reference-definitions"><a class="permalink" href="#reference-definitions" aria-label="Permalink"></a>Reference-style definitions</h3>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">@</span>[<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="optional-argument">&lt;address&gt;</span> <span class="optional-argument">&lt;title&gt;</span> <span class="repeatable-delimiter">@</span></code></pre>
+<p>
+Reference style image or link definition.
+</p>
+<p>
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
+</p>
+<p>
+The referencing <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code> is case insensitive.
+For definitions whose <code><span class="optional-argument">&lt;address&gt;</span></code> or <code><span class="optional-argument">&lt;title&gt;</span></code>
+contains one or more consecutive at signs
+which are not protected by CMD literals,
+use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
+</p>
+<p>
+<code><span class="optional-argument">&lt;address&gt;</span></code> is used for
+<code>src</code> in <a href="#reference-style-images">images</a> and
+<code>href</code> in <a href="#reference-style-links">links</a>.
+</p>
+<p>
+All reference-style definitions are read and stored.
+If the same label (which is case insensitive)
+is specified more than once,
+the latest definition shall prevail.
+</p>
 <h3 id="images"><a class="permalink" href="#images" aria-label="Permalink"></a>Images</h3>
 <h4 id="inline-style-images"><a class="permalink" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>](<span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>

@@ -690,7 +690,7 @@ Produces
   ~~ </div> ~~
 ^}
 where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <attribute specification> ^} with `.js-maths` prepended,
+built from {^ <|attribute specification|> ^} with `.js-maths` prepended,
 with HTML syntax-character escaping
 and de-indentation for {^ <|CONTENT|> ^}.
 {^ <|flags|> ^} may consist of zero or more of the following characters
@@ -846,10 +846,12 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ^^}
 
 ----
-Reads and stores all regex replacement definitions
+Regex replacement definition
 for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}
 according to Python regex syntax,
 with the flags `re.ASCII`, `re.MULTILINE`, and `re.VERBOSE` enabled.
+----
+----
 Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
 For {^ <|PATTERN|> ^} or {^ <|REPLACEMENT|> ^} containing
 one or more consecutive percent signs,
@@ -930,8 +932,10 @@ which are of the form {^ %<|PROPERTY NAME|> ^}.
 ^^}
 
 ----
-Reads and stores all ordinary replacement definitions
+Ordinary replacement definition
 for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}.
+----
+----
 Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
 For {^ <|PATTERN|> ^} or {^ <|REPLACEMENT|> ^} containing
 one or more consecutive colons,
@@ -1809,6 +1813,41 @@ All leading whitespace on the next line is stripped.
   ````
 
 ====
+
+
+###{#reference-definitions}
+  Reference-style definitions
+###
+
+{^^
+  {{@}}[<|LABEL|>]{<|attribute specification|>} <|address|> <|title|> {{@}}
+^^}
+
+----
+Reference style image or link definition.
+----
+----
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
+----
+----
+The referencing {^ <|LABEL|> ^} is case insensitive.
+For definitions whose {^ <|address|> ^} or {^ <|title|> ^}
+contains one or more consecutive at signs
+which are not protected by CMD literals,
+use a longer run of {{at signs}} in the delimiters.
+----
+----
+{^ <|address|> ^} is used for
+`src` in [images](#reference-style-images) and
+`href` in [links](#reference-style-links).
+----
+----
+All reference-style definitions are read and stored.
+If the same label (which is case insensitive)
+is specified more than once,
+the latest definition shall prevail.
+----
 
 
 ###{#images}
