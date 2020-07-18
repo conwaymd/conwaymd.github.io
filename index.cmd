@@ -1369,23 +1369,25 @@ the curly brackets surrounding it may be omitted.
 ###
 
 {^^
-  \/{{ '''' }}<|id|>{<|class|>}
+  \/{{ '''' }}{<|attribute specification|>}
   \/  <|CONTENT|>
   \/{{ '''' }}
 ^^}
 
 ----
-If {^ <|class|> ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the table
 {^
-  \<table
-    id="<|id|>" class="<|class|>"\>↵\
-      <|CONTENT|>\
+  \<table<|ATTRIBUTES|>↵\
+     <|CONTENT|>\
   \</table\>
-^}.
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
 For {^ <|CONTENT|> ^} containing four or more apostrophes
 which are not protected by [CMD literals],
 use a longer run of {{apostrophes}} in the delimiters.
@@ -1416,7 +1418,7 @@ In the implementation, a recursive call is used to process nested tables.
 according to leading occurrences of the following:
 ----
 
-{^^ \Z<|id|>{<|class|>}[<|rowspan|>,<|colspan|>] ^^}
+{^^ \Z{<|attribute specification|>} ^^}
 
 ----
 The following delimiters {^ \Z ^} for table cells are used:
@@ -1428,12 +1430,8 @@ The following delimiters {^ \Z ^} for table cells are used:
 ----
 Table cells end at the next table cell, table row, or table part,
 or at the end of the content being split.
-Non-empty {^ <|rowspan|> ^} and {^ <|colspan|> ^} must consist of digits only.
-If {^ <|class|> ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
-If {^ <|colspan|> ^} is empty, the comma before it may be omitted.
-If both {^ <|rowspan|> ^} and {^ <|colspan|> ^} are empty,
-the comma between them and the square brackets surrounding them may be omitted.
 ----
 
 ####{#table-rows}
@@ -1445,12 +1443,12 @@ the comma between them and the square brackets surrounding them may be omitted.
 according to leading occurrences of the following:
 ----
 
-{^^ ==<|id|>{<|class|>} ^^}
+{^^ =={<|attribute specification|>} ^^}
 
 ----
 Table rows end at the next table row or table part,
 or at the end of the content being split.
-If {^ <|class|> ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
@@ -1463,7 +1461,7 @@ the curly brackets surrounding it may be omitted.
 according to leading occurrences of the following:
 ----
 
-{^^ \Y<|id|>{<|class|>} ^^}
+{^^ \Y{<|attribute specification|>} ^^}
 
 ----
 The following delimiters {^ \Y ^} for table parts are used:
@@ -1476,7 +1474,7 @@ The following delimiters {^ \Y ^} for table parts are used:
 ----
 Table parts end at the next table part,
 or at the end of the content being split.
-If {^ <|class|> ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
@@ -1495,14 +1493,14 @@ the curly brackets surrounding it may be omitted.
         ; D
       ==
         , 1
-        ,[2] 2
+        ,{r2} 2
         , 3
         , 4
       ==
         , 5
-        ,[3,2] 6
+        ,{r3 c2} 6
       ==
-        ,[,2] 7
+        ,{c2} 7
       ==
         , 8
         ; ?
@@ -1584,7 +1582,7 @@ the curly brackets surrounding it may be omitted.
     |_
       ==
         ; Total
-        ,total-cost{some-class}
+        ,{#total-cost .some-class}
           17
     ''''
   ````

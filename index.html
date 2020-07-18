@@ -1100,15 +1100,18 @@ Paragraph with &lt;code&gt;id&lt;/code&gt; and &lt;code&gt;class&lt;/code&gt;.
 </li>
 </ul>
 <h3 id="tables"><a class="permalink" href="#tables" aria-label="Permalink"></a>Tables</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
 <span class="repeatable-delimiter">''''</span></code></pre>
 <p>
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the table
-<code>&lt;table id="<span class="optional-argument">&lt;id&gt;</span>" class="<span class="optional-argument">&lt;class&gt;</span>"&gt;↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/table&gt;</code>.
+<code>&lt;table<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/table&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing four or more apostrophes
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a longer run of <span class="repeatable-delimiter">apostrophes</span> in the delimiters.
@@ -1135,7 +1138,7 @@ according to <a href="#table-parts">table part processing</a>.
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table cells <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>&lt;Z&gt;<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}[<span class="optional-argument">&lt;rowspan&gt;</span>,<span class="optional-argument">&lt;colspan&gt;</span>]</code></pre>
+<pre class="cmd syntax"><code>&lt;Z&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 The following delimiters <code>&lt;Z&gt;</code> for table cells are used:
 </p>
@@ -1148,23 +1151,19 @@ The following delimiters <code>&lt;Z&gt;</code> for table cells are used:
 <p>
 Table cells end at the next table cell, table row, or table part,
 or at the end of the content being split.
-Non-empty <code><span class="optional-argument">&lt;rowspan&gt;</span></code> and <code><span class="optional-argument">&lt;colspan&gt;</span></code> must consist of digits only.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;colspan&gt;</span></code> is empty, the comma before it may be omitted.
-If both <code><span class="optional-argument">&lt;rowspan&gt;</span></code> and <code><span class="optional-argument">&lt;colspan&gt;</span></code> are empty,
-the comma between them and the square brackets surrounding them may be omitted.
 </p>
 <h4 id="table-rows"><a class="permalink" href="#table-rows" aria-label="Permalink"></a>Table rows</h4>
 <p>
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table rows <code>&lt;tr&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>==<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code></pre>
+<pre class="cmd syntax"><code>=={<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 Table rows end at the next table row or table part,
 or at the end of the content being split.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="table-parts"><a class="permalink" href="#table-parts" aria-label="Permalink"></a>Table parts</h4>
@@ -1172,7 +1171,7 @@ the curly brackets surrounding it may be omitted.
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table parts <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>&lt;Y&gt;<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code></pre>
+<pre class="cmd syntax"><code>&lt;Y&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 The following delimiters <code>&lt;Y&gt;</code> for table parts are used:
 </p>
@@ -1187,7 +1186,7 @@ The following delimiters <code>&lt;Y&gt;</code> for table parts are used:
 <p>
 Table parts end at the next table part,
 or at the end of the content being split.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="tables-without-parts"><a class="permalink" href="#tables-without-parts" aria-label="Permalink"></a>Example 1: table <em>without</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
@@ -1201,14 +1200,14 @@ the curly brackets surrounding it may be omitted.
     ; D
   ==
     , 1
-    ,[2] 2
+    ,{r2} 2
     , 3
     , 4
   ==
     , 5
-    ,[3,2] 6
+    ,{r3 c2} 6
   ==
-    ,[,2] 7
+    ,{c2} 7
   ==
     , 8
     ; ?
@@ -1289,7 +1288,7 @@ the curly brackets surrounding it may be omitted.
 |_
   ==
     ; Total
-    ,total-cost{some-class}
+    ,{#total-cost .some-class}
       17
 ''''
 </code></pre>
