@@ -838,7 +838,7 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 
 
 ###{#regex-replacements}
-  Regex replacements
+  Regex replacement definitions
 ###
 
 {^^
@@ -846,7 +846,8 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ^^}
 
 ----
-Processes regex replacements of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}
+Reads and stores all regex replacement definitions
+for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}
 according to Python regex syntax,
 with the flags `re.ASCII`, `re.MULTILINE`, and `re.VERBOSE` enabled.
 Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
@@ -877,9 +878,9 @@ If {^ <|flag|> ^} is empty, it defaults to `A`.
 ----
 
 ----
-All regex replacement specifications are read and stored.
+All regex replacement definitions are read and stored.
 If the same pattern is specified more than once for a given flag,
-the latest specification shall prevail.
+the latest definition shall prevail.
 ----
 
 ----
@@ -890,13 +891,15 @@ before the section headings (`<h2>` to `<h6>`) in this page:
 ````{.cmd}
   {%
     ^ [^\S\n]*
-    (?P<hashes> [#]{2,6} (?![#]) )
-      (?P<id_> [\S]*? )
+    (?P<hashes> [#]{2,6} )
+      \{
+        [#] (?P<id_> [\S]+? )
+      \}
     [\s]+
       (?P<content> [\s\S]*? )
     (?P=hashes)
   %
-    \g<hashes>\g<id_>
+    \g<hashes>{#\g<id_>}
       <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
       \g<content>
     \g<hashes>
