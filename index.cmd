@@ -76,19 +76,19 @@
   <span class="repeatable-delimiter">\g<content></span>
 %}
 
-<## {.Mandatory.} ##>
+<## {.MANDATORY.} ##>
 {%
   \{ [.]
-    (?P<content> [\s\S]*? )
+    (?P<content> [A-Z ]+? )
   [.] \}
 %
   <span class="mandatory-argument">\\<\g<content>\\></span>
 %}
 
-<## [.Optional.] ##>
+<## [.optional.] ##>
 {%
   \[ [.]
-    (?P<content> [\s\S]*? )
+    (?P<content> [a-z ]+? )
   [.] \]
 %
   <span class="optional-argument">\\<\g<content>\\></span>
@@ -97,13 +97,15 @@
 <## Heading permalinks (<h2> to <h6>) ##>
 {%
   ^ [^\S\n]*
-  (?P<hashes> [#]{2,6} (?![#]) )
-    (?P<id_> [\S]*? )
+  (?P<hashes> [#]{2,6} )
+    \{
+      [#] (?P<id_> [\S]+? )
+    \}
   [\s]+
     (?P<content> [\s\S]*? )
   (?P=hashes)
 %
-  \g<hashes>\g<id_>
+  \g<hashes>{#\g<id_>}
     <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
     \g<content>
   \g<hashes>
@@ -118,7 +120,7 @@
 
 
 
-||||{page-properties}
+||||{.page-properties}
   First created: %date-created \+
   Last modified: %date-modified
 ||||
@@ -167,7 +169,7 @@ CMD addresses each of these.
 ----
 
 
-##installation
+##{#installation}
   Installation
 ##
 
@@ -188,7 +190,7 @@ $ git clone https://github.com/conway-markdown/conway-markdown.git
 ====
 
 
-##usage
+##{#usage}
   Usage
 ##
 
@@ -207,7 +209,7 @@ except those listed in `.cmdignore`.
 ----
 
 
-##syntax
+##{#syntax}
   Syntax
 ##
 
@@ -257,7 +259,7 @@ The syntax of CMD, in the order of processing, is thus:
 ======
 
 
-###cmd-literals
+###{#cmd-literals}
   CMD literals
 ###
 
@@ -288,13 +290,13 @@ This makes it immune to all CMD processing
 (e.g.~conversion of `* *` to `<em> </em>`).
 ----
 
-####cmd-literals-basic
+####{#cmd-literals-basic}
   Example 1: basic usage
 ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~~
     Escaping: ~~ & < > ~~.
     Whitespace stripping: {~~      yes      ~~}.
@@ -303,7 +305,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   ~~~~~
     Escaping: &amp; &lt; &gt;.
     Whitespace stripping: {yes}.
@@ -320,20 +322,19 @@ This makes it immune to all CMD processing
 
 ====
 
-####flags
+####{#flags}
   Example 2: flags
 ####
-@@[flags examples]
-  \#flags
-@@
 
-#####unescaped-flag
+@[flags examples] #flags @
+
+#####{#unescaped-flag}
   2.1~Unescaped flag `u`
 #####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     Escaping:     ~~ <b>blah</b> ~~.
     No escaping: u~~ <b>cough</b> ~~.
@@ -341,7 +342,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     Escaping:     &lt;b&gt;blah&lt;/b&gt;.
     No escaping: <b>cough</b>.
   ````
@@ -354,13 +355,13 @@ This makes it immune to all CMD processing
 
 ====
 
-#####continuations-flag
+#####{#continuations-flag}
   2.2~Continuations flag `c`
 #####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     uc~~
       <pre>
@@ -373,7 +374,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
       <pre>
         Blah blah blahCough cough cough
             Yep yep yep
@@ -391,16 +392,15 @@ This makes it immune to all CMD processing
 
 ====
 
-#####whitespace-flag
+#####{#whitespace-flag}
   2.3~Whitespace flag `w`
 #####
-@@[whitespace flag example]
-  \#whitespace-flag
-@@
+
+@[whitespace flag example] #whitespace-flag @
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     uw~~
       <pre>
@@ -413,7 +413,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <pre>
     Blah blah blah
     Cough cough cough
@@ -432,7 +432,7 @@ This makes it immune to all CMD processing
 
 ====
 
-####cmd-literals-contrived
+####{#cmd-literals-contrived}
   Example 3: contrived usage
 ####
 
@@ -448,7 +448,7 @@ from being interpreted as the class `dumb-id`:
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     ``{dumb-id}
       Whoops!
@@ -460,7 +460,7 @@ from being interpreted as the class `dumb-id`:
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <pre class="dumb-id"><code>Whoops!
     </code></pre>
     <pre id="{dumb-id}"><code>That's better.
@@ -471,7 +471,7 @@ from being interpreted as the class `dumb-id`:
 
 
 
-###display-code
+###{#display-code}
   Display code
 ###
 
@@ -513,7 +513,7 @@ use a longer run of {{backticks}} in the delimiters.
 
 ====
 * CMD
-  ``````{cmd}
+  ``````{.cmd}
   ~~~~
     ``id-0{class-1 class-2}
         Escaping: & < >.
@@ -534,7 +534,7 @@ use a longer run of {{backticks}} in the delimiters.
   ``````
 
 * HTML
-  ``````{html}
+  ``````{.html}
   ~~~~
     <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
     Note that CMD literals have higher precedence,
@@ -553,7 +553,7 @@ use a longer run of {{backticks}} in the delimiters.
   ``````
 
 * Rendered
-    ``id-0{class-1 class-2}
+    ``{#id-0 .class-1 .class-2}
         Escaping: & < >.
         Note that CMD literals have higher precedence,
         since they are processed first: ~~~ ~~ literally ~~ ~~~.
@@ -572,7 +572,7 @@ use a longer run of {{backticks}} in the delimiters.
 ====
 
 
-###inline-code
+###{#inline-code}
   Inline code
 ###
 
@@ -607,12 +607,12 @@ use a longer run of {{backticks}} in the delimiters.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     `` The escaped form of & is &amp;. Here is a tilde: `. ``
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <code>The escaped form of &amp; is &amp;amp;. Here is a tilde: `.</code>
   ````
 
@@ -624,7 +624,7 @@ use a longer run of {{backticks}} in the delimiters.
 ====
 
 
-###comments
+###{#comments}
   Comments
 ###
 
@@ -648,7 +648,7 @@ In this sense they are stronger than literals and code.
 
 
 
-###display-maths
+###{#display-maths}
   Display maths
 ###
 
@@ -692,7 +692,7 @@ On this page I am using [KaTeX].
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     $$
       1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
         = \frac{\pi^2}{6}
@@ -701,7 +701,7 @@ On this page I am using [KaTeX].
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
       = \frac{\pi^2}{6}
       &lt; 2
@@ -718,7 +718,7 @@ On this page I am using [KaTeX].
 ====
 
 
-###inline-maths
+###{#inline-maths}
   Inline maths
 ###
 
@@ -755,13 +755,13 @@ On this page I am using [KaTeX].
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     A contrived instance of multiple dollar signs in inline maths:
     $$$ \text{Yea, \$$d$ means $d$~dollars.} $$$
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     A contrived instance of multiple dollar signs in inline maths:
     <span class="js-maths">\text{Yea, \$$d$ means $d$~dollars.}</span>
   ````
@@ -775,7 +775,7 @@ On this page I am using [KaTeX].
 ====
 
 
-###inclusions
+###{#inclusions}
   Inclusions
 ###
 
@@ -797,12 +797,12 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     {+ inclusion.txt +}
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   This is content from <a href="/inclusion.txt"><code>inclusion.txt</code></a>.
   Nested inclusions are not processed,
   so there is no need to worry about recursion errors: {+ inclusion.txt +}
@@ -816,7 +816,7 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ====
 
 
-###regex-replacements
+###{#regex-replacements}
   Regex replacements
 ###
 
@@ -866,7 +866,7 @@ As an example, the following regex replacement is used
 to automatically insert the permalinks
 before the section headings (`<h2>` to `<h6>`) in this page:
 ----
-````{cmd}
+````{.cmd}
   {%
     ^ [^\S\n]*
     (?P<hashes> [#]{2,6} (?![#]) )
@@ -897,7 +897,7 @@ which are of the form {^ %{.PROPERTY NAME.} ^}.
 ----
 
 
-###ordinary-replacements
+###{#ordinary-replacements}
   Ordinary replacements
 ###
 
@@ -940,7 +940,7 @@ the latest specification shall prevail.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     {: |hup-hup| : Huzzah! :}
     |hup-hup| \+
     
@@ -990,7 +990,7 @@ which are of the form {^ %{.PROPERTY NAME.} ^}.
 ----
 
 
-###preamble
+###{#preamble}
   Preamble
 ###
 
@@ -1035,7 +1035,7 @@ are accorded special treatment.
 If omitted from a preamble,
 they take the default values shown beside them:
 ----
-````{cmd}
+````{.cmd}
   %lang en
   %viewport width=device-width, initial-scale=1
   %title Title
@@ -1055,7 +1055,7 @@ they take the default values shown beside them:
 The following properties, called derived properties,
 are computed based on the supplied original properties:
 ----
-````{cmd}
+````{.cmd}
   %html-lang-attribute
   %meta-element-author
   %meta-element-description
@@ -1071,17 +1071,17 @@ are computed based on the supplied original properties:
   %clean-url
 ````
 
-####preamble-minimal Example 1: a minimal HTML file ####
+####{#preamble-minimal} Example 1: a minimal HTML file ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     %%
     %%
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -1096,11 +1096,11 @@ are computed based on the supplied original properties:
 
 ====
 
-####preamble-not-minimal Example 2: a not-so-minimal HTML file ####
+####{#preamble-not-minimal} Example 2: a not-so-minimal HTML file ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     %%
       %lang en-AU
@@ -1132,7 +1132,7 @@ are computed based on the supplied original properties:
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <!DOCTYPE html>
     <html lang="en-AU">
     <head>
@@ -1161,7 +1161,7 @@ are computed based on the supplied original properties:
 ====
 
 
-###blocks
+###{#blocks}
   Blocks
 ###
 
@@ -1210,7 +1210,7 @@ The following delimiting characters {^ \C ^} are used:
 In the implementation, a recursive call is used to process nested blocks.
 ----
 
-####list-items
+####{#list-items}
   List items
 ####
 
@@ -1237,11 +1237,11 @@ If {^ [.class.] ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
-####blocks-nesting Example 1: nesting ####
+####{#blocks-nesting} Example 1: nesting ####
 
 ================
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ----
     A paragraph.
     ----
@@ -1304,11 +1304,11 @@ the curly brackets surrounding it may be omitted.
 
 ================
 
-####blocks-id-class Example 2: `id` and `class` ####
+####{#blocks-id-class} Example 2: `id` and `class` ####
 
 ================
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ----p-id{p-class}
     Paragraph with `id` and `class`.
     ----
@@ -1321,7 +1321,7 @@ the curly brackets surrounding it may be omitted.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <p id="p-id" class="p-class">
     Paragraph with <code>id</code> and <code>class</code>.
     </p>
@@ -1338,7 +1338,7 @@ the curly brackets surrounding it may be omitted.
 ================
 
 
-###tables
+###{#tables}
   Tables
 ###
 
@@ -1381,7 +1381,7 @@ In the implementation, a recursive call is used to process nested tables.
     according to [table part processing](#table-parts).
 ++++
 
-####table-cells
+####{#table-cells}
   Table cells
 ####
 
@@ -1410,7 +1410,7 @@ If both {^ [.rowspan.] ^} and {^ [.colspan.] ^} are empty,
 the comma between them and the square brackets surrounding them may be omitted.
 ----
 
-####table-rows
+####{#table-rows}
   Table rows
 ####
 
@@ -1428,7 +1428,7 @@ If {^ [.class.] ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
-####table-parts
+####{#table-parts}
   Table parts
 ####
 
@@ -1454,13 +1454,13 @@ If {^ [.class.] ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
-####tables-without-parts
+####{#tables-without-parts}
   Example 1: table *without* `<thead>`, `<tbody>`, `<tfoot>` parts
 ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ''''
       ==
         ; A
@@ -1484,7 +1484,7 @@ the curly brackets surrounding it may be omitted.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <table>
     <tr>
     <th>A</th>
@@ -1521,14 +1521,14 @@ the curly brackets surrounding it may be omitted.
         ; D
       ==
         , 1
-        ,[2] 2
+        ,{r2} 2
         , 3
         , 4
       ==
         , 5
-        ,[3,2] 6
+        ,{r3 c2} 6
       ==
-        ,[,2] 7
+        ,{c2} 7
       ==
         , 8
         ; ?
@@ -1536,13 +1536,13 @@ the curly brackets surrounding it may be omitted.
 
 ====
 
-####tables-with-parts
+####{#tables-with-parts}
   Example 2: table *with* `<thead>`, `<tbody>`, `<tfoot>` parts
 ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ''''
     |^
       ==
@@ -1564,7 +1564,7 @@ the curly brackets surrounding it may be omitted.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <table>
     <thead>
     <tr>
@@ -1607,19 +1607,19 @@ the curly brackets surrounding it may be omitted.
     |_
       ==
         ; Total
-        ,total-cost{some-class}
+        ,{#total-cost .some-class}
           17
     ''''
 
 ====
 
 
-###escapes
+###{#escapes}
   Escapes
 ###
 
 
-||||{centred-flex}
+||||{.centred-flex}
 ''''
   ==
     ; CCH
@@ -1760,7 +1760,7 @@ the curly brackets surrounding it may be omitted.
 ||||
 
 
-###line-continuations
+###{#line-continuations}
   Line continuations
 ###
 
@@ -1771,7 +1771,7 @@ All leading whitespace on the next line is stripped.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     (Line 1)\
       (Line 2)
     (Line 3) \
@@ -1779,7 +1779,7 @@ All leading whitespace on the next line is stripped.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     (Line 1)(Line 2)
     (Line 3) (Line 4)
   ````
@@ -1787,12 +1787,12 @@ All leading whitespace on the next line is stripped.
 ====
 
 
-###images
+###{#images}
   Images
 ###
 
 
-####inline-style-images
+####{#inline-style-images}
   Inline-style images
 ####
 
@@ -1822,7 +1822,7 @@ use [escapes] or [CMD literals].
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
     /rembrandt-anatomy.jpg
     The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
@@ -1830,7 +1830,7 @@ use [escapes] or [CMD literals].
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
   ````
 
@@ -1845,7 +1845,7 @@ use [escapes] or [CMD literals].
 ====
 
 
-####reference-style-images
+####{#reference-style-images}
   Reference-style images
 ####
 
@@ -1909,7 +1909,7 @@ the latest specification shall prevail.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   @@![moses-breaking-tablets][200]
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
@@ -1919,13 +1919,13 @@ the latest specification shall prevail.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200">
   ````
 
 * Rendered
   ----
-  @@![moses-breaking-tablets][200]
+  @@[moses-breaking-tablets]{w200}
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
   @@
@@ -1936,12 +1936,12 @@ the latest specification shall prevail.
 ====
 
 
-###links
+###{#links}
   Links
 ###
 
 
-####inline-style-links
+####{#inline-style-links}
   Inline-style links
 ####
 
@@ -1973,7 +1973,7 @@ use [escapes] or [CMD literals].
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   [Wikimedia Commons](
     https://commons.wikimedia.org/wiki/Main_Page
     Wikimedia Commons
@@ -1983,7 +1983,7 @@ use [escapes] or [CMD literals].
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
   <a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
   ````
@@ -2001,7 +2001,7 @@ use [escapes] or [CMD literals].
 ====
 
 
-####reference-style-links
+####{#reference-style-links}
   Reference-style links
 ####
 
@@ -2062,7 +2062,7 @@ the latest specification shall prevail.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   @@[wikipedia]
     https://en.wikipedia.org/wiki/Main_Page
     Wikipedia, the free encyclopedia
@@ -2074,7 +2074,7 @@ the latest specification shall prevail.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia's home page</a><br>
   <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a><br>
   <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a>
@@ -2095,7 +2095,7 @@ the latest specification shall prevail.
 ====
 
 
-###headings
+###{#headings}
   Headings
 ###
 
@@ -2119,13 +2119,13 @@ or more consecutive hashes, use [CMD literals].
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ###some-id Heading with id ###
     #### Heading without id ####
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <h3 id="some-id">Heading with id</h3>
     <h4>Heading without id</h4>
   ````
@@ -2133,7 +2133,7 @@ or more consecutive hashes, use [CMD literals].
 ====
 
 
-###inline-semantics
+###{#inline-semantics}
   Inline semantics
 ###
 
@@ -2191,7 +2191,7 @@ In the implementation, matches are sought in the following order
 (for brevity, `C` is used in place of {^ \C ^} below):
 ----
 
-||||{centred-flex}
+||||{.centred-flex}
 ''''
 |^
   ==
@@ -2237,7 +2237,7 @@ only three cases need to be handled for the resulting match object:
 Recursive calls are used to process nested inline semantics.
 ----
 
-||||{centred-flex}
+||||{.centred-flex}
 ''''
 |^
   ==
@@ -2279,7 +2279,7 @@ Recursive calls are used to process nested inline semantics.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
@@ -2287,7 +2287,7 @@ Recursive calls are used to process nested inline semantics.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
   They are <em>not</em> the same.<br>
   Meals come with <b>rice</b> or <b>pasta</b>.<br>
@@ -2299,13 +2299,13 @@ Recursive calls are used to process nested inline semantics.
   \/**Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
-  I _{translator-supplied} am_ the LORD.
+  I _{.translator-supplied} am_ the LORD.
   ----
 
 ====
 
 
-###whitespace
+###{#whitespace}
   Whitespace
 ###
 
@@ -2336,13 +2336,8 @@ Whitespace is processed as follows:
 
 %footer-element
 
-@@[CMD literals]
-  #cmd-literals
-@@
-
-@@[escapes]
-  #escapes
-@@
+@[CMD literals] #cmd-literals @
+@[escapes] #escapes @
 
 @@[cmd-repo]
   https://github.com/conway-markdown/conway-markdown/
