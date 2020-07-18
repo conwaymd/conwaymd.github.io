@@ -2131,6 +2131,8 @@ Produces the heading
 ^},
 where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
 [built from {^ <|attribute specification|> ^}][as].
+----
+----
 Whitespace around {^ <|CONTENT|> ^} is stripped.
 For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
 For {^ <|CONTENT|> ^} containing the delimiting number of
@@ -2158,22 +2160,26 @@ or more consecutive hashes, use [CMD literals].
 ###
 
 {^^
-  \X{<|class|>} <|CONTENT|> \X
+  \X{<|attribute specification|>} <|CONTENT|> \X
 ^^}
 
 ----
 {^ <|CONTENT|> ^} must be non-empty.
-If {^ <|class|> ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the inline semantic
 {^
-  \<<|TAG NAME|>
-    class="<|class|>"\>\
-      <|CONTENT|>\
+  \<<|TAG NAME|><|ATTRIBUTES|>
+     <|CONTENT|>\
   \</<|TAG NAME|>\>
-^}.
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
+----
+----
 Whitespace around {^ <|CONTENT|> ^} is stripped.
 For {^ <|CONTENT|> ^} containing one or more occurrences of `*` or `_`,
 use [CMD literals] or the [escapes] `\*` and `\_`.
@@ -2208,7 +2214,8 @@ See [W3C on using `<b>` and `<i>` elements](
 
 ----
 In the implementation, matches are sought in the following order
-(for brevity, `C` is used in place of {^ \C ^} below):
+(for brevity, `C` is used in place of {^ \C ^},
+and `spec` in place of `attribute specification`, below):
 ----
 
 ||||{.centred-flex}
@@ -2220,19 +2227,19 @@ In the implementation, matches are sought in the following order
 |:
   ==
     , 33
-    , {^ CCC{<|inner class|>} <|INNER CONTENT|> CCC ^}
+    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> CCC ^}
   ==
     , 312
-    , {^ CCC{<|inner class|>} <|INNER CONTENT|> C <|OUTER CONTENT|> CC ^}
+    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> C <|OUTER CONTENT|> CC ^}
   ==
     , 321
-    , {^ CCC{<|inner class|>} <|INNER CONTENT|> CC <|OUTER CONTENT|> C ^}
+    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> CC <|OUTER CONTENT|> C ^}
   ==
     , 22
-    , {^ CC{<|class|>} <|CONTENT|> CC ^}
+    , {^ CC{<|spec|>} <|CONTENT|> CC ^}
   ==
     , 11
-    , {^ C{<|class|>} <|CONTENT|> C ^}
+    , {^ C{<|spec|>} <|CONTENT|> C ^}
 ''''
 ||||
 
@@ -2243,13 +2250,13 @@ only three cases need to be handled for the resulting match object:
 ----
 ====
 * 2-layer special (for 33): \+
-  {^^ \X\Y{<|inner class|>} <|INNER CONTENT|> \Y\X ^^}
+  {^^ \X\Y{<|inner spec|>} <|INNER CONTENT|> \Y\X ^^}
 
 * 2-layer general (for 312, 321): \+
-  {^^ \X\Y{<|inner class|>} <|INNER CONTENT|> \Y <|OUTER CONTENT|> \X ^^}
+  {^^ \X\Y{<|inner spec|>} <|INNER CONTENT|> \Y <|OUTER CONTENT|> \X ^^}
 
 * 1-layer case (for 22, 11): \+
-  {^^ \X{<|class|>} <|CONTENT|> \X ^^}
+  {^^ \X{<|spec|>} <|CONTENT|> \X ^^}
 
 ====
 
@@ -2303,7 +2310,7 @@ Recursive calls are used to process nested inline semantics.
   **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
-  I _{translator-supplied} am_ the LORD.
+  I _{.translator-supplied} am_ the LORD.
   ````
 
 * HTML

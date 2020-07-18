@@ -1749,6 +1749,8 @@ Produces the heading
 <code>&lt;h1<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/h1&gt;</code>,
 where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
 <a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>, use 2 to 6 delimiting hashes respectively.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing the delimiting number of
@@ -1767,14 +1769,20 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h3 id="inline-semantics"><a class="permalink" href="#inline-semantics" aria-label="Permalink"></a>Inline semantics</h3>
-<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
 <p>
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> must be non-empty.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the inline semantic
-<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span> class="<span class="optional-argument">&lt;class&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>.
+<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>
+<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing one or more occurrences of <code>*</code> or <code>_</code>,
 use <a href="#cmd-literals">CMD literals</a> or the <a href="#escapes">escapes</a> <code>\*</code> and <code>\_</code>.
@@ -1804,7 +1812,8 @@ See <a href="https://www.w3.org/International/questions/qa-b-and-i-tags.en">W3C 
 </p>
 <p>
 In the implementation, matches are sought in the following order
-(for brevity, <code>C</code> is used in place of <code>&lt;C&gt;</code> below):
+(for brevity, <code>C</code> is used in place of <code>&lt;C&gt;</code>,
+and <code>spec</code> in place of <code>attribute specification</code>, below):
 </p>
 <div class="centred-flex">
 <table>
@@ -1817,23 +1826,23 @@ In the implementation, matches are sought in the following order
 <tbody>
 <tr>
 <td>33</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CCC</code></td>
+<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CCC</code></td>
 </tr>
 <tr>
 <td>312</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> C <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> CC</code></td>
+<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> C <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> CC</code></td>
 </tr>
 <tr>
 <td>321</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CC <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> C</code></td>
+<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CC <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> C</code></td>
 </tr>
 <tr>
 <td>22</td>
-<td><code>CC{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> CC</code></td>
+<td><code>CC{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> CC</code></td>
 </tr>
 <tr>
 <td>11</td>
-<td><code>C{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> C</code></td>
+<td><code>C{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> C</code></td>
 </tr>
 </tbody>
 </table>
@@ -1845,13 +1854,13 @@ only three cases need to be handled for the resulting match object:
 </p>
 <ul>
 <li>2-layer special (for 33):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt;&lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt;&lt;X&gt;</code></pre>
 </li>
 <li>2-layer general (for 312, 321):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt; <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> &lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt; <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> &lt;X&gt;</code></pre>
 </li>
 <li>1-layer case (for 22, 11):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
 </li>
 </ul>
 <p>
@@ -1914,7 +1923,7 @@ Recursive calls are used to process nested inline semantics.
 <pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` and `&lt;em&gt;` with `&lt;b&gt;` and `&lt;i&gt;`.** \+
 They are *not* the same. \+
 Meals come with __rice__ or __pasta__. \+
-I _{translator-supplied} am_ the LORD.
+I _{.translator-supplied} am_ the LORD.
 </code></pre>
 </li>
 <li>HTML
