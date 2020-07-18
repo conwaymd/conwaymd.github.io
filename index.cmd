@@ -264,6 +264,8 @@ The syntax of CMD, in the order of processing, is thus:
   Attribute specifications
 ###
 
+@[as] #attribute-specifications @
+
 ----
 Most CMD syntaxes have an optional curly-bracketed part
 which allows for the specification of attributes.
@@ -491,25 +493,27 @@ This makes it immune to all CMD processing
 ###
 
 {^^
-  \/<|flags|>{{ ~~``~~ }}<|id|>{<|class|>}
+  \/<|flags|>{{ ~~``~~ }}{<|attribute specification|>}
   \/  <|CONTENT|>
   \/{{ ~~``~~ }}
 ^^}
 
 ----
-If {^ <|class|> ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the display code
 {^
-  ~~ <pre ~~
-    id="<|id|>" class="<|class|>"~~ > ~~\
-      ~~ <code> ~~\
-        <|CONTENT|>\
-      ~~ </code> ~~\
+  ~~ <pre ~~<|ATTRIBUTES|>~~ > ~~\
+    ~~ <code> ~~\
+         <|CONTENT|>\
+    ~~ </code> ~~\
   ~~ </pre> ~~
-^},
+^}
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as],
 with HTML syntax-character escaping
 and de-indentation for {^ <|CONTENT|> ^}.
 {^ <|flags|> ^} may consist of zero or more of the following characters
@@ -530,7 +534,7 @@ use a longer run of {{backticks}} in the delimiters.
 * CMD
   ``````{.cmd}
   ~~~~
-    ``id-0{class-1 class-2}
+    ``{#id-0 .class-1 .class-2}
         Escaping: & < >.
         Note that CMD literals have higher precedence,
         since they are processed first: ~~~ ~~ literally ~~ ~~~.
@@ -541,7 +545,7 @@ use a longer run of {{backticks}} in the delimiters.
     ````
       ``
       Use more backticks as required.
-      If [id] and [class] are omitted,
+      If <id> and <class> are omitted,
       no corresponding attributes are generated.
       ``
     ````
@@ -560,7 +564,7 @@ use a longer run of {{backticks}} in the delimiters.
     </code></pre>
     <pre><code>``
     Use more backticks as required.
-    If [id] and [class] are omitted,
+    If &lt;id&gt; and &lt;class&gt; are omitted,
     no corresponding attributes are generated.
     ``
     </code></pre>
@@ -579,7 +583,7 @@ use a longer run of {{backticks}} in the delimiters.
     ````
       ``
       Use more backticks as required.
-      If [id] and [class] are omitted,
+      If <id> and <class> are omitted,
       no corresponding attributes are generated.
       ``
     ````
