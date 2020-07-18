@@ -1191,23 +1191,25 @@ are computed based on the supplied original properties:
 ###
 
 {^^
-  \/{{ \C\C\C\C }}<|id|>{<|class|>}
+  \/{{ \C\C\C\C }}{<|attribute specification|>}
   \/  <|CONTENT|>
   \/{{ \C\C\C\C }}
 ^^}
 
 ----
-If {^ <|class|> ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the block
 {^
-  \<<|TAG NAME|>
-    id="<|id|>" class="<|class|>"\>↵\
-      <|CONTENT|>\
+  \<<|TAG NAME|><|ATTRIBUTES|>↵\
+     <|CONTENT|>\
   \</<|TAG NAME|>\>
-^}.
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
 For {^ <|CONTENT|> ^} containing four or more
 consecutive delimiting characters
 which are not protected by [CMD literals],
@@ -1215,7 +1217,7 @@ use a longer run of {{delimiting characters}} in the delimiters.
 ----
 
 ----
-The following delimiting characters {^ \C ^} are used:
+The following delimiting characters {^ {{\C}} ^} are used:
 ----
 ======
 * Non-lists:
@@ -1244,7 +1246,7 @@ For list blocks, {^ <|CONTENT|> ^} is split into list items `<li>`
 according to leading occurrences of the following:
 ----
 
-{^^ \Y<|id|>{<|class|>} ^^}
+{^^ \Y{<|attribute specification|>} ^^}
 
 ----
 The following delimiters {^ \Y ^} for list items are used:
@@ -1258,7 +1260,7 @@ The following delimiters {^ \Y ^} for list items are used:
 ----
 List items end at the next list item,
 or at the end of the content being split.
-If {^ <|class|> ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
@@ -1334,13 +1336,13 @@ the curly brackets surrounding it may be omitted.
 ================
 * CMD
   ````{.cmd}
-    ----p-id{p-class}
+    ----{#p-id .p-class}
     Paragraph with `id` and `class`.
     ----
     ======
-    *li-id List item with `id` and no `class`.
-    0.{li-class} List item with `class` and no `id`.
-    1.{li-class}
+    *{#li-id} List item with `id` and no `class`.
+    0.{.li-class} List item with `class` and no `id`.
+    1.{.li-class}
       Put arbitrary whitespace after the class for more clarity.
     ======
   ````
@@ -1359,7 +1361,6 @@ the curly brackets surrounding it may be omitted.
     </li>
     </ul>
   ````
-
 ================
 
 

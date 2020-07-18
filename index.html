@@ -926,22 +926,25 @@ At the time of writing, next year will be 2021.
 </li>
 </ul>
 <h3 id="blocks"><a class="permalink" href="#blocks" aria-label="Permalink"></a>Blocks</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
 <span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span></code></pre>
 <p>
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the block
-<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span> id="<span class="optional-argument">&lt;id&gt;</span>" class="<span class="optional-argument">&lt;class&gt;</span>"&gt;↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>.
+<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing four or more
 consecutive delimiting characters
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a longer run of <span class="repeatable-delimiter">delimiting characters</span> in the delimiters.
 </p>
 <p>
-The following delimiting characters <code>&lt;C&gt;</code> are used:
+The following delimiting characters <code><span class="repeatable-delimiter">&lt;C&gt;</span></code> are used:
 </p>
 <ul>
 <li>Non-lists:
@@ -971,7 +974,7 @@ In the implementation, a recursive call is used to process nested blocks.
 For list blocks, <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into list items <code>&lt;li&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>&lt;Y&gt;<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code></pre>
+<pre class="cmd syntax"><code>&lt;Y&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 The following delimiters <code>&lt;Y&gt;</code> for list items are used:
 </p>
@@ -988,7 +991,7 @@ The following delimiters <code>&lt;Y&gt;</code> for list items are used:
 <p>
 List items end at the next list item,
 or at the end of the content being split.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="blocks-nesting"><a class="permalink" href="#blocks-nesting" aria-label="Permalink"></a>Example 1: nesting</h4>
@@ -1070,13 +1073,13 @@ Someone might quote this later.
 <h4 id="blocks-id-class"><a class="permalink" href="#blocks-id-class" aria-label="Permalink"></a>Example 2: <code>id</code> and <code>class</code></h4>
 <ul>
 <li>CMD
-<pre class="cmd"><code>----p-id{p-class}
+<pre class="cmd"><code>----{#p-id .p-class}
 Paragraph with `id` and `class`.
 ----
 ======
-*li-id List item with `id` and no `class`.
-0.{li-class} List item with `class` and no `id`.
-1.{li-class}
+*{#li-id} List item with `id` and no `class`.
+0.{.li-class} List item with `class` and no `id`.
+1.{.li-class}
   Put arbitrary whitespace after the class for more clarity.
 ======
 </code></pre>
