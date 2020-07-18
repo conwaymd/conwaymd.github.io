@@ -1743,10 +1743,12 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h3 id="headings"><a class="permalink" href="#headings" aria-label="Permalink"></a>Headings</h3>
-<pre class="cmd syntax"><code>#<span class="optional-argument">&lt;id&gt;</span> <span class="mandatory-argument">&lt;CONTENT&gt;</span> #</code></pre>
+<pre class="cmd syntax"><code>#{<span class="optional-argument">&lt;attribute specification&gt;</span>}> <span class="mandatory-argument">&lt;CONTENT&gt;</span> #</code></pre>
 <p>
 Produces the heading
-<code>&lt;h1 id="<span class="optional-argument">&lt;id&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/h1&gt;</code>.
+<code>&lt;h1<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/h1&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>, use 2 to 6 delimiting hashes respectively.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing the delimiting number of
@@ -1754,7 +1756,7 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>###some-id Heading with id ###
+<pre class="cmd"><code>###{#some-id} Heading with id ###
 #### Heading without id ####
 </code></pre>
 </li>

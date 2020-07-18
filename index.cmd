@@ -2119,17 +2119,18 @@ use [escapes] or [CMD literals].
 ###
 
 {^^
-  \#<|id|> <|CONTENT|> \#
+  \#{<|attribute specification|>}> <|CONTENT|> \#
 ^^}
 
 ----
 Produces the heading
 {^
-  ~~ <h1 ~~
-    id="<|id|>"~~ > ~~\
+  ~~ <h1 ~~<|ATTRIBUTES|>~~ > ~~\
       <|CONTENT|>\
   ~~ </h1> ~~
-^}.
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
 Whitespace around {^ <|CONTENT|> ^} is stripped.
 For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
 For {^ <|CONTENT|> ^} containing the delimiting number of
@@ -2139,7 +2140,7 @@ or more consecutive hashes, use [CMD literals].
 ====
 * CMD
   ````{.cmd}
-    ###some-id Heading with id ###
+    ###{#some-id} Heading with id ###
     #### Heading without id ####
   ````
 
