@@ -1544,7 +1544,8 @@ All leading whitespace on the next line is stripped.
 <h3 id="reference-definitions"><a class="permalink" href="#reference-definitions" aria-label="Permalink"></a>Reference-style definitions</h3>
 <pre class="cmd syntax"><code><span class="repeatable-delimiter">@</span>[<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="optional-argument">&lt;address&gt;</span> <span class="optional-argument">&lt;title&gt;</span> <span class="repeatable-delimiter">@</span></code></pre>
 <p>
-Reference style image or link definition.
+Reference style definition
+for an <a href="#reference-style-images">image</a> or a <a href="#reference-style-links">link</a>.
 </p>
 <p>
 If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
@@ -1578,7 +1579,9 @@ they are automatically escaped as <code>&amp;quot;</code>.
 </p>
 <p>
 Produces the image
-<code>&lt;img alt="<span class="mandatory-argument">&lt;ALT&gt;</span>" src="<span class="optional-argument">&lt;src&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>"&gt;</code>.
+<code>&lt;img<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, and <code><span class="optional-argument">&lt;title&gt;</span></code>.
 For <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
 one or more closing square or round brackets,
 use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
@@ -1602,61 +1605,43 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h4 id="reference-style-images"><a class="permalink" href="#reference-style-images" aria-label="Permalink"></a>Reference-style images</h4>
-<ul>
-<li>Definition
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>![<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;class&gt;</span>}[<span class="optional-argument">&lt;width&gt;</span>]
-  <span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>
-<span class="repeatable-delimiter">@@</span></code></pre>
-</li>
-<li>Image
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>][<span class="optional-argument">&lt;label&gt;</span>]</code></pre>
-</li>
-</ul>
+<p>
+To be used with a <a href="#reference-definitions">reference-style definition</a>.
+</p>
 <p>
 A single space may be included
-between <code>[<span class="mandatory-argument">&lt;ALT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code> in an image.
-The referencing strings <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code> and <code><span class="optional-argument">&lt;label&gt;</span></code>
-are case insensitive.
-Non-empty <code><span class="optional-argument">&lt;width&gt;</span></code> in a definition must consist of digits only.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;width&gt;</span></code> in a definition is empty,
-the square brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;label&gt;</span></code> in an image is empty,
+between <code>[<span class="mandatory-argument">&lt;ALT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code>.
+The referencing <code><span class="optional-argument">&lt;label&gt;</span></code> is case insensitive.
+If <code><span class="optional-argument">&lt;label&gt;</span></code> is empty,
 the square brackets surrounding it may be omitted,
-and <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> is used as the label for that image.
+and <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> is used as the label.
 </p>
 <p>
 Produces the image
-<code>&lt;img alt="<span class="mandatory-argument">&lt;ALT&gt;</span>" class="<span class="optional-argument">&lt;class&gt;</span>" src="<span class="optional-argument">&lt;src&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>" width="<span class="optional-argument">&lt;width&gt;</span>"&gt;</code>.
+<code>&lt;img<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> and the attribute specifications
+for the corresponding <a href="#reference-definitions">reference-style image definition</a>.
+</p>
+<p>
 Whitespace around <code><span class="optional-argument">&lt;label&gt;</span></code> is stripped.
-For definitions whose <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code>, <code><span class="optional-argument">&lt;class&gt;</span></code>,
-<code><span class="optional-argument">&lt;src&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
 For images whose <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> or <code><span class="optional-argument">&lt;label&gt;</span></code> contains
 one or more closing square brackets,
 use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
-<p>
-All image definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-</p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>@@![moses-breaking-tablets][200]
+<pre class="cmd"><code>@[moses-breaking-tablets]{w200}
   /rembrandt-moses.jpg
   Moses Breaking the Tablets of the Law (Rembrandt)
-@@
+@
 
 ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
 </code></pre>
 </li>
 <li>HTML
-<pre class="html"><code>&lt;img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200"&gt;
+<pre class="html"><code>&lt;img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)"&gt;
 </code></pre>
 </li>
 <li>Rendered

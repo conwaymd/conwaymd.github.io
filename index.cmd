@@ -1828,7 +1828,8 @@ All leading whitespace on the next line is stripped.
 ^^}
 
 ----
-Reference style image or link definition.
+Reference style definition
+for an [image](#reference-style-images) or a [link](#reference-style-links).
 ----
 ----
 If {^ <|attribute specification|> ^} is empty,
@@ -1876,12 +1877,10 @@ they are automatically escaped as `&quot;`.
 ----
 Produces the image
 {^
-  ~~ <img ~~
-    alt="<|ALT|>"
-    src="<|src|>"
-    title="<|title|>"\
-  ~~ > ~~
-^}.
+  ~~ <img ~~<|ATTRIBUTES|>~~ > ~~
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|ALT|> ^}, {^ <|src|> ^}, and {^ <|title|> ^}.
 For {^ <|ALT|> ^}, {^ <|src|> ^}, or {^ <|title|> ^} containing
 one or more closing square or round brackets,
 use [escapes] or [CMD literals].
@@ -1916,86 +1915,60 @@ use [escapes] or [CMD literals].
   Reference-style images
 ####
 
-====
-* Definition
-  {^^
-    \/{{ @@ }}![<|LABEL|>]{<|class|>}[<|width|>]
-    \/  <|src|> <|title|>
-    \/{{ @@ }}
-  ^^}
+{^^
+  ![<|ALT|>][<|label|>]
+^^}
 
-* Image
-  {^^
-    ![<|ALT|>][<|label|>]
-  ^^}
-
-====
+----
+To be used with a [reference-style definition][ref-defs].
+----
 ----
 A single space may be included
-between {^ [<|ALT|>] ^} and {^ [<|label|>] ^} in an image.
-The referencing strings {^ <|LABEL|> ^} and {^ <|label|> ^}
-are case insensitive.
-Non-empty {^ <|width|> ^} in a definition must consist of digits only.
-If {^ <|class|> ^} in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If {^ <|width|> ^} in a definition is empty,
-the square brackets surrounding it may be omitted.
-If {^ <|label|> ^} in an image is empty,
+between {^ [<|ALT|>] ^} and {^ [<|label|>] ^}.
+The referencing {^ <|label|> ^} is case insensitive.
+If {^ <|label|> ^} is empty,
 the square brackets surrounding it may be omitted,
-and {^ <|ALT|> ^} is used as the label for that image.
+and {^ <|ALT|> ^} is used as the label.
 ----
 
 ----
 Produces the image
 {^
-  ~~ <img ~~
-    alt="<|ALT|>"
-    class="<|class|>"
-    src="<|src|>"
-    title="<|title|>"
-    width="<|width|>"\
-  ~~ > ~~
-^}.
+  ~~ <img ~~<|ATTRIBUTES|>~~ > ~~
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|ALT|> ^} and the attribute specifications
+for the corresponding [reference-style image definition][ref-defs].
+----
+----
 Whitespace around {^ <|label|> ^} is stripped.
-For definitions whose {^ <|LABEL|> ^}, {^ <|class|> ^},
-{^ <|src|> ^}, or {^ <|title|> ^} contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of {{at signs}} in the delimiters.
 For images whose {^ <|ALT|> ^} or {^ <|label|> ^} contains
 one or more closing square brackets,
 use [escapes] or [CMD literals].
 ----
 
-----
-All image definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-----
-
 ====
 * CMD
   ````{.cmd}
-  @@![moses-breaking-tablets][200]
+  @[moses-breaking-tablets]{w200}
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
-  @@
+  @
   
   ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
   ````
 
 * HTML
   ````{.html}
-  <img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200">
+  <img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)">
   ````
 
 * Rendered
   ----
-  @@[moses-breaking-tablets]{w200}
+  @[moses-breaking-tablets]{w200}
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
-  @@
+  @
   
   ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
   ----
