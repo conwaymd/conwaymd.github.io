@@ -1027,16 +1027,16 @@ which are of the form {^ %<|PROPERTY NAME|> ^}.
 
 ----
 Processes the preamble.
-{^ <|CONTENT|> ^} is split into property specifications
+{^ <|CONTENT|> ^} is split into property definitions
 according to leading occurrences of {^ %<|PROPERTY NAME|> ^},
 where {^ <|PROPERTY NAME|> ^} may only contain letters, digits, and hyphens.
-Property specifications end at the next property specification,
+Property definitions end at the next property definition,
 or at the end of the (preamble) content being split.
-Each property is stored and may be referenced
+Each property definition is stored and may be referenced
 by writing {^ %<|PROPERTY NAME|> ^},
 called a property string, anywhere else in the document.
 If the same property is specified more than once,
-the latest specification shall prevail.
+the latest definition shall prevail.
 ----
 
 ----
@@ -1133,9 +1133,9 @@ are computed based on the supplied original properties:
       %title-suffix \ | My site
       %author Me
       %date-created 2020-04-11
-      %date-modified 2020-04-11
+      %date-modified 2020-07-19
       %description
-        This is the description. Hooray for automatic escaping (&, <, >, ")!
+        Example CMD-to-HTML output.
       %css a~~
         #special {
           color: purple;
@@ -1147,7 +1147,7 @@ are computed based on the supplied original properties:
     
     # %title #
     
-    ----special
+    ----{#special}
       The title of this page is "%title", and the author is %author.
       At the time of writing, next year will be %year-modified-next.
     ----
@@ -1163,7 +1163,7 @@ are computed based on the supplied original properties:
     <head>
     <meta charset="utf-8">
     <meta name="author" content="Me">
-    <meta name="description" content="This is the description. Hooray for automatic escaping (&amp;, &lt;, &gt;, &quot;)!">
+    <meta name="description" content="Example CMD-to-HTML output.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My title | My site</title>
     <style>#special {
