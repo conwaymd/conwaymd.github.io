@@ -123,31 +123,31 @@ The syntax of CMD, in the order of processing, is thus:
 <ul>
 <li><a href="#cmd-literals">CMD literals <code>~~ ~~</code></a>
 </li>
-<li><a href="#display-code">Display code <code>``↵ ``</code></a>
+<li><a href="#display-code">Display code <code>``↵ ↵``</code></a>
 </li>
 <li><a href="#inline-code">Inline code <code>` `</code></a>
 </li>
 <li><a href="#comments">Comments <code>&lt;# #&gt;</code></a>
 </li>
-<li><a href="#display-maths">Display maths <code>$$↵ $$</code></a>
+<li><a href="#display-maths">Display maths <code>$$↵ ↵$$</code></a>
 </li>
 <li><a href="#inline-maths">Inline maths <code>$ $</code></a>
 </li>
 <li><a href="#inclusions">Inclusions <code>{+ +}</code></a>
 </li>
-<li><a href="#regex-replacements">Regex replacements <code>{% % %}</code></a>
+<li><a href="#regex-replacements">Regex replacement definitions <code>{% % %}</code></a>
 </li>
-<li><a href="#ordinary-replacements">Ordinary replacements <code>{: : :}</code></a>
+<li><a href="#ordinary-replacements">Ordinary replacement definitions <code>{: : :}</code></a>
 </li>
-<li><a href="#preamble">Preamble <code>%%↵ %%</code></a>
+<li><a href="#preamble">Preamble <code>%%↵ ↵%%</code></a>
 </li>
-<li><a href="#blocks">Blocks <code>----↵ ----</code> etc.</a>
+<li><a href="#blocks">Blocks <code>----↵ ↵----</code> etc.</a>
 <ul>
 <li><a href="#list-items">List items <code>*</code>, <code>+</code>, <code>-</code>, <code>1.</code></a>
 </li>
 </ul>
 </li>
-<li><a href="#tables">Tables <code>''''↵ ''''</code></a>
+<li><a href="#tables">Tables <code>''''↵ ↵''''</code></a>
 <ul>
 <li><a href="#table-cells">Table cells <code>;</code> <code>,</code></a>
 </li>
@@ -161,11 +161,13 @@ The syntax of CMD, in the order of processing, is thus:
 </li>
 <li><a href="#line-continuations">Line continuations <code>\↵</code></a>
 </li>
+<li><a href="#reference-definitions">Reference-style definitions <code>@[ ] @</code></a>
+</li>
 <li><a href="#images">Images</a>
 <ul>
 <li><a href="#inline-style-images">Inline-style images <code>![ ]( )</code></a>
 </li>
-<li><a href="#reference-style-images">Reference-style images <code>@@![ ]↵ @@</code>, <code>![ ][ ]</code></a>
+<li><a href="#reference-style-images">Reference-style images <code>![ ][ ]</code></a>
 </li>
 </ul>
 </li>
@@ -173,7 +175,7 @@ The syntax of CMD, in the order of processing, is thus:
 <ul>
 <li><a href="#inline-style-links">Inline-style links <code>[ ]( )</code></a>
 </li>
-<li><a href="#reference-style-links">Reference-style links <code>@@[ ]↵ @@</code>, <code>[ ][ ]</code></a>
+<li><a href="#reference-style-links">Reference-style links <code>[ ][ ]</code></a>
 </li>
 </ul>
 </li>

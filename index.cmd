@@ -223,20 +223,20 @@ The syntax of CMD, in the order of processing, is thus:
 ----
 ======
 * [CMD literals `~~~ ~~ ~~ ~~~`] [cmd literals]
-* [Display code ``` ``↵ `` ```](#display-code)
+* [Display code ``` ``↵ ↵`` ```](#display-code)
 * [Inline code `` ` ` ``](#inline-code)
 * [Comments `<# #>`](#comments)
-* [Display maths `$$↵ $$`](#display-maths)
+* [Display maths `$$↵ ↵$$`](#display-maths)
 * [Inline maths `$ $`](#inline-maths)
 * [Inclusions `{+ +}`](#inclusions)
-* [Regex replacements `{% % %}`](#regex-replacements)
-* [Ordinary replacements `{: : :}`](#ordinary-replacements)
-* [Preamble `%%↵ %%`](#preamble)
-* [Blocks `----↵ ----` etc.](#blocks)
+* [Regex replacement definitions `{% % %}`](#regex-replacements)
+* [Ordinary replacement definitions `{: : :}`](#ordinary-replacements)
+* [Preamble `%%↵ ↵%%`](#preamble)
+* [Blocks `----↵ ↵----` etc.](#blocks)
   ====
   * [List items `*`, `+`, `-`, `1.`](#list-items)
   ====
-* [Tables `''''↵ ''''`](#tables)
+* [Tables `''''↵ ↵''''`](#tables)
   ====
   * [Table cells `;` `,`](#table-cells)
   * [Table rows `==`](#table-rows)
@@ -244,15 +244,16 @@ The syntax of CMD, in the order of processing, is thus:
   ====
 * [Escapes `\\` etc.](#escapes)
 * [Line continuations `\↵`](#line-continuations)
+* [Reference-style definitions `@[ ] @`][ref-defs]
 * [Images](#images)
   ====
   * [Inline-style images `![ ]( )`](#inline-style-images)
-  * [Reference-style images `@@![ ]↵ @@`, `![ ][ ]`](#reference-style-images)
+  * [Reference-style images `![ ][ ]`](#reference-style-images)
   ====
 * [Links](#links)
   ====
   * [Inline-style links `[ ]( )`](#inline-style-links)
-  * [Reference-style links `@@[ ]↵ @@`, `[ ][ ]`](#reference-style-links)
+  * [Reference-style links `[ ][ ]`](#reference-style-links)
   ====
 * [Headings `# #`](#headings)
 * [Inline semantics `* *`, `** **`, `_ _`, `__ __`](#inline-semantics)
