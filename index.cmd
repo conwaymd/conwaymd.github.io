@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-07-18
+%date-modified 2020-07-19
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -76,20 +76,20 @@
   <span class="repeatable-delimiter">\g<content></span>
 %}
 
-<## {.Mandatory.} ##>
+<## <|MANDATORY|> ##>
 {%
-  \{ [.]
-    (?P<content> [\s\S]*? )
-  [.] \}
+  < [|]
+    (?P<content> [A-Z ]+? )
+  [|] >
 %
   <span class="mandatory-argument">\\<\g<content>\\></span>
 %}
 
-<## [.Optional.] ##>
+<## <|optional|> ##>
 {%
-  \[ [.]
-    (?P<content> [\s\S]*? )
-  [.] \]
+  < [|]
+    (?P<content> [a-z ]+? )
+  [|] >
 %
   <span class="optional-argument">\\<\g<content>\\></span>
 %}
@@ -97,13 +97,15 @@
 <## Heading permalinks (<h2> to <h6>) ##>
 {%
   ^ [^\S\n]*
-  (?P<hashes> [#]{2,6} (?![#]) )
-    (?P<id_> [\S]*? )
+  (?P<hashes> [#]{2,6} )
+    \{
+      [#] (?P<id_> [\S]+? )
+    \}
   [\s]+
     (?P<content> [\s\S]*? )
   (?P=hashes)
 %
-  \g<hashes>\g<id_>
+  \g<hashes>{#\g<id_>}
     <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
     \g<content>
   \g<hashes>
@@ -118,7 +120,7 @@
 
 
 
-||||{page-properties}
+||||{.page-properties}
   First created: %date-created \+
   Last modified: %date-modified
 ||||
@@ -154,20 +156,21 @@ which I can't without some sort of extension
 ----
 ++++
 1.  Set the width of [images](#images)
-2.  Add `id` and `class` to elements
+2.  Add [`id` and `class`](#attribute-specifications) to elements
 3.  Write [arbitrary text](#cmd-literals) outside of code elements
     without using backslash escapes or HTML (ampersand) entities
 4.  [Include](#inclusions) markdown from another file (e.g.~a template)
 5.  Use [`<b>` and `<i>` elements](#inline-semantics),
     not just `<strong>` and `<em>`
-6.  [Define my own syntax](#regex-replacements) as I go.
+6.  Use [`<div>` elements](#blocks) without falling back to HTML
+7.  [Define my own syntax](#regex-replacements) as I go.
 ++++
 ----
 CMD addresses each of these.
 ----
 
 
-##installation
+##{#installation}
   Installation
 ##
 
@@ -188,7 +191,7 @@ $ git clone https://github.com/conway-markdown/conway-markdown.git
 ====
 
 
-##usage
+##{#usage}
   Usage
 ##
 
@@ -207,7 +210,7 @@ except those listed in `.cmdignore`.
 ----
 
 
-##syntax
+##{#syntax}
   Syntax
 ##
 
@@ -220,20 +223,20 @@ The syntax of CMD, in the order of processing, is thus:
 ----
 ======
 * [CMD literals `~~~ ~~ ~~ ~~~`] [cmd literals]
-* [Display code ``` ``↵ `` ```](#display-code)
+* [Display code ``` ``↵ ↵`` ```](#display-code)
 * [Inline code `` ` ` ``](#inline-code)
 * [Comments `<# #>`](#comments)
-* [Display maths `$$↵ $$`](#display-maths)
+* [Display maths `$$↵ ↵$$`](#display-maths)
 * [Inline maths `$ $`](#inline-maths)
 * [Inclusions `{+ +}`](#inclusions)
-* [Regex replacements `{% % %}`](#regex-replacements)
-* [Ordinary replacements `{: : :}`](#ordinary-replacements)
-* [Preamble `%%↵ %%`](#preamble)
-* [Blocks `----↵ ----` etc.](#blocks)
+* [Regex replacement definitions `{% % %}`](#regex-replacements)
+* [Ordinary replacement definitions `{: : :}`](#ordinary-replacements)
+* [Preamble `%%↵ ↵%%`](#preamble)
+* [Blocks `----↵ ↵----` etc.](#blocks)
   ====
   * [List items `*`, `+`, `-`, `1.`](#list-items)
   ====
-* [Tables `''''↵ ''''`](#tables)
+* [Tables `''''↵ ↵''''`](#tables)
   ====
   * [Table cells `;` `,`](#table-cells)
   * [Table rows `==`](#table-rows)
@@ -241,15 +244,16 @@ The syntax of CMD, in the order of processing, is thus:
   ====
 * [Escapes `\\` etc.](#escapes)
 * [Line continuations `\↵`](#line-continuations)
+* [Reference-style definitions `@[ ] @`][ref-defs]
 * [Images](#images)
   ====
   * [Inline-style images `![ ]( )`](#inline-style-images)
-  * [Reference-style images `@@![ ]↵ @@`, `![ ][ ]`](#reference-style-images)
+  * [Reference-style images `![ ][ ]`](#reference-style-images)
   ====
 * [Links](#links)
   ====
   * [Inline-style links `[ ]( )`](#inline-style-links)
-  * [Reference-style links `@@[ ]↵ @@`, `[ ][ ]`](#reference-style-links)
+  * [Reference-style links `[ ][ ]`](#reference-style-links)
   ====
 * [Headings `# #`](#headings)
 * [Inline semantics `* *`, `** **`, `_ _`, `__ __`](#inline-semantics)
@@ -257,19 +261,72 @@ The syntax of CMD, in the order of processing, is thus:
 ======
 
 
-###cmd-literals
+###{#attribute-specifications}
+  Attribute specifications
+###
+
+@[as] #attribute-specifications @
+
+----
+Most CMD syntaxes have an optional curly-bracketed part
+which allows for the specification of attributes.
+The following forms are recognised:
+----
+
+{^^
+  \#<|ID|>
+  .<|CLASS|>
+  r<|ROWSPAN|>
+  c<|COLSPAN|>
+  w<|WIDTH|>
+^^}
+
+----
+Unrecognised forms are ignored.
+If the class attribute is specified more than once,
+the new value is appended to the existing values.
+If a non-class attribute is specified more than once,
+the latest specification shall prevail.
+----
+
+====
+* CMD
+  ````{.cmd}
+  ||||{#first .hot #second .cold}
+    Blah
+  ||||
+  ````
+
+* HTML
+  ````{.html}
+  <div id="second" class="hot cold">
+  Blah
+  </div>
+  ````
+====
+
+----
+CMD attribute specifications are inspired
+by [kramdown's inline attribute lists][ial].
+----
+
+@[ial] https://kramdown.gettalong.org/syntax#inline-attribute-lists @
+
+
+
+###{#cmd-literals}
   CMD literals
 ###
 
 {^^
-  [.flags.]{{~~~ ~~ ~~~}} {.CONTENT.} {{~~~ ~~ ~~~}}
+  <|flags|>{{~~~ ~~ ~~~}} <|CONTENT|> {{~~~ ~~ ~~~}}
 ^^}
 
 ----
-Produces {^ {.CONTENT.} ^} literally,
+Produces {^ <|CONTENT|> ^} literally,
 with HTML syntax-character escaping and de-indentation.
-Whitespace around {^ {.CONTENT.} ^} is stripped.
-{^ [.flags.] ^} may consist of zero or more of the following characters:
+Whitespace around {^ <|CONTENT|> ^} is stripped.
+{^ <|flags|> ^} may consist of zero or more of the following characters:
 ----
 ====
 * `u` to leave HTML syntax characters unescaped
@@ -278,7 +335,7 @@ Whitespace around {^ {.CONTENT.} ^} is stripped.
 * `a` to enable all flags above
 ====
 ----
-For {^ {.CONTENT.} ^} containing two or more consecutive tildes,
+For {^ <|CONTENT|> ^} containing two or more consecutive tildes,
 use a longer run of {{tildes}} in the delimiters.
 ----
 
@@ -288,13 +345,13 @@ This makes it immune to all CMD processing
 (e.g.~conversion of `* *` to `<em> </em>`).
 ----
 
-####cmd-literals-basic
+####{#cmd-literals-basic}
   Example 1: basic usage
 ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~~
     Escaping: ~~ & < > ~~.
     Whitespace stripping: {~~      yes      ~~}.
@@ -303,7 +360,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   ~~~~~
     Escaping: &amp; &lt; &gt;.
     Whitespace stripping: {yes}.
@@ -320,20 +377,19 @@ This makes it immune to all CMD processing
 
 ====
 
-####flags
+####{#flags}
   Example 2: flags
 ####
-@@[flags examples]
-  \#flags
-@@
 
-#####unescaped-flag
+@[flags examples] #flags @
+
+#####{#unescaped-flag}
   2.1~Unescaped flag `u`
 #####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     Escaping:     ~~ <b>blah</b> ~~.
     No escaping: u~~ <b>cough</b> ~~.
@@ -341,7 +397,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     Escaping:     &lt;b&gt;blah&lt;/b&gt;.
     No escaping: <b>cough</b>.
   ````
@@ -354,13 +410,13 @@ This makes it immune to all CMD processing
 
 ====
 
-#####continuations-flag
+#####{#continuations-flag}
   2.2~Continuations flag `c`
 #####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     uc~~
       <pre>
@@ -373,7 +429,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
       <pre>
         Blah blah blahCough cough cough
             Yep yep yep
@@ -391,16 +447,15 @@ This makes it immune to all CMD processing
 
 ====
 
-#####whitespace-flag
+#####{#whitespace-flag}
   2.3~Whitespace flag `w`
 #####
-@@[whitespace flag example]
-  \#whitespace-flag
-@@
+
+@[whitespace flag example] #whitespace-flag @
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     uw~~
       <pre>
@@ -413,7 +468,7 @@ This makes it immune to all CMD processing
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <pre>
     Blah blah blah
     Cough cough cough
@@ -432,72 +487,37 @@ This makes it immune to all CMD processing
 
 ====
 
-####cmd-literals-contrived
-  Example 3: contrived usage
-####
-
-----
-CMD literals are very powerful.
-For example, `id` and `class` in CMD block syntax
-are specified in the form {^ [.id.]{[.class.]} ^}.
-Now, if for whatever reason you want an `id`
-with curly brackets, e.g.~`{dumb-id}`,
-then wrapping it inside a CMD literal will prevent it
-from being interpreted as the class `dumb-id`:
-----
-
-====
-* CMD
-  ````{cmd}
-  ~~~~
-    ``{dumb-id}
-      Whoops!
-    ``
-    ``~~ {dumb-id} ~~
-      That's better.
-    ``
-  ~~~~
-  ````
-
-* HTML
-  ````{html}
-    <pre class="dumb-id"><code>Whoops!
-    </code></pre>
-    <pre id="{dumb-id}"><code>That's better.
-    </code></pre>
-  ````
-
-====
 
 
-
-###display-code
+###{#display-code}
   Display code
 ###
 
 {^^
-  \/[.flags.]{{ ~~``~~ }}[.id.]{[.class.]}
-  \/  {.CONTENT.}
+  \/<|flags|>{{ ~~``~~ }}{<|attribute specification|>}
+  \/  <|CONTENT|>
   \/{{ ~~``~~ }}
 ^^}
 
 ----
-If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the display code
 {^
-  ~~ <pre ~~
-    id="[.id.]" class="[.class.]"~~ > ~~\
-      ~~ <code> ~~\
-        {.CONTENT.}\
-      ~~ </code> ~~\
+  ~~ <pre ~~<|ATTRIBUTES|>~~ > ~~\
+    ~~ <code> ~~\
+         <|CONTENT|>\
+    ~~ </code> ~~\
   ~~ </pre> ~~
-^},
+^}
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as],
 with HTML syntax-character escaping
-and de-indentation for {^ {.CONTENT.} ^}.
-{^ [.flags.] ^} may consist of zero or more of the following characters
+and de-indentation for {^ <|CONTENT|> ^}.
+{^ <|flags|> ^} may consist of zero or more of the following characters
 (see [flags examples]):
 ----
 ====
@@ -507,15 +527,15 @@ and de-indentation for {^ {.CONTENT.} ^}.
 * `a` to enable all flags above
 ====
 ----
-For {^ {.CONTENT.} ^} containing two or more consecutive backticks,
+For {^ <|CONTENT|> ^} containing two or more consecutive backticks,
 use a longer run of {{backticks}} in the delimiters.
 ----
 
 ====
 * CMD
-  ``````{cmd}
+  ``````{.cmd}
   ~~~~
-    ``id-0{class-1 class-2}
+    ``{#id-0 .class-1 .class-2}
         Escaping: & < >.
         Note that CMD literals have higher precedence,
         since they are processed first: ~~~ ~~ literally ~~ ~~~.
@@ -526,7 +546,7 @@ use a longer run of {{backticks}} in the delimiters.
     ````
       ``
       Use more backticks as required.
-      If [id] and [class] are omitted,
+      If <id> and <class> are omitted,
       no corresponding attributes are generated.
       ``
     ````
@@ -534,7 +554,7 @@ use a longer run of {{backticks}} in the delimiters.
   ``````
 
 * HTML
-  ``````{html}
+  ``````{.html}
   ~~~~
     <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
     Note that CMD literals have higher precedence,
@@ -545,7 +565,7 @@ use a longer run of {{backticks}} in the delimiters.
     </code></pre>
     <pre><code>``
     Use more backticks as required.
-    If [id] and [class] are omitted,
+    If &lt;id&gt; and &lt;class&gt; are omitted,
     no corresponding attributes are generated.
     ``
     </code></pre>
@@ -553,7 +573,7 @@ use a longer run of {{backticks}} in the delimiters.
   ``````
 
 * Rendered
-    ``id-0{class-1 class-2}
+    ``{#id-0 .class-1 .class-2}
         Escaping: & < >.
         Note that CMD literals have higher precedence,
         since they are processed first: ~~~ ~~ literally ~~ ~~~.
@@ -564,7 +584,7 @@ use a longer run of {{backticks}} in the delimiters.
     ````
       ``
       Use more backticks as required.
-      If [id] and [class] are omitted,
+      If <id> and <class> are omitted,
       no corresponding attributes are generated.
       ``
     ````
@@ -572,25 +592,25 @@ use a longer run of {{backticks}} in the delimiters.
 ====
 
 
-###inline-code
+###{#inline-code}
   Inline code
 ###
 
 {^^
-  [.flags.]{{ ~~`~~ }} {.CONTENT.} {{ ~~`~~ }}
+  <|flags|>{{ ~~`~~ }} <|CONTENT|> {{ ~~`~~ }}
 ^^}
 
 ----
 Produces the inline code
 {^
   ~~ <code> ~~\
-    {.CONTENT.}\
+    <|CONTENT|>\
   ~~ </code> ~~
 ^},
 with HTML syntax-character escaping
-and de-indentation for {^ {.CONTENT.} ^}.
-Whitespace around {^ {.CONTENT.} ^} is stripped.
-{^ [.flags.] ^} may consist of zero or more of the following characters
+and de-indentation for {^ <|CONTENT|> ^}.
+Whitespace around {^ <|CONTENT|> ^} is stripped.
+{^ <|flags|> ^} may consist of zero or more of the following characters
 (see [flags examples]):
 ----
 ====
@@ -600,19 +620,19 @@ Whitespace around {^ {.CONTENT.} ^} is stripped.
 * `a` to enable all flags above
 ====
 ----
-For {^ {.CONTENT.} ^} containing one or more consecutive backticks
+For {^ <|CONTENT|> ^} containing one or more consecutive backticks
 which are not protected by [CMD literals],
 use a longer run of {{backticks}} in the delimiters.
 ----
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     `` The escaped form of & is &amp;. Here is a tilde: `. ``
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <code>The escaped form of &amp; is &amp;amp;. Here is a tilde: `.</code>
   ````
 
@@ -624,17 +644,17 @@ use a longer run of {{backticks}} in the delimiters.
 ====
 
 
-###comments
+###{#comments}
   Comments
 ###
 
 {^^
-  \<{{\#}} {.COMMENT.} {{\#}}\>
+  \<{{\#}} <|COMMENT|> {{\#}}\>
 ^^}
 
 ----
 Removed, along with any preceding horizontal whitespace.
-For {^ {.COMMENT.} ^} containing one or more consecutive hashes
+For {^ <|COMMENT|> ^} containing one or more consecutive hashes
 followed by a closing angle bracket,
 use a longer run of {{hashes}} in the delimiters.
 ----
@@ -648,38 +668,40 @@ In this sense they are stronger than literals and code.
 
 
 
-###display-maths
+###{#display-maths}
   Display maths
 ###
 
 {^^
-  \/[.flags.]{{ ~~$$~~ }}[.id.]{[.class.]}
-  \/  {.CONTENT.}
+  \/<|flags|>{{ ~~$$~~ }}{<|attribute specification|>}
+  \/  <|CONTENT|>
   \/{{ ~~$$~~ }}
 ^^}
 
 ----
-If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces
 {^
-  ~~ <div ~~
-    id="[.id.]" class="js-maths [.class.]"~~ > ~~\
-      {.CONTENT.}\
+  ~~ <div ~~<|ATTRIBUTES|>~~ > ~~\
+       <|CONTENT|>\
   ~~ </div> ~~
-^},
+^}
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|attribute specification|> ^} with `.js-maths` prepended,
 with HTML syntax-character escaping
-and de-indentation for {^ {.CONTENT.} ^}.
-{^ [.flags.] ^} may consist of zero or more of the following characters
+and de-indentation for {^ <|CONTENT|> ^}.
+{^ <|flags|> ^} may consist of zero or more of the following characters
 (see [whitespace flag example]):
 ----
 ====
 * `w` to process [whitespace](#whitespace) completely
 ====
 ----
-For {^ {.CONTENT.} ^} containing two or more consecutive dollar signs
+For {^ <|CONTENT|> ^} containing two or more consecutive dollar signs
 which are not protected by [CMD literals],
 use a longer run of {{dollar signs}} in the delimiters.
 ----
@@ -692,7 +714,7 @@ On this page I am using [KaTeX].
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     $$
       1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
         = \frac{\pi^2}{6}
@@ -701,7 +723,7 @@ On this page I am using [KaTeX].
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
       = \frac{\pi^2}{6}
       &lt; 2
@@ -718,31 +740,31 @@ On this page I am using [KaTeX].
 ====
 
 
-###inline-maths
+###{#inline-maths}
   Inline maths
 ###
 
 {^^
-  [.flags.]{{ ~~$~~ }} {.CONTENT.} {{ ~~$~~ }}
+  <|flags|>{{ ~~$~~ }} <|CONTENT|> {{ ~~$~~ }}
 ^^}
 
 ----
 Produces
 {^
   ~~ <span class="js-maths"> ~~\
-    {.CONTENT.}\
+    <|CONTENT|>\
   ~~ </span> ~~
 ^},
-with HTML syntax-character escaping for {^ {.CONTENT.} ^}.
-Whitespace around {^ {.CONTENT.} ^} is stripped.
-{^ [.flags.] ^} may consist of zero or more of the following characters
+with HTML syntax-character escaping for {^ <|CONTENT|> ^}.
+Whitespace around {^ <|CONTENT|> ^} is stripped.
+{^ <|flags|> ^} may consist of zero or more of the following characters
 (see [whitespace flag example]):
 ----
 ====
 * `w` to process [whitespace](#whitespace) completely
 ====
 ----
-For {^ {.CONTENT.} ^} containing one or more consecutive dollar signs
+For {^ <|CONTENT|> ^} containing one or more consecutive dollar signs
 which are not protected by [CMD literals],
 use a longer run of {{dollar signs}} in the delimiters.
 ----
@@ -755,13 +777,13 @@ On this page I am using [KaTeX].
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     A contrived instance of multiple dollar signs in inline maths:
     $$$ \text{Yea, \$$d$ means $d$~dollars.} $$$
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     A contrived instance of multiple dollar signs in inline maths:
     <span class="js-maths">\text{Yea, \$$d$ means $d$~dollars.}</span>
   ````
@@ -775,17 +797,17 @@ On this page I am using [KaTeX].
 ====
 
 
-###inclusions
+###{#inclusions}
   Inclusions
 ###
 
 {^^
-  ~~ { ~~{{ + }} {.FILE NAME.} {{ + }}~~ } ~~
+  ~~ { ~~{{ + }} <|FILE NAME|> {{ + }}~~ } ~~
 ^^}
 
 ----
-Includes the content of the file {^ {.FILE NAME.} ^}.
-For {^ {.FILE NAME.} ^} containing one or more consecutive plus signs
+Includes the content of the file {^ <|FILE NAME|> ^}.
+For {^ <|FILE NAME|> ^} containing one or more consecutive plus signs
 followed by a closing curly bracket,
 use a longer run of {{plus signs}} in the delimiters.
 ----
@@ -797,12 +819,12 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     {+ inclusion.txt +}
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   This is content from <a href="/inclusion.txt"><code>inclusion.txt</code></a>.
   Nested inclusions are not processed,
   so there is no need to worry about recursion errors: {+ inclusion.txt +}
@@ -816,34 +838,38 @@ Unlike nested `\input` in LaTeX, nested inclusions are not processed.
 ====
 
 
-###regex-replacements
-  Regex replacements
+###{#regex-replacements}
+  Regex replacement definitions
 ###
 
 {^^
-  [.flag.]~~{~~{{ % }} {.PATTERN.} {{ % }} {.REPLACEMENT.} {{ % }}~~}~~
+  <|flag|>~~{~~{{ % }} <|PATTERN|> {{ % }} <|REPLACEMENT|> {{ % }}~~}~~
 ^^}
 
 ----
-Processes regex replacements of {^ {.PATTERN.} ^} by {^ {.REPLACEMENT.} ^}
+Regex replacement definition
+for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}
 according to Python regex syntax,
 with the flags `re.ASCII`, `re.MULTILINE`, and `re.VERBOSE` enabled.
-Whitespace around {^ {.PATTERN.} ^} and {^ {.REPLACEMENT.} ^} is stripped.
-For {^ {.PATTERN.} ^} or {^ {.REPLACEMENT.} ^} containing
+----
+----
+Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
+For {^ <|PATTERN|> ^} or {^ <|REPLACEMENT|> ^} containing
 one or more consecutive percent signs,
 use a longer run of {{percent signs}} in the delimiters.
-For {^ {.PATTERN.} ^} matching any of the syntax above,
+For {^ <|PATTERN|> ^} matching any of the syntax above,
 which should not be processed using that syntax, use CMD literals.
-{^ [.flag.] ^} may consist of zero or one of the following characters,
+{^ <|flag|> ^} may consist of zero or one of the following characters,
 and specifies when the regex replacement is to be applied:
 ----
 ====
-* `A` for immediately after processing regex replacements
+* `A` for immediately after processing regex replacement definitions
 * `p` for just before processing [preamble](#preamble)
 * `b` for just before processing [blocks](#blocks)
 * `t` for just before processing [tables](#tables)
 * `e` for just before processing [escapes]
 * `c` for just before processing [line continuations](#line-continuations)
+* `r` for just before processing [reference-style definitions][ref-defs]
 * `i` for just before processing [images](#images)
 * `l` for just before processing [links](#links)
 * `h` for just before processing [headings](#headings)
@@ -852,13 +878,13 @@ and specifies when the regex replacement is to be applied:
 * `Z` for just before replacing placeholder strings
 ====
 ----
-If {^ [.flag.] ^} is empty, it defaults to `A`.
+If {^ <|flag|> ^} is empty, it defaults to `A`.
 ----
 
 ----
-All regex replacement specifications are read and stored.
+All regex replacement definitions are read and stored.
 If the same pattern is specified more than once for a given flag,
-the latest specification shall prevail.
+the latest definition shall prevail.
 ----
 
 ----
@@ -866,16 +892,18 @@ As an example, the following regex replacement is used
 to automatically insert the permalinks
 before the section headings (`<h2>` to `<h6>`) in this page:
 ----
-````{cmd}
+````{.cmd}
   {%
     ^ [^\S\n]*
-    (?P<hashes> [#]{2,6} (?![#]) )
-      (?P<id_> [\S]*? )
+    (?P<hashes> [#]{2,6} )
+      \{
+        [#] (?P<id_> [\S]+? )
+      \}
     [\s]+
       (?P<content> [\s\S]*? )
     (?P=hashes)
   %
-    \g<hashes>\g<id_>
+    \g<hashes>{#\g<id_>}
       <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
       \g<content>
     \g<hashes>
@@ -888,39 +916,43 @@ will break the normal CMD syntax.
 To avoid breaking placeholder storage
 (used to protect portions of the markup from further processing),
 do not use replacements to alter placeholder strings,
-which are of the form {^ \e000{.N.}\e000 ^},
+which are of the form {^ \e000<|N|>\e000 ^},
 where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
-and {^ {.N.} ^} is an integer.
+and {^ <|N|> ^} is an integer.
 To avoid breaking properties,
 do not use replacements to alter property strings,
-which are of the form {^ %{.PROPERTY NAME.} ^}.
+which are of the form {^ %<|PROPERTY NAME|> ^}.
 ----
 
 
-###ordinary-replacements
+###{#ordinary-replacements}
   Ordinary replacements
 ###
 
 {^^
-  [.flag.]~~{~~{{ : }} {.PATTERN.} {{ : }} {.REPLACEMENT.} {{ : }}~~}~~
+  <|flag|>~~{~~{{ : }} <|PATTERN|> {{ : }} <|REPLACEMENT|> {{ : }}~~}~~
 ^^}
 
 ----
-Processes ordinary replacements of {^ {.PATTERN.} ^} by {^ {.REPLACEMENT.} ^}.
-Whitespace around {^ {.PATTERN.} ^} and {^ {.REPLACEMENT.} ^} is stripped.
-For {^ {.PATTERN.} ^} or {^ {.REPLACEMENT.} ^} containing
+Ordinary replacement definition
+for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}.
+----
+----
+Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
+For {^ <|PATTERN|> ^} or {^ <|REPLACEMENT|> ^} containing
 one or more consecutive colons,
 use a longer run of {{colons}} in the delimiters.
-{^ [.flag.] ^} may consist of zero or one of the following characters,
+{^ <|flag|> ^} may consist of zero or one of the following characters,
 and specifies when the ordinary replacement is to be applied:
 ----
 ====
-* `A` for immediately after processing ordinary replacements
+* `A` for immediately after processing ordinary replacement definitions
 * `p` for just before processing [preamble](#preamble)
 * `b` for just before processing [blocks](#blocks)
 * `t` for just before processing [tables](#tables)
 * `e` for just before processing [escapes]
 * `c` for just before processing [line continuations](#line-continuations)
+* `r` for just before processing [reference-style definitions][ref-defs]
 * `i` for just before processing [images](#images)
 * `l` for just before processing [links](#links)
 * `h` for just before processing [headings](#headings)
@@ -929,18 +961,18 @@ and specifies when the ordinary replacement is to be applied:
 * `Z` for just before replacing placeholder strings
 ====
 ----
-If {^ [.flag.] ^} is empty, it defaults to `A`.
+If {^ <|flag|> ^} is empty, it defaults to `A`.
 ----
 
 ----
-All ordinary replacement specifications are read and stored.
+All ordinary replacement definitions are read and stored.
 If the same pattern is specified more than once for a given flag,
-the latest specification shall prevail.
+the latest definition shall prevail.
 ----
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     {: |hup-hup| : Huzzah! :}
     |hup-hup| \+
     
@@ -981,37 +1013,37 @@ will break the normal CMD syntax.
 To avoid breaking placeholder storage
 (used to protect portions of the markup from further processing),
 do not use replacements to alter placeholder strings,
-which are of the form {^ \e000{.N.}\e000 ^},
+which are of the form {^ \e000<|N|>\e000 ^},
 where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
-and {^ {.N.} ^} is an integer.
+and {^ <|N|> ^} is an integer.
 To avoid breaking properties,
 do not use replacements to alter property strings,
-which are of the form {^ %{.PROPERTY NAME.} ^}.
+which are of the form {^ %<|PROPERTY NAME|> ^}.
 ----
 
 
-###preamble
+###{#preamble}
   Preamble
 ###
 
 {^^
   \/{{ %% }}
-  \/  {.CONTENT.}
+  \/  <|CONTENT|>
   \/{{ %% }}
 ^^}
 
 ----
 Processes the preamble.
-{^ {.CONTENT.} ^} is split into property specifications
-according to leading occurrences of {^ %{.PROPERTY NAME.} ^},
-where {^ {.PROPERTY NAME.} ^} may only contain letters, digits, and hyphens.
-Property specifications end at the next property specification,
+{^ <|CONTENT|> ^} is split into property definitions
+according to leading occurrences of {^ %<|PROPERTY NAME|> ^},
+where {^ <|PROPERTY NAME|> ^} may only contain letters, digits, and hyphens.
+Property definitions end at the next property definition,
 or at the end of the (preamble) content being split.
-Each property is stored and may be referenced
-by writing {^ %{.PROPERTY NAME.} ^},
+Each property definition is stored and may be referenced
+by writing {^ %<|PROPERTY NAME|> ^},
 called a property string, anywhere else in the document.
 If the same property is specified more than once,
-the latest specification shall prevail.
+the latest definition shall prevail.
 ----
 
 ----
@@ -1020,7 +1052,7 @@ i.e.~everything from `<!DOCTYPE html>` through to `<body>`.
 ----
 
 ----
-For {^ {.CONTENT.} ^} containing two or more consecutive percent signs
+For {^ <|CONTENT|> ^} containing two or more consecutive percent signs
 which are not protected by CMD literals,
 use a longer run of {{percent signs}} in the delimiters.
 ----
@@ -1035,7 +1067,7 @@ are accorded special treatment.
 If omitted from a preamble,
 they take the default values shown beside them:
 ----
-````{cmd}
+````{.cmd}
   %lang en
   %viewport width=device-width, initial-scale=1
   %title Title
@@ -1055,7 +1087,7 @@ they take the default values shown beside them:
 The following properties, called derived properties,
 are computed based on the supplied original properties:
 ----
-````{cmd}
+````{.cmd}
   %html-lang-attribute
   %meta-element-author
   %meta-element-description
@@ -1071,17 +1103,17 @@ are computed based on the supplied original properties:
   %clean-url
 ````
 
-####preamble-minimal Example 1: a minimal HTML file ####
+####{#preamble-minimal} Example 1: a minimal HTML file ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     %%
     %%
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -1096,11 +1128,11 @@ are computed based on the supplied original properties:
 
 ====
 
-####preamble-not-minimal Example 2: a not-so-minimal HTML file ####
+####{#preamble-not-minimal} Example 2: a not-so-minimal HTML file ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ~~~~
     %%
       %lang en-AU
@@ -1108,9 +1140,9 @@ are computed based on the supplied original properties:
       %title-suffix \ | My site
       %author Me
       %date-created 2020-04-11
-      %date-modified 2020-04-11
+      %date-modified 2020-07-19
       %description
-        This is the description. Hooray for automatic escaping (&, <, >, ")!
+        Example CMD-to-HTML output.
       %css a~~
         #special {
           color: purple;
@@ -1122,7 +1154,7 @@ are computed based on the supplied original properties:
     
     # %title #
     
-    ----special
+    ----{#special}
       The title of this page is "%title", and the author is %author.
       At the time of writing, next year will be %year-modified-next.
     ----
@@ -1132,13 +1164,13 @@ are computed based on the supplied original properties:
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <!DOCTYPE html>
     <html lang="en-AU">
     <head>
     <meta charset="utf-8">
     <meta name="author" content="Me">
-    <meta name="description" content="This is the description. Hooray for automatic escaping (&amp;, &lt;, &gt;, &quot;)!">
+    <meta name="description" content="Example CMD-to-HTML output.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My title | My site</title>
     <style>#special {
@@ -1161,36 +1193,38 @@ are computed based on the supplied original properties:
 ====
 
 
-###blocks
+###{#blocks}
   Blocks
 ###
 
 {^^
-  \/{{ \C\C\C\C }}[.id.]{[.class.]}
-  \/  {.CONTENT.}
+  \/{{ \C\C\C\C }}{<|attribute specification|>}
+  \/  <|CONTENT|>
   \/{{ \C\C\C\C }}
 ^^}
 
 ----
-If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the block
 {^
-  \<{.TAG NAME.}
-    id="[.id.]" class="[.class.]"\>↵\
-      {.CONTENT.}\
-  \</{.TAG NAME.}\>
-^}.
-For {^ {.CONTENT.} ^} containing four or more
+  \<<|TAG NAME|><|ATTRIBUTES|>↵\
+     <|CONTENT|>\
+  \</<|TAG NAME|>\>
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
+For {^ <|CONTENT|> ^} containing four or more
 consecutive delimiting characters
 which are not protected by [CMD literals],
 use a longer run of {{delimiting characters}} in the delimiters.
 ----
 
 ----
-The following delimiting characters {^ \C ^} are used:
+The following delimiting characters {^ {{\C}} ^} are used:
 ----
 ======
 * Non-lists:
@@ -1210,16 +1244,16 @@ The following delimiting characters {^ \C ^} are used:
 In the implementation, a recursive call is used to process nested blocks.
 ----
 
-####list-items
+####{#list-items}
   List items
 ####
 
 ----
-For list blocks, {^ {.CONTENT.} ^} is split into list items `<li>`
+For list blocks, {^ <|CONTENT|> ^} is split into list items `<li>`
 according to leading occurrences of the following:
 ----
 
-{^^ \Y[.id.]{[.class.]} ^^}
+{^^ \Y{<|attribute specification|>} ^^}
 
 ----
 The following delimiters {^ \Y ^} for list items are used:
@@ -1233,15 +1267,15 @@ The following delimiters {^ \Y ^} for list items are used:
 ----
 List items end at the next list item,
 or at the end of the content being split.
-If {^ [.class.] ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
-####blocks-nesting Example 1: nesting ####
+####{#blocks-nesting} Example 1: nesting ####
 
 ================
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ----
     A paragraph.
     ----
@@ -1304,24 +1338,24 @@ the curly brackets surrounding it may be omitted.
 
 ================
 
-####blocks-id-class Example 2: `id` and `class` ####
+####{#blocks-id-class} Example 2: `id` and `class` ####
 
 ================
 * CMD
-  ````{cmd}
-    ----p-id{p-class}
+  ````{.cmd}
+    ----{#p-id .p-class}
     Paragraph with `id` and `class`.
     ----
     ======
-    *li-id List item with `id` and no `class`.
-    0.{li-class} List item with `class` and no `id`.
-    1.{li-class}
+    *{#li-id} List item with `id` and no `class`.
+    0.{.li-class} List item with `class` and no `id`.
+    1.{.li-class}
       Put arbitrary whitespace after the class for more clarity.
     ======
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <p id="p-id" class="p-class">
     Paragraph with <code>id</code> and <code>class</code>.
     </p>
@@ -1334,33 +1368,34 @@ the curly brackets surrounding it may be omitted.
     </li>
     </ul>
   ````
-
 ================
 
 
-###tables
+###{#tables}
   Tables
 ###
 
 {^^
-  \/{{ '''' }}[.id.]{[.class.]}
-  \/  {.CONTENT.}
+  \/{{ '''' }}{<|attribute specification|>}
+  \/  <|CONTENT|>
   \/{{ '''' }}
 ^^}
 
 ----
-If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the table
 {^
-  \<table
-    id="[.id.]" class="[.class.]"\>↵\
-      {.CONTENT.}\
+  \<table<|ATTRIBUTES|>↵\
+     <|CONTENT|>\
   \</table\>
-^}.
-For {^ {.CONTENT.} ^} containing four or more apostrophes
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
+For {^ <|CONTENT|> ^} containing four or more apostrophes
 which are not protected by [CMD literals],
 use a longer run of {{apostrophes}} in the delimiters.
 ----
@@ -1370,7 +1405,7 @@ In the implementation, a recursive call is used to process nested tables.
 ----
 
 ----
-{^ {.CONTENT.} ^} is
+{^ <|CONTENT|> ^} is
 ----
 ++++
 1.  split into table cells `<th>`, `<td>`
@@ -1381,16 +1416,16 @@ In the implementation, a recursive call is used to process nested tables.
     according to [table part processing](#table-parts).
 ++++
 
-####table-cells
+####{#table-cells}
   Table cells
 ####
 
 ----
-{^ {.CONTENT.} ^} is split into table cells `<th>`, `<td>`
+{^ <|CONTENT|> ^} is split into table cells `<th>`, `<td>`
 according to leading occurrences of the following:
 ----
 
-{^^ \Z[.id.]{[.class.]}[[.rowspan.],[.colspan.]] ^^}
+{^^ \Z{<|attribute specification|>} ^^}
 
 ----
 The following delimiters {^ \Z ^} for table cells are used:
@@ -1402,42 +1437,38 @@ The following delimiters {^ \Z ^} for table cells are used:
 ----
 Table cells end at the next table cell, table row, or table part,
 or at the end of the content being split.
-Non-empty {^ [.rowspan.] ^} and {^ [.colspan.] ^} must consist of digits only.
-If {^ [.class.] ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
-If {^ [.colspan.] ^} is empty, the comma before it may be omitted.
-If both {^ [.rowspan.] ^} and {^ [.colspan.] ^} are empty,
-the comma between them and the square brackets surrounding them may be omitted.
 ----
 
-####table-rows
+####{#table-rows}
   Table rows
 ####
 
 ----
-{^ {.CONTENT.} ^} is split into table rows `<tr>`
+{^ <|CONTENT|> ^} is split into table rows `<tr>`
 according to leading occurrences of the following:
 ----
 
-{^^ ==[.id.]{[.class.]} ^^}
+{^^ =={<|attribute specification|>} ^^}
 
 ----
 Table rows end at the next table row or table part,
 or at the end of the content being split.
-If {^ [.class.] ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
-####table-parts
+####{#table-parts}
   Table parts
 ####
 
 ----
-{^ {.CONTENT.} ^} is split into table parts `<thead>`, `<tbody>`, `<tfoot>`
+{^ <|CONTENT|> ^} is split into table parts `<thead>`, `<tbody>`, `<tfoot>`
 according to leading occurrences of the following:
 ----
 
-{^^ \Y[.id.]{[.class.]} ^^}
+{^^ \Y{<|attribute specification|>} ^^}
 
 ----
 The following delimiters {^ \Y ^} for table parts are used:
@@ -1450,17 +1481,17 @@ The following delimiters {^ \Y ^} for table parts are used:
 ----
 Table parts end at the next table part,
 or at the end of the content being split.
-If {^ [.class.] ^} is empty,
+If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
 
-####tables-without-parts
+####{#tables-without-parts}
   Example 1: table *without* `<thead>`, `<tbody>`, `<tfoot>` parts
 ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ''''
       ==
         ; A
@@ -1469,14 +1500,14 @@ the curly brackets surrounding it may be omitted.
         ; D
       ==
         , 1
-        ,[2] 2
+        ,{r2} 2
         , 3
         , 4
       ==
         , 5
-        ,[3,2] 6
+        ,{r3 c2} 6
       ==
-        ,[,2] 7
+        ,{c2} 7
       ==
         , 8
         ; ?
@@ -1484,7 +1515,7 @@ the curly brackets surrounding it may be omitted.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <table>
     <tr>
     <th>A</th>
@@ -1521,14 +1552,14 @@ the curly brackets surrounding it may be omitted.
         ; D
       ==
         , 1
-        ,[2] 2
+        ,{r2} 2
         , 3
         , 4
       ==
         , 5
-        ,[3,2] 6
+        ,{r3 c2} 6
       ==
-        ,[,2] 7
+        ,{c2} 7
       ==
         , 8
         ; ?
@@ -1536,13 +1567,13 @@ the curly brackets surrounding it may be omitted.
 
 ====
 
-####tables-with-parts
+####{#tables-with-parts}
   Example 2: table *with* `<thead>`, `<tbody>`, `<tfoot>` parts
 ####
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     ''''
     |^
       ==
@@ -1558,13 +1589,13 @@ the curly brackets surrounding it may be omitted.
     |_
       ==
         ; Total
-        ,total-cost{some-class}
+        ,{#total-cost .some-class}
           17
     ''''
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <table>
     <thead>
     <tr>
@@ -1607,19 +1638,24 @@ the curly brackets surrounding it may be omitted.
     |_
       ==
         ; Total
-        ,total-cost{some-class}
+        ,{#total-cost .some-class}
           17
     ''''
 
 ====
 
 
-###escapes
+###{#escapes}
   Escapes
 ###
 
 
-||||{centred-flex}
+----
+**Important.** These escapes are processed *after* the syntax above.
+----
+
+
+||||{.centred-flex}
 ''''
   ==
     ; CCH
@@ -1760,7 +1796,7 @@ the curly brackets surrounding it may be omitted.
 ||||
 
 
-###line-continuations
+###{#line-continuations}
   Line continuations
 ###
 
@@ -1771,7 +1807,7 @@ All leading whitespace on the next line is stripped.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
     (Line 1)\
       (Line 2)
     (Line 3) \
@@ -1779,7 +1815,7 @@ All leading whitespace on the next line is stripped.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     (Line 1)(Line 2)
     (Line 3) (Line 4)
   ````
@@ -1787,42 +1823,78 @@ All leading whitespace on the next line is stripped.
 ====
 
 
-###images
+###{#reference-definitions}
+  Reference-style definitions
+###
+
+@[ref-defs] #reference-definitions @
+
+{^^
+  {{@}}[<|LABEL|>]{<|attribute specification|>} <|address|> <|title|> {{@}}
+^^}
+
+----
+Reference style definition
+for an [image](#reference-style-images) or a [link](#reference-style-links).
+----
+----
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
+----
+----
+The referencing {^ <|LABEL|> ^} is case insensitive.
+For definitions whose {^ <|address|> ^} or {^ <|title|> ^}
+contains one or more consecutive at signs
+which are not protected by CMD literals,
+use a longer run of {{at signs}} in the delimiters.
+----
+----
+{^ <|address|> ^} is used for
+`src` in [images](#reference-style-images) and
+`href` in [links](#reference-style-links).
+----
+----
+All reference-style definitions are read and stored.
+If the same label (which is case insensitive)
+is specified more than once,
+the latest definition shall prevail.
+----
+
+
+###{#images}
   Images
 ###
 
 
-####inline-style-images
+####{#inline-style-images}
   Inline-style images
 ####
 
 {^^
-  ~~ ![ ~~{.ALT.}]([.src.] [.title.])
+  ~~ ![ ~~<|ALT|>](<|src|> <|title|>)
 ^^}
 
 ----
-Unlike John Gruber's markdown, {^ [.title.] ^} is not surrounded by quotes.
-If quotes are supplied to {^ [.title.] ^},
+Unlike John Gruber's markdown, {^ <|title|> ^} is not surrounded by quotes.
+If quotes are supplied to {^ <|title|> ^},
 they are automatically escaped as `&quot;`.
 ----
 
 ----
 Produces the image
 {^
-  ~~ <img ~~
-    alt="{.ALT.}"
-    src="[.src.]"
-    title="[.title.]"\
-  ~~ > ~~
-^}.
-For {^ {.ALT.} ^}, {^ [.src.] ^}, or {^ [.title.] ^} containing
+  ~~ <img ~~<|ATTRIBUTES|>~~ > ~~
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|ALT|> ^}, {^ <|src|> ^}, and {^ <|title|> ^}.
+For {^ <|ALT|> ^}, {^ <|src|> ^}, or {^ <|title|> ^} containing
 one or more closing square or round brackets,
 use [escapes] or [CMD literals].
 ----
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
     /rembrandt-anatomy.jpg
     The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
@@ -1830,7 +1902,7 @@ use [escapes] or [CMD literals].
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
   ````
 
@@ -1845,90 +1917,64 @@ use [escapes] or [CMD literals].
 ====
 
 
-####reference-style-images
+####{#reference-style-images}
   Reference-style images
 ####
 
-====
-* Definition
-  {^^
-    \/{{ @@ }}![{.LABEL.}]{[.class.]}[[.width.]]
-    \/  [.src.] [.title.]
-    \/{{ @@ }}
-  ^^}
+{^^
+  ![<|ALT|>][<|label|>]
+^^}
 
-* Image
-  {^^
-    ![{.ALT.}][[.label.]]
-  ^^}
-
-====
+----
+To be used in conjunction with a [reference-style definition][ref-defs].
+----
 ----
 A single space may be included
-between {^ [{.ALT.}] ^} and {^ [[.label.]] ^} in an image.
-The referencing strings {^ {.LABEL.} ^} and {^ [.label.] ^}
-are case insensitive.
-Non-empty {^ [.width.] ^} in a definition must consist of digits only.
-If {^ [.class.] ^} in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If {^ [.width.] ^} in a definition is empty,
-the square brackets surrounding it may be omitted.
-If {^ [.label.] ^} in an image is empty,
+between {^ [<|ALT|>] ^} and {^ [<|label|>] ^}.
+The referencing {^ <|label|> ^} is case insensitive.
+If {^ <|label|> ^} is empty,
 the square brackets surrounding it may be omitted,
-and {^ {.ALT.} ^} is used as the label for that image.
+and {^ <|ALT|> ^} is used as the label.
 ----
 
 ----
 Produces the image
 {^
-  ~~ <img ~~
-    alt="{.ALT.}"
-    class="[.class.]"
-    src="[.src.]"
-    title="[.title.]"
-    width="[.width.]"\
-  ~~ > ~~
-^}.
-Whitespace around {^ [.label.] ^} is stripped.
-For definitions whose {^ {.LABEL.} ^}, {^ [.class.] ^},
-{^ [.src.] ^}, or {^ [.title.] ^} contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of {{at signs}} in the delimiters.
-For images whose {^ {.ALT.} ^} or {^ [.label.] ^} contains
+  ~~ <img ~~<|ATTRIBUTES|>~~ > ~~
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|ALT|> ^} and the attribute specifications
+for the corresponding [reference-style image definition][ref-defs].
+----
+----
+Whitespace around {^ <|label|> ^} is stripped.
+For images whose {^ <|ALT|> ^} or {^ <|label|> ^} contains
 one or more closing square brackets,
 use [escapes] or [CMD literals].
 ----
 
-----
-All image definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-----
-
 ====
 * CMD
-  ````{cmd}
-  @@![moses-breaking-tablets][200]
+  ````{.cmd}
+  @[moses-breaking-tablets]{w200}
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
-  @@
+  @
   
   ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
   ````
 
 * HTML
-  ````{html}
-  <img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200">
+  ````{.html}
+  <img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)">
   ````
 
 * Rendered
   ----
-  @@![moses-breaking-tablets][200]
+  @[moses-breaking-tablets]{w200}
     /rembrandt-moses.jpg
     Moses Breaking the Tablets of the Law (Rembrandt)
-  @@
+  @
   
   ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
   ----
@@ -1936,44 +1982,43 @@ the latest specification shall prevail.
 ====
 
 
-###links
+###{#links}
   Links
 ###
 
 
-####inline-style-links
+####{#inline-style-links}
   Inline-style links
 ####
 
 {^^
-  ~~ [ ~~{.CONTENT.}]([.href.] [.title.])
+  ~~ [ ~~<|CONTENT|>](<|href|> <|title|>)
 ^^}
 
 ----
-Unlike John Gruber's markdown, {^ [.title.] ^} is not surrounded by quotes.
-If quotes are supplied to {^ [.title.] ^},
+Unlike John Gruber's markdown, {^ <|title|> ^} is not surrounded by quotes.
+If quotes are supplied to {^ <|title|> ^},
 they are automatically escaped as `&quot;`.
 ----
 
 ----
 Produces the link
 {^
-  ~~ <a ~~
-    href="[.href.]"
-    title="[.title.]"\
-  ~~ > ~~\
-    {.CONTENT.}\
+  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
+       <|CONTENT|>\
   ~~ </a> ~~
-^}.
-Whitespace around {^ {.CONTENT.} ^} is stripped.
-For {^ {.CONTENT.} ^}, {^ [.href.] ^}, or {^ [.title.] ^} containing
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|href|> ^} and {^ <|title|> ^}.
+Whitespace around {^ <|CONTENT|> ^} is stripped.
+For {^ <|CONTENT|> ^}, {^ <|href|> ^}, or {^ <|title|> ^} containing
 one or more closing square or round brackets,
 use [escapes] or [CMD literals].
 ----
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   [Wikimedia Commons](
     https://commons.wikimedia.org/wiki/Main_Page
     Wikimedia Commons
@@ -1983,7 +2028,7 @@ use [escapes] or [CMD literals].
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
   <a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
   ````
@@ -2001,72 +2046,52 @@ use [escapes] or [CMD literals].
 ====
 
 
-####reference-style-links
+####{#reference-style-links}
   Reference-style links
 ####
 
-====
-* Definition
-  {^^
-    \/{{ @@ }}[{.LABEL.}]{[.class.]}
-    \/  [.href.] [.title.]
-    \/{{ @@ }}
-  ^^}
+{^^
+  [<|CONTENT|>][<|label|>]
+^^}
 
-* Link
-  {^^
-    [{.CONTENT.}][[.label.]]
-  ^^}
+----
+To be used in conjunction with a [reference-style definition][ref-defs].
+----
 
-====
 ----
 A single space may be included
-between {^ [{.CONTENT.}] ^} and {^ [[.label.]] ^} in a link.
-The referencing strings {^ {.LABEL.} ^} and {^ [.label.] ^}
-are case insensitive.
-If {^ [.class.] ^} in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If {^ [.label.] ^} in a link is empty,
+between {^ [<|CONTENT|>] ^} and {^ [<|label|>] ^}.
+The referencing {^ <|label|> ^} is case insensitive.
+If {^ <|label|> ^} is empty,
 the square brackets surrounding it may be omitted,
-and {^ {.CONTENT.} ^} is used as the label for that link.
+and {^ <|CONTENT|> ^} is used as the label.
 ----
 
 ----
 Produces the link
 {^
-  ~~ <a ~~
-    class="[.class.]"
-    href="[.href.]"
-    title="[.title.]"\
-  ~~ > ~~\
-    {.CONTENT.}\
+  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
+       <|CONTENT|>\
   ~~ </a> ~~
-^}.
-Whitespace around {^ {.CONTENT.} ^} and {^ [.label.] ^} is stripped.
-For definitions whose {^ {.LABEL.} ^}, {^ [.class.] ^},
-{^ [.href.] ^}, or {^ [.title.] ^} contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of {{at signs}} in the delimiters.
-For links whose {^ {.CONTENT.} ^} or {^ [.label.] ^} contains
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from the attribute specifications
+for the corresponding [reference-style image definition][ref-defs].
+----
+----
+Whitespace around {^ <|CONTENT|> ^} and {^ <|label|> ^} is stripped.
+For links whose {^ <|CONTENT|> ^} or {^ <|label|> ^} contains
 one or more closing square brackets,
 use [escapes] or [CMD literals].
 ----
 
-----
-All link definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-----
-
 ====
 * CMD
-  ````{cmd}
-  @@[wikipedia]
+  ````{.cmd}
+  @[wikipedia]
     https://en.wikipedia.org/wiki/Main_Page
     Wikipedia, the free encyclopedia
-  @@
+  @
   
   [Wikipedia's home page][wikipedia] \+
   [Wikipedia][] \+
@@ -2074,7 +2099,7 @@ the latest specification shall prevail.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia's home page</a><br>
   <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a><br>
   <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a>
@@ -2082,10 +2107,10 @@ the latest specification shall prevail.
 
 * Rendered
   ----
-  @@[wikipedia]
+  @[wikipedia]
     https://en.wikipedia.org/wiki/Main_Page
     Wikipedia, the free encyclopedia
-  @@
+  @
   
   [Wikipedia's home page][wikipedia] \+
   [Wikipedia][] \+
@@ -2095,37 +2120,40 @@ the latest specification shall prevail.
 ====
 
 
-###headings
+###{#headings}
   Headings
 ###
 
 {^^
-  \#[.id.] {.CONTENT.} \#
+  \#{<|attribute specification|>}> <|CONTENT|> \#
 ^^}
 
 ----
 Produces the heading
 {^
-  ~~ <h1 ~~
-    id="[.id.]"~~ > ~~\
-      {.CONTENT.}\
+  ~~ <h1 ~~<|ATTRIBUTES|>~~ > ~~\
+      <|CONTENT|>\
   ~~ </h1> ~~
-^}.
-Whitespace around {^ {.CONTENT.} ^} is stripped.
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
+----
+----
+Whitespace around {^ <|CONTENT|> ^} is stripped.
 For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
-For {^ {.CONTENT.} ^} containing the delimiting number of
+For {^ <|CONTENT|> ^} containing the delimiting number of
 or more consecutive hashes, use [CMD literals].
 ----
 
 ====
 * CMD
-  ````{cmd}
-    ###some-id Heading with id ###
+  ````{.cmd}
+    ###{#some-id} Heading with id ###
     #### Heading without id ####
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
     <h3 id="some-id">Heading with id</h3>
     <h4>Heading without id</h4>
   ````
@@ -2133,29 +2161,33 @@ or more consecutive hashes, use [CMD literals].
 ====
 
 
-###inline-semantics
+###{#inline-semantics}
   Inline semantics
 ###
 
 {^^
-  \X{[.class.]} {.CONTENT.} \X
+  \X{<|attribute specification|>} <|CONTENT|> \X
 ^^}
 
 ----
-{^ {.CONTENT.} ^} must be non-empty.
-If {^ [.class.] ^} is empty, the curly brackets surrounding it may be omitted.
+{^ <|CONTENT|> ^} must be non-empty.
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
 Produces the inline semantic
 {^
-  \<{.TAG NAME.}
-    class="[.class.]"\>\
-      {.CONTENT.}\
-  \</{.TAG NAME.}\>
-^}.
-Whitespace around {^ {.CONTENT.} ^} is stripped.
-For {^ {.CONTENT.} ^} containing one or more occurrences of `*` or `_`,
+  \<<|TAG NAME|><|ATTRIBUTES|>
+     <|CONTENT|>\
+  \</<|TAG NAME|>\>
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+[built from {^ <|attribute specification|> ^}][as].
+----
+----
+Whitespace around {^ <|CONTENT|> ^} is stripped.
+For {^ <|CONTENT|> ^} containing one or more occurrences of `*` or `_`,
 use [CMD literals] or the [escapes] `\*` and `\_`.
 ----
 
@@ -2188,10 +2220,11 @@ See [W3C on using `<b>` and `<i>` elements](
 
 ----
 In the implementation, matches are sought in the following order
-(for brevity, `C` is used in place of {^ \C ^} below):
+(for brevity, `C` is used in place of {^ \C ^},
+and `spec` in place of `attribute specification`, below):
 ----
 
-||||{centred-flex}
+||||{.centred-flex}
 ''''
 |^
   ==
@@ -2200,36 +2233,36 @@ In the implementation, matches are sought in the following order
 |:
   ==
     , 33
-    , {^ CCC{[.inner class.]} {.INNER CONTENT.} CCC ^}
+    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> CCC ^}
   ==
     , 312
-    , {^ CCC{[.inner class.]} {.INNER CONTENT.} C {.OUTER CONTENT.} CC ^}
+    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> C <|OUTER CONTENT|> CC ^}
   ==
     , 321
-    , {^ CCC{[.inner class.]} {.INNER CONTENT.} CC {.OUTER CONTENT.} C ^}
+    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> CC <|OUTER CONTENT|> C ^}
   ==
     , 22
-    , {^ CC{[.class.]} {.CONTENT.} CC ^}
+    , {^ CC{<|spec|>} <|CONTENT|> CC ^}
   ==
     , 11
-    , {^ C{[.class.]} {.CONTENT.} C ^}
+    , {^ C{<|spec|>} <|CONTENT|> C ^}
 ''''
 ||||
 
 ----
-33 is effectively 312 with empty {^ {.OUTER CONTENT.} ^}.
+33 is effectively 312 with empty {^ <|OUTER CONTENT|> ^}.
 Once such a pattern has been matched,
 only three cases need to be handled for the resulting match object:
 ----
 ====
 * 2-layer special (for 33): \+
-  {^^ \X\Y{[.inner class.]} {.INNER CONTENT.} \Y\X ^^}
+  {^^ \X\Y{<|inner spec|>} <|INNER CONTENT|> \Y\X ^^}
 
 * 2-layer general (for 312, 321): \+
-  {^^ \X\Y{[.inner class.]} {.INNER CONTENT.} \Y {.OUTER CONTENT.} \X ^^}
+  {^^ \X\Y{<|inner spec|>} <|INNER CONTENT|> \Y <|OUTER CONTENT|> \X ^^}
 
 * 1-layer case (for 22, 11): \+
-  {^^ \X{[.class.]} {.CONTENT.} \X ^^}
+  {^^ \X{<|spec|>} <|CONTENT|> \X ^^}
 
 ====
 
@@ -2237,7 +2270,7 @@ only three cases need to be handled for the resulting match object:
 Recursive calls are used to process nested inline semantics.
 ----
 
-||||{centred-flex}
+||||{.centred-flex}
 ''''
 |^
   ==
@@ -2279,15 +2312,15 @@ Recursive calls are used to process nested inline semantics.
 
 ====
 * CMD
-  ````{cmd}
+  ````{.cmd}
   **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
-  I _{translator-supplied} am_ the LORD.
+  I _{.translator-supplied} am_ the LORD.
   ````
 
 * HTML
-  ````{html}
+  ````{.html}
   <strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
   They are <em>not</em> the same.<br>
   Meals come with <b>rice</b> or <b>pasta</b>.<br>
@@ -2299,13 +2332,13 @@ Recursive calls are used to process nested inline semantics.
   \/**Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
-  I _{translator-supplied} am_ the LORD.
+  I _{.translator-supplied} am_ the LORD.
   ----
 
 ====
 
 
-###whitespace
+###{#whitespace}
   Whitespace
 ###
 
@@ -2336,13 +2369,8 @@ Whitespace is processed as follows:
 
 %footer-element
 
-@@[CMD literals]
-  #cmd-literals
-@@
-
-@@[escapes]
-  #escapes
-@@
+@[CMD literals] #cmd-literals @
+@[escapes] #escapes @
 
 @@[cmd-repo]
   https://github.com/conway-markdown/conway-markdown/

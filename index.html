@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-07-18
+Last modified: 2020-07-19
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -66,7 +66,7 @@ which I can't without some sort of extension
 <ol>
 <li>Set the width of <a href="#images">images</a>
 </li>
-<li>Add <code>id</code> and <code>class</code> to elements
+<li>Add <a href="#attribute-specifications"><code>id</code> and <code>class</code></a> to elements
 </li>
 <li>Write <a href="#cmd-literals">arbitrary text</a> outside of code elements
 without using backslash escapes or HTML (ampersand) entities
@@ -75,6 +75,8 @@ without using backslash escapes or HTML (ampersand) entities
 </li>
 <li>Use <a href="#inline-semantics"><code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> elements</a>,
 not just <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>
+</li>
+<li>Use <a href="#blocks"><code>&lt;div&gt;</code> elements</a> without falling back to HTML
 </li>
 <li><a href="#regex-replacements">Define my own syntax</a> as I go.
 </li>
@@ -121,31 +123,31 @@ The syntax of CMD, in the order of processing, is thus:
 <ul>
 <li><a href="#cmd-literals">CMD literals <code>~~ ~~</code></a>
 </li>
-<li><a href="#display-code">Display code <code>``↵ ``</code></a>
+<li><a href="#display-code">Display code <code>``↵ ↵``</code></a>
 </li>
 <li><a href="#inline-code">Inline code <code>` `</code></a>
 </li>
 <li><a href="#comments">Comments <code>&lt;# #&gt;</code></a>
 </li>
-<li><a href="#display-maths">Display maths <code>$$↵ $$</code></a>
+<li><a href="#display-maths">Display maths <code>$$↵ ↵$$</code></a>
 </li>
 <li><a href="#inline-maths">Inline maths <code>$ $</code></a>
 </li>
 <li><a href="#inclusions">Inclusions <code>{+ +}</code></a>
 </li>
-<li><a href="#regex-replacements">Regex replacements <code>{% % %}</code></a>
+<li><a href="#regex-replacements">Regex replacement definitions <code>{% % %}</code></a>
 </li>
-<li><a href="#ordinary-replacements">Ordinary replacements <code>{: : :}</code></a>
+<li><a href="#ordinary-replacements">Ordinary replacement definitions <code>{: : :}</code></a>
 </li>
-<li><a href="#preamble">Preamble <code>%%↵ %%</code></a>
+<li><a href="#preamble">Preamble <code>%%↵ ↵%%</code></a>
 </li>
-<li><a href="#blocks">Blocks <code>----↵ ----</code> etc.</a>
+<li><a href="#blocks">Blocks <code>----↵ ↵----</code> etc.</a>
 <ul>
 <li><a href="#list-items">List items <code>*</code>, <code>+</code>, <code>-</code>, <code>1.</code></a>
 </li>
 </ul>
 </li>
-<li><a href="#tables">Tables <code>''''↵ ''''</code></a>
+<li><a href="#tables">Tables <code>''''↵ ↵''''</code></a>
 <ul>
 <li><a href="#table-cells">Table cells <code>;</code> <code>,</code></a>
 </li>
@@ -159,11 +161,13 @@ The syntax of CMD, in the order of processing, is thus:
 </li>
 <li><a href="#line-continuations">Line continuations <code>\↵</code></a>
 </li>
+<li><a href="#reference-definitions">Reference-style definitions <code>@[ ] @</code></a>
+</li>
 <li><a href="#images">Images</a>
 <ul>
 <li><a href="#inline-style-images">Inline-style images <code>![ ]( )</code></a>
 </li>
-<li><a href="#reference-style-images">Reference-style images <code>@@![ ]↵ @@</code>, <code>![ ][ ]</code></a>
+<li><a href="#reference-style-images">Reference-style images <code>![ ][ ]</code></a>
 </li>
 </ul>
 </li>
@@ -171,7 +175,7 @@ The syntax of CMD, in the order of processing, is thus:
 <ul>
 <li><a href="#inline-style-links">Inline-style links <code>[ ]( )</code></a>
 </li>
-<li><a href="#reference-style-links">Reference-style links <code>@@[ ]↵ @@</code>, <code>[ ][ ]</code></a>
+<li><a href="#reference-style-links">Reference-style links <code>[ ][ ]</code></a>
 </li>
 </ul>
 </li>
@@ -182,6 +186,42 @@ The syntax of CMD, in the order of processing, is thus:
 <li><a href="#whitespace">Whitespace</a>
 </li>
 </ul>
+<h3 id="attribute-specifications"><a class="permalink" href="#attribute-specifications" aria-label="Permalink"></a>Attribute specifications</h3>
+<p>
+Most CMD syntaxes have an optional curly-bracketed part
+which allows for the specification of attributes.
+The following forms are recognised:
+</p>
+<pre class="cmd syntax"><code>#<span class="mandatory-argument">&lt;ID&gt;</span>
+.<span class="mandatory-argument">&lt;CLASS&gt;</span>
+r<span class="mandatory-argument">&lt;ROWSPAN&gt;</span>
+c<span class="mandatory-argument">&lt;COLSPAN&gt;</span>
+w<span class="mandatory-argument">&lt;WIDTH&gt;</span></code></pre>
+<p>
+Unrecognised forms are ignored.
+If the class attribute is specified more than once,
+the new value is appended to the existing values.
+If a non-class attribute is specified more than once,
+the latest specification shall prevail.
+</p>
+<ul>
+<li>CMD
+<pre class="cmd"><code>||||{#first .hot #second .cold}
+  Blah
+||||
+</code></pre>
+</li>
+<li>HTML
+<pre class="html"><code>&lt;div id="second" class="hot cold"&gt;
+Blah
+&lt;/div&gt;
+</code></pre>
+</li>
+</ul>
+<p>
+CMD attribute specifications are inspired
+by <a href="https://kramdown.gettalong.org/syntax#inline-attribute-lists">kramdown's inline attribute lists</a>.
+</p>
 <h3 id="cmd-literals"><a class="permalink" href="#cmd-literals" aria-label="Permalink"></a>CMD literals</h3>
 <pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">~~</span> <span class="mandatory-argument">&lt;CONTENT&gt;</span> <span class="repeatable-delimiter">~~</span></code></pre>
 <p>
@@ -305,44 +345,19 @@ Yep yep yep
 </pre>
 </li>
 </ul>
-<h4 id="cmd-literals-contrived"><a class="permalink" href="#cmd-literals-contrived" aria-label="Permalink"></a>Example 3: contrived usage</h4>
-<p>
-CMD literals are very powerful.
-For example, <code>id</code> and <code>class</code> in CMD block syntax
-are specified in the form <code><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code>.
-Now, if for whatever reason you want an <code>id</code>
-with curly brackets, e.g.&nbsp;<code>{dumb-id}</code>,
-then wrapping it inside a CMD literal will prevent it
-from being interpreted as the class <code>dumb-id</code>:
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>``{dumb-id}
-  Whoops!
-``
-``~~ {dumb-id} ~~
-  That's better.
-``
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;pre class="dumb-id"&gt;&lt;code&gt;Whoops!
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre id="{dumb-id}"&gt;&lt;code&gt;That's better.
-&lt;/code&gt;&lt;/pre&gt;
-</code></pre>
-</li>
-</ul>
 <h3 id="display-code"><a class="permalink" href="#display-code" aria-label="Permalink"></a>Display code</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">``</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
+<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">``</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
 <span class="repeatable-delimiter">``</span></code></pre>
 <p>
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the display code
-<code>&lt;pre id="<span class="optional-argument">&lt;id&gt;</span>" class="<span class="optional-argument">&lt;class&gt;</span>"&gt;&lt;code&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/code&gt;&lt;/pre&gt;</code>,
+<code>&lt;pre<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;&lt;code&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/code&gt;&lt;/pre&gt;</code>
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>,
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
 <code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
@@ -364,7 +379,7 @@ use a longer run of <span class="repeatable-delimiter">backticks</span> in the d
 </p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>``id-0{class-1 class-2}
+<pre class="cmd"><code>``{#id-0 .class-1 .class-2}
     Escaping: &amp; &lt; &gt;.
     Note that CMD literals have higher precedence,
     since they are processed first: ~~~ ~~ literally ~~ ~~~.
@@ -375,7 +390,7 @@ use a longer run of <span class="repeatable-delimiter">backticks</span> in the d
 ````
   ``
   Use more backticks as required.
-  If [id] and [class] are omitted,
+  If &lt;id&gt; and &lt;class&gt; are omitted,
   no corresponding attributes are generated.
   ``
 ````
@@ -391,7 +406,7 @@ since they are processed first: ~~ literally ~~.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;``
 Use more backticks as required.
-If [id] and [class] are omitted,
+If &amp;lt;id&amp;gt; and &amp;lt;class&amp;gt; are omitted,
 no corresponding attributes are generated.
 ``
 &lt;/code&gt;&lt;/pre&gt;
@@ -407,7 +422,7 @@ since they are processed first: ~~ literally ~~.
 </code></pre>
 <pre><code>``
 Use more backticks as required.
-If [id] and [class] are omitted,
+If &lt;id&gt; and &lt;class&gt; are omitted,
 no corresponding attributes are generated.
 ``
 </code></pre>
@@ -470,15 +485,18 @@ whereas <code>&lt;# A ~~ B ~~ #&gt;</code> is removed entirely.
 In this sense they are stronger than literals and code.
 </p>
 <h3 id="display-maths"><a class="permalink" href="#display-maths" aria-label="Permalink"></a>Display maths</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">$$</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
+<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">$$</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
 <span class="repeatable-delimiter">$$</span></code></pre>
 <p>
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces
-<code>&lt;div id="<span class="optional-argument">&lt;id&gt;</span>" class="js-maths <span class="optional-argument">&lt;class&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/div&gt;</code>,
+<code>&lt;div<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/div&gt;</code>
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> with <code>.js-maths</code> prepended,
 with HTML syntax-character escaping
 and de-indentation for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
 <code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
@@ -594,12 +612,15 @@ so there is no need to worry about recursion errors: {+ inclusion.txt +}
 </p>
 </li>
 </ul>
-<h3 id="regex-replacements"><a class="permalink" href="#regex-replacements" aria-label="Permalink"></a>Regex replacements</h3>
+<h3 id="regex-replacements"><a class="permalink" href="#regex-replacements" aria-label="Permalink"></a>Regex replacement definitions</h3>
 <pre class="cmd syntax"><code><span class="optional-argument">&lt;flag&gt;</span>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">&lt;PATTERN&gt;</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">&lt;REPLACEMENT&gt;</span> <span class="repeatable-delimiter">%</span>}</code></pre>
 <p>
-Processes regex replacements of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>
+Regex replacement definition
+for the replacement of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>
 according to Python regex syntax,
 with the flags <code>re.ASCII</code>, <code>re.MULTILINE</code>, and <code>re.VERBOSE</code> enabled.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> and <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> or <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> containing
 one or more consecutive percent signs,
@@ -610,7 +631,7 @@ which should not be processed using that syntax, use CMD literals.
 and specifies when the regex replacement is to be applied:
 </p>
 <ul>
-<li><code>A</code> for immediately after processing regex replacements
+<li><code>A</code> for immediately after processing regex replacement definitions
 </li>
 <li><code>p</code> for just before processing <a href="#preamble">preamble</a>
 </li>
@@ -621,6 +642,8 @@ and specifies when the regex replacement is to be applied:
 <li><code>e</code> for just before processing <a href="#escapes">escapes</a>
 </li>
 <li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
+</li>
+<li><code>r</code> for just before processing <a href="#reference-definitions">reference-style definitions</a>
 </li>
 <li><code>i</code> for just before processing <a href="#images">images</a>
 </li>
@@ -639,9 +662,9 @@ and specifies when the regex replacement is to be applied:
 If <code><span class="optional-argument">&lt;flag&gt;</span></code> is empty, it defaults to <code>A</code>.
 </p>
 <p>
-All regex replacement specifications are read and stored.
+All regex replacement definitions are read and stored.
 If the same pattern is specified more than once for a given flag,
-the latest specification shall prevail.
+the latest definition shall prevail.
 </p>
 <p>
 As an example, the following regex replacement is used
@@ -650,13 +673,15 @@ before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>)
 </p>
 <pre class="cmd"><code>{%
   ^ [^\S\n]*
-  (?P&lt;hashes&gt; [#]{2,6} (?![#]) )
-    (?P&lt;id_&gt; [\S]*? )
+  (?P&lt;hashes&gt; [#]{2,6} )
+    \{
+      [#] (?P&lt;id_&gt; [\S]+? )
+    \}
   [\s]+
     (?P&lt;content&gt; [\s\S]*? )
   (?P=hashes)
 %
-  \g&lt;hashes&gt;\g&lt;id_&gt;
+  \g&lt;hashes&gt;{#\g&lt;id_&gt;}
     &lt;a class="permalink" href="#\g&lt;id_&gt;" aria-label="Permalink"&gt;&lt;/a&gt;\\
     \g&lt;content&gt;
   \g&lt;hashes&gt;
@@ -678,7 +703,10 @@ which are of the form <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&
 <h3 id="ordinary-replacements"><a class="permalink" href="#ordinary-replacements" aria-label="Permalink"></a>Ordinary replacements</h3>
 <pre class="cmd syntax"><code><span class="optional-argument">&lt;flag&gt;</span>{<span class="repeatable-delimiter">:</span> <span class="mandatory-argument">&lt;PATTERN&gt;</span> <span class="repeatable-delimiter">:</span> <span class="mandatory-argument">&lt;REPLACEMENT&gt;</span> <span class="repeatable-delimiter">:</span>}</code></pre>
 <p>
-Processes ordinary replacements of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>.
+Ordinary replacement definition
+for the replacement of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> and <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> or <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> containing
 one or more consecutive colons,
@@ -687,7 +715,7 @@ use a longer run of <span class="repeatable-delimiter">colons</span> in the deli
 and specifies when the ordinary replacement is to be applied:
 </p>
 <ul>
-<li><code>A</code> for immediately after processing ordinary replacements
+<li><code>A</code> for immediately after processing ordinary replacement definitions
 </li>
 <li><code>p</code> for just before processing <a href="#preamble">preamble</a>
 </li>
@@ -698,6 +726,8 @@ and specifies when the ordinary replacement is to be applied:
 <li><code>e</code> for just before processing <a href="#escapes">escapes</a>
 </li>
 <li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
+</li>
+<li><code>r</code> for just before processing <a href="#reference-definitions">reference-style definitions</a>
 </li>
 <li><code>i</code> for just before processing <a href="#images">images</a>
 </li>
@@ -716,9 +746,9 @@ and specifies when the ordinary replacement is to be applied:
 If <code><span class="optional-argument">&lt;flag&gt;</span></code> is empty, it defaults to <code>A</code>.
 </p>
 <p>
-All ordinary replacement specifications are read and stored.
+All ordinary replacement definitions are read and stored.
 If the same pattern is specified more than once for a given flag,
-the latest specification shall prevail.
+the latest definition shall prevail.
 </p>
 <ul>
 <li>CMD
@@ -765,16 +795,16 @@ which are of the form <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&
 <span class="repeatable-delimiter">%%</span></code></pre>
 <p>
 Processes the preamble.
-<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into property specifications
+<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into property definitions
 according to leading occurrences of <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code>,
 where <code><span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code> may only contain letters, digits, and hyphens.
-Property specifications end at the next property specification,
+Property definitions end at the next property definition,
 or at the end of the (preamble) content being split.
-Each property is stored and may be referenced
+Each property definition is stored and may be referenced
 by writing <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code>,
 called a property string, anywhere else in the document.
 If the same property is specified more than once,
-the latest specification shall prevail.
+the latest definition shall prevail.
 </p>
 <p>
 This produces the HTML preamble,
@@ -856,9 +886,9 @@ are computed based on the supplied original properties:
   %title-suffix \ | My site
   %author Me
   %date-created 2020-04-11
-  %date-modified 2020-04-11
+  %date-modified 2020-07-19
   %description
-    This is the description. Hooray for automatic escaping (&amp;, &lt;, &gt;, ")!
+    Example CMD-to-HTML output.
   %css a~~
     #special {
       color: purple;
@@ -870,7 +900,7 @@ are computed based on the supplied original properties:
 
 # %title #
 
-----special
+----{#special}
   The title of this page is "%title", and the author is %author.
   At the time of writing, next year will be %year-modified-next.
 ----
@@ -884,7 +914,7 @@ are computed based on the supplied original properties:
 &lt;head&gt;
 &lt;meta charset="utf-8"&gt;
 &lt;meta name="author" content="Me"&gt;
-&lt;meta name="description" content="This is the description. Hooray for automatic escaping (&amp;amp;, &amp;lt;, &amp;gt;, &amp;quot;)!"&gt;
+&lt;meta name="description" content="Example CMD-to-HTML output."&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 &lt;title&gt;My title | My site&lt;/title&gt;
 &lt;style&gt;#special {
@@ -906,22 +936,25 @@ At the time of writing, next year will be 2021.
 </li>
 </ul>
 <h3 id="blocks"><a class="permalink" href="#blocks" aria-label="Permalink"></a>Blocks</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
 <span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span></code></pre>
 <p>
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the block
-<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span> id="<span class="optional-argument">&lt;id&gt;</span>" class="<span class="optional-argument">&lt;class&gt;</span>"&gt;↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>.
+<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing four or more
 consecutive delimiting characters
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a longer run of <span class="repeatable-delimiter">delimiting characters</span> in the delimiters.
 </p>
 <p>
-The following delimiting characters <code>&lt;C&gt;</code> are used:
+The following delimiting characters <code><span class="repeatable-delimiter">&lt;C&gt;</span></code> are used:
 </p>
 <ul>
 <li>Non-lists:
@@ -951,7 +984,7 @@ In the implementation, a recursive call is used to process nested blocks.
 For list blocks, <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into list items <code>&lt;li&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>&lt;Y&gt;<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code></pre>
+<pre class="cmd syntax"><code>&lt;Y&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 The following delimiters <code>&lt;Y&gt;</code> for list items are used:
 </p>
@@ -968,7 +1001,7 @@ The following delimiters <code>&lt;Y&gt;</code> for list items are used:
 <p>
 List items end at the next list item,
 or at the end of the content being split.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="blocks-nesting"><a class="permalink" href="#blocks-nesting" aria-label="Permalink"></a>Example 1: nesting</h4>
@@ -1050,13 +1083,13 @@ Someone might quote this later.
 <h4 id="blocks-id-class"><a class="permalink" href="#blocks-id-class" aria-label="Permalink"></a>Example 2: <code>id</code> and <code>class</code></h4>
 <ul>
 <li>CMD
-<pre class="cmd"><code>----p-id{p-class}
+<pre class="cmd"><code>----{#p-id .p-class}
 Paragraph with `id` and `class`.
 ----
 ======
-*li-id List item with `id` and no `class`.
-0.{li-class} List item with `class` and no `id`.
-1.{li-class}
+*{#li-id} List item with `id` and no `class`.
+0.{.li-class} List item with `class` and no `id`.
+1.{.li-class}
   Put arbitrary whitespace after the class for more clarity.
 ======
 </code></pre>
@@ -1077,15 +1110,18 @@ Paragraph with &lt;code&gt;id&lt;/code&gt; and &lt;code&gt;class&lt;/code&gt;.
 </li>
 </ul>
 <h3 id="tables"><a class="permalink" href="#tables" aria-label="Permalink"></a>Tables</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span><span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
   <span class="mandatory-argument">&lt;CONTENT&gt;</span>
 <span class="repeatable-delimiter">''''</span></code></pre>
 <p>
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the table
-<code>&lt;table id="<span class="optional-argument">&lt;id&gt;</span>" class="<span class="optional-argument">&lt;class&gt;</span>"&gt;↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/table&gt;</code>.
+<code>&lt;table<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/table&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing four or more apostrophes
 which are not protected by <a href="#cmd-literals">CMD literals</a>,
 use a longer run of <span class="repeatable-delimiter">apostrophes</span> in the delimiters.
@@ -1112,7 +1148,7 @@ according to <a href="#table-parts">table part processing</a>.
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table cells <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>&lt;Z&gt;<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}[<span class="optional-argument">&lt;rowspan&gt;</span>,<span class="optional-argument">&lt;colspan&gt;</span>]</code></pre>
+<pre class="cmd syntax"><code>&lt;Z&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 The following delimiters <code>&lt;Z&gt;</code> for table cells are used:
 </p>
@@ -1125,23 +1161,19 @@ The following delimiters <code>&lt;Z&gt;</code> for table cells are used:
 <p>
 Table cells end at the next table cell, table row, or table part,
 or at the end of the content being split.
-Non-empty <code><span class="optional-argument">&lt;rowspan&gt;</span></code> and <code><span class="optional-argument">&lt;colspan&gt;</span></code> must consist of digits only.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;colspan&gt;</span></code> is empty, the comma before it may be omitted.
-If both <code><span class="optional-argument">&lt;rowspan&gt;</span></code> and <code><span class="optional-argument">&lt;colspan&gt;</span></code> are empty,
-the comma between them and the square brackets surrounding them may be omitted.
 </p>
 <h4 id="table-rows"><a class="permalink" href="#table-rows" aria-label="Permalink"></a>Table rows</h4>
 <p>
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table rows <code>&lt;tr&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>==<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code></pre>
+<pre class="cmd syntax"><code>=={<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 Table rows end at the next table row or table part,
 or at the end of the content being split.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="table-parts"><a class="permalink" href="#table-parts" aria-label="Permalink"></a>Table parts</h4>
@@ -1149,7 +1181,7 @@ the curly brackets surrounding it may be omitted.
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table parts <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>
 according to leading occurrences of the following:
 </p>
-<pre class="cmd syntax"><code>&lt;Y&gt;<span class="optional-argument">&lt;id&gt;</span>{<span class="optional-argument">&lt;class&gt;</span>}</code></pre>
+<pre class="cmd syntax"><code>&lt;Y&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
 <p>
 The following delimiters <code>&lt;Y&gt;</code> for table parts are used:
 </p>
@@ -1164,7 +1196,7 @@ The following delimiters <code>&lt;Y&gt;</code> for table parts are used:
 <p>
 Table parts end at the next table part,
 or at the end of the content being split.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty,
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
 <h4 id="tables-without-parts"><a class="permalink" href="#tables-without-parts" aria-label="Permalink"></a>Example 1: table <em>without</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
@@ -1178,14 +1210,14 @@ the curly brackets surrounding it may be omitted.
     ; D
   ==
     , 1
-    ,[2] 2
+    ,{r2} 2
     , 3
     , 4
   ==
     , 5
-    ,[3,2] 6
+    ,{r3 c2} 6
   ==
-    ,[,2] 7
+    ,{c2} 7
   ==
     , 8
     ; ?
@@ -1266,7 +1298,7 @@ the curly brackets surrounding it may be omitted.
 |_
   ==
     ; Total
-    ,total-cost{some-class}
+    ,{#total-cost .some-class}
       17
 ''''
 </code></pre>
@@ -1326,6 +1358,9 @@ the curly brackets surrounding it may be omitted.
 </li>
 </ul>
 <h3 id="escapes"><a class="permalink" href="#escapes" aria-label="Permalink"></a>Escapes</h3>
+<p>
+<strong>Important.</strong> These escapes are processed <em>after</em> the syntax above.
+</p>
 <div class="centred-flex">
 <table>
 <tr>
@@ -1511,6 +1546,34 @@ All leading whitespace on the next line is stripped.
 </code></pre>
 </li>
 </ul>
+<h3 id="reference-definitions"><a class="permalink" href="#reference-definitions" aria-label="Permalink"></a>Reference-style definitions</h3>
+<pre class="cmd syntax"><code><span class="repeatable-delimiter">@</span>[<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="optional-argument">&lt;address&gt;</span> <span class="optional-argument">&lt;title&gt;</span> <span class="repeatable-delimiter">@</span></code></pre>
+<p>
+Reference style definition
+for an <a href="#reference-style-images">image</a> or a <a href="#reference-style-links">link</a>.
+</p>
+<p>
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
+</p>
+<p>
+The referencing <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code> is case insensitive.
+For definitions whose <code><span class="optional-argument">&lt;address&gt;</span></code> or <code><span class="optional-argument">&lt;title&gt;</span></code>
+contains one or more consecutive at signs
+which are not protected by CMD literals,
+use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
+</p>
+<p>
+<code><span class="optional-argument">&lt;address&gt;</span></code> is used for
+<code>src</code> in <a href="#reference-style-images">images</a> and
+<code>href</code> in <a href="#reference-style-links">links</a>.
+</p>
+<p>
+All reference-style definitions are read and stored.
+If the same label (which is case insensitive)
+is specified more than once,
+the latest definition shall prevail.
+</p>
 <h3 id="images"><a class="permalink" href="#images" aria-label="Permalink"></a>Images</h3>
 <h4 id="inline-style-images"><a class="permalink" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>](<span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
@@ -1521,7 +1584,9 @@ they are automatically escaped as <code>&amp;quot;</code>.
 </p>
 <p>
 Produces the image
-<code>&lt;img alt="<span class="mandatory-argument">&lt;ALT&gt;</span>" src="<span class="optional-argument">&lt;src&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>"&gt;</code>.
+<code>&lt;img<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, and <code><span class="optional-argument">&lt;title&gt;</span></code>.
 For <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
 one or more closing square or round brackets,
 use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
@@ -1545,66 +1610,48 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h4 id="reference-style-images"><a class="permalink" href="#reference-style-images" aria-label="Permalink"></a>Reference-style images</h4>
-<ul>
-<li>Definition
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>![<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;class&gt;</span>}[<span class="optional-argument">&lt;width&gt;</span>]
-  <span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>
-<span class="repeatable-delimiter">@@</span></code></pre>
-</li>
-<li>Image
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>][<span class="optional-argument">&lt;label&gt;</span>]</code></pre>
-</li>
-</ul>
+<p>
+To be used in conjunction with a <a href="#reference-definitions">reference-style definition</a>.
+</p>
 <p>
 A single space may be included
-between <code>[<span class="mandatory-argument">&lt;ALT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code> in an image.
-The referencing strings <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code> and <code><span class="optional-argument">&lt;label&gt;</span></code>
-are case insensitive.
-Non-empty <code><span class="optional-argument">&lt;width&gt;</span></code> in a definition must consist of digits only.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;width&gt;</span></code> in a definition is empty,
-the square brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;label&gt;</span></code> in an image is empty,
+between <code>[<span class="mandatory-argument">&lt;ALT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code>.
+The referencing <code><span class="optional-argument">&lt;label&gt;</span></code> is case insensitive.
+If <code><span class="optional-argument">&lt;label&gt;</span></code> is empty,
 the square brackets surrounding it may be omitted,
-and <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> is used as the label for that image.
+and <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> is used as the label.
 </p>
 <p>
 Produces the image
-<code>&lt;img alt="<span class="mandatory-argument">&lt;ALT&gt;</span>" class="<span class="optional-argument">&lt;class&gt;</span>" src="<span class="optional-argument">&lt;src&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>" width="<span class="optional-argument">&lt;width&gt;</span>"&gt;</code>.
+<code>&lt;img<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> and the attribute specifications
+for the corresponding <a href="#reference-definitions">reference-style image definition</a>.
+</p>
+<p>
 Whitespace around <code><span class="optional-argument">&lt;label&gt;</span></code> is stripped.
-For definitions whose <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code>, <code><span class="optional-argument">&lt;class&gt;</span></code>,
-<code><span class="optional-argument">&lt;src&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
 For images whose <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> or <code><span class="optional-argument">&lt;label&gt;</span></code> contains
 one or more closing square brackets,
 use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
-<p>
-All image definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-</p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>@@![moses-breaking-tablets][200]
+<pre class="cmd"><code>@[moses-breaking-tablets]{w200}
   /rembrandt-moses.jpg
   Moses Breaking the Tablets of the Law (Rembrandt)
-@@
+@
 
 ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
 </code></pre>
 </li>
 <li>HTML
-<pre class="html"><code>&lt;img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200"&gt;
+<pre class="html"><code>&lt;img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)"&gt;
 </code></pre>
 </li>
 <li>Rendered
 <p>
-<img alt="A pissed-off Moses, about to smash the Law Tablets" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)" width="200">
+<img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)">
 </p>
 </li>
 </ul>
@@ -1618,7 +1665,9 @@ they are automatically escaped as <code>&amp;quot;</code>.
 </p>
 <p>
 Produces the link
-<code>&lt;a href="<span class="optional-argument">&lt;href&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>.
+<code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from <code><span class="optional-argument">&lt;href&gt;</span></code> and <code><span class="optional-argument">&lt;title&gt;</span></code>.
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>, <code><span class="optional-argument">&lt;href&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
 one or more closing square or round brackets,
@@ -1647,52 +1696,37 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h4 id="reference-style-links"><a class="permalink" href="#reference-style-links" aria-label="Permalink"></a>Reference-style links</h4>
-<ul>
-<li>Definition
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">@@</span>[<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;class&gt;</span>}
-  <span class="optional-argument">&lt;href&gt;</span> <span class="optional-argument">&lt;title&gt;</span>
-<span class="repeatable-delimiter">@@</span></code></pre>
-</li>
-<li>Link
 <pre class="cmd syntax"><code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>][<span class="optional-argument">&lt;label&gt;</span>]</code></pre>
-</li>
-</ul>
+<p>
+To be used in conjunction with a <a href="#reference-definitions">reference-style definition</a>.
+</p>
 <p>
 A single space may be included
-between <code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code> in a link.
-The referencing strings <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code> and <code><span class="optional-argument">&lt;label&gt;</span></code>
-are case insensitive.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> in a definition is empty,
-the curly brackets surrounding it may be omitted.
-If <code><span class="optional-argument">&lt;label&gt;</span></code> in a link is empty,
+between <code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code>.
+The referencing <code><span class="optional-argument">&lt;label&gt;</span></code> is case insensitive.
+If <code><span class="optional-argument">&lt;label&gt;</span></code> is empty,
 the square brackets surrounding it may be omitted,
-and <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is used as the label for that link.
+and <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is used as the label.
 </p>
 <p>
 Produces the link
-<code>&lt;a class="<span class="optional-argument">&lt;class&gt;</span>" href="<span class="optional-argument">&lt;href&gt;</span>" title="<span class="optional-argument">&lt;title&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>.
+<code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+built from the attribute specifications
+for the corresponding <a href="#reference-definitions">reference-style image definition</a>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> and <code><span class="optional-argument">&lt;label&gt;</span></code> is stripped.
-For definitions whose <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code>, <code><span class="optional-argument">&lt;class&gt;</span></code>,
-<code><span class="optional-argument">&lt;href&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> contains
-two or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
 For links whose <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> or <code><span class="optional-argument">&lt;label&gt;</span></code> contains
 one or more closing square brackets,
 use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </p>
-<p>
-All link definitions are read and stored
-before being applied in order.
-If the same label is specified more than once,
-the latest specification shall prevail.
-</p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>@@[wikipedia]
+<pre class="cmd"><code>@[wikipedia]
   https://en.wikipedia.org/wiki/Main_Page
   Wikipedia, the free encyclopedia
-@@
+@
 
 [Wikipedia's home page][wikipedia] \+
 [Wikipedia][] \+
@@ -1714,10 +1748,14 @@ the latest specification shall prevail.
 </li>
 </ul>
 <h3 id="headings"><a class="permalink" href="#headings" aria-label="Permalink"></a>Headings</h3>
-<pre class="cmd syntax"><code>#<span class="optional-argument">&lt;id&gt;</span> <span class="mandatory-argument">&lt;CONTENT&gt;</span> #</code></pre>
+<pre class="cmd syntax"><code>#{<span class="optional-argument">&lt;attribute specification&gt;</span>}> <span class="mandatory-argument">&lt;CONTENT&gt;</span> #</code></pre>
 <p>
 Produces the heading
-<code>&lt;h1 id="<span class="optional-argument">&lt;id&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/h1&gt;</code>.
+<code>&lt;h1<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/h1&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>, use 2 to 6 delimiting hashes respectively.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing the delimiting number of
@@ -1725,7 +1763,7 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </p>
 <ul>
 <li>CMD
-<pre class="cmd"><code>###some-id Heading with id ###
+<pre class="cmd"><code>###{#some-id} Heading with id ###
 #### Heading without id ####
 </code></pre>
 </li>
@@ -1736,14 +1774,20 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h3 id="inline-semantics"><a class="permalink" href="#inline-semantics" aria-label="Permalink"></a>Inline semantics</h3>
-<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
 <p>
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> must be non-empty.
-If <code><span class="optional-argument">&lt;class&gt;</span></code> is empty, the curly brackets surrounding it may be omitted.
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
 </p>
 <p>
 Produces the inline semantic
-<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span> class="<span class="optional-argument">&lt;class&gt;</span>"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>.
+<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>
+<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>,
+where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
+<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
+</p>
+<p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing one or more occurrences of <code>*</code> or <code>_</code>,
 use <a href="#cmd-literals">CMD literals</a> or the <a href="#escapes">escapes</a> <code>\*</code> and <code>\_</code>.
@@ -1773,7 +1817,8 @@ See <a href="https://www.w3.org/International/questions/qa-b-and-i-tags.en">W3C 
 </p>
 <p>
 In the implementation, matches are sought in the following order
-(for brevity, <code>C</code> is used in place of <code>&lt;C&gt;</code> below):
+(for brevity, <code>C</code> is used in place of <code>&lt;C&gt;</code>,
+and <code>spec</code> in place of <code>attribute specification</code>, below):
 </p>
 <div class="centred-flex">
 <table>
@@ -1786,23 +1831,23 @@ In the implementation, matches are sought in the following order
 <tbody>
 <tr>
 <td>33</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CCC</code></td>
+<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CCC</code></td>
 </tr>
 <tr>
 <td>312</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> C <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> CC</code></td>
+<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> C <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> CC</code></td>
 </tr>
 <tr>
 <td>321</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CC <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> C</code></td>
+<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CC <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> C</code></td>
 </tr>
 <tr>
 <td>22</td>
-<td><code>CC{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> CC</code></td>
+<td><code>CC{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> CC</code></td>
 </tr>
 <tr>
 <td>11</td>
-<td><code>C{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> C</code></td>
+<td><code>C{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> C</code></td>
 </tr>
 </tbody>
 </table>
@@ -1814,13 +1859,13 @@ only three cases need to be handled for the resulting match object:
 </p>
 <ul>
 <li>2-layer special (for 33):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt;&lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt;&lt;X&gt;</code></pre>
 </li>
 <li>2-layer general (for 312, 321):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner class&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt; <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> &lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt; <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> &lt;X&gt;</code></pre>
 </li>
 <li>1-layer case (for 22, 11):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;class&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
 </li>
 </ul>
 <p>
@@ -1883,7 +1928,7 @@ Recursive calls are used to process nested inline semantics.
 <pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` and `&lt;em&gt;` with `&lt;b&gt;` and `&lt;i&gt;`.** \+
 They are *not* the same. \+
 Meals come with __rice__ or __pasta__. \+
-I _{translator-supplied} am_ the LORD.
+I _{.translator-supplied} am_ the LORD.
 </code></pre>
 </li>
 <li>HTML
