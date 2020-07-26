@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-07-19
+%date-modified 2020-07-26
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -1099,6 +1099,7 @@ are computed based on the supplied original properties:
   %year-modified
   %year-modified-next
   %footer-element
+  %cmd-name
   %url
   %clean-url
 ````
