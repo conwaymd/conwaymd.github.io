@@ -1784,6 +1784,11 @@ the curly brackets surrounding it may be omitted.
     , \_
     , Underscore
   ==
+    , `\|`
+    , `|`
+    , \|
+    , Pipe
+  ==
     , `\=`
     , `<hr>`
     , \=
@@ -2199,6 +2204,7 @@ is opening rather than closing.
 Whitespace around {^ <|CONTENT|> ^} is stripped.
 For {^ <|CONTENT|> ^} containing one or more occurrences of `*` or `_`,
 use [CMD literals] or the [escapes] `\*` and `\_`.
+For {^ <|CONTENT|> ^} ending in a pipe, use the [escape] `\|`.
 ----
 
 ----
@@ -2351,6 +2357,7 @@ Whitespace is processed as follows:
 %footer-element
 
 @[CMD literals] #cmd-literals @
+@[escape] #escapes @
 @[escapes] #escapes @
 
 @@[cmd-repo]

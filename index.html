@@ -1515,6 +1515,12 @@ the curly brackets surrounding it may be omitted.
 <td>Underscore</td>
 </tr>
 <tr>
+<td><code>\|</code></td>
+<td><code>|</code></td>
+<td>|</td>
+<td>Pipe</td>
+</tr>
+<tr>
 <td><code>\=</code></td>
 <td><code>&lt;hr&gt;</code></td>
 <td><hr></td>
@@ -1801,6 +1807,7 @@ is opening rather than closing.
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing one or more occurrences of <code>*</code> or <code>_</code>,
 use <a href="#cmd-literals">CMD literals</a> or the <a href="#escapes">escapes</a> <code>\*</code> and <code>\_</code>.
+For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> ending in a pipe, use the <a href="#escapes">escape</a> <code>\|</code>.
 </p>
 <p>
 The following delimiters <code>&lt;X&gt;</code> are used:
