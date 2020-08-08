@@ -56,7 +56,6 @@ ol, ul {
 }
 
 pre {
-  background: white;
   border: 1px solid;
   overflow-x: auto;
   padding: 0.5em;
@@ -82,7 +81,6 @@ pre {
 }
 
 :not(pre) > code {
-  background: white;
   border: 1px solid grey;
   padding: 0.2em;
 }
