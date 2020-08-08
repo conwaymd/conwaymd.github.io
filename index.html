@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-07-26
+Last modified: 2020-08-08
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -1775,9 +1775,12 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h3 id="inline-semantics"><a class="permalink" href="#inline-semantics" aria-label="Permalink"></a>Inline semantics</h3>
-<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;X&gt;</code></pre>
 <p>
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> must be non-empty.
+The opening delimiter <code>&lt;X&gt;</code> must not be followed by whitespace
+or by <code>&lt;/</code> (which would presumably be a closing tag).
+The closing delimiter <code>&lt;X&gt;</code> must not be preceded by whitespace.
 If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
@@ -1794,9 +1797,7 @@ For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> contain
 use <a href="#cmd-literals">CMD literals</a> or the <a href="#escapes">escapes</a> <code>\*</code> and <code>\_</code>.
 </p>
 <p>
-The following delimiters <code>&lt;X&gt;</code>,
-equal to one or two delimiting characters <code>&lt;C&gt;</code>,
-are used:
+The following delimiters <code>&lt;X&gt;</code> are used:
 </p>
 <ul>
 <li><code>**</code> for <code>&lt;strong&gt;</code>
@@ -1817,58 +1818,14 @@ are used:
 See <a href="https://www.w3.org/International/questions/qa-b-and-i-tags.en">W3C on using <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> elements</a>.
 </p>
 <p>
-In the implementation, matches are sought in the following order
-(for brevity, <code>C</code> is used in place of <code>&lt;C&gt;</code>,
-and <code>spec</code> in place of <code>attribute specification</code>, below):
+Multiple passes are used to process nested inline semantics
+with the same delimiting character.
+Delimiter matching is inner-greedy,
+so <code>***blah***</code> produces <code>&lt;em&gt;&lt;strong&gt;blah&lt;/strong&gt;&lt;/em&gt;</code>
+rather than <code>&lt;strong&gt;&lt;em&gt;blah&lt;/em&gt;&lt;/strong&gt;</code>.
+For the latter, use an empty attribute specification
+for the outer delimiter, i.e.&nbsp;<code>**{} *blah***</code>.
 </p>
-<div class="centred-flex">
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Form</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>33</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CCC</code></td>
-</tr>
-<tr>
-<td>312</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> C <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> CC</code></td>
-</tr>
-<tr>
-<td>321</td>
-<td><code>CCC{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> CC <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> C</code></td>
-</tr>
-<tr>
-<td>22</td>
-<td><code>CC{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> CC</code></td>
-</tr>
-<tr>
-<td>11</td>
-<td><code>C{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> C</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>
-33 is effectively 312 with empty <code><span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span></code>.
-Once such a pattern has been matched,
-only three cases need to be handled for the resulting match object:
-</p>
-<ul>
-<li>2-layer special (for 33):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt;&lt;X&gt;</code></pre>
-</li>
-<li>2-layer general (for 312, 321):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;&lt;Y&gt;{<span class="optional-argument">&lt;inner spec&gt;</span>} <span class="mandatory-argument">&lt;INNER CONTENT&gt;</span> &lt;Y&gt; <span class="mandatory-argument">&lt;OUTER CONTENT&gt;</span> &lt;X&gt;</code></pre>
-</li>
-<li>1-layer case (for 22, 11):<br>
-<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;spec&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span> &lt;X&gt;</code></pre>
-</li>
-</ul>
 <p>
 Recursive calls are used to process nested inline semantics.
 </p>
@@ -1876,50 +1833,61 @@ Recursive calls are used to process nested inline semantics.
 <table>
 <thead>
 <tr>
+<th>Pattern</th>
 <th>CCH</th>
 <th>Rendered</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>***strong-em***</code></td>
-<td><strong><em>strong-em</em></strong></td>
-</tr>
-<tr>
-<td><code>***strong-em* strong**</code></td>
-<td><strong><em>strong-em</em> strong</strong></td>
-</tr>
-<tr>
-<td><code>***em-strong** em*</code></td>
-<td><em><strong>em-strong</strong> em</em></td>
-</tr>
-<tr>
-<td><code>**strong**</code></td>
-<td><strong>strong</strong></td>
-</tr>
-<tr>
+<td>11</td>
 <td><code>*em*</code></td>
 <td><em>em</em></td>
 </tr>
 <tr>
-<td><code>___b-i___</code></td>
-<td><b><i>b-i</i></b></td>
+<td>22</td>
+<td><code>**strong**</code></td>
+<td><strong>strong</strong></td>
 </tr>
 <tr>
-<td><code>___b-i_ b__</code></td>
-<td><b><i>b-i</i> b</b></td>
+<td>33</td>
+<td><code>***em(strong)***</code></td>
+<td><em><strong>em(strong)</strong></em></td>
 </tr>
 <tr>
-<td><code>___i-b__ i_</code></td>
-<td><i><b>i-b</b> i</i></td>
+<td>44</td>
+<td><code>****strong(strong)****</code></td>
+<td><strong><strong>strong(strong)</strong></strong></td>
 </tr>
 <tr>
-<td><code>__b__</code></td>
-<td><b>b</b></td>
+<td>123</td>
+<td><code>*em **em(strong)***</code></td>
+<td><em>em <strong>em(strong)</strong></em></td>
 </tr>
 <tr>
-<td><code>_i_</code></td>
-<td><i>i</i></td>
+<td>213</td>
+<td><code>**strong *strong(em)***</code></td>
+<td><strong>strong <em>strong(em)</em></strong></td>
+</tr>
+<tr>
+<td>312</td>
+<td><code>***strong(em)* strong**</code></td>
+<td><strong><em>strong(em)</em> strong</strong></td>
+</tr>
+<tr>
+<td>321</td>
+<td><code>***em(strong)** em*</code></td>
+<td><em><strong>em(strong)</strong> em</em></td>
+</tr>
+<tr>
+<td>1221</td>
+<td><code>*em **em(strong)** em*</code></td>
+<td><em>em <strong>em(strong)</strong> em</em></td>
+</tr>
+<tr>
+<td>2112</td>
+<td><code>**strong *strong(em)* strong**</code></td>
+<td><strong>strong <em>strong(em)</em> strong</strong></td>
 </tr>
 </tbody>
 </table>

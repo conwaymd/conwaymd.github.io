@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-07-26
+%date-modified 2020-08-08
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -2167,11 +2167,14 @@ or more consecutive hashes, use [CMD literals].
 ###
 
 {^^
-  \X{<|attribute specification|>} <|CONTENT|> \X
+  \X{<|attribute specification|>} <|CONTENT|>\X
 ^^}
 
 ----
 {^ <|CONTENT|> ^} must be non-empty.
+The opening delimiter {^ \X ^} must not be followed by whitespace
+or by `</` (which would presumably be a closing tag).
+The closing delimiter {^ \X ^} must not be preceded by whitespace.
 If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
@@ -2193,9 +2196,7 @@ use [CMD literals] or the [escapes] `\*` and `\_`.
 ----
 
 ----
-The following delimiters {^ \X ^},
-equal to one or two delimiting characters {^ \C ^},
-are used:
+The following delimiters {^ \X ^} are used:
 ----
 ======
 * `**` for `<strong>`
@@ -2220,52 +2221,14 @@ See [W3C on using `<b>` and `<i>` elements](
 ----
 
 ----
-In the implementation, matches are sought in the following order
-(for brevity, `C` is used in place of {^ \C ^},
-and `spec` in place of `attribute specification`, below):
+Multiple passes are used to process nested inline semantics
+with the same delimiting character.
+Delimiter matching is inner-greedy,
+so `***blah***` produces `<em><strong>blah</strong></em>`
+rather than `<strong><em>blah</em></strong>`.
+For the latter, use an empty attribute specification
+for the outer delimiter, i.e.~`**{} *blah***`.
 ----
-
-||||{.centred-flex}
-''''
-|^
-  ==
-    ; Type
-    ; Form
-|:
-  ==
-    , 33
-    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> CCC ^}
-  ==
-    , 312
-    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> C <|OUTER CONTENT|> CC ^}
-  ==
-    , 321
-    , {^ CCC{<|inner spec|>} <|INNER CONTENT|> CC <|OUTER CONTENT|> C ^}
-  ==
-    , 22
-    , {^ CC{<|spec|>} <|CONTENT|> CC ^}
-  ==
-    , 11
-    , {^ C{<|spec|>} <|CONTENT|> C ^}
-''''
-||||
-
-----
-33 is effectively 312 with empty {^ <|OUTER CONTENT|> ^}.
-Once such a pattern has been matched,
-only three cases need to be handled for the resulting match object:
-----
-====
-* 2-layer special (for 33): \+
-  {^^ \X\Y{<|inner spec|>} <|INNER CONTENT|> \Y\X ^^}
-
-* 2-layer general (for 312, 321): \+
-  {^^ \X\Y{<|inner spec|>} <|INNER CONTENT|> \Y <|OUTER CONTENT|> \X ^^}
-
-* 1-layer case (for 22, 11): \+
-  {^^ \X{<|spec|>} <|CONTENT|> \X ^^}
-
-====
 
 ----
 Recursive calls are used to process nested inline semantics.
@@ -2275,39 +2238,50 @@ Recursive calls are used to process nested inline semantics.
 ''''
 |^
   ==
+    ; Pattern
     ; CCH
     ; Rendered
 |:
   ==
-    , `***strong-em***`
-    ,  ***strong-em***
-  ==
-    , `***strong-em* strong**`
-    ,  ***strong-em* strong**
-  ==
-    , `***em-strong** em*`
-    ,  ***em-strong** em*
-  ==
-    , `**strong**`
-    ,  **strong**
-  ==
+    , 11
     , `*em*`
     ,  *em*
   ==
-    , `___b-i___`
-    ,  ___b-i___
+    , 22
+    , `**strong**`
+    ,  **strong**
   ==
-    , `___b-i_ b__`
-    ,  ___b-i_ b__
+    , 33
+    , `***em(strong)***`
+    ,  ***em(strong)***
   ==
-    , `___i-b__ i_`
-    ,  ___i-b__ i_
+    , 44
+    , `****strong(strong)****`
+    ,  ****strong(strong)****
   ==
-    , `__b__`
-    ,  __b__
+    , 123
+    , `*em **em(strong)***`
+    ,  *em **em(strong)***
   ==
-    , `_i_`
-    ,  _i_
+    , 213
+    , `**strong *strong(em)***`
+    ,  **strong *strong(em)***
+  ==
+    , 312
+    , `***strong(em)* strong**`
+    ,  ***strong(em)* strong**
+  ==
+    , 321
+    , `***em(strong)** em*`
+    ,  ***em(strong)** em*
+  ==
+    , 1221
+    , `*em **em(strong)** em*`
+    ,  *em **em(strong)** em*
+  ==
+    , 2112
+    , `**strong *strong(em)* strong**`
+    ,  **strong *strong(em)* strong**
 ''''
 ||||
 
