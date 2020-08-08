@@ -2167,14 +2167,15 @@ or more consecutive hashes, use [CMD literals].
 ###
 
 {^^
-  \X{<|attribute specification|>} <|CONTENT|>\X
+  <|optional pipe|>\X{<|attribute specification|>} <|CONTENT|>\X
 ^^}
 
 ----
 {^ <|CONTENT|> ^} must be non-empty.
 The opening delimiter {^ \X ^} must not be followed by whitespace
 or by `</` (which would presumably be a closing tag).
-The closing delimiter {^ \X ^} must not be preceded by whitespace.
+The closing delimiter {^ \X ^} must not be preceded by whitespace
+or by a pipe `|`.
 If {^ <|attribute specification|> ^} is empty,
 the curly brackets surrounding it may be omitted.
 ----
@@ -2188,6 +2189,11 @@ Produces the inline semantic
 ^},
 where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
 [built from {^ <|attribute specification|> ^}][as].
+----
+----
+The leading optional pipe is to be used as a disambiguator in some edge cases.
+If present, it indicates that the delimiter directly afterwards
+is opening rather than closing.
 ----
 ----
 Whitespace around {^ <|CONTENT|> ^} is stripped.
@@ -2226,8 +2232,8 @@ with the same delimiting character.
 Delimiter matching is inner-greedy,
 so `***blah***` produces `<em><strong>blah</strong></em>`
 rather than `<strong><em>blah</em></strong>`.
-For the latter, use an empty attribute specification
-for the outer delimiter, i.e.~`**{} *blah***`.
+For the latter, use the optional pipe for the inner occurrence,
+i.e.~`**|*blah***`.
 ----
 
 ----

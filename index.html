@@ -1775,12 +1775,13 @@ or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
 </li>
 </ul>
 <h3 id="inline-semantics"><a class="permalink" href="#inline-semantics" aria-label="Permalink"></a>Inline semantics</h3>
-<pre class="cmd syntax"><code>&lt;X&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;X&gt;</code></pre>
+<pre class="cmd syntax"><code><span class="optional-argument">&lt;optional pipe&gt;</span>&lt;X&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;X&gt;</code></pre>
 <p>
 <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> must be non-empty.
 The opening delimiter <code>&lt;X&gt;</code> must not be followed by whitespace
 or by <code>&lt;/</code> (which would presumably be a closing tag).
-The closing delimiter <code>&lt;X&gt;</code> must not be preceded by whitespace.
+The closing delimiter <code>&lt;X&gt;</code> must not be preceded by whitespace
+or by a pipe <code>|</code>.
 If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
 the curly brackets surrounding it may be omitted.
 </p>
@@ -1790,6 +1791,11 @@ Produces the inline semantic
 <span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>,
 where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
 <a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
+</p>
+<p>
+The leading optional pipe is to be used as a disambiguator in some edge cases.
+If present, it indicates that the delimiter directly afterwards
+is opening rather than closing.
 </p>
 <p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
@@ -1823,8 +1829,8 @@ with the same delimiting character.
 Delimiter matching is inner-greedy,
 so <code>***blah***</code> produces <code>&lt;em&gt;&lt;strong&gt;blah&lt;/strong&gt;&lt;/em&gt;</code>
 rather than <code>&lt;strong&gt;&lt;em&gt;blah&lt;/em&gt;&lt;/strong&gt;</code>.
-For the latter, use an empty attribute specification
-for the outer delimiter, i.e.&nbsp;<code>**{} *blah***</code>.
+For the latter, use the optional pipe for the inner occurrence,
+i.e.&nbsp;<code>**|*blah***</code>.
 </p>
 <p>
 Recursive calls are used to process nested inline semantics.
