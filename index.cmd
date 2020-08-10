@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-08-08
+%date-modified 2020-08-10
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -2221,7 +2221,7 @@ The following delimiters {^ \X ^} are used:
   (bring to attention *without* strong importance,~e.g. keywords)
 
 * `_` for `<i>`
-  (offset text *without* stress emphasis, e.g.~book titles, Latin)
+  (offset text *without* stress emphasis, e.g.~Latin)
 
 ======
 
