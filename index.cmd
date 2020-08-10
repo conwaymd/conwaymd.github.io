@@ -276,6 +276,7 @@ The following forms are recognised:
 {^^
   \#<|ID|>
   .<|CLASS|>
+  l<|LANG|>
   r<|ROWSPAN|>
   c<|COLSPAN|>
   w<|WIDTH|>
