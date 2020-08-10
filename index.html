@@ -1807,6 +1807,7 @@ is opening rather than closing.
 <p>
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing one or more occurrences of <code>*</code> or <code>_</code>,
+or three or more consecutive occurrences of <code>"</code> or <code>'</code>,
 use <a href="#cmd-literals">CMD literals</a> or the <a href="#escapes">escapes</a> <code>\*</code> and <code>\_</code>.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> ending in a pipe, use the <a href="#escapes">escape</a> <code>\|</code>.
 </p>
@@ -1825,6 +1826,12 @@ The following delimiters <code>&lt;X&gt;</code> are used:
 </li>
 <li><code>_</code> for <code>&lt;i&gt;</code>
 (offset text <em>without</em> stress emphasis, e.g.&nbsp;Latin)
+</li>
+<li><code>"""</code> for <code>&lt;q&gt;</code>
+(inline quotation)
+</li>
+<li><code>'''</code> for <code>&lt;cite&gt;</code>
+(citation)
 </li>
 </ul>
 <p>
@@ -1911,14 +1918,16 @@ Recursive calls are used to process nested inline semantics.
 <pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` and `&lt;em&gt;` with `&lt;b&gt;` and `&lt;i&gt;`.** \+
 They are *not* the same. \+
 Meals come with __rice__ or __pasta__. \+
-I _{.translator-supplied} am_ the LORD.
+I _{.translator-supplied} am_ the LORD. \+
+'''Nineteen Eighty-Four''' begins with """It was a bright cold day in April""".
 </code></pre>
 </li>
 <li>HTML
 <pre class="html"><code>&lt;strong&gt;Do not confuse &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt; with &lt;code&gt;&amp;lt;b&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;i&amp;gt;&lt;/code&gt;.&lt;/strong&gt;&lt;br&gt;
 They are &lt;em&gt;not&lt;/em&gt; the same.&lt;br&gt;
 Meals come with &lt;b&gt;rice&lt;/b&gt; or &lt;b&gt;pasta&lt;/b&gt;.&lt;br&gt;
-I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.
+I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.&lt;br&gt;
+&lt;cite&gt;Nineteen Eighty-Four&lt;/cite&gt; begins with &lt;q&gt;It was a bright cold day in April&lt;/q&gt;.
 </code></pre>
 </li>
 <li>Rendered
@@ -1926,7 +1935,8 @@ I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.
 <strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
 They are <em>not</em> the same.<br>
 Meals come with <b>rice</b> or <b>pasta</b>.<br>
-I <i class="translator-supplied">am</i> the LORD.
+I <i class="translator-supplied">am</i> the LORD.<br>
+<cite>Nineteen Eighty-Four</cite> begins with <q>It was a bright cold day in April</q>.
 </p>
 </li>
 </ul>

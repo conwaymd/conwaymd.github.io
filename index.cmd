@@ -2204,6 +2204,7 @@ is opening rather than closing.
 ----
 Whitespace around {^ <|CONTENT|> ^} is stripped.
 For {^ <|CONTENT|> ^} containing one or more occurrences of `*` or `_`,
+or three or more consecutive occurrences of `"` or `'`,
 use [CMD literals] or the [escapes] `\*` and `\_`.
 For {^ <|CONTENT|> ^} ending in a pipe, use the [escape] `\|`.
 ----
@@ -2223,6 +2224,12 @@ The following delimiters {^ \X ^} are used:
 
 * `_` for `<i>`
   (offset text *without* stress emphasis, e.g.~Latin)
+
+* `"""` for `<q>`
+  (inline quotation)
+
+* `'''` for `<cite>`
+  (citation)
 
 ======
 
@@ -2304,7 +2311,8 @@ Recursive calls are used to process nested inline semantics.
   **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
-  I _{.translator-supplied} am_ the LORD.
+  I _{.translator-supplied} am_ the LORD. \+
+  '''Nineteen Eighty-Four''' begins with """It was a bright cold day in April""".
   ````
 
 * HTML
@@ -2312,7 +2320,8 @@ Recursive calls are used to process nested inline semantics.
   <strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
   They are <em>not</em> the same.<br>
   Meals come with <b>rice</b> or <b>pasta</b>.<br>
-  I <i class="translator-supplied">am</i> the LORD.
+  I <i class="translator-supplied">am</i> the LORD.<br>
+  <cite>Nineteen Eighty-Four</cite> begins with <q>It was a bright cold day in April</q>.
   ````
 
 * Rendered
@@ -2320,7 +2329,8 @@ Recursive calls are used to process nested inline semantics.
   \/**Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
-  I _{.translator-supplied} am_ the LORD.
+  I _{.translator-supplied} am_ the LORD. \+
+  '''Nineteen Eighty-Four''' begins with """It was a bright cold day in April""".
   ----
 
 ====
