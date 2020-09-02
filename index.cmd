@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-08-10
+%date-modified 2020-09-02
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -283,6 +283,7 @@ The following forms are recognised:
 ^^}
 
 ----
+An optional equals sign may be used after the leading character.
 Unrecognised forms are ignored.
 If the class attribute is specified more than once,
 the new value is appended to the existing values.
