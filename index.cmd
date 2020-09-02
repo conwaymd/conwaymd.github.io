@@ -316,6 +316,24 @@ by [kramdown's inline attribute lists][ial].
 
 @[ial] https://kramdown.gettalong.org/syntax#inline-attribute-lists @
 
+====
+* CMD
+  ````{.cmd}
+  **{l=de s=color:red} Achtung!**
+  ````
+
+* HTML
+  ````{.html}
+  <strong lang="de" style="color:red">Achtung!</strong>
+  ````
+
+* Rendered
+  ----
+  \/**{l=de s=color:red} Achtung!**
+  ----
+
+====
+
 
 
 ###{#cmd-literals}
