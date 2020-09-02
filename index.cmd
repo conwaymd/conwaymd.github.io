@@ -280,6 +280,7 @@ The following forms are recognised:
   r<|ROWSPAN|>
   c<|COLSPAN|>
   w<|WIDTH|>
+  s<|STYLE|>
 ^^}
 
 ----
@@ -289,6 +290,7 @@ If the class attribute is specified more than once,
 the new value is appended to the existing values.
 If a non-class attribute is specified more than once,
 the latest specification shall prevail.
+For {^ <|STYLE|> ^} containing whitespace, use [CMD literals].
 ----
 
 ====
