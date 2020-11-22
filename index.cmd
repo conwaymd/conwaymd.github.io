@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-09-02
+%date-modified 2020-11-22
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -160,7 +160,7 @@ which I can't without some sort of extension
 3.  Write [arbitrary text](#cmd-literals) outside of code elements
     without using backslash escapes or HTML (ampersand) entities
 4.  [Include](#inclusions) markdown from another file (e.g.~a template)
-5.  Use [`<b>` and `<i>` elements](#inline-semantics),
+5.  Use [`<b>`, `<i>`, and `<cite>` elements](#inline-semantics),
     not just `<strong>` and `<em>`
 6.  Use [`<div>` elements](#blocks) without falling back to HTML
 7.  [Define my own syntax](#regex-replacements) as I go.
