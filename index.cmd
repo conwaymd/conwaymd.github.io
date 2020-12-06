@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-11-22
+%date-modified 2020-12-07
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -290,6 +290,7 @@ If the class attribute is specified more than once,
 the new value is appended to the existing values.
 If a non-class attribute is specified more than once,
 the latest specification shall prevail.
+To omit an attribute, use the special value `\-`.
 For {^ <|STYLE|> ^} containing whitespace, use [CMD literals].
 ----
 
