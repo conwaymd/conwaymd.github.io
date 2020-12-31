@@ -2348,7 +2348,7 @@ Recursive calls are used to process nested inline semantics.
 
 * Rendered
   ----
-  \/**Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
+  **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
   They are *not* the same. \+
   Meals come with __rice__ or __pasta__. \+
   I _{.translator-supplied} am_ the LORD. \+
