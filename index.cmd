@@ -2276,7 +2276,8 @@ i.e.~`**|*blah***`.
 Recursive calls are used to process nested inline semantics.
 ----
 
-||||{.centred-flex}
+||||||{.centred-block}
+||||{.overflowing}
 ''''
 |^
   ==
@@ -2326,6 +2327,7 @@ Recursive calls are used to process nested inline semantics.
     ,  **strong *strong(em)* strong**
 ''''
 ||||
+||||||
 
 ====
 * CMD
