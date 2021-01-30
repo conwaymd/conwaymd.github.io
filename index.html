@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2020-12-07
+Last modified: 2021-01-31
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -192,7 +192,8 @@ Most CMD syntaxes have an optional curly-bracketed part
 which allows for the specification of attributes.
 The following forms are recognised:
 </p>
-<pre class="cmd syntax"><code>#<span class="mandatory-argument">&lt;ID&gt;</span>
+<pre class="cmd syntax"><code><span class="mandatory-argument">&lt;NAME&gt;</span>=<span class="mandatory-argument">&lt;VALUE&gt;</span>
+#<span class="mandatory-argument">&lt;ID&gt;</span>
 .<span class="mandatory-argument">&lt;CLASS&gt;</span>
 l<span class="mandatory-argument">&lt;LANG&gt;</span>
 r<span class="mandatory-argument">&lt;ROWSPAN&gt;</span>
@@ -200,14 +201,16 @@ c<span class="mandatory-argument">&lt;COLSPAN&gt;</span>
 w<span class="mandatory-argument">&lt;WIDTH&gt;</span>
 s<span class="mandatory-argument">&lt;STYLE&gt;</span></code></pre>
 <p>
-An optional equals sign may be used after the leading character.
-Unrecognised forms are ignored.
+The first is called "full form"; the rest are "short forms".
+An optional equals sign may be used after the leading character in short forms.
+Unrecognised short forms are ignored.
 If the class attribute is specified more than once,
 the new value is appended to the existing values.
 If a non-class attribute is specified more than once,
 the latest specification shall prevail.
 To omit an attribute, use the special value <code>\-</code>.
-For <code><span class="mandatory-argument">&lt;STYLE&gt;</span></code> containing whitespace, use <a href="#cmd-literals">CMD literals</a>.
+For <code><span class="mandatory-argument">&lt;VALUE&gt;</span></code> etc. containing whitespace, use <a href="#cmd-literals">CMD literals</a>.
+For <code><span class="mandatory-argument">&lt;ID&gt;</span></code> etc. containing equals signs, use <a href="#cmd-literals">CMD literals</a>.
 </p>
 <ul>
 <li>CMD
@@ -1991,7 +1994,7 @@ consecutive newlines are replaced with a single newline.)
 </li>
 </ol>
 <footer>
-©&nbsp;2020&nbsp;Conway.
+©&nbsp;2020–2021&nbsp;Conway.
 </footer>
 </body>
 </html>

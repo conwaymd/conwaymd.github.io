@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2020-12-07
+%date-modified 2021-01-31
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -274,6 +274,7 @@ The following forms are recognised:
 ----
 
 {^^
+  <|NAME|>=<|VALUE|>
   \#<|ID|>
   .<|CLASS|>
   l<|LANG|>
@@ -284,14 +285,16 @@ The following forms are recognised:
 ^^}
 
 ----
-An optional equals sign may be used after the leading character.
-Unrecognised forms are ignored.
+The first is called "full form"; the rest are "short forms".
+An optional equals sign may be used after the leading character in short forms.
+Unrecognised short forms are ignored.
 If the class attribute is specified more than once,
 the new value is appended to the existing values.
 If a non-class attribute is specified more than once,
 the latest specification shall prevail.
 To omit an attribute, use the special value `\-`.
-For {^ <|STYLE|> ^} containing whitespace, use [CMD literals].
+For {^ <|VALUE|> ^} etc. containing whitespace, use [CMD literals].
+For {^ <|ID|> ^} etc. containing equals signs, use [CMD literals].
 ----
 
 ====
