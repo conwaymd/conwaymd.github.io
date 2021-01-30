@@ -281,6 +281,7 @@ The following forms are recognised:
   r<|ROWSPAN|>
   c<|COLSPAN|>
   w<|WIDTH|>
+  h<|HEIGHT|>
   s<|STYLE|>
 ^^}
 
