@@ -13,9 +13,11 @@ blockquote {
 }
 
 body {
+  background: white;
   font-family: sans-serif;
   line-height: 1.6;
-  padding: 0 0.25em;
+  margin: 0;
+  padding: 0.2em 1.3em 0.7em;
 }
 
 .centred-block {
@@ -55,6 +57,12 @@ footer {
   display: block;
   height: 10px;
   margin: -10px 0 0;
+}
+
+html {
+  background: #feecec;
+  margin: 0 auto;
+  max-width: 45em;
 }
 
 li {
