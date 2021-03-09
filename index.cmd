@@ -2031,13 +2031,18 @@ use [escapes] or [CMD literals].
 ####
 
 {^^
-  ~~ [ ~~<|CONTENT|>](<|href|> <|title|>)
+  ~~ [ ~~<|CONTENT|>]{<|attribute specification|>}(<|href|> <|title|>)
 ^^}
 
 ----
 Unlike John Gruber's markdown, {^ <|title|> ^} is not surrounded by quotes.
 If quotes are supplied to {^ <|title|> ^},
 they are automatically escaped as `&quot;`.
+----
+
+----
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
 ----
 
 ----
@@ -2048,7 +2053,8 @@ Produces the link
   ~~ </a> ~~
 ^},
 where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <|href|> ^} and {^ <|title|> ^}.
+built from {^ <|href|> ^}, {^ <|title|> ^},
+and {^ <|attribute specification|> ^}.
 Whitespace around {^ <|CONTENT|> ^} is stripped.
 For {^ <|CONTENT|> ^}, {^ <|href|> ^}, or {^ <|title|> ^} containing
 one or more closing square or round brackets,

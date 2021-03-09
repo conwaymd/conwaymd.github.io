@@ -1693,17 +1693,22 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 </ul>
 <h3 id="links"><a class="permalink" href="#links" aria-label="Permalink"></a>Links</h3>
 <h4 id="inline-style-links"><a class="permalink" href="#inline-style-links" aria-label="Permalink"></a>Inline-style links</h4>
-<pre class="cmd syntax"><code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>](<span class="optional-argument">&lt;href&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
+<pre class="cmd syntax"><code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>}(<span class="optional-argument">&lt;href&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
 <p>
 Unlike John Gruber's markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
 If quotes are supplied to <code><span class="optional-argument">&lt;title&gt;</span></code>,
 they are automatically escaped as <code>&amp;quot;</code>.
 </p>
 <p>
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
+</p>
+<p>
 Produces the link
 <code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>,
 where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><span class="optional-argument">&lt;href&gt;</span></code> and <code><span class="optional-argument">&lt;title&gt;</span></code>.
+built from <code><span class="optional-argument">&lt;href&gt;</span></code>, <code><span class="optional-argument">&lt;title&gt;</span></code>,
+and <code><span class="optional-argument">&lt;attribute specification&gt;</span></code>.
 Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
 For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>, <code><span class="optional-argument">&lt;href&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
 one or more closing square or round brackets,
