@@ -33,7 +33,7 @@ element,
 <h1>Conway's markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2021-01-31
+Last modified: 2021-03-09
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -1607,17 +1607,22 @@ the latest definition shall prevail.
 </p>
 <h3 id="images"><a class="permalink" href="#images" aria-label="Permalink"></a>Images</h3>
 <h4 id="inline-style-images"><a class="permalink" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
-<pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>](<span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
+<pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>}(<span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
 <p>
 Unlike John Gruber's markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
 If quotes are supplied to <code><span class="optional-argument">&lt;title&gt;</span></code>,
 they are automatically escaped as <code>&amp;quot;</code>.
 </p>
 <p>
+If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
+the curly brackets surrounding it may be omitted.
+</p>
+<p>
 Produces the image
 <code>&lt;img<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;</code>,
 where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, and <code><span class="optional-argument">&lt;title&gt;</span></code>.
+built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, <code><span class="optional-argument">&lt;title&gt;</span></code>,
+and <code><span class="optional-argument">&lt;attribute specification&gt;</span></code>.
 For <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
 one or more closing square or round brackets,
 use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.

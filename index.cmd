@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2021-01-31
+%date-modified 2021-03-09
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -1904,7 +1904,7 @@ the latest definition shall prevail.
 ####
 
 {^^
-  ~~ ![ ~~<|ALT|>](<|src|> <|title|>)
+  ~~ ![ ~~<|ALT|>]{<|attribute specification|>}(<|src|> <|title|>)
 ^^}
 
 ----
@@ -1914,12 +1914,18 @@ they are automatically escaped as `&quot;`.
 ----
 
 ----
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
+----
+
+----
 Produces the image
 {^
   ~~ <img ~~<|ATTRIBUTES|>~~ > ~~
 ^},
 where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <|ALT|> ^}, {^ <|src|> ^}, and {^ <|title|> ^}.
+built from {^ <|ALT|> ^}, {^ <|src|> ^}, {^ <|title|> ^},
+and {^ <|attribute specification|> ^}.
 For {^ <|ALT|> ^}, {^ <|src|> ^}, or {^ <|title|> ^} containing
 one or more closing square or round brackets,
 use [escapes] or [CMD literals].
