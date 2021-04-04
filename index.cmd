@@ -3,7 +3,7 @@
 %author Conway
 %title Conway's markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2021-03-09
+%date-modified 2021-04-04
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -1686,7 +1686,7 @@ the curly brackets surrounding it may be omitted.
 ||||{.centred-flex}
 ''''
   ==
-    ; CCH
+    ; CMD
     ; HTML
     ; Rendered
     ; Description
@@ -2298,7 +2298,7 @@ Recursive calls are used to process nested inline semantics.
 |^
   ==
     ; Pattern
-    ; CCH
+    ; CMD
     ; Rendered
 |:
   ==
