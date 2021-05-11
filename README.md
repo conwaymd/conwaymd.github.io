@@ -1,6 +1,6 @@
 # conway-markdown.github.io
 
-GitHub pages documentation for Conway's markdown (CMD):
+GitHub pages documentation for Conway-Markdown (CMD):
 <https://conway-markdown.github.io/>
 
 For the Python converter `cmd.py` itself, see [conway-markdown][cmd-repo].
