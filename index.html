@@ -46,20 +46,20 @@ Last modified: 2021-05-11
 </li>
 </ul>
 <p>
-Conway's fence-style markdown,
+Conway's fence-style Markdown,
 implemented in Python&nbsp;3.6+ using regex replacements.
 </p>
 <p>
 Conway-Markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
-Inspired by the backticks of John Gruber's <a href="https://daringfireball.net/projects/markdown/" title="Daring Fireball: Markdown">markdown</a>,
+Inspired by the backticks of John Gruber's <a href="https://daringfireball.net/projects/markdown/" title="Daring Fireball: Markdown">Markdown</a>,
 CMD uses fence-style constructs
 where an <span class="repeatable-delimiter">arbitrarily repeatable delimiter symbol</span>
 is used to wrap shorter runs of that symbol.
 </p>
 <p>
-While markdown is really an excellent syntax,
-there are many things which I've always wanted to do in markdown,
+While Markdown is really an excellent syntax,
+there are many things which I've always wanted to do in Markdown,
 which I can't without some sort of extension
 (or falling back to writing plain HTML):
 </p>
@@ -71,7 +71,7 @@ which I can't without some sort of extension
 <li>Write <a href="#cmd-literals">arbitrary text</a> outside of code elements
 without using backslash escapes or HTML (ampersand) entities
 </li>
-<li><a href="#inclusions">Include</a> markdown from another file (e.g.&nbsp;a template)
+<li><a href="#inclusions">Include</a> content from another file (e.g.&nbsp;a template)
 </li>
 <li>Use <a href="#inline-semantics"><code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>, and <code>&lt;cite&gt;</code> elements</a>,
 not just <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>
@@ -1038,7 +1038,7 @@ A paragraph.
 ======
 * A nested unordered list:
   ====
-  1. Unlike John Gruber's markdown, indentation doesn't matter.
+  1. Unlike John Gruber's Markdown, indentation doesn't matter.
       * This is on the same level as the item above.
   ====
 * A nested ordered list:
@@ -1069,7 +1069,7 @@ A paragraph.
 <ul>
 <li>A nested unordered list:
 <ul>
-<li>Unlike John Gruber's markdown, indentation doesn't matter.
+<li>Unlike John Gruber's Markdown, indentation doesn't matter.
 </li>
 <li>This is on the same level as the item above.
 </li>
@@ -1609,7 +1609,7 @@ the latest definition shall prevail.
 <h4 id="inline-style-images"><a class="permalink" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
 <pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>}(<span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
 <p>
-Unlike John Gruber's markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
+Unlike John Gruber's Markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
 If quotes are supplied to <code><span class="optional-argument">&lt;title&gt;</span></code>,
 they are automatically escaped as <code>&amp;quot;</code>.
 </p>
@@ -1695,7 +1695,7 @@ use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
 <h4 id="inline-style-links"><a class="permalink" href="#inline-style-links" aria-label="Permalink"></a>Inline-style links</h4>
 <pre class="cmd syntax"><code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>}(<span class="optional-argument">&lt;href&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
 <p>
-Unlike John Gruber's markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
+Unlike John Gruber's Markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
 If quotes are supplied to <code><span class="optional-argument">&lt;title&gt;</span></code>,
 they are automatically escaped as <code>&amp;quot;</code>.
 </p>

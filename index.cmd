@@ -135,22 +135,22 @@
 
 
 ----
-Conway's fence-style markdown,
+Conway's fence-style Markdown,
 implemented in Python~3.6+ using regex replacements.
 ----
 
 ----
 Conway-Markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
-Inspired by the backticks of John Gruber's [markdown],
+Inspired by the backticks of John Gruber's [Markdown],
 CMD uses fence-style constructs
 where an {{arbitrarily repeatable delimiter symbol}}
 is used to wrap shorter runs of that symbol.
 ----
 
 ----
-While markdown is really an excellent syntax,
-there are many things which I've always wanted to do in markdown,
+While Markdown is really an excellent syntax,
+there are many things which I've always wanted to do in Markdown,
 which I can't without some sort of extension
 (or falling back to writing plain HTML):
 ----
@@ -159,7 +159,7 @@ which I can't without some sort of extension
 2.  Add [`id` and `class`](#attribute-specifications) to elements
 3.  Write [arbitrary text](#cmd-literals) outside of code elements
     without using backslash escapes or HTML (ampersand) entities
-4.  [Include](#inclusions) markdown from another file (e.g.~a template)
+4.  [Include](#inclusions) content from another file (e.g.~a template)
 5.  Use [`<b>`, `<i>`, and `<cite>` elements](#inline-semantics),
     not just `<strong>` and `<em>`
 6.  Use [`<div>` elements](#blocks) without falling back to HTML
@@ -1310,7 +1310,7 @@ the curly brackets surrounding it may be omitted.
     ======
     * A nested unordered list:
       ====
-      1. Unlike John Gruber's markdown, indentation doesn't matter.
+      1. Unlike John Gruber's Markdown, indentation doesn't matter.
           * This is on the same level as the item above.
       ====
     * A nested ordered list:
@@ -1341,7 +1341,7 @@ the curly brackets surrounding it may be omitted.
     ======
     * A nested unordered list:
       ====
-      1. Unlike John Gruber's markdown, indentation doesn't matter.
+      1. Unlike John Gruber's Markdown, indentation doesn't matter.
           * This is on the same level as the item above.
       ====
     * A nested ordered list:
@@ -1908,7 +1908,7 @@ the latest definition shall prevail.
 ^^}
 
 ----
-Unlike John Gruber's markdown, {^ <|title|> ^} is not surrounded by quotes.
+Unlike John Gruber's Markdown, {^ <|title|> ^} is not surrounded by quotes.
 If quotes are supplied to {^ <|title|> ^},
 they are automatically escaped as `&quot;`.
 ----
@@ -2035,7 +2035,7 @@ use [escapes] or [CMD literals].
 ^^}
 
 ----
-Unlike John Gruber's markdown, {^ <|title|> ^} is not surrounded by quotes.
+Unlike John Gruber's Markdown, {^ <|title|> ^} is not surrounded by quotes.
 If quotes are supplied to {^ <|title|> ^},
 they are automatically escaped as `&quot;`.
 ----
@@ -2438,7 +2438,7 @@ Whitespace is processed as follows:
   KaTeX --- The fastest math typesetting library for the web
 @@
 
-@@[markdown]
+@@[Markdown]
   https://daringfireball.net/projects/markdown/
   Daring Fireball: Markdown
 @@
