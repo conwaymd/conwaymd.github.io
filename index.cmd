@@ -1,9 +1,9 @@
 %%%%
 
 %author Conway
-%title Conway's markdown (CMD)
+%title Conway-Markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2021-04-04
+%date-modified 2021-05-11
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -140,7 +140,7 @@ implemented in Python~3.6+ using regex replacements.
 ----
 
 ----
-Conway's markdown (CMD) is the result of someone joking that
+Conway-Markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
 Inspired by the backticks of John Gruber's [markdown],
 CMD uses fence-style constructs
@@ -2413,12 +2413,12 @@ Whitespace is processed as follows:
 
 @@[cmd-repo]
   https://github.com/conway-markdown/conway-markdown/
-  GitHub: Conway's markdown
+  GitHub: Conway-Markdown
 @@
 
 @@[cmd-docs-repo]
   https://github.com/conway-markdown/conway-markdown.github.io/
-  GitHub: Documentation for Conway's markdown (GitHub pages)
+  GitHub: Documentation for Conway-Markdown (GitHub pages)
 @@
 
 @@[source-cmd]
