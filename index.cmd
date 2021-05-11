@@ -133,12 +133,6 @@
     [conway-markdown.github.io][cmd-docs-repo]
 ====
 
-
-----
-Conway's fence-style Markdown,
-implemented in Python~3.6+ using regex replacements.
-----
-
 ----
 Conway-Markdown (CMD) is the result of someone joking that
 "the filenames would look like Windows executables from the 90s".
@@ -174,6 +168,9 @@ CMD addresses each of these.
   Installation
 ##
 
+----
+Requires Python~3.6+.
+----
 ----
 Since this is just a crappy, single-file regex converter,
 there is no plan on turning it into a proper Python package any time soon.
