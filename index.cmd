@@ -3,7 +3,7 @@
 %author Conway
 %title Conway-Markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2021-05-11
+%date-modified 2021-06-06
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -249,6 +249,7 @@ The syntax of CMD, in the order of processing, is thus:
   ====
 * [Links](#links)
   ====
+  * [Direct-style links `< : >`](#direct-style-links)
   * [Inline-style links `[ ]( )`](#inline-style-links)
   * [Reference-style links `[ ][ ]`](#reference-style-links)
   ====
@@ -2022,6 +2023,62 @@ use [escapes] or [CMD literals].
   Links
 ###
 
+
+####{#direct-style-links}
+  Direct-style links
+####
+
+{^^
+  <|flags|>\<<|SCHEME|>:<|address|>\>{<|attribute specification|>}
+^^}
+
+----
+Produces the link
+{^
+  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
+       <|SCHEME|>:<|address|>\
+  ~~ </a> ~~
+^},
+where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
+built from {^ <|SCHEME|>:<|address|> ^} and {^ <|attribute specification|> ^}.
+Neither {^ <|SCHEME|> ^} nor {^ <|address|> ^} may contain whitespace.
+{^ <|flags|> ^} may consist of zero or more of the following characters:
+----
+====
+* `b` to enclose the link in angle brackets
+* `s` to suppress the scheme separator in the link content
+* `a` to enable all flags above
+====
+----
+If {^ <|attribute specification|> ^} is empty,
+the curly brackets surrounding it may be omitted.
+----
+
+====
+* CMD
+  ````{.cmd}
+  <https://example.com>,
+  b<https://example.com>,
+  s<https://example.com>,
+  a<https://example.com>.
+  ````
+
+* HTML
+  ````{.html}
+  <a href="https://example.com">https://example.com</a>,
+  &lt;<a href="https://example.com">https://example.com</a>&gt;,
+  <a href="https://example.com">example.com</a>,
+  &lt;<a href="https://example.com">example.com</a>&gt;.
+  ````
+
+* Rendered
+  ----
+  <https://example.com>,
+  b<https://example.com>,
+  s<https://example.com>,
+  a<https://example.com>.
+  ----
+====
 
 ####{#inline-style-links}
   Inline-style links
