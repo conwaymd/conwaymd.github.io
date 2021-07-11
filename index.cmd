@@ -3,7 +3,7 @@
 %author Conway
 %title Conway-Markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2021-06-06
+%date-modified 2021-07-12
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -2041,7 +2041,8 @@ Produces the link
 ^},
 where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
 built from {^ <|SCHEME|>:<|address|> ^} and {^ <|attribute specification|> ^}.
-Neither {^ <|SCHEME|> ^} nor {^ <|address|> ^} may contain whitespace.
+{^ <|SCHEME|> ^} and {^ <|address|> ^}
+may not contain whitespace or angle brackets.
 {^ <|flags|> ^} may consist of zero or more of the following characters:
 ----
 ====
