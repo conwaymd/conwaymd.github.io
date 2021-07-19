@@ -3,7 +3,7 @@
 %author Conway
 %title Conway-Markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2021-07-12
+%date-modified 2021-07-19
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -832,6 +832,9 @@ On this page I am using [KaTeX].
 
 ----
 Includes the content of the file {^ <|FILE NAME|> ^}.
+If {^ <|FILE NAME|> ^} begins with a slash,
+it is reckoned relative to the current directory of the terminal;
+otherwise it is reckoned relative to the current CMD file.
 For {^ <|FILE NAME|> ^} containing one or more consecutive plus signs
 followed by a closing curly bracket,
 use a longer run of {{plus signs}} in the delimiters.

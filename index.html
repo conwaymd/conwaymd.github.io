@@ -33,7 +33,7 @@ element,
 <h1>Conway-Markdown (CMD)</h1>
 <div class="page-properties">
 First created: 2020-04-05<br>
-Last modified: 2021-07-12
+Last modified: 2021-07-19
 </div>
 <ul>
 <li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
@@ -610,6 +610,9 @@ A contrived instance of multiple dollar signs in inline maths:
 <pre class="cmd syntax"><code>{<span class="repeatable-delimiter">+</span> <span class="mandatory-argument">&lt;FILE NAME&gt;</span> <span class="repeatable-delimiter">+</span>}</code></pre>
 <p>
 Includes the content of the file <code><span class="mandatory-argument">&lt;FILE NAME&gt;</span></code>.
+If <code><span class="mandatory-argument">&lt;FILE NAME&gt;</span></code> begins with a slash,
+it is reckoned relative to the current directory of the terminal;
+otherwise it is reckoned relative to the current CMD file.
 For <code><span class="mandatory-argument">&lt;FILE NAME&gt;</span></code> containing one or more consecutive plus signs
 followed by a closing curly bracket,
 use a longer run of <span class="repeatable-delimiter">plus signs</span> in the delimiters.
