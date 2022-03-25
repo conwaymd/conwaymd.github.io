@@ -3,7 +3,7 @@
 %author Conway
 %title Conway-Markdown (CMD)
 %date-created 2020-04-05
-%date-modified 2021-07-20
+%date-modified 2022-03-25
 %resources a~~
   <link rel="stylesheet" href="/cmd.min.css">
   <link rel="stylesheet"
@@ -1505,7 +1505,7 @@ The following delimiters {^ \Y ^} for table parts are used:
 ----
 ====
 * `|^` for `<thead>`
-* `|~` for `<tbody>`
+* `|:` for `<tbody>`
 * `|_` for `<tfoot>`
 ====
 ----
