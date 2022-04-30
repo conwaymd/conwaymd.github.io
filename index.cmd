@@ -59,7 +59,6 @@ Conway-Markdown is:
 - Repository of this page: [conway-markdown.github.io]
 - Repository of Python implementation (`cmd.py`): [conway-markdown]
 ==
-
 [%cmd-basename.cmd]:
   https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
     %cmd-name.cmd
@@ -70,3 +69,72 @@ Conway-Markdown is:
   https://github.com/conway-markdown/conway-markdown.github.io/
 [conway-markdown]:
   https://github.com/conway-markdown/conway-markdown
+
+
+##{#command-line-usage} Command-line usage
+
+--
+Since `cmd.py` is [a shitty single-file script],
+it will not be turned into a proper Python package.
+--
+[a shitty single-file script]:
+  https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py
+
+###{#linux} Linux terminals, macOS Terminal, Git BASH for Windows
+
+++++
+1.
+  Make an alias for `cmd.py` in whatever dotfile
+  you configure your aliases in:
+  ````
+  alias cmd='path/to/cmd.py'
+  ````
+
+2.
+  Invoke the alias to convert a CMD file to HTML:
+  ````
+  $ cmd [-h] [-v] [-x] [file.cmd]
+
+  Convert Conway-Markdown (CMD) to HTML.
+
+  positional arguments:
+    file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
+                   `file.` for increased productivity. Omit to convert all CMD
+                   files under the working directory.
+
+  optional arguments:
+    -h, --help     show this help message and exit
+    -v, --version  show program's version number and exit
+    -x, --verbose  run in verbose mode (prints every replacement applied)
+  ````
+++++
+
+###{#windows} Windows Command Prompt
+
+++++
+1.
+  Add the folder containing `cmd.py` to the `%PATH%` variable
+
+2.
+  Invoke `cmd.py` to convert a CMD file to HTML:
+  ````
+  > cmd.py [-h] [-v] [-x] [file.cmd]
+
+  Convert Conway-Markdown (CMD) to HTML.
+
+  positional arguments:
+    file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
+                   `file.` for increased productivity. Omit to convert all CMD
+                   files under the working directory.
+
+  optional arguments:
+    -h, --help     show this help message and exit
+    -v, --version  show program's version number and exit
+    -x, --verbose  run in verbose mode (prints every replacement applied)
+  ````
+++++
+
+--
+**WARNING: on Windows, be careful not to run any `.cmd` files by accident;
+they might break your computer. God save!**
+--
