@@ -226,6 +226,12 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
   - HTML: <| `{#foo .bar l=en-AU title="baz"} test` |>
   ==
 
+1. Empty attribute specifications:
+  ==
+  - CMD: ``{.cmd .cmdc} `{} test` ``
+  - HTML: <| `{} test` |>
+  ==
+
 1.
   Non-`class` values will supersede earlier ones:
   ==
