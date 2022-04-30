@@ -51,7 +51,7 @@ Conway-Markdown (CMD) is:
 [python3]: https://packages.debian.org/stable/python3
 
 
-##{#useful-links} Useful links
+##{#see-also} See also
 
 ==
 - This page's CMD: [%cmd-basename.cmd]
