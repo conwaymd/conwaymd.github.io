@@ -37,7 +37,7 @@ RegexDictionaryReplacement: #heading-permalinks
 ||
 
 --
-Conway-Markdown is:
+Conway-Markdown (CMD) is:
 --
 ==
 - A replacement-driven markup language inspired by Markdown.
