@@ -61,12 +61,12 @@ Conway-Markdown (CMD) is:
   $ git clone https://github.com/conway-markdown/conway-markdown
   ``
   --
-  Since `cmd.py` is [a shitty single-file script],
+  Since `cmd.py` is [a shitty single-file script][`cmd.py`],
   it will not be turned into a proper Python package.
   --
 ++
 
-[a shitty single-file script]:
+[`cmd.py`]:
   https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py
 
 
