@@ -16,12 +16,16 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
 
 %%%
 
+
 # %title
 
 ||{.page-properties}
   First created: 2020-04-05 <br>
   Last modified: 2022-04-30
 ||
+
+
+##{#useful-links} Useful links
 
 ==
 - This page's CMD: [%cmd-basename.cmd]
