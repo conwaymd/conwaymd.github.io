@@ -113,8 +113,8 @@ CMD files are parsed thus:
 </code></pre>
 <ul>
 <li>
-<b><code class="cmd cmdr">«replacement_rules»</code></b> are user-defined replacement rules
-that will be used in addition to the standard rules.
+<b><code class="cmd cmdr">«replacement_rules»</code></b> are user-defined CMD replacement rules
+that will be used in addition to the standard CMD replacement rules.
 </li>
 <li>
 <code class="cmd">«delimiter»</code> is the first occurrence of
@@ -123,8 +123,9 @@ that will be used in addition to the standard rules.
 the whole file is parsed as <code class="cmd cmdc">«main_content»</code>.)
 </li>
 <li>
-<b><code class="cmd cmdc">«main_content»</code></b> is what gets converted to HTML
-according to the standard and user-defined replacement rules.
+<b><code class="cmd cmdc">«main_content»</code></b> is the CMD content
+that will be converted to HTML according to
+the standard and user-defined CMD replacement rules.
 </li>
 </ul>
 <p>
@@ -136,16 +137,17 @@ An empty <b>replacement queue</b> is initialised.
 </li>
 <li>
 <b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a> are parsed,
-and replacement rules are added to the replacement queue accordingly.
+and CMD replacement rules are added to the replacement queue accordingly.
 </li>
 <li>
 <b><code class="cmd cmdr">«replacement_rules»</code></b> in the CMD file are parsed,
-and replacement rules are added or inserted into the replacement queue
+and CMD replacement rules are added or inserted into the replacement queue
 accordingly.
 </li>
 <li>
-The replacement rules in the replacement queue are <b>applied sequentially
-to <code class="cmd cmdc">«main_content»</code></b>, converting it to HTML.
+The CMD replacement rules in the replacement queue are
+<b>applied sequentially to <code class="cmd cmdc">«main_content»</code></b>
+to convert it to HTML.
 </li>
 </ol>
 <h2 id="repository-links"><a href="#repository-links" class="permalink" aria-label="Permalink"></a>Repository links</h2>
