@@ -1,0 +1,13 @@
+body {
+  background: white;
+  font-family: sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0.2em 1.3em 0.7em;
+}
+
+html {
+  background: #feecec;
+  margin: 0 auto;
+  max-width: 45em;
+}
