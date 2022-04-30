@@ -138,3 +138,21 @@ it will not be turned into a proper Python package.
 **WARNING: on Windows, be careful not to run any `.cmd` files by accident;
 they might break your computer. God save!**
 --
+
+
+##{#authoring-documents} Authoring documents
+
+--
+CMD files are parsed as
+--
+````{.cmd}
+«replacement_rules»
+«delimiter»
+«main_content»
+````
+--
+where `«delimiter»` is the first occurrence of
+3-or-more percent signs on its own line.
+If the file is free of `«delimiter»`,
+the whole file is parsed is parsed as `«main_content»`.
+--
