@@ -186,12 +186,36 @@ HTML: <code class="html">&lt;code id="foo" class="bar" title="baz"&gt;test&lt;/c
 </li>
 <li>
 Non-<code>class</code> values will supersede:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{#1 #2 title=A title=B} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code id="2" title="B"&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
 </li>
 <li>
 <code>class</code> values will accumulate:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{.a .b class=c} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code class="a b c"&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
 </li>
 <li>
 Delete <code>class</code> to reset it:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{.a .b -class class=c} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code class="c"&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
 </li>
 </ol>
 <h2 id="repository-links"><a href="#repository-links" class="permalink" aria-label="Permalink"></a>Repository links</h2>

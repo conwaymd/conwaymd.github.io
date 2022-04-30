@@ -7,7 +7,6 @@
 a {
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
@@ -34,6 +33,9 @@ html {
 li {
   padding-left: 0.3em;
   padding-bottom: 0.2em;
+}
+ol > li {
+  padding-bottom: 0.35em;
 }
 
 ol, ul {

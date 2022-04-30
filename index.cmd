@@ -205,17 +205,33 @@ u``{.cmd .cmdc}
 ### Examples
 
 ++
-1. Behaviour for the standard rule `#inline-code`:
+1.
+  Behaviour for the standard rule `#inline-code`:
   ==
   - CMD: ``{.cmd .cmdc} `{#foo .bar title="baz"} test` ``
   - HTML: <| `{#foo .bar title="baz"} test` |>
   ==
 
-2. Non-`class` values will supersede:
+1.
+  Non-`class` values will supersede:
+  ==
+  - CMD: ``{.cmd .cmdc} `{#1 #2 title=A title=B} test` ``
+  - HTML: <| `{#1 #2 title=A title=B} test` |>
+  ==
 
-3. `class` values will accumulate:
+1.
+  `class` values will accumulate:
+  ==
+  - CMD: ``{.cmd .cmdc} `{.a .b class=c} test` ``
+  - HTML: <| `{.a .b class=c} test` |>
+  ==
 
-4. Delete `class` to reset it:
+1.
+  Delete `class` to reset it:
+  ==
+  - CMD: ``{.cmd .cmdc} `{.a .b -class class=c} test` ``
+  - HTML: <| `{.a .b -class class=c} test` |>
+  ==
 ++
 
 
