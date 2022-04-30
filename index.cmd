@@ -145,7 +145,7 @@ the whole file is parsed as `{.cmd} «main_content»`.
 Then:
 --
 ++
-1. A __replacement queue__ is initialised.
+1. An empty __replacement queue__ is initialised.
 2. __`STANDARD_RULES`__ in [`cmd.py`] are parsed,
    and replacement rules are added to the replacement queue accordingly.
 3. __`{.cmd} «replacement_rules»`__ in the CMD file are parsed,
