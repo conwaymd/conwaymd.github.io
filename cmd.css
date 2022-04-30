@@ -20,6 +20,17 @@ html {
   max-width: 45em;
 }
 
+li {
+  padding-left: 0.3em;
+  padding-bottom: 0.2em;
+}
+
+ol, ul {
+  padding-left: 1.5em;
+}
+
+
+
 .page-properties {
   font-size: smaller;
 }
