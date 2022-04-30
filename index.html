@@ -107,23 +107,23 @@ they might break your computer. God save!</strong>
 <p>
 CMD files are parsed thus:
 </p>
-<pre class="cmd"><code><b class="cmdr">«replacement_rules»</b>
+<pre class="cmd"><code><b class="cmdr">«replacement rules»</b>
 «delimiter»
-<b class="cmdc">«main_content»</b>
+<b class="cmdc">«main content»</b>
 </code></pre>
 <ul>
 <li>
-<b><code class="cmd cmdr">«replacement_rules»</code></b> are user-defined CMD replacement rules
+<b><code class="cmd cmdr">«replacement rules»</code></b> are user-defined CMD replacement rules
 that will be used in addition to the standard CMD replacement rules.
 </li>
 <li>
 <code class="cmd">«delimiter»</code> is the first occurrence of
 3-or-more percent signs on its own line.
 (If no <code class="cmd">«delimiter»</code> is found in the file,
-the whole file is parsed as <code class="cmd cmdc">«main_content»</code>.)
+the whole file is parsed as <code class="cmd cmdc">«main content»</code>.)
 </li>
 <li>
-<b><code class="cmd cmdc">«main_content»</code></b> is the CMD content
+<b><code class="cmd cmdc">«main content»</code></b> is the CMD content
 that will be converted to HTML according to
 the standard and user-defined CMD replacement rules.
 </li>
@@ -140,13 +140,13 @@ An empty <b>replacement queue</b> is initialised.
 and CMD replacement rules are added to the replacement queue accordingly.
 </li>
 <li>
-<b><code class="cmd cmdr">«replacement_rules»</code></b> in the CMD file are parsed,
+<b><code class="cmd cmdr">«replacement rules»</code></b> in the CMD file are parsed,
 and CMD replacement rules are added or inserted into the replacement queue
 accordingly.
 </li>
 <li>
 The CMD replacement rules in the replacement queue are
-<b>applied sequentially to <code class="cmd cmdc">«main_content»</code></b>
+<b>applied sequentially to <code class="cmd cmdc">«main content»</code></b>
 to convert it to HTML.
 </li>
 </ol>

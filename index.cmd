@@ -131,18 +131,18 @@ they might break your computer. God save!**
 CMD files are parsed thus:
 --
 u``{.cmd}
-<b class="cmdr">«replacement_rules»</b>
+<b class="cmdr">«replacement rules»</b>
 «delimiter»
-<b class="cmdc">«main_content»</b>
+<b class="cmdc">«main content»</b>
 ``
 ==
-- __`{.cmd .cmdr} «replacement_rules»`__ are user-defined CMD replacement rules
+- __`{.cmd .cmdr} «replacement rules»`__ are user-defined CMD replacement rules
   that will be used in addition to the standard CMD replacement rules.
 - `{.cmd} «delimiter»` is the first occurrence of
   3-or-more percent signs on its own line.
   (If no `{.cmd} «delimiter»` is found in the file,
-  the whole file is parsed as `{.cmd .cmdc} «main_content»`.)
-- __`{.cmd .cmdc} «main_content»`__ is the CMD content
+  the whole file is parsed as `{.cmd .cmdc} «main content»`.)
+- __`{.cmd .cmdc} «main content»`__ is the CMD content
   that will be converted to HTML according to
   the standard and user-defined CMD replacement rules.
 ==
@@ -153,11 +153,11 @@ In the implementation:
 1. An empty __replacement queue__ is initialised.
 2. __`STANDARD_RULES`__ in [`cmd.py`] are parsed,
    and CMD replacement rules are added to the replacement queue accordingly.
-3. __`{.cmd .cmdr} «replacement_rules»`__ in the CMD file are parsed,
+3. __`{.cmd .cmdr} «replacement rules»`__ in the CMD file are parsed,
    and CMD replacement rules are added or inserted into the replacement queue
    accordingly.
 4. The CMD replacement rules in the replacement queue are
-   __applied sequentially to `{.cmd .cmdc} «main_content»`__
+   __applied sequentially to `{.cmd .cmdc} «main content»`__
    to convert it to HTML.
 ++
 
