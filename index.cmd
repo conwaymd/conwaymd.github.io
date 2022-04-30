@@ -220,7 +220,7 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
 
 ++
 1.
-  Behaviour for the standard rule `#inline-code`:
+  Behaviour for the standard rule `{.cmd .cmdr} #inline-code`:
   ==
   - CMD: ``{.cmd .cmdc} `{#foo .bar l=en-AU title="baz"} test` ``
   - HTML: <| `{#foo .bar l=en-AU title="baz"} test` |>
