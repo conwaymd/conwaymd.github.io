@@ -1,5 +1,7 @@
 :root {
-  --cmd-background-colour: #feecec
+  --cmd-background-colour: #feecec;
+  --cmdr-colour: #7700aa;
+  --cmdc-colour: #1100aa;
 }
 
 a {
@@ -46,6 +48,12 @@ pre {
 
 .cmd {
   background: var(--cmd-background-colour);
+}
+.cmdc {
+  color: var(--cmdc-colour);
+}
+.cmdr {
+  color: var(--cmdr-colour);
 }
 
 .page-properties {

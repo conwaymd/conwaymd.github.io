@@ -131,18 +131,18 @@ they might break your computer. God save!**
 CMD files are parsed thus:
 --
 u``{.cmd}
-<b>«replacement_rules»</b>
+<b class="cmdr">«replacement_rules»</b>
 «delimiter»
-<b>«main_content»</b>
+<b class="cmdc">«main_content»</b>
 ``
 ==
-- __`{.cmd} «replacement_rules»`__ are user-defined replacement rules
+- __`{.cmd .cmdr} «replacement_rules»`__ are user-defined replacement rules
   that will be used in addition to the standard rules.
 - `{.cmd} «delimiter»` is the first occurrence of
   3-or-more percent signs on its own line.
   (If no `{.cmd} «delimiter»` is found in the file,
-  the whole file is parsed as `{.cmd} «main_content»`.)
-- __`{.cmd} «main_content»`__ is what gets converted to HTML
+  the whole file is parsed as `{.cmd .cmdc} «main_content»`.)
+- __`{.cmd .cmdc} «main_content»`__ is what gets converted to HTML
   according to the standard and user-defined replacement rules.
 ==
 --
@@ -152,11 +152,11 @@ In the implementation:
 1. An empty __replacement queue__ is initialised.
 2. __`STANDARD_RULES`__ in [`cmd.py`] are parsed,
    and replacement rules are added to the replacement queue accordingly.
-3. __`{.cmd} «replacement_rules»`__ in the CMD file are parsed,
+3. __`{.cmd .cmdr} «replacement_rules»`__ in the CMD file are parsed,
    and replacement rules are added or inserted into the replacement queue
    accordingly.
 4. The replacement rules in the replacement queue are __applied sequentially
-   to `{.cmd} «main_content»`__, converting it to HTML.
+   to `{.cmd .cmdc} «main_content»`__, converting it to HTML.
 ++
 
 

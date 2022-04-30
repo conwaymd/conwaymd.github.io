@@ -107,23 +107,23 @@ they might break your computer. God save!</strong>
 <p>
 CMD files are parsed thus:
 </p>
-<pre class="cmd"><code><b>«replacement_rules»</b>
+<pre class="cmd"><code><b class="cmdr">«replacement_rules»</b>
 «delimiter»
-<b>«main_content»</b>
+<b class="cmdc">«main_content»</b>
 </code></pre>
 <ul>
 <li>
-<b><code class="cmd">«replacement_rules»</code></b> are user-defined replacement rules
+<b><code class="cmd cmdr">«replacement_rules»</code></b> are user-defined replacement rules
 that will be used in addition to the standard rules.
 </li>
 <li>
 <code class="cmd">«delimiter»</code> is the first occurrence of
 3-or-more percent signs on its own line.
 (If no <code class="cmd">«delimiter»</code> is found in the file,
-the whole file is parsed as <code class="cmd">«main_content»</code>.)
+the whole file is parsed as <code class="cmd cmdc">«main_content»</code>.)
 </li>
 <li>
-<b><code class="cmd">«main_content»</code></b> is what gets converted to HTML
+<b><code class="cmd cmdc">«main_content»</code></b> is what gets converted to HTML
 according to the standard and user-defined replacement rules.
 </li>
 </ul>
@@ -139,13 +139,13 @@ An empty <b>replacement queue</b> is initialised.
 and replacement rules are added to the replacement queue accordingly.
 </li>
 <li>
-<b><code class="cmd">«replacement_rules»</code></b> in the CMD file are parsed,
+<b><code class="cmd cmdr">«replacement_rules»</code></b> in the CMD file are parsed,
 and replacement rules are added or inserted into the replacement queue
 accordingly.
 </li>
 <li>
 The replacement rules in the replacement queue are <b>applied sequentially
-to <code class="cmd">«main_content»</code></b>, converting it to HTML.
+to <code class="cmd cmdc">«main_content»</code></b>, converting it to HTML.
 </li>
 </ol>
 <h2 id="repository-links"><a href="#repository-links" class="permalink" aria-label="Permalink"></a>Repository links</h2>
