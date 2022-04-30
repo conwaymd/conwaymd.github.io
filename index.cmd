@@ -236,15 +236,15 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
 1.
   `class` values will accumulate:
   ==
-  - CMD: ``{.cmd .cmdc} `{.a .b class=c} test` ``
-  - HTML: <| `{.a .b class=c} test` |>
+  - CMD: ``{.cmd .cmdc} `{.a .b class=c .d} test` ``
+  - HTML: <| `{.a .b class=c .d} test` |>
   ==
 
 1.
   Delete `class` to reset it:
   ==
-  - CMD: ``{.cmd .cmdc} `{.a .b -class class=c} test` ``
-  - HTML: <| `{.a .b -class class=c} test` |>
+  - CMD: ``{.cmd .cmdc} `{.a .b -class class=c .d} test` ``
+  - HTML: <| `{.a .b -class class=c .d} test` |>
   ==
 ++
 
