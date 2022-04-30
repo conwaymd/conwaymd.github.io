@@ -128,21 +128,25 @@ they might break your computer. God save!**
 ##{#authoring-cmd-files} Authoring CMD files
 
 --
-First, CMD files are parsed as
+CMD files are parsed thus:
 --
-``{.cmd}
-«replacement_rules»
+u``{.cmd}
+<b>«replacement_rules»</b>
 «delimiter»
-«main_content»
+<b>«main_content»</b>
 ``
+==
+- __`{.cmd} «replacement_rules»`__ are user-defined replacement rules
+  that will be used in addition to the standard rules.
+- `{.cmd} «delimiter»` is the first occurrence of
+  3-or-more percent signs on its own line.
+  (If no `{.cmd} «delimiter»` is found in the file,
+  the whole file is parsed as `{.cmd} «main_content»`.)
+- __`{.cmd} «main_content»`__ is what gets converted to HTML
+  according to the standard and user-defined replacement rules.
+==
 --
-where `{.cmd} «delimiter»` is the first occurrence of
-3-or-more percent signs on its own line.
-If the file is free of `{.cmd} «delimiter»`,
-the whole file is parsed as `{.cmd} «main_content»`.
---
---
-Then:
+In the implementation:
 --
 ++
 1. An empty __replacement queue__ is initialised.

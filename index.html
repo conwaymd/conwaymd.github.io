@@ -105,20 +105,30 @@ they might break your computer. God save!</strong>
 </p>
 <h2 id="authoring-cmd-files"><a href="#authoring-cmd-files" class="permalink" aria-label="Permalink"></a>Authoring CMD files</h2>
 <p>
-First, CMD files are parsed as
+CMD files are parsed thus:
 </p>
-<pre class="cmd"><code>«replacement_rules»
+<pre class="cmd"><code><b>«replacement_rules»</b>
 «delimiter»
-«main_content»
+<b>«main_content»</b>
 </code></pre>
-<p>
-where <code class="cmd">«delimiter»</code> is the first occurrence of
+<ul>
+<li>
+<b><code class="cmd">«replacement_rules»</code></b> are user-defined replacement rules
+that will be used in addition to the standard rules.
+</li>
+<li>
+<code class="cmd">«delimiter»</code> is the first occurrence of
 3-or-more percent signs on its own line.
-If the file is free of <code class="cmd">«delimiter»</code>,
-the whole file is parsed as <code class="cmd">«main_content»</code>.
-</p>
+(If no <code class="cmd">«delimiter»</code> is found in the file,
+the whole file is parsed as <code class="cmd">«main_content»</code>.)
+</li>
+<li>
+<b><code class="cmd">«main_content»</code></b> is what gets converted to HTML
+according to the standard and user-defined replacement rules.
+</li>
+</ul>
 <p>
-Then:
+In the implementation:
 </p>
 <ol>
 <li>
