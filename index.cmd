@@ -27,6 +27,22 @@ RegexDictionaryReplacement: #heading-permalinks
     -->
   \g<opening_hashes_etc> []{.permalink aria-label=Permalink}(#\g<id_>)
 
+ExtensibleFenceReplacement: #html-as-inline-code
+- queue_position: BEFORE #placeholder-unprotect
+- syntax_type: INLINE
+- prologue_delimiter: <
+- extensible_delimiter: |
+- attribute_specifications: .html
+- content_replacements:
+    #placeholder-unprotect
+    #escape-html
+    #de-indent
+    #trim-whitespace
+    #reduce-whitespace
+    #placeholder-protect
+- epilogue_delimiter: >
+- tag_name: code
+
 %%%
 
 
@@ -192,7 +208,7 @@ u``{.cmd .cmdc}
 1. Behaviour for the standard rule `#inline-code`:
   ==
   - CMD: ``{.cmd .cmdc} `{#foo .bar title="baz"} test` ``
-  - HTML: `{.html} <code id="foo" class="bar" title="baz">test</code>`
+  - HTML: <| `{#foo .bar title="baz"} test` |>
   ==
 
 2. Non-`class` values will supersede:
