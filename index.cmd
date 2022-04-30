@@ -12,7 +12,7 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
-* %title --> Conway-Markdown (CMD)
+* %title --> Conway-Markdown (CMD) v%cmd-version
 
 RegexDictionaryReplacement: #heading-permalinks
 - queue_position: BEFORE #headings
