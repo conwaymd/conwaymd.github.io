@@ -128,7 +128,7 @@ they might break your computer. God save!**
 ##{#authoring-cmd-files} Authoring CMD files
 
 --
-CMD files are parsed as
+First, CMD files are parsed as
 --
 ``{.cmd}
 «replacement_rules»
@@ -139,8 +139,21 @@ CMD files are parsed as
 where `{.cmd} «delimiter»` is the first occurrence of
 3-or-more percent signs on its own line.
 If the file is free of `{.cmd} «delimiter»`,
-the whole file is parsed is parsed as `{.cmd} «main_content»`.
+the whole file is parsed as `{.cmd} «main_content»`.
 --
+--
+Then:
+--
+++
+1. A __replacement queue__ is initialised.
+2. __`STANDARD_RULES`__ in [`cmd.py`] are parsed,
+   and replacement rules are added to the replacement queue accordingly.
+3. __`{.cmd} «replacement_rules»`__ in the CMD file are parsed,
+   and replacement rules are added or inserted into the replacement queue
+   accordingly.
+4. The replacement rules in the replacement queue are __applied sequentially
+   to `{.cmd} «main_content»`__, converting it to HTML.
+++
 
 
 ##{#repository-links} Repository links

@@ -105,7 +105,7 @@ they might break your computer. God save!</strong>
 </p>
 <h2 id="authoring-cmd-files"><a href="#authoring-cmd-files" class="permalink" aria-label="Permalink"></a>Authoring CMD files</h2>
 <p>
-CMD files are parsed as
+First, CMD files are parsed as
 </p>
 <pre class="cmd"><code>«replacement_rules»
 «delimiter»
@@ -115,8 +115,29 @@ CMD files are parsed as
 where <code class="cmd">«delimiter»</code> is the first occurrence of
 3-or-more percent signs on its own line.
 If the file is free of <code class="cmd">«delimiter»</code>,
-the whole file is parsed is parsed as <code class="cmd">«main_content»</code>.
+the whole file is parsed as <code class="cmd">«main_content»</code>.
 </p>
+<p>
+Then:
+</p>
+<ol>
+<li>
+A <b>replacement queue</b> is initialised.
+</li>
+<li>
+<b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a> are parsed,
+and replacement rules are added to the replacement queue accordingly.
+</li>
+<li>
+<b><code class="cmd">«replacement_rules»</code></b> in the CMD file are parsed,
+and replacement rules are added or inserted into the replacement queue
+accordingly.
+</li>
+<li>
+The replacement rules in the replacement queue are <b>applied sequentially
+to <code class="cmd">«main_content»</code></b>, converting it to HTML.
+</li>
+</ol>
 <h2 id="repository-links"><a href="#repository-links" class="permalink" aria-label="Permalink"></a>Repository links</h2>
 <ul>
 <li>
