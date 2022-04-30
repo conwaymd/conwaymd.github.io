@@ -51,14 +51,23 @@ Conway-Markdown (CMD) is:
 [python3]: https://packages.debian.org/stable/python3
 
 
-##{#command-line-usage} Command-line usage
+##{#installation-usage} Installation and usage
 
---
-Since `cmd.py` is [a shitty single-file script],
-it will not be turned into a proper Python package.
---
+++{start=0}
+0.
+  Clone the [repository of the Python implementation][conway-markdown]:
+  ``
+  $ git clone https://github.com/conway-markdown/conway-markdown
+  ``
+  --
+  Since `cmd.py` is [a shitty single-file script],
+  it will not be turned into a proper Python package.
+  --
+++
+
 [a shitty single-file script]:
   https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py
+
 
 ###{#linux} Linux terminals, macOS Terminal, Git BASH for Windows
 
@@ -143,8 +152,8 @@ the whole file is parsed is parsed as `{.cmd} «main_content»`.
 ==
 - This page's CMD: [%cmd-basename.cmd]
 - This page's HTML: [%cmd-basename.html]
-- Repository of this page: [conway-markdown.github.io]
-- Repository of Python implementation (`cmd.py`): [conway-markdown]
+- This page's repository: [conway-markdown.github.io]
+- Python implementation's repository: [conway-markdown]
 ==
 [%cmd-basename.cmd]:
   https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
