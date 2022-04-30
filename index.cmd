@@ -125,7 +125,7 @@ they might break your computer. God save!**
 --
 
 
-##{#authoring-cmd} Authoring CMD files
+##{#authoring-cmd-files} Authoring CMD files
 
 --
 CMD files are parsed as
