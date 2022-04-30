@@ -171,21 +171,51 @@ CMD attribute specifications may be of the following forms:
 <b>-</b>«delete-name»
 «boolean-name»
 </code></pre>
+<p>
+In the two forms with an explicit equals sign,
+the following abbreviations are allowed for <code class="cmd cmdc">«name»</code>:
+</p>
+<ul>
+<li>
+<code class="cmd cmdc">#</code> for <code class="cmd cmdc">id</code>
+</li>
+<li>
+<code class="cmd cmdc">.</code> for <code class="cmd cmdc">class</code>
+</li>
+<li>
+<code class="cmd cmdc">l</code> for <code class="cmd cmdc">lang</code>
+</li>
+<li>
+<code class="cmd cmdc">r</code> for <code class="cmd cmdc">rowspan</code>
+</li>
+<li>
+<code class="cmd cmdc">c</code> for <code class="cmd cmdc">colspan</code>
+</li>
+<li>
+<code class="cmd cmdc">w</code> for <code class="cmd cmdc">width</code>
+</li>
+<li>
+<code class="cmd cmdc">h</code> for <code class="cmd cmdc">height</code>
+</li>
+<li>
+<code class="cmd cmdc">s</code> for <code class="cmd cmdc">style</code>
+</li>
+</ul>
 <h3>Examples</h3>
 <ol>
 <li>
 Behaviour for the standard rule <code>#inline-code</code>:
 <ul>
 <li>
-CMD: <code class="cmd cmdc">`{#foo .bar title="baz"} test`</code>
+CMD: <code class="cmd cmdc">`{#foo .bar l=en-AU title="baz"} test`</code>
 </li>
 <li>
-HTML: <code class="html">&lt;code id="foo" class="bar" title="baz"&gt;test&lt;/code&gt;</code>
+HTML: <code class="html">&lt;code id="foo" class="bar" lang="en-AU" title="baz"&gt;test&lt;/code&gt;</code>
 </li>
 </ul>
 </li>
 <li>
-Non-<code>class</code> values will supersede:
+Non-<code>class</code> values will supersede earlier ones:
 <ul>
 <li>
 CMD: <code class="cmd cmdc">`{#1 #2 title=A title=B} test`</code>

@@ -201,6 +201,20 @@ u``{.cmd .cmdc}
 <b>-</b>«delete-name»
 «boolean-name»
 ``
+--
+In the two forms with an explicit equals sign,
+the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
+--
+==
+- `{.cmd .cmdc} #` for `{.cmd .cmdc} id`
+- `{.cmd .cmdc} .` for `{.cmd .cmdc} class`
+- `{.cmd .cmdc} l` for `{.cmd .cmdc} lang`
+- `{.cmd .cmdc} r` for `{.cmd .cmdc} rowspan`
+- `{.cmd .cmdc} c` for `{.cmd .cmdc} colspan`
+- `{.cmd .cmdc} w` for `{.cmd .cmdc} width`
+- `{.cmd .cmdc} h` for `{.cmd .cmdc} height`
+- `{.cmd .cmdc} s` for `{.cmd .cmdc} style`
+==
 
 ### Examples
 
@@ -208,12 +222,12 @@ u``{.cmd .cmdc}
 1.
   Behaviour for the standard rule `#inline-code`:
   ==
-  - CMD: ``{.cmd .cmdc} `{#foo .bar title="baz"} test` ``
-  - HTML: <| `{#foo .bar title="baz"} test` |>
+  - CMD: ``{.cmd .cmdc} `{#foo .bar l=en-AU title="baz"} test` ``
+  - HTML: <| `{#foo .bar l=en-AU title="baz"} test` |>
   ==
 
 1.
-  Non-`class` values will supersede:
+  Non-`class` values will supersede earlier ones:
   ==
   - CMD: ``{.cmd .cmdc} `{#1 #2 title=A title=B} test` ``
   - HTML: <| `{#1 #2 title=A title=B} test` |>
