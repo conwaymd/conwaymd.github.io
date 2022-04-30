@@ -51,26 +51,6 @@ Conway-Markdown (CMD) is:
 [python3]: https://packages.debian.org/stable/python3
 
 
-##{#see-also} See also
-
-==
-- This page's CMD: [%cmd-basename.cmd]
-- This page's HTML: [%cmd-basename.html]
-- Repository of this page: [conway-markdown.github.io]
-- Repository of Python implementation (`cmd.py`): [conway-markdown]
-==
-[%cmd-basename.cmd]:
-  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
-    %cmd-name.cmd
-[%cmd-basename.html]:
-  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
-    %cmd-name.html
-[conway-markdown.github.io]:
-  https://github.com/conway-markdown/conway-markdown.github.io/
-[conway-markdown]:
-  https://github.com/conway-markdown/conway-markdown
-
-
 ##{#command-line-usage} Command-line usage
 
 --
@@ -156,3 +136,23 @@ where `{.cmd} «delimiter»` is the first occurrence of
 If the file is free of `{.cmd} «delimiter»`,
 the whole file is parsed is parsed as `{.cmd} «main_content»`.
 --
+
+
+##{#see-also} See also
+
+==
+- This page's CMD: [%cmd-basename.cmd]
+- This page's HTML: [%cmd-basename.html]
+- Repository of this page: [conway-markdown.github.io]
+- Repository of Python implementation (`cmd.py`): [conway-markdown]
+==
+[%cmd-basename.cmd]:
+  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
+    %cmd-name.cmd
+[%cmd-basename.html]:
+  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
+    %cmd-name.html
+[conway-markdown.github.io]:
+  https://github.com/conway-markdown/conway-markdown.github.io/
+[conway-markdown]:
+  https://github.com/conway-markdown/conway-markdown
