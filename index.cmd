@@ -32,11 +32,6 @@ RegexDictionaryReplacement: #heading-permalinks
 
 # %title
 
-||{.page-properties}
-  First created: 2020-04-05 <br>
-  Last modified: 2022-04-30
-||
-
 --
 Conway-Markdown (CMD) is:
 --
@@ -166,3 +161,9 @@ the whole file is parsed is parsed as `{.cmd} «main_content»`.
   https://github.com/conway-markdown/conway-markdown.github.io/
 [conway-markdown]:
   https://github.com/conway-markdown/conway-markdown
+
+
+<footer class="page-properties">
+  First created: 2020-04-05 <br>
+  Last modified: 2022-04-30 <br>
+</footer>
