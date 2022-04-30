@@ -52,7 +52,7 @@ Conway-Markdown (CMD) is:
 [python3]: https://packages.debian.org/stable/python3
 
 
-##{#installation-usage} Installation and usage
+##{#installation-and-usage} Installation and usage
 
 ++{start=0}
 0.
@@ -70,7 +70,7 @@ Conway-Markdown (CMD) is:
   https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py
 
 
-###{#linux} Linux terminals, macOS Terminal, Git BASH for Windows
+###{#linux-terminals} Linux terminals, macOS Terminal, Git BASH for Windows
 
 ++
 1.
@@ -99,7 +99,7 @@ Conway-Markdown (CMD) is:
   ``
 ++
 
-###{#windows} Windows Command Prompt
+###{#windows-command-prompt} Windows Command Prompt
 
 ++
 1.
