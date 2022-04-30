@@ -150,6 +150,50 @@ The CMD replacement rules in the replacement queue are
 to convert it to HTML.
 </li>
 </ol>
+<h2 id="cmd-attribute-specifications"><a href="#cmd-attribute-specifications" class="permalink" aria-label="Permalink"></a>CMD attribute specifications</h2>
+<p>
+When a CMD replacement rule is defined with
+<code class="cmd cmdr">attribute_specifications</code> not equal to <code class="cmd cmdr">NONE</code>,
+it allows HTML attributes to be specified by <b>CMD attribute specifications</b>
+enclosed in curly brackets.
+</p>
+<p>
+CMD attribute specifications may be of the following forms:
+</p>
+<pre class="cmd cmdc"><code>«name»<b>=</b>"«quoted value (whitespace allowed)»"
+«name»<b>=</b>«bare-value»
+<b>#</b>«id»
+<b>.</b>«class»
+<b>r</b>«rowspan»
+<b>c</b>«colspan»
+<b>w</b>«width»
+<b>h</b>«height»
+<b>-</b>«delete-name»
+«boolean-name»
+</code></pre>
+<h3>Examples</h3>
+<ol>
+<li>
+Behaviour for the standard rule <code>#inline-code</code>:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{#foo .bar title="baz"} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code id="foo" class="bar" title="baz"&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+Non-<code>class</code> values will supersede:
+</li>
+<li>
+<code>class</code> values will accumulate:
+</li>
+<li>
+Delete <code>class</code> to reset it:
+</li>
+</ol>
 <h2 id="repository-links"><a href="#repository-links" class="permalink" aria-label="Permalink"></a>Repository links</h2>
 <ul>
 <li>

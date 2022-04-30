@@ -162,6 +162,47 @@ In the implementation:
 ++
 
 
+##{#cmd-attribute-specifications} CMD attribute specifications
+
+--
+When a CMD replacement rule is defined with
+`{.cmd .cmdr} attribute_specifications` not equal to `{.cmd .cmdr} NONE`,
+it allows HTML attributes to be specified by __CMD attribute specifications__
+enclosed in curly brackets.
+--
+--
+CMD attribute specifications may be of the following forms:
+--
+u``{.cmd .cmdc}
+«name»<b>=</b>"«quoted value (whitespace allowed)»"
+«name»<b>=</b>«bare-value»
+<b>#</b>«id»
+<b>.</b>«class»
+<b>r</b>«rowspan»
+<b>c</b>«colspan»
+<b>w</b>«width»
+<b>h</b>«height»
+<b>-</b>«delete-name»
+«boolean-name»
+``
+
+### Examples
+
+++
+1. Behaviour for the standard rule `#inline-code`:
+  ==
+  - CMD: ``{.cmd .cmdc} `{#foo .bar title="baz"} test` ``
+  - HTML: `{.html} <code id="foo" class="bar" title="baz">test</code>`
+  ==
+
+2. Non-`class` values will supersede:
+
+3. `class` values will accumulate:
+
+4. Delete `class` to reset it:
+++
+
+
 ##{#repository-links} Repository links
 
 ==

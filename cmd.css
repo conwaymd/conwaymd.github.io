@@ -41,7 +41,7 @@ ol, ul {
 }
 
 pre {
-  border: 1px solid;
+  border: 1px solid black;
   overflow-x: auto;
   padding: 0.5em;
 }
