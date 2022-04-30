@@ -22,3 +22,21 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
   First created: 2020-04-05 <br>
   Last modified: 2022-04-30
 ||
+
+==
+- This page's CMD: [%cmd-basename.cmd]
+- This page's HTML: [%cmd-basename.html]
+- Repository of this page: [conway-markdown.github.io]
+- Repository of Python implementation (`cmd.py`): [conway-markdown]
+==
+
+[%cmd-basename.cmd]:
+  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
+    %cmd-name.cmd
+[%cmd-basename.html]:
+  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
+    %cmd-name.html
+[conway-markdown.github.io]:
+  https://github.com/conway-markdown/conway-markdown.github.io/
+[conway-markdown]:
+  https://github.com/conway-markdown/conway-markdown
