@@ -148,7 +148,7 @@ the whole file is parsed is parsed as `{.cmd} «main_content»`.
 --
 
 
-##{#see-also} See also
+##{#repository-links} Repository links
 
 ==
 - This page's CMD: [%cmd-basename.cmd]
