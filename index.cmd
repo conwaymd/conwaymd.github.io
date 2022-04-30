@@ -72,17 +72,17 @@ Conway-Markdown (CMD) is:
 
 ###{#linux} Linux terminals, macOS Terminal, Git BASH for Windows
 
-++++
+++
 1.
   Make an alias for `cmd.py` in whatever dotfile
   you configure your aliases in:
-  ````
+  ``
   alias cmd='path/to/cmd.py'
-  ````
+  ``
 
 2.
   Invoke the alias to convert a CMD file to HTML:
-  ````
+  ``
   $ cmd [-h] [-v] [-x] [file.cmd]
 
   Convert Conway-Markdown (CMD) to HTML.
@@ -96,18 +96,18 @@ Conway-Markdown (CMD) is:
     -h, --help     show this help message and exit
     -v, --version  show program's version number and exit
     -x, --verbose  run in verbose mode (prints every replacement applied)
-  ````
-++++
+  ``
+++
 
 ###{#windows} Windows Command Prompt
 
-++++
+++
 1.
   Add the folder containing `cmd.py` to the `%PATH%` variable
 
 2.
   Invoke `cmd.py` to convert a CMD file to HTML:
-  ````
+  ``
   > cmd.py [-h] [-v] [-x] [file.cmd]
 
   Convert Conway-Markdown (CMD) to HTML.
@@ -121,8 +121,8 @@ Conway-Markdown (CMD) is:
     -h, --help     show this help message and exit
     -v, --version  show program's version number and exit
     -x, --verbose  run in verbose mode (prints every replacement applied)
-  ````
-++++
+  ``
+++
 
 --
 **WARNING: on Windows, be careful not to run any `.cmd` files by accident;
@@ -135,11 +135,11 @@ they might break your computer. God save!**
 --
 CMD files are parsed as
 --
-````{.cmd}
+``{.cmd}
 «replacement_rules»
 «delimiter»
 «main_content»
-````
+``
 --
 where `{.cmd} «delimiter»` is the first occurrence of
 3-or-more percent signs on its own line.
