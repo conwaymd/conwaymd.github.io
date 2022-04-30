@@ -3,6 +3,7 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
 - apply_mode: SIMULTANEOUS
 * %head-elements-before-viewport -->
     <meta name="author" content="Conway">
+    <meta name="description" content="Documentation for Conway-Markdown (CMD).">
 * %head-elements-after-viewport -->
     <link rel="stylesheet" href="/cmd.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
