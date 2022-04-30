@@ -14,6 +14,18 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
     <meta name="theme-color" content="#ffffff">
 * %title --> Conway-Markdown (CMD)
 
+RegexDictionaryReplacement: #heading-permalinks
+- queue_position: BEFORE #headings
+* (?P<opening_hashes_etc>
+    [#]{2,6}
+    \{
+      [#] (?P<id_> [\S]+ )
+    \}
+    [\s]+
+  )
+    -->
+  \g<opening_hashes_etc> []{.permalink aria-label=Permalink}(#\g<id_>)
+
 %%%
 
 
