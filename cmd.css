@@ -1,3 +1,7 @@
+:root {
+  --cmd-background-colour: #feecec
+}
+
 a {
   text-decoration: none;
 }
@@ -20,7 +24,7 @@ body {
 }
 
 html {
-  background: #feecec;
+  background: var(--cmd-background-colour);
   margin: 0 auto;
   max-width: 45em;
 }
@@ -38,6 +42,10 @@ pre {
   border: 1px solid;
   overflow-x: auto;
   padding: 0.5em;
+}
+
+.cmd {
+  background: var(--cmd-background-colour);
 }
 
 .page-properties {

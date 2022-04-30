@@ -151,8 +151,8 @@ CMD files are parsed as
 «main_content»
 ````
 --
-where `«delimiter»` is the first occurrence of
+where `{.cmd} «delimiter»` is the first occurrence of
 3-or-more percent signs on its own line.
-If the file is free of `«delimiter»`,
-the whole file is parsed is parsed as `«main_content»`.
+If the file is free of `{.cmd} «delimiter»`,
+the whole file is parsed is parsed as `{.cmd} «main_content»`.
 --
