@@ -1190,8 +1190,35 @@ However, they might be called by queued replacements.
 }}
 {{des
   --
-  Partitions content into table-headers
+  Partitions content into table headers
   based on leading occurrences of `{.cmd .cmdc} @(;)@`
+  up to the next leading `{.cmd .cmdc} @(;)@` or `{.cmd .cmdc} @(,)@`.
+  --
+}}
+{{dep
+  ==
+  - [`#table-rows`]
+  ==
+}}
+
+####{#table-data} `#table-data`
+[`#table-data`]: #table-data
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-data
+  - starting_pattern: [,]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #trim-whitespace
+  - ending_pattern: [;,]
+  - tag_name: td
+  ``
+}}
+{{des
+  --
+  Partitions content into table data
+  based on leading occurrences of `{.cmd .cmdc} @(,)@`
   up to the next leading `{.cmd .cmdc} @(;)@` or `{.cmd .cmdc} @(,)@`.
   --
 }}
