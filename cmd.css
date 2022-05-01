@@ -52,6 +52,10 @@ pre {
   padding: 0.5em;
 }
 
+summary {
+  font-weight: bold;
+}
+
 .cmd {
   background: var(--cmd-background-colour);
 }
