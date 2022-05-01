@@ -33,7 +33,7 @@ FixedDelimitersReplacement: #definition-details
 - closing_delimiter: }}
 
 RegexDictionaryReplacement: #summary
-* \A d --> \n <summary>Description</summary>
+* \A des --> \n <summary>Description</summary>
 
 FixedDelimitersReplacement: #details
 - queue_position: BEFORE #whitespace
@@ -241,7 +241,7 @@ However, they might be called by queued replacements.
   PlaceholderMarkerReplacement: #placeholder-markers
   - queue_position: ROOT
 }}
-{{d
+{{des
   --
   Replaces occurrences of the placeholder marker `«U+F8FF»`
   with a [placeholder]
@@ -257,7 +257,7 @@ However, they might be called by queued replacements.
 {{`
   PlaceholderProtectionReplacement: #placeholder-protect
 }}
-{{d
+{{des
   --
   Protects a string with a [placeholder].
   --
@@ -269,7 +269,7 @@ However, they might be called by queued replacements.
   DeIndentationReplacement: #de-indent
   - negative_flag: KEEP_INDENTED
 }}
-{{d
+{{des
   --
   Removes the longest common indentation in a string.
   --
