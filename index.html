@@ -757,34 +757,6 @@ CMD:
 </code></pre>
 </li>
 <li>
-HTML:
-<pre class="html"><code>&lt;ul&gt;
-&lt;li&gt;
-A
-&lt;ul style="background: yellow"&gt;
-&lt;li&gt;
-A1
-&lt;/li&gt;
-&lt;li&gt;
-A2
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-B
-&lt;ul&gt;
-&lt;li style="color: purple"&gt;
-B1
-&lt;/li&gt;
-&lt;li&gt;
-B2
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-</li>
-<li>
 Rendered:
 <ul>
 <li>
@@ -810,6 +782,166 @@ B2
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="ordered-lists"><a href="#ordered-lists" class="permalink" aria-label="Permalink"></a>7. <code>#ordered-lists</code></h4>
+<details>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #ordered-lists
+- queue_position: AFTER #unordered-lists
+- syntax_type: BLOCK
+- extensible_delimiter: ++
+- attribute_specifications: EMPTY
+- content_replacements:
+    #ordered-lists
+    #ordered-list-items
+    #prepend-newline
+- tag_name: ol
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>++</b>
+<b>1.</b> «item»
+«...»
+<b>++</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>++</b>{«attribute specifications»}
+<b>1.</b>{«attribute specifications»} «item»
+«...»
+<b>++</b>
+</code></pre>
+<ul>
+<li>
+The number of plus signs <code class="cmd cmdc"><b>+</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+The item delimiter may be any run of digits followed by a full stop,
+see <a href="#ordered-list-items"><code>#ordered-list-items</code></a>.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces an ordered list:
+</p>
+<pre class="html"><code><b>&lt;ol</b>«attribute sequence»<b>&gt;</b>
+<b>&lt;li&gt;</b>
+«item»
+<b>&lt;/li&gt;</b>
+«...»
+<b>&lt;/ol&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Any run of digits can be used in the item delimiter:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>++
+1. A
+2. B
+3. C
+0. D
+99999999. E
+++
+</code></pre>
+</li>
+<li>
+Rendered:
+<ol>
+<li>
+A
+</li>
+<li>
+B
+</li>
+<li>
+C
+</li>
+<li>
+D
+</li>
+<li>
+E
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+Nested ordered lists:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>++++
+1. This shall be respected.
+2. This shall be read aloud if:
+  ++{type="a"}
+  1. I say so;
+  2. I think so; or
+  3.{style="color: purple"} Pigs fly.
+  ++
+++++
+</code></pre>
+</li>
+<li>
+Rendered:
+<ol>
+<li>
+This shall be respected.
+</li>
+<li>
+This shall be read aloud if:
+<ol type="a">
+<li>
+I say so;
+</li>
+<li>
+I think so; or
+</li>
+<li style="color: purple">
+Pigs fly.
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+Zero-based indexing:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>++{start=0}
+0. Nil
+1. One
+++
+</code></pre>
+</li>
+<li>
+Rendered:
+<ol start="0">
+<li>
+Nil
+</li>
+<li>
+One
+</li>
+</ol>
 </li>
 </ul>
 </li>
@@ -1045,7 +1177,7 @@ Adds a newline at the very start of a string.
 <a href="#ordered-list-items"><code>#ordered-list-items</code></a>
 </li>
 <li>
-[<code>#ordered-lists</code>]
+<a href="#ordered-lists"><code>#ordered-lists</code></a>
 </li>
 <li>
 [<code>#table-rows</code>]
@@ -1117,7 +1249,7 @@ a run of digits followed by a full stop.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#ordered-lists</code>]
+<a href="#ordered-lists"><code>#ordered-lists</code></a>
 </li>
 </ul>
 </details>

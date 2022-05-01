@@ -772,21 +772,6 @@ However, they might be called by queued replacements.
           ====
         ======
       ````
-    - HTML:
-      <||
-        ======
-        * A
-          ===={style="background: yellow"}
-          - A1
-          - A2
-          ====
-        - B
-          ====
-          +{style="color: purple"} B1
-          - B2
-          ====
-        ======
-      ||>
     - Rendered:
         ======
         * A
@@ -802,6 +787,127 @@ However, they might be called by queued replacements.
         ======
     ========
   ++
+}}
+
+####{#ordered-lists} 7. `#ordered-lists`
+[`#ordered-lists`]: #ordered-lists
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #ordered-lists
+  - queue_position: AFTER #unordered-lists
+  - syntax_type: BLOCK
+  - extensible_delimiter: ++
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #ordered-lists
+      #ordered-list-items
+      #prepend-newline
+  - tag_name: ol
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(++)@
+    @(1.)@ «item»
+    «...»
+    @(++)@
+  ````
+  ````{.cmd .cmdc}
+    @(++)@{«attribute specifications»}
+    @(1.)@{«attribute specifications»} «item»
+    «...»
+    @(++)@
+  ````
+  ====
+  - The number of plus signs ``{.cmd .cmdc} @(+)@ ``
+    may be increased arbitrarily.
+  - The item delimiter may be any run of digits followed by a full stop,
+    see [`#ordered-list-items`].
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces an ordered list:
+  --
+  ````{.html}
+    @(<ol)@«attribute sequence»@(>)@
+    @(<li>)@
+    «item»
+    @(</li>)@
+    «...»
+    @(</ol>)@
+  ````
+}}
+{{ex
+  ++++++++
+  1.
+    Any run of digits can be used in the item delimiter:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ++
+        1. A
+        2. B
+        3. C
+        0. D
+        99999999. E
+        ++
+      ````
+    - Rendered:
+        ++
+        1. A
+        2. B
+        3. C
+        0. D
+        99999999. E
+        ++
+    ==
+  2.
+    Nested ordered lists:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ++++
+        1. This shall be respected.
+        2. This shall be read aloud if:
+          ++{type="a"}
+          1. I say so;
+          2. I think so; or
+          3.{style="color: purple"} Pigs fly.
+          ++
+        ++++
+      ````
+    - Rendered:
+        ++++
+        1. This shall be respected.
+        2. This shall be read aloud if:
+          ++{type="a"}
+          1. I say so;
+          2. I think so; or
+          3.{style="color: purple"} Pigs fly.
+          ++
+        ++++
+    ==
+  3.
+    Zero-based indexing:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ++{start=0}
+        0. Nil
+        1. One
+        ++
+      ````
+    - Rendered:
+        ++{start=0}
+        0. Nil
+        1. One
+        ++
+    ==
+  ++++++++
 }}
 
 
