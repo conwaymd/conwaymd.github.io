@@ -408,8 +408,12 @@ However, they might be called by queued replacements.
 }}
 {{des
   --
-  Produces pre-formatted code.
+  Produces pre-formatted code:
   --
+  ````{.html}
+    @(<pre)@«attribute sequence»@(><code>)@«content»
+    @(</code></pre>)@
+  ````
 }}
 {{ex
   ++
@@ -591,6 +595,11 @@ However, they might be called by queued replacements.
   --
   Produces a division.
   --
+  ````{.html}
+    @(<div)@«attribute sequence»@(>)@
+    «content»
+    @(</div>)@
+  ````
 }}
 {{ex
   ++
