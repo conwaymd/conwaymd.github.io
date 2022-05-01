@@ -2,6 +2,7 @@
   --cmd-background-colour: #feecec;
   --cmdr-colour: #880000;
   --cmdc-colour: #1100aa;
+  --html-colour: #006600;
 }
 
 details > :not(summary) {
@@ -65,6 +66,9 @@ summary {
 }
 .cmdr {
   color: var(--cmdr-colour);
+}
+.html {
+  color: var(--html-colour);
 }
 
 .page-properties {
