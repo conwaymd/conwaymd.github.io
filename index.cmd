@@ -1333,9 +1333,35 @@ However, they might be called by queued replacements.
 }}
 {{des
   --
-  Partitions content into table heads
+  Partitions content into table bodies
   based on leading occurrences of `{.cmd .cmdc} @(|:)@`
   up to the next leading `{.cmd .cmdc} @(|_)@`.
+  --
+}}
+{{dep
+  ==
+  - [`#tables`]
+  ==
+}}
+
+####{#table-foot} `#table-foot`
+[`#table-foot`]: #table-foot
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-foot
+  - starting_pattern: [|][_]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #table-rows
+      #prepend-newline
+  - tag_name: tfoot
+  ``
+}}
+{{des
+  --
+  Partitions content into table feet
+  based on leading occurrences of `{.cmd .cmdc} @(|_)@`.
   --
 }}
 {{dep
