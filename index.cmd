@@ -368,24 +368,24 @@ However, they might be called by queued replacements.
 }}
 {{syn
   u````{.cmd .cmdc}
-    ``
+    <b>``</b>
       «content»
-    ``
+    <b>``</b>
   ````
   u````{.cmd .cmdc}
-    ``{«attribute specifications»}
+    <b>``</b>{«attribute specifications»}
       «content»
-    ``
+    <b>``</b>
   ````
   u````{.cmd .cmdc}
-    «flags»``
+    «flags»<b>``</b>
       «content»
-    ``
+    <b>``</b>
   ````
   u````{.cmd .cmdc}
-    «flags»``{«attribute specifications»}
+    «flags»<b>``</b>{«attribute specifications»}
       «content»
-    ``
+    <b>``</b>
   ````
   ====
   - `{.cmd .cmdc} «flags»`:
