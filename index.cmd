@@ -1327,6 +1327,82 @@ However, they might be called by queued replacements.
   ++
 }}
 
+####{#inline-code} 11. `#inline-code`
+[`#inline-code`]: #inline-code
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #inline-code
+  - queue_position: AFTER #paragraphs
+  - syntax_type: INLINE
+  - allowed_flags:
+      u=KEEP_HTML_UNESCAPED
+      i=KEEP_INDENTED
+      w=REDUCE_WHITESPACE
+  - extensible_delimiter: `
+  - attribute_specifications: EMPTY
+  - prohibited_content: ANCHORED_BLOCKS
+  - content_replacements:
+      #escape-html
+      #de-indent
+      #trim-whitespace
+      #reduce-whitespace
+      #placeholder-protect
+  - tag_name: code
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(`)@ «content» @(`)@
+  ````
+  ````{.cmd .cmdc}
+    «flags»@(`)@ «content» @(`)@
+  ````
+  ====
+  - `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
+    - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
+    ==
+  - The number of backticks ``{.cmd .cmdc} @(`)@ ``
+    may be increased arbitrarily.
+  ====
+}}
+{{des
+  --
+  Produces inline code:
+  --
+  ````{.html}
+  @(<code)@«attribute sequence»@(>)@«content»@(</code>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Code:
+    ==
+    - CMD: ``{.cmd .cmdc} `<br>` ``
+    - HTML: <| `<br>` |>
+    - Rendered: `<br>`
+    ==
+  1.
+    Code containing backticks:
+    ==
+    - CMD: ````{.cmd .cmdc} ``A `backticked` word.`` ````
+    - HTML: <| ``A `backticked` word.`` |>
+    - Rendered: ``A `backticked` word.``
+    ==
+  1.
+    Use [`#literals`] with flag `{.cmd .cmdc} u` to inject HTML:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` `Some u<`<b>bold</b>`> code` ``> ``
+    - HTML: <| `Some u<`<b>bold</b>`> code` |>
+    - Rendered: `Some u<`<b>bold</b>`> code`
+    ==
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

@@ -486,7 +486,7 @@ After.
 </ul>
 </li>
 <li>
-<code>#comments</code> prevail over [<code>#inline-code</code>]:
+<code>#comments</code> prevail over <a href="#inline-code"><code>#inline-code</code></a>:
 <ul>
 <li>
 CMD: <code class="cmd cmdc">`Before. &lt;# This be a comment. #&gt; After.`</code>
@@ -500,7 +500,7 @@ Rendered: <code>Before. After.</code>
 </ul>
 </li>
 <li>
-Use <a href="#literals"><code>#literals</code></a> to make [<code>#inline-code</code>] prevail over <code>#comments</code>:
+Use <a href="#literals"><code>#literals</code></a> to make <a href="#inline-code"><code>#inline-code</code></a> prevail over <code>#comments</code>:
 <ul>
 <li>
 CMD:
@@ -1438,6 +1438,110 @@ After.
 </li>
 </ol>
 </details>
+<h4 id="inline-code"><a href="#inline-code" class="permalink" aria-label="Permalink"></a>11. <code>#inline-code</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #inline-code
+- queue_position: AFTER #paragraphs
+- syntax_type: INLINE
+- allowed_flags:
+    u=KEEP_HTML_UNESCAPED
+    i=KEEP_INDENTED
+    w=REDUCE_WHITESPACE
+- extensible_delimiter: `
+- attribute_specifications: EMPTY
+- prohibited_content: ANCHORED_BLOCKS
+- content_replacements:
+    #escape-html
+    #de-indent
+    #trim-whitespace
+    #reduce-whitespace
+    #placeholder-protect
+- tag_name: code
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>`</b> «content» <b>`</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>`</b> «content» <b>`</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«flags»</code>:
+<ul>
+<li>
+<code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">t</code>: keep indented (do not apply <a href="#de-indent"><code>#de-indent</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">w</code>: reduce whitespace (apply <a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>)
+</li>
+</ul>
+</li>
+<li>
+The number of backticks <code class="cmd cmdc"><b>`</b></code>
+may be increased arbitrarily.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces inline code:
+</p>
+<pre class="html"><code><b>&lt;code</b>«attribute sequence»<b>&gt;</b>«content»<b>&lt;/code&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Code:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`&lt;br&gt;`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>&lt;br&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+Code containing backticks:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">``A `backticked` word.``</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;A `backticked` word.&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>A `backticked` word.</code>
+</li>
+</ul>
+</li>
+<li>
+Use <a href="#literals"><code>#literals</code></a> with flag <code class="cmd cmdc">u</code> to inject HTML:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`Some u&lt;`&lt;b&gt;bold&lt;/b&gt;`&gt; code`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;Some &lt;b&gt;bold&lt;/b&gt; code&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>Some <b>bold</b> code</code>
+</li>
+</ul>
+</li>
+</ol>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details open>
@@ -1461,7 +1565,7 @@ Protects a string with a <a href="#cmd-placeholders">placeholder</a>.
 <a href="#display-code"><code>#display-code</code></a>
 </li>
 <li>
-[<code>#inline-code</code>]
+<a href="#inline-code"><code>#inline-code</code></a>
 </li>
 <li>
 [<code>#cmd-properties</code>]
@@ -1500,7 +1604,7 @@ Removes the longest common indentation in a string.
 <a href="#display-code"><code>#display-code</code></a>
 </li>
 <li>
-[<code>#inline-code</code>]
+<a href="#inline-code"><code>#inline-code</code></a>
 </li>
 </ul>
 </details>
@@ -1531,7 +1635,7 @@ Escapes <code>&amp;</code>, <code>&lt;</code>, and <code>&gt;</code> as their re
 <a href="#display-code"><code>#display-code</code></a>
 </li>
 <li>
-[<code>#inline-code</code>]
+<a href="#inline-code"><code>#inline-code</code></a>
 </li>
 </ul>
 </details>
@@ -1562,7 +1666,7 @@ Removes whitespace at the very start and very end of the string.
 <a href="#table-data"><code>#table-data</code></a>
 </li>
 <li>
-[<code>#inline-code</code>]
+<a href="#inline-code"><code>#inline-code</code></a>
 </li>
 </ul>
 </details>
@@ -1604,7 +1708,7 @@ Collapsed multiple consecutive newlines into a single newline.
 <a href="#display-code"><code>#display-code</code></a>
 </li>
 <li>
-[<code>#inline-code</code>]
+<a href="#inline-code"><code>#inline-code</code></a>
 </li>
 <li>
 [<code>#boilerplate-protect</code>]
@@ -2083,7 +2187,7 @@ the following abbreviations are allowed for <code class="cmd cmdc">«name»</cod
 <h3>Examples</h3>
 <ol>
 <li>
-Behaviour for the standard rule [<code>#inline-code</code>]:
+Behaviour for the standard rule <a href="#inline-code"><code>#inline-code</code></a>:
 <ul>
 <li>
 CMD: <code class="cmd cmdc">`{#foo .bar l=en-AU title="baz"} test`</code>
