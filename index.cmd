@@ -289,6 +289,13 @@ However, they might be called by queued replacements.
   Removes the longest common indentation in a string.
   --
 }}
+{{dep
+  ==
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
+  ==
+}}
 
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
