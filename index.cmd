@@ -689,6 +689,37 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#prepend-newline} `#prepend-newline`
+[`#prepend-newline`]: #prepend-newline
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #prepend-newline
+  * \A --> \n
+  ``
+}}
+{{des
+  --
+  Adds a newline at the very start of a string.
+  --
+}}
+{{dep
+  ==
+  - [`#divisions`]
+  - [`#blockquotes`]
+  - [`#unordered-list-items`]
+  - [`#unordered-lists`]
+  - [`#ordered-list-items`]
+  - [`#ordered-lists`]
+  - [`#table-rows`]
+  - [`#table-head`]
+  - [`#table-body`]
+  - [`#table-foot`]
+  - [`#tables`]
+  - [`#paragraphs`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
