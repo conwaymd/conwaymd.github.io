@@ -4,6 +4,10 @@
   --cmdc-colour: #1100aa;
 }
 
+details > * {
+  margin-top: 0.2em;
+}
+
 a {
   text-decoration: none;
 }
@@ -40,10 +44,6 @@ ol > li {
 
 ol, ul {
   padding-left: 1.5em;
-}
-
-details > p {
-  margin-top: 0.2em;
 }
 
 pre {

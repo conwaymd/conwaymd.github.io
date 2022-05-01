@@ -26,6 +26,10 @@ OrdinaryDictionaryReplacement: #details-summary-shorthand
     '{{
     <summary>Description</summary>
   '
+* {{dep -->
+    '{{{-open}
+    <summary>Dependants</summary>
+  '
 
 FixedDelimitersReplacement: #details
 - queue_position: AFTER #details-summary-shorthand
@@ -227,6 +231,7 @@ However, they might be called by queued replacements.
 ###{#standard-queued-replacements} Standard queued replacements
 
 ####{#placeholder-markers} 0. `#placeholder-markers`
+[`#placeholder-markers`]: #placeholder-markers
 
 {{def
   ``{.cmd .cmdr}
@@ -246,6 +251,7 @@ However, they might be called by queued replacements.
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
 ####{#placeholder-protect} `#placeholder-protect`
+[`#placeholder-protect`]: #placeholder-protect
 
 {{def
   ``{.cmd .cmdr}
@@ -257,8 +263,20 @@ However, they might be called by queued replacements.
   Protects a string with a [placeholder].
   --
 }}
+{{dep
+  ==
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
+  - [`#cmd-properties`]
+  - [`#boilerplate-protect`]
+  - [`#backslash-escapes`]
+  - [`#angle-bracket-wrap`]
+  ==
+}}
 
 ####{#de-indent} `#de-indent`
+[`#de-indent`]: #de-indent
 
 {{def
   ``{.cmd .cmdr}
@@ -277,7 +295,6 @@ However, they might be called by queued replacements.
 
 
 ##{#cmd-placeholders} CMD placeholders
-
 [placeholder]: #cmd-placeholders
 
 --
