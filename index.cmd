@@ -441,7 +441,7 @@ However, they might be called by queued replacements.
   ++
   1. Removes leading horizontal whitespace on each line.
   1. Removes trailing horizontal whitespace on each line.
-  1. Removes whitespace before `<br>` elements.
+  1. Removes whitespace before `{.cmd .cmdc} <br>`.
   1. Collapsed multiple consecutive newlines into a single newline.
   ++
 }}
@@ -454,6 +454,28 @@ However, they might be called by queued replacements.
   - [`#whitespace`]
   ==
 }}
+
+####{#code-tag-wrap} `#code-tag-wrap`
+[`#code-tag-wrap`]: #code-tag-wrap
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #code-tag-wrap
+  * \A --> <code>
+  * \Z --> </code>
+  ``
+}}
+{{des
+  --
+  Wraps a string in opening and closing `code` tags.
+  --
+}}
+{{dep
+  ==
+  - [`#display-code`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
