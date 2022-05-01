@@ -1118,6 +1118,115 @@ However, they might be called by queued replacements.
   ++++++++
 }}
 
+####{#headings} 9. `#headings`
+[`#headings`]: #headings
+
+{{def
+  ``{.cmd .cmdr}
+  HeadingReplacement: #headings
+  - queue_position: AFTER #tables
+  - attribute_specifications: EMPTY
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(#)@ «content»
+  ````
+  ````{.cmd .cmdc}
+    @(#)@{«attribute specifications»} «content»
+  ````
+  ====
+  - The number of hashes ``{.cmd .cmdc} @(#)@ `` may be between 1 and 6.
+  - ``{.cmd .cmdc} «content»`` may be optionally closed by hashes.
+  - For continuation of ``{.cmd .cmdc} «content»``,
+    indent the continuation more than the leading hashes.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a heading:
+  --
+  ````{.html}
+    @(<h«hash count»>)@«content»@(</h«hash count»>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Empty headings:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        #
+        ##
+        ###
+        ####
+        #####
+        ######
+      ````
+    - HTML:
+      <||
+        #
+        ##
+        ###
+        ####
+        #####
+        ######
+      ||>
+    ==
+  1.
+    Non-empty headings require whitespace after the hashes:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ## OK
+        #lacks-whitespace
+      ````
+    - HTML:
+      <||
+        ## OK
+        #lacks-whitespace
+      ||>
+    ==
+  1.
+    Optional closing hashes:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ## Closed ##
+        ## Fewer closing hashes is OK #
+        ## More closing hashes is OK ###
+      ````
+    - HTML:
+      <||
+        ## Closed ##
+        ## Fewer closing hashes is OK #
+        ## More closing hashes is OK ###
+      ||>
+    ==
+  1.
+    Continuation:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ##{.interesting-heading-class}
+          This heading is so long, I have used continuation.
+          Second continuation line.
+        This line is not a continuation due to insufficient indentation.
+      ````
+    - HTML:
+      <||
+        ##{.interesting-heading-class}
+          This heading is so long, I have used continuation.
+          Second continuation line.
+        This line is not a continuation due to insufficient indentation.
+      ||>
+    ==
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

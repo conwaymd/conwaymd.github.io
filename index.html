@@ -1201,6 +1201,132 @@ Rendered
 </li>
 </ol>
 </details>
+<h4 id="headings"><a href="#headings" class="permalink" aria-label="Permalink"></a>9. <code>#headings</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>HeadingReplacement: #headings
+- queue_position: AFTER #tables
+- attribute_specifications: EMPTY
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>#</b> «content»
+</code></pre>
+<pre class="cmd cmdc"><code><b>#</b>{«attribute specifications»} «content»
+</code></pre>
+<ul>
+<li>
+The number of hashes <code class="cmd cmdc"><b>#</b></code> may be between 1 and 6.
+</li>
+<li>
+<code class="cmd cmdc">«content»</code> may be optionally closed by hashes.
+</li>
+<li>
+For continuation of <code class="cmd cmdc">«content»</code>,
+indent the continuation more than the leading hashes.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a heading:
+</p>
+<pre class="html"><code><b>&lt;h«hash count»&gt;</b>«content»<b>&lt;/h«hash count»&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Empty headings:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>#
+##
+###
+####
+#####
+######
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h1&gt;&lt;/h1&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;h3&gt;&lt;/h3&gt;
+&lt;h4&gt;&lt;/h4&gt;
+&lt;h5&gt;&lt;/h5&gt;
+&lt;h6&gt;&lt;/h6&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Non-empty headings require whitespace after the hashes:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>## OK
+#lacks-whitespace
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h2&gt;OK&lt;/h2&gt;
+#lacks-whitespace
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Optional closing hashes:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>## Closed ##
+## Fewer closing hashes is OK #
+## More closing hashes is OK ###
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h2&gt;Closed&lt;/h2&gt;
+&lt;h2&gt;Fewer closing hashes is OK&lt;/h2&gt;
+&lt;h2&gt;More closing hashes is OK&lt;/h2&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Continuation:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>##{.interesting-heading-class}
+  This heading is so long, I have used continuation.
+  Second continuation line.
+This line is not a continuation due to insufficient indentation.
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h2 class="interesting-heading-class"&gt;
+This heading is so long, I have used continuation.
+Second continuation line.&lt;/h2&gt;
+This line is not a continuation due to insufficient indentation.
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details open>
