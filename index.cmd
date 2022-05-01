@@ -15,35 +15,26 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
     <meta name="theme-color" content="#ffffff">
 * %title --> Conway-Markdown (CMD) v%cmd-version
 
-RegexDictionaryReplacement: #definition-details-content
-* \A -->
-    {{{-open}
-      <summary>Definition</summary>
-      ``{.cmd .cmdr}\n
-* \Z -->
-      ``
-    }} \n
-
-FixedDelimitersReplacement: #definition-details
-- queue_position: BEFORE #display-code
-- syntax_type: BLOCK
-- opening_delimiter: {{`
-- content_replacements:
-    #definition-details-content
-- closing_delimiter: }}
-
-RegexDictionaryReplacement: #summary
-* \A des --> \n <summary>Description</summary>
+OrdinaryDictionaryReplacement: #details-summary-shorthand
+- queue_position: BEFORE #whitespace
+- apply_mode: SIMULTANEOUS
+* {{def -->
+    '{{{-open}
+    <summary>Definition</summary>
+  '
+* {{des -->
+    '{{
+    <summary>Description</summary>
+  '
 
 FixedDelimitersReplacement: #details
-- queue_position: BEFORE #whitespace
+- queue_position: AFTER #details-summary-shorthand
 - syntax_type: INLINE
 - opening_delimiter: {{
 - attribute_specifications: open
-- content_replacements:
-    #summary
 - closing_delimiter: }}
 - tag_name: details
+
 
 RegexDictionaryReplacement: #heading-permalinks
 - queue_position: BEFORE #headings
@@ -237,9 +228,11 @@ However, they might be called by queued replacements.
 
 ####{#placeholder-markers} 0. `#placeholder-markers`
 
-{{`
+{{def
+  ``{.cmd .cmdr}
   PlaceholderMarkerReplacement: #placeholder-markers
   - queue_position: ROOT
+  ``
 }}
 {{des
   --
@@ -254,8 +247,10 @@ However, they might be called by queued replacements.
 
 ####{#placeholder-protect} `#placeholder-protect`
 
-{{`
+{{def
+  ``{.cmd .cmdr}
   PlaceholderProtectionReplacement: #placeholder-protect
+  ``
 }}
 {{des
   --
@@ -265,9 +260,11 @@ However, they might be called by queued replacements.
 
 ####{#de-indent} `#de-indent`
 
-{{`
+{{def
+  ``{.cmd .cmdr}
   DeIndentationReplacement: #de-indent
   - negative_flag: KEEP_INDENTED
+  ``
 }}
 {{des
   --
