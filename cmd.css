@@ -52,11 +52,8 @@ pre {
   padding: 0.5em;
 }
 
-summary::before {
-  content: '[';
-}
-summary::after {
-  content: ']';
+summary {
+  font-style: italic;
 }
 
 .cmd {
