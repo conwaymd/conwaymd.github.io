@@ -60,6 +60,22 @@ RegexDictionaryReplacement: #heading-permalinks
     -->
   \g<opening_hashes_etc> []{.permalink aria-label=Permalink}(#\g<id_>)
 
+ExtensibleFenceReplacement: #html-as-display-code
+- queue_position: BEFORE #placeholder-unprotect
+- syntax_type: BLOCK
+- prologue_delimiter: <
+- extensible_delimiter: ||
+- attribute_specifications: .html
+- content_replacements:
+    #placeholder-unprotect
+    #escape-html
+    #de-indent
+    #reduce-whitespace
+    #code-tag-wrap
+    #placeholder-protect
+- epilogue_delimiter: >
+- tag_name: pre
+
 ExtensibleFenceReplacement: #html-as-inline-code
 - queue_position: BEFORE #placeholder-unprotect
 - syntax_type: INLINE
@@ -279,17 +295,20 @@ However, they might be called by queued replacements.
   ``
 }}
 {{syn
-  u``{.cmd .cmdc}
-  «flags»<b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
-  ``
+  u````{.cmd .cmdc}
+    <b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
+  ````
+  u````{.cmd .cmdc}
+    «flags»<b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
+  ````
   ====
-  - Allowed `{.cmd .cmdc} «flags»`:
+  - `{.cmd .cmdc} «flags»`:
     ==
     - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
     - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
     - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
     ==
-  - The number of backticks may be increased arbitrarily.
+  - The number of backticks ``{.cmd .cmdc} ` `` may be increased arbitrarily.
   ====
 }}
 {{des
@@ -320,6 +339,123 @@ However, they might be called by queued replacements.
     - CMD: ``{.cmd .cmdc} <``` <`` Literally <`literal`>. ``> ```> ``
     - HTML: <| <`` Literally <`literal`>. ``> |>
     - Rendered: <`` Literally <`literal`>. ``>
+    ==
+  ++
+}}
+
+####{#display-code} 2. `#display-code`
+[`#display-code`]: #display-code
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #display-code
+  - queue_position: AFTER #literals
+  - syntax_type: BLOCK
+  - allowed_flags:
+      u=KEEP_HTML_UNESCAPED
+      i=KEEP_INDENTED
+      w=REDUCE_WHITESPACE
+  - extensible_delimiter: ``
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #escape-html
+      #de-indent
+      #reduce-whitespace
+      #code-tag-wrap
+      #placeholder-protect
+  - tag_name: pre
+  ``
+}}
+{{syn
+  u````{.cmd .cmdc}
+    ``
+      «content»
+    ``
+  ````
+  u````{.cmd .cmdc}
+    ``{«attribute specifications»}
+      «content»
+    ``
+  ````
+  u````{.cmd .cmdc}
+    «flags»``
+      «content»
+    ``
+  ````
+  u````{.cmd .cmdc}
+    «flags»``{«attribute specifications»}
+      «content»
+    ``
+  ````
+  ====
+  - `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
+    - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
+    ==
+  - The number of backticks ``{.cmd .cmdc} ` `` may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produce pre-formatted code.
+  --
+}}
+{{ex
+  ++
+  1.
+    Display code:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ``{.java}
+          for (int index = 0; index < count; index++)
+          {
+            // etc. etc.
+          }
+        ``
+      ````
+    - HTML:
+      <|||
+        ``{.java}
+          for (int index = 0; index < count; index++)
+          {
+            // etc. etc.
+          }
+        ``
+      |||>
+    - Rendered:
+        ``{.java}
+          for (int index = 0; index < count; index++)
+          {
+            // etc. etc.
+          }
+        ``
+    ==
+  1.
+    Use [`#literals`] with flag `{.cmd .cmdc} u` to inject HTML:
+    ==
+    - CMD:
+      ``````
+      <````
+        ``
+          Injection of <b> element u<` <b>here</b> `>.
+        ``
+      ````>
+      ``````
+    - HTML:
+      <||
+        ``
+          Injection of <b> element u<` <b>here</b> `>.
+        ``
+      ||>
+    - Rendered:
+        ``
+          Injection of <b> element u<` <b>here</b> `>.
+        ``
     ==
   ++
 }}
@@ -523,6 +659,7 @@ tamper with strings of the form
 
 
 ##{#cmd-attribute-specifications} CMD attribute specifications
+[CMD attribute specifications]: #cmd-attribute-specifications
 
 --
 When a CMD replacement rule is defined with
