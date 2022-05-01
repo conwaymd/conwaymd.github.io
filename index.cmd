@@ -1145,6 +1145,32 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#mark-table-headers-for-preceding-table-data}
+  `#mark-table-headers-for-preceding-table-data`
+[`#mark-table-headers-for-preceding-table-data`]:
+  #mark-table-headers-for-preceding-table-data
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #mark-table-headers-for-preceding-table-data
+  * \A --> ;{}
+  # Replaces `<th«attributes_sequence»>` with `;{}<th«attributes_sequence»>`,
+  # so that #table-data will know to stop before it.
+  ``
+}}
+{{des
+  --
+  Replaces `{.cmd .cmdc} <th«attributes_sequence»>`
+  with `{.cmd .cmdc} ;{}<th«attributes_sequence»>`
+  so that [`#table-data`] will know to stop before it.
+  --
+}}
+{{dep
+  ==
+  - [`#table-headers`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
