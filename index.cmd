@@ -255,6 +255,47 @@ However, they might be called by queued replacements.
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
 
+##{#cmd-placeholders} CMD placeholders
+
+--
+There are many instances in which the result of a replacement
+should not be altered further by replacements to follow.
+To protect a string from further alteration,
+it is temporarily replaced by a __placeholder__
+consisting of code points in the main Unicode Private Use Area.
+--
+--
+Specifically, the placeholder for a string shall be of the following form:
+--
+u``{.cmd .cmdc}
+<b>«marker»</b><b>«run_characters»</b><b>«marker»</b>
+``
+==
+- __`{.cmd .cmdc} «marker»`__ is `«U+F8FF»`.
+- __`{.cmd .cmdc}«run_characters»`__ are between `«U+E000»` and `«U+E0FF»`
+  each representing a Unicode byte of the string.
+==
+
+--
+It is assumed that the user will not define replacement rules that
+tamper with strings of the form
+`{.cmd .cmdc} «marker»«run_characters»«marker»`.
+--
+
+### Example
+
+==
+- Consider the string `{.cmd .cmdc} £3`.
+- Its code points are `U+00A3` and `U+0033`.
+- The corresponding Unicode bytes are
+  u`\x<b>C2</b>\x<b>A3</b>` and u`\x<b>33</b>`.
+- The `{.cmd .cmdc}«run_characters»` are therefore
+  u`«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»`.
+- The full placeholder is therefore
+  u`«U+F8FF»«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»«U+F8FF»`.
+==
+
+
 ##{#cmd-attribute-specifications} CMD attribute specifications
 
 --

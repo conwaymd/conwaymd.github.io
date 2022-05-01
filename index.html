@@ -190,6 +190,54 @@ so that the occurrences will not be confounding.
 </details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h2 id="replacement-rule-syntax"><a href="#replacement-rule-syntax" class="permalink" aria-label="Permalink"></a>CMD replacement rule syntax</h2>
+<h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
+<p>
+There are many instances in which the result of a replacement
+should not be altered further by replacements to follow.
+To protect a string from further alteration,
+it is temporarily replaced by a <b>placeholder</b>
+consisting of code points in the main Unicode Private Use Area.
+</p>
+<p>
+Specifically, the placeholder for a string shall be of the following form:
+</p>
+<pre class="cmd cmdc"><code><b>«marker»</b><b>«run_characters»</b><b>«marker»</b>
+</code></pre>
+<ul>
+<li>
+<b><code class="cmd cmdc">«marker»</code></b> is <code>«U+F8FF»</code>.
+</li>
+<li>
+<b><code class="cmd cmdc">«run_characters»</code></b> are between <code>«U+E000»</code> and <code>«U+E0FF»</code>
+each representing a Unicode byte of the string.
+</li>
+</ul>
+<p>
+It is assumed that the user will not define replacement rules that
+tamper with strings of the form
+<code class="cmd cmdc">«marker»«run_characters»«marker»</code>.
+</p>
+<h3>Example</h3>
+<ul>
+<li>
+Consider the string <code class="cmd cmdc">£3</code>.
+</li>
+<li>
+Its code points are <code>U+00A3</code> and <code>U+0033</code>.
+</li>
+<li>
+The corresponding Unicode bytes are
+<code>\x<b>C2</b>\x<b>A3</b></code> and <code>\x<b>33</b></code>.
+</li>
+<li>
+The <code class="cmd cmdc">«run_characters»</code> are therefore
+<code>«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»</code>.
+</li>
+<li>
+The full placeholder is therefore
+<code>«U+F8FF»«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»«U+F8FF»</code>.
+</li>
+</ul>
 <h2 id="cmd-attribute-specifications"><a href="#cmd-attribute-specifications" class="permalink" aria-label="Permalink"></a>CMD attribute specifications</h2>
 <p>
 When a CMD replacement rule is defined with
