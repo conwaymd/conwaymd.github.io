@@ -1007,6 +1007,37 @@ However, they might be called by queued replacements.
   `{.cmd .cmdc} @(-)@`, `{.cmd .cmdc} @(+)@`, or `{.cmd .cmdc} @(*)@`.
   --
 }}
+{{dep
+  ==
+  - [`#unordered-lists`]
+  ==
+}}
+
+####{#ordered-list-items} `#ordered-list-items`
+[`#ordered-list-items`]: #ordered-list-items
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #ordered-list-items
+  - starting_pattern: [0-9]+ [.]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #prepend-newline
+  - ending_pattern: [0-9]+ [.]
+  - tag_name: li
+  ``
+}}
+{{des
+  --
+  Partitions content into list items based on leading occurrences of
+  a run of digits followed by a full stop.
+  --
+}}
+{{dep
+  ==
+  - [`#ordered-lists`]
+  ==
+}}
 
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
