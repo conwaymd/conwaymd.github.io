@@ -297,6 +297,32 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#escape-html} `#escape-html`
+[`#escape-html`]: #escape-html
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #escape-html
+  - negative_flag: KEEP_HTML_UNESCAPED
+  - apply_mode: SIMULTANEOUS
+  * & --> &amp;
+  * < --> &lt;
+  * > --> &gt;
+  ``
+}}
+{{des
+  --
+  Escapes `&`, ` < `, and ` > ` as their respective HTML ampersand entities.
+  --
+}}
+{{dep
+  ==
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
