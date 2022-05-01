@@ -232,13 +232,12 @@ However, they might be called by queued replacements.
 
 ###{#standard-queued-replacements} Standard queued replacements
 
-####{#placeholder-markers} `#placeholder-markers`
+####{#placeholder-markers} 0. `#placeholder-markers`
 
 {{`
   PlaceholderMarkerReplacement: #placeholder-markers
   - queue_position: ROOT
 }}
-
 {{
   / Description /
   --
@@ -250,6 +249,18 @@ However, they might be called by queued replacements.
 
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
+
+####{#placeholder-protect} `#placeholder-protect`
+
+{{`
+  PlaceholderProtectionReplacement: #placeholder-protect
+}}
+{{
+  / Description /
+  --
+  Protects a string with a [placeholder](#cmd-placeholders).
+  --
+}}
 
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
