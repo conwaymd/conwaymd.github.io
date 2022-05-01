@@ -1187,7 +1187,7 @@ Adds a newline at the very start of a string.
 <a href="#table-head"><code>#table-head</code></a>
 </li>
 <li>
-[<code>#table-body</code>]
+<a href="#table-body"><code>#table-body</code></a>
 </li>
 <li>
 [<code>#table-foot</code>]
@@ -1395,7 +1395,7 @@ based on leading occurrences of <code class="cmd cmdc"><b>//</b></code>.
 <a href="#table-head"><code>#table-head</code></a>
 </li>
 <li>
-[<code>#table-body</code>]
+<a href="#table-body"><code>#table-body</code></a>
 </li>
 <li>
 [<code>#table-foot</code>]
@@ -1424,6 +1424,35 @@ based on leading occurrences of <code class="cmd cmdc"><b>//</b></code>.
 Partitions content into table heads
 based on leading occurrences of <code class="cmd cmdc"><b>|^</b></code>
 up to the next leading <code class="cmd cmdc"><b>|:</b></code> or <code class="cmd cmdc"><b>|_</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+[<code>#tables</code>]
+</li>
+</ul>
+</details>
+<h4 id="table-body"><a href="#table-body" class="permalink" aria-label="Permalink"></a><code>#table-body</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #table-body
+- starting_pattern: [|][:]
+- attribute_specifications: EMPTY
+- ending_pattern: [|][_]
+- content_replacements:
+    #table-rows
+    #prepend-newline
+- tag_name: tbody
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into table heads
+based on leading occurrences of <code class="cmd cmdc"><b>|:</b></code>
+up to the next leading <code class="cmd cmdc"><b>|_</b></code>.
 </p>
 </details>
 <details>
