@@ -575,16 +575,6 @@ However, they might be called by queued replacements.
       «content»
     @(||)@
   ````
-  u````{.cmd .cmdc}
-    «flags»@(||)@
-      «content»
-    @(||)@
-  ````
-  u````{.cmd .cmdc}
-    «flags»@(||)@{«attribute specifications»}
-      «content»
-    @(||)@
-  ````
   ====
   - The number of pipes ``{.cmd .cmdc} | `` may be increased arbitrarily.
   - `{.cmd .cmdc} «attribute specifications»`:
