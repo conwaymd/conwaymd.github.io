@@ -460,6 +460,83 @@ However, they might be called by queued replacements.
   ++
 }}
 
+####{#comments} 3. `#comments`
+[`#comments`]: #comments
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #comments
+  - queue_position: AFTER #display-code
+  * [^\S\n]*
+    [<]
+      (?P<hashes> [#]+ )
+        [\s\S]*?
+      (?P=hashes)
+    [>]
+      -->
+  ``
+}}
+{{syn
+  u````{.cmd .cmdc}
+    <b>&lt;</b><b>#</b> «content» <b>#</b><b>&gt;</b>
+  ````
+  ====
+  - The number of hashes ``{.cmd .cmdc} # `` may be increased arbitrarily.
+  ====
+}}
+{{des
+  --
+  Remove CMD comments, along with all preceding whitespace.
+  --
+}}
+{{ex
+  ++
+  1.
+    [`#display-code`] prevails over `#comments`:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ``
+          Before.
+          <# This be a comment. #>
+          After.
+        ``
+      ````
+    - HTML:
+      <||
+        ``
+          Before.
+          <# This be a comment. #>
+          After.
+        ``
+      ||>
+    - Rendered:
+        ``
+          Before.
+          <# This be a comment. #>
+          After.
+        ``
+    ==
+  1.
+    `#comments` prevail over [`#inline-code`]:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` `Before. <# This be a comment. #> After.` ``> ``
+    - HTML: <| `Before. <# This be a comment. #> After.` |>
+    - Rendered: `Before. <# This be a comment. #> After.`
+    ==
+  1.
+    Use [`#literals`] to make [`#inline-code`] prevail over `#comments`:
+    ==
+    - CMD:
+      ``{.cmd .cmdc} <`` ` <`Before. <# This be a comment. #> After.`> ` ``> ``
+    - HTML:
+        <|| ` <`Before. <# This be a comment. #> After.`> ` ||>
+    - Rendered:
+        ` <`Before. <# This be a comment. #> After.`> `
+    ==
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

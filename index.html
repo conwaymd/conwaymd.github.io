@@ -418,6 +418,101 @@ Rendered:
 </li>
 </ol>
 </details>
+<h4 id="comments"><a href="#comments" class="permalink" aria-label="Permalink"></a>3. <code>#comments</code></h4>
+<details>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #comments
+- queue_position: AFTER #display-code
+* [^\S\n]*
+  [&lt;]
+    (?P&lt;hashes&gt; [#]+ )
+      [\s\S]*?
+    (?P=hashes)
+  [&gt;]
+    --&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>&lt;</b><b>#</b> «content» <b>#</b><b>&gt;</b>
+</code></pre>
+<ul>
+<li>
+The number of hashes <code class="cmd cmdc">#</code> may be increased arbitrarily.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Remove CMD comments, along with all preceding whitespace.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+<a href="#display-code"><code>#display-code</code></a> prevails over <code>#comments</code>:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>``
+  Before.
+  &lt;# This be a comment. #&gt;
+  After.
+``
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;pre&gt;&lt;code&gt;Before.
+&amp;lt;# This be a comment. #&amp;gt;
+After.
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<pre><code>Before.
+&lt;# This be a comment. #&gt;
+After.
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<code>#comments</code> prevail over [<code>#inline-code</code>]:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`Before. &lt;# This be a comment. #&gt; After.`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;Before. After.&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>Before. After.</code>
+</li>
+</ul>
+</li>
+<li>
+Use <a href="#literals"><code>#literals</code></a> to make [<code>#inline-code</code>] prevail over <code>#comments</code>:
+<ul>
+<li>
+CMD:
+<code class="cmd cmdc">` &lt;`Before. &lt;# This be a comment. #&gt; After.`&gt; `</code>
+</li>
+<li>
+HTML:
+<code class="html">&lt;code&gt;Before. &amp;lt;# This be a comment. #&amp;gt; After.&lt;/code&gt;</code>
+</li>
+<li>
+Rendered:
+<code>Before. &lt;# This be a comment. #&gt; After.</code>
+</li>
+</ul>
+</li>
+</ol>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details>
