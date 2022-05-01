@@ -1227,6 +1227,106 @@ However, they might be called by queued replacements.
   ++
 }}
 
+####{#paragraphs} 10. `#paragraphs`
+[`#paragraphs`]: #paragraphs
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #paragraphs
+  - queue_position: AFTER #headings
+  - syntax_type: BLOCK
+  - extensible_delimiter: --
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  - content_replacements:
+      #prepend-newline
+  - tag_name: p
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(--)@
+    «content»
+    @(--)@
+  ````
+  ````{.cmd .cmdc}
+    @(--)@{«attribute specifications»}
+    «content»
+    @(--)@
+  ````
+  ====
+  - The number of hyphens ``{.cmd .cmdc} @(-)@ `` may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a paragraph:
+  --
+  ````{.html}
+    @(<p)@«attribute sequence»@(>)@
+    «content»
+    @(</p>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Paragraph:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        --
+        The quick brown fox etc. etc.
+        --
+      ````
+    - HTML:
+      <||
+        --
+        The quick brown fox etc. etc.
+        --
+      ||>
+    - Rendered:
+        --
+        The quick brown fox etc. etc.
+        --
+    ==
+  1.
+    Paragraphs cannot be nested:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ----
+        Before.
+        --
+        Not a nested paragraph.
+        --
+        After.
+        ----
+      ````
+    - HTML:
+      <||
+        ----
+        Before.
+        --
+        Not a nested paragraph.
+        --
+        After.
+        ----
+      ||>
+    - Rendered:
+        ----
+        Before.
+        --
+        Not a nested paragraph.
+        --
+        After.
+        ----
+    ==
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

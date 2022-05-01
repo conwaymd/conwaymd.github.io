@@ -1327,6 +1327,117 @@ This line is not a continuation due to insufficient indentation.
 </li>
 </ol>
 </details>
+<h4 id="paragraphs"><a href="#paragraphs" class="permalink" aria-label="Permalink"></a>10. <code>#paragraphs</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #paragraphs
+- queue_position: AFTER #headings
+- syntax_type: BLOCK
+- extensible_delimiter: --
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+- content_replacements:
+    #prepend-newline
+- tag_name: p
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>--</b>
+«content»
+<b>--</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>--</b>{«attribute specifications»}
+«content»
+<b>--</b>
+</code></pre>
+<ul>
+<li>
+The number of hyphens <code class="cmd cmdc"><b>-</b></code> may be increased arbitrarily.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a paragraph:
+</p>
+<pre class="html"><code><b>&lt;p</b>«attribute sequence»<b>&gt;</b>
+«content»
+<b>&lt;/p&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Paragraph:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>--
+The quick brown fox etc. etc.
+--
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;p&gt;
+The quick brown fox etc. etc.
+&lt;/p&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+The quick brown fox etc. etc.
+</p>
+</li>
+</ul>
+</li>
+<li>
+Paragraphs cannot be nested:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>----
+Before.
+--
+Not a nested paragraph.
+--
+After.
+----
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;p&gt;
+Before.
+--
+Not a nested paragraph.
+--
+After.
+&lt;/p&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+Before.
+--
+Not a nested paragraph.
+--
+After.
+</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details open>
@@ -1575,7 +1686,7 @@ Adds a newline at the very start of a string.
 <a href="#tables"><code>#tables</code></a>
 </li>
 <li>
-[<code>#paragraphs</code>]
+<a href="#paragraphs"><code>#paragraphs</code></a>
 </li>
 </ul>
 </details>
