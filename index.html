@@ -948,6 +948,259 @@ One
 </li>
 </ol>
 </details>
+<h4 id="tables"><a href="#tables" class="permalink" aria-label="Permalink"></a>8. <code>#tables</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #tables
+- queue_position: AFTER #ordered-lists
+- syntax_type: BLOCK
+- extensible_delimiter: ''
+- attribute_specifications: EMPTY
+- content_replacements:
+    #tables
+    #table-head
+    #table-body
+    #table-foot
+    #table-rows
+    #prepend-newline
+- tag_name: table
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>''</b>
+<b>|^</b> «item»
+  <b>//</b> «item»
+    <b>;</b> «item»
+    <b>,</b> «item»
+    «...»
+  «...»
+<b>|:</b> «item»
+  «...»
+<b>|_</b> «item»
+  «...»
+<b>''</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>''</b>
+<b>//</b> «item»
+  <b>;</b> «item»
+  <b>,</b> «item»
+  «...»
+«...»
+<b>''</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>''</b>{«attribute specifications»}
+«...»
+<b>''</b>
+</code></pre>
+<ul>
+<li>
+The number of single-quotes <code class="cmd cmdc"><b>'</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+Table parts:
+<ul>
+<li>
+<code class="cmd cmdc"><b>|^</b></code> for table head, see <a href="#table-head"><code>#table-head</code></a>.
+</li>
+<li>
+<code class="cmd cmdc"><b>|:</b></code> for table body, see <a href="#table-body"><code>#table-body</code></a>.
+</li>
+<li>
+<code class="cmd cmdc"><b>|:</b></code> for table foot, see <a href="#table-foot"><code>#table-foot</code></a>.
+</li>
+</ul>
+</li>
+<li>
+Table cells:
+<ul>
+<li>
+<code class="cmd cmdc"><b>;</b></code> for table headers, see <a href="#table-headers"><code>#table-headers</code></a>.
+</li>
+<li>
+<code class="cmd cmdc"><b>,</b></code> for table data, see <a href="#table-data"><code>#table-data</code></a>.
+</li>
+</ul>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a table:
+</p>
+<pre class="html"><code><b>&lt;table</b>«attribute sequence»<b>&gt;</b>
+«...»
+<b>&lt;/table&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Table without parts:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>''
+//
+  ; A
+  , 1
+//
+  ; B
+  , 2
+''
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;A&lt;/th&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;B&lt;/th&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<table>
+<tr>
+<th>A</th>
+<td>1</td>
+</tr>
+<tr>
+<th>B</th>
+<td>2</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+<li>
+Table with head and body:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>''
+|^
+  //
+    ; A
+    ; B
+|:
+  //
+    , 1
+    , 2
+  //
+    , First
+    , Second
+''
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;A&lt;/th&gt;
+&lt;th&gt;B&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;First&lt;/td&gt;
+&lt;td&gt;Second&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>First</td>
+<td>Second</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+Cell merging
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>''
+//
+  ,{c3} 3*1
+  , 14
+//
+  , 21
+  , 22
+  , 23
+  , 24
+//
+  ,{rowspan=2 colspan="2"} 2*2
+  , 33
+  ,{r2} 2*1
+//
+  , 43
+''
+</code></pre>
+</li>
+<li>
+Rendered
+<table>
+<tr>
+<td colspan="3">3*1</td>
+<td>14</td>
+</tr>
+<tr>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+</tr>
+<tr>
+<td rowspan="2" colspan="2">2*2</td>
+<td>33</td>
+<td rowspan="2">2*1</td>
+</tr>
+<tr>
+<td>43</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+</ol>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details open>
@@ -1193,7 +1446,7 @@ Adds a newline at the very start of a string.
 <a href="#table-foot"><code>#table-foot</code></a>
 </li>
 <li>
-[<code>#tables</code>]
+<a href="#tables"><code>#tables</code></a>
 </li>
 <li>
 [<code>#paragraphs</code>]
@@ -1401,7 +1654,7 @@ based on leading occurrences of <code class="cmd cmdc"><b>//</b></code>.
 <a href="#table-foot"><code>#table-foot</code></a>
 </li>
 <li>
-[<code>#tables</code>]
+<a href="#tables"><code>#tables</code></a>
 </li>
 </ul>
 </details>
@@ -1430,7 +1683,7 @@ up to the next leading <code class="cmd cmdc"><b>|:</b></code> or <code class="c
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#tables</code>]
+<a href="#tables"><code>#tables</code></a>
 </li>
 </ul>
 </details>
@@ -1459,7 +1712,7 @@ up to the next leading <code class="cmd cmdc"><b>|_</b></code>.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#tables</code>]
+<a href="#tables"><code>#tables</code></a>
 </li>
 </ul>
 </details>
@@ -1486,7 +1739,7 @@ based on leading occurrences of <code class="cmd cmdc"><b>|_</b></code>.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#tables</code>]
+<a href="#tables"><code>#tables</code></a>
 </li>
 </ul>
 </details>

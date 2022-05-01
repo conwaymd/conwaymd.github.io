@@ -911,6 +911,213 @@ However, they might be called by queued replacements.
   ++++++++
 }}
 
+####{#tables} 8. `#tables`
+[`#tables`]: #tables
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #tables
+  - queue_position: AFTER #ordered-lists
+  - syntax_type: BLOCK
+  - extensible_delimiter: ''
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #tables
+      #table-head
+      #table-body
+      #table-foot
+      #table-rows
+      #prepend-newline
+  - tag_name: table
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @('')@
+    @(|^)@ «item»
+      @(//)@ «item»
+        @(;)@ «item»
+        @(,)@ «item»
+        «...»
+      «...»
+    @(|:)@ «item»
+      «...»
+    @(|_)@ «item»
+      «...»
+    @('')@
+  ````
+  ````{.cmd .cmdc}
+    @('')@
+    @(//)@ «item»
+      @(;)@ «item»
+      @(,)@ «item»
+      «...»
+    «...»
+    @('')@
+  ````
+  ````{.cmd .cmdc}
+    @('')@{«attribute specifications»}
+    «...»
+    @('')@
+  ````
+  ====
+  - The number of single-quotes ``{.cmd .cmdc} @(')@ ``
+    may be increased arbitrarily.
+  - Table parts:
+    ==
+    - `{.cmd .cmdc} @(|^)@` for table head, see [`#table-head`].
+    - `{.cmd .cmdc} @(|:)@` for table body, see [`#table-body`].
+    - `{.cmd .cmdc} @(|:)@` for table foot, see [`#table-foot`].
+    ==
+  - Table cells:
+    ==
+    - `{.cmd .cmdc} @(;)@` for table headers, see [`#table-headers`].
+    - `{.cmd .cmdc} @(,)@` for table data, see [`#table-data`].
+    ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a table:
+  --
+  ````{.html}
+    @(<table)@«attribute sequence»@(>)@
+    «...»
+    @(</table>)@
+  ````
+}}
+{{ex
+  ++++++++
+  1.
+    Table without parts:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ''
+        //
+          ; A
+          , 1
+        //
+          ; B
+          , 2
+        ''
+      ````
+    - HTML:
+      <||
+        ''
+        //
+          ; A
+          , 1
+        //
+          ; B
+          , 2
+        ''
+      ||>
+    - Rendered:
+        ''
+        //
+          ; A
+          , 1
+        //
+          ; B
+          , 2
+        ''
+    ==
+  1.
+    Table with head and body:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ''
+        |^
+          //
+            ; A
+            ; B
+        |:
+          //
+            , 1
+            , 2
+          //
+            , First
+            , Second
+        ''
+      ````
+    - HTML:
+      <||
+        ''
+        |^
+          //
+            ; A
+            ; B
+        |:
+          //
+            , 1
+            , 2
+          //
+            , First
+            , Second
+        ''
+      ||>
+    - Rendered:
+        ''
+        |^
+          //
+            ; A
+            ; B
+        |:
+          //
+            , 1
+            , 2
+          //
+            , First
+            , Second
+        ''
+    ==
+  1.
+    Cell merging
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ''
+        //
+          ,{c3} 3*1
+          , 14
+        //
+          , 21
+          , 22
+          , 23
+          , 24
+        //
+          ,{rowspan=2 colspan="2"} 2*2
+          , 33
+          ,{r2} 2*1
+        //
+          , 43
+        ''
+      ````
+    - Rendered
+        ''
+        //
+          ,{c3} 3*1
+          , 14
+        //
+          , 21
+          , 22
+          , 23
+          , 24
+        //
+          ,{rowspan=2 colspan="2"} 2*2
+          , 33
+          ,{r2} 2*1
+        //
+          , 43
+        ''
+    ==
+  ++++++++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
