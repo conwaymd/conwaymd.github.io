@@ -52,8 +52,11 @@ pre {
   padding: 0.5em;
 }
 
-summary {
-  font-weight: bold;
+summary::before {
+  content: '[';
+}
+summary::after {
+  content: ']';
 }
 
 .cmd {
