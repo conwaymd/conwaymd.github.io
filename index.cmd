@@ -347,6 +347,36 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#reduce-whitespace} `#reduce-whitespace`
+[`#reduce-whitespace`]: #reduce-whitespace
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #reduce-whitespace
+  - positive_flag: REDUCE_WHITESPACE
+  * ^ [^\S\n]+ -->
+  * [^\S\n]+ $ -->
+  * [\s]+ (?= <br> ) -->
+  * [\n]+ --> \n
+  ``
+}}
+{{des
+  ++
+  1. Removes leading horizontal whitespace on each line.
+  1. Removes trailing horizontal whitespace on each line.
+  1. Removes whitespace before `<br>` elements.
+  1. Collapsed multiple consecutive newlines into a single newline.
+  ++
+}}
+{{dep
+  ==
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
+  - [`#boilerplate-protect`]
+  - [`#whitespace`]
+  ==
+}}
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
