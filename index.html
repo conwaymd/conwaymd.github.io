@@ -285,6 +285,37 @@ Escapes <code>&amp;</code>, <code>&lt;</code>, and <code>&gt;</code> as their re
 </li>
 </ul>
 </details>
+<h4 id="trim-whitespace"><a href="#trim-whitespace" class="permalink" aria-label="Permalink"></a><code>#trim-whitespace</code></h4>
+<details>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #trim-whitespace
+* \A [\s]* --&gt;
+* [\s]* \Z --&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Removes whitespace at the very start and very end of the string.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+[<code>#literals</code>]
+</li>
+<li>
+[<code>#table-headers</code>]
+</li>
+<li>
+[<code>#table-data</code>]
+</li>
+<li>
+[<code>#inline-code</code>]
+</li>
+</ul>
+</details>
 <h2 id="replacement-rule-syntax"><a href="#replacement-rule-syntax" class="permalink" aria-label="Permalink"></a>CMD replacement rule syntax</h2>
 <h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
 <p>

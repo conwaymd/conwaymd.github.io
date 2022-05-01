@@ -323,6 +323,30 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#trim-whitespace} `#trim-whitespace`
+[`#trim-whitespace`]: #trim-whitespace
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #trim-whitespace
+  * \A [\s]* -->
+  * [\s]* \Z -->
+  ``
+}}
+{{des
+  --
+  Removes whitespace at the very start and very end of the string.
+  --
+}}
+{{dep
+  ==
+  - [`#literals`]
+  - [`#table-headers`]
+  - [`#table-data`]
+  - [`#inline-code`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
