@@ -278,11 +278,6 @@ However, they might be called by queued replacements.
   - epilogue_delimiter: >
   ``
 }}
-{{des
-  --
-  Preserves content literally.
-  --
-}}
 {{syn
   u``{.cmd .cmdc}
   «flags»<b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
@@ -296,6 +291,11 @@ However, they might be called by queued replacements.
     ==
   - The number of backticks may be increased arbitrarily.
   ====
+}}
+{{des
+  --
+  Preserves `{.cmd .cmdc} «content»` literally.
+  --
 }}
 {{ex
   ++
