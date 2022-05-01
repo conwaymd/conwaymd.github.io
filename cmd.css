@@ -7,7 +7,7 @@
 
 details > :not(summary) {
   margin-top: 0.2em;
-  margin-left: 2em;
+  margin-left: 1em;
 }
 
 a {
