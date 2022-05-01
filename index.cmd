@@ -822,7 +822,8 @@ However, they might be called by queued replacements.
   ====
   - The number of plus signs ``{.cmd .cmdc} @(+)@ ``
     may be increased arbitrarily.
-  - The item delimiter may be any run of digits followed by a full stop,
+  - The item delimiter may be any __run of digits__
+    followed by a __full stop__,
     see [`#ordered-list-items`].
   - `{.cmd .cmdc} «attribute specifications»`:
     see [CMD attribute specifications].
@@ -1136,7 +1137,7 @@ However, they might be called by queued replacements.
 {{des
   --
   Partitions content into list items based on leading occurrences of
-  a run of digits followed by a full stop.
+  a __run of digits__ followed by a __full stop__.
   --
 }}
 {{dep
@@ -1168,6 +1169,35 @@ However, they might be called by queued replacements.
 {{dep
   ==
   - [`#table-headers`]
+  ==
+}}
+
+####{#table-headers} `#table-headers`
+[`#table-headers`]: #table-headers
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-headers
+  - starting_pattern: [;]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #trim-whitespace
+  - ending_pattern: [;,]
+  - tag_name: th
+  - concluding_replacements:
+      #mark-table-headers-for-preceding-table-data
+  ``
+}}
+{{des
+  --
+  Partitions content into table-headers
+  based on leading occurrences of `{.cmd .cmdc} @(;)@`
+  up to the next leading `{.cmd .cmdc} @(;)@` or `{.cmd .cmdc} @(,)@`.
+  --
+}}
+{{dep
+  ==
+  - [`#table-rows`]
   ==
 }}
 
