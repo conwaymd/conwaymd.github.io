@@ -315,7 +315,8 @@ However, they might be called by queued replacements.
     - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
     - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
     ==
-  - The number of backticks ``{.cmd .cmdc} ` `` may be increased arbitrarily.
+  - The number of backticks ``{.cmd .cmdc} @(`)@ ``
+    may be increased arbitrarily.
   ====
 }}
 {{des
@@ -401,14 +402,15 @@ However, they might be called by queued replacements.
     - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
     - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
     ==
-  - The number of backticks ``{.cmd .cmdc} ` `` may be increased arbitrarily.
+  - The number of backticks ``{.cmd .cmdc} @(`)@ ``
+    may be increased arbitrarily.
   - `{.cmd .cmdc} «attribute specifications»`:
     see [CMD attribute specifications].
   ====
 }}
 {{des
   --
-  Produces pre-formatted code:
+  Produces (pre-formatted) display code:
   --
   ````{.html}
     @(<pre)@«attribute sequence»@(><code>)@«content»
@@ -492,7 +494,7 @@ However, they might be called by queued replacements.
     @(<)@@(#)@ «content» @(#)@@(>)@
   ````
   ====
-  - The number of hashes ``{.cmd .cmdc} # `` may be increased arbitrarily.
+  - The number of hashes ``{.cmd .cmdc} @(#)@ `` may be increased arbitrarily.
   ====
 }}
 {{des
@@ -576,14 +578,14 @@ However, they might be called by queued replacements.
     @(||)@
   ````
   ====
-  - The number of pipes ``{.cmd .cmdc} | `` may be increased arbitrarily.
+  - The number of pipes ``{.cmd .cmdc} @(|)@ `` may be increased arbitrarily.
   - `{.cmd .cmdc} «attribute specifications»`:
     see [CMD attribute specifications].
   ====
 }}
 {{des
   --
-  Produces a division.
+  Produces a division:
   --
   ````{.html}
     @(<div)@«attribute sequence»@(>)@
@@ -627,6 +629,71 @@ However, they might be called by queued replacements.
             This be a division.
           ||
         ||||
+      ||>
+    ==
+  ++
+}}
+
+####{#blockquotes} 5. `#blockquotes`
+[`#blockquotes`]: #blockquotes
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #blockquotes
+  - queue_position: AFTER #divisions
+  - syntax_type: BLOCK
+  - extensible_delimiter: ""
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #blockquotes
+      #prepend-newline
+  - tag_name: blockquote
+  ``
+}}
+{{syn
+  u````{.cmd .cmdc}
+    @("")@
+      «content»
+    @("")@
+  ````
+  u````{.cmd .cmdc}
+    @("")@{«attribute specifications»}
+      «content»
+    @("")@
+  ````
+  ====
+  - The number of double-quotes ``{.cmd .cmdc} @(")@ ``
+    may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a blockquote:
+  --
+  ````{.html}
+    @(<blockquote)@«attribute sequence»@(>)@
+    «content»
+    @(</blockquote>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Blockquote:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ""{#test-blockquote-id .test-blockquote-class}
+          This be a blockquote.
+        ""
+      ````
+    - HTML:
+      <||
+        ""{#test-blockquote-id .test-blockquote-class}
+          This be a blockquote.
+        ""
       ||>
     ==
   ++

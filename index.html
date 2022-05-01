@@ -231,7 +231,8 @@ so that the occurrences will not be confounding.
 </ul>
 </li>
 <li>
-The number of backticks <code class="cmd cmdc">`</code> may be increased arbitrarily.
+The number of backticks <code class="cmd cmdc"><b>`</b></code>
+may be increased arbitrarily.
 </li>
 </ul>
 </details>
@@ -344,7 +345,8 @@ Rendered: Literally &lt;`literal`&gt;.
 </ul>
 </li>
 <li>
-The number of backticks <code class="cmd cmdc">`</code> may be increased arbitrarily.
+The number of backticks <code class="cmd cmdc"><b>`</b></code>
+may be increased arbitrarily.
 </li>
 <li>
 <code class="cmd cmdc">«attribute specifications»</code>:
@@ -355,7 +357,7 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <details open>
 <summary>Description</summary>
 <p>
-Produces pre-formatted code:
+Produces (pre-formatted) display code:
 </p>
 <pre class="html"><code><b>&lt;pre</b>«attribute sequence»<b>&gt;&lt;code&gt;</b>«content»
 <b>&lt;/code&gt;&lt;/pre&gt;</b>
@@ -441,7 +443,7 @@ Rendered:
 </code></pre>
 <ul>
 <li>
-The number of hashes <code class="cmd cmdc">#</code> may be increased arbitrarily.
+The number of hashes <code class="cmd cmdc"><b>#</b></code> may be increased arbitrarily.
 </li>
 </ul>
 </details>
@@ -542,7 +544,7 @@ Rendered:
 </code></pre>
 <ul>
 <li>
-The number of pipes <code class="cmd cmdc">|</code> may be increased arbitrarily.
+The number of pipes <code class="cmd cmdc"><b>|</b></code> may be increased arbitrarily.
 </li>
 <li>
 <code class="cmd cmdc">«attribute specifications»</code>:
@@ -553,7 +555,7 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <details open>
 <summary>Description</summary>
 <p>
-Produces a division.
+Produces a division:
 </p>
 <pre class="html"><code><b>&lt;div</b>«attribute sequence»<b>&gt;</b>
 «content»
@@ -601,6 +603,75 @@ HTML:
 This be a division.
 &lt;/div&gt;
 &lt;/div&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="blockquotes"><a href="#blockquotes" class="permalink" aria-label="Permalink"></a>5. <code>#blockquotes</code></h4>
+<details>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #blockquotes
+- queue_position: AFTER #divisions
+- syntax_type: BLOCK
+- extensible_delimiter: ""
+- attribute_specifications: EMPTY
+- content_replacements:
+    #blockquotes
+    #prepend-newline
+- tag_name: blockquote
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>""</b>
+  «content»
+<b>""</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>""</b>{«attribute specifications»}
+  «content»
+<b>""</b>
+</code></pre>
+<ul>
+<li>
+The number of double-quotes <code class="cmd cmdc"><b>"</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a blockquote:
+</p>
+<pre class="html"><code><b>&lt;blockquote</b>«attribute sequence»<b>&gt;</b>
+«content»
+<b>&lt;/blockquote&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Blockquote:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>""{#test-blockquote-id .test-blockquote-class}
+  This be a blockquote.
+""
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;blockquote id="test-blockquote-id" class="test-blockquote-class"&gt;
+This be a blockquote.
+&lt;/blockquote&gt;
 </code></pre>
 </li>
 </ul>
@@ -825,7 +896,7 @@ Adds a newline at the very start of a string.
 <a href="#divisions"><code>#divisions</code></a>
 </li>
 <li>
-[<code>#blockquotes</code>]
+<a href="#blockquotes"><code>#blockquotes</code></a>
 </li>
 <li>
 [<code>#unordered-list-items</code>]
