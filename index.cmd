@@ -882,6 +882,27 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#unordered-list-items} `#unordered-list-items`
+[`#unordered-list-items`]: #unordered-list-items
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #unordered-list-items
+  - starting_pattern: [-+*]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #prepend-newline
+  - ending_pattern: [-+*]
+  - tag_name: li
+  ``
+}}
+{{des
+  --
+  Partitions content into list items based on leading occurrences of
+  `{.cmd .cmdc} @(-)@`, `{.cmd .cmdc} @(+)@`, `{.cmd .cmdc} @(*)@`.
+  --
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
