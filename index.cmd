@@ -15,6 +15,33 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
     <meta name="theme-color" content="#ffffff">
 * %title --> Conway-Markdown (CMD) v%cmd-version
 
+RegexDictionaryReplacement: #definition-details-content
+* \A --> {{{-open}\n / Definition / \n``{.cmd .cmdr}\n
+* \Z --> ``\n }} \n
+
+FixedDelimitersReplacement: #definition-details
+- queue_position: BEFORE #display-code
+- syntax_type: BLOCK
+- opening_delimiter: {{`
+- content_replacements:
+    #definition-details-content
+- closing_delimiter: }}
+
+RegexDictionaryReplacement: #summary
+* [/][^\S\n]* (?P<summary> [^\n]+ ) [^\S\n]*[/] -->
+    <summary>\g<summary></summary>
+
+FixedDelimitersReplacement: #details
+- queue_position: BEFORE #whitespace
+- syntax_type: BLOCK
+- opening_delimiter: {{
+- attribute_specifications: open
+- content_replacements:
+    #prepend-newline
+    #summary
+- closing_delimiter: }}
+- tag_name: details
+
 RegexDictionaryReplacement: #heading-permalinks
 - queue_position: BEFORE #headings
 * (?P<opening_hashes_etc>
@@ -204,6 +231,23 @@ However, they might be called by queued replacements.
 --
 
 ###{#standard-queued-replacements} Standard queued replacements
+
+####{#placeholder-markers} `#placeholder-markers`
+
+{{`
+  PlaceholderMarkerReplacement: #placeholder-markers
+  - queue_position: ROOT
+}}
+
+{{
+  / Description /
+  --
+  Replaces occurrences of the placeholder marker `«U+F8FF»`
+  with a [placeholder](#cmd-placeholders)
+  so that the occurrences will not be confounding.
+  --
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

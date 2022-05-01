@@ -42,6 +42,10 @@ ol, ul {
   padding-left: 1.5em;
 }
 
+details > p {
+  margin-top: 0.2em;
+}
+
 pre {
   border: 1px solid black;
   overflow-x: auto;
