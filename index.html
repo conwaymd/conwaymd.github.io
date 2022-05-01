@@ -1338,6 +1338,34 @@ up to the next leading <code class="cmd cmdc"><b>;</b></code> or <code class="cm
 </li>
 </ul>
 </details>
+<h4 id="unmark-table-headers-for-preceding-table-data">
+<a href="#unmark-table-headers-for-preceding-table-data" class="permalink" aria-label="Permalink"></a><code>#unmark-table-headers-for-preceding-table-data</code></h4>
+<details>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #unmark-table-headers-for-preceding-table-data
+* ^ [;] \{ \} &lt;th (?P&lt;bracket_or_placeholder_marker&gt; [&gt;\uF8FF] )
+    --&gt;
+  &lt;th\g&lt;bracket_or_placeholder_marker&gt;
+# Replaces `;{}&lt;th«attributes_sequence»&gt;` with `&lt;th«attributes_sequence»&gt;`
+# so that #mark-table-headers-for-preceding-table-data is undone.
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Replaces <code class="cmd cmdc">;{}&lt;th«attributes_sequence»&gt;</code>
+with <code class="cmd cmdc">&lt;th«attributes_sequence»&gt;</code>
+so that <a href="#mark-table-headers-for-preceding-table-data"><code>#mark-table-headers-for-preceding-table-data</code></a> is undone.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+[<code>#table-rows</code>]
+</li>
+</ul>
+</details>
 <h2 id="replacement-rule-syntax"><a href="#replacement-rule-syntax" class="permalink" aria-label="Permalink"></a>CMD replacement rule syntax</h2>
 <h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
 <p>
