@@ -16,8 +16,13 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
 * %title --> Conway-Markdown (CMD) v%cmd-version
 
 RegexDictionaryReplacement: #definition-details-content
-* \A --> {{{-open}\n / Definition / \n``{.cmd .cmdr}\n
-* \Z --> ``\n }} \n
+* \A -->
+    {{{-open}
+      <summary>Definition</summary>
+      ``{.cmd .cmdr}\n
+* \Z -->
+      ``
+    }} \n
 
 FixedDelimitersReplacement: #definition-details
 - queue_position: BEFORE #display-code
@@ -28,16 +33,14 @@ FixedDelimitersReplacement: #definition-details
 - closing_delimiter: }}
 
 RegexDictionaryReplacement: #summary
-* [/][^\S\n]* (?P<summary> [^\n]+ ) [^\S\n]*[/] -->
-    <summary>\g<summary></summary>
+* \A d --> \n <summary>Description</summary>
 
 FixedDelimitersReplacement: #details
 - queue_position: BEFORE #whitespace
-- syntax_type: BLOCK
+- syntax_type: INLINE
 - opening_delimiter: {{
 - attribute_specifications: open
 - content_replacements:
-    #prepend-newline
     #summary
 - closing_delimiter: }}
 - tag_name: details
@@ -238,8 +241,7 @@ However, they might be called by queued replacements.
   PlaceholderMarkerReplacement: #placeholder-markers
   - queue_position: ROOT
 }}
-{{
-  / Description /
+{{d
   --
   Replaces occurrences of the placeholder marker `«U+F8FF»`
   with a [placeholder]
@@ -255,8 +257,7 @@ However, they might be called by queued replacements.
 {{`
   PlaceholderProtectionReplacement: #placeholder-protect
 }}
-{{
-  / Description /
+{{d
   --
   Protects a string with a [placeholder].
   --
@@ -268,8 +269,7 @@ However, they might be called by queued replacements.
   DeIndentationReplacement: #de-indent
   - negative_flag: KEEP_INDENTED
 }}
-{{
-  / Description /
+{{d
   --
   Removes the longest common indentation in a string.
   --
