@@ -567,12 +567,12 @@ However, they might be called by queued replacements.
   ``
 }}
 {{syn
-  u````{.cmd .cmdc}
+  ````{.cmd .cmdc}
     @(||)@
       «content»
     @(||)@
   ````
-  u````{.cmd .cmdc}
+  ````{.cmd .cmdc}
     @(||)@{«attribute specifications»}
       «content»
     @(||)@
@@ -651,12 +651,12 @@ However, they might be called by queued replacements.
   ``
 }}
 {{syn
-  u````{.cmd .cmdc}
+  ````{.cmd .cmdc}
     @("")@
       «content»
     @("")@
   ````
-  u````{.cmd .cmdc}
+  ````{.cmd .cmdc}
     @("")@{«attribute specifications»}
       «content»
     @("")@
@@ -696,6 +696,111 @@ However, they might be called by queued replacements.
         ""
       ||>
     ==
+  ++
+}}
+
+####{#unordered-lists} 6. `#unordered-lists`
+[`#unordered-lists`]: #unordered-lists
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #unordered-lists
+  - queue_position: AFTER #blockquotes
+  - syntax_type: BLOCK
+  - extensible_delimiter: ==
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #unordered-lists
+      #unordered-list-items
+      #prepend-newline
+  - tag_name: ul
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(==)@
+    @(-)@ «item»
+    «...»
+    @(==)@
+  ````
+  ````{.cmd .cmdc}
+    @(==)@{«attribute specifications»}
+    @(-)@{«attribute specifications»} «item»
+    «...»
+    @(==)@
+  ````
+  ====
+  - The number of equals signs ``{.cmd .cmdc} @(=)@ ``
+    may be increased arbitrarily.
+  - The item delimiter may be
+    `{.cmd .cmdc} @(-)@`, `{.cmd .cmdc} @(+)@`, or `{.cmd .cmdc} @(*)@`,
+    see [`#unordered-list-items`].
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces an unordered list:
+  --
+  ````{.html}
+    @(<ul)@«attribute sequence»@(>)@
+    @(<li>)@
+    «item»
+    @(</li>)@
+    «...»
+    @(</ul>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Nested list:
+    ========
+    - CMD:
+      ````{.cmd .cmdc}
+        ======
+        * A
+          ===={style="background: yellow"}
+          - A1
+          - A2
+          ====
+        - B
+          ====
+          +{style="color: purple"} B1
+          - B2
+          ====
+        ======
+      ````
+    - HTML:
+      <||
+        ======
+        * A
+          ===={style="background: yellow"}
+          - A1
+          - A2
+          ====
+        - B
+          ====
+          +{style="color: purple"} B1
+          - B2
+          ====
+        ======
+      ||>
+    - Rendered:
+        ======
+        * A
+          ===={style="background: yellow"}
+          - A1
+          - A2
+          ====
+        - B
+          ====
+          +{style="color: purple"} B1
+          - B2
+          ====
+        ======
+    ========
   ++
 }}
 
@@ -899,7 +1004,7 @@ However, they might be called by queued replacements.
 {{des
   --
   Partitions content into list items based on leading occurrences of
-  `{.cmd .cmdc} @(-)@`, `{.cmd .cmdc} @(+)@`, `{.cmd .cmdc} @(*)@`.
+  `{.cmd .cmdc} @(-)@`, `{.cmd .cmdc} @(+)@`, or `{.cmd .cmdc} @(*)@`.
   --
 }}
 
@@ -920,8 +1025,8 @@ consisting of code points in the main Unicode Private Use Area.
 --
 Specifically, the placeholder for a string shall be of the following form:
 --
-u``{.cmd .cmdc}
-<b>«marker»</b><b>«run_characters»</b><b>«marker»</b>
+``{.cmd .cmdc}
+@(«marker»)@@(«run_characters»)@@(«marker»)@
 ``
 ==
 - __`{.cmd .cmdc} «marker»`__ is `«U+F8FF»`.
@@ -941,11 +1046,11 @@ tamper with strings of the form
 - Consider the string `{.cmd .cmdc} £3`.
 - Its code points are `U+00A3` and `U+0033`.
 - The corresponding Unicode bytes are
-  u`\x<b>C2</b>\x<b>A3</b>` and u`\x<b>33</b>`.
+  `\x@(C2)@\x@(A3)@` and u`\x@(33)@`.
 - The `{.cmd .cmdc}«run_characters»` are therefore
-  u`«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»`.
+  `«U+E0@(C2)@»«U+E0@(A3)@»«U+E0@(33)@»`.
 - The full placeholder is therefore
-  u`«U+F8FF»«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»«U+F8FF»`.
+  `«U+F8FF»«U+E0@(C2)@»«U+E0@(A3)@»«U+E0@(33)@»«U+F8FF»`.
 ==
 
 
@@ -961,16 +1066,16 @@ enclosed in curly brackets.
 --
 CMD attribute specifications may be of the following forms:
 --
-u``{.cmd .cmdc}
-«name»<b>=</b>"«quoted value (whitespace allowed)»"
-«name»<b>=</b>«bare-value»
-<b>#</b>«id»
-<b>.</b>«class»
-<b>r</b>«rowspan»
-<b>c</b>«colspan»
-<b>w</b>«width»
-<b>h</b>«height»
-<b>-</b>«delete-name»
+``{.cmd .cmdc}
+«name»@(=)@"«quoted value (whitespace allowed)»"
+«name»@(=)@«bare-value»
+@(#)@«id»
+@(.)@«class»
+@(r)@«rowspan»
+@(c)@«colspan»
+@(w)@«width»
+@(h)@«height»
+@(-)@«delete-name»
 «boolean-name»
 ``
 --
