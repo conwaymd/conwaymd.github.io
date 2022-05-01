@@ -15,6 +15,13 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
     <meta name="theme-color" content="#ffffff">
 * %title --> Conway-Markdown (CMD) v%cmd-version
 
+OrdinaryDictionaryReplacement: #bold-code
+- queue_position: BEFORE #display-code
+- apply_mode: SIMULTANEOUS
+* @( --> <b>
+* )@ --> </b>
+- concluding_replacements: #placeholder-protect
+
 OrdinaryDictionaryReplacement: #details-summary-shorthand
 - queue_position: BEFORE #whitespace
 - apply_mode: SIMULTANEOUS
@@ -295,11 +302,11 @@ However, they might be called by queued replacements.
   ``
 }}
 {{syn
-  u````{.cmd .cmdc}
-    <b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
+  ````{.cmd .cmdc}
+    @(<)@@(`)@ «content» @(`)@@(>)@
   ````
-  u````{.cmd .cmdc}
-    «flags»<b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
+  ````{.cmd .cmdc}
+    «flags»@(<)@@(`)@ «content» @(`)@@(>)@
   ````
   ====
   - `{.cmd .cmdc} «flags»`:
@@ -367,25 +374,25 @@ However, they might be called by queued replacements.
   ``
 }}
 {{syn
-  u````{.cmd .cmdc}
-    <b>``</b>
+  ````{.cmd .cmdc}
+    @(``)@
       «content»
-    <b>``</b>
+    @(``)@
   ````
-  u````{.cmd .cmdc}
-    <b>``</b>{«attribute specifications»}
+  ````{.cmd .cmdc}
+    @(``)@{«attribute specifications»}
       «content»
-    <b>``</b>
+    @(``)@
   ````
-  u````{.cmd .cmdc}
-    «flags»<b>``</b>
+  ````{.cmd .cmdc}
+    «flags»@(``)@
       «content»
-    <b>``</b>
+    @(``)@
   ````
-  u````{.cmd .cmdc}
-    «flags»<b>``</b>{«attribute specifications»}
+  ````{.cmd .cmdc}
+    «flags»@(``)@{«attribute specifications»}
       «content»
-    <b>``</b>
+    @(``)@
   ````
   ====
   - `{.cmd .cmdc} «flags»`:
@@ -477,8 +484,8 @@ However, they might be called by queued replacements.
   ``
 }}
 {{syn
-  u````{.cmd .cmdc}
-    <b>&lt;</b><b>#</b> «content» <b>#</b><b>&gt;</b>
+  ````{.cmd .cmdc}
+    @(<)@@(#)@ «content» @(#)@@(>)@
   ````
   ====
   - The number of hashes ``{.cmd .cmdc} # `` may be increased arbitrarily.
@@ -555,24 +562,24 @@ However, they might be called by queued replacements.
 }}
 {{syn
   u````{.cmd .cmdc}
-    <b>||</b>
+    @(||)@
       «content»
-    <b>||</b>
+    @(||)@
   ````
   u````{.cmd .cmdc}
-    <b>||</b>{«attribute specifications»}
+    @(||)@{«attribute specifications»}
       «content»
-    <b>||</b>
+    @(||)@
   ````
   u````{.cmd .cmdc}
-    «flags»<b>||</b>
+    «flags»@(||)@
       «content»
-    <b>||</b>
+    @(||)@
   ````
   u````{.cmd .cmdc}
-    «flags»<b>||</b>{«attribute specifications»}
+    «flags»@(||)@{«attribute specifications»}
       «content»
-    <b>||</b>
+    @(||)@
   ````
   ====
   - The number of pipes ``{.cmd .cmdc} | `` may be increased arbitrarily.
