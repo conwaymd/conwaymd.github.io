@@ -242,7 +242,7 @@ However, they might be called by queued replacements.
   / Description /
   --
   Replaces occurrences of the placeholder marker `«U+F8FF»`
-  with a [placeholder](#cmd-placeholders)
+  with a [placeholder]
   so that the occurrences will not be confounding.
   --
 }}
@@ -258,7 +258,7 @@ However, they might be called by queued replacements.
 {{
   / Description /
   --
-  Protects a string with a [placeholder](#cmd-placeholders).
+  Protects a string with a [placeholder].
   --
 }}
 
@@ -280,6 +280,8 @@ However, they might be called by queued replacements.
 
 
 ##{#cmd-placeholders} CMD placeholders
+
+[placeholder]: #cmd-placeholders
 
 --
 There are many instances in which the result of a replacement
