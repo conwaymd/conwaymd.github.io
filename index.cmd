@@ -189,6 +189,24 @@ read about [CMD replacement rule syntax](#replacement-rule-syntax).
 
 ##{#standard-rules} Standard CMD replacement rules
 
+--
+These section lists standard CMD replacement rules
+as defined by the constant string __`STANDARD_RULES`__ in [`cmd.py`].
+--
+--
+Some replacement rules are [queued](#standard-queued-replacements),
+in that they appear explicitly in the replacement queue.
+--
+--
+Other replacement rules are [unqueued](#standard-unqueued-replacements),
+in that they do not appear explicitly in the replacement queue.
+However, they might be called by queued replacements.
+--
+
+###{#standard-queued-replacements} Standard queued replacements
+
+###{#standard-unqueued-replacements} Standard unqueued replacements
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
