@@ -1288,6 +1288,34 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#table-head} `#table-head`
+[`#table-head`]: #table-head
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-head
+  - starting_pattern: [|][\^]
+  - attribute_specifications: EMPTY
+  - ending_pattern: [|][:_]
+  - content_replacements:
+      #table-rows
+      #prepend-newline
+  - tag_name: thead
+  ``
+}}
+{{des
+  --
+  Partitions content into table heads
+  based on leading occurrences of `{.cmd .cmdc} @(|^)@`
+  up to the next leading `{.cmd .cmdc} @(|:)@` or `{.cmd .cmdc} @(|_)@`.
+  --
+}}
+{{dep
+  ==
+  - [`#tables`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
