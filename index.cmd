@@ -262,6 +262,19 @@ However, they might be called by queued replacements.
   --
 }}
 
+####{#de-indent} `#de-indent`
+
+{{`
+  DeIndentationReplacement: #de-indent
+  - negative_flag: KEEP_INDENTED
+}}
+{{
+  / Description /
+  --
+  Removes the longest common indentation in a string.
+  --
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
