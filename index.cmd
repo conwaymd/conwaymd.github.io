@@ -177,6 +177,21 @@ In the implementation:
    to convert it to HTML.
 ++
 
+--
+To get started with writing __`{.cmd .cmdc} «main content»`__,
+read the listing of [standard CMD replacement rules](#standard-rules).
+--
+--
+To learn about writing user-defined __`{.cmd .cmdr} «replacement rules»`__,
+read about [CMD replacement rule syntax](#replacement-rule-syntax).
+--
+
+
+##{#standard-rules} Standard CMD replacement rules
+
+
+##{#replacement-rule-syntax} CMD replacement rule syntax
+
 
 ##{#cmd-attribute-specifications} CMD attribute specifications
 
