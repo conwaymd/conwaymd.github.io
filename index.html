@@ -188,6 +188,105 @@ with a <a href="#cmd-placeholders">placeholder</a>
 so that the occurrences will not be confounding.
 </p>
 </details>
+<h4 id="literals"><a href="#literals" class="permalink" aria-label="Permalink"></a>1. <code>#literals</code></h4>
+<details>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #literals
+- queue_position: AFTER #placeholder-markers
+- syntax_type: INLINE
+- allowed_flags:
+    u=KEEP_HTML_UNESCAPED
+    i=KEEP_INDENTED
+    w=REDUCE_WHITESPACE
+- prologue_delimiter: &lt;
+- extensible_delimiter: `
+- content_replacements:
+    #escape-html
+    #de-indent
+    #trim-whitespace
+    #reduce-whitespace
+    #placeholder-protect
+- epilogue_delimiter: &gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Preserves content literally.
+</p>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code>«flags»<b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
+</code></pre>
+<ul>
+<li>
+Allowed <code class="cmd cmdc">«flags»</code>:
+<ul>
+<li>
+<code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">t</code>: keep indented (do not apply <a href="#de-indent"><code>#de-indent</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">w</code>: reduce whitespace (apply <a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>)
+</li>
+</ul>
+</li>
+<li>
+The number of backticks may be increased arbitrarily.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Write a literal string:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">&lt;` &lt;b&gt;Foo&lt;/b&gt; `&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&amp;lt;b&amp;gt;Foo&amp;lt;/b&amp;gt;</code>
+</li>
+<li>
+Rendered: &lt;b&gt;Foo&lt;/b&gt;
+</li>
+</ul>
+</li>
+<li>
+Keep HTML unescaped:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">u&lt;` &lt;b&gt;Foo&lt;/b&gt; `&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&lt;b&gt;Foo&lt;/b&gt;</code>
+</li>
+<li>
+Rendered: <b>Foo</b>
+</li>
+</ul>
+</li>
+<li>
+Increase the number of backticks to include content
+that matches the <code>#literals</code> syntax itself:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">&lt;`` Literally &lt;`literal`&gt;. ``&gt;</code>
+</li>
+<li>
+HTML: <code class="html">Literally &amp;lt;`literal`&amp;gt;.</code>
+</li>
+<li>
+Rendered: Literally &lt;`literal`&gt;.
+</li>
+</ul>
+</li>
+</ol>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details>
@@ -205,7 +304,7 @@ Protects a string with a <a href="#cmd-placeholders">placeholder</a>.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#literals</code>]
+<a href="#literals"><code>#literals</code></a>
 </li>
 <li>
 [<code>#display-code</code>]
@@ -244,7 +343,7 @@ Removes the longest common indentation in a string.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#literals</code>]
+<a href="#literals"><code>#literals</code></a>
 </li>
 <li>
 [<code>#display-code</code>]
@@ -275,7 +374,7 @@ Escapes <code>&amp;</code>, <code>&lt;</code>, and <code>&gt;</code> as their re
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#literals</code>]
+<a href="#literals"><code>#literals</code></a>
 </li>
 <li>
 [<code>#display-code</code>]
@@ -303,7 +402,7 @@ Removes whitespace at the very start and very end of the string.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#literals</code>]
+<a href="#literals"><code>#literals</code></a>
 </li>
 <li>
 [<code>#table-headers</code>]
@@ -348,7 +447,7 @@ Collapsed multiple consecutive newlines into a single newline.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#literals</code>]
+<a href="#literals"><code>#literals</code></a>
 </li>
 <li>
 [<code>#display-code</code>]

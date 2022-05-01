@@ -26,6 +26,14 @@ OrdinaryDictionaryReplacement: #details-summary-shorthand
     '{{
     <summary>Description</summary>
   '
+* {{syn -->
+    '{{
+    <summary>Syntax</summary>
+  '
+* {{ex -->
+    '{{
+    <summary>Examples</summary>
+  '
 * {{dep -->
     '{{{-open}
     <summary>Dependants</summary>
@@ -245,6 +253,75 @@ However, they might be called by queued replacements.
   with a [placeholder]
   so that the occurrences will not be confounding.
   --
+}}
+
+####{#literals} 1. `#literals`
+[`#literals`]: #literals
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #literals
+  - queue_position: AFTER #placeholder-markers
+  - syntax_type: INLINE
+  - allowed_flags:
+      u=KEEP_HTML_UNESCAPED
+      i=KEEP_INDENTED
+      w=REDUCE_WHITESPACE
+  - prologue_delimiter: <
+  - extensible_delimiter: `
+  - content_replacements:
+      #escape-html
+      #de-indent
+      #trim-whitespace
+      #reduce-whitespace
+      #placeholder-protect
+  - epilogue_delimiter: >
+  ``
+}}
+{{des
+  --
+  Preserves content literally.
+  --
+}}
+{{syn
+  u``{.cmd .cmdc}
+  «flags»<b>&lt;</b><b>` </b>«content»<b> `</b><b>&gt;</b>
+  ``
+  ====
+  - Allowed `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
+    - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
+    ==
+  - The number of backticks may be increased arbitrarily.
+  ====
+}}
+{{ex
+  ++
+  1.
+    Write a literal string:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` <` <b>Foo</b> `> ``> ``
+    - HTML: <| <` <b>Foo</b> `> |>
+    - Rendered: <` <b>Foo</b> `>
+    ==
+  1.
+    Keep HTML unescaped:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` u<` <b>Foo</b> `> ``> ``
+    - HTML: <| u<` <b>Foo</b> `> |>
+    - Rendered: u<` <b>Foo</b> `>
+    ==
+  1.
+    Increase the number of backticks to include content
+    that matches the `#literals` syntax itself:
+    ==
+    - CMD: ``{.cmd .cmdc} <``` <`` Literally <`literal`>. ``> ```> ``
+    - HTML: <| <`` Literally <`literal`>. ``> |>
+    - Rendered: <`` Literally <`literal`>. ``>
+    ==
+  ++
 }}
 
 
