@@ -26,7 +26,7 @@ OrdinaryDictionaryReplacement: #details-summary-shorthand
 - queue_position: BEFORE #whitespace
 - apply_mode: SIMULTANEOUS
 * {{def -->
-    '{{{-open}
+    '{{
     <summary>Definition</summary>
   '
 * {{des -->

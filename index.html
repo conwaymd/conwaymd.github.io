@@ -174,7 +174,7 @@ However, they might be called by queued replacements.
 </p>
 <h3 id="standard-queued-replacements"><a href="#standard-queued-replacements" class="permalink" aria-label="Permalink"></a>Standard queued replacements</h3>
 <h4 id="placeholder-markers"><a href="#placeholder-markers" class="permalink" aria-label="Permalink"></a>0. <code>#placeholder-markers</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>PlaceholderMarkerReplacement: #placeholder-markers
 - queue_position: ROOT
@@ -189,7 +189,7 @@ so that the occurrences will not be confounding.
 </p>
 </details>
 <h4 id="literals"><a href="#literals" class="permalink" aria-label="Permalink"></a>1. <code>#literals</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #literals
 - queue_position: AFTER #placeholder-markers
@@ -291,7 +291,7 @@ Rendered: Literally &lt;`literal`&gt;.
 </ol>
 </details>
 <h4 id="display-code"><a href="#display-code" class="permalink" aria-label="Permalink"></a>2. <code>#display-code</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #display-code
 - queue_position: AFTER #literals
@@ -424,7 +424,7 @@ Rendered:
 </ol>
 </details>
 <h4 id="comments"><a href="#comments" class="permalink" aria-label="Permalink"></a>3. <code>#comments</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #comments
 - queue_position: AFTER #display-code
@@ -519,7 +519,7 @@ Rendered:
 </ol>
 </details>
 <h4 id="divisions"><a href="#divisions" class="permalink" aria-label="Permalink"></a>4. <code>#divisions</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #divisions
 - queue_position: AFTER #comments
@@ -610,7 +610,7 @@ This be a division.
 </ol>
 </details>
 <h4 id="blockquotes"><a href="#blockquotes" class="permalink" aria-label="Permalink"></a>5. <code>#blockquotes</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #blockquotes
 - queue_position: AFTER #divisions
@@ -679,7 +679,7 @@ This be a blockquote.
 </ol>
 </details>
 <h4 id="unordered-lists"><a href="#unordered-lists" class="permalink" aria-label="Permalink"></a>6. <code>#unordered-lists</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #unordered-lists
 - queue_position: AFTER #blockquotes
@@ -788,7 +788,7 @@ B2
 </ol>
 </details>
 <h4 id="ordered-lists"><a href="#ordered-lists" class="permalink" aria-label="Permalink"></a>7. <code>#ordered-lists</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #ordered-lists
 - queue_position: AFTER #unordered-lists
@@ -950,7 +950,7 @@ One
 </details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>PlaceholderProtectionReplacement: #placeholder-protect
 </code></pre>
@@ -988,7 +988,7 @@ Protects a string with a <a href="#cmd-placeholders">placeholder</a>.
 </ul>
 </details>
 <h4 id="de-indent"><a href="#de-indent" class="permalink" aria-label="Permalink"></a><code>#de-indent</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>DeIndentationReplacement: #de-indent
 - negative_flag: KEEP_INDENTED
@@ -1015,7 +1015,7 @@ Removes the longest common indentation in a string.
 </ul>
 </details>
 <h4 id="escape-html"><a href="#escape-html" class="permalink" aria-label="Permalink"></a><code>#escape-html</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #escape-html
 - negative_flag: KEEP_HTML_UNESCAPED
@@ -1046,7 +1046,7 @@ Escapes <code>&amp;</code>, <code>&lt;</code>, and <code>&gt;</code> as their re
 </ul>
 </details>
 <h4 id="trim-whitespace"><a href="#trim-whitespace" class="permalink" aria-label="Permalink"></a><code>#trim-whitespace</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #trim-whitespace
 * \A [\s]* --&gt;
@@ -1077,7 +1077,7 @@ Removes whitespace at the very start and very end of the string.
 </ul>
 </details>
 <h4 id="reduce-whitespace"><a href="#reduce-whitespace" class="permalink" aria-label="Permalink"></a><code>#reduce-whitespace</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #reduce-whitespace
 - positive_flag: REDUCE_WHITESPACE
@@ -1125,7 +1125,7 @@ Collapsed multiple consecutive newlines into a single newline.
 </ul>
 </details>
 <h4 id="code-tag-wrap"><a href="#code-tag-wrap" class="permalink" aria-label="Permalink"></a><code>#code-tag-wrap</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #code-tag-wrap
 * \A --&gt; &lt;code&gt;
@@ -1147,7 +1147,7 @@ Wraps a string in opening and closing <code>code</code> tags.
 </ul>
 </details>
 <h4 id="prepend-newline"><a href="#prepend-newline" class="permalink" aria-label="Permalink"></a><code>#prepend-newline</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #prepend-newline
 * \A --&gt; \n
@@ -1201,7 +1201,7 @@ Adds a newline at the very start of a string.
 </ul>
 </details>
 <h4 id="unordered-list-items"><a href="#unordered-list-items" class="permalink" aria-label="Permalink"></a><code>#unordered-list-items</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>PartitioningReplacement: #unordered-list-items
 - starting_pattern: [-+*]
@@ -1228,7 +1228,7 @@ Partitions content into list items based on leading occurrences of
 </ul>
 </details>
 <h4 id="ordered-list-items"><a href="#ordered-list-items" class="permalink" aria-label="Permalink"></a><code>#ordered-list-items</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>PartitioningReplacement: #ordered-list-items
 - starting_pattern: [0-9]+ [.]
@@ -1256,7 +1256,7 @@ a <b>run of digits</b> followed by a <b>full stop</b>.
 </details>
 <h4 id="mark-table-headers-for-preceding-table-data">
 <a href="#mark-table-headers-for-preceding-table-data" class="permalink" aria-label="Permalink"></a><code>#mark-table-headers-for-preceding-table-data</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #mark-table-headers-for-preceding-table-data
 * \A --&gt; ;{}
@@ -1281,7 +1281,7 @@ so that <a href="#table-data"><code>#table-data</code></a> will know to stop bef
 </ul>
 </details>
 <h4 id="table-headers"><a href="#table-headers" class="permalink" aria-label="Permalink"></a><code>#table-headers</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>PartitioningReplacement: #table-headers
 - starting_pattern: [;]
@@ -1311,7 +1311,7 @@ up to the next leading <code class="cmd cmdc"><b>;</b></code> or <code class="cm
 </ul>
 </details>
 <h4 id="table-data"><a href="#table-data" class="permalink" aria-label="Permalink"></a><code>#table-data</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>PartitioningReplacement: #table-data
 - starting_pattern: [,]
@@ -1340,7 +1340,7 @@ up to the next leading <code class="cmd cmdc"><b>;</b></code> or <code class="cm
 </details>
 <h4 id="unmark-table-headers-for-preceding-table-data">
 <a href="#unmark-table-headers-for-preceding-table-data" class="permalink" aria-label="Permalink"></a><code>#unmark-table-headers-for-preceding-table-data</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #unmark-table-headers-for-preceding-table-data
 * ^ [;] \{ \} &lt;th (?P&lt;bracket_or_placeholder_marker&gt; [&gt;\uF8FF] )
@@ -1367,7 +1367,7 @@ so that <a href="#mark-table-headers-for-preceding-table-data"><code>#mark-table
 </ul>
 </details>
 <h4 id="table-rows"><a href="#table-rows" class="permalink" aria-label="Permalink"></a><code>#table-rows</code></h4>
-<details>
+<details open>
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>PartitioningReplacement: #table-rows
 - starting_pattern: [/]{2}
