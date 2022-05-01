@@ -439,7 +439,7 @@ However, they might be called by queued replacements.
     Use [`#literals`] with flag `{.cmd .cmdc} u` to inject HTML:
     ==
     - CMD:
-      ``````
+      ``````{.cmd .cmdc}
       <````
         ``
           Injection of <b> element u<` <b>here</b> `>.
@@ -701,7 +701,7 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
 
 ++
 1.
-  Behaviour for the standard rule `{.cmd .cmdr} #inline-code`:
+  Behaviour for the standard rule [`#inline-code`]:
   ==
   - CMD: ``{.cmd .cmdc} `{#foo .bar l=en-AU title="baz"} test` ``
   - HTML: <| `{#foo .bar l=en-AU title="baz"} test` |>
