@@ -401,7 +401,7 @@ However, they might be called by queued replacements.
 }}
 {{des
   --
-  Produce pre-formatted code.
+  Produces pre-formatted code.
   --
 }}
 {{ex
@@ -533,6 +533,95 @@ However, they might be called by queued replacements.
         <|| ` <`Before. <# This be a comment. #> After.`> ` ||>
     - Rendered:
         ` <`Before. <# This be a comment. #> After.`> `
+    ==
+  ++
+}}
+
+####{#divisions} 4. `#divisions`
+[`#divisions`]: #divisions
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #divisions
+  - queue_position: AFTER #comments
+  - syntax_type: BLOCK
+  - extensible_delimiter: ||
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #divisions
+      #prepend-newline
+  - tag_name: div
+  ``
+}}
+{{syn
+  u````{.cmd .cmdc}
+    <b>||</b>
+      «content»
+    <b>||</b>
+  ````
+  u````{.cmd .cmdc}
+    <b>||</b>{«attribute specifications»}
+      «content»
+    <b>||</b>
+  ````
+  u````{.cmd .cmdc}
+    «flags»<b>||</b>
+      «content»
+    <b>||</b>
+  ````
+  u````{.cmd .cmdc}
+    «flags»<b>||</b>{«attribute specifications»}
+      «content»
+    <b>||</b>
+  ````
+  ====
+  - The number of pipes ``{.cmd .cmdc} | `` may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a division.
+  --
+}}
+{{ex
+  ++
+  1.
+    Division:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ||{#test-div-id .test-div-class}
+          This be a division.
+        ||
+      ````
+    - HTML:
+      <||
+        ||{#test-div-id .test-div-class}
+          This be a division.
+        ||
+      ||>
+    ==
+  1.
+    More pipes for nested divisions:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ||||{.outer}
+          ||{.inner}
+            This be a division.
+          ||
+        ||||
+      ````
+    - HTML:
+      <||
+        ||||{.outer}
+          ||{.inner}
+            This be a division.
+          ||
+        ||||
+      ||>
     ==
   ++
 }}
