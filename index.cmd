@@ -1403,6 +1403,52 @@ However, they might be called by queued replacements.
   ++
 }}
 
+####{#boilerplate} 12. `#boilerplate`
+[`#boilerplate`]: #boilerplate
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #boilerplate
+  - queue_position: AFTER #inline-code
+  * \A -->
+      <!DOCTYPE html>
+      <html lang="%lang">
+        <head>
+          <meta charset="utf-8">
+          %head-elements-before-viewport
+          <meta name="viewport" content="%viewport-content">
+          %head-elements-after-viewport
+          <title>%title</title>
+          <style>
+            %styles
+          </style>
+        </head>
+        <body>\n
+  * \Z -->
+        </body>
+      </html>\n
+  ``
+}}
+{{des
+  --
+  Wraps content in the HTML5 boilerplate:
+  --
+  ==
+  - `{.html} <!DOCTYPE html>` through `{.html} <body>` at the start
+  - `{.html} </body></html>` at the end
+  ==
+  --
+  The default boilerplate properties
+  `{.cmd .cmdc} %lang`,
+  `{.cmd .cmdc} %head-elements-before-viewport`,
+  `{.cmd .cmdc} %viewport-content`,
+  `{.cmd .cmdc} %head-elements-after-viewport`,
+  `{.cmd .cmdc} %title`, and
+  `{.cmd .cmdc} %styles`
+  are set in [`#boilerplate-properties`].
+  --
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

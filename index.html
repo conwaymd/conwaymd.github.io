@@ -1542,6 +1542,54 @@ Rendered: <code>Some <b>bold</b> code</code>
 </li>
 </ol>
 </details>
+<h4 id="boilerplate"><a href="#boilerplate" class="permalink" aria-label="Permalink"></a>12. <code>#boilerplate</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #boilerplate
+- queue_position: AFTER #inline-code
+* \A --&gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="%lang"&gt;
+      &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        %head-elements-before-viewport
+        &lt;meta name="viewport" content="%viewport-content"&gt;
+        %head-elements-after-viewport
+        &lt;title&gt;%title&lt;/title&gt;
+        &lt;style&gt;
+          %styles
+        &lt;/style&gt;
+      &lt;/head&gt;
+      &lt;body&gt;\n
+* \Z --&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;\n
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Wraps content in the HTML5 boilerplate:
+</p>
+<ul>
+<li>
+<code class="html">&lt;!DOCTYPE html&gt;</code> through <code class="html">&lt;body&gt;</code> at the start
+</li>
+<li>
+<code class="html">&lt;/body&gt;&lt;/html&gt;</code> at the end
+</li>
+</ul>
+<p>
+The default boilerplate properties
+<code class="cmd cmdc">%lang</code>,
+<code class="cmd cmdc">%head-elements-before-viewport</code>,
+<code class="cmd cmdc">%viewport-content</code>,
+<code class="cmd cmdc">%head-elements-after-viewport</code>,
+<code class="cmd cmdc">%title</code>, and
+<code class="cmd cmdc">%styles</code>
+are set in [<code>#boilerplate-properties</code>].
+</p>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details open>
