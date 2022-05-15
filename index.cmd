@@ -1358,6 +1358,12 @@ However, they might be called by queued replacements.
   ````{.cmd .cmdc}
     «flags»@(`)@ «content» @(`)@
   ````
+  ````{.cmd .cmdc}
+    @(`)@{«attribute specifications»} «content» @(`)@
+  ````
+  ````{.cmd .cmdc}
+    «flags»@(`)@{«attribute specifications»} «content» @(`)@
+  ````
   ====
   - `{.cmd .cmdc} «flags»`:
     ==
@@ -1367,6 +1373,8 @@ However, they might be called by queued replacements.
     ==
   - The number of backticks ``{.cmd .cmdc} @(`)@ ``
     may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
   ====
 }}
 {{des
