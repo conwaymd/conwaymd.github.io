@@ -38,6 +38,183 @@ Implemented in <a href="https://packages.debian.org/stable/python3">Python 3.{wh
 Licensed under "MIT No Attribution" (MIT-0).
 </li>
 </ul>
+<h2 id="contents"><a href="#contents" class="permalink" aria-label="Permalink"></a>Contents</h2>
+<ul>
+<li>
+<a href="#installation-and-usage">Installation and usage</a>
+</li>
+<li>
+<a href="#authoring-cmd-files">Authoring CMD files</a>
+</li>
+<li>
+<a href="#standard-rules">Standard CMD replacement rules</a>
+<ul>
+<li>
+<a href="#standard-queued-replacements">Standard queued replacements</a>
+<ol start="0">
+<li>
+<a href="#placeholder-markers"><code>#placeholder-markers</code></a>
+</li>
+<li>
+<a href="#literals"><code>#literals</code></a>
+</li>
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+<li>
+<a href="#comments"><code>#comments</code></a>
+</li>
+<li>
+<a href="#divisions"><code>#divisions</code></a>
+</li>
+<li>
+<a href="#blockquotes"><code>#blockquotes</code></a>
+</li>
+<li>
+<a href="#unordered-lists"><code>#unordered-lists</code></a>
+</li>
+<li>
+<a href="#ordered-lists"><code>#ordered-lists</code></a>
+</li>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+<li>
+<a href="#headings"><code>#headings</code></a>
+</li>
+<li>
+<a href="#paragraphs"><code>#paragraphs</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+<li>
+<a href="#boilerplate"><code>#boilerplate</code></a>
+</li>
+<li>
+<a href="#boilerplate-properties"><code>#boilerplate-properties</code></a>
+</li>
+<li>
+<a href="#cmd-properties"><code>#cmd-properties</code></a>
+</li>
+<li>
+<a href="#boilerplate-protect"><code>#boilerplate-protect</code></a>
+</li>
+<li>
+<a href="#backslash-escapes"><code>#backslash-escapes</code></a>
+</li>
+<li>
+<a href="#backslash-continuations"><code>#backslash-continuations</code></a>
+</li>
+<li>
+<a href="#reference-definitions"><code>#reference-definitions</code></a>
+</li>
+<li>
+<a href="#specified-images"><code>#specified-images</code></a>
+</li>
+<li>
+<a href="#referenced-images"><code>#referenced-images</code></a>
+</li>
+<li>
+<a href="#explicit-links"><code>#explicit-links</code></a>
+</li>
+<li>
+<a href="#specified-links"><code>#specified-links</code></a>
+</li>
+<li>
+<a href="#referenced-links"><code>#referenced-links</code></a>
+</li>
+<li>
+<a href="#inline-semantics"><code>#inline-semantics</code></a>
+</li>
+<li>
+<a href="#escape-idle-html"><code>#escape-idle-html</code></a>
+</li>
+<li>
+<a href="#whitespace"><code>#whitespace</code></a>
+</li>
+<li>
+<a href="#placeholder-unprotect"><code>#placeholder-unprotect</code></a>
+</li>
+</ol>
+</li>
+<li>
+<a href="#standard-unqueued-replacements">Standard unqueued replacements</a>
+<ul>
+<li>
+<a href="#placeholder-protect"><code>#placeholder-protect</code></a>
+</li>
+<li>
+<a href="#de-indent"><code>#de-indent</code></a>
+</li>
+<li>
+<a href="#escape-html"><code>#escape-html</code></a>
+</li>
+<li>
+<a href="#trim-whitespace"><code>#trim-whitespace</code></a>
+</li>
+<li>
+<a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>
+</li>
+<li>
+<a href="#code-tag-wrap"><code>#code-tag-wrap</code></a>
+</li>
+<li>
+<a href="#prepend-newline"><code>#prepend-newline</code></a>
+</li>
+<li>
+<a href="#unordered-list-items"><code>#unordered-list-items</code></a>
+</li>
+<li>
+<a href="#ordered-list-items"><code>#ordered-list-items</code></a>
+</li>
+<li>
+<a href="#mark-table-headers-for-preceding-table-data"><code>#mark-table-headers-for-preceding-table-data</code></a>
+</li>
+<li>
+<a href="#table-headers"><code>#table-headers</code></a>
+</li>
+<li>
+<a href="#table-data"><code>#table-data</code></a>
+</li>
+<li>
+<a href="#unmark-table-headers-for-preceding-table-data"><code>#unmark-table-headers-for-preceding-table-data</code></a>
+</li>
+<li>
+<a href="#table-rows"><code>#table-rows</code></a>
+</li>
+<li>
+<a href="#table-head"><code>#table-head</code></a>
+</li>
+<li>
+<a href="#table-body"><code>#table-body</code></a>
+</li>
+<li>
+<a href="#table-foot"><code>#table-foot</code></a>
+</li>
+<li>
+<a href="#suppress-scheme"><code>#suppress-scheme</code></a>
+</li>
+<li>
+<a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#replacement-rule-syntax">CMD replacement rule syntax</a>
+</li>
+<li>
+<a href="#cmd-placeholders">CMD placeholders</a>
+</li>
+<li>
+<a href="#cmd-attribute-specifications">CMD attribute specifications</a>
+</li>
+<li>
+<a href="#repository-links">Repository links</a>
+</li>
+</ul>
 <h2 id="installation-and-usage"><a href="#installation-and-usage" class="permalink" aria-label="Permalink"></a>Installation and usage</h2>
 <ol start="0">
 <li>

@@ -119,6 +119,74 @@ Conway-Markdown (CMD) is:
 [python3]: https://packages.debian.org/stable/python3
 
 
+##{#contents} Contents
+
+======
+- [Installation and usage](#installation-and-usage)
+- [Authoring CMD files](#authoring-cmd-files)
+- [Standard CMD replacement rules](#standard-rules)
+  ====
+  - [Standard queued replacements](#standard-queued-replacements)
+    ++{start=0}
+    0. [`#placeholder-markers`]
+    1. [`#literals`]
+    2. [`#display-code`]
+    3. [`#comments`]
+    4. [`#divisions`]
+    5. [`#blockquotes`]
+    6. [`#unordered-lists`]
+    7. [`#ordered-lists`]
+    8. [`#tables`]
+    9. [`#headings`]
+    10. [`#paragraphs`]
+    11. [`#inline-code`]
+    12. [`#boilerplate`]
+    13. [`#boilerplate-properties`]
+    14. [`#cmd-properties`]
+    15. [`#boilerplate-protect`]
+    16. [`#backslash-escapes`]
+    17. [`#backslash-continuations`]
+    18. [`#reference-definitions`]
+    19. [`#specified-images`]
+    20. [`#referenced-images`]
+    21. [`#explicit-links`]
+    22. [`#specified-links`]
+    23. [`#referenced-links`]
+    24. [`#inline-semantics`]
+    25. [`#escape-idle-html`]
+    26. [`#whitespace`]
+    27. [`#placeholder-unprotect`]
+    ++
+  - [Standard unqueued replacements](#standard-unqueued-replacements)
+    ==
+    - [`#placeholder-protect`]
+    - [`#de-indent`]
+    - [`#escape-html`]
+    - [`#trim-whitespace`]
+    - [`#reduce-whitespace`]
+    - [`#code-tag-wrap`]
+    - [`#prepend-newline`]
+    - [`#unordered-list-items`]
+    - [`#ordered-list-items`]
+    - [`#mark-table-headers-for-preceding-table-data`]
+    - [`#table-headers`]
+    - [`#table-data`]
+    - [`#unmark-table-headers-for-preceding-table-data`]
+    - [`#table-rows`]
+    - [`#table-head`]
+    - [`#table-body`]
+    - [`#table-foot`]
+    - [`#suppress-scheme`]
+    - [`#angle-bracket-wrap`]
+    ==
+  ====
+- [CMD replacement rule syntax](#replacement-rule-syntax)
+- [CMD placeholders](#cmd-placeholders)
+- [CMD attribute specifications](#cmd-attribute-specifications)
+- [Repository links](#repository-links)
+======
+
+
 ##{#installation-and-usage} Installation and usage
 
 ++{start=0}
