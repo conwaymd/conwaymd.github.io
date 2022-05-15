@@ -2186,6 +2186,24 @@ Rendered:
 </li>
 </ul>
 </li>
+<li>
+Later reference definitions prevail:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[image-label]{.class1}: file1.png
+[image-label]{.class2}: file2.png
+
+[Second definition wins.][image-label]
+</code></pre>
+</li>
+<li>
+HTML
+<pre class="html"><code>&lt;a href="file2.png" class="class2"&gt;Second definition wins.&lt;/a&gt;
+</code></pre>
+</li>
+</ul>
+</li>
 </ol>
 </details>
 <h4 id="explicit-links"><a href="#explicit-links" class="permalink" aria-label="Permalink"></a>21. <code>#explicit-links</code></h4>

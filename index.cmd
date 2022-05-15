@@ -1977,6 +1977,24 @@ However, they might be called by queued replacements.
       ![Conway-Markdown logo.]
       ||||
     ==
+  1.
+    Later reference definitions prevail:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [image-label]{.class1}: file1.png
+      [image-label]{.class2}: file2.png
+      
+      [Second definition wins.][image-label]
+      ````
+    - HTML
+      <||
+      [image-label]{.class1}: file1.png
+      [image-label]{.class2}: file2.png
+      
+      [Second definition wins.][image-label]
+      ||>
+    ==
   ++
 }}
 
