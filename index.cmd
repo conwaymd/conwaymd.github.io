@@ -1480,19 +1480,19 @@ However, they might be called by queued replacements.
       , `{.html} en`
     //
       , `{.cmd .cmdc} %head-elements-before-viewport`
-      ,
+      , (empty)
     //
       , `{.cmd .cmdc} %viewport-content`
       , `{.html} width=device-width, initial-scale=1`
     //
       , `{.cmd .cmdc} %head-elements-after-viewport`
-      ,
+      , (empty)
     //
       , `{.cmd .cmdc} %title`
       , `{.html} Title`
     //
       , `{.cmd .cmdc} %styles`
-      ,
+      , (empty)
   ''''
 }}
 {{ex
