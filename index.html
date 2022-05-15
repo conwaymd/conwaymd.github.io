@@ -1938,7 +1938,7 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <summary>Description</summary>
 <p>
 Defines a reference, to be used by
-[<code>#referenced-images</code>] or [<code>#referenced-links</code>].
+<a href="#referenced-images"><code>#referenced-images</code></a> or [<code>#referenced-links</code>].
 </p>
 </details>
 <h4 id="specified-images"><a href="#specified-images" class="permalink" aria-label="Permalink"></a>19. <code>#specified-images</code></h4>
@@ -2004,18 +2004,18 @@ Basic usage:
 <ul>
 <li>
 CMD:
-<pre class="cmd cmdc"><code>![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp](rembrandt-anatomy.jpg)
+<pre class="cmd cmdc"><code>![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
 </code></pre>
 </li>
 <li>
 HTML:
-<pre class="html"><code>&lt;img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp" src="rembrandt-anatomy.jpg"&gt;
+<pre class="html"><code>&lt;img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg"&gt;
 </code></pre>
 </li>
 <li>
 Rendered:
 <div>
-<img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp" src="rembrandt-anatomy.jpg">
+<img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg">
 </div>
 </li>
 </ul>
@@ -2025,18 +2025,18 @@ Set width:
 <ul>
 <li>
 CMD:
-<pre class="cmd cmdc"><code>![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp]{w=120}(rembrandt-anatomy.jpg)
+<pre class="cmd cmdc"><code>![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
 </code></pre>
 </li>
 <li>
 HTML:
-<pre class="html"><code>&lt;img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp" src="rembrandt-anatomy.jpg" width="120"&gt;
+<pre class="html"><code>&lt;img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg" width="120"&gt;
 </code></pre>
 </li>
 <li>
 Rendered:
 <div>
-<img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp" src="rembrandt-anatomy.jpg" width="120">
+<img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg" width="120">
 </div>
 </li>
 </ul>
@@ -2059,6 +2059,97 @@ HTML:
 Rendered:
 <div>
 <img alt="" src="/favicon-16x16.png"> Conway-Markdown is good.
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="referenced-images"><a href="#referenced-images" class="permalink" aria-label="Permalink"></a>20. <code>#referenced-images</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ReferencedImageReplacement: #referenced-images
+- queue_position: AFTER #specified-images
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b><b>[</b>«label»<b>]</b>
+<b>!</b><b>[</b>«alt text»<b>]</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}<b>[</b>«label»<b>]</b>
+<b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«label»</code>: must correspond to a defined
+<a href="#reference-definitions">reference definition</a>, up to case.
+If <code class="cmd cmdc">«label»</code> is omitted,
+<code class="cmd cmdc">«alt text»</code> is used in its stead.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces an image:
+</p>
+<pre class="html"><code><b>&lt;img</b>«attribute sequence»<b>&gt;</b>
+</code></pre>
+<p>
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
+</p>
+<ul>
+<li>
+<code class="cmd cmdc">«alt text»</code>
+</li>
+<li>
+<code class="cmd cmdc">«src»</code>
+</li>
+<li>
+<code class="cmd cmdc">«title»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+</li>
+</ul>
+<p>
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[moses]: rembrandt-moses.jpg
+![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;img alt="Rembrandt painting: Moses Breaking the Tablets of the Law." src="rembrandt-moses.jpg"&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<div>
+<img alt="Rembrandt painting: Moses Breaking the Tablets of the Law." src="rembrandt-moses.jpg">
 </div>
 </li>
 </ul>

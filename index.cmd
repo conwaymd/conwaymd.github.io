@@ -1823,15 +1823,15 @@ However, they might be called by queued replacements.
     ==
     - CMD:
       ````{.cmd .cmdc}
-      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp](rembrandt-anatomy.jpg)
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
       ````
     - HTML:
       <||
-      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp](rembrandt-anatomy.jpg)
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
       ||>
     - Rendered:
       ||||
-      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp](rembrandt-anatomy.jpg)
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
       ||||
     ==
   1.
@@ -1839,15 +1839,15 @@ However, they might be called by queued replacements.
     ==
     - CMD:
       ````{.cmd .cmdc}
-      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp]{w=120}(rembrandt-anatomy.jpg)
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
       ````
     - HTML:
       <||
-      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp]{w=120}(rembrandt-anatomy.jpg)
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
       ||>
     - Rendered:
       ||||
-      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp]{w=120}(rembrandt-anatomy.jpg)
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
       ||||
     ==
   1.
@@ -1865,6 +1865,83 @@ However, they might be called by queued replacements.
     - Rendered:
       ||||
       ![](/favicon-16x16.png) Conway-Markdown is good.
+      ||||
+    ==
+  ++
+}}
+
+####{#referenced-images} 20. `#referenced-images`
+[`#referenced-images`]: #referenced-images
+
+{{def
+  ``{.cmd .cmdr}
+  ReferencedImageReplacement: #referenced-images
+  - queue_position: AFTER #specified-images
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@@([)@«label»@(])@
+  @(!)@@([)@«alt text»@(])@
+  ````
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@{«attribute specifications»}@([)@«label»@(])@
+  @(!)@@([)@«alt text»@(])@{«attribute specifications»}
+  ````
+  ==
+  - `{.cmd .cmdc} «label»`: must correspond to a defined
+    [reference definition](#reference-definitions), up to case.
+    If `{.cmd .cmdc} «label»` is omitted,
+    `{.cmd .cmdc} «alt text»` is used in its stead.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces an image:
+  --
+  ````{.html}
+  @(<img)@«attribute sequence»@(>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «alt text»`
+  - `{.cmd .cmdc} «src»`
+  - `{.cmd .cmdc} «title»`
+  - `{.cmd .cmdc} «attribute specifications»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [moses]: rembrandt-moses.jpg
+      ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
+      ````
+    - HTML:
+      <||
+      [moses]: rembrandt-moses.jpg
+      ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
+      ||>
+    - Rendered:
+      ||||
+      [moses]: rembrandt-moses.jpg
+      ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
       ||||
     ==
   ++
