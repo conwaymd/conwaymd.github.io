@@ -1992,7 +1992,7 @@ However, they might be called by queued replacements.
       [Hooray.][image-label-CASE]
       [Hooray.][ImAGe-laBEl-CAsE]
       ````
-    - HTML
+    - HTML:
       <||
       [image-label-case]: insensitive.png
       
@@ -2011,7 +2011,7 @@ However, they might be called by queued replacements.
       
       [Second definition wins.][image-label]
       ````
-    - HTML
+    - HTML:
       <||
       [image-label]{.class1}: file1.png
       [image-label]{.class2}: file2.png
@@ -2233,6 +2233,149 @@ However, they might be called by queued replacements.
       ||||
       [Beware]{href=https://example.com/evil}(https://example.com/good)
       ||||
+    ==
+  ++
+}}
+
+####{#referenced-links} 23. `#referenced-links`
+[`#referenced-links`]: #referenced-links
+
+{{def
+  ``{.cmd .cmdr}
+  ReferencedLinkReplacement: #referenced-links
+  - queue_position: AFTER #specified-links
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@@([)@«label»@(])@
+  @([)@«link text»@(])@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@{«attribute specifications»}@([)@«label»@(])@
+  @([)@«link text»@(])@{«attribute specifications»}
+  ````
+  ==
+  - `{.cmd .cmdc} «label»`: must correspond to a defined
+    [reference definition](#reference-definitions), up to case.
+    If `{.cmd .cmdc} «label»` is omitted,
+    `{.cmd .cmdc} «link text»` is used in its stead.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces a link:
+  --
+  ````{.html}
+  @(<a)@«attribute sequence»@(>)@«link text»@(</a>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «href»` equal to `{.cmd .cmdc} «uri»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «title»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «attribute specifications»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [wiki]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia's main page.][wiki]
+      ````
+    - HTML:
+      <||
+      [wiki]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia's main page.][wiki]
+      ||>
+    - Rendered:
+      ||||
+      [wiki]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia's main page.][wiki]
+      ||||
+    ==
+  1.
+    Use `{.cmd .cmdc} «link text»` for `{.cmd .cmdc} «label»`:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia]
+      ````
+    - HTML:
+      <||
+      [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia]
+      ||>
+    - Rendered:
+      ||||
+      [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia]
+      ||||
+    ==
+  1.
+    `{.cmd .cmdc} «label»` is case-insensitive:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [link-label-case]: https://example.com
+      
+      [Hooray.][link-label-case]
+      [Hooray.][link-label-CASE]
+      [Hooray.][LiNK-laBEl-CAsE]
+      ````
+    - HTML:
+      <||
+      [link-label-case]: https://example.com
+      
+      [Hooray.][link-label-case]
+      [Hooray.][link-label-CASE]
+      [Hooray.][LiNK-laBEl-CAsE]
+      ||>
+    ==
+  1.
+    Later reference definitions prevail:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [link-label]{.class1}: https://example.com/1
+      [link-label]{.class2}: https://example.com/2
+      
+      [Second definition wins.][link-label]
+      ````
+    - HTML:
+      <||
+      [link-label]{.class1}: https://example.com/1
+      [link-label]{.class2}: https://example.com/2
+      
+      [Second definition wins.][link-label]
+      ||>
     ==
   ++
 }}

@@ -1946,7 +1946,7 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <summary>Description</summary>
 <p>
 Defines a reference, to be used by
-<a href="#referenced-images"><code>#referenced-images</code></a> or [<code>#referenced-links</code>].
+<a href="#referenced-images"><code>#referenced-images</code></a> or <a href="#referenced-links"><code>#referenced-links</code></a>.
 </p>
 </details>
 <h4 id="specified-images"><a href="#specified-images" class="permalink" aria-label="Permalink"></a>19. <code>#specified-images</code></h4>
@@ -2203,7 +2203,7 @@ CMD:
 </code></pre>
 </li>
 <li>
-HTML
+HTML:
 <pre class="html"><code>&lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
 &lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
 &lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
@@ -2223,7 +2223,7 @@ CMD:
 </code></pre>
 </li>
 <li>
-HTML
+HTML:
 <pre class="html"><code>&lt;a href="file2.png" class="class2"&gt;Second definition wins.&lt;/a&gt;
 </code></pre>
 </li>
@@ -2495,6 +2495,161 @@ Rendered:
 <div>
 <a href="https://example.com/evil">Beware</a>
 </div>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="referenced-links"><a href="#referenced-links" class="permalink" aria-label="Permalink"></a>23. <code>#referenced-links</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ReferencedLinkReplacement: #referenced-links
+- queue_position: AFTER #specified-links
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b><b>[</b>«label»<b>]</b>
+<b>[</b>«link text»<b>]</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b>{«attribute specifications»}<b>[</b>«label»<b>]</b>
+<b>[</b>«link text»<b>]</b>{«attribute specifications»}
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«label»</code>: must correspond to a defined
+<a href="#reference-definitions">reference definition</a>, up to case.
+If <code class="cmd cmdc">«label»</code> is omitted,
+<code class="cmd cmdc">«link text»</code> is used in its stead.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a link:
+</p>
+<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«link text»<b>&lt;/a&gt;</b>
+</code></pre>
+<p>
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
+</p>
+<ul>
+<li>
+<code class="cmd cmdc">«href»</code> equal to <code class="cmd cmdc">«uri»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«title»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+</li>
+</ul>
+<p>
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[wiki]: https://en.wikipedia.org/wiki/Main_Page
+
+[Wikipedia's main page.][wiki]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://en.wikipedia.org/wiki/Main_Page"&gt;Wikipedia's main page.&lt;/a&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<div>
+<a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia's main page.</a>
+</div>
+</li>
+</ul>
+</li>
+<li>
+Use <code class="cmd cmdc">«link text»</code> for <code class="cmd cmdc">«label»</code>:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+
+[Wikipedia]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://en.wikipedia.org/wiki/Main_Page"&gt;Wikipedia&lt;/a&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<div>
+<a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<code class="cmd cmdc">«label»</code> is case-insensitive:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[link-label-case]: https://example.com
+
+[Hooray.][link-label-case]
+[Hooray.][link-label-CASE]
+[Hooray.][LiNK-laBEl-CAsE]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://example.com"&gt;Hooray.&lt;/a&gt;
+&lt;a href="https://example.com"&gt;Hooray.&lt;/a&gt;
+&lt;a href="https://example.com"&gt;Hooray.&lt;/a&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Later reference definitions prevail:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[link-label]{.class1}: https://example.com/1
+[link-label]{.class2}: https://example.com/2
+
+[Second definition wins.][link-label]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://example.com/2" class="class2"&gt;Second definition wins.&lt;/a&gt;
+</code></pre>
 </li>
 </ul>
 </li>
