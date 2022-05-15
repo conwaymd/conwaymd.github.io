@@ -1864,15 +1864,15 @@ However, they might be called by queued replacements.
     ==
     - CMD:
       ````{.cmd .cmdc}
-      ![](/favicon-16x16.png) Conway-Markdown is good.
+      ![](/favicon-16x16.png) Conway-Markdown is dumb.
       ````
     - HTML:
       <||
-      ![](/favicon-16x16.png) Conway-Markdown is good.
+      ![](/favicon-16x16.png) Conway-Markdown is dumb.
       ||>
     - Rendered:
       ||||
-      ![](/favicon-16x16.png) Conway-Markdown is good.
+      ![](/favicon-16x16.png) Conway-Markdown is dumb.
       ||||
     ==
   ++
@@ -1960,19 +1960,19 @@ However, they might be called by queued replacements.
     ==
     - CMD:
       ````{.cmd .cmdc}
-      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is good."
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
       
       ![Conway-Markdown logo.]
       ````
     - HTML:
       <||
-      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is good."
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
       
       ![Conway-Markdown logo.]
       ||>
     - Rendered:
       ||||
-      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is good."
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
       
       ![Conway-Markdown logo.]
       ||||
