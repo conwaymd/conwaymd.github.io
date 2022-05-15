@@ -1934,7 +1934,7 @@ Applies backslash continuation.
 <ul>
 <li>
 For continuation of <code class="cmd cmdc">«uri»</code> or <code class="cmd cmdc">«title»</code>,
-indent the continuation more than the leading square-bracket.
+indent the continuation more than the leading square bracket.
 </li>
 <li>
 <code class="cmd cmdc">«attribute specifications»</code>:
@@ -2183,6 +2183,152 @@ Rendered:
 <div>
 <img alt="Conway-Markdown logo." src="/favicon-32x32.png" title="Conway-Markdown is good.">
 </div>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="explicit-links"><a href="#explicit-links" class="permalink" aria-label="Permalink"></a>21. <code>#explicit-links</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExplicitLinkReplacement: #explicit-links
+- queue_position: AFTER #referenced-images
+- allowed_flags:
+    b=ANGLE_BRACKET_WRAP
+    s=SUPPRESS_SCHEME
+- attribute_specifications: EMPTY
+- content_replacements:
+    #suppress-scheme
+- concluding_replacements:
+    #angle-bracket-wrap
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>&lt;</b>«uri»<b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>&lt;</b>{«attribute specifications»} «uri»<b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>&lt;</b>«uri»<b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>&lt;</b>{«attribute specifications»} «uri»<b>&gt;</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«flags»</code>:
+<ul>
+<li>
+<code class="cmd cmdc">b</code>: wrap in angle brackets (apply <a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">s</code>: suppress scheme (apply <a href="#suppress-scheme"><code>#suppress-scheme</code></a>)
+</li>
+</ul>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a link:
+</p>
+<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«uri»<b>&lt;/a&gt;</b>
+</code></pre>
+<p>
+Or:
+</p>
+<pre class="html"><code><b>&amp;lt;&lt;a</b>«attribute sequence»<b>&gt;</b>«uri»<b>&lt;/a&gt;&amp;gt;</b>
+</code></pre>
+<p>
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
+</p>
+<ul>
+<li>
+<code class="cmd cmdc">«uri»</code> as <code>href</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+</li>
+</ul>
+<p>
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&lt;a href="https://example.com"&gt;https://example.com&lt;/a&gt;</code>
+</li>
+<li>
+Rendered: <a href="https://example.com">https://example.com</a>
+</li>
+</ul>
+</li>
+<li>
+Wrap in angle brackets:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">b&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&amp;lt;&lt;a href="https://example.com"&gt;https://example.com&lt;/a&gt;&amp;gt;</code>
+</li>
+<li>
+Rendered: &lt;<a href="https://example.com">https://example.com</a>&gt;
+</li>
+</ul>
+</li>
+<li>
+Suppress scheme:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">s&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&lt;a href="https://example.com"&gt;example.com&lt;/a&gt;</code>
+</li>
+<li>
+Rendered: <a href="https://example.com">example.com</a>
+</li>
+</ul>
+</li>
+<li>
+<i lang="es">¿Por qué no los dos?</i>
+<ul>
+<li>
+CMD: <code class="cmd cmdc">bs&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&amp;lt;&lt;a href="https://example.com"&gt;example.com&lt;/a&gt;&amp;gt;</code>
+</li>
+<li>
+Rendered: &lt;<a href="https://example.com">example.com</a>&gt;
+</li>
+</ul>
+</li>
+<li>
+Invitation to spammers:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">s&lt;mailto:mail@example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&lt;a href="mailto:mail@example.com"&gt;mail@example.com&lt;/a&gt;</code>
+</li>
+<li>
+Rendered: <a href="mailto:mail@example.com">mail@example.com</a>
 </li>
 </ul>
 </li>
@@ -2750,7 +2896,7 @@ of a URI.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#explicit-links</code>]
+<a href="#explicit-links"><code>#explicit-links</code></a>
 </li>
 </ul>
 </details>
@@ -2775,7 +2921,7 @@ Wraps a string in angle brackets.
 <summary>Dependants</summary>
 <ul>
 <li>
-[<code>#explicit-links</code>]
+<a href="#explicit-links"><code>#explicit-links</code></a>
 </li>
 </ul>
 </details>

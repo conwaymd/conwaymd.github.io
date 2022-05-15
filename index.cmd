@@ -1763,7 +1763,7 @@ However, they might be called by queued replacements.
   ````
   ==
   - For continuation of `{.cmd .cmdc} «uri»` or `{.cmd .cmdc} «title»`,
-    indent the continuation more than the leading square-bracket.
+    indent the continuation more than the leading square bracket.
   - `{.cmd .cmdc} «attribute specifications»`:
     see [CMD attribute specifications].
   ==
@@ -1976,6 +1976,111 @@ However, they might be called by queued replacements.
       
       ![Conway-Markdown logo.]
       ||||
+    ==
+  ++
+}}
+
+####{#explicit-links} 21. `#explicit-links`
+[`#explicit-links`]: #explicit-links
+
+{{def
+  ``{.cmd .cmdr}
+  ExplicitLinkReplacement: #explicit-links
+  - queue_position: AFTER #referenced-images
+  - allowed_flags:
+      b=ANGLE_BRACKET_WRAP
+      s=SUPPRESS_SCHEME
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #suppress-scheme
+  - concluding_replacements:
+      #angle-bracket-wrap
+  ``
+}}
+{{syn
+  ``{.cmd .cmdc}
+  @(<)@«uri»@(>)@
+  ``
+  ``{.cmd .cmdc}
+  @(<)@{«attribute specifications»} «uri»@(>)@
+  ``
+  ``{.cmd .cmdc}
+  «flags»@(<)@«uri»@(>)@
+  ``
+  ``{.cmd .cmdc}
+  «flags»@(<)@{«attribute specifications»} «uri»@(>)@
+  ``
+  ====
+  - `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} b`: wrap in angle brackets (apply [`#angle-bracket-wrap`])
+    - `{.cmd .cmdc} s`: suppress scheme (apply [`#suppress-scheme`])
+    ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a link:
+  --
+  ````{.html}
+  @(<a)@«attribute sequence»@(>)@«uri»@(</a>)@
+  ````
+  --
+  Or:
+  --
+  ````{.html}
+  @(&lt;<a)@«attribute sequence»@(>)@«uri»@(</a>&gt;)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «uri»` as `href`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD: `{.cmd .cmdc} <https://example.com> `
+    - HTML: <| <https://example.com> |>
+    - Rendered: <https://example.com>
+    ==
+  1.
+    Wrap in angle brackets:
+    ==
+    - CMD: `{.cmd .cmdc} b<https://example.com> `
+    - HTML: <| b<https://example.com> |>
+    - Rendered: b<https://example.com>
+    ==
+  1.
+    Suppress scheme:
+    ==
+    - CMD: `{.cmd .cmdc} s<https://example.com> `
+    - HTML: <| s<https://example.com> |>
+    - Rendered: s<https://example.com>
+    ==
+  1.
+    _{lang=es} ¿Por qué no los dos?_
+    ==
+    - CMD: `{.cmd .cmdc} bs<https://example.com> `
+    - HTML: <| bs<https://example.com> |>
+    - Rendered: bs<https://example.com>
+    ==
+  1.
+    Invitation to spammers:
+    ==
+    - CMD: `{.cmd .cmdc} s<mailto:mail@example.com> `
+    - HTML: <| s<mailto:mail@example.com> |>
+    - Rendered: s<mailto:mail@example.com>
     ==
   ++
 }}
