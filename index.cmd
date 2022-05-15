@@ -1,2507 +1,3357 @@
-%%%%
+OrdinaryDictionaryReplacement: #boilerplate-properties-override
+- queue_position: BEFORE #boilerplate-properties
+- apply_mode: SIMULTANEOUS
+* %head-elements-before-viewport -->
+    <meta name="author" content="Conway">
+    <meta name="description" content="Documentation for Conway-Markdown (CMD).">
+* %head-elements-after-viewport -->
+    <link rel="stylesheet" href="/cmd.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+* %title --> Conway-Markdown (CMD) v%cmd-version
 
-%author Conway
-%title Conway-Markdown (CMD)
-%date-created 2020-04-05
-%date-modified 2022-03-25
-%resources a~~
-  <link rel="stylesheet" href="/cmd.min.css">
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
-    integrity="sha384-\
-      zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq\
-    "
-    crossorigin="anonymous">
-  <script defer
-    src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
-    integrity="sha384-\
-      y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz\
-    "
-    crossorigin="anonymous"></script>
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    let elements = document.getElementsByClassName("js-maths");
-    for (let i = 0; i < elements.length; i++) {
-      let element = elements[i]
-      katex.render(
-        element.textContent,
-        element,
-        {displayMode: element.tagName == "DIV"}
-      );
-    }
-  })
-  </script>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
-  <meta name="msapplication-TileColor" content="#00aba9">
-  <meta name="theme-color" content="#ffffff">
-~~
-%%%%
+OrdinaryDictionaryReplacement: #bold-code
+- queue_position: BEFORE #display-code
+- apply_mode: SIMULTANEOUS
+* @( --> <b>
+* )@ --> </b>
+- concluding_replacements: #placeholder-protect
+
+OrdinaryDictionaryReplacement: #details-summary-shorthand
+- queue_position: BEFORE #whitespace
+- apply_mode: SIMULTANEOUS
+* {{def -->
+    '{{
+    <summary>Definition</summary>
+  '
+* {{des -->
+    '{{
+    <summary>Description</summary>
+  '
+* {{syn -->
+    '{{
+    <summary>Syntax</summary>
+  '
+* {{ex -->
+    '{{
+    <summary>Examples</summary>
+  '
+* {{dep -->
+    '{{{-open}
+    <summary>Dependants</summary>
+  '
+
+FixedDelimitersReplacement: #details
+- queue_position: AFTER #details-summary-shorthand
+- syntax_type: INLINE
+- opening_delimiter: {{
+- attribute_specifications: open
+- closing_delimiter: }}
+- tag_name: details
 
 
-<## {^^ Syntax (display) ^^} ##>
-{%
-  \{ \^\^ [\s]*
-    (?P<content> [\s\S]*? )
-  [\s]* \^\^ \}
-%
-  <pre class="cmd syntax"><code>\g<content></code></pre>
-%}
-
-<## {^ Inline syntax ^} ##>
-{%
-  \{ \^ [\s]*
-    (?P<content> [\s\S]*? )
-  [\s]* \^ \}
-%
-  <code>\g<content></code>
-%}
-
-<## Delimiting character or run \C \X \Y \Z ##>
-{%
-  \\ (?P<character> [CXYZ])
-%
-  \\<\g<character>\\>
-%}
-
-<## {{ Repeatable delimiter }} ##>
-{%
-  \{{2} [\s]*
-    (?P<content> [\s\S]*? )
-  [\s]* \}{2}
-%
-  <span class="repeatable-delimiter">\g<content></span>
-%}
-
-<## <|MANDATORY|> ##>
-{%
-  < [|]
-    (?P<content> [A-Z ]+? )
-  [|] >
-%
-  <span class="mandatory-argument">\\<\g<content>\\></span>
-%}
-
-<## <|optional|> ##>
-{%
-  < [|]
-    (?P<content> [a-z ]+? )
-  [|] >
-%
-  <span class="optional-argument">\\<\g<content>\\></span>
-%}
-
-<## Heading permalinks (<h2> to <h6>) ##>
-{%
-  ^ [^\S\n]*
-  (?P<hashes> [#]{2,6} )
+RegexDictionaryReplacement: #heading-permalinks
+- queue_position: BEFORE #headings
+* (?P<opening_hashes_etc>
+    [#]{2,6}
     \{
-      [#] (?P<id_> [\S]+? )
+      [#] (?P<id_> [\S]+ )
     \}
-  [\s]+
-    (?P<content> [\s\S]*? )
-  (?P=hashes)
-%
-  \g<hashes>{#\g<id_>}
-    <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
-    \g<content>
-  \g<hashes>
-%}
-
-<## U+E000 PRIVATE USE AREA ##>
-{: \e000 :  :}
-
-
-
-# %title #
-
-
-
-||||{.page-properties}
-  First created: %date-created \+
-  Last modified: %date-modified
-||||
-
-====
-* This page's source CMD: [index.cmd][source-cmd]
-* This page's output HTML: [index.html][output-html]
-* GitHub repositories:
-    [conway-markdown][cmd-repo],
-    [conway-markdown.github.io][cmd-docs-repo]
-====
-
-----
-Conway-Markdown (CMD) is the result of someone joking that
-"the filenames would look like Windows executables from the 90s".
-Inspired by the backticks of John Gruber's [Markdown],
-CMD uses fence-style constructs
-where an {{arbitrarily repeatable delimiter symbol}}
-is used to wrap shorter runs of that symbol.
-----
-
-----
-While Markdown is really an excellent syntax,
-there are many things which I've always wanted to do in Markdown,
-which I can't without some sort of extension
-(or falling back to writing plain HTML):
-----
-++++
-1.  Set the width of [images](#images)
-2.  Add [`id` and `class`](#attribute-specifications) to elements
-3.  Write [arbitrary text](#cmd-literals) outside of code elements
-    without using backslash escapes or HTML (ampersand) entities
-4.  [Include](#inclusions) content from another file (e.g.~a template)
-5.  Use [`<b>`, `<i>`, and `<cite>` elements](#inline-semantics),
-    not just `<strong>` and `<em>`
-6.  Use [`<div>` elements](#blocks) without falling back to HTML
-7.  [Define my own syntax](#regex-replacements) as I go.
-++++
-----
-CMD addresses each of these.
-----
-
-
-##{#installation}
-  Installation
-##
-
-----
-Requires Python~3.6+.
-----
-----
-Since this is just a crappy, single-file regex converter,
-there is no plan on turning it into a proper Python package any time soon.
-In the meantime:
-----
-````
-$ cd some-directory/
-$ git clone https://github.com/conway-markdown/conway-markdown.git
-````
-====
-* If you are using Linux or Mac,
-  make an alias for `some-directory/conway-markdown/cmd.py` and invoke that.
-* If you are using Windows,
-  add `some-directory` to the `%PATH%` variable and invoke `cmd.py`.
-====
-
-
-##{#usage}
-  Usage
-##
-
-----
-Convert a CMD file to HTML, outputting to `cmd_name.html`:
-----
-
-````
-$ cmd.py [cmd_name[.[cmd]]]
-````
-
-----
-Omit `[cmd_name[.[cmd]]]` to convert all CMD files
-in the current directory (at all levels),
-except those listed in `.cmdignore`.
-----
-
-
-##{#syntax}
-  Syntax
-##
-
-----
-Since CMD-to-HTML conversion is merely a bunch of regex replacements
-with some dictionaries for temporary storage of strings,
-the syntax for earlier replacements will have higher precedence
-than that for later replacements.
-The syntax of CMD, in the order of processing, is thus:
-----
-======
-* [CMD literals `~~~ ~~ ~~ ~~~`] [cmd literals]
-* [Display code ``` ``↵ ↵`` ```](#display-code)
-* [Inline code `` ` ` ``](#inline-code)
-* [Comments `<# #>`](#comments)
-* [Display maths `$$↵ ↵$$`](#display-maths)
-* [Inline maths `$ $`](#inline-maths)
-* [Inclusions `{+ +}`](#inclusions)
-* [Regex replacement definitions `{% % %}`](#regex-replacements)
-* [Ordinary replacement definitions `{: : :}`](#ordinary-replacements)
-* [Preamble `%%↵ ↵%%`](#preamble)
-* [Blocks `----↵ ↵----` etc.](#blocks)
-  ====
-  * [List items `*`, `+`, `-`, `1.`](#list-items)
-  ====
-* [Tables `''''↵ ↵''''`](#tables)
-  ====
-  * [Table cells `;` `,`](#table-cells)
-  * [Table rows `==`](#table-rows)
-  * [Table parts `|^`, `|:`, `|_`](#table-parts)
-  ====
-* [Escapes `\\` etc.](#escapes)
-* [Line continuations `\↵`](#line-continuations)
-* [Reference-style definitions `@[ ] @`][ref-defs]
-* [Images](#images)
-  ====
-  * [Inline-style images `![ ]( )`](#inline-style-images)
-  * [Reference-style images `![ ][ ]`](#reference-style-images)
-  ====
-* [Links](#links)
-  ====
-  * [Direct-style links `< : >`](#direct-style-links)
-  * [Inline-style links `[ ]( )`](#inline-style-links)
-  * [Reference-style links `[ ][ ]`](#reference-style-links)
-  ====
-* [Headings `# #`](#headings)
-* [Inline semantics `* *`, `** **`, `_ _`, `__ __`](#inline-semantics)
-* [Whitespace](#whitespace)
-======
-
-
-###{#attribute-specifications}
-  Attribute specifications
-###
-
-@[as] #attribute-specifications @
-
-----
-Most CMD syntaxes have an optional curly-bracketed part
-which allows for the specification of attributes.
-The following forms are recognised:
-----
-
-{^^
-  <|NAME|>=<|VALUE|>
-  \#<|ID|>
-  .<|CLASS|>
-  l<|LANG|>
-  r<|ROWSPAN|>
-  c<|COLSPAN|>
-  w<|WIDTH|>
-  h<|HEIGHT|>
-  s<|STYLE|>
-^^}
-
-----
-The first is called "full form"; the rest are "short forms".
-An optional equals sign may be used after the leading character in short forms.
-Unrecognised short forms are ignored.
-If the class attribute is specified more than once,
-the new value is appended to the existing values.
-If a non-class attribute is specified more than once,
-the latest specification shall prevail.
-To omit an attribute, use the special value `\-`.
-For {^ <|VALUE|> ^} etc. containing whitespace, use [CMD literals].
-For {^ <|ID|> ^} etc. containing equals signs, use [CMD literals].
-----
-
-====
-* CMD
-  ````{.cmd}
-  ||||{#first .hot #second .cold}
-    Blah
-  ||||
-  ````
-
-* HTML
-  ````{.html}
-  <div id="second" class="hot cold">
-  Blah
-  </div>
-  ````
-====
-
-----
-CMD attribute specifications are inspired
-by [kramdown's inline attribute lists][ial].
-----
-
-@[ial] https://kramdown.gettalong.org/syntax#inline-attribute-lists @
-
-====
-* CMD
-  ````{.cmd}
-  **{l=de s=color:red} Achtung!**
-  ````
-
-* HTML
-  ````{.html}
-  <strong lang="de" style="color:red">Achtung!</strong>
-  ````
-
-* Rendered
-  ----
-  \/**{l=de s=color:red} Achtung!**
-  ----
-
-====
-
-
-
-###{#cmd-literals}
-  CMD literals
-###
-
-{^^
-  <|flags|>{{~~~ ~~ ~~~}} <|CONTENT|> {{~~~ ~~ ~~~}}
-^^}
-
-----
-Produces {^ <|CONTENT|> ^} literally,
-with HTML syntax-character escaping and de-indentation.
-Whitespace around {^ <|CONTENT|> ^} is stripped.
-{^ <|flags|> ^} may consist of zero or more of the following characters:
-----
-====
-* `u` to leave HTML syntax characters unescaped
-* `c` to process [line continuations](#line-continuations)
-* `w` to process [whitespace](#whitespace) completely
-* `a` to enable all flags above
-====
-----
-For {^ <|CONTENT|> ^} containing two or more consecutive tildes,
-use a longer run of {{tildes}} in the delimiters.
-----
-
-----
-A good use case is to wrap `<script>` elements inside `~~~ u~~ ~~ ~~~`.
-This makes it immune to all CMD processing
-(e.g.~conversion of `* *` to `<em> </em>`).
-----
-
-####{#cmd-literals-basic}
-  Example 1: basic usage
-####
-
-====
-* CMD
-  ````{.cmd}
-  ~~~~~
-    Escaping: ~~ & < > ~~.
-    Whitespace stripping: {~~      yes      ~~}.
-    Enough tildes: ~~~~ ~~~ ~~ never ~~ ~~~ ~~~~.
-  ~~~~~
-  ````
-
-* HTML
-  ````{.html}
-  ~~~~~
-    Escaping: &amp; &lt; &gt;.
-    Whitespace stripping: {yes}.
-    Enough tildes: ~~~ ~~ never ~~ ~~~.
-  ~~~~~
-  ````
-
-* Rendered
-  ----
-    Escaping: ~~ & < > ~~.
-    Whitespace stripping: {~~      yes      ~~}.
-    Enough tildes: ~~~~ ~~~ ~~ never ~~ ~~~ ~~~~.
-  ----
-
-====
-
-####{#flags}
-  Example 2: flags
-####
-
-@[flags examples] #flags @
-
-#####{#unescaped-flag}
-  2.1~Unescaped flag `u`
-#####
-
-====
-* CMD
-  ````{.cmd}
-  ~~~~
-    Escaping:     ~~ <b>blah</b> ~~.
-    No escaping: u~~ <b>cough</b> ~~.
-  ~~~~
-  ````
-
-* HTML
-  ````{.html}
-    Escaping:     &lt;b&gt;blah&lt;/b&gt;.
-    No escaping: <b>cough</b>.
-  ````
-
-* Rendered
-  ----
-    Escaping:     ~~ <b>blah</b> ~~.
-    No escaping: u~~ <b>cough</b> ~~.
-  ----
-
-====
-
-#####{#continuations-flag}
-  2.2~Continuations flag `c`
-#####
-
-====
-* CMD
-  ````{.cmd}
-  ~~~~
-    uc~~
-      <pre>
-        Blah blah blah\
-          Cough cough cough
-            Yep yep yep
-      </pre>
-    ~~
-  ~~~~
-  ````
-
-* HTML
-  ````{.html}
-      <pre>
-        Blah blah blahCough cough cough
-            Yep yep yep
-      </pre>
-  ````
-
-* Rendered
-    uc~~
-      <pre>
-        Blah blah blah\
-          Cough cough cough
-            Yep yep yep
-      </pre>
-    ~~
-
-====
-
-#####{#whitespace-flag}
-  2.3~Whitespace flag `w`
-#####
-
-@[whitespace flag example] #whitespace-flag @
-
-====
-* CMD
-  ````{.cmd}
-  ~~~~
-    uw~~
-      <pre>
-        Blah blah blah
-          Cough cough cough
-            Yep yep yep
-      </pre>
-    ~~
-  ~~~~
-  ````
-
-* HTML
-  ````{.html}
-    <pre>
-    Blah blah blah
-    Cough cough cough
-    Yep yep yep
-    </pre>
-  ````
-
-* Rendered
-    uw~~
-      <pre>
-        Blah blah blah
-          Cough cough cough
-            Yep yep yep
-      </pre>
-    ~~
-
-====
-
-
-
-###{#display-code}
-  Display code
-###
-
-{^^
-  \/<|flags|>{{ ~~``~~ }}{<|attribute specification|>}
-  \/  <|CONTENT|>
-  \/{{ ~~``~~ }}
-^^}
-
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-----
-Produces the display code
-{^
-  ~~ <pre ~~<|ATTRIBUTES|>~~ > ~~\
-    ~~ <code> ~~\
-         <|CONTENT|>\
-    ~~ </code> ~~\
-  ~~ </pre> ~~
-^}
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-[built from {^ <|attribute specification|> ^}][as],
-with HTML syntax-character escaping
-and de-indentation for {^ <|CONTENT|> ^}.
-{^ <|flags|> ^} may consist of zero or more of the following characters
-(see [flags examples]):
-----
-====
-* `u` to leave HTML syntax characters unescaped
-* `c` to process [line continuations](#line-continuations)
-* `w` to process [whitespace](#whitespace) completely
-* `a` to enable all flags above
-====
-----
-For {^ <|CONTENT|> ^} containing two or more consecutive backticks,
-use a longer run of {{backticks}} in the delimiters.
-----
-
-====
-* CMD
-  ``````{.cmd}
-  ~~~~
-    ``{#id-0 .class-1 .class-2}
-        Escaping: & < >.
-        Note that CMD literals have higher precedence,
-        since they are processed first: ~~~ ~~ literally ~~ ~~~.
-            Uniform
-            de-indentation:
-            yes.
-    ``
-    ````
-      ``
-      Use more backticks as required.
-      If <id> and <class> are omitted,
-      no corresponding attributes are generated.
-      ``
-    ````
-  ~~~~
-  ``````
-
-* HTML
-  ``````{.html}
-  ~~~~
-    <pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
-    Note that CMD literals have higher precedence,
-    since they are processed first: ~~ literally ~~.
-        Uniform
-        de-indentation:
-        yes.
-    </code></pre>
-    <pre><code>``
-    Use more backticks as required.
-    If &lt;id&gt; and &lt;class&gt; are omitted,
-    no corresponding attributes are generated.
-    ``
-    </code></pre>
-  ~~~~
-  ``````
-
-* Rendered
-    ``{#id-0 .class-1 .class-2}
-        Escaping: & < >.
-        Note that CMD literals have higher precedence,
-        since they are processed first: ~~~ ~~ literally ~~ ~~~.
-            Uniform
-            de-indentation:
-            yes.
-    ``
-    ````
-      ``
-      Use more backticks as required.
-      If <id> and <class> are omitted,
-      no corresponding attributes are generated.
-      ``
-    ````
-
-====
-
-
-###{#inline-code}
-  Inline code
-###
-
-{^^
-  <|flags|>{{ ~~`~~ }} <|CONTENT|> {{ ~~`~~ }}
-^^}
-
-----
-Produces the inline code
-{^
-  ~~ <code> ~~\
-    <|CONTENT|>\
-  ~~ </code> ~~
-^},
-with HTML syntax-character escaping
-and de-indentation for {^ <|CONTENT|> ^}.
-Whitespace around {^ <|CONTENT|> ^} is stripped.
-{^ <|flags|> ^} may consist of zero or more of the following characters
-(see [flags examples]):
-----
-====
-* `u` to leave HTML syntax characters unescaped
-* `c` to process [line continuations](#line-continuations)
-* `w` to process [whitespace](#whitespace) completely
-* `a` to enable all flags above
-====
-----
-For {^ <|CONTENT|> ^} containing one or more consecutive backticks
-which are not protected by [CMD literals],
-use a longer run of {{backticks}} in the delimiters.
-----
-
-====
-* CMD
-  ````{.cmd}
-    `` The escaped form of & is &amp;. Here is a tilde: `. ``
-  ````
-
-* HTML
-  ````{.html}
-    <code>The escaped form of &amp; is &amp;amp;. Here is a tilde: `.</code>
-  ````
-
-* Rendered
-  ----
-    `` The escaped form of & is &amp;. Here is a tilde: `. ``
-  ----
-
-====
-
-
-###{#comments}
-  Comments
-###
-
-{^^
-  \<{{\#}} <|COMMENT|> {{\#}}\>
-^^}
-
-----
-Removed, along with any preceding horizontal whitespace.
-For {^ <|COMMENT|> ^} containing one or more consecutive hashes
-followed by a closing angle bracket,
-use a longer run of {{hashes}} in the delimiters.
-----
-----
-Although comments are weaker than literals and code
-they may still be used to remove them.
-For instance ` ~~~ ~~ A <# B #> ~~ ~~~ ` becomes ` A <# B #> `,
-whereas ` ~~~ <# A ~~ B ~~ #> ~~~ ` is removed entirely.
-In this sense they are stronger than literals and code.
-----
-
-
-
-###{#display-maths}
-  Display maths
-###
-
-{^^
-  \/<|flags|>{{ ~~$$~~ }}{<|attribute specification|>}
-  \/  <|CONTENT|>
-  \/{{ ~~$$~~ }}
-^^}
-
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-----
-Produces
-{^
-  ~~ <div ~~<|ATTRIBUTES|>~~ > ~~\
-       <|CONTENT|>\
-  ~~ </div> ~~
-^}
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <|attribute specification|> ^} with `.js-maths` prepended,
-with HTML syntax-character escaping
-and de-indentation for {^ <|CONTENT|> ^}.
-{^ <|flags|> ^} may consist of zero or more of the following characters
-(see [whitespace flag example]):
-----
-====
-* `w` to process [whitespace](#whitespace) completely
-====
-----
-For {^ <|CONTENT|> ^} containing two or more consecutive dollar signs
-which are not protected by [CMD literals],
-use a longer run of {{dollar signs}} in the delimiters.
-----
-
-----
-This is to be used with some sort of JavaScript code
-which renders equations based on the class `js-maths`.
-On this page I am using [KaTeX].
-----
-
-====
-* CMD
-  ````{.cmd}
-    $$
-      1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-        = \frac{\pi^2}{6}
-        < 2
-    $$
-  ````
-
-* HTML
-  ````{.html}
-    <div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-      = \frac{\pi^2}{6}
-      &lt; 2
-    </div>
-  ````
-
-* Rendered
-    $$
-      1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-        = \frac{\pi^2}{6}
-        < 2
-    $$
-
-====
-
-
-###{#inline-maths}
-  Inline maths
-###
-
-{^^
-  <|flags|>{{ ~~$~~ }} <|CONTENT|> {{ ~~$~~ }}
-^^}
-
-----
-Produces
-{^
-  ~~ <span class="js-maths"> ~~\
-    <|CONTENT|>\
-  ~~ </span> ~~
-^},
-with HTML syntax-character escaping for {^ <|CONTENT|> ^}.
-Whitespace around {^ <|CONTENT|> ^} is stripped.
-{^ <|flags|> ^} may consist of zero or more of the following characters
-(see [whitespace flag example]):
-----
-====
-* `w` to process [whitespace](#whitespace) completely
-====
-----
-For {^ <|CONTENT|> ^} containing one or more consecutive dollar signs
-which are not protected by [CMD literals],
-use a longer run of {{dollar signs}} in the delimiters.
-----
-
-----
-This is to be used with some sort of JavaScript code
-which renders equations based on the class `js-maths`.
-On this page I am using [KaTeX].
-----
-
-====
-* CMD
-  ````{.cmd}
-    A contrived instance of multiple dollar signs in inline maths:
-    $$$ \text{Yea, \$$d$ means $d$~dollars.} $$$
-  ````
-
-* HTML
-  ````{.html}
-    A contrived instance of multiple dollar signs in inline maths:
-    <span class="js-maths">\text{Yea, \$$d$ means $d$~dollars.}</span>
-  ````
-
-* Rendered
-  ----
-    A contrived instance of multiple dollar signs in inline maths:
-    $$$ \text{Yea, \$$d$ means $d$~dollars.} $$$
-  ----
-
-====
-
-
-###{#inclusions}
-  Inclusions
-###
-
-{^^
-  ~~ { ~~{{ + }} <|FILE NAME|> {{ + }}~~ } ~~
-^^}
-
-----
-Includes the content of the file {^ <|FILE NAME|> ^}.
-If {^ <|FILE NAME|> ^} begins with a slash,
-it is reckoned relative to the current directory of the terminal;
-otherwise it is reckoned relative to the current CMD file.
-For {^ <|FILE NAME|> ^} containing one or more consecutive plus signs
-followed by a closing curly bracket,
-use a longer run of {{plus signs}} in the delimiters.
-----
-
-----
-All of the syntax above (CMD literals through to inline maths) is processed.
-Unlike nested `\input` in LaTeX, nested inclusions are not processed.
-----
-
-====
-* CMD
-  ````{.cmd}
-    {+ inclusion.txt +}
-  ````
-
-* HTML
-  ````{.html}
-  This is content from <a href="/inclusion.txt"><code>inclusion.txt</code></a>.
-  Nested inclusions are not processed,
-  so there is no need to worry about recursion errors: {+ inclusion.txt +}
-  ````
-
-* Rendered
-  ----
-    {+ inclusion.txt +}
-  ----
-
-====
-
-
-###{#regex-replacements}
-  Regex replacement definitions
-###
-
-{^^
-  <|flag|>~~{~~{{ % }} <|PATTERN|> {{ % }} <|REPLACEMENT|> {{ % }}~~}~~
-^^}
-
-----
-Regex replacement definition
-for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}
-according to Python regex syntax,
-with the flags `re.ASCII`, `re.MULTILINE`, and `re.VERBOSE` enabled.
-----
-----
-Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
-For {^ <|PATTERN|> ^} or {^ <|REPLACEMENT|> ^} containing
-one or more consecutive percent signs,
-use a longer run of {{percent signs}} in the delimiters.
-For {^ <|PATTERN|> ^} matching any of the syntax above,
-which should not be processed using that syntax, use CMD literals.
-{^ <|flag|> ^} may consist of zero or one of the following characters,
-and specifies when the regex replacement is to be applied:
-----
-====
-* `A` for immediately after processing regex replacement definitions
-* `p` for just before processing [preamble](#preamble)
-* `b` for just before processing [blocks](#blocks)
-* `t` for just before processing [tables](#tables)
-* `e` for just before processing [escapes]
-* `c` for just before processing [line continuations](#line-continuations)
-* `r` for just before processing [reference-style definitions][ref-defs]
-* `i` for just before processing [images](#images)
-* `l` for just before processing [links](#links)
-* `h` for just before processing [headings](#headings)
-* `s` for just before processing [inline semantics](#inline-semantics)
-* `w` for just before processing [whitespace](#whitespace)
-* `Z` for just before replacing placeholder strings
-====
-----
-If {^ <|flag|> ^} is empty, it defaults to `A`.
-----
-
-----
-All regex replacement definitions are read and stored.
-If the same pattern is specified more than once for a given flag,
-the latest definition shall prevail.
-----
-
-----
-As an example, the following regex replacement is used
-to automatically insert the permalinks
-before the section headings (`<h2>` to `<h6>`) in this page:
-----
-````{.cmd}
-  {%
-    ^ [^\S\n]*
-    (?P<hashes> [#]{2,6} )
-      \{
-        [#] (?P<id_> [\S]+? )
-      \}
     [\s]+
-      (?P<content> [\s\S]*? )
-    (?P=hashes)
-  %
-    \g<hashes>{#\g<id_>}
-      <a class="permalink" href="#\g<id_>" aria-label="Permalink"></a>\\
-      \g<content>
-    \g<hashes>
-  %}
-````
+  )
+    -->
+  \g<opening_hashes_etc> []{.permalink aria-label=Permalink}(#\g<id_>)
 
-----
-**Warning:** malicious or careless user-defined regex replacements
-will break the normal CMD syntax.
-To avoid breaking placeholder storage
-(used to protect portions of the markup from further processing),
-do not use replacements to alter placeholder strings,
-which are of the form {^ \e000<|N|>\e000 ^},
-where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
-and {^ <|N|> ^} is an integer.
-To avoid breaking properties,
-do not use replacements to alter property strings,
-which are of the form {^ %<|PROPERTY NAME|> ^}.
-----
+ExtensibleFenceReplacement: #html-as-display-code
+- queue_position: BEFORE #placeholder-unprotect
+- syntax_type: BLOCK
+- prologue_delimiter: <
+- extensible_delimiter: ||
+- attribute_specifications: .html
+- content_replacements:
+    #placeholder-unprotect
+    #escape-html
+    #de-indent
+    #reduce-whitespace
+    #code-tag-wrap
+    #placeholder-protect
+- epilogue_delimiter: >
+- tag_name: pre
 
+ExtensibleFenceReplacement: #html-as-inline-code
+- queue_position: BEFORE #placeholder-unprotect
+- syntax_type: INLINE
+- prologue_delimiter: <
+- extensible_delimiter: |
+- attribute_specifications: .html
+- content_replacements:
+    #placeholder-unprotect
+    #escape-html
+    #de-indent
+    #trim-whitespace
+    #reduce-whitespace
+    #placeholder-protect
+- epilogue_delimiter: >
+- tag_name: code
 
-###{#ordinary-replacements}
-  Ordinary replacements
-###
-
-{^^
-  <|flag|>~~{~~{{ : }} <|PATTERN|> {{ : }} <|REPLACEMENT|> {{ : }}~~}~~
-^^}
-
-----
-Ordinary replacement definition
-for the replacement of {^ <|PATTERN|> ^} by {^ <|REPLACEMENT|> ^}.
-----
-----
-Whitespace around {^ <|PATTERN|> ^} and {^ <|REPLACEMENT|> ^} is stripped.
-For {^ <|PATTERN|> ^} or {^ <|REPLACEMENT|> ^} containing
-one or more consecutive colons,
-use a longer run of {{colons}} in the delimiters.
-{^ <|flag|> ^} may consist of zero or one of the following characters,
-and specifies when the ordinary replacement is to be applied:
-----
-====
-* `A` for immediately after processing ordinary replacement definitions
-* `p` for just before processing [preamble](#preamble)
-* `b` for just before processing [blocks](#blocks)
-* `t` for just before processing [tables](#tables)
-* `e` for just before processing [escapes]
-* `c` for just before processing [line continuations](#line-continuations)
-* `r` for just before processing [reference-style definitions][ref-defs]
-* `i` for just before processing [images](#images)
-* `l` for just before processing [links](#links)
-* `h` for just before processing [headings](#headings)
-* `s` for just before processing [inline semantics](#inline-semantics)
-* `w` for just before processing [whitespace](#whitespace)
-* `Z` for just before replacing placeholder strings
-====
-----
-If {^ <|flag|> ^} is empty, it defaults to `A`.
-----
-
-----
-All ordinary replacement definitions are read and stored.
-If the same pattern is specified more than once for a given flag,
-the latest definition shall prevail.
-----
-
-====
-* CMD
-  ````{.cmd}
-    {: |hup-hup| : Huzzah! :}
-    |hup-hup| \+
-    
-    {: \def1 : Earlier specifications lose. :}
-    {: \def1 : Later specifications win. :}
-    \def1 \+
-    
-    \def2 \+
-    {: \def2 : Specifications can be given anywhere. :}
-    
-    {: <out> : Nesting will work provided the <in> is given later. :}
-    {: <in> : inner specification :}
-    <out>
-  ````
-
-* Rendered
-  ----
-    {: |hup-hup| : Huzzah! :}
-    |hup-hup| \+
-    
-    {: \def1 : Earlier specifications lose. :}
-    {: \def1 : Later specifications win. :}
-    \def1 \+
-    
-    \def2 \+
-    {: \def2 : Specifications can be given anywhere. :}
-    
-    {: <out> : Nesting will work provided the <in> is given later. :}
-    {: <in> : inner specification :}
-    <out>
-  ----
-
-====
-
-----
-**Warning:** malicious or careless user-defined ordinary replacements
-will break the normal CMD syntax.
-To avoid breaking placeholder storage
-(used to protect portions of the markup from further processing),
-do not use replacements to alter placeholder strings,
-which are of the form {^ \e000<|N|>\e000 ^},
-where {^ \e000 ^} is the placeholder marker `U+E000` (Private Use Area)
-and {^ <|N|> ^} is an integer.
-To avoid breaking properties,
-do not use replacements to alter property strings,
-which are of the form {^ %<|PROPERTY NAME|> ^}.
-----
+%%%
 
 
-###{#preamble}
-  Preamble
-###
+# %title
 
-{^^
-  \/{{ %% }}
-  \/  <|CONTENT|>
-  \/{{ %% }}
-^^}
+--
+Conway-Markdown (CMD) is:
+--
+==
+- A replacement-driven markup language inspired by Markdown.
+- A demonstration of the folly of throwing regex at a parsing problem.
+- The result of someone joking that
+  ""the filenames would look like Windows executables from the 90s"".
+- Implemented in [Python 3.{whatever Debian stable is at}][python3].
+- Licensed under "MIT No Attribution" (MIT-0).
+==
 
-----
-Processes the preamble.
-{^ <|CONTENT|> ^} is split into property definitions
-according to leading occurrences of {^ %<|PROPERTY NAME|> ^},
-where {^ <|PROPERTY NAME|> ^} may only contain letters, digits, and hyphens.
-Property definitions end at the next property definition,
-or at the end of the (preamble) content being split.
-Each property definition is stored and may be referenced
-by writing {^ %<|PROPERTY NAME|> ^},
-called a property string, anywhere else in the document.
-If the same property is specified more than once,
-the latest definition shall prevail.
-----
-
-----
-This produces the HTML preamble,
-i.e.~everything from `<!DOCTYPE html>` through to `<body>`.
-----
-
-----
-For {^ <|CONTENT|> ^} containing two or more consecutive percent signs
-which are not protected by CMD literals,
-use a longer run of {{percent signs}} in the delimiters.
-----
-
-----
-Only the first occurrence of a preamble in the markup is processed.
-----
-
-----
-The following properties, called original properties,
-are accorded special treatment.
-If omitted from a preamble,
-they take the default values shown beside them:
-----
-````{.cmd}
-  %lang en
-  %viewport width=device-width, initial-scale=1
-  %title Title
-  %title-suffix
-  %author
-  %date-created yyyy-mm-dd
-  %date-modified yyyy-mm-dd
-  %resources
-  %description
-  %css
-  %onload-js
-  %footer-copyright-remark
-  %footer-remark
-````
-
-----
-The following properties, called derived properties,
-are computed based on the supplied original properties:
-----
-````{.cmd}
-  %html-lang-attribute
-  %meta-element-author
-  %meta-element-description
-  %meta-element-viewport
-  %title-element
-  %style-element
-  %body-onload-attribute
-  %year-created
-  %year-modified
-  %year-modified-next
-  %footer-element
-  %cmd-name
-  %cmd-name-file
-  %url
-  %clean-url
-````
-
-####{#preamble-minimal} Example 1: a minimal HTML file ####
-
-====
-* CMD
-  ````{.cmd}
-    %%
-    %%
-  ````
-
-* HTML
-  ````{.html}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    </head>
-    <body>
-    </body>
-    </html>
-  ````
-
-====
-
-####{#preamble-not-minimal} Example 2: a not-so-minimal HTML file ####
-
-====
-* CMD
-  ````{.cmd}
-  ~~~~
-    %%
-      %lang en-AU
-      %title My title
-      %title-suffix \ | My site
-      %author Me
-      %date-created 2020-04-11
-      %date-modified 2020-07-19
-      %description
-        Example CMD-to-HTML output.
-      %css a~~
-        #special {
-          color: purple;
-        }
-      ~~
-      %onload-js
-        special.textContent += ' This is a special paragraph!'
-    %%
-    
-    # %title #
-    
-    ----{#special}
-      The title of this page is "%title", and the author is %author.
-      At the time of writing, next year will be %year-modified-next.
-    ----
-    
-    %footer-element
-  ~~~~
-  ````
-
-* HTML
-  ````{.html}
-    <!DOCTYPE html>
-    <html lang="en-AU">
-    <head>
-    <meta charset="utf-8">
-    <meta name="author" content="Me">
-    <meta name="description" content="Example CMD-to-HTML output.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My title | My site</title>
-    <style>#special {
-    color: purple;
-    }</style>
-    </head>
-    <body onload="special.textContent += ' This is a special paragraph!'">
-    <h1>My title</h1>
-    <p id="special">
-    The title of this page is "My title", and the author is Me.
-    At the time of writing, next year will be 2021.
-    </p>
-    <footer>
-    ©&nbsp;2020&nbsp;Me.
-    </footer>
-    </body>
-    </html>
-  ````
-
-====
+[python3]: https://packages.debian.org/stable/python3
 
 
-###{#blocks}
-  Blocks
-###
+##{#contents} Contents
 
-{^^
-  \/{{ \C\C\C\C }}{<|attribute specification|>}
-  \/  <|CONTENT|>
-  \/{{ \C\C\C\C }}
-^^}
-
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-----
-Produces the block
-{^
-  \<<|TAG NAME|><|ATTRIBUTES|>↵\
-     <|CONTENT|>\
-  \</<|TAG NAME|>\>
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-[built from {^ <|attribute specification|> ^}][as].
-For {^ <|CONTENT|> ^} containing four or more
-consecutive delimiting characters
-which are not protected by [CMD literals],
-use a longer run of {{delimiting characters}} in the delimiters.
-----
-
-----
-The following delimiting characters {^ {{\C}} ^} are used:
-----
 ======
-* Non-lists:
+- [Installation and usage](#installation-and-usage)
+- [Authoring CMD files](#authoring-cmd-files)
+- [Standard CMD replacement rules](#standard-rules)
   ====
-  * `-` for `<p>`
-  * `|` for `<div>`
-  * `"` for `<blockquote>`
+  - [Standard queued replacements](#standard-queued-replacements)
+    ++{start=0}
+    0. [`#placeholder-markers`]
+    1. [`#literals`]
+    2. [`#display-code`]
+    3. [`#comments`]
+    4. [`#divisions`]
+    5. [`#blockquotes`]
+    6. [`#unordered-lists`]
+    7. [`#ordered-lists`]
+    8. [`#tables`]
+    9. [`#headings`]
+    10. [`#paragraphs`]
+    11. [`#inline-code`]
+    12. [`#boilerplate`]
+    13. [`#boilerplate-properties`]
+    14. [`#cmd-properties`]
+    15. [`#boilerplate-protect`]
+    16. [`#backslash-escapes`]
+    17. [`#backslash-continuations`]
+    18. [`#reference-definitions`]
+    19. [`#specified-images`]
+    20. [`#referenced-images`]
+    21. [`#explicit-links`]
+    22. [`#specified-links`]
+    23. [`#referenced-links`]
+    24. [`#inline-semantics`]
+    25. [`#escape-idle-html`]
+    26. [`#whitespace`]
+    27. [`#placeholder-unprotect`]
+    ++
+  - [Standard unqueued replacements](#standard-unqueued-replacements)
+    ==
+    - [`#placeholder-protect`]
+    - [`#de-indent`]
+    - [`#escape-html`]
+    - [`#trim-whitespace`]
+    - [`#reduce-whitespace`]
+    - [`#code-tag-wrap`]
+    - [`#prepend-newline`]
+    - [`#unordered-list-items`]
+    - [`#ordered-list-items`]
+    - [`#mark-table-headers-for-preceding-table-data`]
+    - [`#table-headers`]
+    - [`#table-data`]
+    - [`#unmark-table-headers-for-preceding-table-data`]
+    - [`#table-rows`]
+    - [`#table-head`]
+    - [`#table-body`]
+    - [`#table-foot`]
+    - [`#suppress-scheme`]
+    - [`#angle-bracket-wrap`]
+    ==
   ====
-* Lists:
-  ====
-  * `=` for `<ul>`
-  * `+` for `<ol>`
-  ====
+- [CMD replacement rule syntax](#replacement-rule-syntax)
+- [CMD placeholders](#cmd-placeholders)
+- [CMD attribute specifications](#cmd-attribute-specifications)
+- [Repository links](#repository-links)
 ======
 
-----
-In the implementation, a recursive call is used to process nested blocks.
-----
 
-####{#list-items}
-  List items
-####
+##{#installation-and-usage} Installation and usage
 
-----
-For list blocks, {^ <|CONTENT|> ^} is split into list items `<li>`
-according to leading occurrences of the following:
-----
+++{start=0}
+0.
+  Clone the [repository of the Python implementation][conway-markdown]:
+  ``
+  $ git clone https://github.com/conway-markdown/conway-markdown
+  ``
+  --
+  Since `cmd.py` is [a shitty single-file script][`cmd.py`],
+  it will not be turned into a proper Python package.
+  --
+++
 
-{^^ \Y{<|attribute specification|>} ^^}
+[`cmd.py`]:
+  https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py
 
-----
-The following delimiters {^ \Y ^} for list items are used:
-----
-====
-* `*`
-* `+`
-* `-`
-* `1.` (or any run of digits followed by a full stop)
-====
-----
-List items end at the next list item,
-or at the end of the content being split.
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
 
-####{#blocks-nesting} Example 1: nesting ####
+###{#linux-terminals} Linux terminals, macOS Terminal, Git BASH for Windows
 
-================
-* CMD
-  ````{.cmd}
-    ----
-    A paragraph.
-    ----
-    ======
-    * A nested unordered list:
-      ====
-      1. Unlike John Gruber's Markdown, indentation doesn't matter.
-          * This is on the same level as the item above.
-      ====
-    * A nested ordered list:
-      ++++
-      * A leading asterisk `*` can be used for `<li>` in `<ol>`.
-      + Also a plus sign `+`.
-      - Also a hyphen `-`.
-      2.  An easy way to remember the list delimiters is that
-          unordered list items stay constant (`====`) while
-          ordered list items increment (`++++`).
-      ++++
-    0. A leading number and full stop can be used for `<li>` in `<ul>`.
-    99999999. Any non-negative integer will do.
-      """"""
-      Someone might quote this later. 
-      ====
-      * Yes, I know.
-      ====
-      """"""
-    1. They all get turned into `<li>` tags regardless.
-    ======
+++
+1.
+  Make an alias for `cmd.py` in whatever dotfile
+  you configure your aliases in:
+  ``
+  alias cmd='path/to/cmd.py'
+  ``
+
+2.
+  Invoke the alias to convert a CMD file to HTML:
+  ``
+  $ cmd [-h] [-v] [-x] [file.cmd]
+
+  Convert Conway-Markdown (CMD) to HTML.
+
+  positional arguments:
+    file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
+                   `file.` for increased productivity. Omit to convert all CMD
+                   files under the working directory.
+
+  optional arguments:
+    -h, --help     show this help message and exit
+    -v, --version  show program's version number and exit
+    -x, --verbose  run in verbose mode (prints every replacement applied)
+  ``
+++
+
+###{#windows-command-prompt} Windows Command Prompt
+
+++
+1.
+  Add the folder containing `cmd.py` to the `%PATH%` variable
+
+2.
+  Invoke `cmd.py` to convert a CMD file to HTML:
+  ``
+  > cmd.py [-h] [-v] [-x] [file.cmd]
+
+  Convert Conway-Markdown (CMD) to HTML.
+
+  positional arguments:
+    file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
+                   `file.` for increased productivity. Omit to convert all CMD
+                   files under the working directory.
+
+  optional arguments:
+    -h, --help     show this help message and exit
+    -v, --version  show program's version number and exit
+    -x, --verbose  run in verbose mode (prints every replacement applied)
+  ``
+++
+
+--
+**WARNING: on Windows, be careful not to run any `.cmd` files by accident;
+they might break your computer. God save!**
+--
+
+
+##{#authoring-cmd-files} Authoring CMD files
+
+--
+CMD files are parsed thus:
+--
+u``{.cmd}
+<b class="cmdr">«replacement rules»</b>
+«delimiter»
+<b class="cmdc">«main content»</b>
+``
+==
+- __`{.cmd .cmdr} «replacement rules»`__ are user-defined CMD replacement rules
+  that will be used in addition to the standard CMD replacement rules.
+- `{.cmd} «delimiter»` is the first occurrence of
+  3-or-more percent signs on its own line.
+  (If no `{.cmd} «delimiter»` is found in the file,
+  the whole file is parsed as `{.cmd .cmdc} «main content»`.)
+- __`{.cmd .cmdc} «main content»`__ is the CMD content
+  that will be converted to HTML according to
+  the standard and user-defined CMD replacement rules.
+==
+--
+In the implementation:
+--
+++
+1. An empty __replacement queue__ is initialised.
+2. __`STANDARD_RULES`__ in [`cmd.py`] are parsed,
+   and CMD replacement rules are added to the replacement queue accordingly.
+3. __`{.cmd .cmdr} «replacement rules»`__ in the CMD file are parsed,
+   and CMD replacement rules are added or inserted into the replacement queue
+   accordingly.
+4. The CMD replacement rules in the replacement queue are
+   __applied sequentially to `{.cmd .cmdc} «main content»`__
+   to convert it to HTML.
+++
+
+--
+To get started with writing __`{.cmd .cmdc} «main content»`__,
+read the listing of [standard CMD replacement rules](#standard-rules).
+--
+--
+To learn about writing user-defined __`{.cmd .cmdr} «replacement rules»`__,
+read about [CMD replacement rule syntax](#replacement-rule-syntax).
+--
+
+
+##{#standard-rules} Standard CMD replacement rules
+
+--
+These section lists standard CMD replacement rules
+as defined by the constant string __`STANDARD_RULES`__ in [`cmd.py`].
+--
+--
+Some replacement rules are [queued](#standard-queued-replacements),
+in that they appear explicitly in the replacement queue.
+--
+--
+Other replacement rules are [unqueued](#standard-unqueued-replacements),
+in that they do not appear explicitly in the replacement queue.
+However, they might be called by queued replacements.
+--
+
+###{#standard-queued-replacements} Standard queued replacements
+
+####{#placeholder-markers} 0. `#placeholder-markers`
+[`#placeholder-markers`]: #placeholder-markers
+
+{{def
+  ``{.cmd .cmdr}
+  PlaceholderMarkerReplacement: #placeholder-markers
+  - queue_position: ROOT
+  ``
+}}
+{{des
+  --
+  Replaces occurrences of the placeholder marker `«U+F8FF»`
+  with a [placeholder]
+  so that the occurrences will not be confounding.
+  --
+}}
+
+####{#literals} 1. `#literals`
+[`#literals`]: #literals
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #literals
+  - queue_position: AFTER #placeholder-markers
+  - syntax_type: INLINE
+  - allowed_flags:
+      u=KEEP_HTML_UNESCAPED
+      i=KEEP_INDENTED
+      w=REDUCE_WHITESPACE
+  - prologue_delimiter: <
+  - extensible_delimiter: `
+  - content_replacements:
+      #escape-html
+      #de-indent
+      #trim-whitespace
+      #reduce-whitespace
+      #placeholder-protect
+  - epilogue_delimiter: >
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(<)@@(`)@ «content» @(`)@@(>)@
   ````
-
-* Rendered
-    ----
-    A paragraph.
-    ----
-    ======
-    * A nested unordered list:
-      ====
-      1. Unlike John Gruber's Markdown, indentation doesn't matter.
-          * This is on the same level as the item above.
-      ====
-    * A nested ordered list:
-      ++++
-      * A leading asterisk `*` can be used for `<li>` in `<ol>`.
-      + Also a plus sign `+`.
-      - Also a hyphen `-`.
-      2.  An easy way to remember the list delimiters is that
-          unordered list items stay constant (`====`) while
-          ordered list items increment (`++++`).
-      ++++
-    0. A leading number and full stop can be used for `<li>` in `<ul>`.
-    99999999. Any non-negative integer will do.
-      """"""
-      Someone might quote this later. 
-      ====
-      * Yes, I know.
-      ====
-      """"""
-    1. They all get turned into `<li>` tags regardless.
-    ======
-
-================
-
-####{#blocks-id-class} Example 2: `id` and `class` ####
-
-================
-* CMD
-  ````{.cmd}
-    ----{#p-id .p-class}
-    Paragraph with `id` and `class`.
-    ----
-    ======
-    *{#li-id} List item with `id` and no `class`.
-    0.{.li-class} List item with `class` and no `id`.
-    1.{.li-class}
-      Put arbitrary whitespace after the class for more clarity.
-    ======
+  ````{.cmd .cmdc}
+    «flags»@(<)@@(`)@ «content» @(`)@@(>)@
   ````
+  ====
+  - `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
+    - `{.cmd .cmdc} i`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
+    ==
+  - The number of backticks ``{.cmd .cmdc} @(`)@ ``
+    may be increased arbitrarily.
+  ====
+}}
+{{des
+  --
+  Preserves `{.cmd .cmdc} «content»` literally.
+  --
+}}
+{{ex
+  ++
+  1.
+    Write a literal string:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` <` <b>Foo</b> `> ``> ``
+    - HTML: <| <` <b>Foo</b> `> |>
+    - Rendered: <` <b>Foo</b> `>
+    ==
+  1.
+    Keep HTML unescaped:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` u<` <b>Foo</b> `> ``> ``
+    - HTML: <| u<` <b>Foo</b> `> |>
+    - Rendered: u<` <b>Foo</b> `>
+    ==
+  1.
+    Increase the number of backticks to include content
+    that matches the `#literals` syntax itself:
+    ==
+    - CMD: ``{.cmd .cmdc} <``` <`` Literally <`literal`>. ``> ```> ``
+    - HTML: <| <`` Literally <`literal`>. ``> |>
+    - Rendered: <`` Literally <`literal`>. ``>
+    ==
+  ++
+}}
 
-* HTML
+####{#display-code} 2. `#display-code`
+[`#display-code`]: #display-code
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #display-code
+  - queue_position: AFTER #literals
+  - syntax_type: BLOCK
+  - allowed_flags:
+      u=KEEP_HTML_UNESCAPED
+      i=KEEP_INDENTED
+      w=REDUCE_WHITESPACE
+  - extensible_delimiter: ``
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #escape-html
+      #de-indent
+      #reduce-whitespace
+      #code-tag-wrap
+      #placeholder-protect
+  - tag_name: pre
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(``)@
+      «content»
+    @(``)@
+  ````
+  ````{.cmd .cmdc}
+    @(``)@{«attribute specifications»}
+      «content»
+    @(``)@
+  ````
+  ````{.cmd .cmdc}
+    «flags»@(``)@
+      «content»
+    @(``)@
+  ````
+  ````{.cmd .cmdc}
+    «flags»@(``)@{«attribute specifications»}
+      «content»
+    @(``)@
+  ````
+  ====
+  - `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
+    - `{.cmd .cmdc} i`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
+    ==
+  - The number of backticks ``{.cmd .cmdc} @(`)@ ``
+    may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces (pre-formatted) display code:
+  --
   ````{.html}
-    <p id="p-id" class="p-class">
-    Paragraph with <code>id</code> and <code>class</code>.
-    </p>
-    <ul>
-    <li id="li-id">List item with <code>id</code> and no <code>class</code>.
-    </li>
-    <li class="li-class">List item with <code>class</code> and no <code>id</code>.
-    </li>
-    <li class="li-class">Put arbitrary whitespace after the class for more clarity.
-    </li>
-    </ul>
+    @(<pre)@«attribute sequence»@(><code>)@«content»
+    @(</code></pre>)@
   ````
-================
+}}
+{{ex
+  ++
+  1.
+    Display code:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ``{.java}
+          for (int index = 0; index < count; index++)
+          {
+            // etc. etc.
+          }
+        ``
+      ````
+    - HTML:
+      <|||
+        ``{.java}
+          for (int index = 0; index < count; index++)
+          {
+            // etc. etc.
+          }
+        ``
+      |||>
+    - Rendered:
+        ``{.java}
+          for (int index = 0; index < count; index++)
+          {
+            // etc. etc.
+          }
+        ``
+    ==
+  1.
+    Use [`#literals`] with flag `{.cmd .cmdc} u` to inject HTML:
+    ==
+    - CMD:
+      ``````{.cmd .cmdc}
+      <````
+        ``
+          Injection of <b> element u<` <b>here</b> `>.
+        ``
+      ````>
+      ``````
+    - HTML:
+      <||
+        ``
+          Injection of <b> element u<` <b>here</b> `>.
+        ``
+      ||>
+    - Rendered:
+        ``
+          Injection of <b> element u<` <b>here</b> `>.
+        ``
+    ==
+  ++
+}}
 
+####{#comments} 3. `#comments`
+[`#comments`]: #comments
 
-###{#tables}
-  Tables
-###
-
-{^^
-  \/{{ '''' }}{<|attribute specification|>}
-  \/  <|CONTENT|>
-  \/{{ '''' }}
-^^}
-
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-----
-Produces the table
-{^
-  \<table<|ATTRIBUTES|>↵\
-     <|CONTENT|>\
-  \</table\>
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-[built from {^ <|attribute specification|> ^}][as].
-For {^ <|CONTENT|> ^} containing four or more apostrophes
-which are not protected by [CMD literals],
-use a longer run of {{apostrophes}} in the delimiters.
-----
-
-----
-In the implementation, a recursive call is used to process nested tables.
-----
-
-----
-{^ <|CONTENT|> ^} is
-----
-++++
-1.  split into table cells `<th>`, `<td>`
-    according to [table cell processing](#table-cells),
-2.  split into table rows `<tr>`
-    according to [table row processing](#table-rows), and
-3.  split into table parts `<thead>`, `<tbody>`, `<tfoot>`
-    according to [table part processing](#table-parts).
-++++
-
-####{#table-cells}
-  Table cells
-####
-
-----
-{^ <|CONTENT|> ^} is split into table cells `<th>`, `<td>`
-according to leading occurrences of the following:
-----
-
-{^^ \Z{<|attribute specification|>} ^^}
-
-----
-The following delimiters {^ \Z ^} for table cells are used:
-----
-====
-* `;` for `<th>`
-* `,` for `<td>`
-====
-----
-Table cells end at the next table cell, table row, or table part,
-or at the end of the content being split.
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-####{#table-rows}
-  Table rows
-####
-
-----
-{^ <|CONTENT|> ^} is split into table rows `<tr>`
-according to leading occurrences of the following:
-----
-
-{^^ =={<|attribute specification|>} ^^}
-
-----
-Table rows end at the next table row or table part,
-or at the end of the content being split.
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-####{#table-parts}
-  Table parts
-####
-
-----
-{^ <|CONTENT|> ^} is split into table parts `<thead>`, `<tbody>`, `<tfoot>`
-according to leading occurrences of the following:
-----
-
-{^^ \Y{<|attribute specification|>} ^^}
-
-----
-The following delimiters {^ \Y ^} for table parts are used:
-----
-====
-* `|^` for `<thead>`
-* `|:` for `<tbody>`
-* `|_` for `<tfoot>`
-====
-----
-Table parts end at the next table part,
-or at the end of the content being split.
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-####{#tables-without-parts}
-  Example 1: table *without* `<thead>`, `<tbody>`, `<tfoot>` parts
-####
-
-====
-* CMD
-  ````{.cmd}
-    ''''
-      ==
-        ; A
-        ; B
-        ; C
-        ; D
-      ==
-        , 1
-        ,{r2} 2
-        , 3
-        , 4
-      ==
-        , 5
-        ,{r3 c2} 6
-      ==
-        ,{c2} 7
-      ==
-        , 8
-        ; ?
-    ''''
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #comments
+  - queue_position: AFTER #display-code
+  * [^\S\n]*
+    [<]
+      (?P<hashes> [#]+ )
+        [\s\S]*?
+      (?P=hashes)
+    [>]
+      -->
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(<)@@(#)@ «content» @(#)@@(>)@
   ````
+  ====
+  - The number of hashes ``{.cmd .cmdc} @(#)@ `` may be increased arbitrarily.
+  ====
+}}
+{{des
+  --
+  Remove CMD comments, along with all preceding whitespace.
+  --
+}}
+{{ex
+  ++
+  1.
+    [`#display-code`] prevails over `#comments`:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ``
+          Before.
+          <# This be a comment. #>
+          After.
+        ``
+      ````
+    - HTML:
+      <||
+        ``
+          Before.
+          <# This be a comment. #>
+          After.
+        ``
+      ||>
+    - Rendered:
+        ``
+          Before.
+          <# This be a comment. #>
+          After.
+        ``
+    ==
+  1.
+    `#comments` prevail over [`#inline-code`]:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` `Before. <# This be a comment. #> After.` ``> ``
+    - HTML: <| `Before. <# This be a comment. #> After.` |>
+    - Rendered: `Before. <# This be a comment. #> After.`
+    ==
+  1.
+    Use [`#literals`] to make [`#inline-code`] prevail over `#comments`:
+    ==
+    - CMD:
+      ``{.cmd .cmdc} <`` ` <`Before. <# This be a comment. #> After.`> ` ``> ``
+    - HTML:
+        <|| ` <`Before. <# This be a comment. #> After.`> ` ||>
+    - Rendered:
+        ` <`Before. <# This be a comment. #> After.`> `
+    ==
+  ++
+}}
 
-* HTML
+####{#divisions} 4. `#divisions`
+[`#divisions`]: #divisions
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #divisions
+  - queue_position: AFTER #comments
+  - syntax_type: BLOCK
+  - extensible_delimiter: ||
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #divisions
+      #prepend-newline
+  - tag_name: div
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(||)@
+      «content»
+    @(||)@
+  ````
+  ````{.cmd .cmdc}
+    @(||)@{«attribute specifications»}
+      «content»
+    @(||)@
+  ````
+  ====
+  - The number of pipes ``{.cmd .cmdc} @(|)@ `` may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a division:
+  --
   ````{.html}
-    <table>
-    <tr>
-    <th>A</th>
-    <th>B</th>
-    <th>C</th>
-    <th>D</th>
-    </tr>
-    <tr>
-    <td>1</td>
-    <td rowspan="2">2</td>
-    <td>3</td>
-    <td>4</td>
-    </tr>
-    <tr>
-    <td>5</td>
-    <td rowspan="3" colspan="2">6</td>
-    </tr>
-    <tr>
-    <td colspan="2">7</td>
-    </tr>
-    <tr>
-    <td>8</td>
-    <th>?</th>
-    </tr>
-    </table>
+    @(<div)@«attribute sequence»@(>)@
+    «content»
+    @(</div>)@
   ````
+}}
+{{ex
+  ++
+  1.
+    Division:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ||{#test-div-id .test-div-class}
+          This be a division.
+        ||
+      ````
+    - HTML:
+      <||
+        ||{#test-div-id .test-div-class}
+          This be a division.
+        ||
+      ||>
+    ==
+  1.
+    More pipes for nested divisions:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ||||{.outer}
+          ||{.inner}
+            This be a division.
+          ||
+        ||||
+      ````
+    - HTML:
+      <||
+        ||||{.outer}
+          ||{.inner}
+            This be a division.
+          ||
+        ||||
+      ||>
+    ==
+  ++
+}}
 
-* Rendered
-    ''''
-      ==
-        ; A
-        ; B
-        ; C
-        ; D
-      ==
-        , 1
-        ,{r2} 2
-        , 3
-        , 4
-      ==
-        , 5
-        ,{r3 c2} 6
-      ==
-        ,{c2} 7
-      ==
-        , 8
-        ; ?
-    ''''
+####{#blockquotes} 5. `#blockquotes`
+[`#blockquotes`]: #blockquotes
 
-====
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #blockquotes
+  - queue_position: AFTER #divisions
+  - syntax_type: BLOCK
+  - extensible_delimiter: ""
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #blockquotes
+      #prepend-newline
+  - tag_name: blockquote
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @("")@
+      «content»
+    @("")@
+  ````
+  ````{.cmd .cmdc}
+    @("")@{«attribute specifications»}
+      «content»
+    @("")@
+  ````
+  ====
+  - The number of double-quotes ``{.cmd .cmdc} @(")@ ``
+    may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a blockquote:
+  --
+  ````{.html}
+    @(<blockquote)@«attribute sequence»@(>)@
+    «content»
+    @(</blockquote>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Blockquote:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ""{#test-blockquote-id .test-blockquote-class}
+          This be a blockquote.
+        ""
+      ````
+    - HTML:
+      <||
+        ""{#test-blockquote-id .test-blockquote-class}
+          This be a blockquote.
+        ""
+      ||>
+    ==
+  ++
+}}
 
-####{#tables-with-parts}
-  Example 2: table *with* `<thead>`, `<tbody>`, `<tfoot>` parts
-####
+####{#unordered-lists} 6. `#unordered-lists`
+[`#unordered-lists`]: #unordered-lists
 
-====
-* CMD
-  ````{.cmd}
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #unordered-lists
+  - queue_position: AFTER #blockquotes
+  - syntax_type: BLOCK
+  - extensible_delimiter: ==
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #unordered-lists
+      #unordered-list-items
+      #prepend-newline
+  - tag_name: ul
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(==)@
+    @(-)@ «item»
+    «...»
+    @(==)@
+  ````
+  ````{.cmd .cmdc}
+    @(==)@{«attribute specifications»}
+    @(-)@{«attribute specifications»} «item»
+    «...»
+    @(==)@
+  ````
+  ====
+  - The number of equals signs ``{.cmd .cmdc} @(=)@ ``
+    may be increased arbitrarily.
+  - The item delimiter may be
+    `{.cmd .cmdc} @(-)@`, `{.cmd .cmdc} @(+)@`, or `{.cmd .cmdc} @(*)@`,
+    see [`#unordered-list-items`].
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces an unordered list:
+  --
+  ````{.html}
+    @(<ul)@«attribute sequence»@(>)@
+    @(<li>)@
+    «item»
+    @(</li>)@
+    «...»
+    @(</ul>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Nested list:
+    ========
+    - CMD:
+      ````{.cmd .cmdc}
+        ======
+        * A
+          ===={style="background: yellow"}
+          - A1
+          - A2
+          ====
+        - B
+          ====
+          +{style="color: purple"} B1
+          - B2
+          ====
+        ======
+      ````
+    - Rendered:
+        ======
+        * A
+          ===={style="background: yellow"}
+          - A1
+          - A2
+          ====
+        - B
+          ====
+          +{style="color: purple"} B1
+          - B2
+          ====
+        ======
+    ========
+  ++
+}}
+
+####{#ordered-lists} 7. `#ordered-lists`
+[`#ordered-lists`]: #ordered-lists
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #ordered-lists
+  - queue_position: AFTER #unordered-lists
+  - syntax_type: BLOCK
+  - extensible_delimiter: ++
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #ordered-lists
+      #ordered-list-items
+      #prepend-newline
+  - tag_name: ol
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(++)@
+    @(1.)@ «item»
+    «...»
+    @(++)@
+  ````
+  ````{.cmd .cmdc}
+    @(++)@{«attribute specifications»}
+    @(1.)@{«attribute specifications»} «item»
+    «...»
+    @(++)@
+  ````
+  ====
+  - The number of plus signs ``{.cmd .cmdc} @(+)@ ``
+    may be increased arbitrarily.
+  - The item delimiter may be any __run of digits__
+    followed by a __full stop__,
+    see [`#ordered-list-items`].
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces an ordered list:
+  --
+  ````{.html}
+    @(<ol)@«attribute sequence»@(>)@
+    @(<li>)@
+    «item»
+    @(</li>)@
+    «...»
+    @(</ol>)@
+  ````
+}}
+{{ex
+  ++++++++
+  1.
+    Any run of digits can be used in the item delimiter:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ++
+        1. A
+        2. B
+        3. C
+        0. D
+        99999999. E
+        ++
+      ````
+    - Rendered:
+        ++
+        1. A
+        2. B
+        3. C
+        0. D
+        99999999. E
+        ++
+    ==
+  2.
+    Nested ordered lists:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ++++
+        1. This shall be respected.
+        2. This shall be read aloud if:
+          ++{type="a"}
+          1. I say so;
+          2. I think so; or
+          3.{style="color: purple"} Pigs fly.
+          ++
+        ++++
+      ````
+    - Rendered:
+        ++++
+        1. This shall be respected.
+        2. This shall be read aloud if:
+          ++{type="a"}
+          1. I say so;
+          2. I think so; or
+          3.{style="color: purple"} Pigs fly.
+          ++
+        ++++
+    ==
+  3.
+    Zero-based indexing:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ++{start=0}
+        0. Nil
+        1. One
+        ++
+      ````
+    - Rendered:
+        ++{start=0}
+        0. Nil
+        1. One
+        ++
+    ==
+  ++++++++
+}}
+
+####{#tables} 8. `#tables`
+[`#tables`]: #tables
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #tables
+  - queue_position: AFTER #ordered-lists
+  - syntax_type: BLOCK
+  - extensible_delimiter: ''
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #tables
+      #table-head
+      #table-body
+      #table-foot
+      #table-rows
+      #prepend-newline
+  - tag_name: table
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @('')@
+    @(|^)@ «item»
+      @(//)@ «item»
+        @(;)@ «item»
+        @(,)@ «item»
+        «...»
+      «...»
+    @(|:)@ «item»
+      «...»
+    @(|_)@ «item»
+      «...»
+    @('')@
+  ````
+  ````{.cmd .cmdc}
+    @('')@
+    @(//)@ «item»
+      @(;)@ «item»
+      @(,)@ «item»
+      «...»
+    «...»
+    @('')@
+  ````
+  ````{.cmd .cmdc}
+    @('')@{«attribute specifications»}
+    «...»
+    @('')@
+  ````
+  ====
+  - The number of single-quotes ``{.cmd .cmdc} @(')@ ``
+    may be increased arbitrarily.
+  - Table parts:
+    ==
+    - `{.cmd .cmdc} @(|^)@` for table head, see [`#table-head`].
+    - `{.cmd .cmdc} @(|:)@` for table body, see [`#table-body`].
+    - `{.cmd .cmdc} @(|:)@` for table foot, see [`#table-foot`].
+    ==
+  - Table cells:
+    ==
+    - `{.cmd .cmdc} @(;)@` for table headers, see [`#table-headers`].
+    - `{.cmd .cmdc} @(,)@` for table data, see [`#table-data`].
+    ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a table:
+  --
+  ````{.html}
+    @(<table)@«attribute sequence»@(>)@
+    «...»
+    @(</table>)@
+  ````
+}}
+{{ex
+  ++++++++
+  1.
+    Table without parts:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ''
+        //
+          ; A
+          , 1
+        //
+          ; B
+          , 2
+        ''
+      ````
+    - HTML:
+      <||
+        ''
+        //
+          ; A
+          , 1
+        //
+          ; B
+          , 2
+        ''
+      ||>
+    - Rendered:
+        ''
+        //
+          ; A
+          , 1
+        //
+          ; B
+          , 2
+        ''
+    ==
+  1.
+    Table with head and body:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ''
+        |^
+          //
+            ; A
+            ; B
+        |:
+          //
+            , 1
+            , 2
+          //
+            , First
+            , Second
+        ''
+      ````
+    - HTML:
+      <||
+        ''
+        |^
+          //
+            ; A
+            ; B
+        |:
+          //
+            , 1
+            , 2
+          //
+            , First
+            , Second
+        ''
+      ||>
+    - Rendered:
+        ''
+        |^
+          //
+            ; A
+            ; B
+        |:
+          //
+            , 1
+            , 2
+          //
+            , First
+            , Second
+        ''
+    ==
+  1.
+    Cell merging
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ''
+        //
+          ,{c3} 3*1
+          , 14
+        //
+          , 21
+          , 22
+          , 23
+          , 24
+        //
+          ,{rowspan=2 colspan="2"} 2*2
+          , 33
+          ,{r2} 2*1
+        //
+          , 43
+        ''
+      ````
+    - Rendered
+        ''
+        //
+          ,{c3} 3*1
+          , 14
+        //
+          , 21
+          , 22
+          , 23
+          , 24
+        //
+          ,{rowspan=2 colspan="2"} 2*2
+          , 33
+          ,{r2} 2*1
+        //
+          , 43
+        ''
+    ==
+  ++++++++
+}}
+
+####{#headings} 9. `#headings`
+[`#headings`]: #headings
+
+{{def
+  ``{.cmd .cmdr}
+  HeadingReplacement: #headings
+  - queue_position: AFTER #tables
+  - attribute_specifications: EMPTY
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(#)@ «content»
+  ````
+  ````{.cmd .cmdc}
+    @(#)@{«attribute specifications»} «content»
+  ````
+  ====
+  - The number of hashes ``{.cmd .cmdc} @(#)@ `` may be between 1 and 6.
+  - ``{.cmd .cmdc} «content»`` may be optionally closed by hashes.
+  - For continuation of ``{.cmd .cmdc} «content»``,
+    indent the continuation more than the leading hashes.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a heading:
+  --
+  ````{.html}
+    @(<h«hash count»>)@«content»@(</h«hash count»>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Empty headings:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        #
+        ##
+        ###
+        ####
+        #####
+        ######
+      ````
+    - HTML:
+      <||
+        #
+        ##
+        ###
+        ####
+        #####
+        ######
+      ||>
+    ==
+  1.
+    Non-empty headings require whitespace after the hashes:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ## OK
+        #lacks-whitespace
+      ````
+    - HTML:
+      <||
+        ## OK
+        #lacks-whitespace
+      ||>
+    ==
+  1.
+    Optional closing hashes:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ## Closed ##
+        ## Fewer closing hashes is OK #
+        ## More closing hashes is OK ###
+      ````
+    - HTML:
+      <||
+        ## Closed ##
+        ## Fewer closing hashes is OK #
+        ## More closing hashes is OK ###
+      ||>
+    ==
+  1.
+    Continuation:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ##{.interesting-heading-class}
+          This heading is so long, I have used continuation.
+          Second continuation line.
+        This line is not a continuation due to insufficient indentation.
+      ````
+    - HTML:
+      <||
+        ##{.interesting-heading-class}
+          This heading is so long, I have used continuation.
+          Second continuation line.
+        This line is not a continuation due to insufficient indentation.
+      ||>
+    ==
+  ++
+}}
+
+####{#paragraphs} 10. `#paragraphs`
+[`#paragraphs`]: #paragraphs
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #paragraphs
+  - queue_position: AFTER #headings
+  - syntax_type: BLOCK
+  - extensible_delimiter: --
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  - content_replacements:
+      #prepend-newline
+  - tag_name: p
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(--)@
+    «content»
+    @(--)@
+  ````
+  ````{.cmd .cmdc}
+    @(--)@{«attribute specifications»}
+    «content»
+    @(--)@
+  ````
+  ====
+  - The number of hyphens ``{.cmd .cmdc} @(-)@ `` may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a paragraph:
+  --
+  ````{.html}
+    @(<p)@«attribute sequence»@(>)@
+    «content»
+    @(</p>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Paragraph:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        --
+        The quick brown fox etc. etc.
+        --
+      ````
+    - HTML:
+      <||
+        --
+        The quick brown fox etc. etc.
+        --
+      ||>
+    - Rendered:
+        --
+        The quick brown fox etc. etc.
+        --
+    ==
+  1.
+    Paragraphs cannot be nested:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+        ----
+        Before.
+        --
+        Not a nested paragraph.
+        --
+        After.
+        ----
+      ````
+    - HTML:
+      <||
+        ----
+        Before.
+        --
+        Not a nested paragraph.
+        --
+        After.
+        ----
+      ||>
+    - Rendered:
+        ----
+        Before.
+        --
+        Not a nested paragraph.
+        --
+        After.
+        ----
+    ==
+  ++
+}}
+
+####{#inline-code} 11. `#inline-code`
+[`#inline-code`]: #inline-code
+
+{{def
+  ``{.cmd .cmdr}
+  ExtensibleFenceReplacement: #inline-code
+  - queue_position: AFTER #paragraphs
+  - syntax_type: INLINE
+  - allowed_flags:
+      u=KEEP_HTML_UNESCAPED
+      i=KEEP_INDENTED
+      w=REDUCE_WHITESPACE
+  - extensible_delimiter: `
+  - attribute_specifications: EMPTY
+  - prohibited_content: ANCHORED_BLOCKS
+  - content_replacements:
+      #escape-html
+      #de-indent
+      #trim-whitespace
+      #reduce-whitespace
+      #placeholder-protect
+  - tag_name: code
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+    @(`)@ «content» @(`)@
+  ````
+  ````{.cmd .cmdc}
+    @(`)@{«attribute specifications»} «content» @(`)@
+  ````
+  ````{.cmd .cmdc}
+    «flags»@(`)@ «content» @(`)@
+  ````
+  ````{.cmd .cmdc}
+    «flags»@(`)@{«attribute specifications»} «content» @(`)@
+  ````
+  ====
+  - `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
+    - `{.cmd .cmdc} i`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
+    ==
+  - The number of backticks ``{.cmd .cmdc} @(`)@ ``
+    may be increased arbitrarily.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces inline code:
+  --
+  ````{.html}
+  @(<code)@«attribute sequence»@(>)@«content»@(</code>)@
+  ````
+}}
+{{ex
+  ++
+  1.
+    Code:
+    ==
+    - CMD: ``{.cmd .cmdc} `<br>` ``
+    - HTML: <| `<br>` |>
+    - Rendered: `<br>`
+    ==
+  1.
+    Code containing backticks:
+    ==
+    - CMD: ````{.cmd .cmdc} ``A `backticked` word.`` ````
+    - HTML: <| ``A `backticked` word.`` |>
+    - Rendered: ``A `backticked` word.``
+    ==
+  1.
+    Use [`#literals`] with flag `{.cmd .cmdc} u` to inject HTML:
+    ==
+    - CMD: ``{.cmd .cmdc} <`` `Some u<`<b>bold</b>`> code` ``> ``
+    - HTML: <| `Some u<`<b>bold</b>`> code` |>
+    - Rendered: `Some u<`<b>bold</b>`> code`
+    ==
+  ++
+}}
+
+####{#boilerplate} 12. `#boilerplate`
+[`#boilerplate`]: #boilerplate
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #boilerplate
+  - queue_position: AFTER #inline-code
+  * \A -->
+      <!DOCTYPE html>
+      <html lang="%lang">
+        <head>
+          <meta charset="utf-8">
+          %head-elements-before-viewport
+          <meta name="viewport" content="%viewport-content">
+          %head-elements-after-viewport
+          <title>%title</title>
+          <style>
+            %styles
+          </style>
+        </head>
+        <body>\n
+  * \Z -->
+        </body>
+      </html>\n
+  ``
+}}
+{{des
+  --
+  Wraps content in the HTML5 boilerplate:
+  --
+  ==
+  - `{.html} <!DOCTYPE html>` through `{.html} <body>` at the start
+  - `{.html} </body></html>` at the end
+  ==
+  --
+  The default boilerplate properties
+  `{.cmd .cmdc} %lang`,
+  `{.cmd .cmdc} %head-elements-before-viewport`,
+  `{.cmd .cmdc} %viewport-content`,
+  `{.cmd .cmdc} %head-elements-after-viewport`,
+  `{.cmd .cmdc} %title`, and
+  `{.cmd .cmdc} %styles`
+  are set in [`#boilerplate-properties`].
+  --
+}}
+
+####{#boilerplate-properties} 13. `#boilerplate-properties`
+[`#boilerplate-properties`]: #boilerplate-properties
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #boilerplate-properties
+  - queue_position: AFTER #boilerplate
+  - apply_mode: SIMULTANEOUS
+  * %lang --> en
+  * %head-elements-before-viewport -->
+  * %viewport-content --> width=device-width, initial-scale=1
+  * %head-elements-after-viewport -->
+  * %title --> Title
+  * %styles -->
+  ``
+}}
+{{des
+  --
+  Makes replacements for the default boilerplate properties:
+  --
+  ''''
+  |^
+    //
+      ; Property
+      ; Default value
+  |:
+    //
+      , `{.cmd .cmdc} %lang`
+      , `{.html} en`
+    //
+      , `{.cmd .cmdc} %head-elements-before-viewport`
+      , (empty)
+    //
+      , `{.cmd .cmdc} %viewport-content`
+      , `{.html} width=device-width, initial-scale=1`
+    //
+      , `{.cmd .cmdc} %head-elements-after-viewport`
+      , (empty)
+    //
+      , `{.cmd .cmdc} %title`
+      , `{.html} Title`
+    //
+      , `{.cmd .cmdc} %styles`
+      , (empty)
+  ''''
+}}
+{{ex
+  ++
+  1.
+    Defaults:
+    ==
+    - CMD:
+      ``{.cmd .cmdc}
+      # %title
+      This document hath `lang` equal to <code>%lang</code>.
+      ``
+    - HTML (including boilerplate):
+      ``{.html}
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Title</title>
+      </head>
+      <body>
+      <h1>Title</h1>
+      This document hath <code>lang</code> equal to <code>en</code>.
+      </body>
+      </html>
+      ``
+    ==
+  1.
+    Override the defaults:
+    ==
+    - CMD:
+      u````{.cmd}
+      <span class="cmdr"><``
+        OrdinaryDictionaryReplacement: #boilerplate-properties-override
+        - queue_position: BEFORE #boilerplate-properties
+        - apply_mode: SIMULTANEOUS
+        * %lang --> en-AU
+        * %head-elements-before-viewport --> <meta name="author" content="Me">
+        * %title --> Overridden title
+      ``></span>
+      <`` ``>
+      %%%
+      <`` ``>
+      <span class="cmdc"><``
+        # %title
+        This document hath `lang` equal to <code>%lang</code>.
+      ``></span>
+      ````
+    - HTML (including boilerplate):
+      ``{.html}
+      <!DOCTYPE html>
+      <html lang="en-AU">
+      <head>
+      <meta charset="utf-8">
+      <meta name="author" content="Me">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Overridden title</title>
+      </head>
+      <body>
+      <h1>Overridden title</h1>
+      This document hath <code>lang</code> equal to <code>en-AU</code>.
+      </body>
+      </html>
+      ``
+    ==
+  ++
+}}
+
+####{#cmd-properties} 14. `#cmd-properties`
+[`#cmd-properties`]: #cmd-properties
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #cmd-properties
+  - queue_position: AFTER #boilerplate-properties
+  - apply_mode: SIMULTANEOUS
+  * %cmd-version --> CMD_VERSION
+  * %cmd-name --> CMD_NAME
+  * %cmd-basename --> CMD_BASENAME
+  - concluding_replacements:
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Makes replacements for CMD properties:
+  --
+  ''''
+  |^
+    //
+      ; Property
+      ; Description
+  |:
+    //
+      , `{.cmd .cmdc} %cmd-version`
+      , `__version__` in [`cmd.py`]
+        (currently <code class="html">%cmd-version</code>)
+    //
+      , `{.cmd .cmdc} %cmd-name`
+      , CMD file name, relative to working directory, without extension
+    //
+      , `{.cmd .cmdc} %cmd-basename`
+      , CMD file name, without path, without extension
+  ''''
+}}
+
+####{#boilerplate-protect} 15. `#boilerplate-protect`
+[`#boilerplate-protect`]: #boilerplate-protect
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #boilerplate-protect
+  - queue_position: AFTER #cmd-properties
+  * <style>[\s]*?</style>[\s]* -->
+  * <style>[\s\S]*?</style> --> \g<0>
+  * <head>[\s\S]*?</head> --> \g<0>
+  - concluding_replacements:
+      #reduce-whitespace
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Protects boilerplate elements:
+  --
+  ==
+  - Removes empty `<style>` element
+  - Protects `<style>` element
+  - Protects `<head>` element
+  ==
+}}
+
+####{#backslash-escapes} 16. `#backslash-escapes`
+[`#backslash-escapes`]: #backslash-escapes
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #backslash-escapes
+  - queue_position: AFTER #boilerplate-protect
+  - apply_mode: SIMULTANEOUS
+  * \\ --> \
+  * \# --> #
+  * \& --> &amp;
+  * \( --> (
+  * \) --> )
+  * \* --> *
+  * \< --> &lt;
+  * \> --> &gt;
+  * \[ --> [
+  * \] --> ]
+  * \_ --> _
+  * \{ --> {
+  * \| --> |
+  * \} --> }
+  * "\ " --> " "
+  * \t --> "	"
+  - concluding_replacements:
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Applies backslash escapes:
+  --
+  ''''
+  |^
+    //
+      ; Escaped
+      ; Unescaped
+  |:
+    //
+      , `{.cmd .cmdc} \\`
+      , <| \\ |>
+    //
+      , `{.cmd .cmdc} \#`
+      , <| \# |>
+    //
+      , `{.cmd .cmdc} \&`
+      , <| \& |>
+    //
+      , `{.cmd .cmdc} \(`
+      , <| \( |>
+    //
+      , `{.cmd .cmdc} \)`
+      , <| \) |>
+    //
+      , `{.cmd .cmdc} \*`
+      , <| \* |>
+    //
+      , `{.cmd .cmdc} \< `
+      , <| \< |>
+    //
+      , `{.cmd .cmdc} \>`
+      , <| \> |>
+    //
+      , `{.cmd .cmdc} \[`
+      , <| \[ |>
+    //
+      , `{.cmd .cmdc} \]`
+      , <| \] |>
+    //
+      , `{.cmd .cmdc} \_`
+      , <| \_ |>
+    //
+      , `{.cmd .cmdc} \{`
+      , <| \{ |>
+    //
+      , `{.cmd .cmdc} \|`
+      , <| \| |>
+    //
+      , `{.cmd .cmdc} \}`
+      , <| \} |>
+    //
+      , `{.cmd .cmdc} \ <` `>`
+      , (space)
+    //
+      , `{.cmd .cmdc} \t`
+      , (tab)
+  ''''
+}}
+
+####{#backslash-continuations} 17. `#backslash-continuations`
+[`#backslash-continuations`]: #backslash-continuations
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #backslash-continuations
+  - queue_position: AFTER #backslash-escapes
+  * \\ \n [^\S\n]* -->
+  ``
+}}
+{{des
+  --
+  Applies backslash continuation.
+  --
+}}
+
+####{#reference-definitions} 18. `#reference-definitions`
+[`#reference-definitions`]: #reference-definitions
+
+{{def
+  ``{.cmd .cmdr}
+  ReferenceDefinitionReplacement: #reference-definitions
+  - queue_position: AFTER #backslash-continuations
+  - attribute_specifications: EMPTY
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @([)@«label»@(])@@(:)@ «uri»
+  @([)@«label»@(])@@(:)@ @(<)@«uri»@(>)@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«label»@(])@@(:)@ «...» @(")@«title»@(")@
+  @([)@«label»@(])@@(:)@ «...» @(')@«title»@(')@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«label»@(])@{«attribute specifications»}@(:)@ «...»
+  ````
+  ==
+  - For continuation of `{.cmd .cmdc} «uri»` or `{.cmd .cmdc} «title»`,
+    indent the continuation more than the leading square bracket.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Defines a reference, to be used by
+  [`#referenced-images`] or [`#referenced-links`].
+  --
+}}
+
+####{#specified-images} 19. `#specified-images`
+[`#specified-images`]: #specified-images
+
+{{def
+  ``{.cmd .cmdr}
+  SpecifiedImageReplacement: #specified-images
+  - queue_position: AFTER #reference-definitions
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@@(()@«src»@())@
+  @(!)@@([)@«alt text»@(])@@(()@@(<)@«src»@(>)@@())@
+  ````
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@@(()@«...» @(")@«title»@(")@@())@
+  @(!)@@([)@«alt text»@(])@@(()@«...» @(')@«title»@(')@@())@
+  ````
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@{«attribute specifications»}@(()@«...»@())@
+  ````
+  ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces an image:
+  --
+  ````{.html}
+  @(<img)@«attribute sequence»@(>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «alt text»`
+  - `{.cmd .cmdc} «src»`
+  - `{.cmd .cmdc} «title»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
+      ````
+    - HTML:
+      <||
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
+      ||>
+    - Rendered:
+      --
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
+      --
+    ==
+  1.
+    Set width:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
+      ````
+    - HTML:
+      <||
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
+      ||>
+    - Rendered:
+      --
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
+      --
+    ==
+  1.
+    Empty alt text for decorative images,
+    or images where adjacent text already describes the image:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      ![](/favicon-16x16.png) Conway-Markdown is dumb.
+      ````
+    - HTML:
+      <||
+      ![](/favicon-16x16.png) Conway-Markdown is dumb.
+      ||>
+    - Rendered:
+      --
+      ![](/favicon-16x16.png) Conway-Markdown is dumb.
+      --
+    ==
+  ++
+}}
+
+####{#referenced-images} 20. `#referenced-images`
+[`#referenced-images`]: #referenced-images
+
+{{def
+  ``{.cmd .cmdr}
+  ReferencedImageReplacement: #referenced-images
+  - queue_position: AFTER #specified-images
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@@([)@«label»@(])@
+  @(!)@@([)@«alt text»@(])@
+  ````
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@{«attribute specifications»}@([)@«label»@(])@
+  @(!)@@([)@«alt text»@(])@{«attribute specifications»}
+  ````
+  ==
+  - `{.cmd .cmdc} «label»`: must correspond to a defined
+    [reference definition](#reference-definitions), up to case.
+    If `{.cmd .cmdc} «label»` is omitted,
+    `{.cmd .cmdc} «alt text»` is used in its stead.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces an image:
+  --
+  ````{.html}
+  @(<img)@«attribute sequence»@(>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «alt text»`
+  - `{.cmd .cmdc} «src»` equal to `{.cmd .cmdc} «uri»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «title»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «attribute specifications»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [moses]: rembrandt-moses.jpg
+      
+      ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
+      ````
+    - HTML:
+      <||
+      [moses]: rembrandt-moses.jpg
+      
+      ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
+      ||>
+    - Rendered:
+      --
+      [moses]: rembrandt-moses.jpg
+      
+      ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
+      --
+    ==
+  1.
+    Use `{.cmd .cmdc} «alt text»` for `{.cmd .cmdc} «label»`:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
+      
+      ![Conway-Markdown logo.]
+      ````
+    - HTML:
+      <||
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
+      
+      ![Conway-Markdown logo.]
+      ||>
+    - Rendered:
+      --
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
+      
+      ![Conway-Markdown logo.]
+      --
+    ==
+  1.
+    `{.cmd .cmdc} «label»` is case-insensitive:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [image-label-case]: insensitive.png
+      
+      [Hooray.][image-label-case]
+      [Hooray.][image-label-CASE]
+      [Hooray.][ImAGe-laBEl-CAsE]
+      ````
+    - HTML:
+      <||
+      [image-label-case]: insensitive.png
+      
+      [Hooray.][image-label-case]
+      [Hooray.][image-label-CASE]
+      [Hooray.][ImAGe-laBEl-CAsE]
+      ||>
+    ==
+  1.
+    Later reference definitions prevail:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [image-label]{.class1}: file1.png
+      [image-label]{.class2}: file2.png
+      
+      [Second definition wins.][image-label]
+      ````
+    - HTML:
+      <||
+      [image-label]{.class1}: file1.png
+      [image-label]{.class2}: file2.png
+      
+      [Second definition wins.][image-label]
+      ||>
+    ==
+  ++
+}}
+
+####{#explicit-links} 21. `#explicit-links`
+[`#explicit-links`]: #explicit-links
+
+{{def
+  ``{.cmd .cmdr}
+  ExplicitLinkReplacement: #explicit-links
+  - queue_position: AFTER #referenced-images
+  - allowed_flags:
+      b=ANGLE_BRACKET_WRAP
+      s=SUPPRESS_SCHEME
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #suppress-scheme
+  - concluding_replacements:
+      #angle-bracket-wrap
+  ``
+}}
+{{syn
+  ``{.cmd .cmdc}
+  @(<)@«uri»@(>)@
+  ``
+  ``{.cmd .cmdc}
+  @(<)@{«attribute specifications»} «uri»@(>)@
+  ``
+  ``{.cmd .cmdc}
+  «flags»@(<)@«uri»@(>)@
+  ``
+  ``{.cmd .cmdc}
+  «flags»@(<)@{«attribute specifications»} «uri»@(>)@
+  ``
+  ====
+  - `{.cmd .cmdc} «flags»`:
+    ==
+    - `{.cmd .cmdc} b`: wrap in angle brackets (apply [`#angle-bracket-wrap`])
+    - `{.cmd .cmdc} s`: suppress scheme (apply [`#suppress-scheme`])
+    ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ====
+}}
+{{des
+  --
+  Produces a link:
+  --
+  ````{.html}
+  @(<a)@«attribute sequence»@(>)@«uri»@(</a>)@
+  ````
+  --
+  Or:
+  --
+  ````{.html}
+  @(&lt;<a)@«attribute sequence»@(>)@«uri»@(</a>&gt;)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «uri»` as `href`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD: `{.cmd .cmdc} <https://example.com> `
+    - HTML: <| <https://example.com> |>
+    - Rendered: <https://example.com>
+    ==
+  1.
+    Wrap in angle brackets:
+    ==
+    - CMD: `{.cmd .cmdc} b<https://example.com> `
+    - HTML: <| b<https://example.com> |>
+    - Rendered: b<https://example.com>
+    ==
+  1.
+    Suppress scheme:
+    ==
+    - CMD: `{.cmd .cmdc} s<https://example.com> `
+    - HTML: <| s<https://example.com> |>
+    - Rendered: s<https://example.com>
+    ==
+  1.
+    _{lang=es} ¿Por qué no los dos?_
+    ==
+    - CMD: `{.cmd .cmdc} bs<https://example.com> `
+    - HTML: <| bs<https://example.com> |>
+    - Rendered: bs<https://example.com>
+    ==
+  1.
+    Invitation to spammers:
+    ==
+    - CMD: `{.cmd .cmdc} s<mailto:mail@example.com> `
+    - HTML: <| s<mailto:mail@example.com> |>
+    - Rendered: s<mailto:mail@example.com>
+    ==
+  ++
+}}
+
+####{#specified-links} 22. `#specified-links`
+[`#specified-links`]: #specified-links
+
+{{def
+  ``{.cmd .cmdr}
+  SpecifiedLinkReplacement: #specified-links
+  - queue_position: AFTER #explicit-links
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@@(()@«href»@())@
+  @([)@«link text»@(])@@(()@@(<)@«href»@(>)@@())@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@@(()@«...» @(")@«title»@(")@@())@
+  @([)@«link text»@(])@@(()@«...» @(')@«title»@(')@@())@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@{«attribute specifications»}@(()@«...»@())@
+  ````
+  ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces a link:
+  --
+  ````{.html}
+  @(<a)@«attribute sequence»@(>)@«link text»@(</a>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «href»`
+  - `{.cmd .cmdc} «title»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+      ````
+    - HTML:
+      <||
+      [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+      ||>
+    - Rendered:
+      --
+      [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+      --
+    ==
+  1.
+    Title:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Wikipedia](
+        https://en.wikipedia.org/wiki/Main_Page
+        "Wikipedia, the free encyclopedia"
+      )
+      ````
+    - HTML:
+      <||
+      [Wikipedia](
+        https://en.wikipedia.org/wiki/Main_Page
+        "Wikipedia, the free encyclopedia"
+      )
+      ||>
+    - Rendered:
+      --
+      [Wikipedia](
+        https://en.wikipedia.org/wiki/Main_Page
+        "Wikipedia, the free encyclopedia"
+      )
+      --
+    ==
+  1.
+    Override `href`
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      ````
+    - HTML:
+      <||
+      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      ||>
+    - Rendered:
+      --
+      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      --
+    ==
+  ++
+}}
+
+####{#referenced-links} 23. `#referenced-links`
+[`#referenced-links`]: #referenced-links
+
+{{def
+  ``{.cmd .cmdr}
+  ReferencedLinkReplacement: #referenced-links
+  - queue_position: AFTER #specified-links
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@@([)@«label»@(])@
+  @([)@«link text»@(])@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@{«attribute specifications»}@([)@«label»@(])@
+  @([)@«link text»@(])@{«attribute specifications»}
+  ````
+  ==
+  - `{.cmd .cmdc} «label»`: must correspond to a defined
+    [reference definition](#reference-definitions), up to case.
+    If `{.cmd .cmdc} «label»` is omitted,
+    `{.cmd .cmdc} «link text»` is used in its stead.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces a link:
+  --
+  ````{.html}
+  @(<a)@«attribute sequence»@(>)@«link text»@(</a>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «href»` equal to `{.cmd .cmdc} «uri»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «title»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «attribute specifications»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [wiki]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia's main page.][wiki]
+      ````
+    - HTML:
+      <||
+      [wiki]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia's main page.][wiki]
+      ||>
+    - Rendered:
+      --
+      [wiki]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia's main page.][wiki]
+      --
+    ==
+  1.
+    Use `{.cmd .cmdc} «link text»` for `{.cmd .cmdc} «label»`:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia]
+      ````
+    - HTML:
+      <||
+      [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia]
+      ||>
+    - Rendered:
+      --
+      [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+      
+      [Wikipedia]
+      --
+    ==
+  1.
+    `{.cmd .cmdc} «label»` is case-insensitive:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [link-label-case]: https://example.com
+      
+      [Hooray.][link-label-case]
+      [Hooray.][link-label-CASE]
+      [Hooray.][LiNK-laBEl-CAsE]
+      ````
+    - HTML:
+      <||
+      [link-label-case]: https://example.com
+      
+      [Hooray.][link-label-case]
+      [Hooray.][link-label-CASE]
+      [Hooray.][LiNK-laBEl-CAsE]
+      ||>
+    ==
+  1.
+    Later reference definitions prevail:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [link-label]{.class1}: https://example.com/1
+      [link-label]{.class2}: https://example.com/2
+      
+      [Second definition wins.][link-label]
+      ````
+    - HTML:
+      <||
+      [link-label]{.class1}: https://example.com/1
+      [link-label]{.class2}: https://example.com/2
+      
+      [Second definition wins.][link-label]
+      ||>
+    ==
+  ++
+}}
+
+####{#inline-semantics} 24. `#inline-semantics`
+[`#inline-semantics`]: #inline-semantics
+
+{{def
+  ``{.cmd .cmdr}
+  InlineAssortedDelimitersReplacement: #inline-semantics
+  - queue_position: AFTER #referenced-links
+  - delimiter_conversion:
+      __=b
+      _=i
+      **=strong
+      *=em
+      ''=cite
+      ""=q
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @(__)@«b content»@(__)@
+  @(_)@«i content»@(_)@
+  @(**)@«strong content»@(**)@
+  @(*)@«em content»@(*)@
+  @('')@«cite content»@('')@
+  @("")@«q content»@("")@
+  ````
+  ````{.cmd .cmdc}
+  @(«...»)@{«attribute specifications»} «content»@(«...»)@
+  ````
+  ````{.cmd .cmdc}
+  @(|)@@(«...»)@«content»@(«...»)@
+  ````
+  ````{.cmd .cmdc}
+  @(|)@@(«...»)@{«attribute specifications»} «content»@(«...»)@
+  ````
+  ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  - The leading optional pipe is to be used
+    as a disambiguator in some edge cases.
+    If present, it indicates that the delimiter directly after it
+    is opening rather than closing.
+  - The opening delimiter must not be followed by whitespace,
+    nor by `{.html} </` (the beginning of a closing tag).
+  - The closing delimiter must not be preceded by whitespace,
+    nor be a pipe `{.cmd .cmdc} |`.
+  ==
+}}
+{{des
+  --
+  Produces an inline semantic:
+  --
+  ````{.html}
+  @(<b)@«attribute sequence»@(>)@«b content»@(</b>)@
+  @(<i)@«attribute sequence»@(>)@«i content»@(</i>)@
+  @(<strong)@«attribute sequence»@(>)@«strong content»@(</strong>)@
+  @(<em)@«attribute sequence»@(>)@«em content»@(</em>)@
+  @(<cite)@«attribute sequence»@(>)@«cite content»@(</cite>)@
+  @(<q)@«attribute sequence»@(>)@«q content»@(</q>)@
+  ````
+}}
+{{ex
+  --
+  In HTML5, `{.html} <b>` and `{.html} <i>` are *not* deprecated,
+  see [W3C: Using `{.html} <b>` and `{.html} <i>` elements].
+  --
+  [W3C: Using `{.html} <b>` and `{.html} <i>` elements]:
+    https://www.w3.org/International/questions/qa-b-and-i-tags.en
+  ++++
+  1.
+    Bring to attention `{.html} <b>`:
+    ++{type=i}
+    0. Keywords:
+      ==
+      - CMD: `{.cmd .cmdc} Meals are served with __rice__ or __pasta__. `
+      - HTML: <| Meals are served with __rice__ or __pasta__. |>
+      - Rendered: Meals are served with __rice__ or __pasta__.
+      ==
+    ++
+  1.
+    Idiomatic offset `{.html} <i>`:
+    ++{type=i}
+    0. Foreign phrases:
+      ==
+      - CMD: `{.cmd .cmdc} Write out _{lang=la} Romani ite domum_ 100 times.`
+      - HTML: <| Write out _{lang=la} Romani ite domum_ 100 times. |>
+      - Rendered: Write out _{lang=la} Romani ite domum_ 100 times.
+      ==
+    0. Translator-supplied words in the King James Bible:
+      ==
+      - CMD: `{.cmd .cmdc} I _{.translator-supplied} am_ the LORD.`
+      - HTML: <| I _{.translator-supplied} am_ the LORD. |>
+      - Rendered: I _{.translator-supplied} am_ the LORD.
+      ==
+    0. Thoughts:
+      ==
+      - CMD: `{.cmd .cmdc} _Screw 'em._`
+      - HTML: <| _Screw 'em._ |>
+      - Rendered: _Screw 'em._
+      ==
+    ++
+  1.
+    Strong importance `{.html} <strong>`:
+    ++{type=i}
+    0. Warnings:
+      ==
+      - CMD: `{.cmd .cmdc} **{lang=de} Achtung!**`
+      - HTML: <| **{lang=de} Achtung!** |>
+      - Rendered: **{lang=de} Achtung!**
+      ==
+    ++
+  1.
+    Stress emphasis `{.html} <em>`:
+    ++{type=i}
+    0. Stress a particular word in a sentence:
+      ==
+      - CMD: `{.cmd .cmdc} I don't know *who* took it.`
+      - HTML: <| I don't know *who* took it. |>
+      - Rendered: I don't know *who* took it.
+      ==
+    ++
+  1.
+    Citation `{.html} <cite>`:
+    ++{type=i}
+    0. Book titles:
+      ==
+      - CMD: `{.cmd .cmdc} ''Nineteen Eighty-Four'' is already upon us.`
+      - HTML: <| ''Nineteen Eighty-Four'' is already upon us. |>
+      - Rendered: ''Nineteen Eighty-Four'' is already upon us.
+      ==
+    ++
+  1.
+    Quotation `{.html} <q>`:
+    ++{type=i}
+    0. Inline quotes:
+      ==
+      - CMD: `{.cmd .cmdc} ""It wasn't me.""`
+      - HTML: <| ""It wasn't me."" |>
+      - Rendered: ""It wasn't me.""
+      ==
+    ++
+  1.
+    Nesting and disambiguation:
     ''''
     |^
-      ==
-        ; Meals
-        ; Cost / \d
+      //
+        ; Pattern
+        ; CMD
+        ; HTML
     |:
-      ==
-        ; Lunch
-        , 7
-      ==
-        ; Dinner
-        , 10
-    |_
-      ==
-        ; Total
-        ,{#total-cost .some-class}
-          17
+      //
+        , 1-1
+        , `{.cmd .cmdc} *foo* `
+        , <| *foo* |>
+      //
+        , 2-2
+        , `{.cmd .cmdc} **foo** `
+        , <| **foo** |>
+      //
+        , 3-3 (12-21)
+        , `{.cmd .cmdc} ***foo*** `
+        , <| ***foo*** |>
+      //
+        , 12-3 (12-21)
+        , `{.cmd .cmdc} *foo **bar*** `
+        , <| *foo **bar*** |>
+      //
+        , 3-21 (12-21)
+        , `{.cmd .cmdc} ***foo** bar* `
+        , <| ***foo** bar* |>
+      //
+        , 2|1-3 (21-12)
+        , `{.cmd .cmdc} **|*foo*** `
+        , <| **|*foo*** |>
+      //
+        , 21-3 (21-12)
+        , `{.cmd .cmdc} **foo *bar*** `
+        , <| **foo *bar*** |>
+      //
+        , 3-12 (21-12)
+        , `{.cmd .cmdc} ***foo* bar** `
+        , <| ***foo* bar** |>
+      //
+        , 4-4 (22-22)
+        , `{.cmd .cmdc} ****foo**** `
+        , <| ****foo**** |>
+      //
+        , 1|2|1-4 (121-121)
+        , `{.cmd .cmdc} *|**|*foo**** `
+        , <| *|**|*foo**** |>
     ''''
-  ````
+  ++++
+}}
 
-* HTML
-  ````{.html}
-    <table>
-    <thead>
-    <tr>
-    <th>Meals</th>
-    <th>Cost / $</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <th>Lunch</th>
-    <td>7</td>
-    </tr>
-    <tr>
-    <th>Dinner</th>
-    <td>10</td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr>
-    <th>Total</th>
-    <td id="total-cost" class="some-class">17</td>
-    </tr>
-    </tfoot>
-    </table>
-  ````
+####{#escape-idle-html} 25. `#escape-idle-html`
+[`#escape-idle-html`]: #escape-idle-html
 
-* Rendered
-    ''''
-    |^
-      ==
-        ; Meals
-        ; Cost / \d
-    |:
-      ==
-        ; Lunch
-        , 7
-      ==
-        ; Dinner
-        , 10
-    |_
-      ==
-        ; Total
-        ,{#total-cost .some-class}
-          17
-    ''''
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #escape-idle-html
+  - queue_position: AFTER #inline-semantics
+  * [&]
+    (?!
+      (?:
+        [a-zA-Z]{1,31}
+          |
+        [#] (?: [0-9]{1,7} | [xX] [0-9a-fA-F]{1,6} )
+      )
+      [;]
+    )
+      --> &amp;
+  * [<] (?= [\s] ) --> &lt;
+  ``
+}}
+{{des
+  --
+  Escapes idle HTML:
+  --
+  ++
+  1. Replaces non-entity ampersand with <| & |>.
+  1. Replaces opening angle brackets before whitespace with <| < |>
+  ++
+}}
 
-====
+####{#whitespace} 26. `#whitespace`
+[`#whitespace`]: #whitespace
+
+{{def
+  ``{.cmd .cmdr}
+  ReplacementSequence: #whitespace
+  - queue_position: AFTER #escape-idle-html
+  - replacements:
+      #reduce-whitespace
+  ``
+}}
+{{des
+  --
+  Reduces whitespace. See [`#reduce-whitespace`].
+  --
+}}
+
+####{#placeholder-unprotect} 27. `#placeholder-unprotect`
+[`#placeholder-unprotect`]: #placeholder-unprotect
+
+{{def
+  ``{.cmd .cmdr}
+  PlaceholderUnprotectionReplacement: #placeholder-unprotect
+  - queue_position: AFTER #whitespace
+  ``
+}}
+{{des
+  --
+  Unprotects all [placeholder strings][placeholder].
+  --
+}}
 
 
-###{#escapes}
-  Escapes
-###
+###{#standard-unqueued-replacements} Standard unqueued replacements
 
+####{#placeholder-protect} `#placeholder-protect`
+[`#placeholder-protect`]: #placeholder-protect
 
-----
-**Important.** These escapes are processed *after* the syntax above.
-----
-
-
-||||{.centred-flex}
-''''
+{{def
+  ``{.cmd .cmdr}
+  PlaceholderProtectionReplacement: #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Protects a string with a [placeholder].
+  --
+}}
+{{dep
   ==
-    ; CMD
-    ; HTML
-    ; Rendered
-    ; Description
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
+  - [`#cmd-properties`]
+  - [`#boilerplate-protect`]
+  - [`#backslash-escapes`]
+  - [`#angle-bracket-wrap`]
   ==
-    , `\\`
-    , `\`
-    , \\
-    , Backslash
+}}
+
+####{#de-indent} `#de-indent`
+[`#de-indent`]: #de-indent
+
+{{def
+  ``{.cmd .cmdr}
+  DeIndentationReplacement: #de-indent
+  - negative_flag: KEEP_INDENTED
+  ``
+}}
+{{des
+  --
+  Removes the longest common indentation in a string.
+  --
+}}
+{{dep
   ==
-    , `\/`
-    , `~~ ~~`
-    ,
-    , Empty string
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
   ==
-    , `\ /`
-    , `~~ ~~ ~~ ~~`
-    , \ /
-    , Space
+}}
+
+####{#escape-html} `#escape-html`
+[`#escape-html`]: #escape-html
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #escape-html
+  - negative_flag: KEEP_HTML_UNESCAPED
+  - apply_mode: SIMULTANEOUS
+  * & --> &amp;
+  * < --> &lt;
+  * > --> &gt;
+  ``
+}}
+{{des
+  --
+  Escapes `&`, ` < `, and ` > ` as their respective HTML ampersand entities.
+  --
+}}
+{{dep
   ==
-    , `\ ~~ ~~`
-    , `~~ ~~ ~~ ~~`
-    , \ ~~ ~~
-    , Space
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
   ==
-    , `\~`
-    , `~`
-    , \~
-    , Tilde
+}}
+
+####{#trim-whitespace} `#trim-whitespace`
+[`#trim-whitespace`]: #trim-whitespace
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #trim-whitespace
+  * \A [\s]* -->
+  * [\s]* \Z -->
+  ``
+}}
+{{des
+  --
+  Removes whitespace at the very start and very end of the string.
+  --
+}}
+{{dep
   ==
-    , `~`
-    , `&nbsp;`
-    , ~
-    , Non-breaking space
+  - [`#literals`]
+  - [`#table-headers`]
+  - [`#table-data`]
+  - [`#inline-code`]
   ==
-    , `\0`
-    , `&numsp;`
-    , \0
-    , Figure space
+}}
+
+####{#reduce-whitespace} `#reduce-whitespace`
+[`#reduce-whitespace`]: #reduce-whitespace
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #reduce-whitespace
+  - positive_flag: REDUCE_WHITESPACE
+  * ^ [^\S\n]+ -->
+  * [^\S\n]+ $ -->
+  * [\s]+ (?= <br> ) -->
+  * [\n]+ --> \n
+  ``
+}}
+{{des
+  ++
+  1. Removes leading horizontal whitespace on each line.
+  1. Removes trailing horizontal whitespace on each line.
+  1. Removes whitespace before `{.cmd .cmdc} <br>`.
+  1. Collapsed multiple consecutive newlines into a single newline.
+  ++
+}}
+{{dep
   ==
-    , `\,`
-    , `&thinsp;`
-    , \,
-    , Thin space
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#inline-code`]
+  - [`#boilerplate-protect`]
+  - [`#whitespace`]
   ==
-    , `\&`
-    , `&amp;`
-    , \&
-    , Ampersand (entity)
+}}
+
+####{#code-tag-wrap} `#code-tag-wrap`
+[`#code-tag-wrap`]: #code-tag-wrap
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #code-tag-wrap
+  * \A --> <code>
+  * \Z --> </code>
+  ``
+}}
+{{des
+  --
+  Wraps a string in opening and closing `code` tags.
+  --
+}}
+{{dep
   ==
-    , `\<`
-    , `&lt;`
-    , \<
-    , Less than (entity)
+  - [`#display-code`]
   ==
-    , `\>`
-    , `&gt;`
-    , \>
-    , Greater than (entity)
+}}
+
+####{#prepend-newline} `#prepend-newline`
+[`#prepend-newline`]: #prepend-newline
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #prepend-newline
+  * \A --> \n
+  ``
+}}
+{{des
+  --
+  Adds a newline at the very start of a string.
+  --
+}}
+{{dep
   ==
-    , `\"`
-    , `&quot;`
-    , \"
-    , Double quote (entity)
+  - [`#divisions`]
+  - [`#blockquotes`]
+  - [`#unordered-list-items`]
+  - [`#unordered-lists`]
+  - [`#ordered-list-items`]
+  - [`#ordered-lists`]
+  - [`#table-rows`]
+  - [`#table-head`]
+  - [`#table-body`]
+  - [`#table-foot`]
+  - [`#tables`]
+  - [`#paragraphs`]
   ==
-    , `...`
-    , `…`
-    , ...
-    , `U+2026 HORIZONTAL ELLIPSIS`
+}}
+
+####{#unordered-list-items} `#unordered-list-items`
+[`#unordered-list-items`]: #unordered-list-items
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #unordered-list-items
+  - starting_pattern: [-+*]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #prepend-newline
+  - ending_pattern: [-+*]
+  - tag_name: li
+  ``
+}}
+{{des
+  --
+  Partitions content into list items based on leading occurrences of
+  `{.cmd .cmdc} @(-)@`, `{.cmd .cmdc} @(+)@`, or `{.cmd .cmdc} @(*)@`.
+  --
+}}
+{{dep
   ==
-    , `---`
-    , `—`
-    , ---
-    , `U+2014 EM DASH`
+  - [`#unordered-lists`]
   ==
-    , `--`
-    , `–`
-    , --
-    , `U+2013 EN DASH`
+}}
+
+####{#ordered-list-items} `#ordered-list-items`
+[`#ordered-list-items`]: #ordered-list-items
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #ordered-list-items
+  - starting_pattern: [0-9]+ [.]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #prepend-newline
+  - ending_pattern: [0-9]+ [.]
+  - tag_name: li
+  ``
+}}
+{{des
+  --
+  Partitions content into list items based on leading occurrences of
+  a __run of digits__ followed by a __full stop__.
+  --
+}}
+{{dep
   ==
-    , `\P`
-    , `¶`
-    , \P
-    , `U+00B6 PILCROW SIGN`
+  - [`#ordered-lists`]
   ==
-    , `\d`
-    , `$`
-    , \d
-    , Dollar sign
+}}
+
+####{#mark-table-headers-for-preceding-table-data}
+  `#mark-table-headers-for-preceding-table-data`
+[`#mark-table-headers-for-preceding-table-data`]:
+  #mark-table-headers-for-preceding-table-data
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #mark-table-headers-for-preceding-table-data
+  * \A --> ;{}
+  # Replaces `<th«attributes_sequence»>` with `;{}<th«attributes_sequence»>`,
+  # so that #table-data will know to stop before it.
+  ``
+}}
+{{des
+  --
+  Replaces `{.cmd .cmdc} <th«attributes_sequence»>`
+  with `{.cmd .cmdc} ;{}<th«attributes_sequence»>`
+  so that [`#table-data`] will know to stop before it.
+  --
+}}
+{{dep
   ==
-    , `\#`
-    , `#`
-    , \#
-    , Hash
+  - [`#table-headers`]
   ==
-    , `\[`
-    , `[`
-    , \[
-    , Opening square bracket
+}}
+
+####{#table-headers} `#table-headers`
+[`#table-headers`]: #table-headers
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-headers
+  - starting_pattern: [;]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #trim-whitespace
+  - ending_pattern: [;,]
+  - tag_name: th
+  - concluding_replacements:
+      #mark-table-headers-for-preceding-table-data
+  ``
+}}
+{{des
+  --
+  Partitions content into table headers
+  based on leading occurrences of `{.cmd .cmdc} @(;)@`
+  up to the next leading `{.cmd .cmdc} @(;)@` or `{.cmd .cmdc} @(,)@`.
+  --
+}}
+{{dep
   ==
-    , `\]`
-    , `]`
-    , \]
-    , Closing square bracket
+  - [`#table-rows`]
   ==
-    , `\(`
-    , `(`
-    , \(
-    , Opening round bracket
+}}
+
+####{#table-data} `#table-data`
+[`#table-data`]: #table-data
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-data
+  - starting_pattern: [,]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #trim-whitespace
+  - ending_pattern: [;,]
+  - tag_name: td
+  ``
+}}
+{{des
+  --
+  Partitions content into table data
+  based on leading occurrences of `{.cmd .cmdc} @(,)@`
+  up to the next leading `{.cmd .cmdc} @(;)@` or `{.cmd .cmdc} @(,)@`.
+  --
+}}
+{{dep
   ==
-    , `\)`
-    , `)`
-    , \)
-    , Closing round bracket
+  - [`#table-rows`]
   ==
-    , `\*`
-    , `*`
-    , \*
-    , Asterisk
+}}
+
+####{#unmark-table-headers-for-preceding-table-data}
+  `#unmark-table-headers-for-preceding-table-data`
+[`#unmark-table-headers-for-preceding-table-data`]:
+  #unmark-table-headers-for-preceding-table-data
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #unmark-table-headers-for-preceding-table-data
+  * ^ [;] \{ \} <th (?P<bracket_or_placeholder_marker> [>\uF8FF] )
+      -->
+    <th\g<bracket_or_placeholder_marker>
+  # Replaces `;{}<th«attributes_sequence»>` with `<th«attributes_sequence»>`
+  # so that #mark-table-headers-for-preceding-table-data is undone.
+  ``
+}}
+{{des
+  --
+  Replaces `{.cmd .cmdc} ;{}<th«attributes_sequence»>`
+  with `{.cmd .cmdc} <th«attributes_sequence»>`
+  so that [`#mark-table-headers-for-preceding-table-data`] is undone.
+  --
+}}
+{{dep
   ==
-    , `\_`
-    , `_`
-    , \_
-    , Underscore
+  - [`#table-rows`]
   ==
-    , `\|`
-    , `|`
-    , \|
-    , Pipe
+}}
+
+####{#table-rows} `#table-rows`
+[`#table-rows`]: #table-rows
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-rows
+  - starting_pattern: [/]{2}
+  - attribute_specifications: EMPTY
+  - ending_pattern: [/]{2}
+  - content_replacements:
+      #table-headers
+      #table-data
+      #unmark-table-headers-for-preceding-table-data
+      #prepend-newline
+  - tag_name: tr
+  ``
+}}
+{{des
+  --
+  Partitions content into table rows
+  based on leading occurrences of `{.cmd .cmdc} @(//)@`.
+  --
+}}
+{{dep
   ==
-    , `\=`
-    , `<hr>`
-    , \=
-    , Thematic break
+  - [`#table-head`]
+  - [`#table-body`]
+  - [`#table-foot`]
+  - [`#tables`]
   ==
-    , `\+`
-    , `<br>`
-    , \+
-    , Line break
-''''
-||||
-
-
-###{#line-continuations}
-  Line continuations
-###
-
-----
-Use backslashes for line continuation.
-All leading whitespace on the next line is stripped.
-----
-
-====
-* CMD
-  ````{.cmd}
-    (Line 1)\
-      (Line 2)
-    (Line 3) \
-           (Line 4)
-  ````
-
-* HTML
-  ````{.html}
-    (Line 1)(Line 2)
-    (Line 3) (Line 4)
-  ````
-
-====
-
-
-###{#reference-definitions}
-  Reference-style definitions
-###
-
-@[ref-defs] #reference-definitions @
-
-{^^
-  {{@}}[<|LABEL|>]{<|attribute specification|>} <|address|> <|title|> {{@}}
-^^}
-
-----
-Reference style definition
-for an [image](#reference-style-images) or a [link](#reference-style-links).
-----
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-----
-The referencing {^ <|LABEL|> ^} is case insensitive.
-For definitions whose {^ <|address|> ^} or {^ <|title|> ^}
-contains one or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of {{at signs}} in the delimiters.
-----
-----
-{^ <|address|> ^} is used for
-`src` in [images](#reference-style-images) and
-`href` in [links](#reference-style-links).
-----
-----
-All reference-style definitions are read and stored.
-If the same label (which is case insensitive)
-is specified more than once,
-the latest definition shall prevail.
-----
-
-
-###{#images}
-  Images
-###
-
-
-####{#inline-style-images}
-  Inline-style images
-####
-
-{^^
-  ~~ ![ ~~<|ALT|>]{<|attribute specification|>}(<|src|> <|title|>)
-^^}
-
-----
-Unlike John Gruber's Markdown, {^ <|title|> ^} is not surrounded by quotes.
-If quotes are supplied to {^ <|title|> ^},
-they are automatically escaped as `&quot;`.
-----
-
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-----
-Produces the image
-{^
-  ~~ <img ~~<|ATTRIBUTES|>~~ > ~~
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <|ALT|> ^}, {^ <|src|> ^}, {^ <|title|> ^},
-and {^ <|attribute specification|> ^}.
-For {^ <|ALT|> ^}, {^ <|src|> ^}, or {^ <|title|> ^} containing
-one or more closing square or round brackets,
-use [escapes] or [CMD literals].
-----
-
-====
-* CMD
-  ````{.cmd}
-  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
-    /rembrandt-anatomy.jpg
-    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
-  )
-  ````
-
-* HTML
-  ````{.html}
-  <img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
-  ````
-
-* Rendered
-  ----
-  ![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
-    /rembrandt-anatomy.jpg
-    The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
-  )
-  ----
-
-====
-
-
-####{#reference-style-images}
-  Reference-style images
-####
-
-{^^
-  ![<|ALT|>][<|label|>]
-^^}
-
-----
-To be used in conjunction with a [reference-style definition][ref-defs].
-----
-----
-A single space may be included
-between {^ [<|ALT|>] ^} and {^ [<|label|>] ^}.
-The referencing {^ <|label|> ^} is case insensitive.
-If {^ <|label|> ^} is empty,
-the square brackets surrounding it may be omitted,
-and {^ <|ALT|> ^} is used as the label.
-----
-
-----
-Produces the image
-{^
-  ~~ <img ~~<|ATTRIBUTES|>~~ > ~~
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <|ALT|> ^} and the attribute specifications
-for the corresponding [reference-style image definition][ref-defs].
-----
-----
-Whitespace around {^ <|label|> ^} is stripped.
-For images whose {^ <|ALT|> ^} or {^ <|label|> ^} contains
-one or more closing square brackets,
-use [escapes] or [CMD literals].
-----
-
-====
-* CMD
-  ````{.cmd}
-  @[moses-breaking-tablets]{w200}
-    /rembrandt-moses.jpg
-    Moses Breaking the Tablets of the Law (Rembrandt)
-  @
-  
-  ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
-  ````
-
-* HTML
-  ````{.html}
-  <img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)">
-  ````
-
-* Rendered
-  ----
-  @[moses-breaking-tablets]{w200}
-    /rembrandt-moses.jpg
-    Moses Breaking the Tablets of the Law (Rembrandt)
-  @
-  
-  ![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
-  ----
-
-====
-
-
-###{#links}
-  Links
-###
-
-
-####{#direct-style-links}
-  Direct-style links
-####
-
-{^^
-  <|flags|>\<<|SCHEME|>:<|address|>\>{<|attribute specification|>}
-^^}
-
-----
-Produces the link
-{^
-  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
-       <|SCHEME|>:<|address|>\
-  ~~ </a> ~~
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <|SCHEME|>:<|address|> ^} and {^ <|attribute specification|> ^}.
-{^ <|SCHEME|> ^} and {^ <|address|> ^}
-may not contain whitespace or angle brackets.
-{^ <|flags|> ^} may consist of zero or more of the following characters:
-----
-====
-* `b` to enclose the link in angle brackets
-* `s` to suppress the scheme separator in the link content
-* `a` to enable all flags above
-====
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-====
-* CMD
-  ````{.cmd}
-  <https://example.com>,
-  b<https://example.com>,
-  s<https://example.com>,
-  a<https://example.com>.
-  ````
-
-* HTML
-  ````{.html}
-  <a href="https://example.com">https://example.com</a>,
-  &lt;<a href="https://example.com">https://example.com</a>&gt;,
-  <a href="https://example.com">example.com</a>,
-  &lt;<a href="https://example.com">example.com</a>&gt;.
-  ````
-
-* Rendered
-  ----
-  <https://example.com>,
-  b<https://example.com>,
-  s<https://example.com>,
-  a<https://example.com>.
-  ----
-====
-
-####{#inline-style-links}
-  Inline-style links
-####
-
-{^^
-  ~~ [ ~~<|CONTENT|>]{<|attribute specification|>}(<|href|> <|title|>)
-^^}
-
-----
-Unlike John Gruber's Markdown, {^ <|title|> ^} is not surrounded by quotes.
-If quotes are supplied to {^ <|title|> ^},
-they are automatically escaped as `&quot;`.
-----
-
-----
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-----
-Produces the link
-{^
-  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
-       <|CONTENT|>\
-  ~~ </a> ~~
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from {^ <|href|> ^}, {^ <|title|> ^},
-and {^ <|attribute specification|> ^}.
-Whitespace around {^ <|CONTENT|> ^} is stripped.
-For {^ <|CONTENT|> ^}, {^ <|href|> ^}, or {^ <|title|> ^} containing
-one or more closing square or round brackets,
-use [escapes] or [CMD literals].
-----
-
-====
-* CMD
-  ````{.cmd}
-  [Wikimedia Commons](
-    https://commons.wikimedia.org/wiki/Main_Page
-    Wikimedia Commons
-  )
-    \+
-  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
-  ````
-
-* HTML
-  ````{.html}
-  <a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
-  <a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
-  ````
-
-* Rendered
-  ----
-  [Wikimedia Commons](
-    https://commons.wikimedia.org/wiki/Main_Page
-    Wikimedia Commons
-  )
-    \+
-  [Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
-  ----
-
-====
-
-
-####{#reference-style-links}
-  Reference-style links
-####
-
-{^^
-  [<|CONTENT|>][<|label|>]
-^^}
-
-----
-To be used in conjunction with a [reference-style definition][ref-defs].
-----
-
-----
-A single space may be included
-between {^ [<|CONTENT|>] ^} and {^ [<|label|>] ^}.
-The referencing {^ <|label|> ^} is case insensitive.
-If {^ <|label|> ^} is empty,
-the square brackets surrounding it may be omitted,
-and {^ <|CONTENT|> ^} is used as the label.
-----
-
-----
-Produces the link
-{^
-  ~~ <a ~~<|ATTRIBUTES|>~~ > ~~\
-       <|CONTENT|>\
-  ~~ </a> ~~
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-built from the attribute specifications
-for the corresponding [reference-style image definition][ref-defs].
-----
-----
-Whitespace around {^ <|CONTENT|> ^} and {^ <|label|> ^} is stripped.
-For links whose {^ <|CONTENT|> ^} or {^ <|label|> ^} contains
-one or more closing square brackets,
-use [escapes] or [CMD literals].
-----
-
-====
-* CMD
-  ````{.cmd}
-  @[wikipedia]
-    https://en.wikipedia.org/wiki/Main_Page
-    Wikipedia, the free encyclopedia
-  @
-  
-  [Wikipedia's home page][wikipedia] \+
-  [Wikipedia][] \+
-  [Wikipedia]
-  ````
-
-* HTML
-  ````{.html}
-  <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia's home page</a><br>
-  <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a><br>
-  <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a>
-  ````
-
-* Rendered
-  ----
-  @[wikipedia]
-    https://en.wikipedia.org/wiki/Main_Page
-    Wikipedia, the free encyclopedia
-  @
-  
-  [Wikipedia's home page][wikipedia] \+
-  [Wikipedia][] \+
-  [Wikipedia]
-  ----
-
-====
-
-
-###{#headings}
-  Headings
-###
-
-{^^
-  \#{<|attribute specification|>}> <|CONTENT|> \#
-^^}
-
-----
-Produces the heading
-{^
-  ~~ <h1 ~~<|ATTRIBUTES|>~~ > ~~\
-      <|CONTENT|>\
-  ~~ </h1> ~~
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-[built from {^ <|attribute specification|> ^}][as].
-----
-----
-Whitespace around {^ <|CONTENT|> ^} is stripped.
-For `<h2>` to `<h6>`, use 2 to 6 delimiting hashes respectively.
-For {^ <|CONTENT|> ^} containing the delimiting number of
-or more consecutive hashes, use [CMD literals].
-----
-
-====
-* CMD
-  ````{.cmd}
-    ###{#some-id} Heading with id ###
-    #### Heading without id ####
-  ````
-
-* HTML
-  ````{.html}
-    <h3 id="some-id">Heading with id</h3>
-    <h4>Heading without id</h4>
-  ````
-
-====
-
-
-###{#inline-semantics}
-  Inline semantics
-###
-
-{^^
-  <|optional pipe|>\X{<|attribute specification|>} <|CONTENT|>\X
-^^}
-
-----
-{^ <|CONTENT|> ^} must be non-empty.
-The opening delimiter {^ \X ^} must not be followed by whitespace
-or by `</` (which would presumably be a closing tag).
-The closing delimiter {^ \X ^} must not be preceded by whitespace
-or by a pipe `|`.
-If {^ <|attribute specification|> ^} is empty,
-the curly brackets surrounding it may be omitted.
-----
-
-----
-Produces the inline semantic
-{^
-  \<<|TAG NAME|><|ATTRIBUTES|>
-     <|CONTENT|>\
-  \</<|TAG NAME|>\>
-^},
-where {^ <|ATTRIBUTES|> ^} is the sequence of attributes
-[built from {^ <|attribute specification|> ^}][as].
-----
-----
-The leading optional pipe is to be used as a disambiguator in some edge cases.
-If present, it indicates that the delimiter directly after it
-is opening rather than closing.
-----
-----
-Whitespace around {^ <|CONTENT|> ^} is stripped.
-For {^ <|CONTENT|> ^} containing one or more occurrences of `*` or `_`,
-or three or more consecutive occurrences of `"` or `'`,
-use [CMD literals] or the [escapes] `\*` and `\_`.
-For {^ <|CONTENT|> ^} ending in a pipe, use the [escape] `\|`.
-----
-
-----
-The following delimiters {^ \X ^} are used:
-----
-======
-* `**` for `<strong>`
-  (strong importance, seriousness, etc.)
-
-* `*` for `<em>`
-  (stress emphasis, sarcasm, etc.)
-
-* `__` for `<b>`
-  (bring to attention *without* strong importance,~e.g. keywords)
-
-* `_` for `<i>`
-  (offset text *without* stress emphasis, e.g.~Latin)
-
-* `"""` for `<q>`
-  (inline quotation)
-
-* `'''` for `<cite>`
-  (citation)
-
-======
-
-----
-**In HTML5, `<b>` and `<i>` are *not* deprecated.**
-See [W3C on using `<b>` and `<i>` elements](
-  https://www.w3.org/International/questions/qa-b-and-i-tags.en
-).
-----
-
-----
-Multiple passes are used to process nested inline semantics
-with the same delimiting character.
-Delimiter matching is inner-greedy,
-so `***blah***` produces `<em><strong>blah</strong></em>`
-rather than `<strong><em>blah</em></strong>`.
-For the latter, use the optional pipe for the inner occurrence,
-i.e.~`**|*blah***`.
-----
-
-----
-Recursive calls are used to process nested inline semantics.
-----
-
-||||||{.centred-block}
-||||{.overflowing}
-''''
-|^
+}}
+
+####{#table-head} `#table-head`
+[`#table-head`]: #table-head
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-head
+  - starting_pattern: [|][\^]
+  - attribute_specifications: EMPTY
+  - ending_pattern: [|][:_]
+  - content_replacements:
+      #table-rows
+      #prepend-newline
+  - tag_name: thead
+  ``
+}}
+{{des
+  --
+  Partitions content into table heads
+  based on leading occurrences of `{.cmd .cmdc} @(|^)@`
+  up to the next leading `{.cmd .cmdc} @(|:)@` or `{.cmd .cmdc} @(|_)@`.
+  --
+}}
+{{dep
   ==
-    ; Pattern
-    ; CMD
-    ; Rendered
-|:
+  - [`#tables`]
   ==
-    , 11
-    , `*em*`
-    ,  *em*
+}}
+
+####{#table-body} `#table-body`
+[`#table-body`]: #table-body
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-body
+  - starting_pattern: [|][:]
+  - attribute_specifications: EMPTY
+  - ending_pattern: [|][_]
+  - content_replacements:
+      #table-rows
+      #prepend-newline
+  - tag_name: tbody
+  ``
+}}
+{{des
+  --
+  Partitions content into table bodies
+  based on leading occurrences of `{.cmd .cmdc} @(|:)@`
+  up to the next leading `{.cmd .cmdc} @(|_)@`.
+  --
+}}
+{{dep
   ==
-    , 22
-    , `**strong**`
-    ,  **strong**
+  - [`#tables`]
   ==
-    , 33
-    , `***em(strong)***`
-    ,  ***em(strong)***
+}}
+
+####{#table-foot} `#table-foot`
+[`#table-foot`]: #table-foot
+
+{{def
+  ``{.cmd .cmdr}
+  PartitioningReplacement: #table-foot
+  - starting_pattern: [|][_]
+  - attribute_specifications: EMPTY
+  - content_replacements:
+      #table-rows
+      #prepend-newline
+  - tag_name: tfoot
+  ``
+}}
+{{des
+  --
+  Partitions content into table feet
+  based on leading occurrences of `{.cmd .cmdc} @(|_)@`.
+  --
+}}
+{{dep
   ==
-    , 44
-    , `****strong(strong)****`
-    ,  ****strong(strong)****
+  - [`#tables`]
   ==
-    , 123
-    , `*em **em(strong)***`
-    ,  *em **em(strong)***
+}}
+
+####{#suppress-scheme} `#suppress-scheme`
+[`#suppress-scheme`]: #suppress-scheme
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #suppress-scheme
+  - positive_flag: SUPPRESS_SCHEME
+  * \A [\S]+ [:] (?: [/]{2} )? -->
+  ``
+}}
+{{des
+  --
+  Suppresses the scheme
+  (including the colon and possibly two slashes)
+  of a URI.
+  --
+}}
+{{dep
   ==
-    , 213
-    , `**strong *strong(em)***`
-    ,  **strong *strong(em)***
+  - [`#explicit-links`]
   ==
-    , 312
-    , `***strong(em)* strong**`
-    ,  ***strong(em)* strong**
+}}
+
+####{#angle-bracket-wrap} `#angle-bracket-wrap`
+[`#angle-bracket-wrap`]: #angle-bracket-wrap
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #angle-bracket-wrap
+  - positive_flag: ANGLE_BRACKET_WRAP
+  * \A --> &lt;
+  * \Z --> &gt;
+  - concluding_replacements:
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Wraps a string in angle brackets.
+  --
+}}
+{{dep
   ==
-    , 321
-    , `***em(strong)** em*`
-    ,  ***em(strong)** em*
+  - [`#explicit-links`]
   ==
-    , 1221
-    , `*em **em(strong)** em*`
-    ,  *em **em(strong)** em*
+}}
+
+
+##{#replacement-rule-syntax} CMD replacement rule syntax
+
+(Documentation coming soon.)
+
+
+##{#cmd-placeholders} CMD placeholders
+[placeholder]: #cmd-placeholders
+
+--
+There are many instances in which the result of a replacement
+should not be altered further by replacements to follow.
+To protect a string from further alteration,
+it is temporarily replaced by a __placeholder__
+consisting of code points in the main Unicode Private Use Area.
+--
+--
+Specifically, the placeholder for a string shall be of the following form:
+--
+``{.cmd .cmdc}
+@(«marker»)@@(«run_characters»)@@(«marker»)@
+``
+==
+- __`{.cmd .cmdc} «marker»`__ is `«U+F8FF»`.
+- __`{.cmd .cmdc}«run_characters»`__ are between `«U+E000»` and `«U+E0FF»`
+  each representing a Unicode byte of the string.
+==
+
+--
+It is assumed that the user will not define replacement rules that
+tamper with strings of the form
+`{.cmd .cmdc} «marker»«run_characters»«marker»`.
+--
+
+### Example
+
+==
+- Consider the string `{.cmd .cmdc} £3`.
+- Its code points are `U+00A3` and `U+0033`.
+- The corresponding Unicode bytes are
+  `\x@(C2)@\x@(A3)@` and u`\x@(33)@`.
+- The `{.cmd .cmdc}«run_characters»` are therefore
+  `«U+E0@(C2)@»«U+E0@(A3)@»«U+E0@(33)@»`.
+- The full placeholder is therefore
+  `«U+F8FF»«U+E0@(C2)@»«U+E0@(A3)@»«U+E0@(33)@»«U+F8FF»`.
+==
+
+
+##{#cmd-attribute-specifications} CMD attribute specifications
+[CMD attribute specifications]: #cmd-attribute-specifications
+
+--
+When a CMD replacement rule is defined with
+`{.cmd .cmdr} attribute_specifications` not equal to `{.cmd .cmdr} NONE`,
+it allows HTML attributes to be specified by __CMD attribute specifications__
+enclosed in curly brackets.
+--
+--
+CMD attribute specifications may be of the following forms:
+--
+``{.cmd .cmdc}
+«name»@(=)@"«quoted value (whitespace allowed)»"
+«name»@(=)@«bare-value»
+@(#)@«id»
+@(.)@«class»
+@(r)@«rowspan»
+@(c)@«colspan»
+@(w)@«width»
+@(h)@«height»
+@(-)@«delete-name»
+«boolean-name»
+``
+--
+In the two forms with an explicit equals sign,
+the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
+--
+==
+- `{.cmd .cmdc} #` for `{.cmd .cmdc} id`
+- `{.cmd .cmdc} .` for `{.cmd .cmdc} class`
+- `{.cmd .cmdc} l` for `{.cmd .cmdc} lang`
+- `{.cmd .cmdc} r` for `{.cmd .cmdc} rowspan`
+- `{.cmd .cmdc} c` for `{.cmd .cmdc} colspan`
+- `{.cmd .cmdc} w` for `{.cmd .cmdc} width`
+- `{.cmd .cmdc} h` for `{.cmd .cmdc} height`
+- `{.cmd .cmdc} s` for `{.cmd .cmdc} style`
+==
+
+### Examples
+
+++
+1.
+  Behaviour for the standard rule [`#inline-code`]:
   ==
-    , 2112
-    , `**strong *strong(em)* strong**`
-    ,  **strong *strong(em)* strong**
-''''
-||||
-||||||
+  - CMD: ``{.cmd .cmdc} `{#foo .bar l=en-AU title="baz"} test` ``
+  - HTML: <| `{#foo .bar l=en-AU title="baz"} test` |>
+  ==
 
-====
-* CMD
-  ````{.cmd}
-  **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
-  They are *not* the same. \+
-  Meals come with __rice__ or __pasta__. \+
-  I _{.translator-supplied} am_ the LORD. \+
-  '''Nineteen Eighty-Four''' begins with """It was a bright cold day in April""".
-  ````
+1. Empty attribute specifications:
+  ==
+  - CMD: ``{.cmd .cmdc} `{} test` ``
+  - HTML: <| `{} test` |>
+  ==
 
-* HTML
-  ````{.html}
-  <strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
-  They are <em>not</em> the same.<br>
-  Meals come with <b>rice</b> or <b>pasta</b>.<br>
-  I <i class="translator-supplied">am</i> the LORD.<br>
-  <cite>Nineteen Eighty-Four</cite> begins with <q>It was a bright cold day in April</q>.
-  ````
+1.
+  Non-`class` values will supersede earlier ones:
+  ==
+  - CMD: ``{.cmd .cmdc} `{#1 #2 title=A title=B} test` ``
+  - HTML: <| `{#1 #2 title=A title=B} test` |>
+  ==
 
-* Rendered
-  ----
-  **Do not confuse `<strong>` and `<em>` with `<b>` and `<i>`.** \+
-  They are *not* the same. \+
-  Meals come with __rice__ or __pasta__. \+
-  I _{.translator-supplied} am_ the LORD. \+
-  '''Nineteen Eighty-Four''' begins with """It was a bright cold day in April""".
-  ----
+1.
+  `class` values will accumulate:
+  ==
+  - CMD: ``{.cmd .cmdc} `{.a .b class=c .d} test` ``
+  - HTML: <| `{.a .b class=c .d} test` |>
+  ==
 
-====
+1.
+  Delete `class` to reset it:
+  ==
+  - CMD: ``{.cmd .cmdc} `{.a .b -class class=c .d} test` ``
+  - HTML: <| `{.a .b -class class=c .d} test` |>
+  ==
+++
 
 
-###{#whitespace}
-  Whitespace
-###
+##{#repository-links} Repository links
 
-----
-Throughout this document, "whitespace" refers specifically to ASCII whitespace.
-See [`string.whitespace`][string.whitespace]:
-----
-""""
-~~[~~...~~]~~ all ASCII characters that are considered whitespace.
-~~[~~...~~]~~ space, tab, linefeed, return, formfeed, and vertical tab.
-""""
-
-----
-Whitespace is processed as follows:
-----
-++++
-1.  Leading and trailing horizontal whitespace is removed.
-2.  Empty lines are removed. (In the implementation,
-    consecutive newlines are replaced with a single newline.)
-3.  Whitespace before line break elements `<br>` is removed.
-4.  Whitespace for attributes is canonicalised:
-    ====
-    * a single space is used before the attribute name, and
-    * no whitespace is used around the equals sign.
-    ====
-++++
-
-
-%footer-element
-
-@[CMD literals] #cmd-literals @
-@[escape] #escapes @
-@[escapes] #escapes @
-
-@@[cmd-repo]
-  https://github.com/conway-markdown/conway-markdown/
-  GitHub: Conway-Markdown
-@@
-
-@@[cmd-docs-repo]
+==
+- This page's CMD: [%cmd-basename.cmd]
+- This page's HTML: [%cmd-basename.html]
+- This page's repository: [conway-markdown.github.io]
+- Python implementation's repository: [conway-markdown]
+==
+[%cmd-basename.cmd]:
+  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
+    %cmd-name.cmd
+[%cmd-basename.html]:
+  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
+    %cmd-name.html
+[conway-markdown.github.io]:
   https://github.com/conway-markdown/conway-markdown.github.io/
-  GitHub: Documentation for Conway-Markdown (GitHub pages)
-@@
-
-@@[source-cmd]
-  https://github.com/conway-markdown/conway-markdown.github.io/\
-    blob/master/index.cmd
-  GitHub: index.cmd
-@@
-
-@@[output-html]
-  https://github.com/conway-markdown/conway-markdown.github.io/\
-    blob/master/index.html
-  GitHub: index.html
-@@
-
-@@[katex]
-  https://katex.org/
-  KaTeX --- The fastest math typesetting library for the web
-@@
-
-@@[Markdown]
-  https://daringfireball.net/projects/markdown/
-  Daring Fireball: Markdown
-@@
-
-@@[string.whitespace]
-  https://docs.python.org/3/library/string.html#string.whitespace
-@@
+[conway-markdown]:
+  https://github.com/conway-markdown/conway-markdown

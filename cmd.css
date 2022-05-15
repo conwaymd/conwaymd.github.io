@@ -1,15 +1,20 @@
+:root {
+  --cmd-background-colour: #feecec;
+  --cmdr-colour: #880000;
+  --cmdc-colour: #1100aa;
+  --html-colour: #006600;
+}
+
+details > :not(summary) {
+  margin-top: 0.2em;
+  margin-left: 1em;
+}
+
 a {
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
-}
-
-blockquote {
-  background: lightyellow;
-  border-left: 3px solid black;
-  padding: 0.7em;
 }
 
 body {
@@ -17,31 +22,80 @@ body {
   font-family: sans-serif;
   line-height: 1.6;
   margin: 0;
+  overflow-wrap: break-word;
   padding: 0.2em 1.3em 0.7em;
 }
 
-.centred-block {
-  display: flex;
-  justify-content: center;
-  margin: 1em 0;
+code {
+  white-space: pre-wrap;
 }
 
-.centred-flex{
-  display: flex;
-  justify-content: center;
+:not(pre) > code {
+  border: 1px solid grey;
+  padding: 0.2em;
 }
 
-.overflowing {
+html {
+  background: var(--cmd-background-colour);
+  margin: 0 auto;
+  max-width: 45em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+li {
+  padding-left: 0.3em;
+  padding-bottom: 0.2em;
+}
+ol > li {
+  padding-bottom: 0.35em;
+}
+
+ol, ul {
+  padding-left: 1.5em;
+}
+
+pre {
+  border: 1px solid black;
   overflow-x: auto;
+  padding: 0.5em;
 }
 
-.page-properties {
-  font-size: smaller;
+summary {
+  font-style: italic;
 }
 
-footer {
-  border-top: 2px solid black;
-  padding-top: 0.5em;
+table {
+  background-color: white;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+th {
+  background-color: lightgrey;
+}
+th, td {
+  border: 1px solid black;
+  padding: 0.4em;
+}
+
+
+.cmd {
+  background: var(--cmd-background-colour);
+}
+.cmdc {
+  color: var(--cmdc-colour);
+}
+.cmdr {
+  color: var(--cmdr-colour);
+}
+.html {
+  color: var(--html-colour);
 }
 
 .permalink {
@@ -50,85 +104,4 @@ footer {
   background-repeat: no-repeat;
   background-size: 1em;
   padding-left: 1.5em;
-}
-
-:target::before {
-  content: "";
-  display: block;
-  height: 10px;
-  margin: -10px 0 0;
-}
-
-html {
-  background: #feecec;
-  margin: 0 auto;
-  max-width: 45em;
-}
-
-li {
-  padding-bottom: 0.2em;
-}
-
-ol, ul {
-  padding-left: 1.25em;
-}
-
-pre {
-  border: 1px solid;
-  overflow-x: auto;
-  padding: 0.5em;
-}
-
-.cmd {
-  color: #008;
-}
-
-.html {
-  color: #800
-}
-
-.syntax {
-  border: 2px solid #111;
-  font-size: larger;
-  margin: 0.25em;
-}
-
-.repeatable-delimiter {
-  color: black;
-  background: #ffa;
-}
-
-:not(pre) > code {
-  border: 1px solid grey;
-  padding: 0.2em;
-}
-
-code > .repeatable-delimiter {
-  font-weight: bold;
-}
-
-.mandatory-argument {
-  color: #7000ff;
-  font-weight: bold;
-}
-
-.optional-argument {
-  color: green;
-}
-
-table {
-  background-color: white;
-  border-spacing: 0;
-  border-collapse: collapse;
-  margin-top: 0.5em;
-  white-space: pre-wrap;
-}
-
-th {
-  background-color: lightgrey;
-}
-
-th, td {
-  border: 1px solid black;
-  padding: 0.4em;
 }

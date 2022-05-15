@@ -3,23 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="author" content="Conway">
+<meta name="description" content="Documentation for Conway-Markdown (CMD).">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/cmd.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-let elements = document.getElementsByClassName("js-maths");
-for (let i = 0; i < elements.length; i++) {
-let element = elements[i]
-katex.render(
-element.textContent,
-element,
-{displayMode: element.tagName =="DIV"}
-);
-}
-})
-</script>
+<link rel="stylesheet" href="/cmd.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -27,873 +13,1836 @@ element,
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
-<title>Conway-Markdown (CMD)</title>
+<title>Conway-Markdown (CMD) v3.999...</title>
 </head>
 <body>
-<h1>Conway-Markdown (CMD)</h1>
-<div class="page-properties">
-First created: 2020-04-05<br>
-Last modified: 2022-03-25
-</div>
+<h1>Conway-Markdown (CMD) v3.999...</h1>
+<p>
+Conway-Markdown (CMD) is:
+</p>
 <ul>
-<li>This page's source CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd" title="GitHub: index.cmd">index.cmd</a>
+<li>
+A replacement-driven markup language inspired by Markdown.
 </li>
-<li>This page's output HTML: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.html" title="GitHub: index.html">index.html</a>
+<li>
+A demonstration of the folly of throwing regex at a parsing problem.
 </li>
-<li>GitHub repositories:
-<a href="https://github.com/conway-markdown/conway-markdown/" title="GitHub: Conway-Markdown">conway-markdown</a>,
-<a href="https://github.com/conway-markdown/conway-markdown.github.io/" title="GitHub: Documentation for Conway-Markdown (GitHub pages)">conway-markdown.github.io</a>
+<li>
+The result of someone joking that
+<q>the filenames would look like Windows executables from the 90s</q>.
+</li>
+<li>
+Implemented in <a href="https://packages.debian.org/stable/python3">Python 3.{whatever Debian stable is at}</a>.
+</li>
+<li>
+Licensed under "MIT No Attribution" (MIT-0).
 </li>
 </ul>
+<h2 id="contents"><a href="#contents" class="permalink" aria-label="Permalink"></a>Contents</h2>
+<ul>
+<li>
+<a href="#installation-and-usage">Installation and usage</a>
+</li>
+<li>
+<a href="#authoring-cmd-files">Authoring CMD files</a>
+</li>
+<li>
+<a href="#standard-rules">Standard CMD replacement rules</a>
+<ul>
+<li>
+<a href="#standard-queued-replacements">Standard queued replacements</a>
+<ol start="0">
+<li>
+<a href="#placeholder-markers"><code>#placeholder-markers</code></a>
+</li>
+<li>
+<a href="#literals"><code>#literals</code></a>
+</li>
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+<li>
+<a href="#comments"><code>#comments</code></a>
+</li>
+<li>
+<a href="#divisions"><code>#divisions</code></a>
+</li>
+<li>
+<a href="#blockquotes"><code>#blockquotes</code></a>
+</li>
+<li>
+<a href="#unordered-lists"><code>#unordered-lists</code></a>
+</li>
+<li>
+<a href="#ordered-lists"><code>#ordered-lists</code></a>
+</li>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+<li>
+<a href="#headings"><code>#headings</code></a>
+</li>
+<li>
+<a href="#paragraphs"><code>#paragraphs</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+<li>
+<a href="#boilerplate"><code>#boilerplate</code></a>
+</li>
+<li>
+<a href="#boilerplate-properties"><code>#boilerplate-properties</code></a>
+</li>
+<li>
+<a href="#cmd-properties"><code>#cmd-properties</code></a>
+</li>
+<li>
+<a href="#boilerplate-protect"><code>#boilerplate-protect</code></a>
+</li>
+<li>
+<a href="#backslash-escapes"><code>#backslash-escapes</code></a>
+</li>
+<li>
+<a href="#backslash-continuations"><code>#backslash-continuations</code></a>
+</li>
+<li>
+<a href="#reference-definitions"><code>#reference-definitions</code></a>
+</li>
+<li>
+<a href="#specified-images"><code>#specified-images</code></a>
+</li>
+<li>
+<a href="#referenced-images"><code>#referenced-images</code></a>
+</li>
+<li>
+<a href="#explicit-links"><code>#explicit-links</code></a>
+</li>
+<li>
+<a href="#specified-links"><code>#specified-links</code></a>
+</li>
+<li>
+<a href="#referenced-links"><code>#referenced-links</code></a>
+</li>
+<li>
+<a href="#inline-semantics"><code>#inline-semantics</code></a>
+</li>
+<li>
+<a href="#escape-idle-html"><code>#escape-idle-html</code></a>
+</li>
+<li>
+<a href="#whitespace"><code>#whitespace</code></a>
+</li>
+<li>
+<a href="#placeholder-unprotect"><code>#placeholder-unprotect</code></a>
+</li>
+</ol>
+</li>
+<li>
+<a href="#standard-unqueued-replacements">Standard unqueued replacements</a>
+<ul>
+<li>
+<a href="#placeholder-protect"><code>#placeholder-protect</code></a>
+</li>
+<li>
+<a href="#de-indent"><code>#de-indent</code></a>
+</li>
+<li>
+<a href="#escape-html"><code>#escape-html</code></a>
+</li>
+<li>
+<a href="#trim-whitespace"><code>#trim-whitespace</code></a>
+</li>
+<li>
+<a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>
+</li>
+<li>
+<a href="#code-tag-wrap"><code>#code-tag-wrap</code></a>
+</li>
+<li>
+<a href="#prepend-newline"><code>#prepend-newline</code></a>
+</li>
+<li>
+<a href="#unordered-list-items"><code>#unordered-list-items</code></a>
+</li>
+<li>
+<a href="#ordered-list-items"><code>#ordered-list-items</code></a>
+</li>
+<li>
+<a href="#mark-table-headers-for-preceding-table-data"><code>#mark-table-headers-for-preceding-table-data</code></a>
+</li>
+<li>
+<a href="#table-headers"><code>#table-headers</code></a>
+</li>
+<li>
+<a href="#table-data"><code>#table-data</code></a>
+</li>
+<li>
+<a href="#unmark-table-headers-for-preceding-table-data"><code>#unmark-table-headers-for-preceding-table-data</code></a>
+</li>
+<li>
+<a href="#table-rows"><code>#table-rows</code></a>
+</li>
+<li>
+<a href="#table-head"><code>#table-head</code></a>
+</li>
+<li>
+<a href="#table-body"><code>#table-body</code></a>
+</li>
+<li>
+<a href="#table-foot"><code>#table-foot</code></a>
+</li>
+<li>
+<a href="#suppress-scheme"><code>#suppress-scheme</code></a>
+</li>
+<li>
+<a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#replacement-rule-syntax">CMD replacement rule syntax</a>
+</li>
+<li>
+<a href="#cmd-placeholders">CMD placeholders</a>
+</li>
+<li>
+<a href="#cmd-attribute-specifications">CMD attribute specifications</a>
+</li>
+<li>
+<a href="#repository-links">Repository links</a>
+</li>
+</ul>
+<h2 id="installation-and-usage"><a href="#installation-and-usage" class="permalink" aria-label="Permalink"></a>Installation and usage</h2>
+<ol start="0">
+<li>
+Clone the <a href="https://github.com/conway-markdown/conway-markdown">repository of the Python implementation</a>:
+<pre><code>$ git clone https://github.com/conway-markdown/conway-markdown
+</code></pre>
 <p>
-Conway-Markdown (CMD) is the result of someone joking that
-"the filenames would look like Windows executables from the 90s".
-Inspired by the backticks of John Gruber's <a href="https://daringfireball.net/projects/markdown/" title="Daring Fireball: Markdown">Markdown</a>,
-CMD uses fence-style constructs
-where an <span class="repeatable-delimiter">arbitrarily repeatable delimiter symbol</span>
-is used to wrap shorter runs of that symbol.
+Since <code>cmd.py</code> is <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py">a shitty single-file script</a>,
+it will not be turned into a proper Python package.
 </p>
-<p>
-While Markdown is really an excellent syntax,
-there are many things which I've always wanted to do in Markdown,
-which I can't without some sort of extension
-(or falling back to writing plain HTML):
-</p>
+</li>
+</ol>
+<h3 id="linux-terminals"><a href="#linux-terminals" class="permalink" aria-label="Permalink"></a>Linux terminals, macOS Terminal, Git BASH for Windows</h3>
 <ol>
-<li>Set the width of <a href="#images">images</a>
+<li>
+Make an alias for <code>cmd.py</code> in whatever dotfile
+you configure your aliases in:
+<pre><code>alias cmd='path/to/cmd.py'
+</code></pre>
 </li>
-<li>Add <a href="#attribute-specifications"><code>id</code> and <code>class</code></a> to elements
+<li>
+Invoke the alias to convert a CMD file to HTML:
+<pre><code>$ cmd [-h] [-v] [-x] [file.cmd]
+
+Convert Conway-Markdown (CMD) to HTML.
+
+positional arguments:
+  file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
+                 `file.` for increased productivity. Omit to convert all CMD
+                 files under the working directory.
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --version  show program's version number and exit
+  -x, --verbose  run in verbose mode (prints every replacement applied)
+</code></pre>
 </li>
-<li>Write <a href="#cmd-literals">arbitrary text</a> outside of code elements
-without using backslash escapes or HTML (ampersand) entities
+</ol>
+<h3 id="windows-command-prompt"><a href="#windows-command-prompt" class="permalink" aria-label="Permalink"></a>Windows Command Prompt</h3>
+<ol>
+<li>
+Add the folder containing <code>cmd.py</code> to the <code>%PATH%</code> variable
 </li>
-<li><a href="#inclusions">Include</a> content from another file (e.g.&nbsp;a template)
-</li>
-<li>Use <a href="#inline-semantics"><code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>, and <code>&lt;cite&gt;</code> elements</a>,
-not just <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>
-</li>
-<li>Use <a href="#blocks"><code>&lt;div&gt;</code> elements</a> without falling back to HTML
-</li>
-<li><a href="#regex-replacements">Define my own syntax</a> as I go.
+<li>
+Invoke <code>cmd.py</code> to convert a CMD file to HTML:
+<pre><code>&gt; cmd.py [-h] [-v] [-x] [file.cmd]
+
+Convert Conway-Markdown (CMD) to HTML.
+
+positional arguments:
+  file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
+                 `file.` for increased productivity. Omit to convert all CMD
+                 files under the working directory.
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --version  show program's version number and exit
+  -x, --verbose  run in verbose mode (prints every replacement applied)
+</code></pre>
 </li>
 </ol>
 <p>
-CMD addresses each of these.
+<strong>WARNING: on Windows, be careful not to run any <code>.cmd</code> files by accident;
+they might break your computer. God save!</strong>
 </p>
-<h2 id="installation"><a class="permalink" href="#installation" aria-label="Permalink"></a>Installation</h2>
+<h2 id="authoring-cmd-files"><a href="#authoring-cmd-files" class="permalink" aria-label="Permalink"></a>Authoring CMD files</h2>
 <p>
-Requires Python&nbsp;3.6+.
+CMD files are parsed thus:
 </p>
-<p>
-Since this is just a crappy, single-file regex converter,
-there is no plan on turning it into a proper Python package any time soon.
-In the meantime:
-</p>
-<pre><code>$ cd some-directory/
-$ git clone https://github.com/conway-markdown/conway-markdown.git
+<pre class="cmd"><code><b class="cmdr">«replacement rules»</b>
+«delimiter»
+<b class="cmdc">«main content»</b>
 </code></pre>
 <ul>
-<li>If you are using Linux or Mac,
-make an alias for <code>some-directory/conway-markdown/cmd.py</code> and invoke that.
+<li>
+<b><code class="cmd cmdr">«replacement rules»</code></b> are user-defined CMD replacement rules
+that will be used in addition to the standard CMD replacement rules.
 </li>
-<li>If you are using Windows,
-add <code>some-directory</code> to the <code>%PATH%</code> variable and invoke <code>cmd.py</code>.
+<li>
+<code class="cmd">«delimiter»</code> is the first occurrence of
+3-or-more percent signs on its own line.
+(If no <code class="cmd">«delimiter»</code> is found in the file,
+the whole file is parsed as <code class="cmd cmdc">«main content»</code>.)
+</li>
+<li>
+<b><code class="cmd cmdc">«main content»</code></b> is the CMD content
+that will be converted to HTML according to
+the standard and user-defined CMD replacement rules.
 </li>
 </ul>
-<h2 id="usage"><a class="permalink" href="#usage" aria-label="Permalink"></a>Usage</h2>
 <p>
-Convert a CMD file to HTML, outputting to <code>cmd_name.html</code>:
+In the implementation:
 </p>
-<pre><code>$ cmd.py [cmd_name[.[cmd]]]
+<ol>
+<li>
+An empty <b>replacement queue</b> is initialised.
+</li>
+<li>
+<b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a> are parsed,
+and CMD replacement rules are added to the replacement queue accordingly.
+</li>
+<li>
+<b><code class="cmd cmdr">«replacement rules»</code></b> in the CMD file are parsed,
+and CMD replacement rules are added or inserted into the replacement queue
+accordingly.
+</li>
+<li>
+The CMD replacement rules in the replacement queue are
+<b>applied sequentially to <code class="cmd cmdc">«main content»</code></b>
+to convert it to HTML.
+</li>
+</ol>
+<p>
+To get started with writing <b><code class="cmd cmdc">«main content»</code></b>,
+read the listing of <a href="#standard-rules">standard CMD replacement rules</a>.
+</p>
+<p>
+To learn about writing user-defined <b><code class="cmd cmdr">«replacement rules»</code></b>,
+read about <a href="#replacement-rule-syntax">CMD replacement rule syntax</a>.
+</p>
+<h2 id="standard-rules"><a href="#standard-rules" class="permalink" aria-label="Permalink"></a>Standard CMD replacement rules</h2>
+<p>
+These section lists standard CMD replacement rules
+as defined by the constant string <b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>.
+</p>
+<p>
+Some replacement rules are <a href="#standard-queued-replacements">queued</a>,
+in that they appear explicitly in the replacement queue.
+</p>
+<p>
+Other replacement rules are <a href="#standard-unqueued-replacements">unqueued</a>,
+in that they do not appear explicitly in the replacement queue.
+However, they might be called by queued replacements.
+</p>
+<h3 id="standard-queued-replacements"><a href="#standard-queued-replacements" class="permalink" aria-label="Permalink"></a>Standard queued replacements</h3>
+<h4 id="placeholder-markers"><a href="#placeholder-markers" class="permalink" aria-label="Permalink"></a>0. <code>#placeholder-markers</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PlaceholderMarkerReplacement: #placeholder-markers
+- queue_position: ROOT
 </code></pre>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Omit <code>[cmd_name[.[cmd]]]</code> to convert all CMD files
-in the current directory (at all levels),
-except those listed in <code>.cmdignore</code>.
+Replaces occurrences of the placeholder marker <code>«U+F8FF»</code>
+with a <a href="#cmd-placeholders">placeholder</a>
+so that the occurrences will not be confounding.
 </p>
-<h2 id="syntax"><a class="permalink" href="#syntax" aria-label="Permalink"></a>Syntax</h2>
+</details>
+<h4 id="literals"><a href="#literals" class="permalink" aria-label="Permalink"></a>1. <code>#literals</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #literals
+- queue_position: AFTER #placeholder-markers
+- syntax_type: INLINE
+- allowed_flags:
+    u=KEEP_HTML_UNESCAPED
+    i=KEEP_INDENTED
+    w=REDUCE_WHITESPACE
+- prologue_delimiter: &lt;
+- extensible_delimiter: `
+- content_replacements:
+    #escape-html
+    #de-indent
+    #trim-whitespace
+    #reduce-whitespace
+    #placeholder-protect
+- epilogue_delimiter: &gt;
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>&lt;</b><b>`</b> «content» <b>`</b><b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>&lt;</b><b>`</b> «content» <b>`</b><b>&gt;</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«flags»</code>:
+<ul>
+<li>
+<code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">i</code>: keep indented (do not apply <a href="#de-indent"><code>#de-indent</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">w</code>: reduce whitespace (apply <a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>)
+</li>
+</ul>
+</li>
+<li>
+The number of backticks <code class="cmd cmdc"><b>`</b></code>
+may be increased arbitrarily.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Since CMD-to-HTML conversion is merely a bunch of regex replacements
-with some dictionaries for temporary storage of strings,
-the syntax for earlier replacements will have higher precedence
-than that for later replacements.
-The syntax of CMD, in the order of processing, is thus:
+Preserves <code class="cmd cmdc">«content»</code> literally.
 </p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Write a literal string:
 <ul>
-<li><a href="#cmd-literals">CMD literals <code>~~ ~~</code></a>
+<li>
+CMD: <code class="cmd cmdc">&lt;` &lt;b&gt;Foo&lt;/b&gt; `&gt;</code>
 </li>
-<li><a href="#display-code">Display code <code>``↵ ↵``</code></a>
+<li>
+HTML: <code class="html">&amp;lt;b&amp;gt;Foo&amp;lt;/b&amp;gt;</code>
 </li>
-<li><a href="#inline-code">Inline code <code>` `</code></a>
-</li>
-<li><a href="#comments">Comments <code>&lt;# #&gt;</code></a>
-</li>
-<li><a href="#display-maths">Display maths <code>$$↵ ↵$$</code></a>
-</li>
-<li><a href="#inline-maths">Inline maths <code>$ $</code></a>
-</li>
-<li><a href="#inclusions">Inclusions <code>{+ +}</code></a>
-</li>
-<li><a href="#regex-replacements">Regex replacement definitions <code>{% % %}</code></a>
-</li>
-<li><a href="#ordinary-replacements">Ordinary replacement definitions <code>{: : :}</code></a>
-</li>
-<li><a href="#preamble">Preamble <code>%%↵ ↵%%</code></a>
-</li>
-<li><a href="#blocks">Blocks <code>----↵ ↵----</code> etc.</a>
-<ul>
-<li><a href="#list-items">List items <code>*</code>, <code>+</code>, <code>-</code>, <code>1.</code></a>
+<li>
+Rendered: &lt;b&gt;Foo&lt;/b&gt;
 </li>
 </ul>
 </li>
-<li><a href="#tables">Tables <code>''''↵ ↵''''</code></a>
+<li>
+Keep HTML unescaped:
 <ul>
-<li><a href="#table-cells">Table cells <code>;</code> <code>,</code></a>
+<li>
+CMD: <code class="cmd cmdc">u&lt;` &lt;b&gt;Foo&lt;/b&gt; `&gt;</code>
 </li>
-<li><a href="#table-rows">Table rows <code>==</code></a>
+<li>
+HTML: <code class="html">&lt;b&gt;Foo&lt;/b&gt;</code>
 </li>
-<li><a href="#table-parts">Table parts <code>|^</code>, <code>|:</code>, <code>|_</code></a>
+<li>
+Rendered: <b>Foo</b>
 </li>
 </ul>
 </li>
-<li><a href="#escapes">Escapes <code>\\</code> etc.</a>
-</li>
-<li><a href="#line-continuations">Line continuations <code>\↵</code></a>
-</li>
-<li><a href="#reference-definitions">Reference-style definitions <code>@[ ] @</code></a>
-</li>
-<li><a href="#images">Images</a>
+<li>
+Increase the number of backticks to include content
+that matches the <code>#literals</code> syntax itself:
 <ul>
-<li><a href="#inline-style-images">Inline-style images <code>![ ]( )</code></a>
+<li>
+CMD: <code class="cmd cmdc">&lt;`` Literally &lt;`literal`&gt;. ``&gt;</code>
 </li>
-<li><a href="#reference-style-images">Reference-style images <code>![ ][ ]</code></a>
+<li>
+HTML: <code class="html">Literally &amp;lt;`literal`&amp;gt;.</code>
+</li>
+<li>
+Rendered: Literally &lt;`literal`&gt;.
 </li>
 </ul>
 </li>
-<li><a href="#links">Links</a>
+</ol>
+</details>
+<h4 id="display-code"><a href="#display-code" class="permalink" aria-label="Permalink"></a>2. <code>#display-code</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #display-code
+- queue_position: AFTER #literals
+- syntax_type: BLOCK
+- allowed_flags:
+    u=KEEP_HTML_UNESCAPED
+    i=KEEP_INDENTED
+    w=REDUCE_WHITESPACE
+- extensible_delimiter: ``
+- attribute_specifications: EMPTY
+- content_replacements:
+    #escape-html
+    #de-indent
+    #reduce-whitespace
+    #code-tag-wrap
+    #placeholder-protect
+- tag_name: pre
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>``</b>
+  «content»
+<b>``</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>``</b>{«attribute specifications»}
+  «content»
+<b>``</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>``</b>
+  «content»
+<b>``</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>``</b>{«attribute specifications»}
+  «content»
+<b>``</b>
+</code></pre>
 <ul>
-<li><a href="#direct-style-links">Direct-style links <code>&lt; : &gt;</code></a>
+<li>
+<code class="cmd cmdc">«flags»</code>:
+<ul>
+<li>
+<code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
 </li>
-<li><a href="#inline-style-links">Inline-style links <code>[ ]( )</code></a>
+<li>
+<code class="cmd cmdc">i</code>: keep indented (do not apply <a href="#de-indent"><code>#de-indent</code></a>)
 </li>
-<li><a href="#reference-style-links">Reference-style links <code>[ ][ ]</code></a>
-</li>
-</ul>
-</li>
-<li><a href="#headings">Headings <code># #</code></a>
-</li>
-<li><a href="#inline-semantics">Inline semantics <code>* *</code>, <code>** **</code>, <code>_ _</code>, <code>__ __</code></a>
-</li>
-<li><a href="#whitespace">Whitespace</a>
+<li>
+<code class="cmd cmdc">w</code>: reduce whitespace (apply <a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>)
 </li>
 </ul>
-<h3 id="attribute-specifications"><a class="permalink" href="#attribute-specifications" aria-label="Permalink"></a>Attribute specifications</h3>
+</li>
+<li>
+The number of backticks <code class="cmd cmdc"><b>`</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Most CMD syntaxes have an optional curly-bracketed part
-which allows for the specification of attributes.
-The following forms are recognised:
+Produces (pre-formatted) display code:
 </p>
-<pre class="cmd syntax"><code><span class="mandatory-argument">&lt;NAME&gt;</span>=<span class="mandatory-argument">&lt;VALUE&gt;</span>
-#<span class="mandatory-argument">&lt;ID&gt;</span>
-.<span class="mandatory-argument">&lt;CLASS&gt;</span>
-l<span class="mandatory-argument">&lt;LANG&gt;</span>
-r<span class="mandatory-argument">&lt;ROWSPAN&gt;</span>
-c<span class="mandatory-argument">&lt;COLSPAN&gt;</span>
-w<span class="mandatory-argument">&lt;WIDTH&gt;</span>
-h<span class="mandatory-argument">&lt;HEIGHT&gt;</span>
-s<span class="mandatory-argument">&lt;STYLE&gt;</span></code></pre>
-<p>
-The first is called "full form"; the rest are "short forms".
-An optional equals sign may be used after the leading character in short forms.
-Unrecognised short forms are ignored.
-If the class attribute is specified more than once,
-the new value is appended to the existing values.
-If a non-class attribute is specified more than once,
-the latest specification shall prevail.
-To omit an attribute, use the special value <code>\-</code>.
-For <code><span class="mandatory-argument">&lt;VALUE&gt;</span></code> etc. containing whitespace, use <a href="#cmd-literals">CMD literals</a>.
-For <code><span class="mandatory-argument">&lt;ID&gt;</span></code> etc. containing equals signs, use <a href="#cmd-literals">CMD literals</a>.
-</p>
+<pre class="html"><code><b>&lt;pre</b>«attribute sequence»<b>&gt;&lt;code&gt;</b>«content»
+<b>&lt;/code&gt;&lt;/pre&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Display code:
 <ul>
-<li>CMD
-<pre class="cmd"><code>||||{#first .hot #second .cold}
-  Blah
+<li>
+CMD:
+<pre class="cmd cmdc"><code>``{.java}
+  for (int index = 0; index &lt; count; index++)
+  {
+    // etc. etc.
+  }
+``
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;pre class="java"&gt;&lt;code&gt;for (int index = 0; index &amp;lt; count; index++)
+{
+  // etc. etc.
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<pre class="java"><code>for (int index = 0; index &lt; count; index++)
+{
+  // etc. etc.
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Use <a href="#literals"><code>#literals</code></a> with flag <code class="cmd cmdc">u</code> to inject HTML:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>``
+  Injection of &lt;b&gt; element u&lt;` &lt;b&gt;here&lt;/b&gt; `&gt;.
+``
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;pre&gt;&lt;code&gt;Injection of &amp;lt;b&amp;gt; element &lt;b&gt;here&lt;/b&gt;.
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<pre><code>Injection of &lt;b&gt; element <b>here</b>.
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="comments"><a href="#comments" class="permalink" aria-label="Permalink"></a>3. <code>#comments</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #comments
+- queue_position: AFTER #display-code
+* [^\S\n]*
+  [&lt;]
+    (?P&lt;hashes&gt; [#]+ )
+      [\s\S]*?
+    (?P=hashes)
+  [&gt;]
+    --&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>&lt;</b><b>#</b> «content» <b>#</b><b>&gt;</b>
+</code></pre>
+<ul>
+<li>
+The number of hashes <code class="cmd cmdc"><b>#</b></code> may be increased arbitrarily.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Remove CMD comments, along with all preceding whitespace.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+<a href="#display-code"><code>#display-code</code></a> prevails over <code>#comments</code>:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>``
+  Before.
+  &lt;# This be a comment. #&gt;
+  After.
+``
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;pre&gt;&lt;code&gt;Before.
+&amp;lt;# This be a comment. #&amp;gt;
+After.
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<pre><code>Before.
+&lt;# This be a comment. #&gt;
+After.
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<code>#comments</code> prevail over <a href="#inline-code"><code>#inline-code</code></a>:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`Before. &lt;# This be a comment. #&gt; After.`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;Before. After.&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>Before. After.</code>
+</li>
+</ul>
+</li>
+<li>
+Use <a href="#literals"><code>#literals</code></a> to make <a href="#inline-code"><code>#inline-code</code></a> prevail over <code>#comments</code>:
+<ul>
+<li>
+CMD:
+<code class="cmd cmdc">` &lt;`Before. &lt;# This be a comment. #&gt; After.`&gt; `</code>
+</li>
+<li>
+HTML:
+<code class="html">&lt;code&gt;Before. &amp;lt;# This be a comment. #&amp;gt; After.&lt;/code&gt;</code>
+</li>
+<li>
+Rendered:
+<code>Before. &lt;# This be a comment. #&gt; After.</code>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="divisions"><a href="#divisions" class="permalink" aria-label="Permalink"></a>4. <code>#divisions</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #divisions
+- queue_position: AFTER #comments
+- syntax_type: BLOCK
+- extensible_delimiter: ||
+- attribute_specifications: EMPTY
+- content_replacements:
+    #divisions
+    #prepend-newline
+- tag_name: div
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>||</b>
+  «content»
+<b>||</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>||</b>{«attribute specifications»}
+  «content»
+<b>||</b>
+</code></pre>
+<ul>
+<li>
+The number of pipes <code class="cmd cmdc"><b>|</b></code> may be increased arbitrarily.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a division:
+</p>
+<pre class="html"><code><b>&lt;div</b>«attribute sequence»<b>&gt;</b>
+«content»
+<b>&lt;/div&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Division:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>||{#test-div-id .test-div-class}
+  This be a division.
+||
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;div id="test-div-id" class="test-div-class"&gt;
+This be a division.
+&lt;/div&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+More pipes for nested divisions:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>||||{.outer}
+  ||{.inner}
+    This be a division.
+  ||
 ||||
 </code></pre>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;div id="second" class="hot cold"&gt;
-Blah
+<li>
+HTML:
+<pre class="html"><code>&lt;div class="outer"&gt;
+&lt;div class="inner"&gt;
+This be a division.
+&lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
 </li>
 </ul>
-<p>
-CMD attribute specifications are inspired
-by <a href="https://kramdown.gettalong.org/syntax#inline-attribute-lists">kramdown's inline attribute lists</a>.
-</p>
+</li>
+</ol>
+</details>
+<h4 id="blockquotes"><a href="#blockquotes" class="permalink" aria-label="Permalink"></a>5. <code>#blockquotes</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #blockquotes
+- queue_position: AFTER #divisions
+- syntax_type: BLOCK
+- extensible_delimiter: ""
+- attribute_specifications: EMPTY
+- content_replacements:
+    #blockquotes
+    #prepend-newline
+- tag_name: blockquote
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>""</b>
+  «content»
+<b>""</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>""</b>{«attribute specifications»}
+  «content»
+<b>""</b>
+</code></pre>
 <ul>
-<li>CMD
-<pre class="cmd"><code>**{l=de s=color:red} Achtung!**
-</code></pre>
+<li>
+The number of double-quotes <code class="cmd cmdc"><b>"</b></code>
+may be increased arbitrarily.
 </li>
-<li>HTML
-<pre class="html"><code>&lt;strong lang="de" style="color:red"&gt;Achtung!&lt;/strong&gt;
-</code></pre>
-</li>
-<li>Rendered
-<p>
-<strong lang="de" style="color:red">Achtung!</strong>
-</p>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
-<h3 id="cmd-literals"><a class="permalink" href="#cmd-literals" aria-label="Permalink"></a>CMD literals</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">~~</span> <span class="mandatory-argument">&lt;CONTENT&gt;</span> <span class="repeatable-delimiter">~~</span></code></pre>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Produces <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> literally,
-with HTML syntax-character escaping and de-indentation.
-Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
-<code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters:
+Produces a blockquote:
 </p>
+<pre class="html"><code><b>&lt;blockquote</b>«attribute sequence»<b>&gt;</b>
+«content»
+<b>&lt;/blockquote&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Blockquote:
 <ul>
-<li><code>u</code> to leave HTML syntax characters unescaped
-</li>
-<li><code>c</code> to process <a href="#line-continuations">line continuations</a>
-</li>
-<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
-</li>
-<li><code>a</code> to enable all flags above
-</li>
-</ul>
-<p>
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing two or more consecutive tildes,
-use a longer run of <span class="repeatable-delimiter">tildes</span> in the delimiters.
-</p>
-<p>
-A good use case is to wrap <code>&lt;script&gt;</code> elements inside <code>u~~ ~~</code>.
-This makes it immune to all CMD processing
-(e.g.&nbsp;conversion of <code>* *</code> to <code>&lt;em&gt; &lt;/em&gt;</code>).
-</p>
-<h4 id="cmd-literals-basic"><a class="permalink" href="#cmd-literals-basic" aria-label="Permalink"></a>Example 1: basic usage</h4>
-<ul>
-<li>CMD
-<pre class="cmd"><code>Escaping: ~~ &amp; &lt; &gt; ~~.
-Whitespace stripping: {~~      yes      ~~}.
-Enough tildes: ~~~~ ~~~ ~~ never ~~ ~~~ ~~~~.
+<li>
+CMD:
+<pre class="cmd cmdc"><code>""{#test-blockquote-id .test-blockquote-class}
+  This be a blockquote.
+""
 </code></pre>
 </li>
-<li>HTML
-<pre class="html"><code>Escaping: &amp;amp; &amp;lt; &amp;gt;.
-Whitespace stripping: {yes}.
-Enough tildes: ~~~ ~~ never ~~ ~~~.
-</code></pre>
-</li>
-<li>Rendered
-<p>
-Escaping: &amp; &lt; &gt;.
-Whitespace stripping: {yes}.
-Enough tildes: ~~~ ~~ never ~~ ~~~.
-</p>
-</li>
-</ul>
-<h4 id="flags"><a class="permalink" href="#flags" aria-label="Permalink"></a>Example 2: flags</h4>
-<h5 id="unescaped-flag"><a class="permalink" href="#unescaped-flag" aria-label="Permalink"></a>2.1&nbsp;Unescaped flag <code>u</code></h5>
-<ul>
-<li>CMD
-<pre class="cmd"><code>Escaping:     ~~ &lt;b&gt;blah&lt;/b&gt; ~~.
-No escaping: u~~ &lt;b&gt;cough&lt;/b&gt; ~~.
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>Escaping:     &amp;lt;b&amp;gt;blah&amp;lt;/b&amp;gt;.
-No escaping: &lt;b&gt;cough&lt;/b&gt;.
-</code></pre>
-</li>
-<li>Rendered
-<p>
-Escaping:     &lt;b&gt;blah&lt;/b&gt;.
-No escaping: <b>cough</b>.
-</p>
-</li>
-</ul>
-<h5 id="continuations-flag"><a class="permalink" href="#continuations-flag" aria-label="Permalink"></a>2.2&nbsp;Continuations flag <code>c</code></h5>
-<ul>
-<li>CMD
-<pre class="cmd"><code>uc~~
-  &lt;pre&gt;
-    Blah blah blah\
-      Cough cough cough
-        Yep yep yep
-  &lt;/pre&gt;
-~~
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;pre&gt;
-  Blah blah blahCough cough cough
-      Yep yep yep
-&lt;/pre&gt;
-</code></pre>
-</li>
-<li>Rendered
-<pre>
-  Blah blah blahCough cough cough
-      Yep yep yep
-</pre>
-</li>
-</ul>
-<h5 id="whitespace-flag"><a class="permalink" href="#whitespace-flag" aria-label="Permalink"></a>2.3&nbsp;Whitespace flag <code>w</code></h5>
-<ul>
-<li>CMD
-<pre class="cmd"><code>uw~~
-  &lt;pre&gt;
-    Blah blah blah
-      Cough cough cough
-        Yep yep yep
-  &lt;/pre&gt;
-~~
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;pre&gt;
-Blah blah blah
-Cough cough cough
-Yep yep yep
-&lt;/pre&gt;
-</code></pre>
-</li>
-<li>Rendered
-<pre>
-Blah blah blah
-Cough cough cough
-Yep yep yep
-</pre>
-</li>
-</ul>
-<h3 id="display-code"><a class="permalink" href="#display-code" aria-label="Permalink"></a>Display code</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">``</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
-  <span class="mandatory-argument">&lt;CONTENT&gt;</span>
-<span class="repeatable-delimiter">``</span></code></pre>
-<p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<p>
-Produces the display code
-<code>&lt;pre<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;&lt;code&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/code&gt;&lt;/pre&gt;</code>
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>,
-with HTML syntax-character escaping
-and de-indentation for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
-<code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
-(see <a href="#flags">flags examples</a>):
-</p>
-<ul>
-<li><code>u</code> to leave HTML syntax characters unescaped
-</li>
-<li><code>c</code> to process <a href="#line-continuations">line continuations</a>
-</li>
-<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
-</li>
-<li><code>a</code> to enable all flags above
-</li>
-</ul>
-<p>
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing two or more consecutive backticks,
-use a longer run of <span class="repeatable-delimiter">backticks</span> in the delimiters.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>``{#id-0 .class-1 .class-2}
-    Escaping: &amp; &lt; &gt;.
-    Note that CMD literals have higher precedence,
-    since they are processed first: ~~~ ~~ literally ~~ ~~~.
-        Uniform
-        de-indentation:
-        yes.
-``
-````
-  ``
-  Use more backticks as required.
-  If &lt;id&gt; and &lt;class&gt; are omitted,
-  no corresponding attributes are generated.
-  ``
-````
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;pre id="id-0" class="class-1 class-2"&gt;&lt;code&gt;Escaping: &amp;amp; &amp;lt; &amp;gt;.
-Note that CMD literals have higher precedence,
-since they are processed first: ~~ literally ~~.
-    Uniform
-    de-indentation:
-    yes.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;``
-Use more backticks as required.
-If &amp;lt;id&amp;gt; and &amp;lt;class&amp;gt; are omitted,
-no corresponding attributes are generated.
-``
-&lt;/code&gt;&lt;/pre&gt;
-</code></pre>
-</li>
-<li>Rendered
-<pre id="id-0" class="class-1 class-2"><code>Escaping: &amp; &lt; &gt;.
-Note that CMD literals have higher precedence,
-since they are processed first: ~~ literally ~~.
-    Uniform
-    de-indentation:
-    yes.
-</code></pre>
-<pre><code>``
-Use more backticks as required.
-If &lt;id&gt; and &lt;class&gt; are omitted,
-no corresponding attributes are generated.
-``
+<li>
+HTML:
+<pre class="html"><code>&lt;blockquote id="test-blockquote-id" class="test-blockquote-class"&gt;
+This be a blockquote.
+&lt;/blockquote&gt;
 </code></pre>
 </li>
 </ul>
-<h3 id="inline-code"><a class="permalink" href="#inline-code" aria-label="Permalink"></a>Inline code</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">`</span> <span class="mandatory-argument">&lt;CONTENT&gt;</span> <span class="repeatable-delimiter">`</span></code></pre>
+</li>
+</ol>
+</details>
+<h4 id="unordered-lists"><a href="#unordered-lists" class="permalink" aria-label="Permalink"></a>6. <code>#unordered-lists</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #unordered-lists
+- queue_position: AFTER #blockquotes
+- syntax_type: BLOCK
+- extensible_delimiter: ==
+- attribute_specifications: EMPTY
+- content_replacements:
+    #unordered-lists
+    #unordered-list-items
+    #prepend-newline
+- tag_name: ul
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>==</b>
+<b>-</b> «item»
+«...»
+<b>==</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>==</b>{«attribute specifications»}
+<b>-</b>{«attribute specifications»} «item»
+«...»
+<b>==</b>
+</code></pre>
+<ul>
+<li>
+The number of equals signs <code class="cmd cmdc"><b>=</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+The item delimiter may be
+<code class="cmd cmdc"><b>-</b></code>, <code class="cmd cmdc"><b>+</b></code>, or <code class="cmd cmdc"><b>*</b></code>,
+see <a href="#unordered-list-items"><code>#unordered-list-items</code></a>.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Produces the inline code
-<code>&lt;code&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/code&gt;</code>,
-with HTML syntax-character escaping
-and de-indentation for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
-Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
-<code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
-(see <a href="#flags">flags examples</a>):
+Produces an unordered list:
+</p>
+<pre class="html"><code><b>&lt;ul</b>«attribute sequence»<b>&gt;</b>
+<b>&lt;li&gt;</b>
+«item»
+<b>&lt;/li&gt;</b>
+«...»
+<b>&lt;/ul&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Nested list:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>======
+* A
+  ===={style="background: yellow"}
+  - A1
+  - A2
+  ====
+- B
+  ====
+  +{style="color: purple"} B1
+  - B2
+  ====
+======
+</code></pre>
+</li>
+<li>
+Rendered:
+<ul>
+<li>
+A
+<ul style="background: yellow">
+<li>
+A1
+</li>
+<li>
+A2
+</li>
+</ul>
+</li>
+<li>
+B
+<ul>
+<li style="color: purple">
+B1
+</li>
+<li>
+B2
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="ordered-lists"><a href="#ordered-lists" class="permalink" aria-label="Permalink"></a>7. <code>#ordered-lists</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #ordered-lists
+- queue_position: AFTER #unordered-lists
+- syntax_type: BLOCK
+- extensible_delimiter: ++
+- attribute_specifications: EMPTY
+- content_replacements:
+    #ordered-lists
+    #ordered-list-items
+    #prepend-newline
+- tag_name: ol
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>++</b>
+<b>1.</b> «item»
+«...»
+<b>++</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>++</b>{«attribute specifications»}
+<b>1.</b>{«attribute specifications»} «item»
+«...»
+<b>++</b>
+</code></pre>
+<ul>
+<li>
+The number of plus signs <code class="cmd cmdc"><b>+</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+The item delimiter may be any <b>run of digits</b>
+followed by a <b>full stop</b>,
+see <a href="#ordered-list-items"><code>#ordered-list-items</code></a>.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces an ordered list:
+</p>
+<pre class="html"><code><b>&lt;ol</b>«attribute sequence»<b>&gt;</b>
+<b>&lt;li&gt;</b>
+«item»
+<b>&lt;/li&gt;</b>
+«...»
+<b>&lt;/ol&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Any run of digits can be used in the item delimiter:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>++
+1. A
+2. B
+3. C
+0. D
+99999999. E
+++
+</code></pre>
+</li>
+<li>
+Rendered:
+<ol>
+<li>
+A
+</li>
+<li>
+B
+</li>
+<li>
+C
+</li>
+<li>
+D
+</li>
+<li>
+E
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+Nested ordered lists:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>++++
+1. This shall be respected.
+2. This shall be read aloud if:
+  ++{type="a"}
+  1. I say so;
+  2. I think so; or
+  3.{style="color: purple"} Pigs fly.
+  ++
+++++
+</code></pre>
+</li>
+<li>
+Rendered:
+<ol>
+<li>
+This shall be respected.
+</li>
+<li>
+This shall be read aloud if:
+<ol type="a">
+<li>
+I say so;
+</li>
+<li>
+I think so; or
+</li>
+<li style="color: purple">
+Pigs fly.
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+Zero-based indexing:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>++{start=0}
+0. Nil
+1. One
+++
+</code></pre>
+</li>
+<li>
+Rendered:
+<ol start="0">
+<li>
+Nil
+</li>
+<li>
+One
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="tables"><a href="#tables" class="permalink" aria-label="Permalink"></a>8. <code>#tables</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #tables
+- queue_position: AFTER #ordered-lists
+- syntax_type: BLOCK
+- extensible_delimiter: ''
+- attribute_specifications: EMPTY
+- content_replacements:
+    #tables
+    #table-head
+    #table-body
+    #table-foot
+    #table-rows
+    #prepend-newline
+- tag_name: table
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>''</b>
+<b>|^</b> «item»
+  <b>//</b> «item»
+    <b>;</b> «item»
+    <b>,</b> «item»
+    «...»
+  «...»
+<b>|:</b> «item»
+  «...»
+<b>|_</b> «item»
+  «...»
+<b>''</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>''</b>
+<b>//</b> «item»
+  <b>;</b> «item»
+  <b>,</b> «item»
+  «...»
+«...»
+<b>''</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>''</b>{«attribute specifications»}
+«...»
+<b>''</b>
+</code></pre>
+<ul>
+<li>
+The number of single-quotes <code class="cmd cmdc"><b>'</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+Table parts:
+<ul>
+<li>
+<code class="cmd cmdc"><b>|^</b></code> for table head, see <a href="#table-head"><code>#table-head</code></a>.
+</li>
+<li>
+<code class="cmd cmdc"><b>|:</b></code> for table body, see <a href="#table-body"><code>#table-body</code></a>.
+</li>
+<li>
+<code class="cmd cmdc"><b>|:</b></code> for table foot, see <a href="#table-foot"><code>#table-foot</code></a>.
+</li>
+</ul>
+</li>
+<li>
+Table cells:
+<ul>
+<li>
+<code class="cmd cmdc"><b>;</b></code> for table headers, see <a href="#table-headers"><code>#table-headers</code></a>.
+</li>
+<li>
+<code class="cmd cmdc"><b>,</b></code> for table data, see <a href="#table-data"><code>#table-data</code></a>.
+</li>
+</ul>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a table:
+</p>
+<pre class="html"><code><b>&lt;table</b>«attribute sequence»<b>&gt;</b>
+«...»
+<b>&lt;/table&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Table without parts:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>''
+//
+  ; A
+  , 1
+//
+  ; B
+  , 2
+''
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;A&lt;/th&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;B&lt;/th&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<table>
+<tr>
+<th>A</th>
+<td>1</td>
+</tr>
+<tr>
+<th>B</th>
+<td>2</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+<li>
+Table with head and body:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>''
+|^
+  //
+    ; A
+    ; B
+|:
+  //
+    , 1
+    , 2
+  //
+    , First
+    , Second
+''
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;A&lt;/th&gt;
+&lt;th&gt;B&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;First&lt;/td&gt;
+&lt;td&gt;Second&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>First</td>
+<td>Second</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+Cell merging
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>''
+//
+  ,{c3} 3*1
+  , 14
+//
+  , 21
+  , 22
+  , 23
+  , 24
+//
+  ,{rowspan=2 colspan="2"} 2*2
+  , 33
+  ,{r2} 2*1
+//
+  , 43
+''
+</code></pre>
+</li>
+<li>
+Rendered
+<table>
+<tr>
+<td colspan="3">3*1</td>
+<td>14</td>
+</tr>
+<tr>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+</tr>
+<tr>
+<td rowspan="2" colspan="2">2*2</td>
+<td>33</td>
+<td rowspan="2">2*1</td>
+</tr>
+<tr>
+<td>43</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="headings"><a href="#headings" class="permalink" aria-label="Permalink"></a>9. <code>#headings</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>HeadingReplacement: #headings
+- queue_position: AFTER #tables
+- attribute_specifications: EMPTY
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>#</b> «content»
+</code></pre>
+<pre class="cmd cmdc"><code><b>#</b>{«attribute specifications»} «content»
+</code></pre>
+<ul>
+<li>
+The number of hashes <code class="cmd cmdc"><b>#</b></code> may be between 1 and 6.
+</li>
+<li>
+<code class="cmd cmdc">«content»</code> may be optionally closed by hashes.
+</li>
+<li>
+For continuation of <code class="cmd cmdc">«content»</code>,
+indent the continuation more than the leading hashes.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a heading:
+</p>
+<pre class="html"><code><b>&lt;h«hash count»&gt;</b>«content»<b>&lt;/h«hash count»&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Empty headings:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>#
+##
+###
+####
+#####
+######
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h1&gt;&lt;/h1&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;h3&gt;&lt;/h3&gt;
+&lt;h4&gt;&lt;/h4&gt;
+&lt;h5&gt;&lt;/h5&gt;
+&lt;h6&gt;&lt;/h6&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Non-empty headings require whitespace after the hashes:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>## OK
+#lacks-whitespace
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h2&gt;OK&lt;/h2&gt;
+#lacks-whitespace
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Optional closing hashes:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>## Closed ##
+## Fewer closing hashes is OK #
+## More closing hashes is OK ###
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h2&gt;Closed&lt;/h2&gt;
+&lt;h2&gt;Fewer closing hashes is OK&lt;/h2&gt;
+&lt;h2&gt;More closing hashes is OK&lt;/h2&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Continuation:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>##{.interesting-heading-class}
+  This heading is so long, I have used continuation.
+  Second continuation line.
+This line is not a continuation due to insufficient indentation.
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;h2 class="interesting-heading-class"&gt;
+This heading is so long, I have used continuation.
+Second continuation line.&lt;/h2&gt;
+This line is not a continuation due to insufficient indentation.
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="paragraphs"><a href="#paragraphs" class="permalink" aria-label="Permalink"></a>10. <code>#paragraphs</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #paragraphs
+- queue_position: AFTER #headings
+- syntax_type: BLOCK
+- extensible_delimiter: --
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+- content_replacements:
+    #prepend-newline
+- tag_name: p
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>--</b>
+«content»
+<b>--</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>--</b>{«attribute specifications»}
+«content»
+<b>--</b>
+</code></pre>
+<ul>
+<li>
+The number of hyphens <code class="cmd cmdc"><b>-</b></code> may be increased arbitrarily.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a paragraph:
+</p>
+<pre class="html"><code><b>&lt;p</b>«attribute sequence»<b>&gt;</b>
+«content»
+<b>&lt;/p&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Paragraph:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>--
+The quick brown fox etc. etc.
+--
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;p&gt;
+The quick brown fox etc. etc.
+&lt;/p&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+The quick brown fox etc. etc.
+</p>
+</li>
+</ul>
+</li>
+<li>
+Paragraphs cannot be nested:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>----
+Before.
+--
+Not a nested paragraph.
+--
+After.
+----
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;p&gt;
+Before.
+--
+Not a nested paragraph.
+--
+After.
+&lt;/p&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+Before.
+--
+Not a nested paragraph.
+--
+After.
+</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="inline-code"><a href="#inline-code" class="permalink" aria-label="Permalink"></a>11. <code>#inline-code</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #inline-code
+- queue_position: AFTER #paragraphs
+- syntax_type: INLINE
+- allowed_flags:
+    u=KEEP_HTML_UNESCAPED
+    i=KEEP_INDENTED
+    w=REDUCE_WHITESPACE
+- extensible_delimiter: `
+- attribute_specifications: EMPTY
+- prohibited_content: ANCHORED_BLOCKS
+- content_replacements:
+    #escape-html
+    #de-indent
+    #trim-whitespace
+    #reduce-whitespace
+    #placeholder-protect
+- tag_name: code
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>`</b> «content» <b>`</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>`</b>{«attribute specifications»} «content» <b>`</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>`</b> «content» <b>`</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>`</b>{«attribute specifications»} «content» <b>`</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«flags»</code>:
+<ul>
+<li>
+<code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">i</code>: keep indented (do not apply <a href="#de-indent"><code>#de-indent</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">w</code>: reduce whitespace (apply <a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>)
+</li>
+</ul>
+</li>
+<li>
+The number of backticks <code class="cmd cmdc"><b>`</b></code>
+may be increased arbitrarily.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces inline code:
+</p>
+<pre class="html"><code><b>&lt;code</b>«attribute sequence»<b>&gt;</b>«content»<b>&lt;/code&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Code:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`&lt;br&gt;`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>&lt;br&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+Code containing backticks:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">``A `backticked` word.``</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;A `backticked` word.&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>A `backticked` word.</code>
+</li>
+</ul>
+</li>
+<li>
+Use <a href="#literals"><code>#literals</code></a> with flag <code class="cmd cmdc">u</code> to inject HTML:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`Some u&lt;`&lt;b&gt;bold&lt;/b&gt;`&gt; code`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;Some &lt;b&gt;bold&lt;/b&gt; code&lt;/code&gt;</code>
+</li>
+<li>
+Rendered: <code>Some <b>bold</b> code</code>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="boilerplate"><a href="#boilerplate" class="permalink" aria-label="Permalink"></a>12. <code>#boilerplate</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #boilerplate
+- queue_position: AFTER #inline-code
+* \A --&gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="%lang"&gt;
+      &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        %head-elements-before-viewport
+        &lt;meta name="viewport" content="%viewport-content"&gt;
+        %head-elements-after-viewport
+        &lt;title&gt;%title&lt;/title&gt;
+        &lt;style&gt;
+          %styles
+        &lt;/style&gt;
+      &lt;/head&gt;
+      &lt;body&gt;\n
+* \Z --&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;\n
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Wraps content in the HTML5 boilerplate:
 </p>
 <ul>
-<li><code>u</code> to leave HTML syntax characters unescaped
+<li>
+<code class="html">&lt;!DOCTYPE html&gt;</code> through <code class="html">&lt;body&gt;</code> at the start
 </li>
-<li><code>c</code> to process <a href="#line-continuations">line continuations</a>
-</li>
-<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
-</li>
-<li><code>a</code> to enable all flags above
+<li>
+<code class="html">&lt;/body&gt;&lt;/html&gt;</code> at the end
 </li>
 </ul>
 <p>
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing one or more consecutive backticks
-which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a longer run of <span class="repeatable-delimiter">backticks</span> in the delimiters.
+The default boilerplate properties
+<code class="cmd cmdc">%lang</code>,
+<code class="cmd cmdc">%head-elements-before-viewport</code>,
+<code class="cmd cmdc">%viewport-content</code>,
+<code class="cmd cmdc">%head-elements-after-viewport</code>,
+<code class="cmd cmdc">%title</code>, and
+<code class="cmd cmdc">%styles</code>
+are set in <a href="#boilerplate-properties"><code>#boilerplate-properties</code></a>.
 </p>
+</details>
+<h4 id="boilerplate-properties"><a href="#boilerplate-properties" class="permalink" aria-label="Permalink"></a>13. <code>#boilerplate-properties</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #boilerplate-properties
+- queue_position: AFTER #boilerplate
+- apply_mode: SIMULTANEOUS
+* %lang --&gt; en
+* %head-elements-before-viewport --&gt;
+* %viewport-content --&gt; width=device-width, initial-scale=1
+* %head-elements-after-viewport --&gt;
+* %title --&gt; Title
+* %styles --&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Makes replacements for the default boilerplate properties:
+</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="cmd cmdc">%lang</code></td>
+<td><code class="html">en</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">%head-elements-before-viewport</code></td>
+<td>(empty)</td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">%viewport-content</code></td>
+<td><code class="html">width=device-width, initial-scale=1</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">%head-elements-after-viewport</code></td>
+<td>(empty)</td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">%title</code></td>
+<td><code class="html">Title</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">%styles</code></td>
+<td>(empty)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Defaults:
 <ul>
-<li>CMD
-<pre class="cmd"><code>`` The escaped form of &amp; is &amp;amp;. Here is a tilde: `. ``
+<li>
+CMD:
+<pre class="cmd cmdc"><code># %title
+This document hath `lang` equal to &lt;code&gt;%lang&lt;/code&gt;.
 </code></pre>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;code&gt;The escaped form of &amp;amp; is &amp;amp;amp;. Here is a tilde: `.&lt;/code&gt;
-</code></pre>
-</li>
-<li>Rendered
-<p>
-<code>The escaped form of &amp; is &amp;amp;. Here is a tilde: `.</code>
-</p>
-</li>
-</ul>
-<h3 id="comments"><a class="permalink" href="#comments" aria-label="Permalink"></a>Comments</h3>
-<pre class="cmd syntax"><code>&lt;<span class="repeatable-delimiter">#</span> <span class="mandatory-argument">&lt;COMMENT&gt;</span> <span class="repeatable-delimiter">#</span>&gt;</code></pre>
-<p>
-Removed, along with any preceding horizontal whitespace.
-For <code><span class="mandatory-argument">&lt;COMMENT&gt;</span></code> containing one or more consecutive hashes
-followed by a closing angle bracket,
-use a longer run of <span class="repeatable-delimiter">hashes</span> in the delimiters.
-</p>
-<p>
-Although comments are weaker than literals and code
-they may still be used to remove them.
-For instance <code>~~ A &lt;# B #&gt; ~~</code> becomes <code>A &lt;# B #&gt;</code>,
-whereas <code>&lt;# A ~~ B ~~ #&gt;</code> is removed entirely.
-In this sense they are stronger than literals and code.
-</p>
-<h3 id="display-maths"><a class="permalink" href="#display-maths" aria-label="Permalink"></a>Display maths</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">$$</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
-  <span class="mandatory-argument">&lt;CONTENT&gt;</span>
-<span class="repeatable-delimiter">$$</span></code></pre>
-<p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<p>
-Produces
-<code>&lt;div<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/div&gt;</code>
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> with <code>.js-maths</code> prepended,
-with HTML syntax-character escaping
-and de-indentation for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
-<code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
-(see <a href="#whitespace-flag">whitespace flag example</a>):
-</p>
-<ul>
-<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
-</li>
-</ul>
-<p>
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing two or more consecutive dollar signs
-which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a longer run of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
-</p>
-<p>
-This is to be used with some sort of JavaScript code
-which renders equations based on the class <code>js-maths</code>.
-On this page I am using <a href="https://katex.org/" title="KaTeX — The fastest math typesetting library for the web">KaTeX</a>.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>$$
-  1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-    = \frac{\pi^2}{6}
-    &lt; 2
-$$
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;div class="js-maths"&gt;1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-  = \frac{\pi^2}{6}
-  &amp;lt; 2
-&lt;/div&gt;
-</code></pre>
-</li>
-<li>Rendered
-<div class="js-maths">1 + \frac{1}{2^2} + \frac{1}{3^2} + \dots
-  = \frac{\pi^2}{6}
-  &lt; 2
-</div>
-</li>
-</ul>
-<h3 id="inline-maths"><a class="permalink" href="#inline-maths" aria-label="Permalink"></a>Inline maths</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span><span class="repeatable-delimiter">$</span> <span class="mandatory-argument">&lt;CONTENT&gt;</span> <span class="repeatable-delimiter">$</span></code></pre>
-<p>
-Produces
-<code>&lt;span class="js-maths"&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/span&gt;</code>,
-with HTML syntax-character escaping for <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>.
-Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
-<code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters
-(see <a href="#whitespace-flag">whitespace flag example</a>):
-</p>
-<ul>
-<li><code>w</code> to process <a href="#whitespace">whitespace</a> completely
-</li>
-</ul>
-<p>
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing one or more consecutive dollar signs
-which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a longer run of <span class="repeatable-delimiter">dollar signs</span> in the delimiters.
-</p>
-<p>
-This is to be used with some sort of JavaScript code
-which renders equations based on the class <code>js-maths</code>.
-On this page I am using <a href="https://katex.org/" title="KaTeX — The fastest math typesetting library for the web">KaTeX</a>.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>A contrived instance of multiple dollar signs in inline maths:
-$$$ \text{Yea, \$$d$ means $d$~dollars.} $$$
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>A contrived instance of multiple dollar signs in inline maths:
-&lt;span class="js-maths"&gt;\text{Yea, \$$d$ means $d$~dollars.}&lt;/span&gt;
-</code></pre>
-</li>
-<li>Rendered
-<p>
-A contrived instance of multiple dollar signs in inline maths:
-<span class="js-maths">\text{Yea, \$$d$ means $d$~dollars.}</span>
-</p>
-</li>
-</ul>
-<h3 id="inclusions"><a class="permalink" href="#inclusions" aria-label="Permalink"></a>Inclusions</h3>
-<pre class="cmd syntax"><code>{<span class="repeatable-delimiter">+</span> <span class="mandatory-argument">&lt;FILE NAME&gt;</span> <span class="repeatable-delimiter">+</span>}</code></pre>
-<p>
-Includes the content of the file <code><span class="mandatory-argument">&lt;FILE NAME&gt;</span></code>.
-If <code><span class="mandatory-argument">&lt;FILE NAME&gt;</span></code> begins with a slash,
-it is reckoned relative to the current directory of the terminal;
-otherwise it is reckoned relative to the current CMD file.
-For <code><span class="mandatory-argument">&lt;FILE NAME&gt;</span></code> containing one or more consecutive plus signs
-followed by a closing curly bracket,
-use a longer run of <span class="repeatable-delimiter">plus signs</span> in the delimiters.
-</p>
-<p>
-All of the syntax above (CMD literals through to inline maths) is processed.
-Unlike nested <code>\input</code> in LaTeX, nested inclusions are not processed.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>{+ inclusion.txt +}
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>This is content from &lt;a href="/inclusion.txt"&gt;&lt;code&gt;inclusion.txt&lt;/code&gt;&lt;/a&gt;.
-Nested inclusions are not processed,
-so there is no need to worry about recursion errors: {+ inclusion.txt +}
-</code></pre>
-</li>
-<li>Rendered
-<p>
-This is content from <a href="/inclusion.txt"><code>inclusion.txt</code></a>.
-Nested inclusions are not processed,
-so there is no need to worry about recursion errors: {+ inclusion.txt +}
-</p>
-</li>
-</ul>
-<h3 id="regex-replacements"><a class="permalink" href="#regex-replacements" aria-label="Permalink"></a>Regex replacement definitions</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flag&gt;</span>{<span class="repeatable-delimiter">%</span> <span class="mandatory-argument">&lt;PATTERN&gt;</span> <span class="repeatable-delimiter">%</span> <span class="mandatory-argument">&lt;REPLACEMENT&gt;</span> <span class="repeatable-delimiter">%</span>}</code></pre>
-<p>
-Regex replacement definition
-for the replacement of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>
-according to Python regex syntax,
-with the flags <code>re.ASCII</code>, <code>re.MULTILINE</code>, and <code>re.VERBOSE</code> enabled.
-</p>
-<p>
-Whitespace around <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> and <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> is stripped.
-For <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> or <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> containing
-one or more consecutive percent signs,
-use a longer run of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
-For <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> matching any of the syntax above,
-which should not be processed using that syntax, use CMD literals.
-<code><span class="optional-argument">&lt;flag&gt;</span></code> may consist of zero or one of the following characters,
-and specifies when the regex replacement is to be applied:
-</p>
-<ul>
-<li><code>A</code> for immediately after processing regex replacement definitions
-</li>
-<li><code>p</code> for just before processing <a href="#preamble">preamble</a>
-</li>
-<li><code>b</code> for just before processing <a href="#blocks">blocks</a>
-</li>
-<li><code>t</code> for just before processing <a href="#tables">tables</a>
-</li>
-<li><code>e</code> for just before processing <a href="#escapes">escapes</a>
-</li>
-<li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
-</li>
-<li><code>r</code> for just before processing <a href="#reference-definitions">reference-style definitions</a>
-</li>
-<li><code>i</code> for just before processing <a href="#images">images</a>
-</li>
-<li><code>l</code> for just before processing <a href="#links">links</a>
-</li>
-<li><code>h</code> for just before processing <a href="#headings">headings</a>
-</li>
-<li><code>s</code> for just before processing <a href="#inline-semantics">inline semantics</a>
-</li>
-<li><code>w</code> for just before processing <a href="#whitespace">whitespace</a>
-</li>
-<li><code>Z</code> for just before replacing placeholder strings
-</li>
-</ul>
-<p>
-If <code><span class="optional-argument">&lt;flag&gt;</span></code> is empty, it defaults to <code>A</code>.
-</p>
-<p>
-All regex replacement definitions are read and stored.
-If the same pattern is specified more than once for a given flag,
-the latest definition shall prevail.
-</p>
-<p>
-As an example, the following regex replacement is used
-to automatically insert the permalinks
-before the section headings (<code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>) in this page:
-</p>
-<pre class="cmd"><code>{%
-  ^ [^\S\n]*
-  (?P&lt;hashes&gt; [#]{2,6} )
-    \{
-      [#] (?P&lt;id_&gt; [\S]+? )
-    \}
-  [\s]+
-    (?P&lt;content&gt; [\s\S]*? )
-  (?P=hashes)
-%
-  \g&lt;hashes&gt;{#\g&lt;id_&gt;}
-    &lt;a class="permalink" href="#\g&lt;id_&gt;" aria-label="Permalink"&gt;&lt;/a&gt;\\
-    \g&lt;content&gt;
-  \g&lt;hashes&gt;
-%}
-</code></pre>
-<p>
-<strong>Warning:</strong> malicious or careless user-defined regex replacements
-will break the normal CMD syntax.
-To avoid breaking placeholder storage
-(used to protect portions of the markup from further processing),
-do not use replacements to alter placeholder strings,
-which are of the form <code><span class="mandatory-argument">&lt;N&gt;</span></code>,
-where <code></code> is the placeholder marker <code>U+E000</code> (Private Use Area)
-and <code><span class="mandatory-argument">&lt;N&gt;</span></code> is an integer.
-To avoid breaking properties,
-do not use replacements to alter property strings,
-which are of the form <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code>.
-</p>
-<h3 id="ordinary-replacements"><a class="permalink" href="#ordinary-replacements" aria-label="Permalink"></a>Ordinary replacements</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flag&gt;</span>{<span class="repeatable-delimiter">:</span> <span class="mandatory-argument">&lt;PATTERN&gt;</span> <span class="repeatable-delimiter">:</span> <span class="mandatory-argument">&lt;REPLACEMENT&gt;</span> <span class="repeatable-delimiter">:</span>}</code></pre>
-<p>
-Ordinary replacement definition
-for the replacement of <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> by <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code>.
-</p>
-<p>
-Whitespace around <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> and <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> is stripped.
-For <code><span class="mandatory-argument">&lt;PATTERN&gt;</span></code> or <code><span class="mandatory-argument">&lt;REPLACEMENT&gt;</span></code> containing
-one or more consecutive colons,
-use a longer run of <span class="repeatable-delimiter">colons</span> in the delimiters.
-<code><span class="optional-argument">&lt;flag&gt;</span></code> may consist of zero or one of the following characters,
-and specifies when the ordinary replacement is to be applied:
-</p>
-<ul>
-<li><code>A</code> for immediately after processing ordinary replacement definitions
-</li>
-<li><code>p</code> for just before processing <a href="#preamble">preamble</a>
-</li>
-<li><code>b</code> for just before processing <a href="#blocks">blocks</a>
-</li>
-<li><code>t</code> for just before processing <a href="#tables">tables</a>
-</li>
-<li><code>e</code> for just before processing <a href="#escapes">escapes</a>
-</li>
-<li><code>c</code> for just before processing <a href="#line-continuations">line continuations</a>
-</li>
-<li><code>r</code> for just before processing <a href="#reference-definitions">reference-style definitions</a>
-</li>
-<li><code>i</code> for just before processing <a href="#images">images</a>
-</li>
-<li><code>l</code> for just before processing <a href="#links">links</a>
-</li>
-<li><code>h</code> for just before processing <a href="#headings">headings</a>
-</li>
-<li><code>s</code> for just before processing <a href="#inline-semantics">inline semantics</a>
-</li>
-<li><code>w</code> for just before processing <a href="#whitespace">whitespace</a>
-</li>
-<li><code>Z</code> for just before replacing placeholder strings
-</li>
-</ul>
-<p>
-If <code><span class="optional-argument">&lt;flag&gt;</span></code> is empty, it defaults to <code>A</code>.
-</p>
-<p>
-All ordinary replacement definitions are read and stored.
-If the same pattern is specified more than once for a given flag,
-the latest definition shall prevail.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>{: |hup-hup| : Huzzah! :}
-|hup-hup| \+
-
-{: \def1 : Earlier specifications lose. :}
-{: \def1 : Later specifications win. :}
-\def1 \+
-
-\def2 \+
-{: \def2 : Specifications can be given anywhere. :}
-
-{: &lt;out&gt; : Nesting will work provided the &lt;in&gt; is given later. :}
-{: &lt;in&gt; : inner specification :}
-&lt;out&gt;
-</code></pre>
-</li>
-<li>Rendered
-<p>
-Huzzah!<br>
-Later specifications win.<br>
-Specifications can be given anywhere.<br>
-Nesting will work provided the inner specification is given later.
-</p>
-</li>
-</ul>
-<p>
-<strong>Warning:</strong> malicious or careless user-defined ordinary replacements
-will break the normal CMD syntax.
-To avoid breaking placeholder storage
-(used to protect portions of the markup from further processing),
-do not use replacements to alter placeholder strings,
-which are of the form <code><span class="mandatory-argument">&lt;N&gt;</span></code>,
-where <code></code> is the placeholder marker <code>U+E000</code> (Private Use Area)
-and <code><span class="mandatory-argument">&lt;N&gt;</span></code> is an integer.
-To avoid breaking properties,
-do not use replacements to alter property strings,
-which are of the form <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code>.
-</p>
-<h3 id="preamble"><a class="permalink" href="#preamble" aria-label="Permalink"></a>Preamble</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">%%</span>
-  <span class="mandatory-argument">&lt;CONTENT&gt;</span>
-<span class="repeatable-delimiter">%%</span></code></pre>
-<p>
-Processes the preamble.
-<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into property definitions
-according to leading occurrences of <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code>,
-where <code><span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code> may only contain letters, digits, and hyphens.
-Property definitions end at the next property definition,
-or at the end of the (preamble) content being split.
-Each property definition is stored and may be referenced
-by writing <code>%<span class="mandatory-argument">&lt;PROPERTY NAME&gt;</span></code>,
-called a property string, anywhere else in the document.
-If the same property is specified more than once,
-the latest definition shall prevail.
-</p>
-<p>
-This produces the HTML preamble,
-i.e.&nbsp;everything from <code>&lt;!DOCTYPE html&gt;</code> through to <code>&lt;body&gt;</code>.
-</p>
-<p>
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing two or more consecutive percent signs
-which are not protected by CMD literals,
-use a longer run of <span class="repeatable-delimiter">percent signs</span> in the delimiters.
-</p>
-<p>
-Only the first occurrence of a preamble in the markup is processed.
-</p>
-<p>
-The following properties, called original properties,
-are accorded special treatment.
-If omitted from a preamble,
-they take the default values shown beside them:
-</p>
-<pre class="cmd"><code>%lang en
-%viewport width=device-width, initial-scale=1
-%title Title
-%title-suffix
-%author
-%date-created yyyy-mm-dd
-%date-modified yyyy-mm-dd
-%resources
-%description
-%css
-%onload-js
-%footer-copyright-remark
-%footer-remark
-</code></pre>
-<p>
-The following properties, called derived properties,
-are computed based on the supplied original properties:
-</p>
-<pre class="cmd"><code>%html-lang-attribute
-%meta-element-author
-%meta-element-description
-%meta-element-viewport
-%title-element
-%style-element
-%body-onload-attribute
-%year-created
-%year-modified
-%year-modified-next
-%footer-element
-%cmd-name
-%cmd-name-file
-%url
-%clean-url
-</code></pre>
-<h4 id="preamble-minimal"><a class="permalink" href="#preamble-minimal" aria-label="Permalink"></a>Example 1: a minimal HTML file</h4>
-<ul>
-<li>CMD
-<pre class="cmd"><code>%%
-%%
-</code></pre>
-</li>
-<li>HTML
+<li>
+HTML (including boilerplate):
 <pre class="html"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -902,1162 +1851,2091 @@ are computed based on the supplied original properties:
 &lt;title&gt;Title&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
+&lt;h1&gt;Title&lt;/h1&gt;
+This document hath &lt;code&gt;lang&lt;/code&gt; equal to &lt;code&gt;en&lt;/code&gt;.
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 </li>
 </ul>
-<h4 id="preamble-not-minimal"><a class="permalink" href="#preamble-not-minimal" aria-label="Permalink"></a>Example 2: a not-so-minimal HTML file</h4>
+</li>
+<li>
+Override the defaults:
 <ul>
-<li>CMD
-<pre class="cmd"><code>%%
-  %lang en-AU
-  %title My title
-  %title-suffix \ | My site
-  %author Me
-  %date-created 2020-04-11
-  %date-modified 2020-07-19
-  %description
-    Example CMD-to-HTML output.
-  %css a~~
-    #special {
-      color: purple;
-    }
-  ~~
-  %onload-js
-    special.textContent += ' This is a special paragraph!'
-%%
+<li>
+CMD:
+<pre class="cmd"><code><span class="cmdr">OrdinaryDictionaryReplacement: #boilerplate-properties-override
+- queue_position: BEFORE #boilerplate-properties
+- apply_mode: SIMULTANEOUS
+* %lang --&gt; en-AU
+* %head-elements-before-viewport --&gt; &lt;meta name="author" content="Me"&gt;
+* %title --&gt; Overridden title</span>
 
-# %title #
+%%%
 
-----{#special}
-  The title of this page is "%title", and the author is %author.
-  At the time of writing, next year will be %year-modified-next.
-----
-
-%footer-element
+<span class="cmdc"># %title
+This document hath `lang` equal to &lt;code&gt;%lang&lt;/code&gt;.</span>
 </code></pre>
 </li>
-<li>HTML
+<li>
+HTML (including boilerplate):
 <pre class="html"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en-AU"&gt;
 &lt;head&gt;
 &lt;meta charset="utf-8"&gt;
 &lt;meta name="author" content="Me"&gt;
-&lt;meta name="description" content="Example CMD-to-HTML output."&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
-&lt;title&gt;My title | My site&lt;/title&gt;
-&lt;style&gt;#special {
-color: purple;
-}&lt;/style&gt;
+&lt;title&gt;Overridden title&lt;/title&gt;
 &lt;/head&gt;
-&lt;body onload="special.textContent += ' This is a special paragraph!'"&gt;
-&lt;h1&gt;My title&lt;/h1&gt;
-&lt;p id="special"&gt;
-The title of this page is "My title", and the author is Me.
-At the time of writing, next year will be 2021.
-&lt;/p&gt;
-&lt;footer&gt;
-©&amp;nbsp;2020&amp;nbsp;Me.
-&lt;/footer&gt;
+&lt;body&gt;
+&lt;h1&gt;Overridden title&lt;/h1&gt;
+This document hath &lt;code&gt;lang&lt;/code&gt; equal to &lt;code&gt;en-AU&lt;/code&gt;.
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 </li>
 </ul>
-<h3 id="blocks"><a class="permalink" href="#blocks" aria-label="Permalink"></a>Blocks</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
-  <span class="mandatory-argument">&lt;CONTENT&gt;</span>
-<span class="repeatable-delimiter">&lt;C&gt;&lt;C&gt;&lt;C&gt;&lt;C&gt;</span></code></pre>
-<p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<p>
-Produces the block
-<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing four or more
-consecutive delimiting characters
-which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a longer run of <span class="repeatable-delimiter">delimiting characters</span> in the delimiters.
-</p>
-<p>
-The following delimiting characters <code><span class="repeatable-delimiter">&lt;C&gt;</span></code> are used:
-</p>
-<ul>
-<li>Non-lists:
-<ul>
-<li><code>-</code> for <code>&lt;p&gt;</code>
-</li>
-<li><code>|</code> for <code>&lt;div&gt;</code>
-</li>
-<li><code>"</code> for <code>&lt;blockquote&gt;</code>
-</li>
-</ul>
-</li>
-<li>Lists:
-<ul>
-<li><code>=</code> for <code>&lt;ul&gt;</code>
-</li>
-<li><code>+</code> for <code>&lt;ol&gt;</code>
-</li>
-</ul>
-</li>
-</ul>
-<p>
-In the implementation, a recursive call is used to process nested blocks.
-</p>
-<h4 id="list-items"><a class="permalink" href="#list-items" aria-label="Permalink"></a>List items</h4>
-<p>
-For list blocks, <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into list items <code>&lt;li&gt;</code>
-according to leading occurrences of the following:
-</p>
-<pre class="cmd syntax"><code>&lt;Y&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
-<p>
-The following delimiters <code>&lt;Y&gt;</code> for list items are used:
-</p>
-<ul>
-<li><code>*</code>
-</li>
-<li><code>+</code>
-</li>
-<li><code>-</code>
-</li>
-<li><code>1.</code> (or any run of digits followed by a full stop)
-</li>
-</ul>
-<p>
-List items end at the next list item,
-or at the end of the content being split.
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<h4 id="blocks-nesting"><a class="permalink" href="#blocks-nesting" aria-label="Permalink"></a>Example 1: nesting</h4>
-<ul>
-<li>CMD
-<pre class="cmd"><code>----
-A paragraph.
-----
-======
-* A nested unordered list:
-  ====
-  1. Unlike John Gruber's Markdown, indentation doesn't matter.
-      * This is on the same level as the item above.
-  ====
-* A nested ordered list:
-  ++++
-  * A leading asterisk `*` can be used for `&lt;li&gt;` in `&lt;ol&gt;`.
-  + Also a plus sign `+`.
-  - Also a hyphen `-`.
-  2.  An easy way to remember the list delimiters is that
-      unordered list items stay constant (`====`) while
-      ordered list items increment (`++++`).
-  ++++
-0. A leading number and full stop can be used for `&lt;li&gt;` in `&lt;ul&gt;`.
-99999999. Any non-negative integer will do.
-  """"""
-  Someone might quote this later. 
-  ====
-  * Yes, I know.
-  ====
-  """"""
-1. They all get turned into `&lt;li&gt;` tags regardless.
-======
-</code></pre>
-</li>
-<li>Rendered
-<p>
-A paragraph.
-</p>
-<ul>
-<li>A nested unordered list:
-<ul>
-<li>Unlike John Gruber's Markdown, indentation doesn't matter.
-</li>
-<li>This is on the same level as the item above.
-</li>
-</ul>
-</li>
-<li>A nested ordered list:
-<ol>
-<li>A leading asterisk <code>*</code> can be used for <code>&lt;li&gt;</code> in <code>&lt;ol&gt;</code>.
-</li>
-<li>Also a plus sign <code>+</code>.
-</li>
-<li>Also a hyphen <code>-</code>.
-</li>
-<li>An easy way to remember the list delimiters is that
-unordered list items stay constant (<code>====</code>) while
-ordered list items increment (<code>++++</code>).
 </li>
 </ol>
-</li>
-<li>A leading number and full stop can be used for <code>&lt;li&gt;</code> in <code>&lt;ul&gt;</code>.
-</li>
-<li>Any non-negative integer will do.
-<blockquote>
-Someone might quote this later.
-<ul>
-<li>Yes, I know.
-</li>
-</ul>
-</blockquote>
-</li>
-<li>They all get turned into <code>&lt;li&gt;</code> tags regardless.
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="blocks-id-class"><a class="permalink" href="#blocks-id-class" aria-label="Permalink"></a>Example 2: <code>id</code> and <code>class</code></h4>
-<ul>
-<li>CMD
-<pre class="cmd"><code>----{#p-id .p-class}
-Paragraph with `id` and `class`.
-----
-======
-*{#li-id} List item with `id` and no `class`.
-0.{.li-class} List item with `class` and no `id`.
-1.{.li-class}
-  Put arbitrary whitespace after the class for more clarity.
-======
+</details>
+<h4 id="cmd-properties"><a href="#cmd-properties" class="permalink" aria-label="Permalink"></a>14. <code>#cmd-properties</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #cmd-properties
+- queue_position: AFTER #boilerplate-properties
+- apply_mode: SIMULTANEOUS
+* %cmd-version --&gt; CMD_VERSION
+* %cmd-name --&gt; CMD_NAME
+* %cmd-basename --&gt; CMD_BASENAME
+- concluding_replacements:
+    #placeholder-protect
 </code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;p id="p-id" class="p-class"&gt;
-Paragraph with &lt;code&gt;id&lt;/code&gt; and &lt;code&gt;class&lt;/code&gt;.
-&lt;/p&gt;
-&lt;ul&gt;
-&lt;li id="li-id"&gt;List item with &lt;code&gt;id&lt;/code&gt; and no &lt;code&gt;class&lt;/code&gt;.
-&lt;/li&gt;
-&lt;li class="li-class"&gt;List item with &lt;code&gt;class&lt;/code&gt; and no &lt;code&gt;id&lt;/code&gt;.
-&lt;/li&gt;
-&lt;li class="li-class"&gt;Put arbitrary whitespace after the class for more clarity.
-&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-</li>
-</ul>
-<h3 id="tables"><a class="permalink" href="#tables" aria-label="Permalink"></a>Tables</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">''''</span>{<span class="optional-argument">&lt;attribute specification&gt;</span>}
-  <span class="mandatory-argument">&lt;CONTENT&gt;</span>
-<span class="repeatable-delimiter">''''</span></code></pre>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
+Makes replacements for CMD properties:
 </p>
-<p>
-Produces the table
-<code>&lt;table<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>↵<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/table&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing four or more apostrophes
-which are not protected by <a href="#cmd-literals">CMD literals</a>,
-use a longer run of <span class="repeatable-delimiter">apostrophes</span> in the delimiters.
-</p>
-<p>
-In the implementation, a recursive call is used to process nested tables.
-</p>
-<p>
-<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is
-</p>
-<ol>
-<li>split into table cells <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>
-according to <a href="#table-cells">table cell processing</a>,
-</li>
-<li>split into table rows <code>&lt;tr&gt;</code>
-according to <a href="#table-rows">table row processing</a>, and
-</li>
-<li>split into table parts <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>
-according to <a href="#table-parts">table part processing</a>.
-</li>
-</ol>
-<h4 id="table-cells"><a class="permalink" href="#table-cells" aria-label="Permalink"></a>Table cells</h4>
-<p>
-<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table cells <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>
-according to leading occurrences of the following:
-</p>
-<pre class="cmd syntax"><code>&lt;Z&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
-<p>
-The following delimiters <code>&lt;Z&gt;</code> for table cells are used:
-</p>
-<ul>
-<li><code>;</code> for <code>&lt;th&gt;</code>
-</li>
-<li><code>,</code> for <code>&lt;td&gt;</code>
-</li>
-</ul>
-<p>
-Table cells end at the next table cell, table row, or table part,
-or at the end of the content being split.
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<h4 id="table-rows"><a class="permalink" href="#table-rows" aria-label="Permalink"></a>Table rows</h4>
-<p>
-<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table rows <code>&lt;tr&gt;</code>
-according to leading occurrences of the following:
-</p>
-<pre class="cmd syntax"><code>=={<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
-<p>
-Table rows end at the next table row or table part,
-or at the end of the content being split.
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<h4 id="table-parts"><a class="permalink" href="#table-parts" aria-label="Permalink"></a>Table parts</h4>
-<p>
-<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is split into table parts <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>
-according to leading occurrences of the following:
-</p>
-<pre class="cmd syntax"><code>&lt;Y&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
-<p>
-The following delimiters <code>&lt;Y&gt;</code> for table parts are used:
-</p>
-<ul>
-<li><code>|^</code> for <code>&lt;thead&gt;</code>
-</li>
-<li><code>|:</code> for <code>&lt;tbody&gt;</code>
-</li>
-<li><code>|_</code> for <code>&lt;tfoot&gt;</code>
-</li>
-</ul>
-<p>
-Table parts end at the next table part,
-or at the end of the content being split.
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<h4 id="tables-without-parts"><a class="permalink" href="#tables-without-parts" aria-label="Permalink"></a>Example 1: table <em>without</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
-<ul>
-<li>CMD
-<pre class="cmd"><code>''''
-  ==
-    ; A
-    ; B
-    ; C
-    ; D
-  ==
-    , 1
-    ,{r2} 2
-    , 3
-    , 4
-  ==
-    , 5
-    ,{r3 c2} 6
-  ==
-    ,{c2} 7
-  ==
-    , 8
-    ; ?
-''''
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;table&gt;
-&lt;tr&gt;
-&lt;th&gt;A&lt;/th&gt;
-&lt;th&gt;B&lt;/th&gt;
-&lt;th&gt;C&lt;/th&gt;
-&lt;th&gt;D&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td rowspan="2"&gt;2&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;5&lt;/td&gt;
-&lt;td rowspan="3" colspan="2"&gt;6&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td colspan="2"&gt;7&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;8&lt;/td&gt;
-&lt;th&gt;?&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-</code></pre>
-</li>
-<li>Rendered
-<table>
-<tr>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-</tr>
-<tr>
-<td>1</td>
-<td rowspan="2">2</td>
-<td>3</td>
-<td>4</td>
-</tr>
-<tr>
-<td>5</td>
-<td rowspan="3" colspan="2">6</td>
-</tr>
-<tr>
-<td colspan="2">7</td>
-</tr>
-<tr>
-<td>8</td>
-<th>?</th>
-</tr>
-</table>
-</li>
-</ul>
-<h4 id="tables-with-parts"><a class="permalink" href="#tables-with-parts" aria-label="Permalink"></a>Example 2: table <em>with</em> <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> parts</h4>
-<ul>
-<li>CMD
-<pre class="cmd"><code>''''
-|^
-  ==
-    ; Meals
-    ; Cost / \d
-|:
-  ==
-    ; Lunch
-    , 7
-  ==
-    ; Dinner
-    , 10
-|_
-  ==
-    ; Total
-    ,{#total-cost .some-class}
-      17
-''''
-</code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Meals&lt;/th&gt;
-&lt;th&gt;Cost / $&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;Lunch&lt;/th&gt;
-&lt;td&gt;7&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;Dinner&lt;/th&gt;
-&lt;td&gt;10&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;tfoot&gt;
-&lt;tr&gt;
-&lt;th&gt;Total&lt;/th&gt;
-&lt;td id="total-cost" class="some-class"&gt;17&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tfoot&gt;
-&lt;/table&gt;
-</code></pre>
-</li>
-<li>Rendered
 <table>
 <thead>
 <tr>
-<th>Meals</th>
-<th>Cost / $</th>
+<th>Property</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>Lunch</th>
-<td>7</td>
+<td><code class="cmd cmdc">%cmd-version</code></td>
+<td><code>__version__</code> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>
+(currently <code class="html">3.999...</code>)</td>
 </tr>
 <tr>
-<th>Dinner</th>
-<td>10</td>
+<td><code class="cmd cmdc">%cmd-name</code></td>
+<td>CMD file name, relative to working directory, without extension</td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">%cmd-basename</code></td>
+<td>CMD file name, without path, without extension</td>
 </tr>
 </tbody>
-<tfoot>
-<tr>
-<th>Total</th>
-<td id="total-cost" class="some-class">17</td>
-</tr>
-</tfoot>
 </table>
+</details>
+<h4 id="boilerplate-protect"><a href="#boilerplate-protect" class="permalink" aria-label="Permalink"></a>15. <code>#boilerplate-protect</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #boilerplate-protect
+- queue_position: AFTER #cmd-properties
+* &lt;style&gt;[\s]*?&lt;/style&gt;[\s]* --&gt;
+* &lt;style&gt;[\s\S]*?&lt;/style&gt; --&gt; \g&lt;0&gt;
+* &lt;head&gt;[\s\S]*?&lt;/head&gt; --&gt; \g&lt;0&gt;
+- concluding_replacements:
+    #reduce-whitespace
+    #placeholder-protect
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Protects boilerplate elements:
+</p>
+<ul>
+<li>
+Removes empty <code>&lt;style&gt;</code> element
+</li>
+<li>
+Protects <code>&lt;style&gt;</code> element
+</li>
+<li>
+Protects <code>&lt;head&gt;</code> element
 </li>
 </ul>
-<h3 id="escapes"><a class="permalink" href="#escapes" aria-label="Permalink"></a>Escapes</h3>
+</details>
+<h4 id="backslash-escapes"><a href="#backslash-escapes" class="permalink" aria-label="Permalink"></a>16. <code>#backslash-escapes</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #backslash-escapes
+- queue_position: AFTER #boilerplate-protect
+- apply_mode: SIMULTANEOUS
+* \\ --&gt; \
+* \# --&gt; #
+* \&amp; --&gt; &amp;amp;
+* \( --&gt; (
+* \) --&gt; )
+* \* --&gt; *
+* \&lt; --&gt; &amp;lt;
+* \&gt; --&gt; &amp;gt;
+* \[ --&gt; [
+* \] --&gt; ]
+* \_ --&gt; _
+* \{ --&gt; {
+* \| --&gt; |
+* \} --&gt; }
+* "\ " --&gt; " "
+* \t --&gt; "	"
+- concluding_replacements:
+    #placeholder-protect
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-<strong>Important.</strong> These escapes are processed <em>after</em> the syntax above.
+Applies backslash escapes:
 </p>
-<div class="centred-flex">
 <table>
+<thead>
 <tr>
-<th>CMD</th>
-<th>HTML</th>
-<th>Rendered</th>
-<th>Description</th>
+<th>Escaped</th>
+<th>Unescaped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="cmd cmdc">\\</code></td>
+<td><code class="html">\</code></td>
 </tr>
 <tr>
-<td><code>\\</code></td>
-<td><code>\</code></td>
-<td>\</td>
-<td>Backslash</td>
+<td><code class="cmd cmdc">\#</code></td>
+<td><code class="html">#</code></td>
 </tr>
 <tr>
-<td><code>\/</code></td>
-<td><code></code></td>
-<td></td>
-<td>Empty string</td>
+<td><code class="cmd cmdc">\&amp;</code></td>
+<td><code class="html">&amp;amp;</code></td>
 </tr>
 <tr>
-<td><code>\ /</code></td>
-<td><code> </code></td>
-<td> </td>
-<td>Space</td>
+<td><code class="cmd cmdc">\(</code></td>
+<td><code class="html">(</code></td>
 </tr>
 <tr>
-<td><code>\ </code></td>
-<td><code> </code></td>
-<td> </td>
-<td>Space</td>
+<td><code class="cmd cmdc">\)</code></td>
+<td><code class="html">)</code></td>
 </tr>
 <tr>
-<td><code>\~</code></td>
-<td><code>~</code></td>
-<td>~</td>
-<td>Tilde</td>
+<td><code class="cmd cmdc">\*</code></td>
+<td><code class="html">*</code></td>
 </tr>
 <tr>
-<td><code>~</code></td>
-<td><code>&amp;nbsp;</code></td>
-<td>&nbsp;</td>
-<td>Non-breaking space</td>
+<td><code class="cmd cmdc">\&lt;</code></td>
+<td><code class="html">&amp;lt;</code></td>
 </tr>
 <tr>
-<td><code>\0</code></td>
-<td><code>&amp;numsp;</code></td>
-<td>&numsp;</td>
-<td>Figure space</td>
+<td><code class="cmd cmdc">\&gt;</code></td>
+<td><code class="html">&amp;gt;</code></td>
 </tr>
 <tr>
-<td><code>\,</code></td>
-<td><code>&amp;thinsp;</code></td>
-<td>&thinsp;</td>
-<td>Thin space</td>
+<td><code class="cmd cmdc">\[</code></td>
+<td><code class="html">[</code></td>
 </tr>
 <tr>
-<td><code>\&amp;</code></td>
-<td><code>&amp;amp;</code></td>
-<td>&amp;</td>
-<td>Ampersand (entity)</td>
+<td><code class="cmd cmdc">\]</code></td>
+<td><code class="html">]</code></td>
 </tr>
 <tr>
-<td><code>\&lt;</code></td>
-<td><code>&amp;lt;</code></td>
-<td>&lt;</td>
-<td>Less than (entity)</td>
+<td><code class="cmd cmdc">\_</code></td>
+<td><code class="html">_</code></td>
 </tr>
 <tr>
-<td><code>\&gt;</code></td>
-<td><code>&amp;gt;</code></td>
-<td>&gt;</td>
-<td>Greater than (entity)</td>
+<td><code class="cmd cmdc">\{</code></td>
+<td><code class="html">{</code></td>
 </tr>
 <tr>
-<td><code>\"</code></td>
-<td><code>&amp;quot;</code></td>
-<td>&quot;</td>
-<td>Double quote (entity)</td>
+<td><code class="cmd cmdc">\|</code></td>
+<td><code class="html">|</code></td>
 </tr>
 <tr>
-<td><code>...</code></td>
-<td><code>…</code></td>
-<td>…</td>
-<td><code>U+2026 HORIZONTAL ELLIPSIS</code></td>
+<td><code class="cmd cmdc">\}</code></td>
+<td><code class="html">}</code></td>
 </tr>
 <tr>
-<td><code>---</code></td>
-<td><code>—</code></td>
-<td>—</td>
-<td><code>U+2014 EM DASH</code></td>
+<td><code class="cmd cmdc">\ </code></td>
+<td>(space)</td>
 </tr>
 <tr>
-<td><code>--</code></td>
-<td><code>–</code></td>
-<td>–</td>
-<td><code>U+2013 EN DASH</code></td>
+<td><code class="cmd cmdc">\t</code></td>
+<td>(tab)</td>
 </tr>
-<tr>
-<td><code>\P</code></td>
-<td><code>¶</code></td>
-<td>¶</td>
-<td><code>U+00B6 PILCROW SIGN</code></td>
-</tr>
-<tr>
-<td><code>\d</code></td>
-<td><code>$</code></td>
-<td>$</td>
-<td>Dollar sign</td>
-</tr>
-<tr>
-<td><code>\#</code></td>
-<td><code>#</code></td>
-<td>#</td>
-<td>Hash</td>
-</tr>
-<tr>
-<td><code>\[</code></td>
-<td><code>[</code></td>
-<td>[</td>
-<td>Opening square bracket</td>
-</tr>
-<tr>
-<td><code>\]</code></td>
-<td><code>]</code></td>
-<td>]</td>
-<td>Closing square bracket</td>
-</tr>
-<tr>
-<td><code>\(</code></td>
-<td><code>(</code></td>
-<td>(</td>
-<td>Opening round bracket</td>
-</tr>
-<tr>
-<td><code>\)</code></td>
-<td><code>)</code></td>
-<td>)</td>
-<td>Closing round bracket</td>
-</tr>
-<tr>
-<td><code>\*</code></td>
-<td><code>*</code></td>
-<td>*</td>
-<td>Asterisk</td>
-</tr>
-<tr>
-<td><code>\_</code></td>
-<td><code>_</code></td>
-<td>_</td>
-<td>Underscore</td>
-</tr>
-<tr>
-<td><code>\|</code></td>
-<td><code>|</code></td>
-<td>|</td>
-<td>Pipe</td>
-</tr>
-<tr>
-<td><code>\=</code></td>
-<td><code>&lt;hr&gt;</code></td>
-<td><hr></td>
-<td>Thematic break</td>
-</tr>
-<tr>
-<td><code>\+</code></td>
-<td><code>&lt;br&gt;</code></td>
-<td><br></td>
-<td>Line break</td>
-</tr>
+</tbody>
 </table>
-</div>
-<h3 id="line-continuations"><a class="permalink" href="#line-continuations" aria-label="Permalink"></a>Line continuations</h3>
+</details>
+<h4 id="backslash-continuations"><a href="#backslash-continuations" class="permalink" aria-label="Permalink"></a>17. <code>#backslash-continuations</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #backslash-continuations
+- queue_position: AFTER #backslash-escapes
+* \\ \n [^\S\n]* --&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Use backslashes for line continuation.
-All leading whitespace on the next line is stripped.
+Applies backslash continuation.
 </p>
+</details>
+<h4 id="reference-definitions"><a href="#reference-definitions" class="permalink" aria-label="Permalink"></a>18. <code>#reference-definitions</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ReferenceDefinitionReplacement: #reference-definitions
+- queue_position: AFTER #backslash-continuations
+- attribute_specifications: EMPTY
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>[</b>«label»<b>]</b><b>:</b> «uri»
+<b>[</b>«label»<b>]</b><b>:</b> <b>&lt;</b>«uri»<b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>[</b>«label»<b>]</b><b>:</b> «...» <b>"</b>«title»<b>"</b>
+<b>[</b>«label»<b>]</b><b>:</b> «...» <b>'</b>«title»<b>'</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>[</b>«label»<b>]</b>{«attribute specifications»}<b>:</b> «...»
+</code></pre>
 <ul>
-<li>CMD
-<pre class="cmd"><code>(Line 1)\
-  (Line 2)
-(Line 3) \
-       (Line 4)
-</code></pre>
+<li>
+For continuation of <code class="cmd cmdc">«uri»</code> or <code class="cmd cmdc">«title»</code>,
+indent the continuation more than the leading square bracket.
 </li>
-<li>HTML
-<pre class="html"><code>(Line 1)(Line 2)
-(Line 3) (Line 4)
-</code></pre>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
-<h3 id="reference-definitions"><a class="permalink" href="#reference-definitions" aria-label="Permalink"></a>Reference-style definitions</h3>
-<pre class="cmd syntax"><code><span class="repeatable-delimiter">@</span>[<span class="mandatory-argument">&lt;LABEL&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="optional-argument">&lt;address&gt;</span> <span class="optional-argument">&lt;title&gt;</span> <span class="repeatable-delimiter">@</span></code></pre>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Reference style definition
-for an <a href="#reference-style-images">image</a> or a <a href="#reference-style-links">link</a>.
+Defines a reference, to be used by
+<a href="#referenced-images"><code>#referenced-images</code></a> or <a href="#referenced-links"><code>#referenced-links</code></a>.
 </p>
+</details>
+<h4 id="specified-images"><a href="#specified-images" class="permalink" aria-label="Permalink"></a>19. <code>#specified-images</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>SpecifiedImageReplacement: #specified-images
+- queue_position: AFTER #reference-definitions
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b><b>(</b>«src»<b>)</b>
+<b>!</b><b>[</b>«alt text»<b>]</b><b>(</b><b>&lt;</b>«src»<b>&gt;</b><b>)</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b><b>(</b>«...» <b>"</b>«title»<b>"</b><b>)</b>
+<b>!</b><b>[</b>«alt text»<b>]</b><b>(</b>«...» <b>'</b>«title»<b>'</b><b>)</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}<b>(</b>«...»<b>)</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
+Produces an image:
 </p>
+<pre class="html"><code><b>&lt;img</b>«attribute sequence»<b>&gt;</b>
+</code></pre>
 <p>
-The referencing <code><span class="mandatory-argument">&lt;LABEL&gt;</span></code> is case insensitive.
-For definitions whose <code><span class="optional-argument">&lt;address&gt;</span></code> or <code><span class="optional-argument">&lt;title&gt;</span></code>
-contains one or more consecutive at signs
-which are not protected by CMD literals,
-use a longer run of <span class="repeatable-delimiter">at signs</span> in the delimiters.
-</p>
-<p>
-<code><span class="optional-argument">&lt;address&gt;</span></code> is used for
-<code>src</code> in <a href="#reference-style-images">images</a> and
-<code>href</code> in <a href="#reference-style-links">links</a>.
-</p>
-<p>
-All reference-style definitions are read and stored.
-If the same label (which is case insensitive)
-is specified more than once,
-the latest definition shall prevail.
-</p>
-<h3 id="images"><a class="permalink" href="#images" aria-label="Permalink"></a>Images</h3>
-<h4 id="inline-style-images"><a class="permalink" href="#inline-style-images" aria-label="Permalink"></a>Inline-style images</h4>
-<pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>}(<span class="optional-argument">&lt;src&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
-<p>
-Unlike John Gruber's Markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
-If quotes are supplied to <code><span class="optional-argument">&lt;title&gt;</span></code>,
-they are automatically escaped as <code>&amp;quot;</code>.
-</p>
-<p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<p>
-Produces the image
-<code>&lt;img<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, <code><span class="optional-argument">&lt;title&gt;</span></code>,
-and <code><span class="optional-argument">&lt;attribute specification&gt;</span></code>.
-For <code><span class="mandatory-argument">&lt;ALT&gt;</span></code>, <code><span class="optional-argument">&lt;src&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
-one or more closing square or round brackets,
-use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
 </p>
 <ul>
-<li>CMD
-<pre class="cmd"><code>![Dr~Nicolaes Tulp giving an anatomy lesson using a corpse](
-  /rembrandt-anatomy.jpg
-  The Anatomy Lesson of Dr~Nicolaes Tulp \(Rembrandt\)
-)
-</code></pre>
+<li>
+<code class="cmd cmdc">«alt text»</code>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;img alt="Dr&amp;nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&amp;nbsp;Nicolaes Tulp (Rembrandt)"&gt;
-</code></pre>
+<li>
+<code class="cmd cmdc">«src»</code>
 </li>
-<li>Rendered
+<li>
+<code class="cmd cmdc">«title»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+</li>
+</ul>
 <p>
-<img alt="Dr&nbsp;Nicolaes Tulp giving an anatomy lesson using a corpse" src="/rembrandt-anatomy.jpg" title="The Anatomy Lesson of Dr&nbsp;Nicolaes Tulp (Rembrandt)">
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg"&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+<img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg">
 </p>
 </li>
 </ul>
-<h4 id="reference-style-images"><a class="permalink" href="#reference-style-images" aria-label="Permalink"></a>Reference-style images</h4>
-<pre class="cmd syntax"><code>![<span class="mandatory-argument">&lt;ALT&gt;</span>][<span class="optional-argument">&lt;label&gt;</span>]</code></pre>
+</li>
+<li>
+Set width:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg" width="120"&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
 <p>
-To be used in conjunction with a <a href="#reference-definitions">reference-style definition</a>.
+<img alt="Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp." src="rembrandt-anatomy.jpg" width="120">
 </p>
+</li>
+</ul>
+</li>
+<li>
+Empty alt text for decorative images,
+or images where adjacent text already describes the image:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>![](/favicon-16x16.png) Conway-Markdown is dumb.
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;img alt="" src="/favicon-16x16.png"&gt; Conway-Markdown is dumb.
+</code></pre>
+</li>
+<li>
+Rendered:
 <p>
-A single space may be included
-between <code>[<span class="mandatory-argument">&lt;ALT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code>.
-The referencing <code><span class="optional-argument">&lt;label&gt;</span></code> is case insensitive.
-If <code><span class="optional-argument">&lt;label&gt;</span></code> is empty,
-the square brackets surrounding it may be omitted,
-and <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> is used as the label.
+<img alt="" src="/favicon-16x16.png"> Conway-Markdown is dumb.
 </p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="referenced-images"><a href="#referenced-images" class="permalink" aria-label="Permalink"></a>20. <code>#referenced-images</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ReferencedImageReplacement: #referenced-images
+- queue_position: AFTER #specified-images
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b><b>[</b>«label»<b>]</b>
+<b>!</b><b>[</b>«alt text»<b>]</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}<b>[</b>«label»<b>]</b>
+<b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«label»</code>: must correspond to a defined
+<a href="#reference-definitions">reference definition</a>, up to case.
+If <code class="cmd cmdc">«label»</code> is omitted,
+<code class="cmd cmdc">«alt text»</code> is used in its stead.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Produces the image
-<code>&lt;img<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> and the attribute specifications
-for the corresponding <a href="#reference-definitions">reference-style image definition</a>.
+Produces an image:
 </p>
+<pre class="html"><code><b>&lt;img</b>«attribute sequence»<b>&gt;</b>
+</code></pre>
 <p>
-Whitespace around <code><span class="optional-argument">&lt;label&gt;</span></code> is stripped.
-For images whose <code><span class="mandatory-argument">&lt;ALT&gt;</span></code> or <code><span class="optional-argument">&lt;label&gt;</span></code> contains
-one or more closing square brackets,
-use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
 </p>
 <ul>
-<li>CMD
-<pre class="cmd"><code>@[moses-breaking-tablets]{w200}
-  /rembrandt-moses.jpg
-  Moses Breaking the Tablets of the Law (Rembrandt)
-@
+<li>
+<code class="cmd cmdc">«alt text»</code>
+</li>
+<li>
+<code class="cmd cmdc">«src»</code> equal to <code class="cmd cmdc">«uri»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«title»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+</li>
+</ul>
+<p>
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[moses]: rembrandt-moses.jpg
 
-![A pissed-off Moses, about to smash the Law Tablets][moses-breaking-tablets]
+![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
 </code></pre>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)"&gt;
+<li>
+HTML:
+<pre class="html"><code>&lt;img alt="Rembrandt painting: Moses Breaking the Tablets of the Law." src="rembrandt-moses.jpg"&gt;
 </code></pre>
 </li>
-<li>Rendered
+<li>
+Rendered:
 <p>
-<img alt="A pissed-off Moses, about to smash the Law Tablets" width="200" src="/rembrandt-moses.jpg" title="Moses Breaking the Tablets of the Law (Rembrandt)">
+<img alt="Rembrandt painting: Moses Breaking the Tablets of the Law." src="rembrandt-moses.jpg">
 </p>
 </li>
 </ul>
-<h3 id="links"><a class="permalink" href="#links" aria-label="Permalink"></a>Links</h3>
-<h4 id="direct-style-links"><a class="permalink" href="#direct-style-links" aria-label="Permalink"></a>Direct-style links</h4>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;flags&gt;</span>&lt;<span class="mandatory-argument">&lt;SCHEME&gt;</span>:<span class="optional-argument">&lt;address&gt;</span>&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>}</code></pre>
-<p>
-Produces the link
-<code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;SCHEME&gt;</span>:<span class="optional-argument">&lt;address&gt;</span>&lt;/a&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><span class="mandatory-argument">&lt;SCHEME&gt;</span>:<span class="optional-argument">&lt;address&gt;</span></code> and <code><span class="optional-argument">&lt;attribute specification&gt;</span></code>.
-<code><span class="mandatory-argument">&lt;SCHEME&gt;</span></code> and <code><span class="optional-argument">&lt;address&gt;</span></code>
-may not contain whitespace or angle brackets.
-<code><span class="optional-argument">&lt;flags&gt;</span></code> may consist of zero or more of the following characters:
-</p>
+</li>
+<li>
+Use <code class="cmd cmdc">«alt text»</code> for <code class="cmd cmdc">«label»</code>:
 <ul>
-<li><code>b</code> to enclose the link in angle brackets
-</li>
-<li><code>s</code> to suppress the scheme separator in the link content
-</li>
-<li><code>a</code> to enable all flags above
-</li>
-</ul>
-<p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<ul>
-<li>CMD
-<pre class="cmd"><code>&lt;https://example.com&gt;,
-b&lt;https://example.com&gt;,
-s&lt;https://example.com&gt;,
-a&lt;https://example.com&gt;.
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
+
+![Conway-Markdown logo.]
 </code></pre>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;a href="https://example.com"&gt;https://example.com&lt;/a&gt;,
-&amp;lt;&lt;a href="https://example.com"&gt;https://example.com&lt;/a&gt;&amp;gt;,
-&lt;a href="https://example.com"&gt;example.com&lt;/a&gt;,
-&amp;lt;&lt;a href="https://example.com"&gt;example.com&lt;/a&gt;&amp;gt;.
+<li>
+HTML:
+<pre class="html"><code>&lt;img alt="Conway-Markdown logo." src="/favicon-32x32.png" title="Conway-Markdown is dumb."&gt;
 </code></pre>
 </li>
-<li>Rendered
+<li>
+Rendered:
 <p>
-<a href="https://example.com">https://example.com</a>,
-&lt;<a href="https://example.com">https://example.com</a>&gt;,
-<a href="https://example.com">example.com</a>,
-&lt;<a href="https://example.com">example.com</a>&gt;.
+<img alt="Conway-Markdown logo." src="/favicon-32x32.png" title="Conway-Markdown is dumb.">
 </p>
 </li>
 </ul>
-<h4 id="inline-style-links"><a class="permalink" href="#inline-style-links" aria-label="Permalink"></a>Inline-style links</h4>
-<pre class="cmd syntax"><code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]{<span class="optional-argument">&lt;attribute specification&gt;</span>}(<span class="optional-argument">&lt;href&gt;</span> <span class="optional-argument">&lt;title&gt;</span>)</code></pre>
+</li>
+<li>
+<code class="cmd cmdc">«label»</code> is case-insensitive:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[image-label-case]: insensitive.png
+
+[Hooray.][image-label-case]
+[Hooray.][image-label-CASE]
+[Hooray.][ImAGe-laBEl-CAsE]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
+&lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
+&lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+Later reference definitions prevail:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[image-label]{.class1}: file1.png
+[image-label]{.class2}: file2.png
+
+[Second definition wins.][image-label]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="file2.png" class="class2"&gt;Second definition wins.&lt;/a&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="explicit-links"><a href="#explicit-links" class="permalink" aria-label="Permalink"></a>21. <code>#explicit-links</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ExplicitLinkReplacement: #explicit-links
+- queue_position: AFTER #referenced-images
+- allowed_flags:
+    b=ANGLE_BRACKET_WRAP
+    s=SUPPRESS_SCHEME
+- attribute_specifications: EMPTY
+- content_replacements:
+    #suppress-scheme
+- concluding_replacements:
+    #angle-bracket-wrap
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>&lt;</b>«uri»<b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>&lt;</b>{«attribute specifications»} «uri»<b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>&lt;</b>«uri»<b>&gt;</b>
+</code></pre>
+<pre class="cmd cmdc"><code>«flags»<b>&lt;</b>{«attribute specifications»} «uri»<b>&gt;</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«flags»</code>:
+<ul>
+<li>
+<code class="cmd cmdc">b</code>: wrap in angle brackets (apply <a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>)
+</li>
+<li>
+<code class="cmd cmdc">s</code>: suppress scheme (apply <a href="#suppress-scheme"><code>#suppress-scheme</code></a>)
+</li>
+</ul>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-Unlike John Gruber's Markdown, <code><span class="optional-argument">&lt;title&gt;</span></code> is not surrounded by quotes.
-If quotes are supplied to <code><span class="optional-argument">&lt;title&gt;</span></code>,
-they are automatically escaped as <code>&amp;quot;</code>.
+Produces a link:
 </p>
+<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«uri»<b>&lt;/a&gt;</b>
+</code></pre>
 <p>
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
+Or:
 </p>
+<pre class="html"><code><b>&amp;lt;&lt;a</b>«attribute sequence»<b>&gt;</b>«uri»<b>&lt;/a&gt;&amp;gt;</b>
+</code></pre>
 <p>
-Produces the link
-<code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from <code><span class="optional-argument">&lt;href&gt;</span></code>, <code><span class="optional-argument">&lt;title&gt;</span></code>,
-and <code><span class="optional-argument">&lt;attribute specification&gt;</span></code>.
-Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code>, <code><span class="optional-argument">&lt;href&gt;</span></code>, or <code><span class="optional-argument">&lt;title&gt;</span></code> containing
-one or more closing square or round brackets,
-use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
 </p>
 <ul>
-<li>CMD
-<pre class="cmd"><code>[Wikimedia Commons](
-  https://commons.wikimedia.org/wiki/Main_Page
-  Wikimedia Commons
-)
-  \+
-[Wikimedia Commons without title](https://commons.wikimedia.org/wiki/Main_Page)
-</code></pre>
+<li>
+<code class="cmd cmdc">«uri»</code> as <code>href</code>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons"&gt;Wikimedia Commons&lt;/a&gt;&lt;br&gt;
-&lt;a href="https://commons.wikimedia.org/wiki/Main_Page"&gt;Wikimedia Commons without title&lt;/a&gt;
-</code></pre>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
 </li>
-<li>Rendered
+</ul>
 <p>
-<a href="https://commons.wikimedia.org/wiki/Main_Page" title="Wikimedia Commons">Wikimedia Commons</a><br>
-<a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons without title</a>
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&lt;a href="https://example.com"&gt;https://example.com&lt;/a&gt;</code>
+</li>
+<li>
+Rendered: <a href="https://example.com">https://example.com</a>
+</li>
+</ul>
+</li>
+<li>
+Wrap in angle brackets:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">b&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&amp;lt;&lt;a href="https://example.com"&gt;https://example.com&lt;/a&gt;&amp;gt;</code>
+</li>
+<li>
+Rendered: &lt;<a href="https://example.com">https://example.com</a>&gt;
+</li>
+</ul>
+</li>
+<li>
+Suppress scheme:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">s&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&lt;a href="https://example.com"&gt;example.com&lt;/a&gt;</code>
+</li>
+<li>
+Rendered: <a href="https://example.com">example.com</a>
+</li>
+</ul>
+</li>
+<li>
+<i lang="es">¿Por qué no los dos?</i>
+<ul>
+<li>
+CMD: <code class="cmd cmdc">bs&lt;https://example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&amp;lt;&lt;a href="https://example.com"&gt;example.com&lt;/a&gt;&amp;gt;</code>
+</li>
+<li>
+Rendered: &lt;<a href="https://example.com">example.com</a>&gt;
+</li>
+</ul>
+</li>
+<li>
+Invitation to spammers:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">s&lt;mailto:mail@example.com&gt;</code>
+</li>
+<li>
+HTML: <code class="html">&lt;a href="mailto:mail@example.com"&gt;mail@example.com&lt;/a&gt;</code>
+</li>
+<li>
+Rendered: <a href="mailto:mail@example.com">mail@example.com</a>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="specified-links"><a href="#specified-links" class="permalink" aria-label="Permalink"></a>22. <code>#specified-links</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>SpecifiedLinkReplacement: #specified-links
+- queue_position: AFTER #explicit-links
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b><b>(</b>«href»<b>)</b>
+<b>[</b>«link text»<b>]</b><b>(</b><b>&lt;</b>«href»<b>&gt;</b><b>)</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b><b>(</b>«...» <b>"</b>«title»<b>"</b><b>)</b>
+<b>[</b>«link text»<b>]</b><b>(</b>«...» <b>'</b>«title»<b>'</b><b>)</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b>{«attribute specifications»}<b>(</b>«...»<b>)</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a link:
+</p>
+<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«link text»<b>&lt;/a&gt;</b>
+</code></pre>
+<p>
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
+</p>
+<ul>
+<li>
+<code class="cmd cmdc">«href»</code>
+</li>
+<li>
+<code class="cmd cmdc">«title»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+</li>
+</ul>
+<p>
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://en.wikipedia.org/wiki/Main_Page"&gt;Wikipedia&lt;/a&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+<a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a>
 </p>
 </li>
 </ul>
-<h4 id="reference-style-links"><a class="permalink" href="#reference-style-links" aria-label="Permalink"></a>Reference-style links</h4>
-<pre class="cmd syntax"><code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>][<span class="optional-argument">&lt;label&gt;</span>]</code></pre>
-<p>
-To be used in conjunction with a <a href="#reference-definitions">reference-style definition</a>.
-</p>
-<p>
-A single space may be included
-between <code>[<span class="mandatory-argument">&lt;CONTENT&gt;</span>]</code> and <code>[<span class="optional-argument">&lt;label&gt;</span>]</code>.
-The referencing <code><span class="optional-argument">&lt;label&gt;</span></code> is case insensitive.
-If <code><span class="optional-argument">&lt;label&gt;</span></code> is empty,
-the square brackets surrounding it may be omitted,
-and <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is used as the label.
-</p>
-<p>
-Produces the link
-<code>&lt;a<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/a&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-built from the attribute specifications
-for the corresponding <a href="#reference-definitions">reference-style image definition</a>.
-</p>
-<p>
-Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> and <code><span class="optional-argument">&lt;label&gt;</span></code> is stripped.
-For links whose <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> or <code><span class="optional-argument">&lt;label&gt;</span></code> contains
-one or more closing square brackets,
-use <a href="#escapes">escapes</a> or <a href="#cmd-literals">CMD literals</a>.
-</p>
+</li>
+<li>
+Title:
 <ul>
-<li>CMD
-<pre class="cmd"><code>@[wikipedia]
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[Wikipedia](
   https://en.wikipedia.org/wiki/Main_Page
-  Wikipedia, the free encyclopedia
-@
-
-[Wikipedia's home page][wikipedia] \+
-[Wikipedia][] \+
-[Wikipedia]
+  "Wikipedia, the free encyclopedia"
+)
 </code></pre>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia"&gt;Wikipedia's home page&lt;/a&gt;&lt;br&gt;
-&lt;a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia"&gt;Wikipedia&lt;/a&gt;&lt;br&gt;
-&lt;a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia"&gt;Wikipedia&lt;/a&gt;
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia"&gt;Wikipedia&lt;/a&gt;
 </code></pre>
 </li>
-<li>Rendered
+<li>
+Rendered:
 <p>
-<a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia's home page</a><br>
-<a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a><br>
 <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia, the free encyclopedia">Wikipedia</a>
 </p>
 </li>
 </ul>
-<h3 id="headings"><a class="permalink" href="#headings" aria-label="Permalink"></a>Headings</h3>
-<pre class="cmd syntax"><code>#{<span class="optional-argument">&lt;attribute specification&gt;</span>}> <span class="mandatory-argument">&lt;CONTENT&gt;</span> #</code></pre>
-<p>
-Produces the heading
-<code>&lt;h1<span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>&gt;<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/h1&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
-</p>
-<p>
-Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
-For <code>&lt;h2&gt;</code> to <code>&lt;h6&gt;</code>, use 2 to 6 delimiting hashes respectively.
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing the delimiting number of
-or more consecutive hashes, use <a href="#cmd-literals">CMD literals</a>.
-</p>
+</li>
+<li>
+Override <code>href</code>
 <ul>
-<li>CMD
-<pre class="cmd"><code>###{#some-id} Heading with id ###
-#### Heading without id ####
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[Beware]{href=https://example.com/evil}(https://example.com/good)
 </code></pre>
 </li>
-<li>HTML
-<pre class="html"><code>&lt;h3 id="some-id"&gt;Heading with id&lt;/h3&gt;
-&lt;h4&gt;Heading without id&lt;/h4&gt;
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://example.com/evil"&gt;Beware&lt;/a&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+<a href="https://example.com/evil">Beware</a>
+</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="referenced-links"><a href="#referenced-links" class="permalink" aria-label="Permalink"></a>23. <code>#referenced-links</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ReferencedLinkReplacement: #referenced-links
+- queue_position: AFTER #specified-links
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b><b>[</b>«label»<b>]</b>
+<b>[</b>«link text»<b>]</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b>{«attribute specifications»}<b>[</b>«label»<b>]</b>
+<b>[</b>«link text»<b>]</b>{«attribute specifications»}
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«label»</code>: must correspond to a defined
+<a href="#reference-definitions">reference definition</a>, up to case.
+If <code class="cmd cmdc">«label»</code> is omitted,
+<code class="cmd cmdc">«link text»</code> is used in its stead.
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces a link:
+</p>
+<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«link text»<b>&lt;/a&gt;</b>
+</code></pre>
+<p>
+Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+built from
+</p>
+<ul>
+<li>
+<code class="cmd cmdc">«href»</code> equal to <code class="cmd cmdc">«uri»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«title»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+of the <a href="#reference-definitions">reference definition</a>
+defined for <code class="cmd cmdc">«label»</code>
+</li>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>
+</li>
+</ul>
+<p>
+parsed in that order.
+</p>
+</details>
+<details open>
+<summary>Examples</summary>
+<ol>
+<li>
+Basic usage:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[wiki]: https://en.wikipedia.org/wiki/Main_Page
+
+[Wikipedia's main page.][wiki]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://en.wikipedia.org/wiki/Main_Page"&gt;Wikipedia's main page.&lt;/a&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+<a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia's main page.</a>
+</p>
+</li>
+</ul>
+</li>
+<li>
+Use <code class="cmd cmdc">«link text»</code> for <code class="cmd cmdc">«label»</code>:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
+
+[Wikipedia]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://en.wikipedia.org/wiki/Main_Page"&gt;Wikipedia&lt;/a&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<p>
+<a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a>
+</p>
+</li>
+</ul>
+</li>
+<li>
+<code class="cmd cmdc">«label»</code> is case-insensitive:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[link-label-case]: https://example.com
+
+[Hooray.][link-label-case]
+[Hooray.][link-label-CASE]
+[Hooray.][LiNK-laBEl-CAsE]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://example.com"&gt;Hooray.&lt;/a&gt;
+&lt;a href="https://example.com"&gt;Hooray.&lt;/a&gt;
+&lt;a href="https://example.com"&gt;Hooray.&lt;/a&gt;
 </code></pre>
 </li>
 </ul>
-<h3 id="inline-semantics"><a class="permalink" href="#inline-semantics" aria-label="Permalink"></a>Inline semantics</h3>
-<pre class="cmd syntax"><code><span class="optional-argument">&lt;optional pipe&gt;</span>&lt;X&gt;{<span class="optional-argument">&lt;attribute specification&gt;</span>} <span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;X&gt;</code></pre>
-<p>
-<code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> must be non-empty.
-The opening delimiter <code>&lt;X&gt;</code> must not be followed by whitespace
-or by <code>&lt;/</code> (which would presumably be a closing tag).
-The closing delimiter <code>&lt;X&gt;</code> must not be preceded by whitespace
-or by a pipe <code>|</code>.
-If <code><span class="optional-argument">&lt;attribute specification&gt;</span></code> is empty,
-the curly brackets surrounding it may be omitted.
-</p>
-<p>
-Produces the inline semantic
-<code>&lt;<span class="mandatory-argument">&lt;TAG NAME&gt;</span><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span>
-<span class="mandatory-argument">&lt;CONTENT&gt;</span>&lt;/<span class="mandatory-argument">&lt;TAG NAME&gt;</span>&gt;</code>,
-where <code><span class="mandatory-argument">&lt;ATTRIBUTES&gt;</span></code> is the sequence of attributes
-<a href="#attribute-specifications">built from <code><span class="optional-argument">&lt;attribute specification&gt;</span></code></a>.
-</p>
-<p>
-The leading optional pipe is to be used as a disambiguator in some edge cases.
+</li>
+<li>
+Later reference definitions prevail:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[link-label]{.class1}: https://example.com/1
+[link-label]{.class2}: https://example.com/2
+
+[Second definition wins.][link-label]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;a href="https://example.com/2" class="class2"&gt;Second definition wins.&lt;/a&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h4 id="inline-semantics"><a href="#inline-semantics" class="permalink" aria-label="Permalink"></a>24. <code>#inline-semantics</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>InlineAssortedDelimitersReplacement: #inline-semantics
+- queue_position: AFTER #referenced-links
+- delimiter_conversion:
+    __=b
+    _=i
+    **=strong
+    *=em
+    ''=cite
+    ""=q
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>__</b>«b content»<b>__</b>
+<b>_</b>«i content»<b>_</b>
+<b>**</b>«strong content»<b>**</b>
+<b>*</b>«em content»<b>*</b>
+<b>''</b>«cite content»<b>''</b>
+<b>""</b>«q content»<b>""</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>«...»</b>{«attribute specifications»} «content»<b>«...»</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>|</b><b>«...»</b>«content»<b>«...»</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>|</b><b>«...»</b>{«attribute specifications»} «content»<b>«...»</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+<li>
+The leading optional pipe is to be used
+as a disambiguator in some edge cases.
 If present, it indicates that the delimiter directly after it
 is opening rather than closing.
-</p>
-<p>
-Whitespace around <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> is stripped.
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> containing one or more occurrences of <code>*</code> or <code>_</code>,
-or three or more consecutive occurrences of <code>"</code> or <code>'</code>,
-use <a href="#cmd-literals">CMD literals</a> or the <a href="#escapes">escapes</a> <code>\*</code> and <code>\_</code>.
-For <code><span class="mandatory-argument">&lt;CONTENT&gt;</span></code> ending in a pipe, use the <a href="#escapes">escape</a> <code>\|</code>.
-</p>
-<p>
-The following delimiters <code>&lt;X&gt;</code> are used:
-</p>
-<ul>
-<li><code>**</code> for <code>&lt;strong&gt;</code>
-(strong importance, seriousness, etc.)
 </li>
-<li><code>*</code> for <code>&lt;em&gt;</code>
-(stress emphasis, sarcasm, etc.)
+<li>
+The opening delimiter must not be followed by whitespace,
+nor by <code class="html">&lt;/</code> (the beginning of a closing tag).
 </li>
-<li><code>__</code> for <code>&lt;b&gt;</code>
-(bring to attention <em>without</em> strong importance,&nbsp;e.g. keywords)
-</li>
-<li><code>_</code> for <code>&lt;i&gt;</code>
-(offset text <em>without</em> stress emphasis, e.g.&nbsp;Latin)
-</li>
-<li><code>"""</code> for <code>&lt;q&gt;</code>
-(inline quotation)
-</li>
-<li><code>'''</code> for <code>&lt;cite&gt;</code>
-(citation)
+<li>
+The closing delimiter must not be preceded by whitespace,
+nor be a pipe <code class="cmd cmdc">|</code>.
 </li>
 </ul>
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-<strong>In HTML5, <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> are <em>not</em> deprecated.</strong>
-See <a href="https://www.w3.org/International/questions/qa-b-and-i-tags.en">W3C on using <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> elements</a>.
+Produces an inline semantic:
 </p>
+<pre class="html"><code><b>&lt;b</b>«attribute sequence»<b>&gt;</b>«b content»<b>&lt;/b&gt;</b>
+<b>&lt;i</b>«attribute sequence»<b>&gt;</b>«i content»<b>&lt;/i&gt;</b>
+<b>&lt;strong</b>«attribute sequence»<b>&gt;</b>«strong content»<b>&lt;/strong&gt;</b>
+<b>&lt;em</b>«attribute sequence»<b>&gt;</b>«em content»<b>&lt;/em&gt;</b>
+<b>&lt;cite</b>«attribute sequence»<b>&gt;</b>«cite content»<b>&lt;/cite&gt;</b>
+<b>&lt;q</b>«attribute sequence»<b>&gt;</b>«q content»<b>&lt;/q&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
 <p>
-Multiple passes are used to process nested inline semantics
-with the same delimiting character.
-Delimiter matching is inner-greedy,
-so <code>***blah***</code> produces <code>&lt;em&gt;&lt;strong&gt;blah&lt;/strong&gt;&lt;/em&gt;</code>
-rather than <code>&lt;strong&gt;&lt;em&gt;blah&lt;/em&gt;&lt;/strong&gt;</code>.
-For the latter, use the optional pipe for the inner occurrence,
-i.e.&nbsp;<code>**|*blah***</code>.
+In HTML5, <code class="html">&lt;b&gt;</code> and <code class="html">&lt;i&gt;</code> are <em>not</em> deprecated,
+see <a href="https://www.w3.org/International/questions/qa-b-and-i-tags.en">W3C: Using <code class="html">&lt;b&gt;</code> and <code class="html">&lt;i&gt;</code> elements</a>.
 </p>
-<p>
-Recursive calls are used to process nested inline semantics.
-</p>
-<div class="centred-block">
-<div class="overflowing">
+<ol>
+<li>
+Bring to attention <code class="html">&lt;b&gt;</code>:
+<ol type="i">
+<li>
+Keywords:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">Meals are served with __rice__ or __pasta__.</code>
+</li>
+<li>
+HTML: <code class="html">Meals are served with &lt;b&gt;rice&lt;/b&gt; or &lt;b&gt;pasta&lt;/b&gt;.</code>
+</li>
+<li>
+Rendered: Meals are served with <b>rice</b> or <b>pasta</b>.
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Idiomatic offset <code class="html">&lt;i&gt;</code>:
+<ol type="i">
+<li>
+Foreign phrases:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">Write out _{lang=la} Romani ite domum_ 100 times.</code>
+</li>
+<li>
+HTML: <code class="html">Write out &lt;i lang="la"&gt;Romani ite domum&lt;/i&gt; 100 times.</code>
+</li>
+<li>
+Rendered: Write out <i lang="la">Romani ite domum</i> 100 times.
+</li>
+</ul>
+</li>
+<li>
+Translator-supplied words in the King James Bible:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">I _{.translator-supplied} am_ the LORD.</code>
+</li>
+<li>
+HTML: <code class="html">I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.</code>
+</li>
+<li>
+Rendered: I <i class="translator-supplied">am</i> the LORD.
+</li>
+</ul>
+</li>
+<li>
+Thoughts:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">_Screw 'em._</code>
+</li>
+<li>
+HTML: <code class="html">&lt;i&gt;Screw 'em.&lt;/i&gt;</code>
+</li>
+<li>
+Rendered: <i>Screw 'em.</i>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Strong importance <code class="html">&lt;strong&gt;</code>:
+<ol type="i">
+<li>
+Warnings:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">**{lang=de} Achtung!**</code>
+</li>
+<li>
+HTML: <code class="html">&lt;strong lang="de"&gt;Achtung!&lt;/strong&gt;</code>
+</li>
+<li>
+Rendered: <strong lang="de">Achtung!</strong>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Stress emphasis <code class="html">&lt;em&gt;</code>:
+<ol type="i">
+<li>
+Stress a particular word in a sentence:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">I don't know *who* took it.</code>
+</li>
+<li>
+HTML: <code class="html">I don't know &lt;em&gt;who&lt;/em&gt; took it.</code>
+</li>
+<li>
+Rendered: I don't know <em>who</em> took it.
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Citation <code class="html">&lt;cite&gt;</code>:
+<ol type="i">
+<li>
+Book titles:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">''Nineteen Eighty-Four'' is already upon us.</code>
+</li>
+<li>
+HTML: <code class="html">&lt;cite&gt;Nineteen Eighty-Four&lt;/cite&gt; is already upon us.</code>
+</li>
+<li>
+Rendered: <cite>Nineteen Eighty-Four</cite> is already upon us.
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Quotation <code class="html">&lt;q&gt;</code>:
+<ol type="i">
+<li>
+Inline quotes:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">""It wasn't me.""</code>
+</li>
+<li>
+HTML: <code class="html">&lt;q&gt;It wasn't me.&lt;/q&gt;</code>
+</li>
+<li>
+Rendered: <q>It wasn't me.</q>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Nesting and disambiguation:
 <table>
 <thead>
 <tr>
 <th>Pattern</th>
 <th>CMD</th>
-<th>Rendered</th>
+<th>HTML</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>11</td>
-<td><code>*em*</code></td>
-<td><em>em</em></td>
+<td>1-1</td>
+<td><code class="cmd cmdc">*foo*</code></td>
+<td><code class="html">&lt;em&gt;foo&lt;/em&gt;</code></td>
 </tr>
 <tr>
-<td>22</td>
-<td><code>**strong**</code></td>
-<td><strong>strong</strong></td>
+<td>2-2</td>
+<td><code class="cmd cmdc">**foo**</code></td>
+<td><code class="html">&lt;strong&gt;foo&lt;/strong&gt;</code></td>
 </tr>
 <tr>
-<td>33</td>
-<td><code>***em(strong)***</code></td>
-<td><em><strong>em(strong)</strong></em></td>
+<td>3-3 (12-21)</td>
+<td><code class="cmd cmdc">***foo***</code></td>
+<td><code class="html">&lt;em&gt;&lt;strong&gt;foo&lt;/strong&gt;&lt;/em&gt;</code></td>
 </tr>
 <tr>
-<td>44</td>
-<td><code>****strong(strong)****</code></td>
-<td><strong><strong>strong(strong)</strong></strong></td>
+<td>12-3 (12-21)</td>
+<td><code class="cmd cmdc">*foo **bar***</code></td>
+<td><code class="html">&lt;em&gt;foo &lt;strong&gt;bar&lt;/strong&gt;&lt;/em&gt;</code></td>
 </tr>
 <tr>
-<td>123</td>
-<td><code>*em **em(strong)***</code></td>
-<td><em>em <strong>em(strong)</strong></em></td>
+<td>3-21 (12-21)</td>
+<td><code class="cmd cmdc">***foo** bar*</code></td>
+<td><code class="html">&lt;em&gt;&lt;strong&gt;foo&lt;/strong&gt; bar&lt;/em&gt;</code></td>
 </tr>
 <tr>
-<td>213</td>
-<td><code>**strong *strong(em)***</code></td>
-<td><strong>strong <em>strong(em)</em></strong></td>
+<td>2|1-3 (21-12)</td>
+<td><code class="cmd cmdc">**|*foo***</code></td>
+<td><code class="html">&lt;strong&gt;&lt;em&gt;foo&lt;/em&gt;&lt;/strong&gt;</code></td>
 </tr>
 <tr>
-<td>312</td>
-<td><code>***strong(em)* strong**</code></td>
-<td><strong><em>strong(em)</em> strong</strong></td>
+<td>21-3 (21-12)</td>
+<td><code class="cmd cmdc">**foo *bar***</code></td>
+<td><code class="html">&lt;strong&gt;foo &lt;em&gt;bar&lt;/em&gt;&lt;/strong&gt;</code></td>
 </tr>
 <tr>
-<td>321</td>
-<td><code>***em(strong)** em*</code></td>
-<td><em><strong>em(strong)</strong> em</em></td>
+<td>3-12 (21-12)</td>
+<td><code class="cmd cmdc">***foo* bar**</code></td>
+<td><code class="html">&lt;strong&gt;&lt;em&gt;foo&lt;/em&gt; bar&lt;/strong&gt;</code></td>
 </tr>
 <tr>
-<td>1221</td>
-<td><code>*em **em(strong)** em*</code></td>
-<td><em>em <strong>em(strong)</strong> em</em></td>
+<td>4-4 (22-22)</td>
+<td><code class="cmd cmdc">****foo****</code></td>
+<td><code class="html">&lt;strong&gt;&lt;strong&gt;foo&lt;/strong&gt;&lt;/strong&gt;</code></td>
 </tr>
 <tr>
-<td>2112</td>
-<td><code>**strong *strong(em)* strong**</code></td>
-<td><strong>strong <em>strong(em)</em> strong</strong></td>
+<td>1|2|1-4 (121-121)</td>
+<td><code class="cmd cmdc">*|**|*foo****</code></td>
+<td><code class="html">&lt;em&gt;&lt;strong&gt;&lt;em&gt;foo&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;</code></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<ul>
-<li>CMD
-<pre class="cmd"><code>**Do not confuse `&lt;strong&gt;` and `&lt;em&gt;` with `&lt;b&gt;` and `&lt;i&gt;`.** \+
-They are *not* the same. \+
-Meals come with __rice__ or __pasta__. \+
-I _{.translator-supplied} am_ the LORD. \+
-'''Nineteen Eighty-Four''' begins with """It was a bright cold day in April""".
+</li>
+</ol>
+</details>
+<h4 id="escape-idle-html"><a href="#escape-idle-html" class="permalink" aria-label="Permalink"></a>25. <code>#escape-idle-html</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #escape-idle-html
+- queue_position: AFTER #inline-semantics
+* [&amp;]
+  (?!
+    (?:
+      [a-zA-Z]{1,31}
+        |
+      [#] (?: [0-9]{1,7} | [xX] [0-9a-fA-F]{1,6} )
+    )
+    [;]
+  )
+    --&gt; &amp;amp;
+* [&lt;] (?= [\s] ) --&gt; &amp;lt;
 </code></pre>
-</li>
-<li>HTML
-<pre class="html"><code>&lt;strong&gt;Do not confuse &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt; with &lt;code&gt;&amp;lt;b&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;i&amp;gt;&lt;/code&gt;.&lt;/strong&gt;&lt;br&gt;
-They are &lt;em&gt;not&lt;/em&gt; the same.&lt;br&gt;
-Meals come with &lt;b&gt;rice&lt;/b&gt; or &lt;b&gt;pasta&lt;/b&gt;.&lt;br&gt;
-I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.&lt;br&gt;
-&lt;cite&gt;Nineteen Eighty-Four&lt;/cite&gt; begins with &lt;q&gt;It was a bright cold day in April&lt;/q&gt;.
-</code></pre>
-</li>
-<li>Rendered
+</details>
+<details open>
+<summary>Description</summary>
 <p>
-<strong>Do not confuse <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> with <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>.</strong><br>
-They are <em>not</em> the same.<br>
-Meals come with <b>rice</b> or <b>pasta</b>.<br>
-I <i class="translator-supplied">am</i> the LORD.<br>
-<cite>Nineteen Eighty-Four</cite> begins with <q>It was a bright cold day in April</q>.
-</p>
-</li>
-</ul>
-<h3 id="whitespace"><a class="permalink" href="#whitespace" aria-label="Permalink"></a>Whitespace</h3>
-<p>
-Throughout this document, "whitespace" refers specifically to ASCII whitespace.
-See <a href="https://docs.python.org/3/library/string.html#string.whitespace"><code>string.whitespace</code></a>:
-</p>
-<blockquote>
-[…] all ASCII characters that are considered whitespace.
-[…] space, tab, linefeed, return, formfeed, and vertical tab.
-</blockquote>
-<p>
-Whitespace is processed as follows:
+Escapes idle HTML:
 </p>
 <ol>
-<li>Leading and trailing horizontal whitespace is removed.
+<li>
+Replaces non-entity ampersand with <code class="html">&amp;amp;</code>.
 </li>
-<li>Empty lines are removed. (In the implementation,
-consecutive newlines are replaced with a single newline.)
+<li>
+Replaces opening angle brackets before whitespace with <code class="html">&amp;lt;</code>
 </li>
-<li>Whitespace before line break elements <code>&lt;br&gt;</code> is removed.
-</li>
-<li>Whitespace for attributes is canonicalised:
+</ol>
+</details>
+<h4 id="whitespace"><a href="#whitespace" class="permalink" aria-label="Permalink"></a>26. <code>#whitespace</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>ReplacementSequence: #whitespace
+- queue_position: AFTER #escape-idle-html
+- replacements:
+    #reduce-whitespace
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Reduces whitespace. See <a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>.
+</p>
+</details>
+<h4 id="placeholder-unprotect"><a href="#placeholder-unprotect" class="permalink" aria-label="Permalink"></a>27. <code>#placeholder-unprotect</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PlaceholderUnprotectionReplacement: #placeholder-unprotect
+- queue_position: AFTER #whitespace
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Unprotects all <a href="#cmd-placeholders">placeholder strings</a>.
+</p>
+</details>
+<h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
+<h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PlaceholderProtectionReplacement: #placeholder-protect
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Protects a string with a <a href="#cmd-placeholders">placeholder</a>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
 <ul>
-<li>a single space is used before the attribute name, and
+<li>
+<a href="#literals"><code>#literals</code></a>
 </li>
-<li>no whitespace is used around the equals sign.
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+<li>
+<a href="#cmd-properties"><code>#cmd-properties</code></a>
+</li>
+<li>
+<a href="#boilerplate-protect"><code>#boilerplate-protect</code></a>
+</li>
+<li>
+<a href="#backslash-escapes"><code>#backslash-escapes</code></a>
+</li>
+<li>
+<a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>
+</li>
+</ul>
+</details>
+<h4 id="de-indent"><a href="#de-indent" class="permalink" aria-label="Permalink"></a><code>#de-indent</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>DeIndentationReplacement: #de-indent
+- negative_flag: KEEP_INDENTED
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Removes the longest common indentation in a string.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#literals"><code>#literals</code></a>
+</li>
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+</ul>
+</details>
+<h4 id="escape-html"><a href="#escape-html" class="permalink" aria-label="Permalink"></a><code>#escape-html</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #escape-html
+- negative_flag: KEEP_HTML_UNESCAPED
+- apply_mode: SIMULTANEOUS
+* &amp; --&gt; &amp;amp;
+* &lt; --&gt; &amp;lt;
+* &gt; --&gt; &amp;gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Escapes <code>&amp;</code>, <code>&lt;</code>, and <code>&gt;</code> as their respective HTML ampersand entities.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#literals"><code>#literals</code></a>
+</li>
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+</ul>
+</details>
+<h4 id="trim-whitespace"><a href="#trim-whitespace" class="permalink" aria-label="Permalink"></a><code>#trim-whitespace</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #trim-whitespace
+* \A [\s]* --&gt;
+* [\s]* \Z --&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Removes whitespace at the very start and very end of the string.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#literals"><code>#literals</code></a>
+</li>
+<li>
+<a href="#table-headers"><code>#table-headers</code></a>
+</li>
+<li>
+<a href="#table-data"><code>#table-data</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+</ul>
+</details>
+<h4 id="reduce-whitespace"><a href="#reduce-whitespace" class="permalink" aria-label="Permalink"></a><code>#reduce-whitespace</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #reduce-whitespace
+- positive_flag: REDUCE_WHITESPACE
+* ^ [^\S\n]+ --&gt;
+* [^\S\n]+ $ --&gt;
+* [\s]+ (?= &lt;br&gt; ) --&gt;
+* [\n]+ --&gt; \n
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<ol>
+<li>
+Removes leading horizontal whitespace on each line.
+</li>
+<li>
+Removes trailing horizontal whitespace on each line.
+</li>
+<li>
+Removes whitespace before <code class="cmd cmdc">&lt;br&gt;</code>.
+</li>
+<li>
+Collapsed multiple consecutive newlines into a single newline.
+</li>
+</ol>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#literals"><code>#literals</code></a>
+</li>
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+<li>
+<a href="#boilerplate-protect"><code>#boilerplate-protect</code></a>
+</li>
+<li>
+<a href="#whitespace"><code>#whitespace</code></a>
+</li>
+</ul>
+</details>
+<h4 id="code-tag-wrap"><a href="#code-tag-wrap" class="permalink" aria-label="Permalink"></a><code>#code-tag-wrap</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #code-tag-wrap
+* \A --&gt; &lt;code&gt;
+* \Z --&gt; &lt;/code&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Wraps a string in opening and closing <code>code</code> tags.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+</ul>
+</details>
+<h4 id="prepend-newline"><a href="#prepend-newline" class="permalink" aria-label="Permalink"></a><code>#prepend-newline</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #prepend-newline
+* \A --&gt; \n
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Adds a newline at the very start of a string.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#divisions"><code>#divisions</code></a>
+</li>
+<li>
+<a href="#blockquotes"><code>#blockquotes</code></a>
+</li>
+<li>
+<a href="#unordered-list-items"><code>#unordered-list-items</code></a>
+</li>
+<li>
+<a href="#unordered-lists"><code>#unordered-lists</code></a>
+</li>
+<li>
+<a href="#ordered-list-items"><code>#ordered-list-items</code></a>
+</li>
+<li>
+<a href="#ordered-lists"><code>#ordered-lists</code></a>
+</li>
+<li>
+<a href="#table-rows"><code>#table-rows</code></a>
+</li>
+<li>
+<a href="#table-head"><code>#table-head</code></a>
+</li>
+<li>
+<a href="#table-body"><code>#table-body</code></a>
+</li>
+<li>
+<a href="#table-foot"><code>#table-foot</code></a>
+</li>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+<li>
+<a href="#paragraphs"><code>#paragraphs</code></a>
+</li>
+</ul>
+</details>
+<h4 id="unordered-list-items"><a href="#unordered-list-items" class="permalink" aria-label="Permalink"></a><code>#unordered-list-items</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #unordered-list-items
+- starting_pattern: [-+*]
+- attribute_specifications: EMPTY
+- content_replacements:
+    #prepend-newline
+- ending_pattern: [-+*]
+- tag_name: li
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into list items based on leading occurrences of
+<code class="cmd cmdc"><b>-</b></code>, <code class="cmd cmdc"><b>+</b></code>, or <code class="cmd cmdc"><b>*</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#unordered-lists"><code>#unordered-lists</code></a>
+</li>
+</ul>
+</details>
+<h4 id="ordered-list-items"><a href="#ordered-list-items" class="permalink" aria-label="Permalink"></a><code>#ordered-list-items</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #ordered-list-items
+- starting_pattern: [0-9]+ [.]
+- attribute_specifications: EMPTY
+- content_replacements:
+    #prepend-newline
+- ending_pattern: [0-9]+ [.]
+- tag_name: li
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into list items based on leading occurrences of
+a <b>run of digits</b> followed by a <b>full stop</b>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#ordered-lists"><code>#ordered-lists</code></a>
+</li>
+</ul>
+</details>
+<h4 id="mark-table-headers-for-preceding-table-data">
+<a href="#mark-table-headers-for-preceding-table-data" class="permalink" aria-label="Permalink"></a><code>#mark-table-headers-for-preceding-table-data</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #mark-table-headers-for-preceding-table-data
+* \A --&gt; ;{}
+# Replaces `&lt;th«attributes_sequence»&gt;` with `;{}&lt;th«attributes_sequence»&gt;`,
+# so that #table-data will know to stop before it.
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Replaces <code class="cmd cmdc">&lt;th«attributes_sequence»&gt;</code>
+with <code class="cmd cmdc">;{}&lt;th«attributes_sequence»&gt;</code>
+so that <a href="#table-data"><code>#table-data</code></a> will know to stop before it.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#table-headers"><code>#table-headers</code></a>
+</li>
+</ul>
+</details>
+<h4 id="table-headers"><a href="#table-headers" class="permalink" aria-label="Permalink"></a><code>#table-headers</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #table-headers
+- starting_pattern: [;]
+- attribute_specifications: EMPTY
+- content_replacements:
+    #trim-whitespace
+- ending_pattern: [;,]
+- tag_name: th
+- concluding_replacements:
+    #mark-table-headers-for-preceding-table-data
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into table headers
+based on leading occurrences of <code class="cmd cmdc"><b>;</b></code>
+up to the next leading <code class="cmd cmdc"><b>;</b></code> or <code class="cmd cmdc"><b>,</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#table-rows"><code>#table-rows</code></a>
+</li>
+</ul>
+</details>
+<h4 id="table-data"><a href="#table-data" class="permalink" aria-label="Permalink"></a><code>#table-data</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #table-data
+- starting_pattern: [,]
+- attribute_specifications: EMPTY
+- content_replacements:
+    #trim-whitespace
+- ending_pattern: [;,]
+- tag_name: td
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into table data
+based on leading occurrences of <code class="cmd cmdc"><b>,</b></code>
+up to the next leading <code class="cmd cmdc"><b>;</b></code> or <code class="cmd cmdc"><b>,</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#table-rows"><code>#table-rows</code></a>
+</li>
+</ul>
+</details>
+<h4 id="unmark-table-headers-for-preceding-table-data">
+<a href="#unmark-table-headers-for-preceding-table-data" class="permalink" aria-label="Permalink"></a><code>#unmark-table-headers-for-preceding-table-data</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #unmark-table-headers-for-preceding-table-data
+* ^ [;] \{ \} &lt;th (?P&lt;bracket_or_placeholder_marker&gt; [&gt;\uF8FF] )
+    --&gt;
+  &lt;th\g&lt;bracket_or_placeholder_marker&gt;
+# Replaces `;{}&lt;th«attributes_sequence»&gt;` with `&lt;th«attributes_sequence»&gt;`
+# so that #mark-table-headers-for-preceding-table-data is undone.
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Replaces <code class="cmd cmdc">;{}&lt;th«attributes_sequence»&gt;</code>
+with <code class="cmd cmdc">&lt;th«attributes_sequence»&gt;</code>
+so that <a href="#mark-table-headers-for-preceding-table-data"><code>#mark-table-headers-for-preceding-table-data</code></a> is undone.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#table-rows"><code>#table-rows</code></a>
+</li>
+</ul>
+</details>
+<h4 id="table-rows"><a href="#table-rows" class="permalink" aria-label="Permalink"></a><code>#table-rows</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #table-rows
+- starting_pattern: [/]{2}
+- attribute_specifications: EMPTY
+- ending_pattern: [/]{2}
+- content_replacements:
+    #table-headers
+    #table-data
+    #unmark-table-headers-for-preceding-table-data
+    #prepend-newline
+- tag_name: tr
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into table rows
+based on leading occurrences of <code class="cmd cmdc"><b>//</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#table-head"><code>#table-head</code></a>
+</li>
+<li>
+<a href="#table-body"><code>#table-body</code></a>
+</li>
+<li>
+<a href="#table-foot"><code>#table-foot</code></a>
+</li>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+</ul>
+</details>
+<h4 id="table-head"><a href="#table-head" class="permalink" aria-label="Permalink"></a><code>#table-head</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #table-head
+- starting_pattern: [|][\^]
+- attribute_specifications: EMPTY
+- ending_pattern: [|][:_]
+- content_replacements:
+    #table-rows
+    #prepend-newline
+- tag_name: thead
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into table heads
+based on leading occurrences of <code class="cmd cmdc"><b>|^</b></code>
+up to the next leading <code class="cmd cmdc"><b>|:</b></code> or <code class="cmd cmdc"><b>|_</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+</ul>
+</details>
+<h4 id="table-body"><a href="#table-body" class="permalink" aria-label="Permalink"></a><code>#table-body</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #table-body
+- starting_pattern: [|][:]
+- attribute_specifications: EMPTY
+- ending_pattern: [|][_]
+- content_replacements:
+    #table-rows
+    #prepend-newline
+- tag_name: tbody
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into table bodies
+based on leading occurrences of <code class="cmd cmdc"><b>|:</b></code>
+up to the next leading <code class="cmd cmdc"><b>|_</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+</ul>
+</details>
+<h4 id="table-foot"><a href="#table-foot" class="permalink" aria-label="Permalink"></a><code>#table-foot</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #table-foot
+- starting_pattern: [|][_]
+- attribute_specifications: EMPTY
+- content_replacements:
+    #table-rows
+    #prepend-newline
+- tag_name: tfoot
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Partitions content into table feet
+based on leading occurrences of <code class="cmd cmdc"><b>|_</b></code>.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+</ul>
+</details>
+<h4 id="suppress-scheme"><a href="#suppress-scheme" class="permalink" aria-label="Permalink"></a><code>#suppress-scheme</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #suppress-scheme
+- positive_flag: SUPPRESS_SCHEME
+* \A [\S]+ [:] (?: [/]{2} )? --&gt;
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Suppresses the scheme
+(including the colon and possibly two slashes)
+of a URI.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#explicit-links"><code>#explicit-links</code></a>
+</li>
+</ul>
+</details>
+<h4 id="angle-bracket-wrap"><a href="#angle-bracket-wrap" class="permalink" aria-label="Permalink"></a><code>#angle-bracket-wrap</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #angle-bracket-wrap
+- positive_flag: ANGLE_BRACKET_WRAP
+* \A --&gt; &amp;lt;
+* \Z --&gt; &amp;gt;
+- concluding_replacements:
+    #placeholder-protect
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Wraps a string in angle brackets.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+<a href="#explicit-links"><code>#explicit-links</code></a>
+</li>
+</ul>
+</details>
+<h2 id="replacement-rule-syntax"><a href="#replacement-rule-syntax" class="permalink" aria-label="Permalink"></a>CMD replacement rule syntax</h2>
+(Documentation coming soon.)
+<h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
+<p>
+There are many instances in which the result of a replacement
+should not be altered further by replacements to follow.
+To protect a string from further alteration,
+it is temporarily replaced by a <b>placeholder</b>
+consisting of code points in the main Unicode Private Use Area.
+</p>
+<p>
+Specifically, the placeholder for a string shall be of the following form:
+</p>
+<pre class="cmd cmdc"><code><b>«marker»</b><b>«run_characters»</b><b>«marker»</b>
+</code></pre>
+<ul>
+<li>
+<b><code class="cmd cmdc">«marker»</code></b> is <code>«U+F8FF»</code>.
+</li>
+<li>
+<b><code class="cmd cmdc">«run_characters»</code></b> are between <code>«U+E000»</code> and <code>«U+E0FF»</code>
+each representing a Unicode byte of the string.
+</li>
+</ul>
+<p>
+It is assumed that the user will not define replacement rules that
+tamper with strings of the form
+<code class="cmd cmdc">«marker»«run_characters»«marker»</code>.
+</p>
+<h3>Example</h3>
+<ul>
+<li>
+Consider the string <code class="cmd cmdc">£3</code>.
+</li>
+<li>
+Its code points are <code>U+00A3</code> and <code>U+0033</code>.
+</li>
+<li>
+The corresponding Unicode bytes are
+<code>\x<b>C2</b>\x<b>A3</b></code> and <code>\x<b>33</b></code>.
+</li>
+<li>
+The <code class="cmd cmdc">«run_characters»</code> are therefore
+<code>«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»</code>.
+</li>
+<li>
+The full placeholder is therefore
+<code>«U+F8FF»«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»«U+F8FF»</code>.
+</li>
+</ul>
+<h2 id="cmd-attribute-specifications"><a href="#cmd-attribute-specifications" class="permalink" aria-label="Permalink"></a>CMD attribute specifications</h2>
+<p>
+When a CMD replacement rule is defined with
+<code class="cmd cmdr">attribute_specifications</code> not equal to <code class="cmd cmdr">NONE</code>,
+it allows HTML attributes to be specified by <b>CMD attribute specifications</b>
+enclosed in curly brackets.
+</p>
+<p>
+CMD attribute specifications may be of the following forms:
+</p>
+<pre class="cmd cmdc"><code>«name»<b>=</b>"«quoted value (whitespace allowed)»"
+«name»<b>=</b>«bare-value»
+<b>#</b>«id»
+<b>.</b>«class»
+<b>r</b>«rowspan»
+<b>c</b>«colspan»
+<b>w</b>«width»
+<b>h</b>«height»
+<b>-</b>«delete-name»
+«boolean-name»
+</code></pre>
+<p>
+In the two forms with an explicit equals sign,
+the following abbreviations are allowed for <code class="cmd cmdc">«name»</code>:
+</p>
+<ul>
+<li>
+<code class="cmd cmdc">#</code> for <code class="cmd cmdc">id</code>
+</li>
+<li>
+<code class="cmd cmdc">.</code> for <code class="cmd cmdc">class</code>
+</li>
+<li>
+<code class="cmd cmdc">l</code> for <code class="cmd cmdc">lang</code>
+</li>
+<li>
+<code class="cmd cmdc">r</code> for <code class="cmd cmdc">rowspan</code>
+</li>
+<li>
+<code class="cmd cmdc">c</code> for <code class="cmd cmdc">colspan</code>
+</li>
+<li>
+<code class="cmd cmdc">w</code> for <code class="cmd cmdc">width</code>
+</li>
+<li>
+<code class="cmd cmdc">h</code> for <code class="cmd cmdc">height</code>
+</li>
+<li>
+<code class="cmd cmdc">s</code> for <code class="cmd cmdc">style</code>
+</li>
+</ul>
+<h3>Examples</h3>
+<ol>
+<li>
+Behaviour for the standard rule <a href="#inline-code"><code>#inline-code</code></a>:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{#foo .bar l=en-AU title="baz"} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code id="foo" class="bar" lang="en-AU" title="baz"&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+Empty attribute specifications:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+Non-<code>class</code> values will supersede earlier ones:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{#1 #2 title=A title=B} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code id="2" title="B"&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+<code>class</code> values will accumulate:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{.a .b class=c .d} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code class="a b c d"&gt;test&lt;/code&gt;</code>
+</li>
+</ul>
+</li>
+<li>
+Delete <code>class</code> to reset it:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">`{.a .b -class class=c .d} test`</code>
+</li>
+<li>
+HTML: <code class="html">&lt;code class="c d"&gt;test&lt;/code&gt;</code>
 </li>
 </ul>
 </li>
 </ol>
-<footer>
-©&nbsp;2020–2022&nbsp;Conway.
-</footer>
+<h2 id="repository-links"><a href="#repository-links" class="permalink" aria-label="Permalink"></a>Repository links</h2>
+<ul>
+<li>
+This page's CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd">index.cmd</a>
+</li>
+<li>
+This page's HTML: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.html">index.html</a>
+</li>
+<li>
+This page's repository: <a href="https://github.com/conway-markdown/conway-markdown.github.io/">conway-markdown.github.io</a>
+</li>
+<li>
+Python implementation's repository: <a href="https://github.com/conway-markdown/conway-markdown">conway-markdown</a>
+</li>
+</ul>
 </body>
 </html>
