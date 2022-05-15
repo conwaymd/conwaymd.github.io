@@ -1715,6 +1715,22 @@ However, they might be called by queued replacements.
   ''''
 }}
 
+####{#backslash-continuations} 17. `#backslash-continuations`
+[`#backslash-continuations`]: #backslash-continuations
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #backslash-continuations
+  - queue_position: AFTER #backslash-escapes
+  * \\ \n [^\S\n]+ -->
+  ``
+}}
+{{des
+  --
+  Applies backslash continuation.
+  --
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
