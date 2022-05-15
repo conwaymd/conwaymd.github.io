@@ -2575,6 +2575,36 @@ However, they might be called by queued replacements.
   ++++
 }}
 
+####{#escape-idle-html} 25. `#escape-idle-html`
+[`#escape-idle-html`]: #escape-idle-html
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #escape-idle-html
+  - queue_position: AFTER #inline-semantics
+  * [&]
+    (?!
+      (?:
+        [a-zA-Z]{1,31}
+          |
+        [#] (?: [0-9]{1,7} | [xX] [0-9a-fA-F]{1,6} )
+      )
+      [;]
+    )
+      --> &amp;
+  * [<] (?= [\s] ) --> &lt;
+  ``
+}}
+{{des
+  --
+  Escapes idle HTML:
+  --
+  ++
+  1. Replaces non-entity ampersand with <| & |>.
+  1. Replaces opening angle brackets before whitespace with <| < |>
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
