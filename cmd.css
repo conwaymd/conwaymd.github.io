@@ -25,6 +25,10 @@ body {
   padding: 0.2em 1.3em 0.7em;
 }
 
+code {
+  white-space: pre-wrap;
+}
+
 :not(pre) > code {
   border: 1px solid grey;
   padding: 0.2em;

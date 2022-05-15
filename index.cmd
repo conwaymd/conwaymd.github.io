@@ -1626,6 +1626,95 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#backslash-escapes} 16. `#backslash-escapes`
+[`#backslash-escapes`]: #backslash-escapes
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #backslash-escapes
+  - queue_position: AFTER #boilerplate-protect
+  - apply_mode: SIMULTANEOUS
+  * \\ --> \
+  * \# --> #
+  * \& --> &amp;
+  * \( --> (
+  * \) --> )
+  * \* --> *
+  * \< --> &lt;
+  * \> --> &gt;
+  * \[ --> [
+  * \] --> ]
+  * \_ --> _
+  * \{ --> {
+  * \| --> |
+  * \} --> }
+  * "\ " --> " "
+  * \t --> "	"
+  - concluding_replacements:
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Applies backslash escapes:
+  --
+  ''''
+  |^
+    //
+      ; Escaped
+      ; Unescaped
+  |:
+    //
+      , `{.cmd .cmdc} \\`
+      , <| \\ |>
+    //
+      , `{.cmd .cmdc} \#`
+      , <| \# |>
+    //
+      , `{.cmd .cmdc} \&`
+      , <| \& |>
+    //
+      , `{.cmd .cmdc} \(`
+      , <| \( |>
+    //
+      , `{.cmd .cmdc} \)`
+      , <| \) |>
+    //
+      , `{.cmd .cmdc} \*`
+      , <| \* |>
+    //
+      , `{.cmd .cmdc} \< `
+      , <| \< |>
+    //
+      , `{.cmd .cmdc} \>`
+      , <| \> |>
+    //
+      , `{.cmd .cmdc} \[`
+      , <| \[ |>
+    //
+      , `{.cmd .cmdc} \]`
+      , <| \] |>
+    //
+      , `{.cmd .cmdc} \_`
+      , <| \_ |>
+    //
+      , `{.cmd .cmdc} \{`
+      , <| \{ |>
+    //
+      , `{.cmd .cmdc} \|`
+      , <| \| |>
+    //
+      , `{.cmd .cmdc} \}`
+      , <| \} |>
+    //
+      , `{.cmd .cmdc} \ <` `>`
+      , (space)
+    //
+      , `{.cmd .cmdc} \t`
+      , (tab)
+  ''''
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

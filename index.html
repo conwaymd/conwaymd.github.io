@@ -1785,6 +1785,112 @@ Protects <code>&lt;head&gt;</code> element
 </li>
 </ul>
 </details>
+<h4 id="backslash-escapes"><a href="#backslash-escapes" class="permalink" aria-label="Permalink"></a>16. <code>#backslash-escapes</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #backslash-escapes
+- queue_position: AFTER #boilerplate-protect
+- apply_mode: SIMULTANEOUS
+* \\ --&gt; \
+* \# --&gt; #
+* \&amp; --&gt; &amp;amp;
+* \( --&gt; (
+* \) --&gt; )
+* \* --&gt; *
+* \&lt; --&gt; &amp;lt;
+* \&gt; --&gt; &amp;gt;
+* \[ --&gt; [
+* \] --&gt; ]
+* \_ --&gt; _
+* \{ --&gt; {
+* \| --&gt; |
+* \} --&gt; }
+* "\ " --&gt; " "
+* \t --&gt; "	"
+- concluding_replacements:
+    #placeholder-protect
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Applies backslash escapes:
+</p>
+<table>
+<thead>
+<tr>
+<th>Escaped</th>
+<th>Unescaped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="cmd cmdc">\\</code></td>
+<td><code class="html">\</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\#</code></td>
+<td><code class="html">#</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\&amp;</code></td>
+<td><code class="html">&amp;amp;</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\(</code></td>
+<td><code class="html">(</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\)</code></td>
+<td><code class="html">)</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\*</code></td>
+<td><code class="html">*</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\&lt;</code></td>
+<td><code class="html">&amp;lt;</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\&gt;</code></td>
+<td><code class="html">&amp;gt;</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\[</code></td>
+<td><code class="html">[</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\]</code></td>
+<td><code class="html">]</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\_</code></td>
+<td><code class="html">_</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\{</code></td>
+<td><code class="html">{</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\|</code></td>
+<td><code class="html">|</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\}</code></td>
+<td><code class="html">}</code></td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\ </code></td>
+<td>(space)</td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">\t</code></td>
+<td>(tab)</td>
+</tr>
+</tbody>
+</table>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details open>
@@ -1817,7 +1923,7 @@ Protects a string with a <a href="#cmd-placeholders">placeholder</a>.
 <a href="#boilerplate-protect"><code>#boilerplate-protect</code></a>
 </li>
 <li>
-[<code>#backslash-escapes</code>]
+<a href="#backslash-escapes"><code>#backslash-escapes</code></a>
 </li>
 <li>
 [<code>#angle-bracket-wrap</code>]
