@@ -1920,8 +1920,12 @@ However, they might be called by queued replacements.
   --
   ==
   - `{.cmd .cmdc} «alt text»`
-  - `{.cmd .cmdc} «src»`
+  - `{.cmd .cmdc} «src»` equal to `{.cmd .cmdc} «uri»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
   - `{.cmd .cmdc} «title»`
+    of the [reference definition](#reference-definitions)
+    defined for `{.cmd .cmdc} «label»`
   - `{.cmd .cmdc} «attribute specifications»`
     of the [reference definition](#reference-definitions)
     defined for `{.cmd .cmdc} «label»`
