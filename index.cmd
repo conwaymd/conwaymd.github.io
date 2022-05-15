@@ -2085,6 +2085,116 @@ However, they might be called by queued replacements.
   ++
 }}
 
+####{#specified-links} 22. `#specified-links`
+[`#specified-links`]: #specified-links
+
+{{def
+  ``{.cmd .cmdr}
+  SpecifiedLinkReplacement: #specified-links
+  - queue_position: AFTER #explicit-links
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@@(()@«href»@())@
+  @([)@«link text»@(])@@(()@@(<)@«href»@(>)@@())@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@@(()@«...» @(")@«title»@(")@@())@
+  @([)@«link text»@(])@@(()@«...» @(')@«title»@(')@@())@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«link text»@(])@{«attribute specifications»}@(()@«...»@())@
+  ````
+  ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces a link:
+  --
+  ````{.html}
+  @(<a)@«attribute sequence»@(>)@«link text»@(</a>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «href»`
+  - `{.cmd .cmdc} «title»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+      ````
+    - HTML:
+      <||
+      [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+      ||>
+    - Rendered:
+      ||||
+      [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+      ||||
+    ==
+  1.
+    Title:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Wikipedia](
+        https://en.wikipedia.org/wiki/Main_Page
+        "Wikipedia, the free encyclopedia"
+      )
+      ````
+    - HTML:
+      <||
+      [Wikipedia](
+        https://en.wikipedia.org/wiki/Main_Page
+        "Wikipedia, the free encyclopedia"
+      )
+      ||>
+    - Rendered:
+      ||||
+      [Wikipedia](
+        https://en.wikipedia.org/wiki/Main_Page
+        "Wikipedia, the free encyclopedia"
+      )
+      ||||
+    ==
+  1.
+    Override `href`
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      ````
+    - HTML:
+      <||
+      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      ||>
+    - Rendered:
+      ||||
+      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      ||||
+    ==
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
