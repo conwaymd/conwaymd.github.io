@@ -1838,9 +1838,9 @@ However, they might be called by queued replacements.
       ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
       ||>
     - Rendered:
-      ||||
+      --
       ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.](rembrandt-anatomy.jpg)
-      ||||
+      --
     ==
   1.
     Set width:
@@ -1854,9 +1854,9 @@ However, they might be called by queued replacements.
       ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
       ||>
     - Rendered:
-      ||||
+      --
       ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp.]{w=120}(rembrandt-anatomy.jpg)
-      ||||
+      --
     ==
   1.
     Empty alt text for decorative images,
@@ -1871,9 +1871,9 @@ However, they might be called by queued replacements.
       ![](/favicon-16x16.png) Conway-Markdown is dumb.
       ||>
     - Rendered:
-      ||||
+      --
       ![](/favicon-16x16.png) Conway-Markdown is dumb.
-      ||||
+      --
     ==
   ++
 }}
@@ -1953,11 +1953,11 @@ However, they might be called by queued replacements.
       ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
       ||>
     - Rendered:
-      ||||
+      --
       [moses]: rembrandt-moses.jpg
       
       ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
-      ||||
+      --
     ==
   1.
     Use `{.cmd .cmdc} «alt text»` for `{.cmd .cmdc} «label»`:
@@ -1975,11 +1975,11 @@ However, they might be called by queued replacements.
       ![Conway-Markdown logo.]
       ||>
     - Rendered:
-      ||||
+      --
       [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is dumb."
       
       ![Conway-Markdown logo.]
-      ||||
+      --
     ==
   1.
     `{.cmd .cmdc} «label»` is case-insensitive:
@@ -2189,9 +2189,9 @@ However, they might be called by queued replacements.
       [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
       ||>
     - Rendered:
-      ||||
+      --
       [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
-      ||||
+      --
     ==
   1.
     Title:
@@ -2211,12 +2211,12 @@ However, they might be called by queued replacements.
       )
       ||>
     - Rendered:
-      ||||
+      --
       [Wikipedia](
         https://en.wikipedia.org/wiki/Main_Page
         "Wikipedia, the free encyclopedia"
       )
-      ||||
+      --
     ==
   1.
     Override `href`
@@ -2230,9 +2230,9 @@ However, they might be called by queued replacements.
       [Beware]{href=https://example.com/evil}(https://example.com/good)
       ||>
     - Rendered:
-      ||||
+      --
       [Beware]{href=https://example.com/evil}(https://example.com/good)
-      ||||
+      --
     ==
   ++
 }}
@@ -2311,11 +2311,11 @@ However, they might be called by queued replacements.
       [Wikipedia's main page.][wiki]
       ||>
     - Rendered:
-      ||||
+      --
       [wiki]: https://en.wikipedia.org/wiki/Main_Page
       
       [Wikipedia's main page.][wiki]
-      ||||
+      --
     ==
   1.
     Use `{.cmd .cmdc} «link text»` for `{.cmd .cmdc} «label»`:
@@ -2333,11 +2333,11 @@ However, they might be called by queued replacements.
       [Wikipedia]
       ||>
     - Rendered:
-      ||||
+      --
       [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
       
       [Wikipedia]
-      ||||
+      --
     ==
   1.
     `{.cmd .cmdc} «label»` is case-insensitive:
