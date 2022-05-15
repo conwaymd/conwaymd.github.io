@@ -1467,7 +1467,7 @@ However, they might be called by queued replacements.
 }}
 {{des
   --
-  Makes replacements for the default boilerplate properties.
+  Makes replacements for the default boilerplate properties:
   --
   ''''
   |^
@@ -1560,6 +1560,44 @@ However, they might be called by queued replacements.
       ``
     ==
   ++
+}}
+
+####{#cmd-properties} 14. `#cmd-properties`
+[`#cmd-properties`]: #cmd-properties
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #cmd-properties
+  - queue_position: AFTER #boilerplate-properties
+  - apply_mode: SIMULTANEOUS
+  * %cmd-version --> CMD_VERSION
+  * %cmd-name --> CMD_NAME
+  * %cmd-basename --> CMD_BASENAME
+  - concluding_replacements:
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Makes replacements for CMD properties:
+  --
+  ''''
+  |^
+    //
+      ; Property
+      ; Description
+  |:
+    //
+      , `{.cmd .cmdc} %cmd-version`
+      , `__version__` in [`cmd.py`]
+        (currently <code class="html">%cmd-version</code>)
+    //
+      , `{.cmd .cmdc} %cmd-name`
+      , CMD file name, relative to working directory, without extension
+    //
+      , `{.cmd .cmdc} %cmd-basename`
+      , CMD file name, without path, without extension
+  ''''
 }}
 
 
