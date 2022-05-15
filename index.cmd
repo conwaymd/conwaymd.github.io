@@ -312,7 +312,7 @@ However, they might be called by queued replacements.
   - `{.cmd .cmdc} «flags»`:
     ==
     - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
-    - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} i`: keep indented (do not apply [`#de-indent`])
     - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
     ==
   - The number of backticks ``{.cmd .cmdc} @(`)@ ``
@@ -399,7 +399,7 @@ However, they might be called by queued replacements.
   - `{.cmd .cmdc} «flags»`:
     ==
     - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
-    - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} i`: keep indented (do not apply [`#de-indent`])
     - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
     ==
   - The number of backticks ``{.cmd .cmdc} @(`)@ ``
@@ -1362,7 +1362,7 @@ However, they might be called by queued replacements.
   - `{.cmd .cmdc} «flags»`:
     ==
     - `{.cmd .cmdc} u`: keep HTML unescaped (do not apply [`#escape-html`])
-    - `{.cmd .cmdc} t`: keep indented (do not apply [`#de-indent`])
+    - `{.cmd .cmdc} i`: keep indented (do not apply [`#de-indent`])
     - `{.cmd .cmdc} w`: reduce whitespace (apply [`#reduce-whitespace`])
     ==
   - The number of backticks ``{.cmd .cmdc} @(`)@ ``
