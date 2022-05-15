@@ -1767,6 +1767,109 @@ However, they might be called by queued replacements.
   --
 }}
 
+####{#specified-images} 19. `#specified-images`
+[`#specified-images`]: #specified-images
+
+{{def
+  ``{.cmd .cmdr}
+  SpecifiedImageReplacement: #specified-images
+  - queue_position: AFTER #reference-definitions
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@@(()@«src»@())@
+  @(!)@@([)@«alt text»@(])@@(()@@(<)@«src»@(>)@@())@
+  ````
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@@(()@«...» @(")@«title»@(")@@())@
+  @(!)@@([)@«alt text»@(])@@(()@«...» @(')@«title»@(')@@())@
+  ````
+  ````{.cmd .cmdc}
+  @(!)@@([)@«alt text»@(])@{«attribute specifications»}@(()@«...»@())@
+  ````
+  ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Produces an image:
+  --
+  ````{.html}
+  @(<img)@«attribute sequence»@(>)@
+  ````
+  --
+  Here, `{.html} «attribute sequence»` is the sequence of attributes
+  built from
+  --
+  ==
+  - `{.cmd .cmdc} «alt text»`
+  - `{.cmd .cmdc} «src»`
+  - `{.cmd .cmdc} «title»`
+  - `{.cmd .cmdc} «attribute specifications»`
+  ==
+  --
+  parsed in that order.
+  --
+}}
+{{ex
+  ++
+  1.
+    Basic usage:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp](rembrandt-anatomy.jpg)
+      ````
+    - HTML:
+      <||
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp](rembrandt-anatomy.jpg)
+      ||>
+    - Rendered:
+      ||||
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp](rembrandt-anatomy.jpg)
+      ||||
+    ==
+  1.
+    Set width:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp]{w=120}(rembrandt-anatomy.jpg)
+      ````
+    - HTML:
+      <||
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp]{w=120}(rembrandt-anatomy.jpg)
+      ||>
+    - Rendered:
+      ||||
+      ![Rembrandt painting: The Anatomy Lesson of Dr Nicolaes Tulp]{w=120}(rembrandt-anatomy.jpg)
+      ||||
+    ==
+  1.
+    Empty alt text for decorative images,
+    or images where adjacent text already describes the image:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      ![](/favicon-16x16.png) Conway-Markdown is good.
+      ````
+    - HTML:
+      <||
+      ![](/favicon-16x16.png) Conway-Markdown is good.
+      ||>
+    - Rendered:
+      ||||
+      ![](/favicon-16x16.png) Conway-Markdown is good.
+      ||||
+    ==
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
