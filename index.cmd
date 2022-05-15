@@ -1931,17 +1931,42 @@ However, they might be called by queued replacements.
     - CMD:
       ````{.cmd .cmdc}
       [moses]: rembrandt-moses.jpg
+      
       ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
       ````
     - HTML:
       <||
       [moses]: rembrandt-moses.jpg
+      
       ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
       ||>
     - Rendered:
       ||||
       [moses]: rembrandt-moses.jpg
+      
       ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
+      ||||
+    ==
+  1.
+    Use `{.cmd .cmdc} «alt text»` for `{.cmd .cmdc} «label»`:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is good."
+      
+      ![Conway-Markdown logo.]
+      ````
+    - HTML:
+      <||
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is good."
+      
+      ![Conway-Markdown logo.]
+      ||>
+    - Rendered:
+      ||||
+      [Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is good."
+      
+      ![Conway-Markdown logo.]
       ||||
     ==
   ++

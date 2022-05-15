@@ -2138,6 +2138,7 @@ Basic usage:
 <li>
 CMD:
 <pre class="cmd cmdc"><code>[moses]: rembrandt-moses.jpg
+
 ![Rembrandt painting: Moses Breaking the Tablets of the Law.][moses]
 </code></pre>
 </li>
@@ -2150,6 +2151,29 @@ HTML:
 Rendered:
 <div>
 <img alt="Rembrandt painting: Moses Breaking the Tablets of the Law." src="rembrandt-moses.jpg">
+</div>
+</li>
+</ul>
+</li>
+<li>
+Use <code class="cmd cmdc">«alt text»</code> for <code class="cmd cmdc">«label»</code>:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[Conway-Markdown logo.]: /favicon-32x32.png "Conway-Markdown is good."
+
+![Conway-Markdown logo.]
+</code></pre>
+</li>
+<li>
+HTML:
+<pre class="html"><code>&lt;img alt="Conway-Markdown logo." src="/favicon-32x32.png" title="Conway-Markdown is good."&gt;
+</code></pre>
+</li>
+<li>
+Rendered:
+<div>
+<img alt="Conway-Markdown logo." src="/favicon-32x32.png" title="Conway-Markdown is good.">
 </div>
 </li>
 </ul>
