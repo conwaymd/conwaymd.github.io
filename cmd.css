@@ -22,6 +22,7 @@ body {
   font-family: sans-serif;
   line-height: 1.6;
   margin: 0;
+  overflow-wrap: break-word;
   padding: 0.2em 1.3em 0.7em;
 }
 
