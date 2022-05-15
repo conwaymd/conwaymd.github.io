@@ -2605,6 +2605,23 @@ However, they might be called by queued replacements.
   ++
 }}
 
+####{#whitespace} 26. `#whitespace`
+[`#whitespace`]: #whitespace
+
+{{def
+  ``{.cmd .cmdr}
+  ReplacementSequence: #whitespace
+  - queue_position: AFTER #escape-idle-html
+  - replacements:
+      #reduce-whitespace
+  ``
+}}
+{{des
+  --
+  Reduces whitespace. See [`#reduce-whitespace`].
+  --
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
