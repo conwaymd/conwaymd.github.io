@@ -1449,6 +1449,119 @@ However, they might be called by queued replacements.
   --
 }}
 
+####{#boilerplate-properties} 13. `#boilerplate-properties`
+[`#boilerplate-properties`]: #boilerplate-properties
+
+{{def
+  ``{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #boilerplate-properties
+  - queue_position: AFTER #boilerplate
+  - apply_mode: SIMULTANEOUS
+  * %lang --> en
+  * %head-elements-before-viewport -->
+  * %viewport-content --> width=device-width, initial-scale=1
+  * %head-elements-after-viewport -->
+  * %title --> Title
+  * %styles -->
+  ``
+}}
+{{des
+  --
+  Makes replacements for the default boilerplate properties.
+  --
+  ''''
+  |^
+    //
+      ; Property
+      ; Default value
+  |:
+    //
+      , `{.cmd .cmdc} %lang`
+      , `{.html} en`
+    //
+      , `{.cmd .cmdc} %head-elements-before-viewport`
+      ,
+    //
+      , `{.cmd .cmdc} %viewport-content`
+      , `{.html} width=device-width, initial-scale=1`
+    //
+      , `{.cmd .cmdc} %head-elements-after-viewport`
+      ,
+    //
+      , `{.cmd .cmdc} %title`
+      , `{.html} Title`
+    //
+      , `{.cmd .cmdc} %styles`
+      ,
+  ''''
+}}
+{{ex
+  ++
+  1.
+    Defaults:
+    ==
+    - CMD:
+      ``{.cmd .cmdc}
+      # %title
+      This document hath `lang` equal to <code>%lang</code>.
+      ``
+    - HTML (including boilerplate):
+      ``{.html}
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Title</title>
+      </head>
+      <body>
+      <h1>Title</h1>
+      This document hath <code>lang</code> equal to <code>en</code>.
+      </body>
+      </html>
+      ``
+    ==
+  1.
+    Override the defaults:
+    ==
+    - CMD:
+      u````{.cmd}
+      <span class="cmdr"><``
+        OrdinaryDictionaryReplacement: #boilerplate-properties-override
+        - queue_position: BEFORE #boilerplate-properties
+        - apply_mode: SIMULTANEOUS
+        * %lang --> en-AU
+        * %head-elements-before-viewport --> <meta name="author" content="Me">
+        * %title --> Overridden title
+      ``></span>
+      <`` ``>
+      %%%
+      <`` ``>
+      <span class="cmdc"><``
+        # %title
+        This document hath `lang` equal to <code>%lang</code>.
+      ``></span>
+      ````
+    - HTML (including boilerplate):
+      ``{.html}
+      <!DOCTYPE html>
+      <html lang="en-AU">
+      <head>
+      <meta charset="utf-8">
+      <meta name="author" content="Me">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Overridden title</title>
+      </head>
+      <body>
+      <h1>Overridden title</h1>
+      This document hath <code>lang</code> equal to <code>en-AU</code>.
+      </body>
+      </html>
+      ``
+    ==
+  ++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
