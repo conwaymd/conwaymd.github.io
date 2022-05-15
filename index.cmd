@@ -2431,6 +2431,29 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#suppress-scheme} `#suppress-scheme`
+[`#suppress-scheme`]: #suppress-scheme
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #suppress-scheme
+  - positive_flag: SUPPRESS_SCHEME
+  * \A [\S]+ [:] (?: [/]{2} )? -->
+  ``
+}}
+{{des
+  --
+  Suppresses the scheme
+  (including the colon and possibly two slashes)
+  of a URI.
+  --
+}}
+{{dep
+  ==
+  - [`#explicit-links`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
