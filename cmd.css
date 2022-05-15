@@ -40,6 +40,11 @@ html {
   max-width: 45em;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 li {
   padding-left: 0.3em;
   padding-bottom: 0.2em;
