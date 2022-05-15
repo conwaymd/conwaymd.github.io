@@ -1600,6 +1600,32 @@ However, they might be called by queued replacements.
   ''''
 }}
 
+####{#boilerplate-protect} 15. `#boilerplate-protect`
+[`#boilerplate-protect`]: #boilerplate-protect
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #boilerplate-protect
+  - queue_position: AFTER #cmd-properties
+  * <style>[\s]*?</style>[\s]* -->
+  * <style>[\s\S]*?</style> --> \g<0>
+  * <head>[\s\S]*?</head> --> \g<0>
+  - concluding_replacements:
+      #reduce-whitespace
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Protects boilerplate elements:
+  --
+  ==
+  - Removes empty `<style>` element
+  - Protects `<style>` element
+  - Protects `<head>` element
+  ==
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
