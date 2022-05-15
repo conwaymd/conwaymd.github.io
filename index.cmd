@@ -1731,6 +1731,42 @@ However, they might be called by queued replacements.
   --
 }}
 
+####{#reference-definitions} 18. `#reference-definitions`
+[`#reference-definitions`]: #reference-definitions
+
+{{def
+  ``{.cmd .cmdr}
+  ReferenceDefinitionReplacement: #reference-definitions
+  - queue_position: AFTER #backslash-continuations
+  - attribute_specifications: EMPTY
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @([)@«label»@(])@@(:)@ «uri»
+  @([)@«label»@(])@@(:)@ @(<)@«uri»@(>)@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«label»@(])@@(:)@ «...» @(")@«title»@(")@
+  @([)@«label»@(])@@(:)@ «...» @(')@«title»@(')@
+  ````
+  ````{.cmd .cmdc}
+  @([)@«label»@(])@{«attribute specifications»}@(:)@ «...»
+  ````
+  ==
+  - For continuation of `{.cmd .cmdc} «uri»` or `{.cmd .cmdc} «title»`,
+    indent the continuation more than the leading square-bracket.
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  ==
+}}
+{{des
+  --
+  Defines a reference, to be used by
+  [`#referenced-images`] or [`#referenced-links`].
+  --
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
