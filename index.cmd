@@ -2380,6 +2380,201 @@ However, they might be called by queued replacements.
   ++
 }}
 
+####{#inline-semantics} 24. `#inline-semantics`
+[`#inline-semantics`]: #inline-semantics
+
+{{def
+  ``{.cmd .cmdr}
+  InlineAssortedDelimitersReplacement: #inline-semantics
+  - queue_position: AFTER #referenced-links
+  - delimiter_conversion:
+      __=b
+      _=i
+      **=strong
+      *=em
+      ''=cite
+      ""=q
+  - attribute_specifications: EMPTY
+  - prohibited_content: BLOCKS
+  ``
+}}
+{{syn
+  ````{.cmd .cmdc}
+  @(__)@«b content»@(__)@
+  @(_)@«i content»@(_)@
+  @(**)@«strong content»@(**)@
+  @(*)@«em content»@(*)@
+  @('')@«cite content»@('')@
+  @("")@«q content»@("")@
+  ````
+  ````{.cmd .cmdc}
+  @(«...»)@{«attribute specifications»} «content»@(«...»)@
+  ````
+  ````{.cmd .cmdc}
+  @(|)@@(«...»)@«content»@(«...»)@
+  ````
+  ````{.cmd .cmdc}
+  @(|)@@(«...»)@{«attribute specifications»} «content»@(«...»)@
+  ````
+  ==
+  - `{.cmd .cmdc} «attribute specifications»`:
+    see [CMD attribute specifications].
+  - The leading optional pipe is to be used
+    as a disambiguator in some edge cases.
+    If present, it indicates that the delimiter directly after it
+    is opening rather than closing.
+  - The opening delimiter must not be followed by whitespace,
+    nor by `{.html} </` (the beginning of a closing tag).
+  - The closing delimiter must not be preceded by whitespace,
+    nor be a pipe `{.cmd .cmdc} |`.
+  ==
+}}
+{{des
+  --
+  Produces an inline semantic:
+  --
+  ````{.html}
+  @(<b)@«attribute sequence»@(>)@«b content»@(</b>)@
+  @(<i)@«attribute sequence»@(>)@«i content»@(</i>)@
+  @(<strong)@«attribute sequence»@(>)@«strong content»@(</strong>)@
+  @(<em)@«attribute sequence»@(>)@«em content»@(</em>)@
+  @(<cite)@«attribute sequence»@(>)@«cite content»@(</cite>)@
+  @(<q)@«attribute sequence»@(>)@«q content»@(</q>)@
+  ````
+}}
+{{ex
+  --
+  In HTML5, `{.html} <b>` and `{.html} <i>` are *not* deprecated,
+  see [W3C: Using `{.html} <b>` and `{.html} <i>` elements].
+  --
+  [W3C: Using `{.html} <b>` and `{.html} <i>` elements]:
+    https://www.w3.org/International/questions/qa-b-and-i-tags.en
+  ++++
+  1.
+    Bring to attention `{.html} <b>`:
+    ++{type=i}
+    0. Keywords:
+      ==
+      - CMD: `{.cmd .cmdc} Meals are served with __rice__ or __pasta__. `
+      - HTML: <| Meals are served with __rice__ or __pasta__. |>
+      - Rendered: Meals are served with __rice__ or __pasta__.
+      ==
+    ++
+  1.
+    Idiomatic offset `{.html} <i>`:
+    ++{type=i}
+    0. Foreign phrases:
+      ==
+      - CMD: `{.cmd .cmdc} Write out _{lang=la} Romani ite domum_ 100 times.`
+      - HTML: <| Write out _{lang=la} Romani ite domum_ 100 times. |>
+      - Rendered: Write out _{lang=la} Romani ite domum_ 100 times.
+      ==
+    0. Translator-supplied words in the King James Bible:
+      ==
+      - CMD: `{.cmd .cmdc} I _{.translator-supplied} am_ the LORD.`
+      - HTML: <| I _{.translator-supplied} am_ the LORD. |>
+      - Rendered: I _{.translator-supplied} am_ the LORD.
+      ==
+    0. Thoughts:
+      ==
+      - CMD: `{.cmd .cmdc} _Screw 'em._`
+      - HTML: <| _Screw 'em._ |>
+      - Rendered: _Screw 'em._
+      ==
+    ++
+  1.
+    Strong importance `{.html} <strong>`:
+    ++{type=i}
+    0. Warnings:
+      ==
+      - CMD: `{.cmd .cmdc} **{lang=de} Achtung!**`
+      - HTML: <| **{lang=de} Achtung!** |>
+      - Rendered: **{lang=de} Achtung!**
+      ==
+    ++
+  1.
+    Stress emphasis `{.html} <em>`:
+    ++{type=i}
+    0. Stress a particular word in a sentence:
+      ==
+      - CMD: `{.cmd .cmdc} I don't know *who* took it.`
+      - HTML: <| I don't know *who* took it. |>
+      - Rendered: I don't know *who* took it.
+      ==
+    ++
+  1.
+    Citation `{.html} <cite>`:
+    ++{type=i}
+    0. Book titles:
+      ==
+      - CMD: `{.cmd .cmdc} ''Nineteen Eighty-Four'' is already upon us.`
+      - HTML: <| ''Nineteen Eighty-Four'' is already upon us. |>
+      - Rendered: ''Nineteen Eighty-Four'' is already upon us.
+      ==
+    ++
+  1.
+    Quotation `{.html} <q>`:
+    ++{type=i}
+    0. Inline quotes:
+      ==
+      - CMD: `{.cmd .cmdc} ""It wasn't me.""`
+      - HTML: <| ""It wasn't me."" |>
+      - Rendered: ""It wasn't me.""
+      ==
+    ++
+  1.
+    Nesting and disambiguation:
+    ''''
+    |^
+      //
+        ; Pattern
+        ; CMD
+        ; HTML
+    |:
+      //
+        , 1-1
+        , `{.cmd .cmdc} *foo* `
+        , <| *foo* |>
+      //
+        , 2-2
+        , `{.cmd .cmdc} **foo** `
+        , <| **foo** |>
+      //
+        , 3-3 (12-21)
+        , `{.cmd .cmdc} ***foo*** `
+        , <| ***foo*** |>
+      //
+        , 12-3 (12-21)
+        , `{.cmd .cmdc} *foo **bar*** `
+        , <| *foo **bar*** |>
+      //
+        , 3-21 (12-21)
+        , `{.cmd .cmdc} ***foo** bar* `
+        , <| ***foo** bar* |>
+      //
+        , 2|1-3 (21-12)
+        , `{.cmd .cmdc} **|*foo*** `
+        , <| **|*foo*** |>
+      //
+        , 21-3 (21-12)
+        , `{.cmd .cmdc} **foo *bar*** `
+        , <| **foo *bar*** |>
+      //
+        , 3-12 (21-12)
+        , `{.cmd .cmdc} ***foo* bar** `
+        , <| ***foo* bar** |>
+      //
+        , 4-4 (22-22)
+        , `{.cmd .cmdc} ****foo**** `
+        , <| ****foo**** |>
+      //
+        , 1|2|1-4 (121-121)
+        , `{.cmd .cmdc} *|**|*foo**** `
+        , <| *|**|*foo**** |>
+    ''''
+  ++++
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 

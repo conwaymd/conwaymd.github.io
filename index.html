@@ -2655,6 +2655,286 @@ HTML:
 </li>
 </ol>
 </details>
+<h4 id="inline-semantics"><a href="#inline-semantics" class="permalink" aria-label="Permalink"></a>24. <code>#inline-semantics</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>InlineAssortedDelimitersReplacement: #inline-semantics
+- queue_position: AFTER #referenced-links
+- delimiter_conversion:
+    __=b
+    _=i
+    **=strong
+    *=em
+    ''=cite
+    ""=q
+- attribute_specifications: EMPTY
+- prohibited_content: BLOCKS
+</code></pre>
+</details>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdc"><code><b>__</b>«b content»<b>__</b>
+<b>_</b>«i content»<b>_</b>
+<b>**</b>«strong content»<b>**</b>
+<b>*</b>«em content»<b>*</b>
+<b>''</b>«cite content»<b>''</b>
+<b>""</b>«q content»<b>""</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>«...»</b>{«attribute specifications»} «content»<b>«...»</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>|</b><b>«...»</b>«content»<b>«...»</b>
+</code></pre>
+<pre class="cmd cmdc"><code><b>|</b><b>«...»</b>{«attribute specifications»} «content»<b>«...»</b>
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdc">«attribute specifications»</code>:
+see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
+</li>
+<li>
+The leading optional pipe is to be used
+as a disambiguator in some edge cases.
+If present, it indicates that the delimiter directly after it
+is opening rather than closing.
+</li>
+<li>
+The opening delimiter must not be followed by whitespace,
+nor by <code class="html">&lt;/</code> (the beginning of a closing tag).
+</li>
+<li>
+The closing delimiter must not be preceded by whitespace,
+nor be a pipe <code class="cmd cmdc">|</code>.
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Produces an inline semantic:
+</p>
+<pre class="html"><code><b>&lt;b</b>«attribute sequence»<b>&gt;</b>«b content»<b>&lt;/b&gt;</b>
+<b>&lt;i</b>«attribute sequence»<b>&gt;</b>«i content»<b>&lt;/i&gt;</b>
+<b>&lt;strong</b>«attribute sequence»<b>&gt;</b>«strong content»<b>&lt;/strong&gt;</b>
+<b>&lt;em</b>«attribute sequence»<b>&gt;</b>«em content»<b>&lt;/em&gt;</b>
+<b>&lt;cite</b>«attribute sequence»<b>&gt;</b>«cite content»<b>&lt;/cite&gt;</b>
+<b>&lt;q</b>«attribute sequence»<b>&gt;</b>«q content»<b>&lt;/q&gt;</b>
+</code></pre>
+</details>
+<details open>
+<summary>Examples</summary>
+<p>
+In HTML5, <code class="html">&lt;b&gt;</code> and <code class="html">&lt;i&gt;</code> are <em>not</em> deprecated,
+see <a href="https://www.w3.org/International/questions/qa-b-and-i-tags.en">W3C: Using <code class="html">&lt;b&gt;</code> and <code class="html">&lt;i&gt;</code> elements</a>.
+</p>
+<ol>
+<li>
+Bring to attention <code class="html">&lt;b&gt;</code>:
+<ol type="i">
+<li>
+Keywords:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">Meals are served with __rice__ or __pasta__.</code>
+</li>
+<li>
+HTML: <code class="html">Meals are served with &lt;b&gt;rice&lt;/b&gt; or &lt;b&gt;pasta&lt;/b&gt;.</code>
+</li>
+<li>
+Rendered: Meals are served with <b>rice</b> or <b>pasta</b>.
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Idiomatic offset <code class="html">&lt;i&gt;</code>:
+<ol type="i">
+<li>
+Foreign phrases:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">Write out _{lang=la} Romani ite domum_ 100 times.</code>
+</li>
+<li>
+HTML: <code class="html">Write out &lt;i lang="la"&gt;Romani ite domum&lt;/i&gt; 100 times.</code>
+</li>
+<li>
+Rendered: Write out <i lang="la">Romani ite domum</i> 100 times.
+</li>
+</ul>
+</li>
+<li>
+Translator-supplied words in the King James Bible:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">I _{.translator-supplied} am_ the LORD.</code>
+</li>
+<li>
+HTML: <code class="html">I &lt;i class="translator-supplied"&gt;am&lt;/i&gt; the LORD.</code>
+</li>
+<li>
+Rendered: I <i class="translator-supplied">am</i> the LORD.
+</li>
+</ul>
+</li>
+<li>
+Thoughts:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">_Screw 'em._</code>
+</li>
+<li>
+HTML: <code class="html">&lt;i&gt;Screw 'em.&lt;/i&gt;</code>
+</li>
+<li>
+Rendered: <i>Screw 'em.</i>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Strong importance <code class="html">&lt;strong&gt;</code>:
+<ol type="i">
+<li>
+Warnings:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">**{lang=de} Achtung!**</code>
+</li>
+<li>
+HTML: <code class="html">&lt;strong lang="de"&gt;Achtung!&lt;/strong&gt;</code>
+</li>
+<li>
+Rendered: <strong lang="de">Achtung!</strong>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Stress emphasis <code class="html">&lt;em&gt;</code>:
+<ol type="i">
+<li>
+Stress a particular word in a sentence:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">I don't know *who* took it.</code>
+</li>
+<li>
+HTML: <code class="html">I don't know &lt;em&gt;who&lt;/em&gt; took it.</code>
+</li>
+<li>
+Rendered: I don't know <em>who</em> took it.
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Citation <code class="html">&lt;cite&gt;</code>:
+<ol type="i">
+<li>
+Book titles:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">''Nineteen Eighty-Four'' is already upon us.</code>
+</li>
+<li>
+HTML: <code class="html">&lt;cite&gt;Nineteen Eighty-Four&lt;/cite&gt; is already upon us.</code>
+</li>
+<li>
+Rendered: <cite>Nineteen Eighty-Four</cite> is already upon us.
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Quotation <code class="html">&lt;q&gt;</code>:
+<ol type="i">
+<li>
+Inline quotes:
+<ul>
+<li>
+CMD: <code class="cmd cmdc">""It wasn't me.""</code>
+</li>
+<li>
+HTML: <code class="html">&lt;q&gt;It wasn't me.&lt;/q&gt;</code>
+</li>
+<li>
+Rendered: <q>It wasn't me.</q>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+Nesting and disambiguation:
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>CMD</th>
+<th>HTML</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-1</td>
+<td><code class="cmd cmdc">*foo*</code></td>
+<td><code class="html">&lt;em&gt;foo&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td>2-2</td>
+<td><code class="cmd cmdc">**foo**</code></td>
+<td><code class="html">&lt;strong&gt;foo&lt;/strong&gt;</code></td>
+</tr>
+<tr>
+<td>3-3 (12-21)</td>
+<td><code class="cmd cmdc">***foo***</code></td>
+<td><code class="html">&lt;em&gt;&lt;strong&gt;foo&lt;/strong&gt;&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td>12-3 (12-21)</td>
+<td><code class="cmd cmdc">*foo **bar***</code></td>
+<td><code class="html">&lt;em&gt;foo &lt;strong&gt;bar&lt;/strong&gt;&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td>3-21 (12-21)</td>
+<td><code class="cmd cmdc">***foo** bar*</code></td>
+<td><code class="html">&lt;em&gt;&lt;strong&gt;foo&lt;/strong&gt; bar&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td>2|1-3 (21-12)</td>
+<td><code class="cmd cmdc">**|*foo***</code></td>
+<td><code class="html">&lt;strong&gt;&lt;em&gt;foo&lt;/em&gt;&lt;/strong&gt;</code></td>
+</tr>
+<tr>
+<td>21-3 (21-12)</td>
+<td><code class="cmd cmdc">**foo *bar***</code></td>
+<td><code class="html">&lt;strong&gt;foo &lt;em&gt;bar&lt;/em&gt;&lt;/strong&gt;</code></td>
+</tr>
+<tr>
+<td>3-12 (21-12)</td>
+<td><code class="cmd cmdc">***foo* bar**</code></td>
+<td><code class="html">&lt;strong&gt;&lt;em&gt;foo&lt;/em&gt; bar&lt;/strong&gt;</code></td>
+</tr>
+<tr>
+<td>4-4 (22-22)</td>
+<td><code class="cmd cmdc">****foo****</code></td>
+<td><code class="html">&lt;strong&gt;&lt;strong&gt;foo&lt;/strong&gt;&lt;/strong&gt;</code></td>
+</tr>
+<tr>
+<td>1|2|1-4 (121-121)</td>
+<td><code class="cmd cmdc">*|**|*foo****</code></td>
+<td><code class="html">&lt;em&gt;&lt;strong&gt;&lt;em&gt;foo&lt;/em&gt;&lt;/strong&gt;&lt;/em&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</details>
 <h3 id="standard-unqueued-replacements"><a href="#standard-unqueued-replacements" class="permalink" aria-label="Permalink"></a>Standard unqueued replacements</h3>
 <h4 id="placeholder-protect"><a href="#placeholder-protect" class="permalink" aria-label="Permalink"></a><code>#placeholder-protect</code></h4>
 <details open>
