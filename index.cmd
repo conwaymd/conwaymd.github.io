@@ -1356,10 +1356,10 @@ However, they might be called by queued replacements.
     @(`)@ «content» @(`)@
   ````
   ````{.cmd .cmdc}
-    «flags»@(`)@ «content» @(`)@
+    @(`)@{«attribute specifications»} «content» @(`)@
   ````
   ````{.cmd .cmdc}
-    @(`)@{«attribute specifications»} «content» @(`)@
+    «flags»@(`)@ «content» @(`)@
   ````
   ````{.cmd .cmdc}
     «flags»@(`)@{«attribute specifications»} «content» @(`)@
