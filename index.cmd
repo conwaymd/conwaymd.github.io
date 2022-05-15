@@ -3355,9 +3355,3 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
   https://github.com/conway-markdown/conway-markdown.github.io/
 [conway-markdown]:
   https://github.com/conway-markdown/conway-markdown
-
-
-<footer class="page-properties">
-  First created: 2020-04-05 <br>
-  Last modified: 2022-04-30 <br>
-</footer>

@@ -98,10 +98,6 @@ th, td {
   color: var(--html-colour);
 }
 
-.page-properties {
-  font-size: smaller;
-}
-
 .permalink {
   background-image: url(/permalink.svg);
   background-position: center left;
