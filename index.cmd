@@ -3214,6 +3214,8 @@ However, they might be called by queued replacements.
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
+(Documentation coming soon.)
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders
