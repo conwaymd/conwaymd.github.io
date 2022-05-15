@@ -2622,6 +2622,21 @@ However, they might be called by queued replacements.
   --
 }}
 
+####{#placeholder-unprotect} 27. `#placeholder-unprotect`
+[`#placeholder-unprotect`]: #placeholder-unprotect
+
+{{def
+  ``{.cmd .cmdr}
+  PlaceholderUnprotectionReplacement: #placeholder-unprotect
+  - queue_position: AFTER #whitespace
+  ``
+}}
+{{des
+  --
+  Unprotects all [placeholder strings][placeholder].
+  --
+}}
+
 
 ###{#standard-unqueued-replacements} Standard unqueued replacements
 
