@@ -2454,6 +2454,30 @@ However, they might be called by queued replacements.
   ==
 }}
 
+####{#angle-bracket-wrap} `#angle-bracket-wrap`
+[`#angle-bracket-wrap`]: #angle-bracket-wrap
+
+{{def
+  ``{.cmd .cmdr}
+  RegexDictionaryReplacement: #angle-bracket-wrap
+  - positive_flag: ANGLE_BRACKET_WRAP
+  * \A --> &lt;
+  * \Z --> &gt;
+  - concluding_replacements:
+      #placeholder-protect
+  ``
+}}
+{{des
+  --
+  Wraps a string in angle brackets.
+  --
+}}
+{{dep
+  ==
+  - [`#explicit-links`]
+  ==
+}}
+
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 

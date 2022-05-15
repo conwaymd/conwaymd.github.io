@@ -2215,7 +2215,7 @@ Protects a string with a <a href="#cmd-placeholders">placeholder</a>.
 <a href="#backslash-escapes"><code>#backslash-escapes</code></a>
 </li>
 <li>
-[<code>#angle-bracket-wrap</code>]
+<a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>
 </li>
 </ul>
 </details>
@@ -2736,6 +2736,31 @@ based on leading occurrences of <code class="cmd cmdc"><b>|_</b></code>.
 Suppresses the scheme
 (including the colon and possibly two slashes)
 of a URI.
+</p>
+</details>
+<details>
+<summary>Dependants</summary>
+<ul>
+<li>
+[<code>#explicit-links</code>]
+</li>
+</ul>
+</details>
+<h4 id="angle-bracket-wrap"><a href="#angle-bracket-wrap" class="permalink" aria-label="Permalink"></a><code>#angle-bracket-wrap</code></h4>
+<details open>
+<summary>Definition</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #angle-bracket-wrap
+- positive_flag: ANGLE_BRACKET_WRAP
+* \A --&gt; &amp;lt;
+* \Z --&gt; &amp;gt;
+- concluding_replacements:
+    #placeholder-protect
+</code></pre>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Wraps a string in angle brackets.
 </p>
 </details>
 <details>
