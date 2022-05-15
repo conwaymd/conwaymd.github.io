@@ -1722,7 +1722,7 @@ However, they might be called by queued replacements.
   ``{.cmd .cmdr}
   RegexDictionaryReplacement: #backslash-continuations
   - queue_position: AFTER #backslash-escapes
-  * \\ \n [^\S\n]+ -->
+  * \\ \n [^\S\n]* -->
   ``
 }}
 {{des
