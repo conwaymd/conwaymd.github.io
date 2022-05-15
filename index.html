@@ -2187,6 +2187,27 @@ Rendered:
 </ul>
 </li>
 <li>
+<code class="cmd cmdc">«label»</code> is case-insensitive:
+<ul>
+<li>
+CMD:
+<pre class="cmd cmdc"><code>[image-label-case]: insensitive.png
+
+[Hooray.][image-label-case]
+[Hooray.][image-label-CASE]
+[Hooray.][ImAGe-laBEl-CAsE]
+</code></pre>
+</li>
+<li>
+HTML
+<pre class="html"><code>&lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
+&lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
+&lt;a href="insensitive.png"&gt;Hooray.&lt;/a&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
 Later reference definitions prevail:
 <ul>
 <li>

@@ -1978,6 +1978,26 @@ However, they might be called by queued replacements.
       ||||
     ==
   1.
+    `{.cmd .cmdc} «label»` is case-insensitive:
+    ==
+    - CMD:
+      ````{.cmd .cmdc}
+      [image-label-case]: insensitive.png
+      
+      [Hooray.][image-label-case]
+      [Hooray.][image-label-CASE]
+      [Hooray.][ImAGe-laBEl-CAsE]
+      ````
+    - HTML
+      <||
+      [image-label-case]: insensitive.png
+      
+      [Hooray.][image-label-case]
+      [Hooray.][image-label-CASE]
+      [Hooray.][ImAGe-laBEl-CAsE]
+      ||>
+    ==
+  1.
     Later reference definitions prevail:
     ==
     - CMD:
