@@ -3220,7 +3220,7 @@ it is temporarily replaced by a __placeholder__
 consisting of code points in the main Unicode Private Use Area.
 --
 --
-Specifically, the placeholder for a string shall be of the following form:
+Specifically, the placeholder for a string is of the following form:
 --
 ``{.cmd .cmdc}
 @(«marker»)@@(«run_characters»)@@(«marker»)@
