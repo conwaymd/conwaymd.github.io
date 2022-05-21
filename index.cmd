@@ -1,6 +1,5 @@
 OrdinaryDictionaryReplacement: #boilerplate-properties-override
 - queue_position: BEFORE #boilerplate-properties
-- apply_mode: SIMULTANEOUS
 * %head-elements-before-viewport -->
     <meta name="author" content="Conway">
     <meta name="description" content="Documentation for Conway-Markdown (CMD).">
@@ -17,14 +16,12 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
 
 OrdinaryDictionaryReplacement: #bold-code
 - queue_position: BEFORE #display-code
-- apply_mode: SIMULTANEOUS
 * @( --> <b>
 * )@ --> </b>
 - concluding_replacements: #placeholder-protect
 
 OrdinaryDictionaryReplacement: #details-summary-shorthand
 - queue_position: BEFORE #whitespace
-- apply_mode: SIMULTANEOUS
 * {{def -->
     '{{
     <summary>Definition</summary>
@@ -1604,7 +1601,6 @@ However, they might be called by queued replacements.
       <span class="cmdr"><``
         OrdinaryDictionaryReplacement: #boilerplate-properties-override
         - queue_position: BEFORE #boilerplate-properties
-        - apply_mode: SIMULTANEOUS
         * %lang --> en-AU
         * %head-elements-before-viewport --> <meta name="author" content="Me">
         * %title --> Overridden title
