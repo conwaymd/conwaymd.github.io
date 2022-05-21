@@ -13,10 +13,10 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
-<title>Conway-Markdown (CMD) v4.0.0</title>
+<title>Conway-Markdown (CMD) v4.1.0</title>
 </head>
 <body>
-<h1>Conway-Markdown (CMD) v4.0.0</h1>
+<h1>Conway-Markdown (CMD) v4.1.0</h1>
 <p>
 Conway-Markdown (CMD) is:
 </p>
@@ -1780,7 +1780,6 @@ are set in <a href="#boilerplate-properties"><code>#boilerplate-properties</code
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #boilerplate-properties
 - queue_position: AFTER #boilerplate
-- apply_mode: SIMULTANEOUS
 * %lang --&gt; en
 * %head-elements-before-viewport --&gt;
 * %viewport-content --&gt; width=device-width, initial-scale=1
@@ -1903,7 +1902,6 @@ This document hath &lt;code&gt;lang&lt;/code&gt; equal to &lt;code&gt;en-AU&lt;/
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #cmd-properties
 - queue_position: AFTER #boilerplate-properties
-- apply_mode: SIMULTANEOUS
 * %cmd-version --&gt; CMD_VERSION
 * %cmd-name --&gt; CMD_NAME
 * %cmd-basename --&gt; CMD_BASENAME
@@ -1927,7 +1925,7 @@ Makes replacements for CMD properties:
 <tr>
 <td><code class="cmd cmdc">%cmd-version</code></td>
 <td><code>__version__</code> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>
-(currently <code class="html">4.0.0</code>)</td>
+(currently <code class="html">4.1.0</code>)</td>
 </tr>
 <tr>
 <td><code class="cmd cmdc">%cmd-name</code></td>
@@ -1975,7 +1973,6 @@ Protects <code>&lt;head&gt;</code> element
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #backslash-escapes
 - queue_position: AFTER #boilerplate-protect
-- apply_mode: SIMULTANEOUS
 * \\ --&gt; \
 * \# --&gt; #
 * \&amp; --&gt; &amp;amp;
@@ -3243,7 +3240,6 @@ Removes the longest common indentation in a string.
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #escape-html
 - negative_flag: KEEP_HTML_UNESCAPED
-- apply_mode: SIMULTANEOUS
 * &amp; --&gt; &amp;amp;
 * &lt; --&gt; &amp;lt;
 * &gt; --&gt; &amp;gt;

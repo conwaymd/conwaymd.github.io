@@ -1532,7 +1532,6 @@ However, they might be called by queued replacements.
   ``{.cmd .cmdr}
   OrdinaryDictionaryReplacement: #boilerplate-properties
   - queue_position: AFTER #boilerplate
-  - apply_mode: SIMULTANEOUS
   * %lang --> en
   * %head-elements-before-viewport -->
   * %viewport-content --> width=device-width, initial-scale=1
@@ -1645,7 +1644,6 @@ However, they might be called by queued replacements.
   ``{.cmd .cmdr}
   OrdinaryDictionaryReplacement: #cmd-properties
   - queue_position: AFTER #boilerplate-properties
-  - apply_mode: SIMULTANEOUS
   * %cmd-version --> CMD_VERSION
   * %cmd-name --> CMD_NAME
   * %cmd-basename --> CMD_BASENAME
@@ -1709,7 +1707,6 @@ However, they might be called by queued replacements.
   ``{.cmd .cmdr}
   OrdinaryDictionaryReplacement: #backslash-escapes
   - queue_position: AFTER #boilerplate-protect
-  - apply_mode: SIMULTANEOUS
   * \\ --> \
   * \# --> #
   * \& --> &amp;
@@ -2762,7 +2759,6 @@ However, they might be called by queued replacements.
   ``{.cmd .cmdr}
   OrdinaryDictionaryReplacement: #escape-html
   - negative_flag: KEEP_HTML_UNESCAPED
-  - apply_mode: SIMULTANEOUS
   * & --> &amp;
   * < --> &lt;
   * > --> &gt;
