@@ -3631,7 +3631,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - `{.cmd .cmdr} closing_delimiter`:
     the closing delimiter
   - `{.cmd .cmdr} tag_name`:
-    the resulting tag name of the element constructed after replacement
+    the tag name of the element to be constructed
   - `{.cmd .cmdr} concluding_replacements`:
     sequence of replacements to be applied after construction of the element
   ==
@@ -3645,6 +3645,73 @@ In CMD replacement rule syntax, a line must be one of the following:
   --
   (None)
   --
+}}
+
+###{#ExtensibleFenceReplacement} `ExtensibleFenceReplacement`
+[`ExtensibleFenceReplacement`]: #ExtensibleFenceReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  ExtensibleFenceReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - syntax_type: BLOCK | INLINE (mandatory)
+  - allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
+  - prologue_delimiter: (def) NONE | «string»
+  - extensible_delimiter: «character_repeated» (mandatory)
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+  - content_replacements: (def) NONE | #«id» [...]
+  - epilogue_delimiter: (def) NONE | «string»
+  - tag_name: (def) NONE | «name»
+  - concluding_replacements: (def) NONE | #«id» [...]
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} syntax_type`:
+    whether the syntax type is block (delimiters must be on their own lines)
+    or inline (delimiters may be anywhere)
+  - `{.cmd .cmdr} allowed_flags`:
+    letters and corresponding flag names
+  - `{.cmd .cmdr} prologue_delimiter`:
+    the delimiter that must appear before the opening extensible delimiter
+  - `{.cmd .cmdr} extensible_delimiter`:
+    the opening and closing extensible delimiter (a character repeated)
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after the opening delimiter,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} prohibited_content`:
+    whether block tags or anchored block tags are prohibited
+    in the content between the opening and closing delimiters
+  - `{.cmd .cmdr} content_replacements`:
+    sequence of replacements to be applied
+    to the content between the opening and closing delimiters
+  - `{.cmd .cmdr} epilogue_delimiter`:
+    the delimiter that must appear after the closing extensible delimiter
+  - `{.cmd .cmdr} tag_name`:
+    the tag name of the element to be constructed
+  - `{.cmd .cmdr} concluding_replacements`:
+    sequence of replacements to be applied after construction of the element
+  ==
+}}
+{{des
+  --
+  Defines a generalised extensible-fence-style replacement rule.
+  --
+}}
+{{std
+  ==
+  - [`#literals`]
+  - [`#display-code`]
+  - [`#divisions`]
+  - [`#blockquotes`]
+  - [`#unordered-lists`]
+  - [`#ordered-lists`]
+  - [`#tables`]
+  - [`#paragraphs`]
+  - [`#inline-code`]
+  ==
 }}
 
 

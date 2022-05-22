@@ -230,7 +230,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#FixedDelimitersReplacement"><code>FixedDelimitersReplacement</code></a>
 </li>
 <li>
-[<code>ExtensibleFenceReplacement</code>]
+<a href="#ExtensibleFenceReplacement"><code>ExtensibleFenceReplacement</code></a>
 </li>
 <li>
 [<code>PartitioningReplacement</code>]
@@ -3869,7 +3869,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>,
 <a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</code></a>,
 <a href="#FixedDelimitersReplacement"><code>FixedDelimitersReplacement</code></a>,
-[<code>ExtensibleFenceReplacement</code>],
+<a href="#ExtensibleFenceReplacement"><code>ExtensibleFenceReplacement</code></a>,
 [<code>PartitioningReplacement</code>],
 [<code>InlineAssortedDelimitersReplacement</code>],
 [<code>HeadingReplacement</code>],
@@ -4339,7 +4339,7 @@ the closing delimiter
 </li>
 <li>
 <code class="cmd cmdr">tag_name</code>:
-the resulting tag name of the element constructed after replacement
+the tag name of the element to be constructed
 </li>
 <li>
 <code class="cmd cmdr">concluding_replacements</code>:
@@ -4358,6 +4358,112 @@ Defines a fixed-delimiters replacement rule.
 <p>
 (None)
 </p>
+</details>
+<h3 id="ExtensibleFenceReplacement"><a href="#ExtensibleFenceReplacement" class="permalink" aria-label="Permalink"></a><code>ExtensibleFenceReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- syntax_type: BLOCK | INLINE (mandatory)
+- allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
+- prologue_delimiter: (def) NONE | «string»
+- extensible_delimiter: «character_repeated» (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | «string»
+- prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+- content_replacements: (def) NONE | #«id» [...]
+- epilogue_delimiter: (def) NONE | «string»
+- tag_name: (def) NONE | «name»
+- concluding_replacements: (def) NONE | #«id» [...]
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">syntax_type</code>:
+whether the syntax type is block (delimiters must be on their own lines)
+or inline (delimiters may be anywhere)
+</li>
+<li>
+<code class="cmd cmdr">allowed_flags</code>:
+letters and corresponding flag names
+</li>
+<li>
+<code class="cmd cmdr">prologue_delimiter</code>:
+the delimiter that must appear before the opening extensible delimiter
+</li>
+<li>
+<code class="cmd cmdr">extensible_delimiter</code>:
+the opening and closing extensible delimiter (a character repeated)
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, after the opening delimiter,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+<li>
+<code class="cmd cmdr">prohibited_content</code>:
+whether block tags or anchored block tags are prohibited
+in the content between the opening and closing delimiters
+</li>
+<li>
+<code class="cmd cmdr">content_replacements</code>:
+sequence of replacements to be applied
+to the content between the opening and closing delimiters
+</li>
+<li>
+<code class="cmd cmdr">epilogue_delimiter</code>:
+the delimiter that must appear after the closing extensible delimiter
+</li>
+<li>
+<code class="cmd cmdr">tag_name</code>:
+the tag name of the element to be constructed
+</li>
+<li>
+<code class="cmd cmdr">concluding_replacements</code>:
+sequence of replacements to be applied after construction of the element
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a generalised extensible-fence-style replacement rule.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#literals"><code>#literals</code></a>
+</li>
+<li>
+<a href="#display-code"><code>#display-code</code></a>
+</li>
+<li>
+<a href="#divisions"><code>#divisions</code></a>
+</li>
+<li>
+<a href="#blockquotes"><code>#blockquotes</code></a>
+</li>
+<li>
+<a href="#unordered-lists"><code>#unordered-lists</code></a>
+</li>
+<li>
+<a href="#ordered-lists"><code>#ordered-lists</code></a>
+</li>
+<li>
+<a href="#tables"><code>#tables</code></a>
+</li>
+<li>
+<a href="#paragraphs"><code>#paragraphs</code></a>
+</li>
+<li>
+<a href="#inline-code"><code>#inline-code</code></a>
+</li>
+</ul>
 </details>
 <h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
 <p>
