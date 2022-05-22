@@ -311,7 +311,7 @@ read about [CMD replacement rule syntax](#replacement-rule-syntax).
 ##{#standard-rules} Standard CMD replacement rules
 
 --
-This section lists standard CMD replacement rules
+This section lists the standard CMD replacement rules
 as defined by the constant string __`STANDARD_RULES`__ in [`cmd.py`].
 --
 --
