@@ -3800,8 +3800,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines an inline assorted-delimiters replacement rule.
-  (A generalisation of the replacement that takes `*` and `**`
-  to `<em>` and `<strong>` in Markdown.)
+  (A generalisation of the replacement that processes `*` and `**`
+  into `<em>` and `<strong>` in Markdown.)
   --
 }}
 {{std
@@ -3831,6 +3831,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a replacement rule for headings.
+  (A generalisation of the replacement that processes
+  ATX headings in Markdown.)
   --
 }}
 {{std
@@ -3860,6 +3862,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a replacement rule for consuming reference definitions.
+  (A generalisation of the replacement that processes
+  `[«label»]: «uri» "«title»"` in Markdown.)
   --
 }}
 {{std
@@ -3894,6 +3898,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a replacement rule for specified images.
+  (A generalisation of the replacement that processes
+  `![«alt text»](«uri» "«title»")` in Markdown.)
   --
 }}
 {{std
@@ -3927,6 +3933,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a replacement rule for referenced images.
+  (A generalisation of the replacement that processes
+  `![«alt text»][«label»]` in Markdown.)
   --
 }}
 {{std
@@ -3966,6 +3974,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a replacement rule for explicit links.
+  (A generalisation of the replacement that processes
+  `<«uri»>` in Markdown.)
   --
 }}
 {{std
@@ -4000,6 +4010,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a replacement rule for specified links.
+  (A generalisation of the replacement that processes
+  `[«link text»](«uri» "«title»")` in Markdown.)
   --
 }}
 {{std
@@ -4033,6 +4045,8 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a replacement rule for referenced links.
+  (A generalisation of the replacement that processes
+  `[«link text»][«label»]` in Markdown.)
   --
 }}
 {{std

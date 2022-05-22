@@ -4587,8 +4587,8 @@ in the content between the opening and closing delimiters
 <summary>Description</summary>
 <p>
 Defines an inline assorted-delimiters replacement rule.
-(A generalisation of the replacement that takes <code>*</code> and <code>**</code>
-to <code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> in Markdown.)
+(A generalisation of the replacement that processes <code>*</code> and <code>**</code>
+into <code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4623,6 +4623,8 @@ and if so, what the default specification is
 <summary>Description</summary>
 <p>
 Defines a replacement rule for headings.
+(A generalisation of the replacement that processes
+ATX headings in Markdown.)
 </p>
 </details>
 <details open>
@@ -4657,6 +4659,8 @@ and if so, what the default specification is
 <summary>Description</summary>
 <p>
 Defines a replacement rule for consuming reference definitions.
+(A generalisation of the replacement that processes
+<code>[«label»]: «uri» "«title»"</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4698,6 +4702,8 @@ in the square-bracketed alt text
 <summary>Description</summary>
 <p>
 Defines a replacement rule for specified images.
+(A generalisation of the replacement that processes
+<code>![«alt text»](«uri» "«title»")</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4738,6 +4744,8 @@ in the square-bracketed alt text and the square-bracketed label
 <summary>Description</summary>
 <p>
 Defines a replacement rule for referenced images.
+(A generalisation of the replacement that processes
+<code>![«alt text»][«label»]</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4788,6 +4796,8 @@ sequence of replacements to be applied after construction of the element
 <summary>Description</summary>
 <p>
 Defines a replacement rule for explicit links.
+(A generalisation of the replacement that processes
+<code>&lt;«uri»&gt;</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4829,6 +4839,8 @@ in the square-bracketed link text
 <summary>Description</summary>
 <p>
 Defines a replacement rule for specified links.
+(A generalisation of the replacement that processes
+<code>[«link text»](«uri» "«title»")</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4869,6 +4881,8 @@ in the square-bracketed link text and the square-bracketed label
 <summary>Description</summary>
 <p>
 Defines a replacement rule for referenced links.
+(A generalisation of the replacement that processes
+<code>[«link text»][«label»]</code> in Markdown.)
 </p>
 </details>
 <details open>
