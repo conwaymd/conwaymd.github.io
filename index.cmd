@@ -178,6 +178,26 @@ Conway-Markdown (CMD) is:
     ==
   ====
 - [CMD replacement rule syntax](#replacement-rule-syntax)
+  ==
+  - [`ReplacementSequence`]
+  - [`PlaceholderMarkerReplacement`]
+  - [`PlaceholderProtectionReplacement`]
+  - [`PlaceholderUnprotectionReplacement`]
+  - [`DeIndentationReplacement`]
+  - [`OrdinaryDictionaryReplacement`]
+  - [`RegexDictionaryReplacement`]
+  - [`FixedDelimitersReplacement`]
+  - [`ExtensibleFenceReplacement`]
+  - [`PartitioningReplacement`]
+  - [`InlineAssortedDelimitersReplacement`]
+  - [`HeadingReplacement`]
+  - [`ReferenceDefinitionReplacement`]
+  - [`SpecifiedImageReplacement`]
+  -  [`ReferencedImageReplacement`]
+  - [`ExplicitLinkReplacement`]
+  - [`SpecifiedLinkReplacement`]
+  - [`ReferencedLinkReplacement`]
+  ==
 - [CMD placeholders](#cmd-placeholders)
 - [CMD attribute specifications](#cmd-attribute-specifications)
 - [Repository links](#repository-links)
@@ -263,6 +283,7 @@ they might break your computer. God save!**
 
 
 ##{#authoring-cmd-files} Authoring CMD files
+[Authoring CMD files]: #authoring-cmd-files
 
 --
 CMD files are parsed thus:
@@ -3206,7 +3227,98 @@ However, they might be called by queued replacements.
 
 ##{#replacement-rule-syntax} CMD replacement rule syntax
 
-(Documentation coming soon.)
+--
+This section gives the syntax for writing user-defined CMD replacement rules,
+which go before the `{.cmd} «delimiter»` when [authoring CMD files].
+--
+--
+In CMD replacement rule syntax, a line must be one of the following:
+--
+++
+1.
+  __Whitespace-only__.
+  <br>
+  Marks the end of the declaration of a replacement rule.
+2.
+  A __comment__:
+  ````{.cmd .cmdr}
+  @(#)@ «comment»
+  ````
+  Is ignored.
+3.
+  A __rules inclusion__:
+  ````{.cmd .cmdr}
+  @(<)@ «included_file_name»
+  ````
+  Includes the content of `{.cmd .cmdr} «included_file_name»`
+  as CMD replacement rules.
+  ==
+  - If `{.cmd .cmdr} «included_file_name»` begins with a slash,
+    it is parsed relative to the working directory.
+  - If `{.cmd .cmdr} «included_file_name»` does not begin with a slash,
+    it is parsed relative to the file in which the inclusion is invoked.
+  ==
+  The convention is for `{.cmd .cmdr} «included_file_name»`
+  is to have the extension `.cmdr`.
+4.
+  A __class declaration__:
+  ``{.cmd .cmdr}
+  «ClassName»@(:)@ @(#)@«id»
+  ``
+  Begins the declaration of a replacement rule
+  with class `{.cmd .cmdr} «ClassName»`.
+  ==
+  - `{.cmd .cmdr} «ClassName»` must be one of
+    [`ReplacementSequence`],
+    [`PlaceholderMarkerReplacement`],
+    [`PlaceholderProtectionReplacement`],
+    [`PlaceholderUnprotectionReplacement`],
+    [`DeIndentationReplacement`],
+    [`OrdinaryDictionaryReplacement`],
+    [`RegexDictionaryReplacement`],
+    [`FixedDelimitersReplacement`],
+    [`ExtensibleFenceReplacement`],
+    [`PartitioningReplacement`],
+    [`InlineAssortedDelimitersReplacement`],
+    [`HeadingReplacement`],
+    [`ReferenceDefinitionReplacement`],
+    [`SpecifiedImageReplacement`],
+    [`ReferencedImageReplacement`],
+    [`ExplicitLinkReplacement`],
+    [`SpecifiedLinkReplacement`],
+      or
+    [`ReferencedLinkReplacement`].
+  - `{.cmd .cmdr} «id»` may only contain lower case letters or hyphens.
+  ==
+5.
+  The start of an __attribute declaration__:
+  ``{.cmd .cmdr}
+  @(-)@ «name»@(:)@ «value»
+  ``
+  Declares an attribute for the replacement that is currently being declared.
+  ==
+  - `{.cmd .cmdr} «name»` must be one of the valid attribute names
+    for the replacement that is currently being declared.
+  - `{.cmd .cmdr} «value»` must be a suitable attribute value
+    for that attribute name.
+  ==
+6.
+  The start of an __substitution declaration__:
+  ``{.cmd .cmdr}
+  @(*)@ «pattern» @(-->)@ «substitute»
+  ``
+  Declares a substitution for the replacement that is currently being declared
+  (which must be an [`OrdinaryDictionaryReplacement`]
+  or a [`RegexDictionaryReplacement`]).
+  ==
+  - The number of hyphens in the delimiter `{.cmd .cmdr} @(-->)@`
+    may be arbitrarily increased should `{.cmd .cmdr} «pattern»` contain
+    a run of hyphens followed by a closing angle-bracket.
+  ==
+7.
+  A __continuation__ (of an attribute declaration or substitution declaration),
+  beginning with whitespace.
+++
 
 
 ##{#cmd-placeholders} CMD placeholders

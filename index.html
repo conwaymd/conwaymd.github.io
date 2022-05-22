@@ -204,6 +204,62 @@ Licensed under "MIT No Attribution" (MIT-0).
 </li>
 <li>
 <a href="#replacement-rule-syntax">CMD replacement rule syntax</a>
+<ul>
+<li>
+[<code>ReplacementSequence</code>]
+</li>
+<li>
+[<code>PlaceholderMarkerReplacement</code>]
+</li>
+<li>
+[<code>PlaceholderProtectionReplacement</code>]
+</li>
+<li>
+[<code>PlaceholderUnprotectionReplacement</code>]
+</li>
+<li>
+[<code>DeIndentationReplacement</code>]
+</li>
+<li>
+[<code>OrdinaryDictionaryReplacement</code>]
+</li>
+<li>
+[<code>RegexDictionaryReplacement</code>]
+</li>
+<li>
+[<code>FixedDelimitersReplacement</code>]
+</li>
+<li>
+[<code>ExtensibleFenceReplacement</code>]
+</li>
+<li>
+[<code>PartitioningReplacement</code>]
+</li>
+<li>
+[<code>InlineAssortedDelimitersReplacement</code>]
+</li>
+<li>
+[<code>HeadingReplacement</code>]
+</li>
+<li>
+[<code>ReferenceDefinitionReplacement</code>]
+</li>
+<li>
+[<code>SpecifiedImageReplacement</code>]
+</li>
+<li>
+[<code>ReferencedImageReplacement</code>]
+</li>
+<li>
+[<code>ExplicitLinkReplacement</code>]
+</li>
+<li>
+[<code>SpecifiedLinkReplacement</code>]
+</li>
+<li>
+[<code>ReferencedLinkReplacement</code>]
+</li>
+</ul>
 </li>
 <li>
 <a href="#cmd-placeholders">CMD placeholders</a>
@@ -3759,7 +3815,113 @@ Wraps a string in angle brackets.
 </ul>
 </details>
 <h2 id="replacement-rule-syntax"><a href="#replacement-rule-syntax" class="permalink" aria-label="Permalink"></a>CMD replacement rule syntax</h2>
-(Documentation coming soon.)
+<p>
+This section gives the syntax for writing user-defined CMD replacement rules,
+which go before the <code class="cmd">«delimiter»</code> when <a href="#authoring-cmd-files">authoring CMD files</a>.
+</p>
+<p>
+In CMD replacement rule syntax, a line must be one of the following:
+</p>
+<ol>
+<li>
+<b>Whitespace-only</b>.<br>
+Marks the end of the declaration of a replacement rule.
+</li>
+<li>
+A <b>comment</b>:
+<pre class="cmd cmdr"><code><b>#</b> «comment»
+</code></pre>
+Is ignored.
+</li>
+<li>
+A <b>rules inclusion</b>:
+<pre class="cmd cmdr"><code><b>&lt;</b> «included_file_name»
+</code></pre>
+Includes the content of <code class="cmd cmdr">«included_file_name»</code>
+as CMD replacement rules.
+<ul>
+<li>
+If <code class="cmd cmdr">«included_file_name»</code> begins with a slash,
+it is parsed relative to the working directory.
+</li>
+<li>
+If <code class="cmd cmdr">«included_file_name»</code> does not begin with a slash,
+it is parsed relative to the file in which the inclusion is invoked.
+</li>
+</ul>
+The convention is for <code class="cmd cmdr">«included_file_name»</code>
+is to have the extension <code>.cmdr</code>.
+</li>
+<li>
+A <b>class declaration</b>:
+<pre class="cmd cmdr"><code>«ClassName»<b>:</b> <b>#</b>«id»
+</code></pre>
+Begins the declaration of a replacement rule
+with class <code class="cmd cmdr">«ClassName»</code>.
+<ul>
+<li>
+<code class="cmd cmdr">«ClassName»</code> must be one of
+[<code>ReplacementSequence</code>],
+[<code>PlaceholderMarkerReplacement</code>],
+[<code>PlaceholderProtectionReplacement</code>],
+[<code>PlaceholderUnprotectionReplacement</code>],
+[<code>DeIndentationReplacement</code>],
+[<code>OrdinaryDictionaryReplacement</code>],
+[<code>RegexDictionaryReplacement</code>],
+[<code>FixedDelimitersReplacement</code>],
+[<code>ExtensibleFenceReplacement</code>],
+[<code>PartitioningReplacement</code>],
+[<code>InlineAssortedDelimitersReplacement</code>],
+[<code>HeadingReplacement</code>],
+[<code>ReferenceDefinitionReplacement</code>],
+[<code>SpecifiedImageReplacement</code>],
+[<code>ReferencedImageReplacement</code>],
+[<code>ExplicitLinkReplacement</code>],
+[<code>SpecifiedLinkReplacement</code>],
+or
+[<code>ReferencedLinkReplacement</code>].
+</li>
+<li>
+<code class="cmd cmdr">«id»</code> may only contain lower case letters or hyphens.
+</li>
+</ul>
+</li>
+<li>
+The start of an <b>attribute declaration</b>:
+<pre class="cmd cmdr"><code><b>-</b> «name»<b>:</b> «value»
+</code></pre>
+Declares an attribute for the replacement that is currently being declared.
+<ul>
+<li>
+<code class="cmd cmdr">«name»</code> must be one of the valid attribute names
+for the replacement that is currently being declared.
+</li>
+<li>
+<code class="cmd cmdr">«value»</code> must be a suitable attribute value
+for that attribute name.
+</li>
+</ul>
+</li>
+<li>
+The start of an <b>substitution declaration</b>:
+<pre class="cmd cmdr"><code><b>*</b> «pattern» <b>--&gt;</b> «substitute»
+</code></pre>
+Declares a substitution for the replacement that is currently being declared
+(which must be an [<code>OrdinaryDictionaryReplacement</code>]
+or a [<code>RegexDictionaryReplacement</code>]).
+<ul>
+<li>
+The number of hyphens in the delimiter <code class="cmd cmdr"><b>--&gt;</b></code>
+may be arbitrarily increased should <code class="cmd cmdr">«pattern»</code> contain
+a run of hyphens followed by a closing angle-bracket.
+</li>
+</ul>
+</li>
+<li>
+A <b>continuation</b> (of an attribute declaration or substitution declaration),
+beginning with whitespace.
+</li>
+</ol>
 <h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
 <p>
 There are many instances in which the result of a replacement
