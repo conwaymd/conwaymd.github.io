@@ -245,7 +245,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#ReferenceDefinitionReplacement"><code>ReferenceDefinitionReplacement</code></a>
 </li>
 <li>
-[<code>SpecifiedImageReplacement</code>]
+<a href="#SpecifiedImageReplacement"><code>SpecifiedImageReplacement</code></a>
 </li>
 <li>
 [<code>ReferencedImageReplacement</code>]
@@ -3874,7 +3874,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#InlineAssortedDelimitersReplacement"><code>InlineAssortedDelimitersReplacement</code></a>,
 <a href="#HeadingReplacement"><code>HeadingReplacement</code></a>,
 <a href="#ReferenceDefinitionReplacement"><code>ReferenceDefinitionReplacement</code></a>,
-[<code>SpecifiedImageReplacement</code>],
+<a href="#SpecifiedImageReplacement"><code>SpecifiedImageReplacement</code></a>,
 [<code>ReferencedImageReplacement</code>],
 [<code>ExplicitLinkReplacement</code>],
 [<code>SpecifiedLinkReplacement</code>],
@@ -4647,7 +4647,7 @@ position in the replacement queue
 </li>
 <li>
 <code class="cmd cmdr">attribute_specifications</code>:
-whether, between the bracketed label and the declaring colon,
+whether, between the square-bracketed label and the declaring colon,
 there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
 and if so, what the default specification is
 </li>
@@ -4664,6 +4664,47 @@ Defines a replacement rule for consuming reference definitions.
 <ul>
 <li>
 <a href="#reference-definitions"><code>#reference-definitions</code></a>
+</li>
+</ul>
+</details>
+<h3 id="SpecifiedImageReplacement"><a href="#SpecifiedImageReplacement" class="permalink" aria-label="Permalink"></a><code>SpecifiedImageReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>SpecifiedImageReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- attribute_specifications: (def) NONE | EMPTY | «string»
+- prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, between the square-bracketed alt text
+and the round-bracketed URI &amp; title,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+<li>
+<code class="cmd cmdr">prohibited_content</code>:
+whether block tags or anchored block tags are prohibited
+in the square-bracketed alt text
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for specified images.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#specified-images"><code>#specified-images</code></a>
 </li>
 </ul>
 </details>

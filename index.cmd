@@ -3852,7 +3852,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - `{.cmd .cmdr} queue_position`:
     position in the replacement queue
   - `{.cmd .cmdr} attribute_specifications`:
-    whether, between the bracketed label and the declaring colon,
+    whether, between the square-bracketed label and the declaring colon,
     there may be [CMD attribute specifications] supplied,
     and if so, what the default specification is
   ==
@@ -3865,6 +3865,40 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{std
   ==
   - [`#reference-definitions`]
+  ==
+}}
+
+###{#SpecifiedImageReplacement} `SpecifiedImageReplacement`
+[`SpecifiedImageReplacement`]: #SpecifiedImageReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  SpecifiedImageReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, between the square-bracketed alt text
+    and the round-bracketed URI & title,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} prohibited_content`:
+    whether block tags or anchored block tags are prohibited
+    in the square-bracketed alt text
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for specified images.
+  --
+}}
+{{std
+  ==
+  - [`#specified-images`]
   ==
 }}
 
