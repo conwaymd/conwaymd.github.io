@@ -239,7 +239,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#InlineAssortedDelimitersReplacement"><code>InlineAssortedDelimitersReplacement</code></a>
 </li>
 <li>
-[<code>HeadingReplacement</code>]
+<a href="#HeadingReplacement"><code>HeadingReplacement</code></a>
 </li>
 <li>
 [<code>ReferenceDefinitionReplacement</code>]
@@ -3872,7 +3872,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#ExtensibleFenceReplacement"><code>ExtensibleFenceReplacement</code></a>,
 <a href="#PartitioningReplacement"><code>PartitioningReplacement</code></a>,
 <a href="#InlineAssortedDelimitersReplacement"><code>InlineAssortedDelimitersReplacement</code></a>,
-[<code>HeadingReplacement</code>],
+<a href="#HeadingReplacement"><code>HeadingReplacement</code></a>,
 [<code>ReferenceDefinitionReplacement</code>],
 [<code>SpecifiedImageReplacement</code>],
 [<code>ReferencedImageReplacement</code>],
@@ -4596,6 +4596,40 @@ to <code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> in Markdown.)
 <ul>
 <li>
 <a href="#inline-semantics"><code>#inline-semantics</code></a>
+</li>
+</ul>
+</details>
+<h3 id="HeadingReplacement"><a href="#HeadingReplacement" class="permalink" aria-label="Permalink"></a><code>HeadingReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>HeadingReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- attribute_specifications: (def) NONE | EMPTY | «string»
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, after the declaring hashes,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for headings.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#headings"><code>#headings</code></a>
 </li>
 </ul>
 </details>

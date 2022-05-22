@@ -3810,6 +3810,35 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#HeadingReplacement} `HeadingReplacement`
+[`HeadingReplacement`]: #HeadingReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  HeadingReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after the declaring hashes,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for headings.
+  --
+}}
+{{std
+  ==
+  - [`#headings`]
+  ==
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders
