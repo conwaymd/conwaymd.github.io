@@ -3698,6 +3698,7 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{des
   --
   Defines a generalised extensible-fence-style replacement rule.
+  (Inspired by the repeatable backticks of John Gruber's Markdown.)
   --
 }}
 {{std
