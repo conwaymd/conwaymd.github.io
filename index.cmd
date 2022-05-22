@@ -3769,6 +3769,47 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#InlineAssortedDelimitersReplacement} `InlineAssortedDelimitersReplacement`
+[`InlineAssortedDelimitersReplacement`]: #InlineAssortedDelimitersReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  InlineAssortedDelimitersReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - delimiter_conversion:
+      «character» | «character_doubled»=«tag_name» [...] (mandatory)
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} delimiter_conversion`:
+    a sequence of conversions
+    from single-character or double-character delimiters
+    to tag names
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after each starting delimiter,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} prohibited_content`:
+    whether block tags or anchored block tags are prohibited
+    in the content between the opening and closing delimiters
+  ==
+}}
+{{des
+  --
+  Defines an inline assorted-delimiters replacement rule.
+  (A generalisation of the replacement that takes `*` and `**`
+  to `<em>` and `<strong>` in Markdown.)
+  --
+}}
+{{std
+  ==
+  - [`#inline-semantics`]
+  ==
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders

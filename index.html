@@ -236,7 +236,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#PartitioningReplacement"><code>PartitioningReplacement</code></a>
 </li>
 <li>
-[<code>InlineAssortedDelimitersReplacement</code>]
+<a href="#InlineAssortedDelimitersReplacement"><code>InlineAssortedDelimitersReplacement</code></a>
 </li>
 <li>
 [<code>HeadingReplacement</code>]
@@ -3871,7 +3871,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#FixedDelimitersReplacement"><code>FixedDelimitersReplacement</code></a>,
 <a href="#ExtensibleFenceReplacement"><code>ExtensibleFenceReplacement</code></a>,
 <a href="#PartitioningReplacement"><code>PartitioningReplacement</code></a>,
-[<code>InlineAssortedDelimitersReplacement</code>],
+<a href="#InlineAssortedDelimitersReplacement"><code>InlineAssortedDelimitersReplacement</code></a>,
 [<code>HeadingReplacement</code>],
 [<code>ReferenceDefinitionReplacement</code>],
 [<code>SpecifiedImageReplacement</code>],
@@ -4546,6 +4546,56 @@ starting pattern up to but not including an ending pattern.)
 </li>
 <li>
 <a href="#table-foot"><code>#table-foot</code></a>
+</li>
+</ul>
+</details>
+<h3 id="InlineAssortedDelimitersReplacement"><a href="#InlineAssortedDelimitersReplacement" class="permalink" aria-label="Permalink"></a><code>InlineAssortedDelimitersReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>InlineAssortedDelimitersReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- delimiter_conversion:
+    «character» | «character_doubled»=«tag_name» [...] (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | «string»
+- prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">delimiter_conversion</code>:
+a sequence of conversions
+from single-character or double-character delimiters
+to tag names
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, after each starting delimiter,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+<li>
+<code class="cmd cmdr">prohibited_content</code>:
+whether block tags or anchored block tags are prohibited
+in the content between the opening and closing delimiters
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines an inline assorted-delimiters replacement rule.
+(A generalisation of the replacement that takes <code>*</code> and <code>**</code>
+to <code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> in Markdown.)
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#inline-semantics"><code>#inline-semantics</code></a>
 </li>
 </ul>
 </details>
