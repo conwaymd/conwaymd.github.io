@@ -3678,15 +3678,15 @@ In CMD replacement rule syntax, a line must be one of the following:
   - `{.cmd .cmdr} extensible_delimiter`:
     the opening and closing extensible delimiter (a character repeated)
   - `{.cmd .cmdr} attribute_specifications`:
-    whether, after the opening delimiter,
+    whether, after the opening extensible delimiter,
     there may be [CMD attribute specifications] supplied,
     and if so, what the default specification is
   - `{.cmd .cmdr} prohibited_content`:
     whether block tags or anchored block tags are prohibited
-    in the content between the opening and closing delimiters
+    in the content between the opening and closing extensible delimiters
   - `{.cmd .cmdr} content_replacements`:
     sequence of replacements to be applied
-    to the content between the opening and closing delimiters
+    to the content between the opening and closing extensible delimiters
   - `{.cmd .cmdr} epilogue_delimiter`:
     the delimiter that must appear after the closing extensible delimiter
   - `{.cmd .cmdr} tag_name`:
@@ -3712,6 +3712,60 @@ In CMD replacement rule syntax, a line must be one of the following:
   - [`#tables`]
   - [`#paragraphs`]
   - [`#inline-code`]
+  ==
+}}
+
+###{#PartitioningReplacement} `PartitioningReplacement`
+[`PartitioningReplacement`]: #PartitioningReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  PartitioningReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - starting_pattern: «regex» (mandatory)
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - content_replacements: (def) NONE | #«id» [...]
+  - ending_pattern: (def) NONE | «regex»
+  - tag_name: (def) NONE | «name»
+  - concluding_replacements: (def) NONE | #«id» [...]
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} starting_pattern`:
+    pattern that marks the start of a partition
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after the starting pattern,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} content_replacements`:
+    sequence of replacements to be applied
+    to the content from the starting pattern up to the ending pattern
+  - `{.cmd .cmdr} ending_pattern`:
+    pattern, not consumed, that marks the end of a partition
+  - `{.cmd .cmdr} tag_name`:
+    the tag name of the element to be constructed
+  - `{.cmd .cmdr} concluding_replacements`:
+    sequence of replacements to be applied after construction of the element
+  ==
+}}
+{{des
+  --
+  Defines a generalised partitioning replacement rule.
+  (Does partitioning by consuming everything from a
+  starting pattern up to but not including an ending pattern.)
+  --
+}}
+{{std
+  ==
+  - [`#unordered-list-items`]
+  - [`#ordered-list-items`]
+  - [`#table-headers`]
+  - [`#table-data`]
+  - [`#table-rows`]
+  - [`#table-head`]
+  - [`#table-body`]
+  - [`#table-foot`]
   ==
 }}
 

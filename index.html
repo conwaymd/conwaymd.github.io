@@ -233,7 +233,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#ExtensibleFenceReplacement"><code>ExtensibleFenceReplacement</code></a>
 </li>
 <li>
-[<code>PartitioningReplacement</code>]
+<a href="#PartitioningReplacement"><code>PartitioningReplacement</code></a>
 </li>
 <li>
 [<code>InlineAssortedDelimitersReplacement</code>]
@@ -3870,7 +3870,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</code></a>,
 <a href="#FixedDelimitersReplacement"><code>FixedDelimitersReplacement</code></a>,
 <a href="#ExtensibleFenceReplacement"><code>ExtensibleFenceReplacement</code></a>,
-[<code>PartitioningReplacement</code>],
+<a href="#PartitioningReplacement"><code>PartitioningReplacement</code></a>,
 [<code>InlineAssortedDelimitersReplacement</code>],
 [<code>HeadingReplacement</code>],
 [<code>ReferenceDefinitionReplacement</code>],
@@ -4399,19 +4399,19 @@ the opening and closing extensible delimiter (a character repeated)
 </li>
 <li>
 <code class="cmd cmdr">attribute_specifications</code>:
-whether, after the opening delimiter,
+whether, after the opening extensible delimiter,
 there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
 and if so, what the default specification is
 </li>
 <li>
 <code class="cmd cmdr">prohibited_content</code>:
 whether block tags or anchored block tags are prohibited
-in the content between the opening and closing delimiters
+in the content between the opening and closing extensible delimiters
 </li>
 <li>
 <code class="cmd cmdr">content_replacements</code>:
 sequence of replacements to be applied
-to the content between the opening and closing delimiters
+to the content between the opening and closing extensible delimiters
 </li>
 <li>
 <code class="cmd cmdr">epilogue_delimiter</code>:
@@ -4463,6 +4463,89 @@ Defines a generalised extensible-fence-style replacement rule.
 </li>
 <li>
 <a href="#inline-code"><code>#inline-code</code></a>
+</li>
+</ul>
+</details>
+<h3 id="PartitioningReplacement"><a href="#PartitioningReplacement" class="permalink" aria-label="Permalink"></a><code>PartitioningReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>PartitioningReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- starting_pattern: «regex» (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | «string»
+- content_replacements: (def) NONE | #«id» [...]
+- ending_pattern: (def) NONE | «regex»
+- tag_name: (def) NONE | «name»
+- concluding_replacements: (def) NONE | #«id» [...]
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">starting_pattern</code>:
+pattern that marks the start of a partition
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, after the starting pattern,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+<li>
+<code class="cmd cmdr">content_replacements</code>:
+sequence of replacements to be applied
+to the content from the starting pattern up to the ending pattern
+</li>
+<li>
+<code class="cmd cmdr">ending_pattern</code>:
+pattern, not consumed, that marks the end of a partition
+</li>
+<li>
+<code class="cmd cmdr">tag_name</code>:
+the tag name of the element to be constructed
+</li>
+<li>
+<code class="cmd cmdr">concluding_replacements</code>:
+sequence of replacements to be applied after construction of the element
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a generalised partitioning replacement rule.
+(Does partitioning by consuming everything from a
+starting pattern up to but not including an ending pattern.)
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#unordered-list-items"><code>#unordered-list-items</code></a>
+</li>
+<li>
+<a href="#ordered-list-items"><code>#ordered-list-items</code></a>
+</li>
+<li>
+<a href="#table-headers"><code>#table-headers</code></a>
+</li>
+<li>
+<a href="#table-data"><code>#table-data</code></a>
+</li>
+<li>
+<a href="#table-rows"><code>#table-rows</code></a>
+</li>
+<li>
+<a href="#table-head"><code>#table-head</code></a>
+</li>
+<li>
+<a href="#table-body"><code>#table-body</code></a>
+</li>
+<li>
+<a href="#table-foot"><code>#table-foot</code></a>
 </li>
 </ul>
 </details>
