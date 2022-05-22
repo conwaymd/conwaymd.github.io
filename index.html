@@ -212,7 +212,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#PlaceholderMarkerReplacement"><code>PlaceholderMarkerReplacement</code></a>
 </li>
 <li>
-[<code>PlaceholderProtectionReplacement</code>]
+<a href="#PlaceholderProtectionReplacement"><code>PlaceholderProtectionReplacement</code></a>
 </li>
 <li>
 [<code>PlaceholderUnprotectionReplacement</code>]
@@ -3863,7 +3863,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <code class="cmd cmdr">«ClassName»</code> must be one of
 <a href="#ReplacementSequence"><code>ReplacementSequence</code></a>,
 <a href="#PlaceholderMarkerReplacement"><code>PlaceholderMarkerReplacement</code></a>,
-[<code>PlaceholderProtectionReplacement</code>],
+<a href="#PlaceholderProtectionReplacement"><code>PlaceholderProtectionReplacement</code></a>,
 [<code>PlaceholderUnprotectionReplacement</code>],
 [<code>DeIndentationReplacement</code>],
 [<code>OrdinaryDictionaryReplacement</code>],
@@ -3975,6 +3975,32 @@ Defines a rule for replacing the placeholder marker with a <a href="#cmd-placeho
 <ul>
 <li>
 <a href="#placeholder-markers"><code>#placeholder-markers</code></a>
+</li>
+</ul>
+</details>
+<h3 id="PlaceholderProtectionReplacement"><a href="#PlaceholderProtectionReplacement" class="permalink" aria-label="Permalink"></a><code>PlaceholderProtectionReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>PlaceholderProtectionReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for protecting strings with a <a href="#cmd-placeholders">placeholder</a>.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#placeholder-protect"><code>#placeholder-protect</code></a>
 </li>
 </ul>
 </details>

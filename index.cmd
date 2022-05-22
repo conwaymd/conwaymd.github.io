@@ -3372,6 +3372,29 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#PlaceholderProtectionReplacement} `PlaceholderProtectionReplacement`
+[`PlaceholderProtectionReplacement`]: #PlaceholderProtectionReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  PlaceholderProtectionReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`: position in the replacement queue
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for protecting strings with a [placeholder].
+  --
+}}
+{{std
+  ==
+  - [`#placeholder-protect`]
+  ==
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders
