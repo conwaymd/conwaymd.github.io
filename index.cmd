@@ -3902,6 +3902,39 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#ReferencedImageReplacement} `ReferencedImageReplacement`
+[`ReferencedImageReplacement`]: #ReferencedImageReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  ReferencedImageReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after the square-bracketed alt text,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} prohibited_content`:
+    whether block tags or anchored block tags are prohibited
+    in the square-bracketed alt text and the square-bracketed label
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for referenced images.
+  --
+}}
+{{std
+  ==
+  - [`#referenced-images`]
+  ==
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders
