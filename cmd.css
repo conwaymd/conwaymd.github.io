@@ -35,6 +35,10 @@ code {
   padding: 0.2em;
 }
 
+h2, h3, h4 {
+  margin-top: 1.7em;
+}
+
 html {
   background: var(--cmd-background-colour);
   margin: 0 auto;
