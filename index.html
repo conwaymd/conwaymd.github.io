@@ -218,7 +218,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#PlaceholderUnprotectionReplacement"><code>PlaceholderUnprotectionReplacement</code></a>
 </li>
 <li>
-[<code>DeIndentationReplacement</code>]
+<a href="#DeIndentationReplacement"><code>DeIndentationReplacement</code></a>
 </li>
 <li>
 [<code>OrdinaryDictionaryReplacement</code>]
@@ -3865,7 +3865,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#PlaceholderMarkerReplacement"><code>PlaceholderMarkerReplacement</code></a>,
 <a href="#PlaceholderProtectionReplacement"><code>PlaceholderProtectionReplacement</code></a>,
 <a href="#PlaceholderUnprotectionReplacement"><code>PlaceholderUnprotectionReplacement</code></a>,
-[<code>DeIndentationReplacement</code>],
+<a href="#DeIndentationReplacement"><code>DeIndentationReplacement</code></a>,
 [<code>OrdinaryDictionaryReplacement</code>],
 [<code>RegexDictionaryReplacement</code>],
 [<code>FixedDelimitersReplacement</code>],
@@ -3931,10 +3931,12 @@ beginning with whitespace.
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
 </li>
 <li>
-<code class="cmd cmdr">replacements</code>: sequence of replacements to be applied
+<code class="cmd cmdr">replacements</code>:
+sequence of replacements to be applied
 </li>
 </ul>
 </details>
@@ -3960,7 +3962,8 @@ Defines a replacement rule that applies a sequence of replacement rules.
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
 </li>
 </ul>
 </details>
@@ -3986,7 +3989,8 @@ Defines a rule for replacing the placeholder marker with a <a href="#cmd-placeho
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
 </li>
 </ul>
 </details>
@@ -4012,7 +4016,8 @@ Defines a replacement rule for protecting strings with a <a href="#cmd-placehold
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
 </li>
 </ul>
 </details>
@@ -4027,6 +4032,43 @@ Defines a replacement rule for restoring <a href="#cmd-placeholders">placeholder
 <ul>
 <li>
 <a href="#placeholder-unprotect"><code>#placeholder-unprotect</code></a>
+</li>
+</ul>
+</details>
+<h3 id="DeIndentationReplacement"><a href="#DeIndentationReplacement" class="permalink" aria-label="Permalink"></a><code>DeIndentationReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>DeIndentationReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- positive_flag: (def) NONE | «FLAG_NAME»
+- negative_flag: (def) NONE | «FLAG_NAME»
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">positive_flag</code>:
+name of flag that must be enabled for the replacement to be applied
+</li>
+<li>
+<code class="cmd cmdr">negative_flag</code>:
+name of flag that must not be enabled for the replacement to be applied
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for de-indentation.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#de-indent"><code>#de-indent</code></a>
 </li>
 </ul>
 </details>

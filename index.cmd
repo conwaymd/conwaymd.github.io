@@ -3334,8 +3334,10 @@ In CMD replacement rule syntax, a line must be one of the following:
   - replacements: (def) NONE | #«id» [...]
   ````
   ==
-  - `{.cmd .cmdr} queue_position`: position in the replacement queue
-  - `{.cmd .cmdr} replacements`: sequence of replacements to be applied
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} replacements`:
+    sequence of replacements to be applied
   ==
 }}
 {{des
@@ -3358,7 +3360,8 @@ In CMD replacement rule syntax, a line must be one of the following:
   - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
   ````
   ==
-  - `{.cmd .cmdr} queue_position`: position in the replacement queue
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
   ==
 }}
 {{des
@@ -3381,7 +3384,8 @@ In CMD replacement rule syntax, a line must be one of the following:
   - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
   ````
   ==
-  - `{.cmd .cmdr} queue_position`: position in the replacement queue
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
   ==
 }}
 {{des
@@ -3404,7 +3408,8 @@ In CMD replacement rule syntax, a line must be one of the following:
   - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
   ````
   ==
-  - `{.cmd .cmdr} queue_position`: position in the replacement queue
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
   ==
 }}
 {{des
@@ -3415,6 +3420,36 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{std
   ==
   - [`#placeholder-unprotect`]
+  ==
+}}
+
+###{#DeIndentationReplacement} `DeIndentationReplacement`
+[`DeIndentationReplacement`]: #DeIndentationReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  DeIndentationReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - positive_flag: (def) NONE | «FLAG_NAME»
+  - negative_flag: (def) NONE | «FLAG_NAME»
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} positive_flag`:
+    name of flag that must be enabled for the replacement to be applied
+  - `{.cmd .cmdr} negative_flag`:
+    name of flag that must not be enabled for the replacement to be applied
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for de-indentation.
+  --
+}}
+{{std
+  ==
+  - [`#de-indent`]
   ==
 }}
 
