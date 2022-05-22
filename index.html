@@ -215,7 +215,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#PlaceholderProtectionReplacement"><code>PlaceholderProtectionReplacement</code></a>
 </li>
 <li>
-[<code>PlaceholderUnprotectionReplacement</code>]
+<a href="#PlaceholderUnprotectionReplacement"><code>PlaceholderUnprotectionReplacement</code></a>
 </li>
 <li>
 [<code>DeIndentationReplacement</code>]
@@ -3864,7 +3864,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#ReplacementSequence"><code>ReplacementSequence</code></a>,
 <a href="#PlaceholderMarkerReplacement"><code>PlaceholderMarkerReplacement</code></a>,
 <a href="#PlaceholderProtectionReplacement"><code>PlaceholderProtectionReplacement</code></a>,
-[<code>PlaceholderUnprotectionReplacement</code>],
+<a href="#PlaceholderUnprotectionReplacement"><code>PlaceholderUnprotectionReplacement</code></a>,
 [<code>DeIndentationReplacement</code>],
 [<code>OrdinaryDictionaryReplacement</code>],
 [<code>RegexDictionaryReplacement</code>],
@@ -4001,6 +4001,32 @@ Defines a replacement rule for protecting strings with a <a href="#cmd-placehold
 <ul>
 <li>
 <a href="#placeholder-protect"><code>#placeholder-protect</code></a>
+</li>
+</ul>
+</details>
+<h3 id="PlaceholderUnprotectionReplacement"><a href="#PlaceholderUnprotectionReplacement" class="permalink" aria-label="Permalink"></a><code>PlaceholderUnprotectionReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>PlaceholderUnprotectionReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for restoring <a href="#cmd-placeholders">placeholders</a> to their strings.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#placeholder-unprotect"><code>#placeholder-unprotect</code></a>
 </li>
 </ul>
 </details>
