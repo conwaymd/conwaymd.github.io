@@ -3591,6 +3591,62 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#FixedDelimitersReplacement} `FixedDelimitersReplacement`
+[`FixedDelimitersReplacement`]: #FixedDelimitersReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  FixedDelimitersReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - syntax_type: BLOCK | INLINE (mandatory)
+  - allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
+  - opening_delimiter: «string» (mandatory)
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+  - content_replacements: (def) NONE | #«id» [...]
+  - closing_delimiter: «string» (mandatory)
+  - tag_name: (def) NONE | «name»
+  - concluding_replacements: (def) NONE | #«id» [...]
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} syntax_type`:
+    whether the syntax type is block (delimiters must be on their own lines)
+    or inline (delimiters may be anywhere)
+  - `{.cmd .cmdr} allowed_flags`:
+    letters and corresponding flag names
+  - `{.cmd .cmdr} opening_delimiter`:
+    the opening delimiter
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after the opening delimiter,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} prohibited_content`:
+    whether block tags or anchored block tags are prohibited
+    in the content between the opening and closing delimiters
+  - `{.cmd .cmdr} content_replacements`:
+    sequence of replacements to be applied
+    to the content between the opening and closing delimiters
+  - `{.cmd .cmdr} closing_delimiter`:
+    the closing delimiter
+  - `{.cmd .cmdr} tag_name`:
+    the resulting tag name of the element constructed after replacement
+  - `{.cmd .cmdr} concluding_replacements`:
+    sequence of replacements to be applied after construction of the element
+  ==
+}}
+{{des
+  --
+  Defines a fixed-delimiters replacement rule.
+  --
+}}
+{{std
+  --
+  (None)
+  --
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders

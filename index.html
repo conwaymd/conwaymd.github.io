@@ -227,7 +227,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</code></a>
 </li>
 <li>
-[<code>FixedDelimitersReplacement</code>]
+<a href="#FixedDelimitersReplacement"><code>FixedDelimitersReplacement</code></a>
 </li>
 <li>
 [<code>ExtensibleFenceReplacement</code>]
@@ -3868,7 +3868,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#DeIndentationReplacement"><code>DeIndentationReplacement</code></a>,
 <a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>,
 <a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</code></a>,
-[<code>FixedDelimitersReplacement</code>],
+<a href="#FixedDelimitersReplacement"><code>FixedDelimitersReplacement</code></a>,
 [<code>ExtensibleFenceReplacement</code>],
 [<code>PartitioningReplacement</code>],
 [<code>InlineAssortedDelimitersReplacement</code>],
@@ -4283,6 +4283,81 @@ Defines a replacement rule for a dictionary of regex substitutions.
 <a href="#escape-idle-html"><code>#escape-idle-html</code></a>
 </li>
 </ul>
+</details>
+<h3 id="FixedDelimitersReplacement"><a href="#FixedDelimitersReplacement" class="permalink" aria-label="Permalink"></a><code>FixedDelimitersReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>FixedDelimitersReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- syntax_type: BLOCK | INLINE (mandatory)
+- allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
+- opening_delimiter: «string» (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | «string»
+- prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+- content_replacements: (def) NONE | #«id» [...]
+- closing_delimiter: «string» (mandatory)
+- tag_name: (def) NONE | «name»
+- concluding_replacements: (def) NONE | #«id» [...]
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">syntax_type</code>:
+whether the syntax type is block (delimiters must be on their own lines)
+or inline (delimiters may be anywhere)
+</li>
+<li>
+<code class="cmd cmdr">allowed_flags</code>:
+letters and corresponding flag names
+</li>
+<li>
+<code class="cmd cmdr">opening_delimiter</code>:
+the opening delimiter
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, after the opening delimiter,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+<li>
+<code class="cmd cmdr">prohibited_content</code>:
+whether block tags or anchored block tags are prohibited
+in the content between the opening and closing delimiters
+</li>
+<li>
+<code class="cmd cmdr">content_replacements</code>:
+sequence of replacements to be applied
+to the content between the opening and closing delimiters
+</li>
+<li>
+<code class="cmd cmdr">closing_delimiter</code>:
+the closing delimiter
+</li>
+<li>
+<code class="cmd cmdr">tag_name</code>:
+the resulting tag name of the element constructed after replacement
+</li>
+<li>
+<code class="cmd cmdr">concluding_replacements</code>:
+sequence of replacements to be applied after construction of the element
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a fixed-delimiters replacement rule.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<p>
+(None)
+</p>
 </details>
 <h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
 <p>
