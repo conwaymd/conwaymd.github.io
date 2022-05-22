@@ -209,7 +209,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#ReplacementSequence"><code>ReplacementSequence</code></a>
 </li>
 <li>
-[<code>PlaceholderMarkerReplacement</code>]
+<a href="#PlaceholderMarkerReplacement"><code>PlaceholderMarkerReplacement</code></a>
 </li>
 <li>
 [<code>PlaceholderProtectionReplacement</code>]
@@ -3862,7 +3862,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <li>
 <code class="cmd cmdr">«ClassName»</code> must be one of
 <a href="#ReplacementSequence"><code>ReplacementSequence</code></a>,
-[<code>PlaceholderMarkerReplacement</code>],
+<a href="#PlaceholderMarkerReplacement"><code>PlaceholderMarkerReplacement</code></a>,
 [<code>PlaceholderProtectionReplacement</code>],
 [<code>PlaceholderUnprotectionReplacement</code>],
 [<code>DeIndentationReplacement</code>],
@@ -3945,10 +3945,36 @@ Defines a replacement rule that applies a sequence of replacement rules.
 </p>
 </details>
 <details open>
-<summary>Standard rule usages</summary>
+<summary>Standard rules usage</summary>
 <ul>
 <li>
 <a href="#whitespace"><code>#whitespace</code></a>
+</li>
+</ul>
+</details>
+<h3 id="PlaceholderMarkerReplacement"><a href="#PlaceholderMarkerReplacement" class="permalink" aria-label="Permalink"></a><code>PlaceholderMarkerReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>PlaceholderMarkerReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a rule for replacing the placeholder marker with a <a href="#cmd-placeholders">placeholder</a>.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#placeholder-markers"><code>#placeholder-markers</code></a>
 </li>
 </ul>
 </details>

@@ -44,7 +44,7 @@ OrdinaryDictionaryReplacement: #details-summary-shorthand
   '
 * {{std -->
     '{{
-    <summary>Standard rule usages</summary>
+    <summary>Standard rules usage</summary>
   '
 
 FixedDelimitersReplacement: #details
@@ -3346,6 +3346,29 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{std
   ==
   - [`#whitespace`]
+  ==
+}}
+
+###{#PlaceholderMarkerReplacement} `PlaceholderMarkerReplacement`
+[`PlaceholderMarkerReplacement`]: #PlaceholderMarkerReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  PlaceholderMarkerReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`: position in the replacement queue
+  ==
+}}
+{{des
+  --
+  Defines a rule for replacing the placeholder marker with a [placeholder].
+  --
+}}
+{{std
+  ==
+  - [`#placeholder-markers`]
   ==
 }}
 
