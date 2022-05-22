@@ -3437,9 +3437,9 @@ In CMD replacement rule syntax, a line must be one of the following:
   - `{.cmd .cmdr} queue_position`:
     position in the replacement queue
   - `{.cmd .cmdr} positive_flag`:
-    name of flag that must be enabled for the replacement to be applied
+    name of the flag that must be enabled for the replacement to be applied
   - `{.cmd .cmdr} negative_flag`:
-    name of flag that must not be enabled for the replacement to be applied
+    name of the flag that must not be enabled for the replacement to be applied
   ==
 }}
 {{des
@@ -3450,6 +3450,70 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{std
   ==
   - [`#de-indent`]
+  ==
+}}
+
+###{#OrdinaryDictionaryReplacement} `OrdinaryDictionaryReplacement`
+[`OrdinaryDictionaryReplacement`]: #OrdinaryDictionaryReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  OrdinaryDictionaryReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - positive_flag: (def) NONE | «FLAG_NAME»
+  - negative_flag: (def) NONE | «FLAG_NAME»
+  - apply_mode: (def) SIMULTANEOUS | SEQUENTIAL
+  * "«pattern»" | '«pattern»' | «pattern»
+      -->
+    CMD_VERSION | CMD_NAME | CMD_BASENAME |
+            "«substitute»" | '«substitute»' | «substitute»
+  [...]
+  - concluding_replacements: (def) NONE | #«id» [...]
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} positive_flag`:
+    name of the flag that must be enabled for the replacement to be applied
+  - `{.cmd .cmdr} negative_flag`:
+    name of the flag that must not be enabled for the replacement to be applied
+  - `{.cmd .cmdr} apply_mode`:
+    whether the substitutions are to be applied simultaneously or sequentially
+  - Patterns may be double-quoted, single-quoted, or bare.
+  - Substitutes may be a keyword, double-quoted, single-quoted, or bare.
+    Possible keywords are:
+    ''''
+    |^
+      //
+        ; Keyword
+        ; Description
+    |:
+      //
+        , `CMD_VERSION`
+        , `__version__` in [`cmd.py`]
+          (currently <code class="html">%cmd-version</code>)
+      //
+        , `CMD_NAME`
+        , CMD file name, relative to working directory, without extension
+      //
+        , `CMD_BASENAME`
+        , CMD file name, without path, without extension
+    ''''
+  - `{.cmd .cmdr} concluding_replacements`:
+    sequence of replacements to be applied after substitution
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for a dictionary of ordinary substitutions.
+  --
+}}
+{{std
+  ==
+  - [`#escape-html`]
+  - [`#boilerplate-properties`]
+  - [`#cmd-properties`]
+  - [`#backslash-escapes`]
   ==
 }}
 

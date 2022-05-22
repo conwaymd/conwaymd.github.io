@@ -221,7 +221,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#DeIndentationReplacement"><code>DeIndentationReplacement</code></a>
 </li>
 <li>
-[<code>OrdinaryDictionaryReplacement</code>]
+<a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>
 </li>
 <li>
 [<code>RegexDictionaryReplacement</code>]
@@ -3866,7 +3866,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#PlaceholderProtectionReplacement"><code>PlaceholderProtectionReplacement</code></a>,
 <a href="#PlaceholderUnprotectionReplacement"><code>PlaceholderUnprotectionReplacement</code></a>,
 <a href="#DeIndentationReplacement"><code>DeIndentationReplacement</code></a>,
-[<code>OrdinaryDictionaryReplacement</code>],
+<a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>,
 [<code>RegexDictionaryReplacement</code>],
 [<code>FixedDelimitersReplacement</code>],
 [<code>ExtensibleFenceReplacement</code>],
@@ -3907,7 +3907,7 @@ The start of an <b>substitution declaration</b>:
 <pre class="cmd cmdr"><code><b>*</b> «pattern» <b>--&gt;</b> «substitute»
 </code></pre>
 Declares a substitution for the replacement that is currently being defined
-(which must be an [<code>OrdinaryDictionaryReplacement</code>]
+(which must be an <a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>
 or a [<code>RegexDictionaryReplacement</code>]).
 <ul>
 <li>
@@ -4050,11 +4050,11 @@ position in the replacement queue
 </li>
 <li>
 <code class="cmd cmdr">positive_flag</code>:
-name of flag that must be enabled for the replacement to be applied
+name of the flag that must be enabled for the replacement to be applied
 </li>
 <li>
 <code class="cmd cmdr">negative_flag</code>:
-name of flag that must not be enabled for the replacement to be applied
+name of the flag that must not be enabled for the replacement to be applied
 </li>
 </ul>
 </details>
@@ -4069,6 +4069,97 @@ Defines a replacement rule for de-indentation.
 <ul>
 <li>
 <a href="#de-indent"><code>#de-indent</code></a>
+</li>
+</ul>
+</details>
+<h3 id="OrdinaryDictionaryReplacement"><a href="#OrdinaryDictionaryReplacement" class="permalink" aria-label="Permalink"></a><code>OrdinaryDictionaryReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- positive_flag: (def) NONE | «FLAG_NAME»
+- negative_flag: (def) NONE | «FLAG_NAME»
+- apply_mode: (def) SIMULTANEOUS | SEQUENTIAL
+* "«pattern»" | '«pattern»' | «pattern»
+    --&gt;
+  CMD_VERSION | CMD_NAME | CMD_BASENAME |
+          "«substitute»" | '«substitute»' | «substitute»
+[...]
+- concluding_replacements: (def) NONE | #«id» [...]
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">positive_flag</code>:
+name of the flag that must be enabled for the replacement to be applied
+</li>
+<li>
+<code class="cmd cmdr">negative_flag</code>:
+name of the flag that must not be enabled for the replacement to be applied
+</li>
+<li>
+<code class="cmd cmdr">apply_mode</code>:
+whether the substitutions are to be applied simultaneously or sequentially
+</li>
+<li>
+Patterns may be double-quoted, single-quoted, or bare.
+</li>
+<li>
+Substitutes may be a keyword, double-quoted, single-quoted, or bare.
+Possible keywords are:
+<table>
+<thead>
+<tr>
+<th>Keyword</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CMD_VERSION</code></td>
+<td><code>__version__</code> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>
+(currently <code class="html">4.1.0</code>)</td>
+</tr>
+<tr>
+<td><code>CMD_NAME</code></td>
+<td>CMD file name, relative to working directory, without extension</td>
+</tr>
+<tr>
+<td><code>CMD_BASENAME</code></td>
+<td>CMD file name, without path, without extension</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<code class="cmd cmdr">concluding_replacements</code>:
+sequence of replacements to be applied after substitution
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for a dictionary of ordinary substitutions.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#escape-html"><code>#escape-html</code></a>
+</li>
+<li>
+<a href="#boilerplate-properties"><code>#boilerplate-properties</code></a>
+</li>
+<li>
+<a href="#cmd-properties"><code>#cmd-properties</code></a>
+</li>
+<li>
+<a href="#backslash-escapes"><code>#backslash-escapes</code></a>
 </li>
 </ul>
 </details>
