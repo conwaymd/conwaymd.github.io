@@ -42,6 +42,10 @@ OrdinaryDictionaryReplacement: #details-summary-shorthand
     '{{{-open}
     <summary>Dependants</summary>
   '
+* {{std -->
+    '{{
+    <summary>Standard rule usages</summary>
+  '
 
 FixedDelimitersReplacement: #details
 - queue_position: AFTER #details-summary-shorthand
@@ -3319,6 +3323,31 @@ In CMD replacement rule syntax, a line must be one of the following:
   A __continuation__ (of an attribute declaration or substitution declaration),
   beginning with whitespace.
 ++
+
+###{#ReplacementSequence} `ReplacementSequence`
+[`ReplacementSequence`]: #ReplacementSequence
+
+{{syn
+  ````{.cmd .cmdr}
+  ReplacementSequence: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - replacements: (def) NONE | #«id» [...]
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`: position in the replacement queue
+  - `{.cmd .cmdr} replacements`: sequence of replacements to be applied
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule that applies a sequence of replacement rules.
+  --
+}}
+{{std
+  ==
+  - [`#whitespace`]
+  ==
+}}
 
 
 ##{#cmd-placeholders} CMD placeholders

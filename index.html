@@ -206,7 +206,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#replacement-rule-syntax">CMD replacement rule syntax</a>
 <ul>
 <li>
-[<code>ReplacementSequence</code>]
+<a href="#ReplacementSequence"><code>ReplacementSequence</code></a>
 </li>
 <li>
 [<code>PlaceholderMarkerReplacement</code>]
@@ -3861,7 +3861,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <ul>
 <li>
 <code class="cmd cmdr">«ClassName»</code> must be one of
-[<code>ReplacementSequence</code>],
+<a href="#ReplacementSequence"><code>ReplacementSequence</code></a>,
 [<code>PlaceholderMarkerReplacement</code>],
 [<code>PlaceholderProtectionReplacement</code>],
 [<code>PlaceholderUnprotectionReplacement</code>],
@@ -3922,6 +3922,36 @@ A <b>continuation</b> (of an attribute declaration or substitution declaration),
 beginning with whitespace.
 </li>
 </ol>
+<h3 id="ReplacementSequence"><a href="#ReplacementSequence" class="permalink" aria-label="Permalink"></a><code>ReplacementSequence</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>ReplacementSequence: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- replacements: (def) NONE | #«id» [...]
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>: position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">replacements</code>: sequence of replacements to be applied
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule that applies a sequence of replacement rules.
+</p>
+</details>
+<details open>
+<summary>Standard rule usages</summary>
+<ul>
+<li>
+<a href="#whitespace"><code>#whitespace</code></a>
+</li>
+</ul>
+</details>
 <h2 id="cmd-placeholders"><a href="#cmd-placeholders" class="permalink" aria-label="Permalink"></a>CMD placeholders</h2>
 <p>
 There are many instances in which the result of a replacement
