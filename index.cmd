@@ -4008,6 +4008,39 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#ReferencedLinkReplacement} `ReferencedLinkReplacement`
+[`ReferencedLinkReplacement`]: #ReferencedLinkReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  ReferencedLinkReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after the square-bracketed link text,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} prohibited_content`:
+    whether block tags or anchored block tags are prohibited
+    in the square-bracketed link text and the square-bracketed label
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for referenced links.
+  --
+}}
+{{std
+  ==
+  - [`#referenced-links`]
+  ==
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders
