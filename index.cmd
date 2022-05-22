@@ -3242,7 +3242,7 @@ In CMD replacement rule syntax, a line must be one of the following:
 1.
   __Whitespace-only__.
   <br>
-  Marks the end of the declaration of a replacement rule.
+  Ends the definition of a replacement rule.
 2.
   A __comment__:
   ````{.cmd .cmdr}
@@ -3269,7 +3269,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   ``{.cmd .cmdr}
   «ClassName»@(:)@ @(#)@«id»
   ``
-  Begins the declaration of a replacement rule
+  Begins the definition of a replacement rule
   with class `{.cmd .cmdr} «ClassName»`.
   ==
   - `{.cmd .cmdr} «ClassName»` must be one of
@@ -3299,10 +3299,10 @@ In CMD replacement rule syntax, a line must be one of the following:
   ``{.cmd .cmdr}
   @(-)@ «name»@(:)@ «value»
   ``
-  Declares an attribute for the replacement that is currently being declared.
+  Declares an attribute for the replacement that is currently being defined.
   ==
   - `{.cmd .cmdr} «name»` must be one of the valid attribute names
-    for the replacement that is currently being declared.
+    for the replacement that is currently being defined.
   - `{.cmd .cmdr} «value»` must be a suitable attribute value
     for that attribute name.
   ==
@@ -3311,7 +3311,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   ``{.cmd .cmdr}
   @(*)@ «pattern» @(-->)@ «substitute»
   ``
-  Declares a substitution for the replacement that is currently being declared
+  Declares a substitution for the replacement that is currently being defined
   (which must be an [`OrdinaryDictionaryReplacement`]
   or a [`RegexDictionaryReplacement`]).
   ==

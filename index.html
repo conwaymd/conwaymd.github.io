@@ -3825,7 +3825,7 @@ In CMD replacement rule syntax, a line must be one of the following:
 <ol>
 <li>
 <b>Whitespace-only</b>.<br>
-Marks the end of the declaration of a replacement rule.
+Ends the definition of a replacement rule.
 </li>
 <li>
 A <b>comment</b>:
@@ -3856,7 +3856,7 @@ is to have the extension <code>.cmdr</code>.
 A <b>class declaration</b>:
 <pre class="cmd cmdr"><code>«ClassName»<b>:</b> <b>#</b>«id»
 </code></pre>
-Begins the declaration of a replacement rule
+Begins the definition of a replacement rule
 with class <code class="cmd cmdr">«ClassName»</code>.
 <ul>
 <li>
@@ -3890,11 +3890,11 @@ or
 The start of an <b>attribute declaration</b>:
 <pre class="cmd cmdr"><code><b>-</b> «name»<b>:</b> «value»
 </code></pre>
-Declares an attribute for the replacement that is currently being declared.
+Declares an attribute for the replacement that is currently being defined.
 <ul>
 <li>
 <code class="cmd cmdr">«name»</code> must be one of the valid attribute names
-for the replacement that is currently being declared.
+for the replacement that is currently being defined.
 </li>
 <li>
 <code class="cmd cmdr">«value»</code> must be a suitable attribute value
@@ -3906,7 +3906,7 @@ for that attribute name.
 The start of an <b>substitution declaration</b>:
 <pre class="cmd cmdr"><code><b>*</b> «pattern» <b>--&gt;</b> «substitute»
 </code></pre>
-Declares a substitution for the replacement that is currently being declared
+Declares a substitution for the replacement that is currently being defined
 (which must be an [<code>OrdinaryDictionaryReplacement</code>]
 or a [<code>RegexDictionaryReplacement</code>]).
 <ul>
