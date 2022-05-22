@@ -224,7 +224,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>
 </li>
 <li>
-[<code>RegexDictionaryReplacement</code>]
+<a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</code></a>
 </li>
 <li>
 [<code>FixedDelimitersReplacement</code>]
@@ -3867,7 +3867,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#PlaceholderUnprotectionReplacement"><code>PlaceholderUnprotectionReplacement</code></a>,
 <a href="#DeIndentationReplacement"><code>DeIndentationReplacement</code></a>,
 <a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>,
-[<code>RegexDictionaryReplacement</code>],
+<a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</code></a>,
 [<code>FixedDelimitersReplacement</code>],
 [<code>ExtensibleFenceReplacement</code>],
 [<code>PartitioningReplacement</code>],
@@ -3908,7 +3908,7 @@ The start of an <b>substitution declaration</b>:
 </code></pre>
 Declares a substitution for the replacement that is currently being defined
 (which must be an <a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>
-or a [<code>RegexDictionaryReplacement</code>]).
+or a <a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</code></a>).
 <ul>
 <li>
 The number of hyphens in the delimiter <code class="cmd cmdr"><b>--&gt;</b></code>
@@ -4160,6 +4160,127 @@ Defines a replacement rule for a dictionary of ordinary substitutions.
 </li>
 <li>
 <a href="#backslash-escapes"><code>#backslash-escapes</code></a>
+</li>
+</ul>
+</details>
+<h3 id="RegexDictionaryReplacement"><a href="#RegexDictionaryReplacement" class="permalink" aria-label="Permalink"></a><code>RegexDictionaryReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- positive_flag: (def) NONE | «FLAG_NAME»
+- negative_flag: (def) NONE | «FLAG_NAME»
+* "«pattern»" | '«pattern»' | «pattern»
+    --&gt;
+  CMD_VERSION | CMD_NAME | CMD_BASENAME |
+          "«substitute»" | '«substitute»' | «substitute»
+[...]
+- concluding_replacements: (def) NONE | #«id» [...]
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">positive_flag</code>:
+name of the flag that must be enabled for the replacement to be applied
+</li>
+<li>
+<code class="cmd cmdr">negative_flag</code>:
+name of the flag that must not be enabled for the replacement to be applied
+</li>
+<li>
+<code class="cmd cmdr">apply_mode</code>:
+whether the substitutions are to be applied simultaneously or sequentially
+</li>
+<li>
+Patterns may be double-quoted, single-quoted, or bare.
+</li>
+<li>
+Substitutes may be a keyword, double-quoted, single-quoted, or bare.
+Possible keywords are:
+<table>
+<thead>
+<tr>
+<th>Keyword</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CMD_VERSION</code></td>
+<td><code>__version__</code> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>
+(currently <code class="html">4.1.0</code>)</td>
+</tr>
+<tr>
+<td><code>CMD_NAME</code></td>
+<td>CMD file name, relative to working directory, without extension</td>
+</tr>
+<tr>
+<td><code>CMD_BASENAME</code></td>
+<td>CMD file name, without path, without extension</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+Patterns and substitutes are parsed according to Python regex syntax
+with <code>flags=re.ASCII | re.MULTILINE | re.VERBOSE</code>.
+</li>
+<li>
+<code class="cmd cmdr">concluding_replacements</code>:
+sequence of replacements to be applied after substitution
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for a dictionary of regex substitutions.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#trim-whitespace"><code>#trim-whitespace</code></a>
+</li>
+<li>
+<a href="#reduce-whitespace"><code>#reduce-whitespace</code></a>
+</li>
+<li>
+<a href="#code-tag-wrap"><code>#code-tag-wrap</code></a>
+</li>
+<li>
+<a href="#comments"><code>#comments</code></a>
+</li>
+<li>
+<a href="#prepend-newline"><code>#prepend-newline</code></a>
+</li>
+<li>
+<a href="#mark-table-headers-for-preceding-table-data"><code>#mark-table-headers-for-preceding-table-data</code></a>
+</li>
+<li>
+<a href="#unmark-table-headers-for-preceding-table-data"><code>#unmark-table-headers-for-preceding-table-data</code></a>
+</li>
+<li>
+<a href="#boilerplate"><code>#boilerplate</code></a>
+</li>
+<li>
+<a href="#boilerplate-protect"><code>#boilerplate-protect</code></a>
+</li>
+<li>
+<a href="#backslash-continuations"><code>#backslash-continuations</code></a>
+</li>
+<li>
+<a href="#suppress-scheme"><code>#suppress-scheme</code></a>
+</li>
+<li>
+<a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>
+</li>
+<li>
+<a href="#escape-idle-html"><code>#escape-idle-html</code></a>
 </li>
 </ul>
 </details>

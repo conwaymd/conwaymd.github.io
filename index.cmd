@@ -3517,6 +3517,80 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#RegexDictionaryReplacement} `RegexDictionaryReplacement`
+[`RegexDictionaryReplacement`]: #RegexDictionaryReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  RegexDictionaryReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - positive_flag: (def) NONE | «FLAG_NAME»
+  - negative_flag: (def) NONE | «FLAG_NAME»
+  * "«pattern»" | '«pattern»' | «pattern»
+      -->
+    CMD_VERSION | CMD_NAME | CMD_BASENAME |
+            "«substitute»" | '«substitute»' | «substitute»
+  [...]
+  - concluding_replacements: (def) NONE | #«id» [...]
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} positive_flag`:
+    name of the flag that must be enabled for the replacement to be applied
+  - `{.cmd .cmdr} negative_flag`:
+    name of the flag that must not be enabled for the replacement to be applied
+  - `{.cmd .cmdr} apply_mode`:
+    whether the substitutions are to be applied simultaneously or sequentially
+  - Patterns may be double-quoted, single-quoted, or bare.
+  - Substitutes may be a keyword, double-quoted, single-quoted, or bare.
+    Possible keywords are:
+    ''''
+    |^
+      //
+        ; Keyword
+        ; Description
+    |:
+      //
+        , `CMD_VERSION`
+        , `__version__` in [`cmd.py`]
+          (currently <code class="html">%cmd-version</code>)
+      //
+        , `CMD_NAME`
+        , CMD file name, relative to working directory, without extension
+      //
+        , `CMD_BASENAME`
+        , CMD file name, without path, without extension
+    ''''
+  - Patterns and substitutes are parsed according to Python regex syntax
+    with `flags=re.ASCII | re.MULTILINE | re.VERBOSE`.
+  - `{.cmd .cmdr} concluding_replacements`:
+    sequence of replacements to be applied after substitution
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for a dictionary of regex substitutions.
+  --
+}}
+{{std
+  ==
+  - [`#trim-whitespace`]
+  - [`#reduce-whitespace`]
+  - [`#code-tag-wrap`]
+  - [`#comments`]
+  - [`#prepend-newline`]
+  - [`#mark-table-headers-for-preceding-table-data`]
+  - [`#unmark-table-headers-for-preceding-table-data`]
+  - [`#boilerplate`]
+  - [`#boilerplate-protect`]
+  - [`#backslash-continuations`]
+  - [`#suppress-scheme`]
+  - [`#angle-bracket-wrap`]
+  - [`#escape-idle-html`]
+  ==
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders
