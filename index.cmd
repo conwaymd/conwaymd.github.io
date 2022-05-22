@@ -3615,7 +3615,7 @@ In CMD replacement rule syntax, a line must be one of the following:
     whether the syntax type is block (delimiters must be on their own lines)
     or inline (delimiters may be anywhere)
   - `{.cmd .cmdr} allowed_flags`:
-    letters and corresponding flag names
+    flag letters and corresponding flag names
   - `{.cmd .cmdr} opening_delimiter`:
     the opening delimiter
   - `{.cmd .cmdr} attribute_specifications`:
@@ -3672,7 +3672,7 @@ In CMD replacement rule syntax, a line must be one of the following:
     whether the syntax type is block (delimiters must be on their own lines)
     or inline (delimiters may be anywhere)
   - `{.cmd .cmdr} allowed_flags`:
-    letters and corresponding flag names
+    flag letters and corresponding flag names
   - `{.cmd .cmdr} prologue_delimiter`:
     the delimiter that must appear before the opening extensible delimiter
   - `{.cmd .cmdr} extensible_delimiter`:
@@ -3932,6 +3932,45 @@ In CMD replacement rule syntax, a line must be one of the following:
 {{std
   ==
   - [`#referenced-images`]
+  ==
+}}
+
+###{#ExplicitLinkReplacement} `ExplicitLinkReplacement`
+[`ExplicitLinkReplacement`]: #ExplicitLinkReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  ExplicitLinkReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  - content_replacements: (def) NONE | #«id» [...]
+  - concluding_replacements: (def) NONE | #«id» [...]
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} allowed_flags`:
+    flag letters and corresponding flag names
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, after the opening angle bracket,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  - `{.cmd .cmdr} content_replacements`:
+    sequence of replacements to be applied
+    to the content between the opening and closing angle brackets
+  - `{.cmd .cmdr} concluding_replacements`:
+    sequence of replacements to be applied after construction of the element
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for explicit links.
+  --
+}}
+{{std
+  ==
+  - [`#explicit-links`]
   ==
 }}
 

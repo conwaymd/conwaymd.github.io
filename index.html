@@ -251,7 +251,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#ReferencedImageReplacement"><code>ReferencedImageReplacement</code></a>
 </li>
 <li>
-[<code>ExplicitLinkReplacement</code>]
+<a href="#ExplicitLinkReplacement"><code>ExplicitLinkReplacement</code></a>
 </li>
 <li>
 [<code>SpecifiedLinkReplacement</code>]
@@ -3876,7 +3876,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#ReferenceDefinitionReplacement"><code>ReferenceDefinitionReplacement</code></a>,
 <a href="#SpecifiedImageReplacement"><code>SpecifiedImageReplacement</code></a>,
 <a href="#ReferencedImageReplacement"><code>ReferencedImageReplacement</code></a>,
-[<code>ExplicitLinkReplacement</code>],
+<a href="#ExplicitLinkReplacement"><code>ExplicitLinkReplacement</code></a>,
 [<code>SpecifiedLinkReplacement</code>],
 or
 [<code>ReferencedLinkReplacement</code>].
@@ -4311,7 +4311,7 @@ or inline (delimiters may be anywhere)
 </li>
 <li>
 <code class="cmd cmdr">allowed_flags</code>:
-letters and corresponding flag names
+flag letters and corresponding flag names
 </li>
 <li>
 <code class="cmd cmdr">opening_delimiter</code>:
@@ -4387,7 +4387,7 @@ or inline (delimiters may be anywhere)
 </li>
 <li>
 <code class="cmd cmdr">allowed_flags</code>:
-letters and corresponding flag names
+flag letters and corresponding flag names
 </li>
 <li>
 <code class="cmd cmdr">prologue_delimiter</code>:
@@ -4745,6 +4745,56 @@ Defines a replacement rule for referenced images.
 <ul>
 <li>
 <a href="#referenced-images"><code>#referenced-images</code></a>
+</li>
+</ul>
+</details>
+<h3 id="ExplicitLinkReplacement"><a href="#ExplicitLinkReplacement" class="permalink" aria-label="Permalink"></a><code>ExplicitLinkReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>ExplicitLinkReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
+- attribute_specifications: (def) NONE | EMPTY | «string»
+- content_replacements: (def) NONE | #«id» [...]
+- concluding_replacements: (def) NONE | #«id» [...]
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">allowed_flags</code>:
+flag letters and corresponding flag names
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, after the opening angle bracket,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+<li>
+<code class="cmd cmdr">content_replacements</code>:
+sequence of replacements to be applied
+to the content between the opening and closing angle brackets
+</li>
+<li>
+<code class="cmd cmdr">concluding_replacements</code>:
+sequence of replacements to be applied after construction of the element
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for explicit links.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#explicit-links"><code>#explicit-links</code></a>
 </li>
 </ul>
 </details>
