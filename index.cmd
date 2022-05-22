@@ -3839,6 +3839,35 @@ In CMD replacement rule syntax, a line must be one of the following:
   ==
 }}
 
+###{#ReferenceDefinitionReplacement} `ReferenceDefinitionReplacement`
+[`ReferenceDefinitionReplacement`]: #ReferenceDefinitionReplacement
+
+{{syn
+  ````{.cmd .cmdr}
+  ReferenceDefinitionReplacement: #«id»
+  - queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+  - attribute_specifications: (def) NONE | EMPTY | «string»
+  ````
+  ==
+  - `{.cmd .cmdr} queue_position`:
+    position in the replacement queue
+  - `{.cmd .cmdr} attribute_specifications`:
+    whether, between the bracketed label and the declaring colon,
+    there may be [CMD attribute specifications] supplied,
+    and if so, what the default specification is
+  ==
+}}
+{{des
+  --
+  Defines a replacement rule for consuming reference definitions.
+  --
+}}
+{{std
+  ==
+  - [`#reference-definitions`]
+  ==
+}}
+
 
 ##{#cmd-placeholders} CMD placeholders
 [placeholder]: #cmd-placeholders

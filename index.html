@@ -242,7 +242,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#HeadingReplacement"><code>HeadingReplacement</code></a>
 </li>
 <li>
-[<code>ReferenceDefinitionReplacement</code>]
+<a href="#ReferenceDefinitionReplacement"><code>ReferenceDefinitionReplacement</code></a>
 </li>
 <li>
 [<code>SpecifiedImageReplacement</code>]
@@ -3873,7 +3873,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#PartitioningReplacement"><code>PartitioningReplacement</code></a>,
 <a href="#InlineAssortedDelimitersReplacement"><code>InlineAssortedDelimitersReplacement</code></a>,
 <a href="#HeadingReplacement"><code>HeadingReplacement</code></a>,
-[<code>ReferenceDefinitionReplacement</code>],
+<a href="#ReferenceDefinitionReplacement"><code>ReferenceDefinitionReplacement</code></a>,
 [<code>SpecifiedImageReplacement</code>],
 [<code>ReferencedImageReplacement</code>],
 [<code>ExplicitLinkReplacement</code>],
@@ -4630,6 +4630,40 @@ Defines a replacement rule for headings.
 <ul>
 <li>
 <a href="#headings"><code>#headings</code></a>
+</li>
+</ul>
+</details>
+<h3 id="ReferenceDefinitionReplacement"><a href="#ReferenceDefinitionReplacement" class="permalink" aria-label="Permalink"></a><code>ReferenceDefinitionReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>ReferenceDefinitionReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- attribute_specifications: (def) NONE | EMPTY | «string»
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, between the bracketed label and the declaring colon,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for consuming reference definitions.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#reference-definitions"><code>#reference-definitions</code></a>
 </li>
 </ul>
 </details>
