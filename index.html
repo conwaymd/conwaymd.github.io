@@ -254,7 +254,7 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#ExplicitLinkReplacement"><code>ExplicitLinkReplacement</code></a>
 </li>
 <li>
-[<code>SpecifiedLinkReplacement</code>]
+<a href="#SpecifiedLinkReplacement"><code>SpecifiedLinkReplacement</code></a>
 </li>
 <li>
 [<code>ReferencedLinkReplacement</code>]
@@ -3877,7 +3877,7 @@ with class <code class="cmd cmdr">«ClassName»</code>.
 <a href="#SpecifiedImageReplacement"><code>SpecifiedImageReplacement</code></a>,
 <a href="#ReferencedImageReplacement"><code>ReferencedImageReplacement</code></a>,
 <a href="#ExplicitLinkReplacement"><code>ExplicitLinkReplacement</code></a>,
-[<code>SpecifiedLinkReplacement</code>],
+<a href="#SpecifiedLinkReplacement"><code>SpecifiedLinkReplacement</code></a>,
 or
 [<code>ReferencedLinkReplacement</code>].
 </li>
@@ -4795,6 +4795,47 @@ Defines a replacement rule for explicit links.
 <ul>
 <li>
 <a href="#explicit-links"><code>#explicit-links</code></a>
+</li>
+</ul>
+</details>
+<h3 id="SpecifiedLinkReplacement"><a href="#SpecifiedLinkReplacement" class="permalink" aria-label="Permalink"></a><code>SpecifiedLinkReplacement</code></h3>
+<details open>
+<summary>Syntax</summary>
+<pre class="cmd cmdr"><code>SpecifiedLinkReplacement: #«id»
+- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+- attribute_specifications: (def) NONE | EMPTY | «string»
+- prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
+</code></pre>
+<ul>
+<li>
+<code class="cmd cmdr">queue_position</code>:
+position in the replacement queue
+</li>
+<li>
+<code class="cmd cmdr">attribute_specifications</code>:
+whether, between the square-bracketed link text
+and the round-bracketed URI &amp; title,
+there may be <a href="#cmd-attribute-specifications">CMD attribute specifications</a> supplied,
+and if so, what the default specification is
+</li>
+<li>
+<code class="cmd cmdr">prohibited_content</code>:
+whether block tags or anchored block tags are prohibited
+in the square-bracketed link text
+</li>
+</ul>
+</details>
+<details open>
+<summary>Description</summary>
+<p>
+Defines a replacement rule for specified links.
+</p>
+</details>
+<details open>
+<summary>Standard rules usage</summary>
+<ul>
+<li>
+<a href="#specified-links"><code>#specified-links</code></a>
 </li>
 </ul>
 </details>
