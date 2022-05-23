@@ -4192,6 +4192,6 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
   https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
     %cmd-name.html
 [conway-markdown.github.io]:
-  https://github.com/conway-markdown/conway-markdown.github.io/
+  https://github.com/conway-markdown/conway-markdown.github.io
 [conway-markdown]:
   https://github.com/conway-markdown/conway-markdown
