@@ -2309,15 +2309,15 @@ However, they might be called by queued replacements.
     ==
     - CMD:
       ````{.cmd .cmdc}
-      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      [Beware]{href=https://example.com/evil/}(https://example.com/good/)
       ````
     - HTML:
       <||
-      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      [Beware]{href=https://example.com/evil/}(https://example.com/good/)
       ||>
     - Rendered:
       --
-      [Beware]{href=https://example.com/evil}(https://example.com/good)
+      [Beware]{href=https://example.com/evil/}(https://example.com/good/)
       --
     ==
   ++
