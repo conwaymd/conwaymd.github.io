@@ -1106,6 +1106,7 @@ However, they might be called by queued replacements.
         ''
       ||>
     - Rendered:
+      ||{.wide}
         ''
         //
           ; A
@@ -1114,6 +1115,7 @@ However, they might be called by queued replacements.
           ; B
           , 2
         ''
+      ||
     ==
   1.
     Table with head and body:
@@ -1151,6 +1153,7 @@ However, they might be called by queued replacements.
         ''
       ||>
     - Rendered:
+      ||{.wide}
         ''
         |^
           //
@@ -1164,6 +1167,7 @@ However, they might be called by queued replacements.
             , First
             , Second
         ''
+      ||
     ==
   1.
     Cell merging
@@ -1188,6 +1192,7 @@ However, they might be called by queued replacements.
         ''
       ````
     - Rendered
+      ||{.wide}
         ''
         //
           ,{c3} 3*1
@@ -1204,6 +1209,7 @@ However, they might be called by queued replacements.
         //
           , 43
         ''
+      ||
     ==
   ++++++++
 }}
@@ -1566,6 +1572,7 @@ However, they might be called by queued replacements.
   --
   Makes replacements for the default boilerplate properties:
   --
+  ||{.wide}
   ''''
   |^
     //
@@ -1591,6 +1598,7 @@ However, they might be called by queued replacements.
       , `{.cmd .cmdc} %styles`
       , (empty)
   ''''
+  ||
 }}
 {{ex
   ++
@@ -1676,6 +1684,7 @@ However, they might be called by queued replacements.
   --
   Makes replacements for CMD properties:
   --
+  ||{.wide}
   ''''
   |^
     //
@@ -1693,6 +1702,7 @@ However, they might be called by queued replacements.
       , `{.cmd .cmdc} %cmd-basename`
       , CMD file name, without path, without extension
   ''''
+  ||
 }}
 
 ####{#boilerplate-protect} 15. `#boilerplate-protect`
@@ -1752,6 +1762,7 @@ However, they might be called by queued replacements.
   --
   Applies backslash escapes:
   --
+  ||{.wide}
   ''''
   |^
     //
@@ -1807,6 +1818,7 @@ However, they might be called by queued replacements.
       , `{.cmd .cmdc} \t`
       , (tab)
   ''''
+  ||
 }}
 
 ####{#backslash-continuations} 17. `#backslash-continuations`
@@ -2610,6 +2622,7 @@ However, they might be called by queued replacements.
     ++
   1.
     Nesting and disambiguation:
+    ||{.wide}
     ''''
     |^
       //
@@ -2658,6 +2671,7 @@ However, they might be called by queued replacements.
         , `{.cmd .cmdc} *|**|*foo**** `
         , <| *|**|*foo**** |>
     ''''
+    ||
   ++++
 }}
 
@@ -3482,6 +3496,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - Patterns may be double-quoted, single-quoted, or bare.
   - Substitutes may be a keyword, double-quoted, single-quoted, or bare.
     Possible keywords are:
+    ||{.wide}
     ''''
     |^
       //
@@ -3499,6 +3514,7 @@ In CMD replacement rule syntax, a line must be one of the following:
         , `CMD_BASENAME`
         , CMD file name, without path, without extension
     ''''
+    ||
   - `{.cmd .cmdr} concluding_replacements`:
     sequence of replacements to be applied after substitution
   ==
@@ -3545,6 +3561,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - Patterns may be double-quoted, single-quoted, or bare.
   - Substitutes may be a keyword, double-quoted, single-quoted, or bare.
     Possible keywords are:
+    ||{.wide}
     ''''
     |^
       //
@@ -3562,6 +3579,7 @@ In CMD replacement rule syntax, a line must be one of the following:
         , `CMD_BASENAME`
         , CMD file name, without path, without extension
     ''''
+    ||
   - Patterns and substitutes are parsed according to Python regex syntax
     with `flags=re.ASCII | re.MULTILINE | re.VERBOSE`.
   - `{.cmd .cmdr} concluding_replacements`:
