@@ -3479,7 +3479,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - apply_mode: (def) SIMULTANEOUS | SEQUENTIAL
   * "«pattern»" | '«pattern»' | «pattern»
       -->
-    CMD_VERSION | CMD_NAME | CMD_BASENAME |
+    CMD_VERSION | CMD_NAME | CMD_BASENAME | CLEAN_URL |
             "«substitute»" | '«substitute»' | «substitute»
   [...]
   - concluding_replacements: (def) NONE | #«id» [...]
@@ -3513,6 +3513,9 @@ In CMD replacement rule syntax, a line must be one of the following:
       //
         , `CMD_BASENAME`
         , CMD file name, without path, without extension
+      //
+        , `CLEAN_URL`
+        , `CMD_NAME`, with `CMD_BASENAME` removed if it equals `index`
     ''''
     ||
   - `{.cmd .cmdr} concluding_replacements`:
@@ -3544,7 +3547,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - negative_flag: (def) NONE | «FLAG_NAME»
   * "«pattern»" | '«pattern»' | «pattern»
       -->
-    CMD_VERSION | CMD_NAME | CMD_BASENAME |
+    CMD_VERSION | CMD_NAME | CMD_BASENAME | CLEAN_URL |
             "«substitute»" | '«substitute»' | «substitute»
   [...]
   - concluding_replacements: (def) NONE | #«id» [...]
@@ -3578,6 +3581,9 @@ In CMD replacement rule syntax, a line must be one of the following:
       //
         , `CMD_BASENAME`
         , CMD file name, without path, without extension
+      //
+        , `CLEAN_URL`
+        , `CMD_NAME`, with `CMD_BASENAME` removed if it equals `index`
     ''''
     ||
   - Patterns and substitutes are parsed according to Python regex syntax

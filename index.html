@@ -4096,7 +4096,7 @@ Defines a replacement rule for de-indentation.
 - apply_mode: (def) SIMULTANEOUS | SEQUENTIAL
 * "«pattern»" | '«pattern»' | «pattern»
     --&gt;
-  CMD_VERSION | CMD_NAME | CMD_BASENAME |
+  CMD_VERSION | CMD_NAME | CMD_BASENAME | CLEAN_URL |
           "«substitute»" | '«substitute»' | «substitute»
 [...]
 - concluding_replacements: (def) NONE | #«id» [...]
@@ -4145,6 +4145,10 @@ Possible keywords are:
 <tr>
 <td><code>CMD_BASENAME</code></td>
 <td>CMD file name, without path, without extension</td>
+</tr>
+<tr>
+<td><code>CLEAN_URL</code></td>
+<td><code>CMD_NAME</code>, with <code>CMD_BASENAME</code> removed if it equals <code>index</code></td>
 </tr>
 </tbody>
 </table>
@@ -4188,7 +4192,7 @@ Defines a replacement rule for a dictionary of ordinary substitutions.
 - negative_flag: (def) NONE | «FLAG_NAME»
 * "«pattern»" | '«pattern»' | «pattern»
     --&gt;
-  CMD_VERSION | CMD_NAME | CMD_BASENAME |
+  CMD_VERSION | CMD_NAME | CMD_BASENAME | CLEAN_URL |
           "«substitute»" | '«substitute»' | «substitute»
 [...]
 - concluding_replacements: (def) NONE | #«id» [...]
@@ -4237,6 +4241,10 @@ Possible keywords are:
 <tr>
 <td><code>CMD_BASENAME</code></td>
 <td>CMD file name, without path, without extension</td>
+</tr>
+<tr>
+<td><code>CLEAN_URL</code></td>
+<td><code>CMD_NAME</code>, with <code>CMD_BASENAME</code> removed if it equals <code>index</code></td>
 </tr>
 </tbody>
 </table>
