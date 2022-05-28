@@ -1676,6 +1676,7 @@ However, they might be called by queued replacements.
   * %cmd-version --> CMD_VERSION
   * %cmd-name --> CMD_NAME
   * %cmd-basename --> CMD_BASENAME
+  * %clean-url --> CLEAN_URL
   - concluding_replacements:
       #placeholder-protect
   ``
@@ -1701,6 +1702,10 @@ However, they might be called by queued replacements.
     //
       , `{.cmd .cmdc} %cmd-basename`
       , CMD file name, without path, without extension
+    //
+      , `{.cmd .cmdc} %clean-url`
+      , `{.cmd .cmdc} %cmd-name`,
+        with `{.cmd .cmdc} %cmd-basename` removed if it equals `index`
   ''''
   ||
 }}

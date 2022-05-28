@@ -1968,6 +1968,7 @@ This document hath &lt;code&gt;lang&lt;/code&gt; equal to &lt;code&gt;en-AU&lt;/
 * %cmd-version --&gt; CMD_VERSION
 * %cmd-name --&gt; CMD_NAME
 * %cmd-basename --&gt; CMD_BASENAME
+* %clean-url --&gt; CLEAN_URL
 - concluding_replacements:
     #placeholder-protect
 </code></pre>
@@ -1998,6 +1999,11 @@ Makes replacements for CMD properties:
 <tr>
 <td><code class="cmd cmdc">%cmd-basename</code></td>
 <td>CMD file name, without path, without extension</td>
+</tr>
+<tr>
+<td><code class="cmd cmdc">%clean-url</code></td>
+<td><code class="cmd cmdc">%cmd-name</code>,
+with <code class="cmd cmdc">%cmd-basename</code> removed if it equals <code>index</code></td>
 </tr>
 </tbody>
 </table>
