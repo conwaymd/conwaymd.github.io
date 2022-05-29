@@ -3282,7 +3282,7 @@ In CMD replacement rule syntax, a line must be one of the following:
     it is parsed relative to the file in which the inclusion is invoked.
   ==
   The convention is for `{.cmd .cmdr} «included_file_name»`
-  is to have the extension `.cmdr`.
+  to have the extension `.cmdr`.
 4.
   A __class declaration__:
   ``{.cmd .cmdr}
