@@ -2529,7 +2529,7 @@ However, they might be called by queued replacements.
   - The opening delimiter must not be followed by whitespace,
     nor by `{.html} </` (the beginning of a closing tag).
   - The closing delimiter must not be preceded by whitespace,
-    nor be a pipe `{.cmd .cmdc} |`.
+    nor by a pipe `{.cmd .cmdc} |`.
   ==
 }}
 {{des
