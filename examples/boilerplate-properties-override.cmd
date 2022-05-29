@@ -1,4 +1,4 @@
-OrdinaryDictionaryReplacement: #boilerplate-properties-override
+OrdinaryDictionaryReplacement: #.boilerplate-properties-override
 - queue_position: BEFORE #boilerplate-properties
 * %lang --> en-AU
 * %head-elements-before-viewport --> <meta name="author" content="Me">
