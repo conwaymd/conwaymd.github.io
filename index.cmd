@@ -3311,7 +3311,8 @@ In CMD replacement rule syntax, a line must be one of the following:
     [`SpecifiedLinkReplacement`],
       or
     [`ReferencedLinkReplacement`].
-  - `{.cmd .cmdr} «id»` may only contain lower case letters or hyphens.
+  - `{.cmd .cmdr} «id»` may only contain
+    lower case letters, hyphens, and full stops.
   ==
 5.
   The start of an __attribute declaration__:
