@@ -1,4 +1,4 @@
-OrdinaryDictionaryReplacement: #boilerplate-properties-override
+OrdinaryDictionaryReplacement: #.boilerplate-properties-override
 - queue_position: BEFORE #boilerplate-properties
 * %head-elements-before-viewport -->
     <meta name="author" content="Conway">
@@ -14,13 +14,13 @@ OrdinaryDictionaryReplacement: #boilerplate-properties-override
     <meta name="theme-color" content="#ffffff">
 * %title --> Conway-Markdown (CMD) v%cmd-version
 
-OrdinaryDictionaryReplacement: #bold-code
+OrdinaryDictionaryReplacement: #.bold-code
 - queue_position: BEFORE #display-code
 * @( --> <b>
 * )@ --> </b>
 - concluding_replacements: #placeholder-protect
 
-OrdinaryDictionaryReplacement: #details-summary-shorthand
+OrdinaryDictionaryReplacement: #.details-summary-shorthand
 - queue_position: BEFORE #whitespace
 * {{def -->
     '{{
@@ -47,8 +47,8 @@ OrdinaryDictionaryReplacement: #details-summary-shorthand
     <summary>Standard rules usage</summary>
   '
 
-FixedDelimitersReplacement: #details
-- queue_position: AFTER #details-summary-shorthand
+FixedDelimitersReplacement: #.details
+- queue_position: AFTER #.details-summary-shorthand
 - syntax_type: INLINE
 - opening_delimiter: {{
 - attribute_specifications: open
@@ -56,7 +56,7 @@ FixedDelimitersReplacement: #details
 - tag_name: details
 
 
-RegexDictionaryReplacement: #heading-permalinks
+RegexDictionaryReplacement: #.heading-permalinks
 - queue_position: BEFORE #headings
 * (?P<opening_hashes_etc>
     [#]{2,6}
@@ -68,7 +68,7 @@ RegexDictionaryReplacement: #heading-permalinks
     -->
   \g<opening_hashes_etc> []{.permalink aria-label=Permalink}(#\g<id_>)
 
-ExtensibleFenceReplacement: #html-as-display-code
+ExtensibleFenceReplacement: #.html-as-display-code
 - queue_position: BEFORE #placeholder-unprotect
 - syntax_type: BLOCK
 - prologue_delimiter: <
@@ -84,7 +84,7 @@ ExtensibleFenceReplacement: #html-as-display-code
 - epilogue_delimiter: >
 - tag_name: pre
 
-ExtensibleFenceReplacement: #html-as-inline-code
+ExtensibleFenceReplacement: #.html-as-inline-code
 - queue_position: BEFORE #placeholder-unprotect
 - syntax_type: INLINE
 - prologue_delimiter: <
