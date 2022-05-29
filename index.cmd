@@ -3312,7 +3312,11 @@ In CMD replacement rule syntax, a line must be one of the following:
       or
     [`ReferencedLinkReplacement`].
   - `{.cmd .cmdr} «id»` may only contain
-    lower case letters, hyphens, and full stops.
+    lower-case letters, hyphens, and full stops.
+    The convention is for user-defined replacement rules
+    to have `{.cmd .cmdr} «id»` beginning with a full stop
+    (whereas the [standard rules](#standard-rules)
+    have `{.cmd .cmdr} «id»` beginning with a letter).
   ==
 5.
   The start of an __attribute declaration__:
