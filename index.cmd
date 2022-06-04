@@ -1744,8 +1744,10 @@ However, they might be called by queued replacements.
   OrdinaryDictionaryReplacement: #backslash-escapes
   - queue_position: AFTER #boilerplate-protect
   * \\ --> \
+  * \" --> "
   * \# --> #
   * \& --> &amp;
+  * \' --> '
   * \( --> (
   * \) --> )
   * \* --> *
@@ -1778,11 +1780,17 @@ However, they might be called by queued replacements.
       , `{.cmd .cmdc} \\`
       , <| \\ |>
     //
+      , `{.cmd .cmdc} \"`
+      , <| \" |>
+    //
       , `{.cmd .cmdc} \#`
       , <| \# |>
     //
       , `{.cmd .cmdc} \&`
       , <| \& |>
+    //
+      , `{.cmd .cmdc} \'`
+      , <| \' |>
     //
       , `{.cmd .cmdc} \(`
       , <| \( |>
