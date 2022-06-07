@@ -239,7 +239,7 @@ Conway-Markdown (CMD) is:
 2.
   Invoke the alias to convert a CMD file to HTML:
   ``
-  $ cmd [-h] [-v] [-x] [file.cmd]
+  $ cmd [-h] [-v] [-x] [file.cmd ...]
 
   Convert Conway-Markdown (CMD) to HTML.
 
@@ -264,7 +264,7 @@ Conway-Markdown (CMD) is:
 2.
   Invoke `cmd.py` to convert a CMD file to HTML:
   ``
-  > cmd.py [-h] [-v] [-x] [file.cmd]
+  > cmd.py [-h] [-v] [-x] [file.cmd ...]
 
   Convert Conway-Markdown (CMD) to HTML.
 
