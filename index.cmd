@@ -1024,21 +1024,21 @@ However, they might be called by queued replacements.
 {{syn
   ````{.cmd .cmdc}
     @('')@
-    @(|^)@ «item»
-      @(//)@ «item»
+    @(|^)@
+      @(//)@
         @(;)@ «item»
         @(,)@ «item»
         «...»
       «...»
-    @(|:)@ «item»
+    @(|:)@
       «...»
-    @(|_)@ «item»
+    @(|_)@
       «...»
     @('')@
   ````
   ````{.cmd .cmdc}
     @('')@
-    @(//)@ «item»
+    @(//)@
       @(;)@ «item»
       @(,)@ «item»
       «...»
@@ -1047,7 +1047,16 @@ However, they might be called by queued replacements.
   ````
   ````{.cmd .cmdc}
     @('')@{«attribute specifications»}
-    «...»
+    @(|^)@{«attribute specifications»}
+      @(//)@{«attribute specifications»}
+        @(;)@{«attribute specifications»} «item»
+        @(,)@{«attribute specifications»} «item»
+        «...»
+      «...»
+    @(|:)@{«attribute specifications»}
+      «...»
+    @(|_)@{«attribute specifications»}
+      «...»
     @('')@
   ````
   ====

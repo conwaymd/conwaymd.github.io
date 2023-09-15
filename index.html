@@ -1202,20 +1202,20 @@ One
 <details open>
 <summary>Syntax</summary>
 <pre class="cmd cmdc"><code><b>''</b>
-<b>|^</b> «item»
-  <b>//</b> «item»
+<b>|^</b>
+  <b>//</b>
     <b>;</b> «item»
     <b>,</b> «item»
     «...»
   «...»
-<b>|:</b> «item»
+<b>|:</b>
   «...»
-<b>|_</b> «item»
+<b>|_</b>
   «...»
 <b>''</b>
 </code></pre>
 <pre class="cmd cmdc"><code><b>''</b>
-<b>//</b> «item»
+<b>//</b>
   <b>;</b> «item»
   <b>,</b> «item»
   «...»
@@ -1223,7 +1223,16 @@ One
 <b>''</b>
 </code></pre>
 <pre class="cmd cmdc"><code><b>''</b>{«attribute specifications»}
-«...»
+<b>|^</b>{«attribute specifications»}
+  <b>//</b>{«attribute specifications»}
+    <b>;</b>{«attribute specifications»} «item»
+    <b>,</b>{«attribute specifications»} «item»
+    «...»
+  «...»
+<b>|:</b>{«attribute specifications»}
+  «...»
+<b>|_</b>{«attribute specifications»}
+  «...»
 <b>''</b>
 </code></pre>
 <ul>
