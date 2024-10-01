@@ -1,8 +1,7 @@
-# conway-markdown.github.io
+# conwaymd.github.io
 
-GitHub pages documentation for Conway-Markdown (CMD):
-<https://conway-markdown.github.io/>
+GitHub pages documentation for Conway-Markdown (CMD): <https://conwaymd.github.io/>
 
-For the Python implementation (`cmd.py`), see [conway-markdown].
+For the Python implementation, see [conwaymd].
 
-[conway-markdown]: https://github.com/conway-markdown/conway-markdown
+[conwaymd]: https://github.com/conwaymd/conwaymd

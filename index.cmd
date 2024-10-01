@@ -12,7 +12,7 @@ OrdinaryDictionaryReplacement: #.boilerplate-properties-override
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
-* %title --> Conway-Markdown (CMD) v%cmd-version
+* %title --> Conway-Markdown (conwaymd, CMD) v%cmd-version
 
 OrdinaryDictionaryReplacement: #.bold-code
 - queue_position: BEFORE #display-code
@@ -106,7 +106,7 @@ ExtensibleFenceReplacement: #.html-as-inline-code
 # %title
 
 --
-Conway-Markdown (CMD) is:
+Conway-Markdown is:
 --
 ==
 - A replacement-driven markup language inspired by Markdown.
@@ -123,7 +123,9 @@ Conway-Markdown (CMD) is:
 ##{#contents} Contents
 
 ======
-- [Installation and usage](#installation-and-usage)
+- [Installation](#installation)
+- [Usage (command line)](#usage-cli)
+- [Usage (scripting example)](#usage-scripting)
 - [Authoring CMD files](#authoring-cmd-files)
 - [Standard CMD replacement rules](#standard-rules)
   ====
@@ -208,82 +210,81 @@ Conway-Markdown (CMD) is:
 ======
 
 
-##{#installation-and-usage} Installation and usage
+##{#installation} Installation
 
-++{start=0}
-0.
-  Clone the [repository of the Python implementation][conway-markdown]:
-  ``
-  $ git clone https://github.com/conway-markdown/conway-markdown
-  ``
-  --
-  Since `cmd.py` is [a shitty single-file script][`cmd.py`],
-  it will not be turned into a proper Python package.
-  --
-++
-
-[`cmd.py`]:
-  https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py
+``
+$ pip3 install conwaymd
+``
 
 
-###{#linux-terminals} Linux terminals, macOS Terminal, Git BASH for Windows
+##{#usage-cli} Usage (command line)
 
-++
-1.
-  Make an alias for `cmd.py` in whatever dotfile
-  you configure your aliases in:
-  ``
-  alias cmd='path/to/cmd.py'
-  ``
+``
+$ cmd [-h] [-v] [-a] [-x] [file.cmd ...]
 
-2.
-  Invoke the alias to convert a CMD file to HTML:
-  ``
-  $ cmd [-h] [-v] [-x] [file.cmd ...]
+Convert Conway-Markdown (CMD) to HTML.
 
-  Convert Conway-Markdown (CMD) to HTML.
+positional arguments:
+  file.cmd       name of CMD file to be converted (can be abbreviated as
+                 `file` or `file.` for increased productivity)
 
-  positional arguments:
-    file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
-                   `file.` for increased productivity. Omit to convert all CMD
-                   files under the working directory.
-
-  optional arguments:
-    -h, --help     show this help message and exit
-    -v, --version  show program's version number and exit
-    -x, --verbose  run in verbose mode (prints every replacement applied)
-  ``
-++
-
-###{#windows-command-prompt} Windows Command Prompt
-
-++
-1.
-  Add the folder containing `cmd.py` to the `%PATH%` variable
-
-2.
-  Invoke `cmd.py` to convert a CMD file to HTML:
-  ``
-  > cmd.py [-h] [-v] [-x] [file.cmd ...]
-
-  Convert Conway-Markdown (CMD) to HTML.
-
-  positional arguments:
-    file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
-                   `file.` for increased productivity. Omit to convert all CMD
-                   files under the working directory.
-
-  optional arguments:
-    -h, --help     show this help message and exit
-    -v, --version  show program's version number and exit
-    -x, --verbose  run in verbose mode (prints every replacement applied)
-  ``
-++
+options:
+  -h, --help     show this help message and exit
+  -v, --version  show program's version number and exit
+  -a, --all      convert all CMD files under the working directory
+  -x, --verbose  run in verbose mode (prints every replacement applied)
+``
 
 --
-**WARNING: on Windows, be careful not to run any `.cmd` files by accident;
-they might break your computer. God save!**
+On Windows:
 --
+==
+- Use the aliases `cmd-` or `conwaymd` instead of `cmd`
+  to avoid summoning Command Prompt.
+- **Beware not to run any `.cmd` files by accident;
+  they might break your computer. God save!**
+==
+
+
+##{#usage-scripting} Usage (scripting example)
+
+``
+from conwaymd.core import cmd_to_html
+
+cmd_content = '''
+# Test
+==
+- This is a *near*-minimal test.
+- Here be [__dragons__].
+==
+[__dragons__]: https://example.com/
+'''
+
+html_content = cmd_to_html(cmd_content, cmd_file_name='scripting-test.py')
+
+print(html_content)
+``
+``
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Title</title>
+</head>
+<body>
+<h1>Test</h1>
+<ul>
+<li>
+This is a <em>near</em>-minimal test.
+</li>
+<li>
+Here be <a href="https://example.com/"><b>dragons</b></a>.
+</li>
+</ul>
+</body>
+</html>
+``
 
 
 ##{#authoring-cmd-files} Authoring CMD files
@@ -313,7 +314,7 @@ In the implementation:
 --
 ++
 1. An empty __replacement queue__ is initialised.
-2. __`STANDARD_RULES`__ in [`cmd.py`] are parsed,
+2. __`STANDARD_RULES`__ in [`constants.py`] are parsed,
    and CMD replacement rules are added to the replacement queue accordingly.
 3. __`{.cmd .cmdr} «replacement rules»`__ in the CMD file are parsed,
    and CMD replacement rules are added or inserted into the replacement queue
@@ -337,7 +338,7 @@ read about [CMD replacement rule syntax](#replacement-rule-syntax).
 
 --
 This section lists the standard CMD replacement rules
-as defined by the constant string __`STANDARD_RULES`__ in [`cmd.py`].
+as defined by the constant string __`STANDARD_RULES`__ in [`constants.py`].
 --
 --
 Some replacement rules are [queued](#standard-queued-replacements),
@@ -1703,7 +1704,7 @@ However, they might be called by queued replacements.
   |:
     //
       , `{.cmd .cmdc} %cmd-version`
-      , `__version__` in [`cmd.py`]
+      , `__version__` in [`_version.py`]
         (currently <code class="html">%cmd-version</code>)
     //
       , `{.cmd .cmdc} %cmd-name`
@@ -3532,7 +3533,7 @@ In CMD replacement rule syntax, a line must be one of the following:
     |:
       //
         , `CMD_VERSION`
-        , `__version__` in [`cmd.py`]
+        , `__version__` in [`_version.py`]
           (currently <code class="html">%cmd-version</code>)
       //
         , `CMD_NAME`
@@ -3600,7 +3601,7 @@ In CMD replacement rule syntax, a line must be one of the following:
     |:
       //
         , `CMD_VERSION`
-        , `__version__` in [`cmd.py`]
+        , `__version__` in [`_version.py`]
           (currently <code class="html">%cmd-version</code>)
       //
         , `CMD_NAME`
@@ -4233,16 +4234,18 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
 ==
 - This page's CMD: [%cmd-basename.cmd]
 - This page's HTML: [%cmd-basename.html]
-- This page's repository: [conway-markdown.github.io]
-- Python implementation's repository: [conway-markdown]
+- This page's repository: [conwaymd.github.io]
+- Python implementation's repository: [conwaymd]
 ==
+[`_version.py`]:
+  https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py
+[`constants.py`]:
+  https://github.com/conwaymd/conwaymd/blob/master/conwaymd/constants.py
 [%cmd-basename.cmd]:
-  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
-    %cmd-name.cmd
+  https://github.com/conwaymd/conwaymd.github.io/blob/master/%cmd-name.cmd
 [%cmd-basename.html]:
-  https://github.com/conway-markdown/conway-markdown.github.io/blob/master/\
-    %cmd-name.html
-[conway-markdown.github.io]:
-  https://github.com/conway-markdown/conway-markdown.github.io
-[conway-markdown]:
-  https://github.com/conway-markdown/conway-markdown
+  https://github.com/conwaymd/conwaymd.github.io/blob/master/%cmd-name.html
+[conwaymd.github.io]:
+  https://github.com/conwaymd/conwaymd.github.io
+[conwaymd]:
+  https://github.com/conwaymd/conwaymd
