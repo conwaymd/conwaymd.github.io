@@ -248,6 +248,9 @@ On Windows:
 
 ##{#usage-scripting} Usage (scripting example)
 
+--
+Code:
+--
 ``
 from conwaymd.core import cmd_to_html
 
@@ -264,6 +267,10 @@ html_content = cmd_to_html(cmd_content, cmd_file_name='scripting-test.py')
 
 print(html_content)
 ``
+
+--
+Output:
+--
 ``
 <!DOCTYPE html>
 <html lang="en">
