@@ -212,9 +212,17 @@ Conway-Markdown is:
 
 ##{#installation} Installation
 
+--
+Conway-Markdown is published to PyPI as [`conwaymd`]:
+--
+
 ``
 $ pip3 install conwaymd
 ``
+
+--
+On Windows, use `pip` instead of `pip3`.
+--
 
 
 ##{#usage-cli} Usage (command line)
@@ -4244,6 +4252,8 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
 - This page's repository: [conwaymd.github.io]
 - Python implementation's repository: [conwaymd]
 ==
+[`conwaymd`]:
+  https://pypi.org/project/conwaymd/
 [`_version.py`]:
   https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py
 [`constants.py`]:
