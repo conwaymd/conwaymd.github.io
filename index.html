@@ -13,12 +13,12 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
-<title>Conway-Markdown (CMD) v4.6.0</title>
+<title>Conway-Markdown (conwaymd, CMD) v4.6.0</title>
 </head>
 <body>
-<h1>Conway-Markdown (CMD) v4.6.0</h1>
+<h1>Conway-Markdown (conwaymd, CMD) v4.6.0</h1>
 <p>
-Conway-Markdown (CMD) is:
+Conway-Markdown is:
 </p>
 <ul>
 <li>
@@ -41,7 +41,13 @@ Licensed under "MIT No Attribution" (MIT-0).
 <h2 id="contents"><a href="#contents" class="permalink" aria-label="Permalink"></a>Contents</h2>
 <ul>
 <li>
-<a href="#installation-and-usage">Installation and usage</a>
+<a href="#installation">Installation</a>
+</li>
+<li>
+<a href="#usage-cli">Usage (command line)</a>
+</li>
+<li>
+<a href="#usage-scripting">Usage (scripting example)</a>
 </li>
 <li>
 <a href="#authoring-cmd-files">Authoring CMD files</a>
@@ -271,71 +277,79 @@ Licensed under "MIT No Attribution" (MIT-0).
 <a href="#repository-links">Repository links</a>
 </li>
 </ul>
-<h2 id="installation-and-usage"><a href="#installation-and-usage" class="permalink" aria-label="Permalink"></a>Installation and usage</h2>
-<ol start="0">
-<li>
-Clone the <a href="https://github.com/conway-markdown/conway-markdown">repository of the Python implementation</a>:
-<pre><code>$ git clone https://github.com/conway-markdown/conway-markdown
+<h2 id="installation"><a href="#installation" class="permalink" aria-label="Permalink"></a>Installation</h2>
+<pre><code>$ pip3 install conwaymd
+</code></pre>
+<h2 id="usage-cli"><a href="#usage-cli" class="permalink" aria-label="Permalink"></a>Usage (command line)</h2>
+<pre><code>$ cmd [-h] [-v] [-a] [-x] [file.cmd ...]
+
+Convert Conway-Markdown (CMD) to HTML.
+
+positional arguments:
+  file.cmd       name of CMD file to be converted (can be abbreviated as
+                 `file` or `file.` for increased productivity)
+
+options:
+  -h, --help     show this help message and exit
+  -v, --version  show program's version number and exit
+  -a, --all      convert all CMD files under the working directory
+  -x, --verbose  run in verbose mode (prints every replacement applied)
 </code></pre>
 <p>
-Since <code>cmd.py</code> is <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py">a shitty single-file script</a>,
-it will not be turned into a proper Python package.
+On Windows:
 </p>
-</li>
-</ol>
-<h3 id="linux-terminals"><a href="#linux-terminals" class="permalink" aria-label="Permalink"></a>Linux terminals, macOS Terminal, Git BASH for Windows</h3>
-<ol>
+<ul>
 <li>
-Make an alias for <code>cmd.py</code> in whatever dotfile
-you configure your aliases in:
-<pre><code>alias cmd='path/to/cmd.py'
-</code></pre>
+Use the aliases <code>cmd-</code> or <code>conwaymd</code> instead of <code>cmd</code>
+to avoid summoning Command Prompt.
 </li>
 <li>
-Invoke the alias to convert a CMD file to HTML:
-<pre><code>$ cmd [-h] [-v] [-x] [file.cmd ...]
-
-Convert Conway-Markdown (CMD) to HTML.
-
-positional arguments:
-  file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
-                 `file.` for increased productivity. Omit to convert all CMD
-                 files under the working directory.
-
-optional arguments:
-  -h, --help     show this help message and exit
-  -v, --version  show program's version number and exit
-  -x, --verbose  run in verbose mode (prints every replacement applied)
-</code></pre>
-</li>
-</ol>
-<h3 id="windows-command-prompt"><a href="#windows-command-prompt" class="permalink" aria-label="Permalink"></a>Windows Command Prompt</h3>
-<ol>
-<li>
-Add the folder containing <code>cmd.py</code> to the <code>%PATH%</code> variable
-</li>
-<li>
-Invoke <code>cmd.py</code> to convert a CMD file to HTML:
-<pre><code>&gt; cmd.py [-h] [-v] [-x] [file.cmd ...]
-
-Convert Conway-Markdown (CMD) to HTML.
-
-positional arguments:
-  file.cmd       Name of CMD file to be converted. Abbreviate as `file` or
-                 `file.` for increased productivity. Omit to convert all CMD
-                 files under the working directory.
-
-optional arguments:
-  -h, --help     show this help message and exit
-  -v, --version  show program's version number and exit
-  -x, --verbose  run in verbose mode (prints every replacement applied)
-</code></pre>
-</li>
-</ol>
-<p>
-<strong>WARNING: on Windows, be careful not to run any <code>.cmd</code> files by accident;
+<strong>Beware not to run any <code>.cmd</code> files by accident;
 they might break your computer. God save!</strong>
+</li>
+</ul>
+<h2 id="usage-scripting"><a href="#usage-scripting" class="permalink" aria-label="Permalink"></a>Usage (scripting example)</h2>
+<p>
+Code:
 </p>
+<pre><code>from conwaymd.core import cmd_to_html
+
+cmd_content = '''
+# Test
+==
+- This is a *near*-minimal test.
+- Here be [__dragons__].
+==
+[__dragons__]: https://example.com/
+'''
+
+html_content = cmd_to_html(cmd_content, cmd_file_name='scripting-test.py')
+
+print(html_content)
+</code></pre>
+<p>
+Output:
+</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Test&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+This is a &lt;em&gt;near&lt;/em&gt;-minimal test.
+&lt;/li&gt;
+&lt;li&gt;
+Here be &lt;a href="https://example.com/"&gt;&lt;b&gt;dragons&lt;/b&gt;&lt;/a&gt;.
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 <h2 id="authoring-cmd-files"><a href="#authoring-cmd-files" class="permalink" aria-label="Permalink"></a>Authoring CMD files</h2>
 <p>
 CMD files are parsed thus:
@@ -369,7 +383,7 @@ In the implementation:
 An empty <b>replacement queue</b> is initialised.
 </li>
 <li>
-<b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a> are parsed,
+<b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/constants.py"><code>constants.py</code></a> are parsed,
 and CMD replacement rules are added to the replacement queue accordingly.
 </li>
 <li>
@@ -394,7 +408,7 @@ read about <a href="#replacement-rule-syntax">CMD replacement rule syntax</a>.
 <h2 id="standard-rules"><a href="#standard-rules" class="permalink" aria-label="Permalink"></a>Standard CMD replacement rules</h2>
 <p>
 This section lists the standard CMD replacement rules
-as defined by the constant string <b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>.
+as defined by the constant string <b><code>STANDARD_RULES</code></b> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/constants.py"><code>constants.py</code></a>.
 </p>
 <p>
 Some replacement rules are <a href="#standard-queued-replacements">queued</a>,
@@ -1998,7 +2012,7 @@ Makes replacements for CMD properties:
 <tbody>
 <tr>
 <td><code class="cmd cmdc">%cmd-version</code></td>
-<td><code>__version__</code> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>
+<td><code>__version__</code> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py"><code>_version.py</code></a>
 (currently <code class="html">4.6.0</code>)</td>
 </tr>
 <tr>
@@ -4165,7 +4179,7 @@ Possible keywords are:
 <tbody>
 <tr>
 <td><code>CMD_VERSION</code></td>
-<td><code>__version__</code> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>
+<td><code>__version__</code> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py"><code>_version.py</code></a>
 (currently <code class="html">4.6.0</code>)</td>
 </tr>
 <tr>
@@ -4261,7 +4275,7 @@ Possible keywords are:
 <tbody>
 <tr>
 <td><code>CMD_VERSION</code></td>
-<td><code>__version__</code> in <a href="https://github.com/conway-markdown/conway-markdown/blob/master/cmd.py"><code>cmd.py</code></a>
+<td><code>__version__</code> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py"><code>_version.py</code></a>
 (currently <code class="html">4.6.0</code>)</td>
 </tr>
 <tr>
@@ -5109,16 +5123,16 @@ HTML: <code class="html">&lt;code class="c d"&gt;test&lt;/code&gt;</code>
 <h2 id="repository-links"><a href="#repository-links" class="permalink" aria-label="Permalink"></a>Repository links</h2>
 <ul>
 <li>
-This page's CMD: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.cmd">index.cmd</a>
+This page's CMD: <a href="https://github.com/conwaymd/conwaymd.github.io/blob/master/index.cmd">index.cmd</a>
 </li>
 <li>
-This page's HTML: <a href="https://github.com/conway-markdown/conway-markdown.github.io/blob/master/index.html">index.html</a>
+This page's HTML: <a href="https://github.com/conwaymd/conwaymd.github.io/blob/master/index.html">index.html</a>
 </li>
 <li>
-This page's repository: <a href="https://github.com/conway-markdown/conway-markdown.github.io">conway-markdown.github.io</a>
+This page's repository: <a href="https://github.com/conwaymd/conwaymd.github.io">conwaymd.github.io</a>
 </li>
 <li>
-Python implementation's repository: <a href="https://github.com/conway-markdown/conway-markdown">conway-markdown</a>
+Python implementation's repository: <a href="https://github.com/conwaymd/conwaymd">conwaymd</a>
 </li>
 </ul>
 </body>
