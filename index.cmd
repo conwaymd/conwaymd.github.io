@@ -213,7 +213,7 @@ Conway-Markdown is:
 ##{#installation} Installation
 
 --
-Conway-Markdown is published to PyPI as [`conwaymd`]:
+Conway-Markdown is [published to PyPI as `conwaymd`][pypi]:
 --
 
 ``
@@ -4252,7 +4252,7 @@ the following abbreviations are allowed for `{.cmd .cmdc} «name»`:
 - This page's repository: [conwaymd.github.io]
 - Python implementation's repository: [conwaymd]
 ==
-[`conwaymd`]:
+[pypi]:
   https://pypi.org/project/conwaymd/
 [`_version.py`]:
   https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py
