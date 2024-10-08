@@ -13,10 +13,10 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7000ff">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
-<title>Conway-Markdown (conwaymd, CMD) v5.0.0</title>
+<title>Conway-Markdown (conwaymd, CMD) v5.0.1</title>
 </head>
 <body>
-<h1>Conway-Markdown (conwaymd, CMD) v5.0.0</h1>
+<h1>Conway-Markdown (conwaymd, CMD) v5.0.1</h1>
 <p>
 Conway-Markdown is:
 </p>
@@ -283,9 +283,15 @@ Conway-Markdown is <a href="https://pypi.org/project/conwaymd/">published to PyP
 </p>
 <pre><code>$ pip3 install conwaymd
 </code></pre>
-<p>
-On Windows, use <code>pip</code> instead of <code>pip3</code>.
-</p>
+<ul>
+<li>
+If simply using as a command line tool, do <code>pipx</code> instead of <code>pip3</code>
+to avoid having to set up a virtual environment.
+</li>
+<li>
+If using Windows, do <code>pip</code> instead of <code>pip3</code>.
+</li>
+</ul>
 <h2 id="usage-cli"><a href="#usage-cli" class="permalink" aria-label="Permalink"></a>Usage (command line)</h2>
 <pre><code>$ cmd [-h] [-v] [-a] [-x] [file.cmd ...]
 
@@ -2019,7 +2025,7 @@ Makes replacements for CMD properties:
 <tr>
 <td><code class="cmd cmdc">%cmd-version</code></td>
 <td><code>__version__</code> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py"><code>_version.py</code></a>
-(currently <code class="html">5.0.0</code>)</td>
+(currently <code class="html">5.0.1</code>)</td>
 </tr>
 <tr>
 <td><code class="cmd cmdc">%cmd-name</code></td>
@@ -4186,7 +4192,7 @@ Possible keywords are:
 <tr>
 <td><code>CMD_VERSION</code></td>
 <td><code>__version__</code> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py"><code>_version.py</code></a>
-(currently <code class="html">5.0.0</code>)</td>
+(currently <code class="html">5.0.1</code>)</td>
 </tr>
 <tr>
 <td><code>CMD_NAME</code></td>
@@ -4282,7 +4288,7 @@ Possible keywords are:
 <tr>
 <td><code>CMD_VERSION</code></td>
 <td><code>__version__</code> in <a href="https://github.com/conwaymd/conwaymd/blob/master/conwaymd/_version.py"><code>_version.py</code></a>
-(currently <code class="html">5.0.0</code>)</td>
+(currently <code class="html">5.0.1</code>)</td>
 </tr>
 <tr>
 <td><code>CMD_NAME</code></td>
