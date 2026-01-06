@@ -1701,10 +1701,10 @@ However, they might be called by queued replacements.
   ``{.cmd .cmdr}
   OrdinaryDictionaryReplacement: #cmd-properties
   - queue_position: AFTER #boilerplate-properties
-  * %cmd-version --> CMD_VERSION
-  * %cmd-name --> CMD_NAME
-  * %cmd-basename --> CMD_BASENAME
-  * %clean-url --> CLEAN_URL
+  * %cmd-version --> {CMD_VERSION}
+  * %cmd-name --> {CMD_NAME}
+  * %cmd-basename --> {CMD_BASENAME}
+  * %clean-url --> {CLEAN_URL}
   - concluding_replacements:
       #placeholder-protect
   ``
@@ -3525,8 +3525,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - apply_mode: (def) SIMULTANEOUS | SEQUENTIAL
   * "«pattern»" | '«pattern»' | «pattern»
       -->
-    CMD_VERSION | CMD_NAME | CMD_BASENAME | CLEAN_URL |
-            "«substitute»" | '«substitute»' | «substitute»
+    "«substitute»" | '«substitute»' | «substitute»
   [...]
   - concluding_replacements: (def) NONE | #«id» [...]
   ````
@@ -3539,29 +3538,28 @@ In CMD replacement rule syntax, a line must be one of the following:
     name of the flag that must not be enabled for the replacement to be applied
   - `{.cmd .cmdr} apply_mode`:
     whether the substitutions are to be applied simultaneously or sequentially
-  - Patterns may be double-quoted, single-quoted, or bare.
-  - Substitutes may be a keyword, double-quoted, single-quoted, or bare.
-    Possible keywords are:
+  - Patterns and substitutes may be double-quoted, single-quoted, or bare.
+  - Patterns and substitutes allow the following interpolations:
     ||{.wide}
     ''''
     |^
       //
-        ; Keyword
+        ; Interpolation key
         ; Description
     |:
       //
-        , `CMD_VERSION`
+        , `{}{CMD_VERSION}`
         , `__version__` in [`_version.py`]
           (currently <code class="html">%cmd-version</code>)
       //
-        , `CMD_NAME`
+        , `{}{CMD_NAME}`
         , CMD file name, relative to working directory, without extension
       //
-        , `CMD_BASENAME`
+        , `{}{CMD_BASENAME}`
         , CMD file name, without path, without extension
       //
-        , `CLEAN_URL`
-        , `CMD_NAME`, with `CMD_BASENAME` removed if it equals `index`
+        , `{}{CLEAN_URL}`
+        , `{}{CMD_NAME}`, with `{}{CMD_BASENAME}` removed if it equals `index`
     ''''
     ||
   - `{.cmd .cmdr} concluding_replacements`:
@@ -3593,8 +3591,7 @@ In CMD replacement rule syntax, a line must be one of the following:
   - negative_flag: (def) NONE | «FLAG_NAME»
   * "«pattern»" | '«pattern»' | «pattern»
       -->
-    CMD_VERSION | CMD_NAME | CMD_BASENAME | CLEAN_URL |
-            "«substitute»" | '«substitute»' | «substitute»
+    "«substitute»" | '«substitute»' | «substitute»
   [...]
   - concluding_replacements: (def) NONE | #«id» [...]
   ````
@@ -3607,29 +3604,28 @@ In CMD replacement rule syntax, a line must be one of the following:
     name of the flag that must not be enabled for the replacement to be applied
   - `{.cmd .cmdr} apply_mode`:
     whether the substitutions are to be applied simultaneously or sequentially
-  - Patterns may be double-quoted, single-quoted, or bare.
-  - Substitutes may be a keyword, double-quoted, single-quoted, or bare.
-    Possible keywords are:
+  - Patterns and substitutes may be double-quoted, single-quoted, or bare.
+  - Patterns and substitutes allow the following interpolations:
     ||{.wide}
     ''''
     |^
       //
-        ; Keyword
+        ; Interpolation key
         ; Description
     |:
       //
-        , `CMD_VERSION`
+        , `{}{CMD_VERSION}`
         , `__version__` in [`_version.py`]
           (currently <code class="html">%cmd-version</code>)
       //
-        , `CMD_NAME`
+        , `{}{CMD_NAME}`
         , CMD file name, relative to working directory, without extension
       //
-        , `CMD_BASENAME`
+        , `{}{CMD_BASENAME}`
         , CMD file name, without path, without extension
       //
-        , `CLEAN_URL`
-        , `CMD_NAME`, with `CMD_BASENAME` removed if it equals `index`
+        , `{}{CLEAN_URL}`
+        , `{}{CMD_NAME}`, with `{}{CMD_BASENAME}` removed if it equals `index`
     ''''
     ||
   - Patterns and substitutes are parsed according to Python regex syntax
