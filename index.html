@@ -367,23 +367,23 @@ Here be &lt;a href="https://example.com/"&gt;&lt;b&gt;dragons&lt;/b&gt;&lt;/a&gt
 <p>
 CMD files are parsed thus:
 </p>
-<pre class="cmd"><code><b class="cmdr">«replacement rules»</b>
-«delimiter»
-<b class="cmdc">«main content»</b>
+<pre class="cmd"><code><b class="cmdr"><var>«replacement rules»</var></b>
+<var>«delimiter»</var>
+<b class="cmdc"><var>«main content»</var></b>
 </code></pre>
 <ul>
 <li>
-<b><code class="cmd cmdr">«replacement rules»</code></b> are user-defined CMD replacement rules
+<b><code class="cmd cmdr"><var>«replacement rules»</var></code></b> are user-defined CMD replacement rules
 that will be used in addition to the standard CMD replacement rules.
 </li>
 <li>
-<code class="cmd">«delimiter»</code> is the first occurrence of
+<code class="cmd"><var>«delimiter»</var></code> is the first occurrence of
 3-or-more percent signs on its own line.
-(If no <code class="cmd">«delimiter»</code> is found in the file,
-the whole file is parsed as <code class="cmd cmdc">«main content»</code>.)
+(If no <code class="cmd"><var>«delimiter»</var></code> is found in the file,
+the whole file is parsed as <code class="cmd cmdc"><var>«main content»</var></code>.)
 </li>
 <li>
-<b><code class="cmd cmdc">«main content»</code></b> is the CMD content
+<b><code class="cmd cmdc"><var>«main content»</var></code></b> is the CMD content
 that will be converted to HTML according to
 the standard and user-defined CMD replacement rules.
 </li>
@@ -400,22 +400,22 @@ An empty <b>replacement queue</b> is initialised.
 and CMD replacement rules are added to the replacement queue accordingly.
 </li>
 <li>
-<b><code class="cmd cmdr">«replacement rules»</code></b> in the CMD file are parsed,
+<b><code class="cmd cmdr"><var>«replacement rules»</var></code></b> in the CMD file are parsed,
 and CMD replacement rules are added or inserted into the replacement queue
 accordingly.
 </li>
 <li>
 The CMD replacement rules in the replacement queue are
-<b>applied sequentially to <code class="cmd cmdc">«main content»</code></b>
+<b>applied sequentially to <code class="cmd cmdc"><var>«main content»</var></code></b>
 to convert it to HTML.
 </li>
 </ol>
 <p>
-To get started with writing <b><code class="cmd cmdc">«main content»</code></b>,
+To get started with writing <b><code class="cmd cmdc"><var>«main content»</var></code></b>,
 read the listing of <a href="#standard-rules">standard CMD replacement rules</a>.
 </p>
 <p>
-To learn about writing user-defined <b><code class="cmd cmdr">«replacement rules»</code></b>,
+To learn about writing user-defined <b><code class="cmd cmdr"><var>«replacement rules»</var></code></b>,
 read about <a href="#replacement-rule-syntax">CMD replacement rule syntax</a>.
 </p>
 <h2 id="standard-rules"><a href="#standard-rules" class="permalink" aria-label="Permalink"></a>Standard CMD replacement rules</h2>
@@ -443,7 +443,7 @@ However, they might be called by queued replacements.
 <details open>
 <summary>Description</summary>
 <p>
-Replaces occurrences of the placeholder marker <code>«U+F8FF»</code>
+Replaces occurrences of the placeholder marker <code><var>«U+F8FF»</var></code>
 with a <a href="#cmd-placeholders">placeholder</a>
 so that the occurrences will not be confounding.
 </p>
@@ -471,13 +471,13 @@ so that the occurrences will not be confounding.
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>&lt;</b><b>`</b> «content» <b>`</b><b>&gt;</b>
+<pre class="cmd cmdc"><code><b>&lt;</b><b>`</b> <var>«content»</var> <b>`</b><b>&gt;</b>
 </code></pre>
-<pre class="cmd cmdc"><code>«flags»<b>&lt;</b><b>`</b> «content» <b>`</b><b>&gt;</b>
+<pre class="cmd cmdc"><code><var>«flags»</var><b>&lt;</b><b>`</b> <var>«content»</var> <b>`</b><b>&gt;</b>
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«flags»</code>:
+<code class="cmd cmdc"><var>«flags»</var></code>:
 <ul>
 <li>
 <code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
@@ -499,7 +499,7 @@ may be increased arbitrarily.
 <details open>
 <summary>Description</summary>
 <p>
-Preserves <code class="cmd cmdc">«content»</code> literally.
+Preserves <code class="cmd cmdc"><var>«content»</var></code> literally.
 </p>
 </details>
 <details open>
@@ -574,24 +574,24 @@ Rendered: Literally &lt;`literal`&gt;.
 <details open>
 <summary>Syntax</summary>
 <pre class="cmd cmdc"><code><b>``</b>
-  «content»
+  <var>«content»</var>
 <b>``</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>``</b>{«attribute specifications»}
-  «content»
+<pre class="cmd cmdc"><code><b>``</b>{<var>«attribute specifications»</var>}
+  <var>«content»</var>
 <b>``</b>
 </code></pre>
-<pre class="cmd cmdc"><code>«flags»<b>``</b>
-  «content»
+<pre class="cmd cmdc"><code><var>«flags»</var><b>``</b>
+  <var>«content»</var>
 <b>``</b>
 </code></pre>
-<pre class="cmd cmdc"><code>«flags»<b>``</b>{«attribute specifications»}
-  «content»
+<pre class="cmd cmdc"><code><var>«flags»</var><b>``</b>{<var>«attribute specifications»</var>}
+  <var>«content»</var>
 <b>``</b>
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«flags»</code>:
+<code class="cmd cmdc"><var>«flags»</var></code>:
 <ul>
 <li>
 <code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
@@ -609,7 +609,7 @@ The number of backticks <code class="cmd cmdc"><b>`</b></code>
 may be increased arbitrarily.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -619,7 +619,7 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces (pre-formatted) display code:
 </p>
-<pre class="html"><code><b>&lt;pre</b>«attribute sequence»<b>&gt;&lt;code&gt;</b>«content»
+<pre class="html"><code><b>&lt;pre</b><var>«attribute sequence»</var><b>&gt;&lt;code&gt;</b><var>«content»</var>
 <b>&lt;/code&gt;&lt;/pre&gt;</b>
 </code></pre>
 </details>
@@ -699,7 +699,7 @@ Rendered:
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>&lt;</b><b>#</b> «content» <b>#</b><b>&gt;</b>
+<pre class="cmd cmdc"><code><b>&lt;</b><b>#</b> <var>«content»</var> <b>#</b><b>&gt;</b>
 </code></pre>
 <ul>
 <li>
@@ -795,11 +795,11 @@ Rendered:
 <details open>
 <summary>Syntax</summary>
 <pre class="cmd cmdc"><code><b>||</b>
-  «content»
+  <var>«content»</var>
 <b>||</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>||</b>{«attribute specifications»}
-  «content»
+<pre class="cmd cmdc"><code><b>||</b>{<var>«attribute specifications»</var>}
+  <var>«content»</var>
 <b>||</b>
 </code></pre>
 <ul>
@@ -807,7 +807,7 @@ Rendered:
 The number of pipes <code class="cmd cmdc"><b>|</b></code> may be increased arbitrarily.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -817,8 +817,8 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a division:
 </p>
-<pre class="html"><code><b>&lt;div</b>«attribute sequence»<b>&gt;</b>
-«content»
+<pre class="html"><code><b>&lt;div</b><var>«attribute sequence»</var><b>&gt;</b>
+<var>«content»</var>
 <b>&lt;/div&gt;</b>
 </code></pre>
 </details>
@@ -886,11 +886,11 @@ This be a division.
 <details open>
 <summary>Syntax</summary>
 <pre class="cmd cmdc"><code><b>""</b>
-  «content»
+  <var>«content»</var>
 <b>""</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>""</b>{«attribute specifications»}
-  «content»
+<pre class="cmd cmdc"><code><b>""</b>{<var>«attribute specifications»</var>}
+  <var>«content»</var>
 <b>""</b>
 </code></pre>
 <ul>
@@ -899,7 +899,7 @@ The number of double-quotes <code class="cmd cmdc"><b>"</b></code>
 may be increased arbitrarily.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -909,8 +909,8 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a blockquote:
 </p>
-<pre class="html"><code><b>&lt;blockquote</b>«attribute sequence»<b>&gt;</b>
-«content»
+<pre class="html"><code><b>&lt;blockquote</b><var>«attribute sequence»</var><b>&gt;</b>
+<var>«content»</var>
 <b>&lt;/blockquote&gt;</b>
 </code></pre>
 </details>
@@ -956,13 +956,13 @@ This be a blockquote.
 <details open>
 <summary>Syntax</summary>
 <pre class="cmd cmdc"><code><b>==</b>
-<b>-</b> «item»
-«...»
+<b>-</b> <var>«item»</var>
+<var>«...»</var>
 <b>==</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>==</b>{«attribute specifications»}
-<b>-</b>{«attribute specifications»} «item»
-«...»
+<pre class="cmd cmdc"><code><b>==</b>{<var>«attribute specifications»</var>}
+<b>-</b>{<var>«attribute specifications»</var>} <var>«item»</var>
+<var>«...»</var>
 <b>==</b>
 </code></pre>
 <ul>
@@ -976,7 +976,7 @@ The item delimiter may be
 see <a href="#unordered-list-items"><code>#unordered-list-items</code></a>.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -986,11 +986,11 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces an unordered list:
 </p>
-<pre class="html"><code><b>&lt;ul</b>«attribute sequence»<b>&gt;</b>
+<pre class="html"><code><b>&lt;ul</b><var>«attribute sequence»</var><b>&gt;</b>
 <b>&lt;li&gt;</b>
-«item»
+<var>«item»</var>
 <b>&lt;/li&gt;</b>
-«...»
+<var>«...»</var>
 <b>&lt;/ul&gt;</b>
 </code></pre>
 </details>
@@ -1065,13 +1065,13 @@ B2
 <details open>
 <summary>Syntax</summary>
 <pre class="cmd cmdc"><code><b>++</b>
-<b>1.</b> «item»
-«...»
+<b>1.</b> <var>«item»</var>
+<var>«...»</var>
 <b>++</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>++</b>{«attribute specifications»}
-<b>1.</b>{«attribute specifications»} «item»
-«...»
+<pre class="cmd cmdc"><code><b>++</b>{<var>«attribute specifications»</var>}
+<b>1.</b>{<var>«attribute specifications»</var>} <var>«item»</var>
+<var>«...»</var>
 <b>++</b>
 </code></pre>
 <ul>
@@ -1085,7 +1085,7 @@ followed by a <b>full stop</b>,
 see <a href="#ordered-list-items"><code>#ordered-list-items</code></a>.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -1095,11 +1095,11 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces an ordered list:
 </p>
-<pre class="html"><code><b>&lt;ol</b>«attribute sequence»<b>&gt;</b>
+<pre class="html"><code><b>&lt;ol</b><var>«attribute sequence»</var><b>&gt;</b>
 <b>&lt;li&gt;</b>
-«item»
+<var>«item»</var>
 <b>&lt;/li&gt;</b>
-«...»
+<var>«...»</var>
 <b>&lt;/ol&gt;</b>
 </code></pre>
 </details>
@@ -1231,35 +1231,35 @@ One
 <pre class="cmd cmdc"><code><b>''</b>
 <b>|^</b>
   <b>//</b>
-    <b>;</b> «item»
-    <b>,</b> «item»
-    «...»
-  «...»
+    <b>;</b> <var>«item»</var>
+    <b>,</b> <var>«item»</var>
+    <var>«...»</var>
+  <var>«...»</var>
 <b>|:</b>
-  «...»
+  <var>«...»</var>
 <b>|_</b>
-  «...»
+  <var>«...»</var>
 <b>''</b>
 </code></pre>
 <pre class="cmd cmdc"><code><b>''</b>
 <b>//</b>
-  <b>;</b> «item»
-  <b>,</b> «item»
-  «...»
-«...»
+  <b>;</b> <var>«item»</var>
+  <b>,</b> <var>«item»</var>
+  <var>«...»</var>
+<var>«...»</var>
 <b>''</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>''</b>{«attribute specifications»}
-<b>|^</b>{«attribute specifications»}
-  <b>//</b>{«attribute specifications»}
-    <b>;</b>{«attribute specifications»} «item»
-    <b>,</b>{«attribute specifications»} «item»
-    «...»
-  «...»
-<b>|:</b>{«attribute specifications»}
-  «...»
-<b>|_</b>{«attribute specifications»}
-  «...»
+<pre class="cmd cmdc"><code><b>''</b>{<var>«attribute specifications»</var>}
+<b>|^</b>{<var>«attribute specifications»</var>}
+  <b>//</b>{<var>«attribute specifications»</var>}
+    <b>;</b>{<var>«attribute specifications»</var>} <var>«item»</var>
+    <b>,</b>{<var>«attribute specifications»</var>} <var>«item»</var>
+    <var>«...»</var>
+  <var>«...»</var>
+<b>|:</b>{<var>«attribute specifications»</var>}
+  <var>«...»</var>
+<b>|_</b>{<var>«attribute specifications»</var>}
+  <var>«...»</var>
 <b>''</b>
 </code></pre>
 <ul>
@@ -1293,7 +1293,7 @@ Table cells:
 </ul>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -1303,8 +1303,8 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a table:
 </p>
-<pre class="html"><code><b>&lt;table</b>«attribute sequence»<b>&gt;</b>
-«...»
+<pre class="html"><code><b>&lt;table</b><var>«attribute sequence»</var><b>&gt;</b>
+<var>«...»</var>
 <b>&lt;/table&gt;</b>
 </code></pre>
 </details>
@@ -1486,23 +1486,23 @@ Rendered
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>#</b> «content»
+<pre class="cmd cmdc"><code><b>#</b> <var>«content»</var>
 </code></pre>
-<pre class="cmd cmdc"><code><b>#</b>{«attribute specifications»} «content»
+<pre class="cmd cmdc"><code><b>#</b>{<var>«attribute specifications»</var>} <var>«content»</var>
 </code></pre>
 <ul>
 <li>
 The number of hashes <code class="cmd cmdc"><b>#</b></code> may be between 1 and 6.
 </li>
 <li>
-<code class="cmd cmdc">«content»</code> may be optionally closed by hashes.
+<code class="cmd cmdc"><var>«content»</var></code> may be optionally closed by hashes.
 </li>
 <li>
-For continuation of <code class="cmd cmdc">«content»</code>,
+For continuation of <code class="cmd cmdc"><var>«content»</var></code>,
 indent the continuation more than the leading hashes.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -1512,7 +1512,7 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a heading:
 </p>
-<pre class="html"><code><b>&lt;h«hash count»&gt;</b>«content»<b>&lt;/h«hash count»&gt;</b>
+<pre class="html"><code><b>&lt;h<var>«hash count»</var>&gt;</b><var>«content»</var><b>&lt;/h<var>«hash count»</var>&gt;</b>
 </code></pre>
 </details>
 <details open>
@@ -1619,11 +1619,11 @@ This line is not a continuation due to insufficient indentation.
 <details open>
 <summary>Syntax</summary>
 <pre class="cmd cmdc"><code><b>--</b>
-«content»
+<var>«content»</var>
 <b>--</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>--</b>{«attribute specifications»}
-«content»
+<pre class="cmd cmdc"><code><b>--</b>{<var>«attribute specifications»</var>}
+<var>«content»</var>
 <b>--</b>
 </code></pre>
 <ul>
@@ -1631,7 +1631,7 @@ This line is not a continuation due to insufficient indentation.
 The number of hyphens <code class="cmd cmdc"><b>-</b></code> may be increased arbitrarily.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -1641,8 +1641,8 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a paragraph:
 </p>
-<pre class="html"><code><b>&lt;p</b>«attribute sequence»<b>&gt;</b>
-«content»
+<pre class="html"><code><b>&lt;p</b><var>«attribute sequence»</var><b>&gt;</b>
+<var>«content»</var>
 <b>&lt;/p&gt;</b>
 </code></pre>
 </details>
@@ -1737,17 +1737,17 @@ After.
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>`</b> «content» <b>`</b>
+<pre class="cmd cmdc"><code><b>`</b> <var>«content»</var> <b>`</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>`</b>{«attribute specifications»} «content» <b>`</b>
+<pre class="cmd cmdc"><code><b>`</b>{<var>«attribute specifications»</var>} <var>«content»</var> <b>`</b>
 </code></pre>
-<pre class="cmd cmdc"><code>«flags»<b>`</b> «content» <b>`</b>
+<pre class="cmd cmdc"><code><var>«flags»</var><b>`</b> <var>«content»</var> <b>`</b>
 </code></pre>
-<pre class="cmd cmdc"><code>«flags»<b>`</b>{«attribute specifications»} «content» <b>`</b>
+<pre class="cmd cmdc"><code><var>«flags»</var><b>`</b>{<var>«attribute specifications»</var>} <var>«content»</var> <b>`</b>
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«flags»</code>:
+<code class="cmd cmdc"><var>«flags»</var></code>:
 <ul>
 <li>
 <code class="cmd cmdc">u</code>: keep HTML unescaped (do not apply <a href="#escape-html"><code>#escape-html</code></a>)
@@ -1765,7 +1765,7 @@ The number of backticks <code class="cmd cmdc"><b>`</b></code>
 may be increased arbitrarily.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -1775,7 +1775,7 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces inline code:
 </p>
-<pre class="html"><code><b>&lt;code</b>«attribute sequence»<b>&gt;</b>«content»<b>&lt;/code&gt;</b>
+<pre class="html"><code><b>&lt;code</b><var>«attribute sequence»</var><b>&gt;</b><var>«content»</var><b>&lt;/code&gt;</b>
 </code></pre>
 </details>
 <details open>
@@ -2216,21 +2216,21 @@ Applies backslash continuation.
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>[</b>«label»<b>]</b><b>:</b> «uri»
-<b>[</b>«label»<b>]</b><b>:</b> <b>&lt;</b>«uri»<b>&gt;</b>
+<pre class="cmd cmdc"><code><b>[</b><var>«label»</var><b>]</b><b>:</b> <var>«uri»</var>
+<b>[</b><var>«label»</var><b>]</b><b>:</b> <b>&lt;</b><var>«uri»</var><b>&gt;</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>[</b>«label»<b>]</b><b>:</b> «...» <b>"</b>«title»<b>"</b>
-<b>[</b>«label»<b>]</b><b>:</b> «...» <b>'</b>«title»<b>'</b>
+<pre class="cmd cmdc"><code><b>[</b><var>«label»</var><b>]</b><b>:</b> <var>«...»</var> <b>"</b><var>«title»</var><b>"</b>
+<b>[</b><var>«label»</var><b>]</b><b>:</b> <var>«...»</var> <b>'</b><var>«title»</var><b>'</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>[</b>«label»<b>]</b>{«attribute specifications»}<b>:</b> «...»
+<pre class="cmd cmdc"><code><b>[</b><var>«label»</var><b>]</b>{<var>«attribute specifications»</var>}<b>:</b> <var>«...»</var>
 </code></pre>
 <ul>
 <li>
-For continuation of <code class="cmd cmdc">«uri»</code> or <code class="cmd cmdc">«title»</code>,
+For continuation of <code class="cmd cmdc"><var>«uri»</var></code> or <code class="cmd cmdc"><var>«title»</var></code>,
 indent the continuation more than the leading square bracket.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -2253,17 +2253,17 @@ Defines a reference, to be used by
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b><b>(</b>«src»<b>)</b>
-<b>!</b><b>[</b>«alt text»<b>]</b><b>(</b><b>&lt;</b>«src»<b>&gt;</b><b>)</b>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b><var>«alt text»</var><b>]</b><b>(</b><var>«src»</var><b>)</b>
+<b>!</b><b>[</b><var>«alt text»</var><b>]</b><b>(</b><b>&lt;</b><var>«src»</var><b>&gt;</b><b>)</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b><b>(</b>«...» <b>"</b>«title»<b>"</b><b>)</b>
-<b>!</b><b>[</b>«alt text»<b>]</b><b>(</b>«...» <b>'</b>«title»<b>'</b><b>)</b>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b><var>«alt text»</var><b>]</b><b>(</b><var>«...»</var> <b>"</b><var>«title»</var><b>"</b><b>)</b>
+<b>!</b><b>[</b><var>«alt text»</var><b>]</b><b>(</b><var>«...»</var> <b>'</b><var>«title»</var><b>'</b><b>)</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}<b>(</b>«...»<b>)</b>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b><var>«alt text»</var><b>]</b>{<var>«attribute specifications»</var>}<b>(</b><var>«...»</var><b>)</b>
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -2273,24 +2273,24 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces an image:
 </p>
-<pre class="html"><code><b>&lt;img</b>«attribute sequence»<b>&gt;</b>
+<pre class="html"><code><b>&lt;img</b><var>«attribute sequence»</var><b>&gt;</b>
 </code></pre>
 <p>
-Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+Here, <code class="html"><var>«attribute sequence»</var></code> is the sequence of attributes
 built from
 </p>
 <ul>
 <li>
-<code class="cmd cmdc">«alt text»</code>
+<code class="cmd cmdc"><var>«alt text»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«src»</code>
+<code class="cmd cmdc"><var>«src»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«title»</code>
+<code class="cmd cmdc"><var>«title»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>
 </li>
 </ul>
 <p>
@@ -2377,21 +2377,21 @@ Rendered:
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b><b>[</b>«label»<b>]</b>
-<b>!</b><b>[</b>«alt text»<b>]</b>
+<pre class="cmd cmdc"><code><b>!</b><b>[</b><var>«alt text»</var><b>]</b><b>[</b><var>«label»</var><b>]</b>
+<b>!</b><b>[</b><var>«alt text»</var><b>]</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}<b>[</b>«label»<b>]</b>
-<b>!</b><b>[</b>«alt text»<b>]</b>{«attribute specifications»}
+<pre class="cmd cmdc"><code><b>!</b><b>[</b><var>«alt text»</var><b>]</b>{<var>«attribute specifications»</var>}<b>[</b><var>«label»</var><b>]</b>
+<b>!</b><b>[</b><var>«alt text»</var><b>]</b>{<var>«attribute specifications»</var>}
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«label»</code>: must correspond to a defined
+<code class="cmd cmdc"><var>«label»</var></code>: must correspond to a defined
 <a href="#reference-definitions">reference definition</a>, up to case.
-If <code class="cmd cmdc">«label»</code> is omitted,
-<code class="cmd cmdc">«alt text»</code> is used in its stead.
+If <code class="cmd cmdc"><var>«label»</var></code> is omitted,
+<code class="cmd cmdc"><var>«alt text»</var></code> is used in its stead.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -2401,33 +2401,33 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces an image:
 </p>
-<pre class="html"><code><b>&lt;img</b>«attribute sequence»<b>&gt;</b>
+<pre class="html"><code><b>&lt;img</b><var>«attribute sequence»</var><b>&gt;</b>
 </code></pre>
 <p>
-Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+Here, <code class="html"><var>«attribute sequence»</var></code> is the sequence of attributes
 built from
 </p>
 <ul>
 <li>
-<code class="cmd cmdc">«alt text»</code>
+<code class="cmd cmdc"><var>«alt text»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«src»</code> equal to <code class="cmd cmdc">«uri»</code>
+<code class="cmd cmdc"><var>«src»</var></code> equal to <code class="cmd cmdc"><var>«uri»</var></code>
 of the <a href="#reference-definitions">reference definition</a>
-defined for <code class="cmd cmdc">«label»</code>
+defined for <code class="cmd cmdc"><var>«label»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«title»</code>
+<code class="cmd cmdc"><var>«title»</var></code>
 of the <a href="#reference-definitions">reference definition</a>
-defined for <code class="cmd cmdc">«label»</code>
+defined for <code class="cmd cmdc"><var>«label»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>
 of the <a href="#reference-definitions">reference definition</a>
-defined for <code class="cmd cmdc">«label»</code>
+defined for <code class="cmd cmdc"><var>«label»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>
 </li>
 </ul>
 <p>
@@ -2461,7 +2461,7 @@ Rendered:
 </ul>
 </li>
 <li>
-Use <code class="cmd cmdc">«alt text»</code> for <code class="cmd cmdc">«label»</code>:
+Use <code class="cmd cmdc"><var>«alt text»</var></code> for <code class="cmd cmdc"><var>«label»</var></code>:
 <ul>
 <li>
 CMD:
@@ -2484,7 +2484,7 @@ Rendered:
 </ul>
 </li>
 <li>
-<code class="cmd cmdc">«label»</code> is case-insensitive:
+<code class="cmd cmdc"><var>«label»</var></code> is case-insensitive:
 <ul>
 <li>
 CMD:
@@ -2541,17 +2541,17 @@ HTML:
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>&lt;</b>«uri»<b>&gt;</b>
+<pre class="cmd cmdc"><code><b>&lt;</b><var>«uri»</var><b>&gt;</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>&lt;</b>{«attribute specifications»} «uri»<b>&gt;</b>
+<pre class="cmd cmdc"><code><b>&lt;</b>{<var>«attribute specifications»</var>} <var>«uri»</var><b>&gt;</b>
 </code></pre>
-<pre class="cmd cmdc"><code>«flags»<b>&lt;</b>«uri»<b>&gt;</b>
+<pre class="cmd cmdc"><code><var>«flags»</var><b>&lt;</b><var>«uri»</var><b>&gt;</b>
 </code></pre>
-<pre class="cmd cmdc"><code>«flags»<b>&lt;</b>{«attribute specifications»} «uri»<b>&gt;</b>
+<pre class="cmd cmdc"><code><var>«flags»</var><b>&lt;</b>{<var>«attribute specifications»</var>} <var>«uri»</var><b>&gt;</b>
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«flags»</code>:
+<code class="cmd cmdc"><var>«flags»</var></code>:
 <ul>
 <li>
 <code class="cmd cmdc">b</code>: wrap in angle brackets (apply <a href="#angle-bracket-wrap"><code>#angle-bracket-wrap</code></a>)
@@ -2562,7 +2562,7 @@ HTML:
 </ul>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -2572,23 +2572,23 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a link:
 </p>
-<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«uri»<b>&lt;/a&gt;</b>
+<pre class="html"><code><b>&lt;a</b><var>«attribute sequence»</var><b>&gt;</b><var>«uri»</var><b>&lt;/a&gt;</b>
 </code></pre>
 <p>
 Or:
 </p>
-<pre class="html"><code><b>&amp;lt;&lt;a</b>«attribute sequence»<b>&gt;</b>«uri»<b>&lt;/a&gt;&amp;gt;</b>
+<pre class="html"><code><b>&amp;lt;&lt;a</b><var>«attribute sequence»</var><b>&gt;</b><var>«uri»</var><b>&lt;/a&gt;&amp;gt;</b>
 </code></pre>
 <p>
-Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+Here, <code class="html"><var>«attribute sequence»</var></code> is the sequence of attributes
 built from
 </p>
 <ul>
 <li>
-<code class="cmd cmdc">«uri»</code> as <code>href</code>
+<code class="cmd cmdc"><var>«uri»</var></code> as <code>href</code>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>
 </li>
 </ul>
 <p>
@@ -2681,17 +2681,17 @@ Rendered: <a href="mailto:mail@example.com">mail@example.com</a>
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b><b>(</b>«href»<b>)</b>
-<b>[</b>«link text»<b>]</b><b>(</b><b>&lt;</b>«href»<b>&gt;</b><b>)</b>
+<pre class="cmd cmdc"><code><b>[</b><var>«link text»</var><b>]</b><b>(</b><var>«href»</var><b>)</b>
+<b>[</b><var>«link text»</var><b>]</b><b>(</b><b>&lt;</b><var>«href»</var><b>&gt;</b><b>)</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b><b>(</b>«...» <b>"</b>«title»<b>"</b><b>)</b>
-<b>[</b>«link text»<b>]</b><b>(</b>«...» <b>'</b>«title»<b>'</b><b>)</b>
+<pre class="cmd cmdc"><code><b>[</b><var>«link text»</var><b>]</b><b>(</b><var>«...»</var> <b>"</b><var>«title»</var><b>"</b><b>)</b>
+<b>[</b><var>«link text»</var><b>]</b><b>(</b><var>«...»</var> <b>'</b><var>«title»</var><b>'</b><b>)</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b>{«attribute specifications»}<b>(</b>«...»<b>)</b>
+<pre class="cmd cmdc"><code><b>[</b><var>«link text»</var><b>]</b>{<var>«attribute specifications»</var>}<b>(</b><var>«...»</var><b>)</b>
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -2701,21 +2701,21 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a link:
 </p>
-<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«link text»<b>&lt;/a&gt;</b>
+<pre class="html"><code><b>&lt;a</b><var>«attribute sequence»</var><b>&gt;</b><var>«link text»</var><b>&lt;/a&gt;</b>
 </code></pre>
 <p>
-Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+Here, <code class="html"><var>«attribute sequence»</var></code> is the sequence of attributes
 built from
 </p>
 <ul>
 <li>
-<code class="cmd cmdc">«href»</code>
+<code class="cmd cmdc"><var>«href»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«title»</code>
+<code class="cmd cmdc"><var>«title»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>
 </li>
 </ul>
 <p>
@@ -2804,21 +2804,21 @@ Rendered:
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b><b>[</b>«label»<b>]</b>
-<b>[</b>«link text»<b>]</b>
+<pre class="cmd cmdc"><code><b>[</b><var>«link text»</var><b>]</b><b>[</b><var>«label»</var><b>]</b>
+<b>[</b><var>«link text»</var><b>]</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>[</b>«link text»<b>]</b>{«attribute specifications»}<b>[</b>«label»<b>]</b>
-<b>[</b>«link text»<b>]</b>{«attribute specifications»}
+<pre class="cmd cmdc"><code><b>[</b><var>«link text»</var><b>]</b>{<var>«attribute specifications»</var>}<b>[</b><var>«label»</var><b>]</b>
+<b>[</b><var>«link text»</var><b>]</b>{<var>«attribute specifications»</var>}
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«label»</code>: must correspond to a defined
+<code class="cmd cmdc"><var>«label»</var></code>: must correspond to a defined
 <a href="#reference-definitions">reference definition</a>, up to case.
-If <code class="cmd cmdc">«label»</code> is omitted,
-<code class="cmd cmdc">«link text»</code> is used in its stead.
+If <code class="cmd cmdc"><var>«label»</var></code> is omitted,
+<code class="cmd cmdc"><var>«link text»</var></code> is used in its stead.
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 </ul>
@@ -2828,30 +2828,30 @@ see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 <p>
 Produces a link:
 </p>
-<pre class="html"><code><b>&lt;a</b>«attribute sequence»<b>&gt;</b>«link text»<b>&lt;/a&gt;</b>
+<pre class="html"><code><b>&lt;a</b><var>«attribute sequence»</var><b>&gt;</b><var>«link text»</var><b>&lt;/a&gt;</b>
 </code></pre>
 <p>
-Here, <code class="html">«attribute sequence»</code> is the sequence of attributes
+Here, <code class="html"><var>«attribute sequence»</var></code> is the sequence of attributes
 built from
 </p>
 <ul>
 <li>
-<code class="cmd cmdc">«href»</code> equal to <code class="cmd cmdc">«uri»</code>
+<code class="cmd cmdc"><var>«href»</var></code> equal to <code class="cmd cmdc"><var>«uri»</var></code>
 of the <a href="#reference-definitions">reference definition</a>
-defined for <code class="cmd cmdc">«label»</code>
+defined for <code class="cmd cmdc"><var>«label»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«title»</code>
+<code class="cmd cmdc"><var>«title»</var></code>
 of the <a href="#reference-definitions">reference definition</a>
-defined for <code class="cmd cmdc">«label»</code>
+defined for <code class="cmd cmdc"><var>«label»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>
 of the <a href="#reference-definitions">reference definition</a>
-defined for <code class="cmd cmdc">«label»</code>
+defined for <code class="cmd cmdc"><var>«label»</var></code>
 </li>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>
 </li>
 </ul>
 <p>
@@ -2885,7 +2885,7 @@ Rendered:
 </ul>
 </li>
 <li>
-Use <code class="cmd cmdc">«link text»</code> for <code class="cmd cmdc">«label»</code>:
+Use <code class="cmd cmdc"><var>«link text»</var></code> for <code class="cmd cmdc"><var>«label»</var></code>:
 <ul>
 <li>
 CMD:
@@ -2908,7 +2908,7 @@ Rendered:
 </ul>
 </li>
 <li>
-<code class="cmd cmdc">«label»</code> is case-insensitive:
+<code class="cmd cmdc"><var>«label»</var></code> is case-insensitive:
 <ul>
 <li>
 CMD:
@@ -2966,22 +2966,22 @@ HTML:
 </details>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdc"><code><b>__</b>«b content»<b>__</b>
-<b>_</b>«i content»<b>_</b>
-<b>**</b>«strong content»<b>**</b>
-<b>*</b>«em content»<b>*</b>
-<b>''</b>«cite content»<b>''</b>
-<b>""</b>«q content»<b>""</b>
+<pre class="cmd cmdc"><code><b>__</b><var>«b content»</var><b>__</b>
+<b>_</b><var>«i content»</var><b>_</b>
+<b>**</b><var>«strong content»</var><b>**</b>
+<b>*</b><var>«em content»</var><b>*</b>
+<b>''</b><var>«cite content»</var><b>''</b>
+<b>""</b><var>«q content»</var><b>""</b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>«...»</b>{«attribute specifications»} «content»<b>«...»</b>
+<pre class="cmd cmdc"><code><b><var>«...»</var></b>{<var>«attribute specifications»</var>} <var>«content»</var><b><var>«...»</var></b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>|</b><b>«...»</b>«content»<b>«...»</b>
+<pre class="cmd cmdc"><code><b>|</b><b><var>«...»</var></b><var>«content»</var><b><var>«...»</var></b>
 </code></pre>
-<pre class="cmd cmdc"><code><b>|</b><b>«...»</b>{«attribute specifications»} «content»<b>«...»</b>
+<pre class="cmd cmdc"><code><b>|</b><b><var>«...»</var></b>{<var>«attribute specifications»</var>} <var>«content»</var><b><var>«...»</var></b>
 </code></pre>
 <ul>
 <li>
-<code class="cmd cmdc">«attribute specifications»</code>:
+<code class="cmd cmdc"><var>«attribute specifications»</var></code>:
 see <a href="#cmd-attribute-specifications">CMD attribute specifications</a>.
 </li>
 <li>
@@ -3005,12 +3005,12 @@ nor by a pipe <code class="cmd cmdc">|</code>.
 <p>
 Produces an inline semantic:
 </p>
-<pre class="html"><code><b>&lt;b</b>«attribute sequence»<b>&gt;</b>«b content»<b>&lt;/b&gt;</b>
-<b>&lt;i</b>«attribute sequence»<b>&gt;</b>«i content»<b>&lt;/i&gt;</b>
-<b>&lt;strong</b>«attribute sequence»<b>&gt;</b>«strong content»<b>&lt;/strong&gt;</b>
-<b>&lt;em</b>«attribute sequence»<b>&gt;</b>«em content»<b>&lt;/em&gt;</b>
-<b>&lt;cite</b>«attribute sequence»<b>&gt;</b>«cite content»<b>&lt;/cite&gt;</b>
-<b>&lt;q</b>«attribute sequence»<b>&gt;</b>«q content»<b>&lt;/q&gt;</b>
+<pre class="html"><code><b>&lt;b</b><var>«attribute sequence»</var><b>&gt;</b><var>«b content»</var><b>&lt;/b&gt;</b>
+<b>&lt;i</b><var>«attribute sequence»</var><b>&gt;</b><var>«i content»</var><b>&lt;/i&gt;</b>
+<b>&lt;strong</b><var>«attribute sequence»</var><b>&gt;</b><var>«strong content»</var><b>&lt;/strong&gt;</b>
+<b>&lt;em</b><var>«attribute sequence»</var><b>&gt;</b><var>«em content»</var><b>&lt;/em&gt;</b>
+<b>&lt;cite</b><var>«attribute sequence»</var><b>&gt;</b><var>«cite content»</var><b>&lt;/cite&gt;</b>
+<b>&lt;q</b><var>«attribute sequence»</var><b>&gt;</b><var>«q content»</var><b>&lt;/q&gt;</b>
 </code></pre>
 </details>
 <details open>
@@ -3601,17 +3601,17 @@ a <b>run of digits</b> followed by a <b>full stop</b>.
 <summary>Definition</summary>
 <pre class="cmd cmdr"><code>RegexDictionaryReplacement: #mark-table-headers-for-preceding-table-data
 * \A --&gt; ;{}
-# Replaces `&lt;th«attributes_sequence»&gt;` with `;{}&lt;th«attributes_sequence»&gt;`,
+# Replaces `&lt;th<var>«attributes_sequence»</var>&gt;` with `;{}&lt;th<var>«attributes_sequence»</var>&gt;`,
 # so that #table-data will know to stop before it.
 </code></pre>
 </details>
 <details open>
 <summary>Description</summary>
-<p>
-Replaces <code class="cmd cmdc">&lt;th«attributes_sequence»&gt;</code>
-with <code class="cmd cmdc">;{}&lt;th«attributes_sequence»&gt;</code>
+--
+Replaces <code class="cmd cmdc">&lt;th<var>«attributes_sequence»</var>&gt;</code>
+with <code class="cmd cmdc">;{}&lt;th<var>«attributes_sequence»</var>&gt;</code>
 so that <a href="#table-data"><code>#table-data</code></a> will know to stop before it.
-</p>
+--
 </details>
 <details>
 <summary>Dependants</summary>
@@ -3687,17 +3687,17 @@ up to the next leading <code class="cmd cmdc"><b>;</b></code> or <code class="cm
 * ^ [;] \{ \} &lt;th (?P&lt;bracket_or_placeholder_marker&gt; [&gt;\uF8FF] )
     --&gt;
   &lt;th\g&lt;bracket_or_placeholder_marker&gt;
-# Replaces `;{}&lt;th«attributes_sequence»&gt;` with `&lt;th«attributes_sequence»&gt;`
+# Replaces `;{}&lt;th<var>«attributes_sequence»</var>&gt;` with `&lt;th<var>«attributes_sequence»</var>&gt;`
 # so that #mark-table-headers-for-preceding-table-data is undone.
 </code></pre>
 </details>
 <details open>
 <summary>Description</summary>
-<p>
-Replaces <code class="cmd cmdc">;{}&lt;th«attributes_sequence»&gt;</code>
-with <code class="cmd cmdc">&lt;th«attributes_sequence»&gt;</code>
+--
+Replaces <code class="cmd cmdc">;{}&lt;th<var>«attributes_sequence»</var>&gt;</code>
+with <code class="cmd cmdc">&lt;th<var>«attributes_sequence»</var>&gt;</code>
 so that <a href="#mark-table-headers-for-preceding-table-data"><code>#mark-table-headers-for-preceding-table-data</code></a> is undone.
-</p>
+--
 </details>
 <details>
 <summary>Dependants</summary>
@@ -3883,7 +3883,7 @@ Wraps a string in angle brackets.
 <h2 id="replacement-rule-syntax"><a href="#replacement-rule-syntax" class="permalink" aria-label="Permalink"></a>CMD replacement rule syntax</h2>
 <p>
 This section gives the syntax for writing user-defined CMD replacement rules,
-which go before the <code class="cmd">«delimiter»</code> when <a href="#authoring-cmd-files">authoring CMD files</a>.
+which go before the <code class="cmd"><var>«delimiter»</var></code> when <a href="#authoring-cmd-files">authoring CMD files</a>.
 </p>
 <p>
 In CMD replacement rule syntax, a line must be one of the following:
@@ -3895,38 +3895,38 @@ Ends the definition of a replacement rule.
 </li>
 <li>
 A <b>comment</b>:
-<pre class="cmd cmdr"><code><b>#</b> «comment»
+<pre class="cmd cmdr"><code><b>#</b> <var>«comment»</var>
 </code></pre>
 Is ignored.
 </li>
 <li>
 A <b>rules inclusion</b>:
-<pre class="cmd cmdr"><code><b>&lt;</b> «included_file_name»
+<pre class="cmd cmdr"><code><b>&lt;</b> <var>«included_file_name»</var>
 </code></pre>
-Includes the content of <code class="cmd cmdr">«included_file_name»</code>
+Includes the content of <code class="cmd cmdr"><var>«included_file_name»</var></code>
 as CMD replacement rules.
 <ul>
 <li>
-If <code class="cmd cmdr">«included_file_name»</code> begins with a slash,
+If <code class="cmd cmdr"><var>«included_file_name»</var></code> begins with a slash,
 it is parsed relative to the working directory.
 </li>
 <li>
-If <code class="cmd cmdr">«included_file_name»</code> does not begin with a slash,
+If <code class="cmd cmdr"><var>«included_file_name»</var></code> does not begin with a slash,
 it is parsed relative to the file in which the inclusion is invoked.
 </li>
 </ul>
-The convention is for <code class="cmd cmdr">«included_file_name»</code>
+The convention is for <code class="cmd cmdr"><var>«included_file_name»</var></code>
 to have the extension <code>.cmdr</code>.
 </li>
 <li>
 A <b>class declaration</b>:
-<pre class="cmd cmdr"><code>«ClassName»<b>:</b> <b>#</b>«id»
+<pre class="cmd cmdr"><code><var>«ClassName»</var><b>:</b> <b>#</b><var>«id»</var>
 </code></pre>
 Begins the definition of a replacement rule
-with class <code class="cmd cmdr">«ClassName»</code>.
+with class <code class="cmd cmdr"><var>«ClassName»</var></code>.
 <ul>
 <li>
-<code class="cmd cmdr">«ClassName»</code> must be one of
+<code class="cmd cmdr"><var>«ClassName»</var></code> must be one of
 <a href="#ReplacementSequence"><code>ReplacementSequence</code></a>,
 <a href="#PlaceholderMarkerReplacement"><code>PlaceholderMarkerReplacement</code></a>,
 <a href="#PlaceholderProtectionReplacement"><code>PlaceholderProtectionReplacement</code></a>,
@@ -3948,34 +3948,34 @@ or
 <a href="#ReferencedLinkReplacement"><code>ReferencedLinkReplacement</code></a>.
 </li>
 <li>
-<code class="cmd cmdr">«id»</code> may only contain
+<code class="cmd cmdr"><var>«id»</var></code> may only contain
 lower-case letters, digits, hyphens, and full stops.
 The convention is for user-defined replacement rules
-to have <code class="cmd cmdr">«id»</code> beginning with a full stop
+to have <code class="cmd cmdr"><var>«id»</var></code> beginning with a full stop
 (whereas the <a href="#standard-rules">standard rules</a>
-have <code class="cmd cmdr">«id»</code> beginning with a letter or digit).
+have <code class="cmd cmdr"><var>«id»</var></code> beginning with a letter or digit).
 </li>
 </ul>
 </li>
 <li>
 The start of an <b>attribute declaration</b>:
-<pre class="cmd cmdr"><code><b>-</b> «name»<b>:</b> «value»
+<pre class="cmd cmdr"><code><b>-</b> <var>«name»</var><b>:</b> <var>«value»</var>
 </code></pre>
 Declares an attribute for the replacement that is currently being defined.
 <ul>
 <li>
-<code class="cmd cmdr">«name»</code> must be one of the valid attribute names
+<code class="cmd cmdr"><var>«name»</var></code> must be one of the valid attribute names
 for the replacement that is currently being defined.
 </li>
 <li>
-<code class="cmd cmdr">«value»</code> must be a suitable attribute value
+<code class="cmd cmdr"><var>«value»</var></code> must be a suitable attribute value
 for that attribute name.
 </li>
 </ul>
 </li>
 <li>
 The start of an <b>substitution declaration</b>:
-<pre class="cmd cmdr"><code><b>*</b> «pattern» <b>--&gt;</b> «substitute»
+<pre class="cmd cmdr"><code><b>*</b> <var>«pattern»</var> <b>--&gt;</b> <var>«substitute»</var>
 </code></pre>
 Declares a substitution for the replacement that is currently being defined
 (which must be an <a href="#OrdinaryDictionaryReplacement"><code>OrdinaryDictionaryReplacement</code></a>
@@ -3983,7 +3983,7 @@ or a <a href="#RegexDictionaryReplacement"><code>RegexDictionaryReplacement</cod
 <ul>
 <li>
 The number of hyphens in the delimiter <code class="cmd cmdr"><b>--&gt;</b></code>
-may be arbitrarily increased should <code class="cmd cmdr">«pattern»</code> contain
+may be arbitrarily increased should <code class="cmd cmdr"><var>«pattern»</var></code> contain
 a run of hyphens followed by a closing angle-bracket.
 </li>
 </ul>
@@ -3996,9 +3996,9 @@ beginning with whitespace.
 <h3 id="ReplacementSequence"><a href="#ReplacementSequence" class="permalink" aria-label="Permalink"></a><code>ReplacementSequence</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>ReplacementSequence: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- replacements: (def) NONE | #«id» [...]
+<pre class="cmd cmdr"><code>ReplacementSequence: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- replacements: (def) NONE | #<var>«id»</var> [...]
 </code></pre>
 <ul>
 <li>
@@ -4028,8 +4028,8 @@ Defines a replacement rule that applies a sequence of replacement rules.
 <h3 id="PlaceholderMarkerReplacement"><a href="#PlaceholderMarkerReplacement" class="permalink" aria-label="Permalink"></a><code>PlaceholderMarkerReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>PlaceholderMarkerReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+<pre class="cmd cmdr"><code>PlaceholderMarkerReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
 </code></pre>
 <ul>
 <li>
@@ -4055,8 +4055,8 @@ Defines a rule for replacing the placeholder marker with a <a href="#cmd-placeho
 <h3 id="PlaceholderProtectionReplacement"><a href="#PlaceholderProtectionReplacement" class="permalink" aria-label="Permalink"></a><code>PlaceholderProtectionReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>PlaceholderProtectionReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+<pre class="cmd cmdr"><code>PlaceholderProtectionReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
 </code></pre>
 <ul>
 <li>
@@ -4082,8 +4082,8 @@ Defines a replacement rule for protecting strings with a <a href="#cmd-placehold
 <h3 id="PlaceholderUnprotectionReplacement"><a href="#PlaceholderUnprotectionReplacement" class="permalink" aria-label="Permalink"></a><code>PlaceholderUnprotectionReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>PlaceholderUnprotectionReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+<pre class="cmd cmdr"><code>PlaceholderUnprotectionReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
 </code></pre>
 <ul>
 <li>
@@ -4109,10 +4109,10 @@ Defines a replacement rule for restoring <a href="#cmd-placeholders">placeholder
 <h3 id="DeIndentationReplacement"><a href="#DeIndentationReplacement" class="permalink" aria-label="Permalink"></a><code>DeIndentationReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>DeIndentationReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- positive_flag: (def) NONE | «FLAG_NAME»
-- negative_flag: (def) NONE | «FLAG_NAME»
+<pre class="cmd cmdr"><code>DeIndentationReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- positive_flag: (def) NONE | <var>«FLAG_NAME»</var>
+- negative_flag: (def) NONE | <var>«FLAG_NAME»</var>
 </code></pre>
 <ul>
 <li>
@@ -4146,16 +4146,16 @@ Defines a replacement rule for de-indentation.
 <h3 id="OrdinaryDictionaryReplacement"><a href="#OrdinaryDictionaryReplacement" class="permalink" aria-label="Permalink"></a><code>OrdinaryDictionaryReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- positive_flag: (def) NONE | «FLAG_NAME»
-- negative_flag: (def) NONE | «FLAG_NAME»
+<pre class="cmd cmdr"><code>OrdinaryDictionaryReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- positive_flag: (def) NONE | <var>«FLAG_NAME»</var>
+- negative_flag: (def) NONE | <var>«FLAG_NAME»</var>
 - apply_mode: (def) SIMULTANEOUS | SEQUENTIAL
-* "«pattern»" | '«pattern»' | «pattern»
+* "<var>«pattern»</var>" | '<var>«pattern»</var>' | <var>«pattern»</var>
     --&gt;
-  "«substitute»" | '«substitute»' | «substitute»
+  "<var>«substitute»</var>" | '<var>«substitute»</var>' | <var>«substitute»</var>
 [...]
-- concluding_replacements: (def) NONE | #«id» [...]
+- concluding_replacements: (def) NONE | #<var>«id»</var> [...]
 </code></pre>
 <ul>
 <li>
@@ -4241,15 +4241,15 @@ Defines a replacement rule for a dictionary of ordinary substitutions.
 <h3 id="RegexDictionaryReplacement"><a href="#RegexDictionaryReplacement" class="permalink" aria-label="Permalink"></a><code>RegexDictionaryReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- positive_flag: (def) NONE | «FLAG_NAME»
-- negative_flag: (def) NONE | «FLAG_NAME»
-* "«pattern»" | '«pattern»' | «pattern»
+<pre class="cmd cmdr"><code>RegexDictionaryReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- positive_flag: (def) NONE | <var>«FLAG_NAME»</var>
+- negative_flag: (def) NONE | <var>«FLAG_NAME»</var>
+* "<var>«pattern»</var>" | '<var>«pattern»</var>' | <var>«pattern»</var>
     --&gt;
-  "«substitute»" | '«substitute»' | «substitute»
+  "<var>«substitute»</var>" | '<var>«substitute»</var>' | <var>«substitute»</var>
 [...]
-- concluding_replacements: (def) NONE | #«id» [...]
+- concluding_replacements: (def) NONE | #<var>«id»</var> [...]
 </code></pre>
 <ul>
 <li>
@@ -4366,17 +4366,17 @@ Defines a replacement rule for a dictionary of regex substitutions.
 <h3 id="FixedDelimitersReplacement"><a href="#FixedDelimitersReplacement" class="permalink" aria-label="Permalink"></a><code>FixedDelimitersReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>FixedDelimitersReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+<pre class="cmd cmdr"><code>FixedDelimitersReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
 - syntax_type: BLOCK | INLINE (mandatory)
-- allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
-- opening_delimiter: «string» (mandatory)
-- attribute_specifications: (def) NONE | EMPTY | «string»
+- allowed_flags: (def) NONE | <var>«letter»</var>=<var>«FLAG_NAME»</var> [...]
+- opening_delimiter: <var>«string»</var> (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
-- content_replacements: (def) NONE | #«id» [...]
-- closing_delimiter: «string» (mandatory)
-- tag_name: (def) NONE | «name»
-- concluding_replacements: (def) NONE | #«id» [...]
+- content_replacements: (def) NONE | #<var>«id»</var> [...]
+- closing_delimiter: <var>«string»</var> (mandatory)
+- tag_name: (def) NONE | <var>«name»</var>
+- concluding_replacements: (def) NONE | #<var>«id»</var> [...]
 </code></pre>
 <ul>
 <li>
@@ -4441,18 +4441,18 @@ Defines a fixed-delimiters replacement rule.
 <h3 id="ExtensibleFenceReplacement"><a href="#ExtensibleFenceReplacement" class="permalink" aria-label="Permalink"></a><code>ExtensibleFenceReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+<pre class="cmd cmdr"><code>ExtensibleFenceReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
 - syntax_type: BLOCK | INLINE (mandatory)
-- allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
-- prologue_delimiter: (def) NONE | «string»
-- extensible_delimiter: «character_repeated» (mandatory)
-- attribute_specifications: (def) NONE | EMPTY | «string»
+- allowed_flags: (def) NONE | <var>«letter»</var>=<var>«FLAG_NAME»</var> [...]
+- prologue_delimiter: (def) NONE | <var>«string»</var>
+- extensible_delimiter: <var>«character_repeated»</var> (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
-- content_replacements: (def) NONE | #«id» [...]
-- epilogue_delimiter: (def) NONE | «string»
-- tag_name: (def) NONE | «name»
-- concluding_replacements: (def) NONE | #«id» [...]
+- content_replacements: (def) NONE | #<var>«id»</var> [...]
+- epilogue_delimiter: (def) NONE | <var>«string»</var>
+- tag_name: (def) NONE | <var>«name»</var>
+- concluding_replacements: (def) NONE | #<var>«id»</var> [...]
 </code></pre>
 <ul>
 <li>
@@ -4548,14 +4548,14 @@ Defines a generalised extensible-fence-style replacement rule.
 <h3 id="PartitioningReplacement"><a href="#PartitioningReplacement" class="permalink" aria-label="Permalink"></a><code>PartitioningReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>PartitioningReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- starting_pattern: «regex» (mandatory)
-- attribute_specifications: (def) NONE | EMPTY | «string»
-- content_replacements: (def) NONE | #«id» [...]
-- ending_pattern: (def) NONE | «regex»
-- tag_name: (def) NONE | «name»
-- concluding_replacements: (def) NONE | #«id» [...]
+<pre class="cmd cmdr"><code>PartitioningReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- starting_pattern: <var>«regex»</var> (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
+- content_replacements: (def) NONE | #<var>«id»</var> [...]
+- ending_pattern: (def) NONE | <var>«regex»</var>
+- tag_name: (def) NONE | <var>«name»</var>
+- concluding_replacements: (def) NONE | #<var>«id»</var> [...]
 </code></pre>
 <ul>
 <li>
@@ -4631,11 +4631,11 @@ starting pattern up to but not including an ending pattern.)
 <h3 id="InlineAssortedDelimitersReplacement"><a href="#InlineAssortedDelimitersReplacement" class="permalink" aria-label="Permalink"></a><code>InlineAssortedDelimitersReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>InlineAssortedDelimitersReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
+<pre class="cmd cmdr"><code>InlineAssortedDelimitersReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
 - delimiter_conversion:
-    «character» | «character_doubled»=«tag_name» [...] (mandatory)
-- attribute_specifications: (def) NONE | EMPTY | «string»
+    <var>«character»</var> | <var>«character_doubled»</var>=<var>«tag_name»</var> [...] (mandatory)
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
 </code></pre>
 <ul>
@@ -4681,9 +4681,9 @@ into <code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> in Markdown.)
 <h3 id="HeadingReplacement"><a href="#HeadingReplacement" class="permalink" aria-label="Permalink"></a><code>HeadingReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>HeadingReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- attribute_specifications: (def) NONE | EMPTY | «string»
+<pre class="cmd cmdr"><code>HeadingReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 </code></pre>
 <ul>
 <li>
@@ -4717,9 +4717,9 @@ ATX headings in Markdown.)
 <h3 id="ReferenceDefinitionReplacement"><a href="#ReferenceDefinitionReplacement" class="permalink" aria-label="Permalink"></a><code>ReferenceDefinitionReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>ReferenceDefinitionReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- attribute_specifications: (def) NONE | EMPTY | «string»
+<pre class="cmd cmdr"><code>ReferenceDefinitionReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 </code></pre>
 <ul>
 <li>
@@ -4739,7 +4739,7 @@ and if so, what the default specification is
 <p>
 Defines a replacement rule for consuming reference definitions.
 (A generalisation of the replacement that processes
-<code>[«label»]: «uri» "«title»"</code> in Markdown.)
+<code>[<var>«label»</var>]: <var>«uri»</var> "<var>«title»</var>"</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4753,9 +4753,9 @@ Defines a replacement rule for consuming reference definitions.
 <h3 id="SpecifiedImageReplacement"><a href="#SpecifiedImageReplacement" class="permalink" aria-label="Permalink"></a><code>SpecifiedImageReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>SpecifiedImageReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- attribute_specifications: (def) NONE | EMPTY | «string»
+<pre class="cmd cmdr"><code>SpecifiedImageReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
 </code></pre>
 <ul>
@@ -4782,7 +4782,7 @@ in the square-bracketed alt text
 <p>
 Defines a replacement rule for specified images.
 (A generalisation of the replacement that processes
-<code>![«alt text»](«uri» "«title»")</code> in Markdown.)
+<code>![<var>«alt text»</var>](<var>«uri»</var> "<var>«title»</var>")</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4796,9 +4796,9 @@ Defines a replacement rule for specified images.
 <h3 id="ReferencedImageReplacement"><a href="#ReferencedImageReplacement" class="permalink" aria-label="Permalink"></a><code>ReferencedImageReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>ReferencedImageReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- attribute_specifications: (def) NONE | EMPTY | «string»
+<pre class="cmd cmdr"><code>ReferencedImageReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
 </code></pre>
 <ul>
@@ -4824,7 +4824,7 @@ in the square-bracketed alt text and the square-bracketed label
 <p>
 Defines a replacement rule for referenced images.
 (A generalisation of the replacement that processes
-<code>![«alt text»][«label»]</code> in Markdown.)
+<code>![<var>«alt text»</var>][<var>«label»</var>]</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4838,12 +4838,12 @@ Defines a replacement rule for referenced images.
 <h3 id="ExplicitLinkReplacement"><a href="#ExplicitLinkReplacement" class="permalink" aria-label="Permalink"></a><code>ExplicitLinkReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>ExplicitLinkReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- allowed_flags: (def) NONE | «letter»=«FLAG_NAME» [...]
-- attribute_specifications: (def) NONE | EMPTY | «string»
-- content_replacements: (def) NONE | #«id» [...]
-- concluding_replacements: (def) NONE | #«id» [...]
+<pre class="cmd cmdr"><code>ExplicitLinkReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- allowed_flags: (def) NONE | <var>«letter»</var>=<var>«FLAG_NAME»</var> [...]
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
+- content_replacements: (def) NONE | #<var>«id»</var> [...]
+- concluding_replacements: (def) NONE | #<var>«id»</var> [...]
 </code></pre>
 <ul>
 <li>
@@ -4876,7 +4876,7 @@ sequence of replacements to be applied after construction of the element
 <p>
 Defines a replacement rule for explicit links.
 (A generalisation of the replacement that processes
-<code>&lt;«uri»&gt;</code> in Markdown.)
+<code>&lt;<var>«uri»</var>&gt;</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4890,9 +4890,9 @@ Defines a replacement rule for explicit links.
 <h3 id="SpecifiedLinkReplacement"><a href="#SpecifiedLinkReplacement" class="permalink" aria-label="Permalink"></a><code>SpecifiedLinkReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>SpecifiedLinkReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- attribute_specifications: (def) NONE | EMPTY | «string»
+<pre class="cmd cmdr"><code>SpecifiedLinkReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
 </code></pre>
 <ul>
@@ -4919,7 +4919,7 @@ in the square-bracketed link text
 <p>
 Defines a replacement rule for specified links.
 (A generalisation of the replacement that processes
-<code>[«link text»](«uri» "«title»")</code> in Markdown.)
+<code>[<var>«link text»</var>](<var>«uri»</var> "<var>«title»</var>")</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4933,9 +4933,9 @@ Defines a replacement rule for specified links.
 <h3 id="ReferencedLinkReplacement"><a href="#ReferencedLinkReplacement" class="permalink" aria-label="Permalink"></a><code>ReferencedLinkReplacement</code></h3>
 <details open>
 <summary>Syntax</summary>
-<pre class="cmd cmdr"><code>ReferencedLinkReplacement: #«id»
-- queue_position: (def) NONE | ROOT | BEFORE #«id» | AFTER #«id»
-- attribute_specifications: (def) NONE | EMPTY | «string»
+<pre class="cmd cmdr"><code>ReferencedLinkReplacement: #<var>«id»</var>
+- queue_position: (def) NONE | ROOT | BEFORE #<var>«id»</var> | AFTER #<var>«id»</var>
+- attribute_specifications: (def) NONE | EMPTY | <var>«string»</var>
 - prohibited_content: (def) NONE | BLOCKS | ANCHORED_BLOCKS
 </code></pre>
 <ul>
@@ -4961,7 +4961,7 @@ in the square-bracketed link text and the square-bracketed label
 <p>
 Defines a replacement rule for referenced links.
 (A generalisation of the replacement that processes
-<code>[«link text»][«label»]</code> in Markdown.)
+<code>[<var>«link text»</var>][<var>«label»</var>]</code> in Markdown.)
 </p>
 </details>
 <details open>
@@ -4983,21 +4983,21 @@ consisting of code points in the main Unicode Private Use Area.
 <p>
 Specifically, the placeholder for a string is of the following form:
 </p>
-<pre class="cmd cmdc"><code><b>«marker»</b><b>«run_characters»</b><b>«marker»</b>
+<pre class="cmd cmdc"><code><b><var>«marker»</var></b><b><var>«run_characters»</var></b><b><var>«marker»</var></b>
 </code></pre>
 <ul>
 <li>
-<b><code class="cmd cmdc">«marker»</code></b> is <code>«U+F8FF»</code>.
+<b><code class="cmd cmdc"><var>«marker»</var></code></b> is <code><var>«U+F8FF»</var></code>.
 </li>
 <li>
-<b><code class="cmd cmdc">«run_characters»</code></b> are between <code>«U+E000»</code> and <code>«U+E0FF»</code>
+<b><code class="cmd cmdc"><var>«run_characters»</var></code></b> are between <code><var>«U+E000»</var></code> and <code><var>«U+E0FF»</var></code>
 each representing a Unicode byte of the string.
 </li>
 </ul>
 <p>
 It is assumed that the user will not define replacement rules that
 tamper with strings of the form
-<code class="cmd cmdc">«marker»«run_characters»«marker»</code>.
+<code class="cmd cmdc"><var>«marker»</var><var>«run_characters»</var><var>«marker»</var></code>.
 </p>
 <h3>Example</h3>
 <ul>
@@ -5012,12 +5012,12 @@ The corresponding Unicode bytes are
 <code>\x<b>C2</b>\x<b>A3</b></code> and <code>\x<b>33</b></code>.
 </li>
 <li>
-The <code class="cmd cmdc">«run_characters»</code> are therefore
-<code>«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»</code>.
+The <code class="cmd cmdc"><var>«run_characters»</var></code> are therefore
+<code><var>«U+E0<b>C2</b>»</var><var>«U+E0<b>A3</b>»</var><var>«U+E0<b>33</b>»</var></code>.
 </li>
 <li>
 The full placeholder is therefore
-<code>«U+F8FF»«U+E0<b>C2</b>»«U+E0<b>A3</b>»«U+E0<b>33</b>»«U+F8FF»</code>.
+<code><var>«U+F8FF»</var><var>«U+E0<b>C2</b>»</var><var>«U+E0<b>A3</b>»</var><var>«U+E0<b>33</b>»</var><var>«U+F8FF»</var></code>.
 </li>
 </ul>
 <h2 id="cmd-attribute-specifications"><a href="#cmd-attribute-specifications" class="permalink" aria-label="Permalink"></a>CMD attribute specifications</h2>
@@ -5030,20 +5030,20 @@ enclosed in curly brackets.
 <p>
 CMD attribute specifications may be of the following forms:
 </p>
-<pre class="cmd cmdc"><code>«name»<b>=</b>"«quoted value (whitespace allowed)»"
-«name»<b>=</b>«bare-value»
-<b>#</b>«id»
-<b>.</b>«class»
-<b>r</b>«rowspan»
-<b>c</b>«colspan»
-<b>w</b>«width»
-<b>h</b>«height»
-<b>-</b>«delete-name»
-«boolean-name»
+<pre class="cmd cmdc"><code><var>«name»</var><b>=</b>"<var>«quoted value (whitespace allowed)»</var>"
+<var>«name»</var><b>=</b><var>«bare-value»</var>
+<b>#</b><var>«id»</var>
+<b>.</b><var>«class»</var>
+<b>r</b><var>«rowspan»</var>
+<b>c</b><var>«colspan»</var>
+<b>w</b><var>«width»</var>
+<b>h</b><var>«height»</var>
+<b>-</b><var>«delete-name»</var>
+<var>«boolean-name»</var>
 </code></pre>
 <p>
 In the two forms with an explicit equals sign,
-the following abbreviations are allowed for <code class="cmd cmdc">«name»</code>:
+the following abbreviations are allowed for <code class="cmd cmdc"><var>«name»</var></code>:
 </p>
 <ul>
 <li>

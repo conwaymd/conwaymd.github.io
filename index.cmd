@@ -14,6 +14,12 @@ OrdinaryDictionaryReplacement: #.boilerplate-properties-override
     <meta name="theme-color" content="#ffffff">
 * %title --> Conway-Markdown (conwaymd, CMD) v%cmd-version
 
+OrdinaryDictionaryReplacement: #.variables
+- queue_position: BEFORE #display-code
+* « --> <var>«
+* » --> »</var>
+- concluding_replacements: #placeholder-protect
+
 OrdinaryDictionaryReplacement: #.bold-code
 - queue_position: BEFORE #display-code
 * @( --> <b>
