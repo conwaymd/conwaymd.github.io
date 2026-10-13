@@ -231,7 +231,7 @@ $ pip3 install conwaymd
 ##{#usage-cli} Usage (command line)
 
 ``
-$ cmd [-h] [-v] [-a] [-x] [file.cmd ...]
+$ cmd [-h] [-v] [-a] [-c] [-x] [file.cmd ...]
 
 Convert Conway-Markdown (CMD) to HTML.
 
@@ -243,6 +243,7 @@ options:
   -h, --help     show this help message and exit
   -v, --version  show program's version number and exit
   -a, --all      convert all CMD files under the working directory
+  -c, --cache    skip unchanged CMD files (WARNING: inclusions-agnostic)
   -x, --verbose  run in verbose mode (prints every replacement applied)
 ``
 
